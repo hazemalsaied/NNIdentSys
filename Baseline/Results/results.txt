@@ -1,0 +1,53 @@
+[\]\[\]\[\]\[\]\[\]\[\]\[\]halsaied@narcisse:~/PycharmProjects/IdenSys-v.2 halsaied@narcisse:~/PycharmProjects/IdenSys-v.2 $cd tmp/
+halsaied@narcisse:~/PycharmProjects/IdenSys-v.2/tmp $sh cv.trainDataSet.evaluation.sh
+>> MWE-based:
+  * P = 0.5475 (144 / 263)
+  * R = 0.3861 (144 / 373)
+  * F = 0.4528
+
+>> Token-based:
+  * P = 0.6304 (336 / 533)
+  * R = 0.3995 (336 / 841)
+  * F = 0.4891
+
+>> MWE-based:
+  * P = 0.5752 (130 / 226)
+  * R = 0.3171 (130 / 410)
+  * F = 0.4088
+
+>> Token-based:
+  * P = 0.6794 (303 / 446)
+  * R = 0.3210 (303 / 944)
+  * F = 0.4360
+
+>> MWE-based:
+  * P = 0.5085 (120 / 236)
+  * R = 0.3343 (120 / 359)
+  * F = 0.4034
+
+>> Token-based:
+  * P = 0.6085 (286 / 470)
+  * R = 0.3401 (286 / 841)
+  * F = 0.4363
+
+>> MWE-based:
+  * P = 0.3619 (93 / 257)
+  * R = 0.3286 (93 / 283)
+  * F = 0.3444
+
+>> Token-based:
+  * P = 0.4218 (213 / 505)
+  * R = 0.3509 (213 / 607)
+  * F = 0.3831
+
+>> MWE-based:
+  * P = 0.5760 (125 / 217)
+  * R = 0.3453 (125 / 362)
+  * F = 0.4318
+
+>> Token-based:
+  * P = 0.6410 (291 / 454)
+  * R = 0.3562 (291 / 817)
+  * F = 0.4579
+
+halsaied@narcisse:~/PycharmProjects/IdenSys-v.2/tmp $

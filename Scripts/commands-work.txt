@@ -1,0 +1,35 @@
+1 -
+ssh halsaied@access.grid5000.fr
+ssh nancy
+2-
+oarsub  -l nodes=2 walltime=5 -I -q production
+oarsub -p "gpu<>'NO'" -l nodes=2,walltime=5 -I -q production
+oarsub -p "cluster='graphique'" -q production -l nodes=2,walltime=15 -I
+
+oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=25 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O stackedGRUout -E stackedGRUerr
+3-
+source /home/halsaied/venv/bin/activate
+4-
+sh NNIdenSys/Scripts/test-passive.sh
+sh NNIdenSys/Scripts/test-interactive.sh
+
+
+
+rm -rf NNIdenSys/src
+
+ls NNIdenSys/
+
+# Local Terminal
+scp -r  src halsaied@access.grid5000.fr:/home/halsaied/nancy/NNIdenSys
+scp -r  Scripts halsaied@access.grid5000.fr:/home/halsaied/nancy/NNIdenSys
+scp -r  NNIdenSys halsaied@access.grid5000.fr:/home/halsaied/
+
+
+scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/mlpLstmStackedErr' /Users/halsaied/PycharmProjects/NNIdentSys/ReportsmlpLstmStackedErr
+
+
+scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/NNIdenSys/Reports/FR-39' /Users/halsaied/Downloads/
+
+
+rm -rf /home/halsaied/NNIdenSys/Reports
+mkdir /home/halsaied/NNIdenSys/Reports
