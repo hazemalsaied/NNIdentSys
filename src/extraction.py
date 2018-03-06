@@ -76,7 +76,7 @@ def extractSyntacticInfo(trans):
         for bElem in config.buffer:
             if bElem.dependencyParent == stack0.position:
                 biIdx = config.buffer.index(bElem)
-                syntacticFeatDic['hasRighDep_' + bElem.dependencyLabel] = True
+                # syntacticFeatDic['hasRighDep_' + bElem.dependencyLabel] = True
                 syntacticFeatDic['S0_hasRighDep_' + bElem.dependencyLabel] = True
                 syntacticFeatDic[
                     'S0_B' + str(biIdx) + '_hasRighDep_' + bElem.dependencyLabel] = True

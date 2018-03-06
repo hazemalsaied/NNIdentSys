@@ -30,5 +30,8 @@ scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/OAR.1517426.stderr' /U
 scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/NNIdenSys/OAR.1517061.stderr' /Users/hazemalsaied/Downloads/
 scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/Reports/FR-65/model.png /Users/hazemalsaied/Downloads/
 
+
+scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/NNIdenSys/src' /Users/hazemalsaied/Downloads/
+
 rm -rf /home/halsaied/NNIdenSys/Reports
 mkdir /home/halsaied/NNIdenSys/Reports

@@ -27,7 +27,6 @@ def nextTrans(transition, sent, clf, normalizer):
         return legalTansDic[transType]
     if len(legalTansDic):
         return initialize(legalTansDic.keys()[0], sent)
-    raise
 
 
 def initializeSent(corpus):

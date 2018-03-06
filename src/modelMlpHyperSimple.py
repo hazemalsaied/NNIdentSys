@@ -19,7 +19,7 @@ INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
 class NetworkMLPHyperSimple(Network):
     def __init__(self, normalizer):
         # Buffer-based Embedding Module
-        wordLayer = Input(shape=(INPUT_WORDS,), name='buffInputLayer')
+        wordLayer = Input(shape=(INPUT_WORDS,), name='words')
         # self.model = Sequential()
         sharedEmbedding = Embedding(output_dim=normalizer.vocabulary.embDim, input_dim=normalizer.vocabulary.size,
                                     weights=[normalizer.weightMatrix], trainable=True)(wordLayer)

@@ -3,7 +3,7 @@ import errno
 import logging
 import os
 
-from keras.models import load_model
+#from keras.models import load_model
 from keras.utils import plot_model
 
 import settings

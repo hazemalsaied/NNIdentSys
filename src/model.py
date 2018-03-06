@@ -10,7 +10,6 @@ from extraction import NNExtractor
 from reports import *
 from transitions import TransitionType
 from vocabulary import unknown, number, Vocabulary
-import matplotlib.pyplot as plt
 
 EPOCHS = 15
 BATCH_SIZE = 128
@@ -30,7 +29,8 @@ class Network(object):
         self.model.compile(loss='categorical_crossentropy', optimizer=OPTIMIZER, metrics=['accuracy'])
         MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, 'bestWeigths.hdf5')
         if settings.XP_CROSS_VALIDATION:
-            MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), 'bestWeigths.hdf5')
+            MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
+                                             'bestWeigths.hdf5')
         callbacks = [ModelCheckpoint(MODEL_WEIGHT_FILE, monitor='val_acc', verbose=1, save_best_only=True,
                                      mode='max')] if SAVE_MODEL and not settings.XP_CROSS_VALIDATION else []
         if settings.EARLY_STOP:
@@ -40,35 +40,41 @@ class Network(object):
         labels, data = normalizer.generateLearningData(corpus)
         labels = to_categorical(labels, num_classes=len(TransitionType))
         logging.warn('Deep Model training started!')
-        history = self.model.fit(data, labels, validation_split=0.2, epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=TRAIN_VERBOSE,
-                       callbacks=callbacks)
-
-        # summarize history for accuracy
-        plt.plot(history.history['acc'])
-        plt.plot(history.history['val_acc'])
-        plt.title('model accuracy')
-        plt.ylabel('accuracy')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='upper left')
-        modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'accuracy-epoch.png')
-        if settings.XP_CROSS_VALIDATION:
-            modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-                                             'accuracy-epoch.png')
-        plt.savefig(modelAccPath)
-        plt.show()
-        # summarize history for loss
-        plt.plot(history.history['loss'])
-        plt.plot(history.history['val_loss'])
-        plt.title('model loss')
-        plt.ylabel('loss')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='upper left')
-        modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'loss-epochs.png')
-        if settings.XP_CROSS_VALIDATION:
-            modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-                                        'loss-epochs.png')
-        plt.savefig(modelLossPath)
-        plt.show()
+        history = self.model.fit(data, labels, validation_split=0.2, epochs=EPOCHS, batch_size=BATCH_SIZE,
+                                 verbose=TRAIN_VERBOSE,
+                                 callbacks=callbacks)
+        # historyFile = os.path.join(XP_CURRENT_DIR_PATH, 'history.txt')
+        # if settings.XP_CROSS_VALIDATION:
+        #     historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), 'history.txt')
+        # with open(historyFile, 'w') as f:
+        #     str = str(history.history['acc']) + str(history.history['val_acc']) + str(plt.ylabel('accuracy')) + str(plt.xlabel('epoch'))
+        #     f.write(str)
+        # # summarize history for accuracy
+        # plt.plot(history.history['acc'])
+        # plt.plot(history.history['val_acc'])
+        # plt.title('model accuracy')
+        # plt.ylabel('accuracy')
+        # plt.xlabel('epoch')
+        # plt.legend(['train', 'test'], loc='upper left')
+        # modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'accuracy-epoch.png')
+        # if settings.XP_CROSS_VALIDATION:
+        #     modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
+        #                                      'accuracy-epoch.png')
+        # plt.savefig(modelAccPath)
+        # #plt.show()
+        # # summarize history for loss
+        # plt.plot(history.history['loss'])
+        # plt.plot(history.history['val_loss'])
+        # plt.title('model loss')
+        # plt.ylabel('loss')
+        # plt.xlabel('epoch')
+        # plt.legend(['train', 'test'], loc='upper left')
+        # modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'loss-epochs.png')
+        # if settings.XP_CROSS_VALIDATION:
+        #     modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
+        #                                 'loss-epochs.png')
+        # plt.savefig(modelLossPath)
+        # #plt.show()
 
         logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
         reports.saveModel(self.model)
@@ -115,18 +121,25 @@ class Normalizer(object):
 
     def generateLearningData(self, corpus):
         data, labels = [], []
-        for i in range(self.inputListDimension):
-            data.append(list())
+        if self.inputListDimension != 1:
+            for i in range(self.inputListDimension):
+                data.append(list())
         for sent in corpus:
             trans = sent.initialTransition
             while trans.next:
                 dataEntry = self.normalize(trans)
                 for i in range(self.inputListDimension):
-                    data[i].append(dataEntry[i])
+                    if self.inputListDimension != 1:
+                        data[i].append(dataEntry[i])
+                    else:
+                        data.append(dataEntry[i])
                 labels = np.append(labels, trans.next.type.value)
                 trans = trans.next
-        for i in range(len(data)):
-            data[i] = np.asarray(data[i])
+        if self.inputListDimension != 1:
+            for i in range(len(data)):
+                data[i] = np.asarray(data[i])
+        if self.inputListDimension == 1:
+            data = np.asarray(data)
         return np.asarray(labels), data
 
     def normalize(self, trans):

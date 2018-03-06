@@ -37,10 +37,10 @@ class NetworkMlpLstm(Network):
             concLayer = keras.layers.concatenate([gru2, auxFeatureLayer])
         else:
             if settings.STACKED:
-                lstmLayer1 = LSTM(512, name='lstm_1', return_sequences=True)(embeddingLayer)
-                lstmLayer2 = LSTM(512, name='lstm_2')(lstmLayer1)
+                lstmLayer1 = LSTM(settings.LSTM_1_UNIT_NUM, name='lstm_1', return_sequences=True)(embeddingLayer)
+                lstmLayer2 = LSTM(settings.LSTM_2_UNIT_NUM, name='lstm_2')(lstmLayer1)
             else:
-                lstmLayer2 = LSTM(512, name='lstm_2')(embeddingLayer)
+                lstmLayer2 = LSTM(settings.LSTM_1_UNIT_NUM, name='lstm_2')(embeddingLayer)
             concLayer = keras.layers.concatenate([lstmLayer2, auxFeatureLayer])
         # MLP module
         dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=self.getActiviation1())(concLayer)

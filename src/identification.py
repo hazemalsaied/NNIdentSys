@@ -3,46 +3,49 @@ import sys
 import numpy
 
 import modelLstmInTwoDirections
+import modelConfTrans
 import modelMLPLSTM2
 import modelMlpHyperSimple
 import modelMlpLstm
 import modelMlpSimple
+import modelMlpAuxSimple
 import oracle
 import v2classification as v2
 from corpus import *
 from evaluation import evaluate
 from parser import parse
 
+# import matplotlib
+# matplotlib.use('Agg')
+
 # langs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
 
 
-def xp(debug=False, train=False,cvDebug=False, cv=False):
+def xp(train=False, cv=False):
     settings.USE_CLUSTER = True
-    ######################################
-    #   Debug
-    ######################################
-    if debug:
+    if train:
+        ######################################
+        #   Debug
+        ######################################
         settings.XP_DEBUG_DATA_SET = True
         identify()
-    ######################################
-    #   Train
-    ######################################
-    if train:
+        ######################################
+        #   Train
+        ######################################
         settings.XP_DEBUG_DATA_SET = False
         settings.XP_TRAIN_DATA_SET = True
         identify()
-    ######################################
-    #   CV
-    ######################################
-    if cvDebug:
+    if cv:
+        ######################################
+        #   CV Debug
+        ######################################
         settings.XP_DEBUG_DATA_SET = False
         settings.XP_TRAIN_DATA_SET = False
         crossValidation(debug=True)
-    ######################################
-    #   CV
-    ######################################
-    if cv:
+        ######################################
+        #   CV
+        ######################################
         settings.XP_DEBUG_DATA_SET = False
         settings.XP_TRAIN_DATA_SET = False
         crossValidation()
@@ -118,8 +121,14 @@ def parseAndTrain(corpus, loadFolderPath=''):
 
 
 def initNormaliser(corpus):
+    if settings.USE_MODEL_CONF_TRANS:
+        normalizer = modelConfTrans.NormalizerConfTrans(corpus)
+        return normalizer
     if settings.USE_MODEL_LSTM_IN_TWO_DIRS:
         normalizer = modelLstmInTwoDirections.NormalizerLstmInTwoDirections(corpus)
+        return normalizer
+    if settings.USE_MODEL_MLP_AUX_SIMPLE:
+        normalizer = modelMlpAuxSimple.NormalizerMLPAuxSimple(corpus)
         return normalizer
     if settings.USE_MODEL_MLP_Hyper_SIMPLE:
         normalizer = modelMlpHyperSimple.NormalizerMLPHyperSimple(corpus)
@@ -136,6 +145,12 @@ def initNormaliser(corpus):
 
 
 def initNetword(normalizer):
+    if settings.USE_MODEL_CONF_TRANS:
+        network = modelConfTrans.NetworkConfTrans(normalizer)
+        return network
+    if settings.USE_MODEL_MLP_AUX_SIMPLE:
+        network = modelMlpAuxSimple.NetworkMLPAuxSimple(normalizer)
+        return network
     if settings.USE_MODEL_LSTM_IN_TWO_DIRS:
         network = modelLstmInTwoDirections.NetworkLstmInTwoDirections(normalizer)
         return network
@@ -202,17 +217,93 @@ def getXPNum():
     return xpNum
 
 
+
+
+
+def xpGRU(moreUnits=False, stacked=False, gru=False, cv=False):
+    settings.USE_MODEL_MLP_LSTM = True
+    if moreUnits:
+        settings.LSTM_1_UNIT_NUM = 1024
+        settings.LSTM_2_UNIT_NUM = 1024
+    settings.STACKED = stacked
+    settings.USE_GRU = gru
+    title = ''
+    title += '' if not stacked else 'Stacked '
+    title += ' LSTM ' if not gru else ' GRU '
+    title += ' Expanded Unit Num ' if moreUnits else ''
+    reports.createHeader('', title)
+    if cv:
+        xp(cv=True)
+    else:
+        xp(train=True)
+
+    settings.LSTM_1_UNIT_NUM = 512
+    settings.LSTM_2_UNIT_NUM = 512
+    settings.USE_MODEL_MLP_LSTM = False
+    settings.STACKED = False
+    settings.USE_GRU = False
+
+
+def xpMLPAux(cv=False):
+    settings.USE_MODEL_MLP_AUX_SIMPLE = True
+    reports.createHeader('', 'MLP Aux')
+    if cv:
+        xp(cv=True)
+    else:
+        xp(train=True)
+
+
+def xpMLP(_543=False, _2048_1024=False, cv=False):
+    settings.USE_MODEL_MLP_SIMPLE = True
+
+    if _543:
+        reports.createHeader('', 'MLP Simle 5 4 3')
+
+    if _2048_1024:
+        reports.createHeader('', 'MLP Simle 2048 + 5 4 3 ')
+        settings.MLP_LAYER_1_UNIT_NUM = 2048
+        settings.MLP_LAYER_2_UNIT_NUM = 1024
+    if cv:
+        xp(cv=True)
+    else:
+        xp(train=True)
+
+    if _2048_1024:
+        settings.USE_MODEL_MLP_SIMPLE = False
+        settings.MLP_LAYER_1_UNIT_NUM = 1024
+        settings.MLP_LAYER_2_UNIT_NUM = 512
+
+def xpConfTrans( stacked = False, gru = False, cv = False):
+    settings.USE_MODEL_CONF_TRANS = True
+    settings.STACKED = stacked
+    settings.USE_GRU = gru
+    title = 'Conf <=> Trans: '
+    title += '' if not stacked else 'Stacked '
+    title += ' LSTM ' if not gru else ' GRU '
+    reports.createHeader('', title)
+    if cv:
+        xp(cv=True)
+    else:
+        xp(train=True)
+
+    settings.USE_MODEL_CONF_TRANS = False
+    settings.STACKED = False
+    settings.USE_GRU = False
+
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
 numpy.random.seed(7)
 
-settings.USE_MODEL_MLP_SIMPLE = True
+if 'GPU' not in os.environ or int(os.environ['GPU']) == 0:
+    print 'Using CPU'
+    use_gpu = False
+else:
+    print 'Using GPU'
+    use_gpu = True
 
-reports.createHeader('', 'MLP Simle 5 4 3')
-xp(train=True)
-
-reports.createHeader('', 'MLP Simle 2048 + 5 4 3 ')
-settings.MLP_LAYER_1_UNIT_NUM = 2048
-settings.MLP_LAYER_2_UNIT_NUM = 1024
-xp(train=True)
+#xpMLP()
+#xpGRU(gru=True, stacked=True, moreUnits=True)
+xpMLPAux()
+# xpConfTrans(gru=True, stacked=True)
