@@ -25,7 +25,7 @@ class Network(object):
         reports.saveNetwork(self.model)
 
     def train(self, normalizer, corpus):
-        print(self.model.summary())
+        print self.model.summary()
         self.model.compile(loss='categorical_crossentropy', optimizer=OPTIMIZER, metrics=['accuracy'])
         MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, 'bestWeigths.hdf5')
         if settings.XP_CROSS_VALIDATION:

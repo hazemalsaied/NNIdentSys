@@ -10,6 +10,9 @@ oarsub -p "cluster='graphique'" -q production -l nodes=2,walltime=15 -I
 
 3-
 source /home/halsaied/venv/bin/activate
+
+source /home/halsaied/miniconda2/bin/activate
+
 4-
 sh /home/halsaied/NNIdenSys/test.sh
 
@@ -20,7 +23,7 @@ rm -rf /home/halsaied/NNIdenSys/src
 ls /home/halsaied/NNIdenSys/
 
 # Local Terminal
-scp -r  IonicApps/NNIdentSys/src/ halsaied@access.grid5000.fr:/home/halsaied/nancy/NNIdenSys
+scp -r  src/ halsaied@access.grid5000.fr:/home/halsaied/nancy/NNIdenSys
 scp -r  /Users/hazemalsaied/IonicApps/NNIdentSys/grid5/ halsaied@access.grid5000.fr:/home/halsaied/nancy/NNIdenSys/NNIdenSys/grid5/
 scp -r  /Users/hazemalsaied/IonicApps/NNIdentSys/ halsaied@access.grid5000.fr:/home/halsaied/
 

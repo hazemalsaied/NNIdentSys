@@ -303,7 +303,8 @@ else:
     print 'Using GPU'
     use_gpu = True
 
-#xpMLP()
+settings.EARLY_STOP = False
+xpMLP()
 #xpGRU(gru=True, stacked=True, moreUnits=True)
-xpMLPAux()
+#xpMLPAux()
 # xpConfTrans(gru=True, stacked=True)
