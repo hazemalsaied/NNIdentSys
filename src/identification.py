@@ -15,8 +15,6 @@ from corpus import *
 from evaluation import evaluate
 from parser import parse
 
-# import matplotlib
-# matplotlib.use('Agg')
 
 # langs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
@@ -29,8 +27,7 @@ def xp(train=False, cv=False, xpNum=1):
         #   Debug
         ######################################
         settings.XP_DEBUG_DATA_SET = True
-        for i in range(xpNum):
-            identify()
+        identify()
         ######################################
         #   Train
         ######################################
@@ -45,8 +42,7 @@ def xp(train=False, cv=False, xpNum=1):
         ######################################
         settings.XP_DEBUG_DATA_SET = False
         settings.XP_TRAIN_DATA_SET = False
-        for i in range(xpNum):
-            crossValidation(debug=True)
+        crossValidation(debug=True)
         ######################################
         #   CV
         ######################################
