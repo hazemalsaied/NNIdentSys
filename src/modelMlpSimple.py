@@ -11,30 +11,21 @@ from transitions import TransitionType
 from vocabulary import empty
 
 PADDING_ON_S0 = 5
-PADDING_ON_S1 = 4
-PADDING_ON_B0 = 3
+PADDING_ON_S1 = 2
+PADDING_ON_B0 = 2
 INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
 PREDICT_VERBOSE = 0
 
 
 class NetworkMLPSimple(Network):
     def __init__(self, normalizer):
-        # Buffer-based Embedding Module
-        wordLayer = Input(shape=(INPUT_WORDS,), name='bInputLayer')
-        sharedEmbedding = Embedding(output_dim=normalizer.vocabulary.embDim, input_dim=normalizer.vocabulary.size,
-                                    weights=[normalizer.weightMatrix], trainable=True)(wordLayer)
-        bOutputLayer = Flatten(name='bOutputLayer')(sharedEmbedding)
+        wordLayer,flattenLayer = Network.createEmbeddingModule(INPUT_WORDS, normalizer)
         # Auxiliary feature vectors
         auxFeatureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='auxFeatureLayer')
         # Merge layer
-        concLayer = keras.layers.concatenate([bOutputLayer, auxFeatureLayer])
+        concLayer = keras.layers.concatenate([flattenLayer, auxFeatureLayer])
         # MLP module
-        dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=self.getActiviation1())(concLayer)
-        dropoutLayer = Dropout(0.2)(dense1Layer)
-        dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation1())(dropoutLayer)
-        dropout2Layer = Dropout(0.2)(dense2Layer)
-        dense3Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation2())(dropout2Layer)
-        mainOutputLayer = Dense(len(TransitionType), activation='softmax', name='mainOutputLayer')(dense3Layer)
+        mainOutputLayer = self.createMLPModule(concLayer)
         self.model = Model(inputs=[wordLayer, auxFeatureLayer], outputs=mainOutputLayer)
         super(NetworkMLPSimple, self).__init__()
 

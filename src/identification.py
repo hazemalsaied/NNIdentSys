@@ -2,13 +2,13 @@ import sys
 
 import numpy
 
-import modelLstmInTwoDirections
 import modelConfTrans
+import modelLstmInTwoDirections
 import modelMLPLSTM2
+import modelMlpAuxSimple
 import modelMlpHyperSimple
 import modelMlpLstm
 import modelMlpSimple
-import modelMlpAuxSimple
 import oracle
 import v2classification as v2
 from corpus import *
@@ -22,33 +22,36 @@ from parser import parse
 langs = ['FR']
 
 
-def xp(train=False, cv=False):
+def xp(train=False, cv=False, xpNum=1):
     settings.USE_CLUSTER = True
     if train:
         ######################################
         #   Debug
         ######################################
         settings.XP_DEBUG_DATA_SET = True
-        identify()
+        for i in range(xpNum):
+            identify()
         ######################################
         #   Train
         ######################################
         settings.XP_DEBUG_DATA_SET = False
         settings.XP_TRAIN_DATA_SET = True
-        identify()
+        for i in range(xpNum):
+            identify()
+        settings.XP_TRAIN_DATA_SET = False
     if cv:
         ######################################
         #   CV Debug
         ######################################
         settings.XP_DEBUG_DATA_SET = False
         settings.XP_TRAIN_DATA_SET = False
-        crossValidation(debug=True)
+        for i in range(xpNum):
+            crossValidation(debug=True)
         ######################################
         #   CV
         ######################################
-        settings.XP_DEBUG_DATA_SET = False
-        settings.XP_TRAIN_DATA_SET = False
-        crossValidation()
+        for i in range(xpNum):
+            crossValidation()
         ######################################
         #   Load
         ######################################
@@ -204,10 +207,11 @@ def createReports(lang):
 
 
 def getXPNum():
-    with open('config.text', 'r+') as f:
+    configPath = os.path.join(settings.PROJECT_PATH, 'config.txt')
+    with open(configPath, 'r+') as f:
         content = f.read()
         xpNum = int(content[-3:])
-    with open('config.text', 'w') as f:
+    with open(configPath, 'w') as f:
         newXpNum = xpNum + 1
         if newXpNum < 10:
             newXpNum = '00' + str(newXpNum)
@@ -215,9 +219,6 @@ def getXPNum():
             newXpNum = '0' + str(newXpNum)
         f.write(content[:-3] + newXpNum)
     return xpNum
-
-
-
 
 
 def xpGRU(moreUnits=False, stacked=False, gru=False, cv=False):
@@ -253,14 +254,72 @@ def xpMLPAux(cv=False):
         xp(train=True)
 
 
+def xpMLPTotal(cv=False, train=False, xpNum=5):
+    settings.USE_MODEL_MLP_SIMPLE = True
+
+    reports.createHeader('', 'Optimizer = ADAM ')
+    settings.USE_ADAM = True
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.USE_ADAM = False
+
+    reports.createHeader('', 'Dense 3 activated')
+    settings.USE_DENSE_3 = True
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.USE_DENSE_3 = False
+
+    reports.createHeader('', 'Tahn is activated')
+    settings.MLP_USE_TANH_1 = True
+    settings.MLP_USE_TANH_2 = True
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.MLP_USE_TANH_1 = False
+    settings.MLP_USE_TANH_2 = False
+
+    reports.createHeader('', 'Without weight matrix')
+    settings.INITIALIZE_EMBEDDING = False
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.INITIALIZE_EMBEDDING = True
+
+    reports.createHeader('', 'Maximized weight matrix')
+    settings.REMOVE_NON_FREQUENT_WORDS = False
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.REMOVE_NON_FREQUENT_WORDS = True
+
+    reports.createHeader('', 'Batch size = 64')
+    settings.NN_BATCH_SIZE = 64
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.NN_BATCH_SIZE = 128
+
+    reports.createHeader('', 'Batch size = 256')
+    settings.NN_BATCH_SIZE = 256
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.NN_BATCH_SIZE = 128
+
+    reports.createHeader('', 'No early stop')
+    settings.EARLY_STOP = False
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.EARLY_STOP = True
+
+    reports.createHeader('', 'Use Lemma')
+    settings.M1_USE_TOKEN = False
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.M1_USE_TOKEN = True
+
+    reports.createHeader('', 'Use POS emb')
+    settings.USE_POS_EMB = False
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.USE_POS_EMB = True
+
+
+
 def xpMLP(_543=False, _2048_1024=False, cv=False):
     settings.USE_MODEL_MLP_SIMPLE = True
 
-    if _543:
-        reports.createHeader('', 'MLP Simle 5 4 3')
+    title = 'MLP '
+    title += '' if not _543 else '5, 4, 3 '
+    title += '' if not _2048_1024 else ' 2048 1024 '
+    reports.createHeader('', title)
 
     if _2048_1024:
-        reports.createHeader('', 'MLP Simle 2048 + 5 4 3 ')
         settings.MLP_LAYER_1_UNIT_NUM = 2048
         settings.MLP_LAYER_2_UNIT_NUM = 1024
     if cv:
@@ -273,7 +332,8 @@ def xpMLP(_543=False, _2048_1024=False, cv=False):
         settings.MLP_LAYER_1_UNIT_NUM = 1024
         settings.MLP_LAYER_2_UNIT_NUM = 512
 
-def xpConfTrans( stacked = False, gru = False, cv = False):
+
+def xpConfTrans(stacked=False, gru=False, cv=False):
     settings.USE_MODEL_CONF_TRANS = True
     settings.STACKED = stacked
     settings.USE_GRU = gru
@@ -296,15 +356,8 @@ sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
 numpy.random.seed(7)
 
-if 'GPU' not in os.environ or int(os.environ['GPU']) == 0:
-    print 'Using CPU'
-    use_gpu = False
-else:
-    print 'Using GPU'
-    use_gpu = True
-
-settings.EARLY_STOP = False
-xpMLP()
-#xpGRU(gru=True, stacked=True, moreUnits=True)
-#xpMLPAux()
+xpMLPTotal(train=True)
+#xpMLP()
+# xpGRU(gru=True, stacked=True, moreUnits=True)
+# xpMLPAux()
 # xpConfTrans(gru=True, stacked=True)

@@ -9,6 +9,7 @@ oarsub -p "cluster='graphique'" -q production -l nodes=2,walltime=15 -I
 oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=25 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O stackedGRUout -E stackedGRUerr
 3-
 source /home/halsaied/venv/bin/activate
+source /home/halsaied/miniconda2/bin/activate
 4-
 sh NNIdenSys/Scripts/test-passive.sh
 sh NNIdenSys/Scripts/test-interactive.sh

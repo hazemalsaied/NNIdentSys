@@ -1,7 +1,4 @@
 #!/bin/bash
-source /home/halsaied/venv/bin/activate
+source /home/halsaied/miniconda2/bin/activate
 cd /home/halsaied/NNIdenSys/
-pwd
-#echo "test identification.py CPU"
-time THEANO_FLAGS='floatX=float32,device=gpu'
-python src/identification.py
+env MKL_THREADING_LAYER=GNU  python src/identification.py

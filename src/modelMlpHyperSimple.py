@@ -25,12 +25,7 @@ class NetworkMLPHyperSimple(Network):
                                     weights=[normalizer.weightMatrix], trainable=True)(wordLayer)
         bOutputLayer = Flatten(name='buffOutputLayer')(sharedEmbedding)
         # MLP module
-        dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=self.getActiviation1())(bOutputLayer)
-        dropoutLayer = Dropout(0.2)(dense1Layer)
-        dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation1())(dropoutLayer)
-        dropout2Layer = Dropout(0.2)(dense2Layer)
-        dense3Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation2())(dropout2Layer)
-        mainOutputLayer = Dense(len(TransitionType), activation='softmax', name='mainOutputLayer')(dense3Layer)
+        mainOutputLayer = self.createMLPModule(bOutputLayer)
         self.model = Model(inputs=wordLayer, outputs=mainOutputLayer)
 
         super(NetworkMLPHyperSimple, self).__init__()

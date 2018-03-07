@@ -18,18 +18,23 @@ ALPHA = 0.2
 
 class Vocabulary:
     def __init__(self, corpus, taux=1):
-        self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus,
-                                                                      settings.MLP_POS_EMB_LIMIT, taux=taux)
-        self.postagDim = len(self.posEmbeddings.values()[0])
+        if settings.USE_POS_EMB:
+            self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(
+                corpus, settings.MLP_POS_EMB_LIMIT, taux=taux)
+            self.postagDim = len(self.posEmbeddings.values()[0])
+
         self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, taux=taux)
         self.tokenDim = len(self.tokenEmbeddings.values()[0])
 
         self.indices, self.embeddings = self.getEmbeddingMatrices(corpus)
-        self.embDim = self.tokenDim + self.postagDim
+        self.embDim = self.tokenDim
+        if settings.USE_POS_EMB:
+            self.embDim += self.postagDim
         self.size = len(self.indices)
 
         logging.warn('Vocabulary size: {0}'.format(self.size))
-        del self.posEmbeddings
+        if settings.USE_POS_EMB:
+            del self.posEmbeddings
         del self.tokenEmbeddings
 
     def getEmbeddingMatrices(self, corpus):
@@ -37,39 +42,61 @@ class Vocabulary:
         for sent in corpus.trainingSents + corpus.testingSents:
             for token in sent.tokens:
                 tokenKey = token.getTokenOrLemma() if token.getTokenOrLemma() in self.tokenIndices else unknown
-                posKey = token.posTag.lower() if token.posTag.lower() in self.posIndices else unknown
-                key = tokenKey + '_' + posKey
+                key = tokenKey
+                if settings.USE_POS_EMB:
+                    posKey = token.posTag.lower() if token.posTag.lower() in self.posIndices else unknown
+                    key += '_' + posKey
                 if key not in indices:
-                    embeddings[key] = np.concatenate((self.tokenEmbeddings[tokenKey],
-                                                      self.posEmbeddings[posKey]))
+                    if settings.USE_POS_EMB:
+                        embeddings[key] = np.concatenate((self.tokenEmbeddings[tokenKey],
+                                                          self.posEmbeddings[posKey]))
+                    else:
+                        embeddings[key] = self.tokenEmbeddings[tokenKey]
+
                     indices[key] = idx
                     idx += 1
         return indices, embeddings
 
     def generateUnknownKeys(self):
         indices, embeddings, idx = dict(), dict(), 0
-        for posTag in self.posIndices.keys():
-            key = unknown + '_' + posTag.lower()
-            if key not in indices:
-                embeddings[key] = np.concatenate((self.tokenEmbeddings[unknown], self.posEmbeddings[posTag.lower()]))
-                indices[key] = idx
-                idx += 1
-            key1 = number + '_' + posTag.lower()
-            if key1 not in indices:
-                embeddings[key1] = np.concatenate((self.tokenEmbeddings[number], self.posEmbeddings[posTag.lower()]))
-                indices[key1] = idx
-                idx += 1
-        key = unknown + '_' + unknown
+        if settings.USE_POS_EMB:
+            for posTag in self.posIndices.keys():
+                key = unknown + '_' + posTag.lower()
+                if key not in indices:
+                    embeddings[key] = np.concatenate(
+                        (self.tokenEmbeddings[unknown], self.posEmbeddings[posTag.lower()]))
+                    indices[key] = idx
+                    idx += 1
+                key1 = number + '_' + posTag.lower()
+                if key1 not in indices:
+                    embeddings[key1] = np.concatenate(
+                        (self.tokenEmbeddings[number], self.posEmbeddings[posTag.lower()]))
+                    indices[key1] = idx
+                    idx += 1
+        key = unknown
+        if settings.USE_POS_EMB:
+            key += '_' + unknown
         if key not in indices:
-            embeddings[key] = np.concatenate((self.tokenEmbeddings[unknown], self.posEmbeddings[unknown]))
+            if settings.USE_POS_EMB:
+                embeddings[key] = np.concatenate((self.tokenEmbeddings[unknown], self.posEmbeddings[unknown]))
+            else:
+                embeddings[key] = self.tokenEmbeddings[unknown]
             indices[key] = idx
             idx += 1
-        key1 = number + '_' + unknown
+        key1 = number
+        if settings.USE_POS_EMB:
+            key1 += '_' + unknown
         if key1 not in indices:
-            embeddings[key1] = np.concatenate((self.tokenEmbeddings[number], self.posEmbeddings[unknown]))
+            if settings.USE_POS_EMB:
+                embeddings[key1] = np.concatenate((self.tokenEmbeddings[number], self.posEmbeddings[unknown]))
+            else:
+                embeddings[key1] = self.tokenEmbeddings[unknown]
             indices[key1] = idx
             idx += 1
-        embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0]) + len(self.posEmbeddings.values()[0])))
+        if settings.USE_POS_EMB:
+            embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0]) + len(self.posEmbeddings.values()[0])))
+        else:
+            embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0])))
         indices[empty] = idx
         idx += 1
         return indices, embeddings, idx
@@ -164,4 +191,4 @@ def trainPosEmbWithWordToVec(corpus, dimension, window=3):
 
 
 def getRandomVector(length):
-    return [float(val) for val in np.random.uniform(low=-0.01, high=0.01, size=int(length))]
+    return np.asarray([float(val) for val in np.random.uniform(low=-0.01, high=0.01, size=int(length))])

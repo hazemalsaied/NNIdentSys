@@ -654,12 +654,16 @@ class Token:
         return None
 
     def getTokenOrLemma(self):
-        if settings.M1_USETOKEN:
+        if settings.M1_USE_TOKEN:
             return self.text.lower()
-        return self.lemma.lower()
+        if self.lemma:
+            return self.lemma.lower()
+        return self.text.lower()
 
     def getStandardKey(self):
-        return self.getTokenOrLemma().lower() + '_' + self.posTag.lower()
+        if settings.USE_POS_EMB:
+            return self.getTokenOrLemma() + '_' + self.posTag.lower()
+        return self.getTokenOrLemma()
 
     def __str__(self):
         parentTxt = ' '

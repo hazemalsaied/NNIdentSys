@@ -21,19 +21,6 @@ class NetworkMLPAuxSimple(Network):
         self.model.add(Dense(1024, activation='relu'))
         self.model.add(Dense(512, activation='relu'))
         self.model.add(Dense(len(TransitionType), activation='softmax'))
-
-
-
-        # Buffer-based Embedding Module
-        # inputLayer = Input(shape=(unitNum,), name='aux_feat_input_layer')
-        # # MLP module
-        # dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=self.getActiviation1())(inputLayer)
-        # dropoutLayer = Dropout(0.2)(dense1Layer)
-        # dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation1())(dropoutLayer)
-        # dropout2Layer = Dropout(0.2)(dense2Layer)
-        # dense3Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation2())(dropout2Layer)
-        # mainOutputLayer = Dense(len(TransitionType), activation='softmax', name='mainOutputLayer')(dense3Layer)
-        # self.model = Model(inputs=inputLayer, outputs=mainOutputLayer)
         super(NetworkMLPAuxSimple, self).__init__()
 
     def predict(self, trans, normalizer):

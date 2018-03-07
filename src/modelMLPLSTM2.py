@@ -41,10 +41,7 @@ class NetworkMlpLstm2(Network):
         concLayer = keras.layers.concatenate([s0LeftOutputLayer, s1LeftOutputLayer,
                                               bOutputLayer, auxFeatureLayer])
         # MLP module
-        dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=self.getActiviation1())(concLayer)
-        dropoutLayer = Dropout(0.2)(dense1Layer)
-        dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation2())(dropoutLayer)
-        mainOutputLayer = Dense(len(TransitionType), activation='softmax', name='mainOutputLayer')(dense2Layer)
+        mainOutputLayer = self.createMLPModule(concLayer)
         self.model = Model(inputs=[s0LeftInputLayer, s1LeftInputLayer, bInputLayer, auxFeatureLayer],
                            outputs=mainOutputLayer)
         super(NetworkMlpLstm2, self).__init__()

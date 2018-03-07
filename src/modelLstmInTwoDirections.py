@@ -49,10 +49,7 @@ class NetworkLstmInTwoDirections(Network):
                                               s1LeftOutputLayer, s1RightOutputLayer,
                                               bOutputLayer, auxFeatureLayer])
         # MLP module
-        dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=self.getActiviation1())(concLayer)
-        dropoutLayer = Dropout(0.2)(dense1Layer)
-        dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=self.getActiviation2())(dropoutLayer)
-        mainOutputLayer = Dense(len(TransitionType), activation='softmax', name='mainOutputLayer')(dense2Layer)
+        mainOutputLayer = self.createMLPModule(concLayer)
         self.model = Model(inputs=[s0LeftInputLayer, s0RightInputLayer, s1LeftInputLayer,
                                    s1RightInputLayer, bInputLayer, auxFeatureLayer],
                            outputs=mainOutputLayer)

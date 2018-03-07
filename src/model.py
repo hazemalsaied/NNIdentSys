@@ -2,8 +2,9 @@ import datetime
 
 import numpy as np
 from keras.callbacks import ModelCheckpoint, EarlyStopping
-from keras.layers import Input
+from keras.layers import Input, Dense, Dropout, Flatten, Embedding
 from keras.utils import to_categorical
+from matplotlib import pyplot as plt
 
 import reports
 from extraction import NNExtractor
@@ -11,13 +12,11 @@ from reports import *
 from transitions import TransitionType
 from vocabulary import unknown, number, Vocabulary
 
-EPOCHS = 15
-BATCH_SIZE = 128
-TRAIN_VERBOSE = 2
-PREDICT_VERBOSE = 0
-EARLY_STOP = True
-SAVE_MODEL = True
+CLASS_NUM = len(TransitionType)
 OPTIMIZER = 'rmsprop'
+ADAM_OPTIMIZER = 'adam'
+BEST_WEIGHT_FILE = 'bestWeigths.hdf5'
+LOSS = 'categorical_crossentropy'
 
 
 class Network(object):
@@ -26,63 +25,73 @@ class Network(object):
 
     def train(self, normalizer, corpus):
         print self.model.summary()
-        self.model.compile(loss='categorical_crossentropy', optimizer=OPTIMIZER, metrics=['accuracy'])
-        MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, 'bestWeigths.hdf5')
+        if settings.USE_ADAM:
+            self.model.compile(loss=LOSS, optimizer=ADAM_OPTIMIZER, metrics=['accuracy'])
+        else:
+            self.model.compile(loss=LOSS, optimizer=OPTIMIZER, metrics=['accuracy'])
+        MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, BEST_WEIGHT_FILE)
         if settings.XP_CROSS_VALIDATION:
             MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-                                             'bestWeigths.hdf5')
+                                             BEST_WEIGHT_FILE)
         callbacks = [ModelCheckpoint(MODEL_WEIGHT_FILE, monitor='val_acc', verbose=1, save_best_only=True,
-                                     mode='max')] if SAVE_MODEL and not settings.XP_CROSS_VALIDATION else []
+                                     mode='max')] if not settings.XP_LOAD_MODEL and not settings.XP_CROSS_VALIDATION else []
         if settings.EARLY_STOP:
-            earlyStopping = EarlyStopping(monitor='val_acc', min_delta=.5, patience=2, verbose=TRAIN_VERBOSE)
+            earlyStopping = EarlyStopping(monitor='val_acc', min_delta=.5, patience=2, verbose=settings.NN_VERBOSE)
             callbacks.append(earlyStopping)
         time = datetime.datetime.now()
+        logging.warn('Training started!')
         labels, data = normalizer.generateLearningData(corpus)
-        labels = to_categorical(labels, num_classes=len(TransitionType))
-        logging.warn('Deep Model training started!')
-        history = self.model.fit(data, labels, validation_split=0.2, epochs=EPOCHS, batch_size=BATCH_SIZE,
-                                 verbose=TRAIN_VERBOSE,
-                                 callbacks=callbacks)
-        # historyFile = os.path.join(XP_CURRENT_DIR_PATH, 'history.txt')
-        # if settings.XP_CROSS_VALIDATION:
-        #     historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), 'history.txt')
-        # with open(historyFile, 'w') as f:
-        #     str = str(history.history['acc']) + str(history.history['val_acc']) + str(plt.ylabel('accuracy')) + str(plt.xlabel('epoch'))
-        #     f.write(str)
-        # # summarize history for accuracy
-        # plt.plot(history.history['acc'])
-        # plt.plot(history.history['val_acc'])
-        # plt.title('model accuracy')
-        # plt.ylabel('accuracy')
-        # plt.xlabel('epoch')
-        # plt.legend(['train', 'test'], loc='upper left')
-        # modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'accuracy-epoch.png')
-        # if settings.XP_CROSS_VALIDATION:
-        #     modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-        #                                      'accuracy-epoch.png')
-        # plt.savefig(modelAccPath)
-        # #plt.show()
-        # # summarize history for loss
-        # plt.plot(history.history['loss'])
-        # plt.plot(history.history['val_loss'])
-        # plt.title('model loss')
-        # plt.ylabel('loss')
-        # plt.xlabel('epoch')
-        # plt.legend(['train', 'test'], loc='upper left')
-        # modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'loss-epochs.png')
-        # if settings.XP_CROSS_VALIDATION:
-        #     modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-        #                                 'loss-epochs.png')
-        # plt.savefig(modelLossPath)
-        # #plt.show()
+        labels = to_categorical(labels, num_classes=CLASS_NUM)
 
+        history = self.model.fit(data, labels, validation_split=0.2, epochs=settings.NN_EPOCHS,
+                                 batch_size=settings.NN_BATCH_SIZE,
+                                 verbose=settings.NN_VERBOSE,
+                                 callbacks=callbacks)
         logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
+        if not settings.USE_CLUSTER:
+            self.plotTraining(history)
         reports.saveModel(self.model)
+
+    def plotTraining(self, history):
+        historyFile = os.path.join(XP_CURRENT_DIR_PATH, 'history.txt')
+        if settings.XP_CROSS_VALIDATION:
+            historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), 'history.txt')
+        with open(historyFile, 'w') as f:
+            str = str(history.history['acc']) + str(history.history['val_acc']) + str(plt.ylabel('accuracy')) + str(
+                plt.xlabel('epoch'))
+            f.write(str)
+        # summarize history for accuracy
+        plt.plot(history.history['acc'])
+        plt.plot(history.history['val_acc'])
+        plt.title('model accuracy')
+        plt.ylabel('accuracy')
+        plt.xlabel('epoch')
+        plt.legend(['train', 'test'], loc='upper left')
+        modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'accuracy-epoch.png')
+        if settings.XP_CROSS_VALIDATION:
+            modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
+                                        'accuracy-epoch.png')
+        plt.savefig(modelAccPath)
+        # plt.show()
+        # summarize history for loss
+        plt.plot(history.history['loss'])
+        plt.plot(history.history['val_loss'])
+        plt.title('model loss')
+        plt.ylabel('loss')
+        plt.xlabel('epoch')
+        plt.legend(['train', 'test'], loc='upper left')
+        modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'loss-epochs.png')
+        if settings.XP_CROSS_VALIDATION:
+            modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
+                                         'loss-epochs.png')
+        plt.savefig(modelLossPath)
+        # plt.show()
 
     def predict(self, trans, normalizer):
         pass
 
-    def createLSTMModule(self, unitNum, name, sharedEmbedding, sharedLSTM, sharedLSTM2=None):
+    @staticmethod
+    def createLSTMModule(unitNum, name, sharedEmbedding, sharedLSTM, sharedLSTM2=None):
         inputLayer = Input(shape=(unitNum,), name=name + 'InputLayer')
         if sharedLSTM2:
             outputLayer = sharedLSTM(sharedLSTM2(sharedEmbedding(inputLayer)))
@@ -90,14 +99,43 @@ class Network(object):
             outputLayer = sharedLSTM(sharedEmbedding(inputLayer))
         return inputLayer, outputLayer
 
-    def getActiviation1(self):
+    @staticmethod
+    def createMLPModule(inputLayer):
+        dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=Network.getActiviation1())(inputLayer)
+        dropoutLayer = Dropout(0.2)(dense1Layer)
+        dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=Network.getActiviation1())(dropoutLayer)
+        dropout2Layer = Dropout(0.2)(dense2Layer)
+        if settings.USE_DENSE_3:
+            dense3Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=Network.getActiviation2())(dropout2Layer)
+            dropout3Layer = Dropout(0.2)(dense3Layer)
+            mainOutputLayer = Dense(CLASS_NUM, activation='softmax', name='mainOutputLayer')(dropout3Layer)
+        else:
+            mainOutputLayer = Dense(CLASS_NUM, activation='softmax', name='mainOutputLayer')(dropout2Layer)
+        return mainOutputLayer
+
+    @staticmethod
+    def createEmbeddingModule(wordNum, normalizer):
+        # Buffer-based Embedding Module
+        wordLayer = Input(shape=(wordNum,), name='word')
+        if settings.INITIALIZE_EMBEDDING:
+            embLayer = Embedding(output_dim=normalizer.vocabulary.embDim, input_dim=normalizer.vocabulary.size,
+                                 weights=[normalizer.weightMatrix], trainable=settings.TRAINABLE_EMBEDDING)(wordLayer)
+        else:
+            embLayer = Embedding(output_dim=normalizer.vocabulary.embDim, input_dim=normalizer.vocabulary.size)(
+                wordLayer)
+        flattenLayer = Flatten(name='flatten')(embLayer)
+        return wordLayer, flattenLayer
+
+    @staticmethod
+    def getActiviation1():
         if settings.MLP_USE_RELU_1:
             return 'relu'
         if settings.MLP_USE_TANH_1:
             return 'tanh'
         return 'relu'
 
-    def getActiviation2(self):
+    @staticmethod
+    def getActiviation2():
         if settings.MLP_USE_RELU_2:
             return 'relu'
         if settings.MLP_USE_SIGMOID_2:
@@ -154,17 +192,27 @@ class Normalizer(object):
 
     def getKey(self, token):
         if any(ch.isdigit() for ch in token.getTokenOrLemma()):
-            posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
-            return number + '_' + posTag
+            key = number
+            if settings.USE_POS_EMB:
+                posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
+                key += '_' + posTag
+            return key
         key = token.getStandardKey()
         if key in self.vocabulary.indices:
             return key
         tokenTxt = unknown if token.getTokenOrLemma() not in self.vocabulary.tokenIndices else token.getTokenOrLemma()
-        posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
-        if tokenTxt + '_' + posTag in self.vocabulary.indices:
-            return tokenTxt + '_' + posTag
-        if tokenTxt + '_' + unknown in self.vocabulary.indices:
-            return tokenTxt + '_' + unknown
-        if unknown + '_' + posTag in self.vocabulary.indices:
-            return unknown + '_' + posTag
-        return unknown + '_' + unknown
+        if settings.USE_POS_EMB:
+            posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
+
+        if settings.USE_POS_EMB:
+            if tokenTxt + '_' + posTag in self.vocabulary.indices:
+                return tokenTxt + '_' + posTag
+            if tokenTxt + '_' + unknown in self.vocabulary.indices:
+                return tokenTxt + '_' + unknown
+            if unknown + '_' + posTag in self.vocabulary.indices:
+                return unknown + '_' + posTag
+            return unknown + '_' + unknown
+        else:
+            if tokenTxt in self.vocabulary.indices:
+                return tokenTxt
+            return unknown
