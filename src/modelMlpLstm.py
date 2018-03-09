@@ -1,15 +1,14 @@
 import keras
 import numpy as np
-from keras.layers import Input, Embedding, Dense, LSTM, Dropout, GRU
+from keras.layers import Input, Embedding, LSTM, GRU
 from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from numpy import argmax
 
+import settings
 from corpus import getTokens
 from model import Network, Normalizer
-from transitions import TransitionType
 from vocabulary import empty
-import settings
 
 PREDICT_VERBOSE = 0
 
@@ -17,8 +16,6 @@ PADDING_ON_S0 = 4
 PADDING_ON_S1 = 2
 PADDING_ON_B0 = 2
 INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
-
-
 
 
 class NetworkMlpLstm(Network):

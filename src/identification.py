@@ -15,8 +15,7 @@ from corpus import *
 from evaluation import evaluate
 from parser import parse
 
-
-# langs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
+allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
 
 
@@ -40,8 +39,6 @@ def xp(train=False, cv=False, xpNum=1):
         ######################################
         #   CV Debug
         ######################################
-        settings.XP_DEBUG_DATA_SET = False
-        settings.XP_TRAIN_DATA_SET = False
         crossValidation(debug=True)
         ######################################
         #   CV
@@ -67,7 +64,7 @@ def identify(loadFolderPath='', load=False):
 def crossValidation(debug=False):
     settings.XP_CROSS_VALIDATION, scores, iterations = True, [0.] * 28, 5
     for lang in langs:
-        createReports(lang)
+        reports.createReportFolder(lang)
         for cvIdx in range(settings.CV_ITERATIONS):
             reports.createHeader('Iteration no.', cvIdx)
             settings.CV_CURRENT_ITERATION = cvIdx
@@ -111,7 +108,7 @@ def parseAndTrain(corpus, loadFolderPath=''):
         network.model = reports.loadModel(loadFolderPath)
     else:
         if not settings.XP_CROSS_VALIDATION:
-            createReports(corpus.langName)
+            reports.createReportFolder(corpus.langName)
         oracle.parse(corpus)
         normalizer = initNormaliser(corpus)
         network = initNetword(normalizer)
@@ -141,6 +138,7 @@ def initNormaliser(corpus):
     if settings.USE_MODEL_MLP_LSTM_2:
         normalizer = modelMLPLSTM2.NormalizerMlpLstm2(corpus)
         return normalizer
+    raise ValueError('initNormaliser: No model Selected!')
 
 
 def initNetword(normalizer):
@@ -165,7 +163,7 @@ def initNetword(normalizer):
     if settings.USE_MODEL_MLP_LSTM_2:
         network = modelMLPLSTM2.NetworkMlpLstm2(normalizer)
         return network
-
+    raise ValueError('initNetword: No model Selected!')
 
 def analyzeCorporaAndOracle():
     header = 'Non recognizable,Interleaving,Embedded,Distributed Embedded,Left Embedded,Right Embedded,Middle Embedded'
@@ -191,30 +189,6 @@ def identifyV2():
         v2.parse(corpus, clf, vec)
         evaluate(corpus)
         logging.warn('*' * 20)
-
-
-def createReports(lang):
-    cpNum = getXPNum()
-    if settings.XP_SAVE_MODEL:
-        reports.getXPDirectory(lang, cpNum)
-        if not settings.XP_LOAD_MODEL:
-            logging.warn('Result folder: {0}'.format(reports.XP_CURRENT_DIR_PATH.split('/')[-1]))
-            reports.createXPDirectory()
-
-
-def getXPNum():
-    configPath = os.path.join(settings.PROJECT_PATH, 'config.txt')
-    with open(configPath, 'r+') as f:
-        content = f.read()
-        xpNum = int(content[-3:])
-    with open(configPath, 'w') as f:
-        newXpNum = xpNum + 1
-        if newXpNum < 10:
-            newXpNum = '00' + str(newXpNum)
-        elif newXpNum < 100:
-            newXpNum = '0' + str(newXpNum)
-        f.write(content[:-3] + newXpNum)
-    return xpNum
 
 
 def xpGRU(moreUnits=False, stacked=False, gru=False, cv=False):
@@ -253,10 +227,18 @@ def xpMLPAux(cv=False):
 def xpMLPTotal(cv=False, train=False, xpNum=5):
     settings.USE_MODEL_MLP_SIMPLE = True
 
+    reports.createHeader('', 'Standard')
+    xp(cv=cv, train=train, xpNum=xpNum)
+
     reports.createHeader('', 'Optimizer = ADAM ')
     settings.USE_ADAM = True
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.USE_ADAM = False
+
+    reports.createHeader('', 'Dense 2 not activated')
+    settings.USE_DENSE_2 = False
+    xp(cv=cv, train=train, xpNum=xpNum)
+    settings.USE_DENSE_2 = True
 
     reports.createHeader('', 'Dense 3 activated')
     settings.USE_DENSE_3 = True
@@ -300,11 +282,10 @@ def xpMLPTotal(cv=False, train=False, xpNum=5):
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.M1_USE_TOKEN = True
 
-    reports.createHeader('', 'Use POS emb')
+    reports.createHeader('', 'No POS emb')
     settings.USE_POS_EMB = False
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.USE_POS_EMB = True
-
 
 
 def xpMLP(_543=False, _2048_1024=False, cv=False):
@@ -352,8 +333,10 @@ sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
 numpy.random.seed(7)
 
-xpMLPTotal(train=True)
-#xpMLP()
+#xpMLPTotal(cv=True)
+settings.USE_MODEL_MLP_SIMPLE = True
+xp(train=True)
+# xpMLP()
 # xpGRU(gru=True, stacked=True, moreUnits=True)
 # xpMLPAux()
 # xpConfTrans(gru=True, stacked=True)

@@ -1,13 +1,12 @@
 import keras
 import numpy as np
-from keras.layers import Input, Embedding, Dense, Flatten, Dropout
+from keras.layers import Input
 from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from numpy import argmax
-import settings
+
 from corpus import getTokens
 from model import Network, Normalizer
-from transitions import TransitionType
 from vocabulary import empty
 
 PADDING_ON_S0 = 5
@@ -19,7 +18,7 @@ PREDICT_VERBOSE = 0
 
 class NetworkMLPSimple(Network):
     def __init__(self, normalizer):
-        wordLayer,flattenLayer = Network.createEmbeddingModule(INPUT_WORDS, normalizer)
+        wordLayer, flattenLayer = Network.createEmbeddingModule(INPUT_WORDS, normalizer)
         # Auxiliary feature vectors
         auxFeatureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='auxFeatureLayer')
         # Merge layer

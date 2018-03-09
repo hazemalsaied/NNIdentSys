@@ -11,6 +11,7 @@ from extraction import NNExtractor
 from reports import *
 from transitions import TransitionType
 from vocabulary import unknown, number, Vocabulary
+import pickle
 
 CLASS_NUM = len(TransitionType)
 OPTIMIZER = 'rmsprop'
@@ -48,18 +49,12 @@ class Network(object):
                                  verbose=settings.NN_VERBOSE,
                                  callbacks=callbacks)
         logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
+        reports.saveHistory(history)
         if not settings.USE_CLUSTER:
             self.plotTraining(history)
         reports.saveModel(self.model)
 
     def plotTraining(self, history):
-        historyFile = os.path.join(XP_CURRENT_DIR_PATH, 'history.txt')
-        if settings.XP_CROSS_VALIDATION:
-            historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), 'history.txt')
-        with open(historyFile, 'w') as f:
-            str = str(history.history['acc']) + str(history.history['val_acc']) + str(plt.ylabel('accuracy')) + str(
-                plt.xlabel('epoch'))
-            f.write(str)
         # summarize history for accuracy
         plt.plot(history.history['acc'])
         plt.plot(history.history['val_acc'])
@@ -103,8 +98,12 @@ class Network(object):
     def createMLPModule(inputLayer):
         dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=Network.getActiviation1())(inputLayer)
         dropoutLayer = Dropout(0.2)(dense1Layer)
-        dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=Network.getActiviation1())(dropoutLayer)
-        dropout2Layer = Dropout(0.2)(dense2Layer)
+        if settings.USE_DENSE_2:
+            dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=Network.getActiviation1())(dropoutLayer)
+            dropout2Layer = Dropout(0.2)(dense2Layer)
+        else:
+            mainOutputLayer = Dense(CLASS_NUM, activation='softmax', name='mainOutputLayer')(dropoutLayer)
+            return mainOutputLayer
         if settings.USE_DENSE_3:
             dense3Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=Network.getActiviation2())(dropout2Layer)
             dropout3Layer = Dropout(0.2)(dense3Layer)

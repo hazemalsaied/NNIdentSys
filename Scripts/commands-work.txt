@@ -16,6 +16,7 @@ sh NNIdenSys/Scripts/test-interactive.sh
 
 
 
+
 rm -rf NNIdenSys/src
 
 ls NNIdenSys/
@@ -26,7 +27,7 @@ scp -r  Scripts halsaied@access.grid5000.fr:/home/halsaied/nancy/NNIdenSys
 scp -r  NNIdenSys halsaied@access.grid5000.fr:/home/halsaied/
 
 
-scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/mlpLstmStackedErr' /Users/halsaied/PycharmProjects/NNIdentSys/ReportsmlpLstmStackedErr
+scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/mlpTotalErr' Reports
 
 
 scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/NNIdenSys/Reports/FR-39' /Users/halsaied/Downloads/

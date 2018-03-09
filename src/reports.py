@@ -3,7 +3,7 @@ import errno
 import logging
 import os
 
-#from keras.models import load_model
+# from keras.models import load_model
 from keras.utils import plot_model
 
 import settings
@@ -22,7 +22,7 @@ XP_CURRENT_DIR_PATH = ''
 
 
 def getXPDirectory(langName, xpNum):
-    if settings.XP_LOAD_MODEL:
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
         return
     cvTxt = '-CV' if settings.XP_CROSS_VALIDATION else ''
     prefix = langName + cvTxt + '-' + str(xpNum)
@@ -31,7 +31,7 @@ def getXPDirectory(langName, xpNum):
 
 
 def createXPDirectory():
-    if settings.XP_LOAD_MODEL:
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
         return
     try:
         if not os.path.isdir(XP_CURRENT_DIR_PATH):
@@ -41,11 +41,41 @@ def createXPDirectory():
             raise
 
 
+def createReportFolder(lang):
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
+        return
+    xpNum = getXPNum()
+    if settings.XP_SAVE_MODEL:
+        getXPDirectory(lang, xpNum)
+        if not settings.XP_LOAD_MODEL:
+            logging.warn('Result folder: {0}'.format(XP_CURRENT_DIR_PATH.split('/')[-1]))
+            createXPDirectory()
+
+
+def getXPNum():
+    configPath = os.path.join(settings.PROJECT_PATH, 'config.txt')
+    with open(configPath, 'r+') as f:
+        content = f.read()
+        xpNum = int(content)
+    with open(configPath, 'w') as f:
+        newXpNum = xpNum + 1
+        if newXpNum < 10:
+            newXpNum = '000' + str(newXpNum)
+        elif newXpNum < 100:
+            newXpNum = '00' + str(newXpNum)
+        elif newXpNum < 1000:
+            newXpNum = '0' + str(newXpNum)
+        else:
+            newXpNum = str(newXpNum)
+        f.write(newXpNum)
+    return xpNum
+
+
 MODEL_SUMMARY_FILE_NAME = 'summary.json'
 
 
 def saveModelSummary(model):
-    if settings.XP_LOAD_MODEL:
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
         return
     json_string = model.to_json()
     summaryFile = os.path.join(XP_CURRENT_DIR_PATH, MODEL_SUMMARY_FILE_NAME)
@@ -59,7 +89,7 @@ NORMALIZER_OBLJ_FILE_NAME = 'normalizer.pkl'
 
 
 def saveNormalizer(normalizer):
-    if settings.XP_LOAD_MODEL:
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
         return
     vectFile = os.path.join(XP_CURRENT_DIR_PATH, NORMALIZER_OBLJ_FILE_NAME)
     if settings.XP_CROSS_VALIDATION:
@@ -72,7 +102,7 @@ SETTINGS_FILE = 'setting.txt'
 
 
 def saveSettings():
-    if settings.XP_LOAD_MODEL:
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
         return
     if settings.XP_CROSS_VALIDATION:
         settFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), SETTINGS_FILE)
@@ -87,7 +117,7 @@ SCORES_FILE = 'scoers.csv'
 
 
 def saveScores(scores):
-    if settings.XP_LOAD_MODEL:
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
         return
     results, line = '', ''
     for i in range(1, len(scores) + 1):
@@ -124,7 +154,7 @@ MODEL_SCHEMA = 'model.png'
 
 
 def saveNetwork(model):
-    if settings.XP_LOAD_MODEL:
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
         return
     schemaPath = os.path.join(XP_CURRENT_DIR_PATH, MODEL_SCHEMA)
     if settings.XP_CROSS_VALIDATION:
@@ -136,6 +166,8 @@ def saveNetwork(model):
 
 
 def saveModel(model):
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
+        return
     if settings.XP_CROSS_VALIDATION:
         modelFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), MODEL_WEIGHT_FILE)
     else:
@@ -161,7 +193,7 @@ def loadModel(loadFolderPath):
 
 
 def saveCVScores(scores):
-    if settings.XP_LOAD_MODEL or not settings.XP_CROSS_VALIDATION:
+    if settings.XP_LOAD_MODEL or not settings.XP_CROSS_VALIDATION or settings.XP_DEBUG_DATA_SET:
         return
     results = ''
     for i in range(len(scores)):
@@ -190,8 +222,18 @@ def settingsToDic():
 
 
 def createHeader(title, value):
-    #logging.warn("*" * 40)
+    # logging.warn("*" * 40)
     logging.warn("*" * 40)
     logging.warn("{0} {1}".format(title, value))
     logging.warn("*" * 40)
-    #logging.warn("*" * 40)
+    # logging.warn("*" * 40)
+
+
+def saveHistory(history):
+    if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
+        return
+    historyFile = os.path.join(XP_CURRENT_DIR_PATH, 'history.pkl')
+    if settings.XP_CROSS_VALIDATION:
+        historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), 'history.pkl')
+    with open(historyFile, 'wb') as f:
+        pickle.dump(history, f, pickle.HIGHEST_PROTOCOL)

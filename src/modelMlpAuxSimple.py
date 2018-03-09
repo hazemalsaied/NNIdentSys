@@ -1,8 +1,8 @@
 import numpy as np
-from keras.layers import Input, Dense, Dropout
-from keras.models import Model
-from numpy import argmax
+from keras.layers import Dense
 from keras.models import Sequential
+from numpy import argmax
+
 import settings
 from model import Normalizer, Network
 from transitions import TransitionType
@@ -17,7 +17,7 @@ class NetworkMLPAuxSimple(Network):
     def __init__(self, normalizer):
         unitNum = normalizer.nnExtractor.featureNum
         self.model = Sequential()
-        self.model.add(Dense(1024, activation='relu',  input_dim=unitNum))
+        self.model.add(Dense(1024, activation='relu', input_dim=unitNum))
         self.model.add(Dense(1024, activation='relu'))
         self.model.add(Dense(512, activation='relu'))
         self.model.add(Dense(len(TransitionType), activation='softmax'))

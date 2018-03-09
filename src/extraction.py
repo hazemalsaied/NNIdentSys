@@ -71,7 +71,7 @@ def extractSyntacticInfo(trans):
     if config.stack and isinstance(config.stack[-1], Token):
         stack0 = config.stack[-1]
         if int(stack0.dependencyParent) == -1 or int(stack0.dependencyParent) == 0 or \
-                        stack0.dependencyLabel.strip() == '' or not config.buffer:
+                stack0.dependencyLabel.strip() == '' or not config.buffer:
             return dict()
         for bElem in config.buffer:
             if bElem.dependencyParent == stack0.position:

@@ -28,7 +28,6 @@ def parse(corpus, clf, vectoeizer):
     for sent in corpus.testingSents:
         if sent.text.startswith('bei der anschlie'):
             pass
-        # print sent.text
         if len(sent.vMWEs) >= 1:
             debug = True
         sent.initialTransition = Transition(None, isInitial=True, sent=sent)
@@ -56,7 +55,6 @@ def nextTrans(transition, sent, clf, vectorizer):
         return legalTansDic[transType]
     if len(legalTansDic):
         return initialize(legalTansDic.keys()[0], sent)
-    raise
 
 
 def initializeSent(corpus):

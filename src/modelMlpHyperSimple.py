@@ -1,14 +1,13 @@
 import numpy as np
-from keras.layers import Input, Embedding, Dense, Flatten, Dropout
+from keras.layers import Input, Embedding, Flatten
 from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from numpy import argmax
+
 import settings
 from corpus import getTokens
 from model import Normalizer, Network
-from transitions import TransitionType
 from vocabulary import empty
-
 
 PADDING_ON_S0 = 3
 PADDING_ON_S1 = 2

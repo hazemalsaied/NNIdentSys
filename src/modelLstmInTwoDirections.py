@@ -1,15 +1,14 @@
 import keras
 import numpy as np
-from keras.layers import Input, Embedding, Dense, Flatten, LSTM, Dropout
+from keras.layers import Input, Embedding, Flatten, LSTM
 from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from numpy import argmax
+
 import settings
 from corpus import getTokens
 from model import Network, Normalizer
-from transitions import TransitionType
 from vocabulary import empty
-
 
 USE_STACKED_LSTM = False
 
@@ -19,7 +18,6 @@ PADDING_ON_S0 = 5
 PADDING_ON_S1 = 5
 PADDING_ON_B0 = 2
 INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
-
 
 
 class NetworkLstmInTwoDirections(Network):

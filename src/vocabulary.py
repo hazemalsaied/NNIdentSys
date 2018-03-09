@@ -175,7 +175,7 @@ def getFreqDic(corpus, posTag=False):
                 freqDic[key] = 1
             else:
                 freqDic[key] += 1
-    logging.warn('{0} frequency dic: {1}'.format('posTag' if posTag else'token', len(freqDic)))
+    logging.warn('{0} frequency dic: {1}'.format('posTag' if posTag else 'token', len(freqDic)))
     return freqDic
 
 

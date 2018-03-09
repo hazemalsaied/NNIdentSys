@@ -4,12 +4,12 @@ from keras.layers import Input, Embedding, Dense, LSTM, Dropout
 from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from numpy import argmax
+
 import settings
 from corpus import getTokens
 from model import Normalizer, Network
 from transitions import TransitionType
 from vocabulary import empty
-
 
 PHRASE_MAXIMUM_LENGHT = 100
 
