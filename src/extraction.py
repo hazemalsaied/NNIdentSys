@@ -2,71 +2,59 @@ import logging
 
 import numpy as np
 
+import v2featureSettings
 from corpus import Token, getTokens
 
 mwtDictionary = None
+mweDictionary = None
+mweTokenDictionary = None
 
 
-class NNExtractor:
+class Extractor:
     def __init__(self, corpus):
-        global mwtDictionary
+        global mwtDictionary, mweDictionary, mweTokenDictionary
         mwtDictionary = corpus.mwtDictionary
-        self.historyDic, self.distanceDic, self.syntacticFeatDic, self.stackLengthDic, self.isMWComponentTDic = \
-            dict(), dict(), dict(), dict(), dict()
-        self.featDics = [self.stackLengthDic, self.isMWComponentTDic, self.syntacticFeatDic, self.distanceDic,
-                         self.historyDic]
+        mweDictionary = corpus.mweDictionary
+        mweTokenDictionary = corpus.mweTokenDictionary
+        featSet = set()
         for sent in corpus:
-            idx = 0
-            dicList = extractSent(sent, corpus)
-            for dic in dicList:
-                self.featDics[idx].update(dic)
-                idx += 1
-        self.featureNum = len(self.stackLengthDic) + len(self.isMWComponentTDic) + len(self.syntacticFeatDic) + \
-                          len(self.distanceDic) + len(self.historyDic)
+            featSet.update(extractSent(sent))
+        self.featList = list(featSet)
+        self.featureNum = len(self.featList)
         logging.warn('Extracted feature number: {0}'.format(self.featureNum))
 
     def vectorize(self, trans):
-        result, idx = np.zeros(self.featureNum, dtype='int32'), 0
-        transFeatDics = extractTrans(trans)
-        for transFeatDic in transFeatDics:
-            for key in transFeatDic:
-                if key in self.featDics[idx]:
-                    featIdx = self.featDics[idx].keys().index(key)
-                    result[featIdx] = 1 if featIdx < len(result) else 0
-            idx += 1
+        result = np.zeros(self.featureNum, dtype='int32')
+        featSet = extractTrans(trans)
+        for f in featSet:
+            if f in self.featList:
+                fIdx = self.featList.index(f)
+                result[fIdx] = 1
         return result
 
 
-def extractSent(sent, corpus):
-    historyDic, distanceDic, syntacticFeatDic, stackLengthDic, isMWComponentTDic = \
-        dict(), dict(), dict(), dict(), dict()
-    localDicList = [stackLengthDic, isMWComponentTDic, syntacticFeatDic, distanceDic, historyDic]
+def extractSent(sent):
+    featSet = set()
     trans = sent.initialTransition
     while trans:
-        idx = 0
-        dics = extractTrans(trans)
-        for dic in dics:
-            localDicList[idx].update(dic)
-            idx += 1
+        featSet.update(extractTrans(trans))
         trans = trans.next
-    return [stackLengthDic, isMWComponentTDic, syntacticFeatDic, distanceDic, historyDic]
+    return featSet
 
 
 def extractTrans(trans):
-    stackLengthDic, isMWTDic = dict(), dict()
-    stackLengthDic['StackLengthIs' + str(len(trans.configuration.stack))] = True
-    if trans.configuration.stack and isinstance(trans.configuration.stack[-1], Token):
-        if trans.configuration.stack[-1].getLemma() in mwtDictionary:
-            isMWTDic['S0isMWT'] = True
-    syntacticFeatDic = extractSyntacticInfo(trans)
-    distanceDic = extractDistanceInfo(trans)
-    historyDic = extractHistoryDic(trans)
-    dics = [stackLengthDic, isMWTDic, syntacticFeatDic, distanceDic, historyDic]
-    return dics
+    featSet = set()
+    featSet.update(extractDicBased(trans))
+    featSet.update(extractSyntaxic(trans))
+    featSet.update(extractDistance(trans))
+    featSet.update(extractHistory(trans))
+    return featSet
 
 
-def extractSyntacticInfo(trans):
-    syntacticFeatDic = dict()
+def extractSyntaxic(trans):
+    if not v2featureSettings.useSyntax:
+        return set()
+    featSet = set()
     config = trans.configuration
     if config.stack and isinstance(config.stack[-1], Token):
         stack0 = config.stack[-1]
@@ -77,54 +65,90 @@ def extractSyntacticInfo(trans):
             if bElem.dependencyParent == stack0.position:
                 biIdx = config.buffer.index(bElem)
                 # syntacticFeatDic['hasRighDep_' + bElem.dependencyLabel] = True
-                syntacticFeatDic['S0_hasRighDep_' + bElem.dependencyLabel] = True
-                syntacticFeatDic[
-                    'S0_B' + str(biIdx) + '_hasRighDep_' + bElem.dependencyLabel] = True
+                featSet.add('RighDep(S0)=' + bElem.dependencyLabel)
+                featSet.add('RighDep(S0,B{0}) = {1}'.format(biIdx, bElem.dependencyLabel))
         if stack0.dependencyParent > stack0.position:
             for bElem in config.buffer[:5]:
                 if bElem.position == stack0.dependencyParent:
                     biIdx = config.buffer.index(bElem)
-                    syntacticFeatDic['S0_isGouvernedBy_' + str(biIdx)] = True
-                    syntacticFeatDic['S0_isGouvernedBy_' + str(biIdx) + '_' + stack0.dependencyLabel] = True
+                    featSet.add('Gouverner(S0) = B{0}'.format(biIdx))
+                    featSet.add('Gouverner+Label(S0) = B{0} {1}'.format(biIdx, stack0.dependencyLabel))
                     break
         if len(config.stack) > 1:
             stack1 = config.stack[-2]
             if isinstance(stack1, Token):
                 if stack0.dependencyParent == stack1.position:
-                    syntacticFeatDic['SyntaxicRelation=' + stack0.dependencyLabel] = True
+                    featSet.add('SyntaxicRel(S0,S1)={0}'.format(stack0.dependencyLabel))
                 elif stack0.position == stack1.dependencyParent:
-                    syntacticFeatDic['SyntaxicRelation=' + stack1.dependencyLabel] = True
-    return syntacticFeatDic
+                    featSet.add('SyntaxicRel(S0,S1)={0}'.format(stack1.dependencyLabel))
+    return featSet
 
 
-def extractDistanceInfo(trans):
+def extractDistance(trans):
     # Distance information
     config = trans.configuration
     sent = trans.sent
-    distanceDic = dict()
+    featSet = set()
+    if v2featureSettings.useStackLength:
+        featSet.add('len(S)={0}'.format(len(trans.configuration.stack)))
     if config.stack:
         stackTokens = getTokens(config.stack[-1])
         if config.buffer:
-            b0Idx = sent.tokens.index(config.buffer[0])
-            s0Idx = sent.tokens.index(stackTokens[-1])
-            distanceDic['S0B0Distance=' + str(b0Idx - s0Idx)] = True
+            if v2featureSettings.useS0B0Distance:
+                b0Idx = sent.tokens.index(config.buffer[0])
+                s0Idx = sent.tokens.index(stackTokens[-1])
+                featSet.add('Distance(S0,B0)={0}'.format(b0Idx - s0Idx))
         if len(config.stack) > 1 and isinstance(config.stack[-1], Token) \
                 and isinstance(config.stack[-2], Token):
-            s0Idx = sent.tokens.index(config.stack[-1])
-            s1Idx = sent.tokens.index(config.stack[-2])
-            distanceDic['S0S1Distance=' + str(s0Idx - s1Idx)] = True
-    return distanceDic
+            if v2featureSettings.useS0S1Distance:
+                s0Idx = sent.tokens.index(config.stack[-1])
+                s1Idx = sent.tokens.index(config.stack[-2])
+                featSet.add('Distance(S0,S1)={0}'.format(s0Idx - s1Idx))
+    return featSet
 
 
-def extractHistoryDic(trans):
-    idx, history, historyDic = 0, '', dict()
+def extractHistory(trans):
+    idx, history, featSet = 0, '', set()
     transition = trans.previous
     while transition and idx < 3:
         if transition.type:
-            history += str(transition.type)
+            history += str(transition.type.value)
         transition = transition.previous
         idx += 1
-    while len(history) <= 6:
+    while len(history) < 3:
         history += '-'
-    historyDic['hisotry3=' + history] = True
-    return historyDic
+    if v2featureSettings.historyLength1:
+        featSet.add('hisotry1={0}'.format(history[0]))
+    if v2featureSettings.historyLength2:
+        featSet.add('hisotry2={0}'.format(history[:2]))
+    if v2featureSettings.historyLength3:
+        featSet.add('hisotry3={0}'.format(history))
+    return featSet
+
+
+def extractDicBased(trans):
+    config = trans.configuration
+    featSet = set()
+    if config.stack and isinstance(config.stack[-1], Token):
+        if trans.configuration.stack[-1].getLemma() in mwtDictionary and v2featureSettings.smartMWTDetection:
+            featSet.add('S0isMWT')
+    if config.stack and (v2featureSettings.enhanceMerge or v2featureSettings.useLexicon):
+        s0 = config.stack[-1]
+        s0Tokens = getTokens(s0)
+        s0LemmaStr = ''
+        for t in s0Tokens:
+            s0LemmaStr += t.getLemma() + ' '
+            tIdx = s0Tokens.index(t)
+            if t.getLemma() in mweTokenDictionary:
+                featSet.add('S0_T{0}=MWE Token'.format(tIdx))
+        s0LemmaStr = s0LemmaStr[:-1]
+        if s0LemmaStr in mweDictionary:
+            featSet.add('S0=MWE')
+    if len(config.stack) > 1:
+        s1 = config.stack[-2]
+        s1Tokens = getTokens(s1)
+        for t in s1Tokens:
+            tIdx = s1Tokens.index(t)
+            if t.getLemma() in mweTokenDictionary:
+                featSet.add('S1_T{0}=MWE Token'.format(tIdx))
+    return featSet

@@ -7,11 +7,10 @@ from keras.utils import to_categorical
 from matplotlib import pyplot as plt
 
 import reports
-from extraction import NNExtractor
+from extraction import Extractor
 from reports import *
 from transitions import TransitionType
 from vocabulary import unknown, number, Vocabulary
-import pickle
 
 CLASS_NUM = len(TransitionType)
 OPTIMIZER = 'rmsprop'
@@ -30,20 +29,20 @@ class Network(object):
             self.model.compile(loss=LOSS, optimizer=ADAM_OPTIMIZER, metrics=['accuracy'])
         else:
             self.model.compile(loss=LOSS, optimizer=OPTIMIZER, metrics=['accuracy'])
-        MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, BEST_WEIGHT_FILE)
+        bestWeightPath = os.path.join(reports.XP_CURRENT_DIR_PATH, BEST_WEIGHT_FILE)
         if settings.XP_CROSS_VALIDATION:
-            MODEL_WEIGHT_FILE = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-                                             BEST_WEIGHT_FILE)
-        callbacks = [ModelCheckpoint(MODEL_WEIGHT_FILE, monitor='val_acc', verbose=1, save_best_only=True,
-                                     mode='max')] if not settings.XP_LOAD_MODEL and not settings.XP_CROSS_VALIDATION else []
+            bestWeightPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
+                                          BEST_WEIGHT_FILE)
+        callbacks = [
+            ModelCheckpoint(bestWeightPath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+        ] if not settings.XP_LOAD_MODEL or not settings.XP_DEBUG_DATA_SET else []
         if settings.EARLY_STOP:
-            earlyStopping = EarlyStopping(monitor='val_acc', min_delta=.5, patience=2, verbose=settings.NN_VERBOSE)
-            callbacks.append(earlyStopping)
+            callbacks.append(
+                EarlyStopping(monitor='val_acc', min_delta=.5, patience=2, verbose=settings.NN_VERBOSE))
         time = datetime.datetime.now()
         logging.warn('Training started!')
         labels, data = normalizer.generateLearningData(corpus)
         labels = to_categorical(labels, num_classes=CLASS_NUM)
-
         history = self.model.fit(data, labels, validation_split=0.2, epochs=settings.NN_EPOCHS,
                                  batch_size=settings.NN_BATCH_SIZE,
                                  verbose=settings.NN_VERBOSE,
@@ -153,7 +152,7 @@ class Normalizer(object):
         del self.vocabulary.embeddings
         self.inputListDimension = INPUT_LIST_NUM
         if extractor:
-            self.nnExtractor = NNExtractor(corpus)
+            self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
 
     def generateLearningData(self, corpus):

@@ -221,13 +221,6 @@ def settingsToDic():
     return results
 
 
-def createHeader(title, value):
-    # logging.warn("*" * 40)
-    logging.warn("*" * 40)
-    logging.warn("{0} {1}".format(title, value))
-    logging.warn("*" * 40)
-    # logging.warn("*" * 40)
-
 
 def saveHistory(history):
     if settings.XP_LOAD_MODEL or settings.XP_DEBUG_DATA_SET:
@@ -237,3 +230,8 @@ def saveHistory(history):
         historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION), 'history.pkl')
     with open(historyFile, 'wb') as f:
         pickle.dump(history, f, pickle.HIGHEST_PROTOCOL)
+
+def createHeader(value):
+    logging.warn("*" * 40)
+    logging.warn("{0}".format( value))
+    logging.warn("*" * 40)

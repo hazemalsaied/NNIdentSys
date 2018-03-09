@@ -5,19 +5,19 @@ useToken = True
 # A'
 useSufixes = False
 # B
-useSyntax = False
+useSyntax = True
 # C
 useBiGram = True
 # D
-useTriGram = False
+useTriGram = True
 # E
 generateS0B2Bigram = True
 # F
-historyLength1 = False
+historyLength1 = True
 # G
-historyLength2 = False
+historyLength2 = True
 # H
-historyLength3 = False
+historyLength3 = True
 # I
 useS0B0Distance = True
 # J
@@ -25,16 +25,17 @@ useS0S1Distance = True
 # K
 useB1 = True
 # L
-useLexic = True
-enhanceMerge = False
+useLexicon = True
+enhanceMerge = True
 # M
-useStackLength = False
+useStackLength = True
 # N
-smartMWTDetection = False
+smartMWTDetection = True
 
 useAbstractSyntax = True
 
-import json, os
+import json
+import os
 
 
 def getConfig(configFolder):
@@ -73,16 +74,16 @@ def getConfig(configFolder):
             res += 'M '
         if ["enableSingleMWE"]:
             res += 'N '
-        print filename,' : ',res
+        print filename, ' : ', res
     return res
 
 
 def setConfig(configFile):
     data = json.load(open(configFile))
-    usePOS = True if data["UseLinguistInfo"]["usePOS"] else True
-    useLemma = True if data["UseLinguistInfo"]["useLemma"] else True
-    useSyntax = True if data["UseLinguistInfo"]["useSytax"] else True
-    useBiGram = True if data["UseLinguistInfo"]["useBiGram"] else True
+    usePOS = True if data["UseLinguistInfo"]["usePOS"] else False
+    useLemma = True if data["UseLinguistInfo"]["useLemma"] else False
+    useSyntax = True if data["UseLinguistInfo"]["useSytax"] else False
+    useBiGram = True if data["UseLinguistInfo"]["useBiGram"] else False
 
     useTriGram = True if data["UseLinguistInfo"]["useTriGram"] else False
     generateS0B2Bigram = True if data["generateS0B2Bigram"] else False
@@ -97,5 +98,4 @@ def setConfig(configFile):
     useStackLength = True if data["useStackLength"] else False
     smartMWTDetection = True if ["enableSingleMWE"] else False
 
-
-#getConfig('/Users/halsaied/PycharmProjects/NNIdentSys/Reports/Langs')
+# getConfig('/Users/halsaied/PycharmProjects/NNIdentSys/Reports/Langs')

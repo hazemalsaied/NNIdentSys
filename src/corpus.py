@@ -28,7 +28,7 @@ class Corpus:
 
             This function iterate over the lines of corpus document to create the precedent ontology
         """
-        reports.createHeader('Language ', langName)
+        reports.createHeader('Language : {0}'.format(langName))
         self.langName = langName
         self.trainingSents, self.testingSents = [], []
         self.mweDictionary, self.mwtDictionary, self.mweTokenDictionary = dict(), dict(), dict()
@@ -995,3 +995,5 @@ def getVMWEByTokens(tokens):
     if vmwes:
         return vmwes[0]
     return None
+
+

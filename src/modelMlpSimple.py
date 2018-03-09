@@ -8,12 +8,10 @@ from numpy import argmax
 from corpus import getTokens
 from model import Network, Normalizer
 from vocabulary import empty
+import settings
 
-PADDING_ON_S0 = 5
-PADDING_ON_S1 = 2
-PADDING_ON_B0 = 2
-INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
-PREDICT_VERBOSE = 0
+
+INPUT_WORDS = settings.PADDING_ON_S0 + settings.PADDING_ON_S1 + settings.PADDING_ON_B0
 
 
 class NetworkMLPSimple(Network):
@@ -31,7 +29,7 @@ class NetworkMLPSimple(Network):
     def predict(self, trans, normalizer):
         dataEntry = normalizer.normalize(trans)
         inputVec = [np.asarray([dataEntry[0]]), np.asarray([dataEntry[1]])]
-        oneHotRep = self.model.predict(inputVec, batch_size=1, verbose=PREDICT_VERBOSE)
+        oneHotRep = self.model.predict(inputVec, batch_size=1, verbose=settings.PREDICT_VERBOSE)
         return argmax(oneHotRep)
 
 
@@ -54,9 +52,9 @@ class NormalizerMLPSimple(Normalizer):
         dataEntry4 = self.nnExtractor.vectorize(trans)
         emptyIdx = self.vocabulary.indices[empty]
 
-        dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=PADDING_ON_S0, value=emptyIdx))[0]
-        dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=PADDING_ON_S1, value=emptyIdx))[0]
-        dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=PADDING_ON_B0, value=emptyIdx))[0]
+        dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
+        dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
+        dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
 
         dataEntry1 = np.concatenate((dataEntry1, dataEntry2, dataEntry3), axis=0)
         return [dataEntry1, np.asarray(dataEntry4)]

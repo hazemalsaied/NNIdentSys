@@ -7,10 +7,8 @@ import settings
 from model import Normalizer, Network
 from transitions import TransitionType
 
-PADDING_ON_S0 = 3
-PADDING_ON_S1 = 2
-PADDING_ON_B0 = 2
-INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
+
+INPUT_WORDS = settings.PADDING_ON_S0 + settings.PADDING_ON_S1 + settings.PADDING_ON_B0
 
 
 class NetworkMLPAuxSimple(Network):

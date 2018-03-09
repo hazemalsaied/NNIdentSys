@@ -19,39 +19,6 @@ allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'M
 langs = ['FR']
 
 
-def xp(train=False, cv=False, xpNum=1):
-    settings.USE_CLUSTER = True
-    if train:
-        ######################################
-        #   Debug
-        ######################################
-        settings.XP_DEBUG_DATA_SET = True
-        identify()
-        ######################################
-        #   Train
-        ######################################
-        settings.XP_DEBUG_DATA_SET = False
-        settings.XP_TRAIN_DATA_SET = True
-        for i in range(xpNum):
-            identify()
-        settings.XP_TRAIN_DATA_SET = False
-    if cv:
-        ######################################
-        #   CV Debug
-        ######################################
-        crossValidation(debug=True)
-        ######################################
-        #   CV
-        ######################################
-        for i in range(xpNum):
-            crossValidation()
-        ######################################
-        #   Load
-        ######################################
-        # preTrainedPath= '/home/halsaied/nancy/NNIdenSys/NNIdenSys/Reports/FR-12/12-FR-modelWeigth.hdf5'
-        # identify(load=settings.XP_LOAD_MODEL, loadFolderPath=loadFolderPath)
-
-
 def identify(loadFolderPath='', load=False):
     settings.XP_LOAD_MODEL = load
     for lang in langs:
@@ -66,7 +33,7 @@ def crossValidation(debug=False):
     for lang in langs:
         reports.createReportFolder(lang)
         for cvIdx in range(settings.CV_ITERATIONS):
-            reports.createHeader('Iteration no.', cvIdx)
+            reports.createHeader('Iteration no.{0}'.format(cvIdx))
             settings.CV_CURRENT_ITERATION = cvIdx
             cvCurrentIterFolder = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION))
             if not os.path.isdir(cvCurrentIterFolder):
@@ -165,19 +132,6 @@ def initNetword(normalizer):
         return network
     raise ValueError('initNetword: No model Selected!')
 
-def analyzeCorporaAndOracle():
-    header = 'Non recognizable,Interleaving,Embedded,Distributed Embedded,Left Embedded,Right Embedded,Middle Embedded'
-    analysisReport = header + '\n'
-    for lang in langs:
-        logging.warn('*' * 20)
-        logging.warn('Language: {0}'.format(lang))
-        corpus = Corpus(lang)
-        analysisReport += corpus.getVMWEReport() + '\n'
-        oracle.parse(corpus)
-        oracle.validate(corpus)
-    with open('../Results/VMWE.Analysis.csv', 'w') as f:
-        f.write(analysisReport)
-
 
 def identifyV2():
     for lang in langs:
@@ -191,6 +145,39 @@ def identifyV2():
         logging.warn('*' * 20)
 
 
+def xp(train=False, cv=False, xpNum=1):
+    settings.USE_CLUSTER = True
+    if train:
+        ######################################
+        #   Debug
+        ######################################
+        settings.XP_DEBUG_DATA_SET = True
+        identify()
+        ######################################
+        #   Train
+        ######################################
+        settings.XP_DEBUG_DATA_SET = False
+        settings.XP_TRAIN_DATA_SET = True
+        for i in range(xpNum):
+            identify()
+        settings.XP_TRAIN_DATA_SET = False
+    if cv:
+        ######################################
+        #   CV Debug
+        ######################################
+        crossValidation(debug=True)
+        ######################################
+        #   CV
+        ######################################
+        for i in range(xpNum):
+            crossValidation()
+        ######################################
+        #   Load
+        ######################################
+        # preTrainedPath= '/home/halsaied/nancy/NNIdenSys/NNIdenSys/Reports/FR-12/12-FR-modelWeigth.hdf5'
+        # identify(load=settings.XP_LOAD_MODEL, loadFolderPath=loadFolderPath)
+
+
 def xpGRU(moreUnits=False, stacked=False, gru=False, cv=False):
     settings.USE_MODEL_MLP_LSTM = True
     if moreUnits:
@@ -202,7 +189,7 @@ def xpGRU(moreUnits=False, stacked=False, gru=False, cv=False):
     title += '' if not stacked else 'Stacked '
     title += ' LSTM ' if not gru else ' GRU '
     title += ' Expanded Unit Num ' if moreUnits else ''
-    reports.createHeader('', title)
+    reports.createHeader(title)
     if cv:
         xp(cv=True)
     else:
@@ -217,7 +204,7 @@ def xpGRU(moreUnits=False, stacked=False, gru=False, cv=False):
 
 def xpMLPAux(cv=False):
     settings.USE_MODEL_MLP_AUX_SIMPLE = True
-    reports.createHeader('', 'MLP Aux')
+    reports.createHeader('MLP Aux')
     if cv:
         xp(cv=True)
     else:
@@ -227,87 +214,65 @@ def xpMLPAux(cv=False):
 def xpMLPTotal(cv=False, train=False, xpNum=5):
     settings.USE_MODEL_MLP_SIMPLE = True
 
-    reports.createHeader('', 'Standard')
+    reports.createHeader('Standard')
     xp(cv=cv, train=train, xpNum=xpNum)
 
-    reports.createHeader('', 'Optimizer = ADAM ')
+    reports.createHeader('Optimizer = ADAM ')
     settings.USE_ADAM = True
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.USE_ADAM = False
 
-    reports.createHeader('', 'Dense 2 not activated')
+    reports.createHeader('Dense 2 not activated')
     settings.USE_DENSE_2 = False
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.USE_DENSE_2 = True
 
-    reports.createHeader('', 'Dense 3 activated')
+    reports.createHeader('Dense 3 activated')
     settings.USE_DENSE_3 = True
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.USE_DENSE_3 = False
 
-    reports.createHeader('', 'Tahn is activated')
+    reports.createHeader('Tahn is activated')
     settings.MLP_USE_TANH_1 = True
     settings.MLP_USE_TANH_2 = True
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.MLP_USE_TANH_1 = False
     settings.MLP_USE_TANH_2 = False
 
-    reports.createHeader('', 'Without weight matrix')
+    reports.createHeader('Without weight matrix')
     settings.INITIALIZE_EMBEDDING = False
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.INITIALIZE_EMBEDDING = True
 
-    reports.createHeader('', 'Maximized weight matrix')
+    reports.createHeader('Maximized weight matrix')
     settings.REMOVE_NON_FREQUENT_WORDS = False
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.REMOVE_NON_FREQUENT_WORDS = True
 
-    reports.createHeader('', 'Batch size = 64')
+    reports.createHeader('Batch size = 64')
     settings.NN_BATCH_SIZE = 64
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.NN_BATCH_SIZE = 128
 
-    reports.createHeader('', 'Batch size = 256')
+    reports.createHeader('Batch size = 256')
     settings.NN_BATCH_SIZE = 256
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.NN_BATCH_SIZE = 128
 
-    reports.createHeader('', 'No early stop')
+    reports.createHeader('No early stop')
     settings.EARLY_STOP = False
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.EARLY_STOP = True
 
-    reports.createHeader('', 'Use Lemma')
+    reports.createHeader('Use Lemma')
     settings.M1_USE_TOKEN = False
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.M1_USE_TOKEN = True
 
-    reports.createHeader('', 'No POS emb')
+    reports.createHeader('No POS emb')
     settings.USE_POS_EMB = False
     xp(cv=cv, train=train, xpNum=xpNum)
     settings.USE_POS_EMB = True
-
-
-def xpMLP(_543=False, _2048_1024=False, cv=False):
-    settings.USE_MODEL_MLP_SIMPLE = True
-
-    title = 'MLP '
-    title += '' if not _543 else '5, 4, 3 '
-    title += '' if not _2048_1024 else ' 2048 1024 '
-    reports.createHeader('', title)
-
-    if _2048_1024:
-        settings.MLP_LAYER_1_UNIT_NUM = 2048
-        settings.MLP_LAYER_2_UNIT_NUM = 1024
-    if cv:
-        xp(cv=True)
-    else:
-        xp(train=True)
-
-    if _2048_1024:
-        settings.USE_MODEL_MLP_SIMPLE = False
-        settings.MLP_LAYER_1_UNIT_NUM = 1024
-        settings.MLP_LAYER_2_UNIT_NUM = 512
 
 
 def xpConfTrans(stacked=False, gru=False, cv=False):
@@ -317,7 +282,7 @@ def xpConfTrans(stacked=False, gru=False, cv=False):
     title = 'Conf <=> Trans: '
     title += '' if not stacked else 'Stacked '
     title += ' LSTM ' if not gru else ' GRU '
-    reports.createHeader('', title)
+    reports.createHeader(title)
     if cv:
         xp(cv=True)
     else:
@@ -333,10 +298,5 @@ sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
 numpy.random.seed(7)
 
-#xpMLPTotal(cv=True)
 settings.USE_MODEL_MLP_SIMPLE = True
 xp(train=True)
-# xpMLP()
-# xpGRU(gru=True, stacked=True, moreUnits=True)
-# xpMLPAux()
-# xpConfTrans(gru=True, stacked=True)

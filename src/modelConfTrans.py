@@ -15,10 +15,7 @@ USE_STACKED_LSTM = False
 
 INPUT_LIST_NUM = 6
 
-PADDING_ON_S0 = 4
-PADDING_ON_S1 = 2
-PADDING_ON_B0 = 2
-INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
+INPUT_WORDS = settings.PADDING_ON_S0 + settings.PADDING_ON_S1 + settings.PADDING_ON_B0
 
 
 class NetworkConfTrans(Network):
@@ -91,9 +88,9 @@ class NormalizerConfTrans(Normalizer):
         dataEntry4 = np.asarray(self.nnExtractor.vectorize(trans))
         emptyIdx = self.vocabulary.indices[empty]
 
-        dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=PADDING_ON_S0, value=emptyIdx))[0]
-        dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=PADDING_ON_S1, value=emptyIdx))[0]
-        dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=PADDING_ON_B0, value=emptyIdx))[0]
+        dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
+        dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
+        dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
 
         dataEntry1 = np.concatenate((dataEntry1, dataEntry2, dataEntry3), axis=0)
         return [dataEntry1, dataEntry4]

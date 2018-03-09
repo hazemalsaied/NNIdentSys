@@ -14,10 +14,7 @@ USE_STACKED_LSTM = False
 
 INPUT_LIST_NUM = 4
 
-PADDING_ON_S0 = 4
-PADDING_ON_S1 = 4
-PADDING_ON_B0 = 2
-INPUT_WORDS = PADDING_ON_S0 + PADDING_ON_S1 + PADDING_ON_B0
+INPUT_WORDS = settings.PADDING_ON_S0 + settings.PADDING_ON_S1 + settings.PADDING_ON_B0
 
 
 class NetworkMlpLstm2(Network):
@@ -26,13 +23,13 @@ class NetworkMlpLstm2(Network):
                                     weights=[normalizer.weightMatrix], trainable=True)
         sharedLSTM = LSTM(settings.LSTM_1_UNIT_NUM, name='sharedLSTMLayer')
         # S0-based left LSTM Module
-        s0LeftInputLayer, s0LeftOutputLayer = self.createLSTMModule(PADDING_ON_S0, 's0Left', sharedEmbedding,
+        s0LeftInputLayer, s0LeftOutputLayer = self.createLSTMModule(settings.PADDING_ON_S0, 's0Left', sharedEmbedding,
                                                                     sharedLSTM)
         # S1-based left LSTM Module
-        s1LeftInputLayer, s1LeftOutputLayer = self.createLSTMModule(PADDING_ON_S1, 's1Left', sharedEmbedding,
+        s1LeftInputLayer, s1LeftOutputLayer = self.createLSTMModule(settings.PADDING_ON_S1, 's1Left', sharedEmbedding,
                                                                     sharedLSTM, )
         # Buffer-based Embedding Module
-        bInputLayer = Input(shape=(PADDING_ON_B0,), name='bInputLayer')
+        bInputLayer = Input(shape=(settings.PADDING_ON_B0,), name='bInputLayer')
         bOutputLayer = Flatten(name='bOutputLayer')(sharedEmbedding(bInputLayer))
         # Auxiliary feature vectors
         auxFeatureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='auxFeatureLayer')
@@ -71,7 +68,7 @@ class NormalizerMlpLstm2(Normalizer):
             dataEntry3 = self.getIndices(trans.configuration.buffer[:2])
         dataEntry4 = self.nnExtractor.vectorize(trans)
         emptyIdx = self.vocabulary.indices[empty]
-        return [np.asarray(pad_sequences([dataEntry1], maxlen=PADDING_ON_S0, value=emptyIdx))[0], \
-                np.asarray(pad_sequences([dataEntry2], maxlen=PADDING_ON_S1, value=emptyIdx))[0], \
-                np.asarray(pad_sequences([dataEntry3], maxlen=PADDING_ON_B0, value=emptyIdx))[0], \
+        return [np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0], \
+                np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0], \
+                np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0], \
                 np.asarray(dataEntry4)]

@@ -94,7 +94,7 @@ def getFeatures(transition, sent):
             sent.tokens.index(conf.stack[-1]) - sent.tokens.index(conf.stack[-2]))
     addTransitionHistory(transition, featureDictionary)
 
-    if v2featureSettings.useLexic and conf.buffer and conf.stack:
+    if v2featureSettings.useLexicon and conf.buffer and conf.stack:
         generateDisconinousFeatures(conf, sent, featureDictionary)
 
     enhanceMerge(transition, featureDictionary)

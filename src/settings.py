@@ -90,7 +90,11 @@ USE_MODEL_MLP_LSTM = False
 USE_MODEL_MLP_LSTM_2 = False
 USE_MODEL_MLP_AUX_SIMPLE = False
 USE_MODEL_CONF_TRANS = False
+PREDICT_VERBOSE = 0
 
+PADDING_ON_S0 = 5
+PADDING_ON_S1 = 2
+PADDING_ON_B0 = 2
 
 def toString():
     # pp = pprint.PrettyPrinter(indent=4)
