@@ -361,5 +361,6 @@ numpy.random.seed(7)
 
 settings.USE_MODEL_MLP_SIMPLE = True
 settings.USE_SEPERATED_EMB_MODULE = True
+settings.USE_CLUSTER = True
 xp(train=True)
 

@@ -36,8 +36,11 @@ class NetworkMLPSimple(Network):
         super(NetworkMLPSimple, self).__init__()
 
     def predict(self, trans, normalizer):
-        dataEntry = normalizer.normalize(trans)
-        inputVec = [np.asarray([dataEntry[0]]), np.asarray([dataEntry[1]])]
+        dataEntry = normalizer.normalize(trans, seperatedModules=settings.USE_SEPERATED_EMB_MODULE)
+        if settings.USE_SEPERATED_EMB_MODULE:
+            inputVec = [np.asarray([dataEntry[0]]), np.asarray([dataEntry[1]]), np.asarray([dataEntry[2]])]
+        else:
+            inputVec = [np.asarray([dataEntry[0]]), np.asarray([dataEntry[1]])]
         oneHotRep = self.model.predict(inputVec, batch_size=1, verbose=settings.PREDICT_VERBOSE)
         return argmax(oneHotRep)
 
@@ -48,7 +51,10 @@ class NormalizerMLPSimple(Normalizer):
     """
 
     def __init__(self, corpus):
-        super(NormalizerMLPSimple, self).__init__(corpus, 2)
+        if settings.USE_SEPERATED_EMB_MODULE:
+            super(NormalizerMLPSimple, self).__init__(corpus, 3)
+        else:
+            super(NormalizerMLPSimple, self).__init__(corpus, 2)
 
     # def normalize(self, trans):
     #     dataEntry1, dataEntry2, dataEntry3, dataEntry4 = [], [], [], []
@@ -90,18 +96,23 @@ class NormalizerMLPSimple(Normalizer):
             else:
                 dataEntry3 = self.getIndices(trans.configuration.buffer[:2])
         dataEntry4 = self.nnExtractor.vectorize(trans)
-        emptyIdx = self.vocabulary.indices[empty]
-        if seperatedModules:
-            dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
-            dataEntry11 = np.asarray(pad_sequences([dataEntry11], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
-            dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
-            dataEntry22 = np.asarray(pad_sequences([dataEntry22], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
-            dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
-            dataEntry33 = np.asarray(pad_sequences([dataEntry33], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
 
-            dataEntry1 = np.concatenate((dataEntry1,dataEntry11, dataEntry2,dataEntry22, dataEntry3,dataEntry33), axis=0)
-            return [dataEntry1, np.asarray(dataEntry4)]
+        if seperatedModules:
+            posEmptyIdx = self.vocabulary.posIndices[empty]
+            tokenEmptyIdx = self.vocabulary.tokenIndices[empty]
+
+            dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=posEmptyIdx))[0]
+            dataEntry11 = np.asarray(pad_sequences([dataEntry11], maxlen=settings.PADDING_ON_S0, value=tokenEmptyIdx))[0]
+            dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=posEmptyIdx))[0]
+            dataEntry22 = np.asarray(pad_sequences([dataEntry22], maxlen=settings.PADDING_ON_S1, value=tokenEmptyIdx))[0]
+            dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=posEmptyIdx))[0]
+            dataEntry33 = np.asarray(pad_sequences([dataEntry33], maxlen=settings.PADDING_ON_B0, value=tokenEmptyIdx))[0]
+
+            dataEntry1 = np.concatenate((dataEntry1, dataEntry2, dataEntry3), axis=0)
+            dataEntry2 = np.concatenate((dataEntry11, dataEntry22, dataEntry33), axis=0)
+            return [dataEntry1, dataEntry2, np.asarray(dataEntry4)]
         else:
+            emptyIdx = self.vocabulary.indices[empty]
             dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
             dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
             dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]

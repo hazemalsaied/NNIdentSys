@@ -48,7 +48,7 @@ class Network(object):
                                  verbose=settings.NN_VERBOSE,
                                  callbacks=callbacks)
         logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
-        reports.saveHistory(history)
+        #reports.saveHistory(history)
         if not settings.USE_CLUSTER:
             self.plotTraining(history)
         reports.saveModel(self.model)

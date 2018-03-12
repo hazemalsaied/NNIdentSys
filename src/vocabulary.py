@@ -148,6 +148,9 @@ def getTokenEmbeddingMatrices(corpus, taux):
     embeddings[number] = getRandomVector(len(preTrainedEmb.vectors[0]))
     indices[number] = idx
     idx += 1
+    if settings.USE_SEPERATED_EMB_MODULE:
+        embeddings[empty] = getRandomVector(len(preTrainedEmb.vectors[0]))
+        indices[empty] = idx
     logging.warn('Filtered token frequency dic: {0}'.format(len(indices)))
     return indices, embeddings
 
@@ -163,6 +166,10 @@ def getPOSEmbeddingMatrices(corpus, dimension, taux, window=3):
             idx += 1
     embeddings[unknown] = getRandomVector(dimension)
     indices[unknown] = idx
+    idx += 1
+    if settings.USE_SEPERATED_EMB_MODULE:
+        embeddings[empty] = getRandomVector(dimension)
+        indices[empty] = idx
     logging.warn('{0} Pos tags'.format(len(traindEmb.wv.vocab) + 1))
     return indices, embeddings
 
