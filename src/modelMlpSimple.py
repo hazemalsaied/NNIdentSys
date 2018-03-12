@@ -70,7 +70,7 @@ class NormalizerMLPSimple(Normalizer):
 
 
     def normalize(self, trans, seperatedModules=False):
-        dataEntry1, dataEntry2, dataEntry3, dataEntry4 = [], [], [], []
+        dataEntry1,dataEntry11, dataEntry2,dataEntry22, dataEntry3,dataEntry33, dataEntry4 = [], [], [], [], [], [], []
         if trans.configuration.stack:
             if seperatedModules:
                 dataEntry1 = self.getIndices(getTokens(trans.configuration.stack[-1]),usePos=True)
