@@ -11,6 +11,7 @@ import modelMlpLstm
 import modelMlpSimple
 import oracle
 import v2classification as v2
+import v2featureSettings as v2S
 from corpus import *
 from evaluation import evaluate
 from parser import parse
@@ -275,6 +276,8 @@ def xpMLPTotal(cv=False, train=False, xpNum=5):
     settings.USE_POS_EMB = True
 
 
+
+
 def xpConfTrans(stacked=False, gru=False, cv=False):
     settings.USE_MODEL_CONF_TRANS = True
     settings.STACKED = stacked
@@ -293,10 +296,70 @@ def xpConfTrans(stacked=False, gru=False, cv=False):
     settings.USE_GRU = False
 
 
+def linearModelImpact():
+    settings.XP_TRAIN_DATA_SET = True
+
+    reports.createHeader('Words Pos + token + lemma only:  A ')
+    v2S.useSyntax = False
+    v2S.useBiGram = False
+    v2S.useLexicon = False
+    v2S.enhanceMerge = False
+    v2S.useB1 = False
+    v2S.useS0S1Distance = False
+    v2S.useS0B0Distance = False
+    v2S.generateS0B2Bigram = False
+    identifyV2()
+
+
+
+    reports.createHeader('Standard settings:  A B C E I J K L')
+    identifyV2()
+
+    reports.createHeader('Without syntax: A C E I J K L')
+    v2S.useSyntax = False
+    identifyV2()
+    v2S.useSyntax = True
+
+    reports.createHeader('Without BiGram: A B E I J K L')
+    v2S.useBiGram = False
+    identifyV2()
+    v2S.useBiGram = True
+
+    reports.createHeader('Without S0B2Bigram: A B C I J K L')
+    v2S.generateS0B2Bigram = False
+    identifyV2()
+    v2S.generateS0B2Bigram = True
+
+    reports.createHeader('Without S0B0Distance: A B C E J K L')
+    v2S.useS0B0Distance = False
+    identifyV2()
+    v2S.useS0B0Distance = True
+
+    reports.createHeader('Without S0S1Distance: A B C E I K L')
+    v2S.useS0S1Distance = False
+    identifyV2()
+    v2S.useS0S1Distance = True
+
+    reports.createHeader('without B1:  A B C E I J L')
+    v2S.useB1 = False
+    identifyV2()
+    v2S.useB1 = True
+
+    reports.createHeader('without lexicon:  A B C E I J K')
+    v2S.useLexicon = False
+    v2S.enhanceMerge = False
+    identifyV2()
+    v2S.useLexicon = True
+    v2S.enhanceMerge = True
+
+
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
 numpy.random.seed(7)
 
 settings.USE_MODEL_MLP_SIMPLE = True
+settings.USE_SEPERATED_EMB_MODULE = True
 xp(train=True)
+

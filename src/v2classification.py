@@ -13,10 +13,12 @@ from v2extraction import getFeatures
 def train(corpus):
     labels, featureDicss = extract(corpus)
     startTime = datetime.now()
-    logging.warn('Training has started, SVM Output Code Classifier is used!')
+
     vec = DictVectorizer()
     features = vec.fit_transform(featureDicss)
+    logging.warn('Feature number: {0}'.format(len(vec.vocabulary_)))
     clf = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=0)
+    logging.warn('Training has started, SVM Output Code Classifier is used!')
     clf.fit(features, labels)
     logging.warn('Training is over, it has taken {0} minutes!'.format(str(datetime.now().minute - startTime.minute)))
     return clf, vec

@@ -33,9 +33,9 @@ class Vocabulary:
         self.size = len(self.indices)
 
         logging.warn('Vocabulary size: {0}'.format(self.size))
-        if settings.USE_POS_EMB:
-            del self.posEmbeddings
-        del self.tokenEmbeddings
+        #if settings.USE_POS_EMB:
+            #del self.posEmbeddings
+        #del self.tokenEmbeddings
 
     def getEmbeddingMatrices(self, corpus):
         indices, embeddings, idx = self.generateUnknownKeys()

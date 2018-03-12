@@ -16,14 +16,23 @@ INPUT_WORDS = settings.PADDING_ON_S0 + settings.PADDING_ON_S1 + settings.PADDING
 
 class NetworkMLPSimple(Network):
     def __init__(self, normalizer):
-        wordLayer, flattenLayer = Network.createEmbeddingModule(INPUT_WORDS, normalizer)
+
+        if settings.USE_SEPERATED_EMB_MODULE:
+            posLayer, posFlattenLayer = Network.createPOSEmbeddingModule(INPUT_WORDS, normalizer)
+            tokenLayer, tokenFlattenLayer = Network.createTokenEmbeddingModule(INPUT_WORDS, normalizer)
+            flattenLayer = keras.layers.concatenate([posFlattenLayer, tokenFlattenLayer])
+        else:
+            wordLayer, flattenLayer = Network.createEmbeddingModule(INPUT_WORDS, normalizer)
         # Auxiliary feature vectors
         auxFeatureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='auxFeatureLayer')
         # Merge layer
         concLayer = keras.layers.concatenate([flattenLayer, auxFeatureLayer])
         # MLP module
         mainOutputLayer = self.createMLPModule(concLayer)
-        self.model = Model(inputs=[wordLayer, auxFeatureLayer], outputs=mainOutputLayer)
+        if settings.USE_SEPERATED_EMB_MODULE:
+            self.model = Model(inputs=[posLayer, tokenLayer, auxFeatureLayer], outputs=mainOutputLayer)
+        else:
+            self.model = Model(inputs=[wordLayer, auxFeatureLayer], outputs=mainOutputLayer)
         super(NetworkMLPSimple, self).__init__()
 
     def predict(self, trans, normalizer):

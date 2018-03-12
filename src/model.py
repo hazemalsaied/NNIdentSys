@@ -125,6 +125,35 @@ class Network(object):
         return wordLayer, flattenLayer
 
     @staticmethod
+    def createPOSEmbeddingModule(wordNum, normalizer):
+        # Buffer-based Embedding Module
+        wordLayer = Input(shape=(wordNum,), name='word')
+        if settings.INITIALIZE_EMBEDDING:
+            embLayer = Embedding(output_dim=normalizer.vocabulary.postagDim, input_dim=len(normalizer.vocabulary.posIndices),
+                                 weights=[normalizer.posWeightMatrix], trainable=settings.TRAINABLE_EMBEDDING)(wordLayer)
+        else:
+            embLayer = Embedding(output_dim=normalizer.vocabulary.postagDim, input_dim=len(normalizer.vocabulary.posIndices))(
+                wordLayer)
+        flattenLayer = Flatten(name='flatten')(embLayer)
+        return wordLayer, flattenLayer
+
+    @staticmethod
+    def createTokenEmbeddingModule(wordNum, normalizer):
+        # Buffer-based Embedding Module
+        wordLayer = Input(shape=(wordNum,), name='word')
+        if settings.INITIALIZE_EMBEDDING:
+            embLayer = Embedding(output_dim=normalizer.vocabulary.tokenDim,
+                                 input_dim=len(normalizer.vocabulary.tokenIndices),
+                                 weights=[normalizer.tokenWeightMatrix], trainable=settings.TRAINABLE_EMBEDDING)(
+                wordLayer)
+        else:
+            embLayer = Embedding(output_dim=normalizer.vocabulary.tokenDim,
+                                 input_dim=len(normalizer.vocabulary.tokenIndices))(
+                wordLayer)
+        flattenLayer = Flatten(name='flatten')(embLayer)
+        return wordLayer, flattenLayer
+
+    @staticmethod
     def getActiviation1():
         if settings.MLP_USE_RELU_1:
             return 'relu'
@@ -146,11 +175,24 @@ class Network(object):
 class Normalizer(object):
     def __init__(self, corpus, INPUT_LIST_NUM, extractor=True):
         self.vocabulary = Vocabulary(corpus)
-        self.weightMatrix = np.zeros((len(self.vocabulary.indices), self.vocabulary.embDim))
-        for tokenKey in self.vocabulary.indices:
-            self.weightMatrix[self.vocabulary.indices[tokenKey]] = self.vocabulary.embeddings[tokenKey]
-        del self.vocabulary.embeddings
-        self.inputListDimension = INPUT_LIST_NUM
+
+        if settings.USE_SEPERATED_EMB_MODULE:
+            self.posWeightMatrix = np.zeros((len(self.vocabulary.posIndices), self.vocabulary.postagDim))
+            for tokenKey in self.vocabulary.posIndices:
+                self.posWeightMatrix[self.vocabulary.posIndices[tokenKey]] = self.vocabulary.posEmbeddings[tokenKey]
+            del self.vocabulary.posEmbeddings
+
+            self.tokenWeightMatrix = np.zeros((len(self.vocabulary.tokenIndices), self.vocabulary.tokenDim))
+            for tokenKey in self.vocabulary.tokenIndices:
+                self.tokenWeightMatrix[self.vocabulary.tokenIndices[tokenKey]] = self.vocabulary.tokenEmbeddings[tokenKey]
+            del self.vocabulary.tokenEmbeddings
+
+        else:
+            self.weightMatrix = np.zeros((len(self.vocabulary.indices), self.vocabulary.embDim))
+            for tokenKey in self.vocabulary.indices:
+                self.weightMatrix[self.vocabulary.indices[tokenKey]] = self.vocabulary.embeddings[tokenKey]
+            del self.vocabulary.embeddings
+            self.inputListDimension = INPUT_LIST_NUM
         if extractor:
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)

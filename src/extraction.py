@@ -43,44 +43,80 @@ def extractSent(sent):
 
 
 def extractTrans(trans):
+    #if trans and trans.type and trans.type.value > 1:
+    #    print trans
     featSet = set()
-    featSet.update(extractDicBased(trans))
-    featSet.update(extractSyntaxic(trans))
+    featSet.update(extractDicBased(trans.configuration))
+    featSet.update(extractSyntaxic(trans.configuration))
+    #if trans and trans.type and trans.type.value > 1:
+    #    print featSet
     featSet.update(extractDistance(trans))
     featSet.update(extractHistory(trans))
     return featSet
 
 
-def extractSyntaxic(trans):
-    if not v2featureSettings.useSyntax:
-        return set()
+def extractSyntaxic(config):
     featSet = set()
-    config = trans.configuration
-    if config.stack and isinstance(config.stack[-1], Token):
-        stack0 = config.stack[-1]
-        if int(stack0.dependencyParent) == -1 or int(stack0.dependencyParent) == 0 or \
-                stack0.dependencyLabel.strip() == '' or not config.buffer:
-            return dict()
-        for bElem in config.buffer:
-            if bElem.dependencyParent == stack0.position:
-                biIdx = config.buffer.index(bElem)
-                # syntacticFeatDic['hasRighDep_' + bElem.dependencyLabel] = True
-                featSet.add('RighDep(S0)=' + bElem.dependencyLabel)
-                featSet.add('RighDep(S0,B{0}) = {1}'.format(biIdx, bElem.dependencyLabel))
-        if stack0.dependencyParent > stack0.position:
-            for bElem in config.buffer[:5]:
-                if bElem.position == stack0.dependencyParent:
+    if not v2featureSettings.useSyntax:
+        return featSet
+    if config.stack:
+        s0Tokens = getTokens(config.stack[-1])
+        for t in reversed(s0Tokens):
+            tIdx = len(s0Tokens) - s0Tokens.index(t) - 1
+            if int(t.dependencyParent) == -1 or int(t.dependencyParent) == 0 or \
+                    t.dependencyLabel.strip() == '' or not config.buffer:
+                return dict()
+            # Syntactic relation between S0 tokens
+            for t1 in reversed(s0Tokens):
+                if t1 is t:
+                    continue
+                t1Idx = len(s0Tokens) - s0Tokens.index(t1) - 1
+                if t.dependencyParent == t1.position:
+                    featSet.add('SyntaxicRel(S0T{0},S0T{1})={2}'.format(t1Idx, tIdx, t.dependencyLabel))
+                elif t.position == t1.dependencyParent:
+                    featSet.add('SyntaxicRel(S0T{0},S0T{1})={2}'.format(tIdx, t1Idx, t1.dependencyLabel))
+                else:
+                    featSet.add('SyntaxicRel(S0T{0},S0T{1})= null'.format(tIdx, t1Idx))
+            # Righ dependence of S0 betwwen the first n elements of the buffer
+            for bElem in config.buffer[:v2featureSettings.bufferElements]:
+                if bElem.dependencyParent == t.position:
                     biIdx = config.buffer.index(bElem)
-                    featSet.add('Gouverner(S0) = B{0}'.format(biIdx))
-                    featSet.add('Gouverner+Label(S0) = B{0} {1}'.format(biIdx, stack0.dependencyLabel))
-                    break
-        if len(config.stack) > 1:
-            stack1 = config.stack[-2]
-            if isinstance(stack1, Token):
-                if stack0.dependencyParent == stack1.position:
-                    featSet.add('SyntaxicRel(S0,S1)={0}'.format(stack0.dependencyLabel))
-                elif stack0.position == stack1.dependencyParent:
-                    featSet.add('SyntaxicRel(S0,S1)={0}'.format(stack1.dependencyLabel))
+                    # syntacticFeatDic['hasRighDep_' + bElem.dependencyLabel] = True
+                    featSet.add('Label(RightDependent(S0T{0}))={1}'.format(tIdx, bElem.dependencyLabel))
+                    featSet.add('RightDependent(S0T{0}) = B{1}'.format(tIdx, biIdx))
+            # S0 token Gouverner present in the buffer
+            if t.dependencyParent > t.position:
+                for bElem in config.buffer[:v2featureSettings.bufferElements]:
+                    if bElem.position == t.dependencyParent:
+                        biIdx = config.buffer.index(bElem)
+                        featSet.add('Gouverner(S0T{0}) = B{1}'.format(tIdx, biIdx))
+                        featSet.add('Label(Gouverner(S0T{0})) = {1}'.format(tIdx, t.dependencyLabel))
+                        break
+            if len(config.stack) > 1:
+                s1Tokens = getTokens(config.stack[-2])
+                # Syntactic relation between tokens of S0 and S1
+                for tS1 in reversed(s1Tokens):
+                    tS1Idx = len(s1Tokens) - s1Tokens.index(tS1) - 1
+                    if t.dependencyParent == tS1.position:
+                        featSet.add('SyntaxicRel(S1T{0},S0T{1})={2}'.format(tS1Idx, tIdx, t.dependencyLabel))
+                    elif t.position == tS1.dependencyParent:
+                        featSet.add('SyntaxicRel(S0T{0},S1T{1})={2}'.format(tIdx, tS1Idx, tS1.dependencyLabel))
+                    else:
+                        featSet.add('SyntaxicRel(S0T{0},S1T{1})= null'.format(tIdx, tS1Idx))
+    # Syntactic relation between S1 tokens
+    if config.stack and len(config.stack) > 1:
+        s1Tokens = getTokens(config.stack[-2])
+        for t in s1Tokens:
+            for t1 in s1Tokens:
+                if t is not t1:
+                    tIdx = len(s1Tokens) - s1Tokens.index(t) - 1
+                    t1Idx = len(s1Tokens) - s1Tokens.index(t1) - 1
+                    if t.dependencyParent == t1.position:
+                        featSet.add('SyntaxicRel(S1T{0},S1T{1})={2}'.format(t1Idx, tIdx, t.dependencyLabel))
+                    elif t.position == tS1.dependencyParent:
+                        featSet.add('SyntaxicRel(S1T{0},S1T{1})={2}'.format(tIdx, t1Idx, tS1.dependencyLabel))
+                    else:
+                        featSet.add('SyntaxicRel(S1T{0},S1T{1})= null'.format(tIdx, t1Idx))
     return featSet
 
 
@@ -98,12 +134,15 @@ def extractDistance(trans):
                 b0Idx = sent.tokens.index(config.buffer[0])
                 s0Idx = sent.tokens.index(stackTokens[-1])
                 featSet.add('Distance(S0,B0)={0}'.format(b0Idx - s0Idx))
-        if len(config.stack) > 1 and isinstance(config.stack[-1], Token) \
-                and isinstance(config.stack[-2], Token):
+        if len(config.stack) > 1:
+            print trans
+            s0Tokens = getTokens(config.stack[-1])
+            s1Tokens = getTokens(config.stack[-1])
             if v2featureSettings.useS0S1Distance:
-                s0Idx = sent.tokens.index(config.stack[-1])
-                s1Idx = sent.tokens.index(config.stack[-2])
+                s0Idx = sent.tokens.index(s0Tokens[0])
+                s1Idx = sent.tokens.index(s1Tokens[-1])
                 featSet.add('Distance(S0,S1)={0}'.format(s0Idx - s1Idx))
+                print 'Distance(S0,S1)={0}'.format(s0Idx - s1Idx)
     return featSet
 
 
@@ -117,20 +156,20 @@ def extractHistory(trans):
         idx += 1
     while len(history) < 3:
         history += '-'
+
     if v2featureSettings.historyLength1:
         featSet.add('hisotry1={0}'.format(history[0]))
     if v2featureSettings.historyLength2:
-        featSet.add('hisotry2={0}'.format(history[:2]))
+        featSet.add('hisotry2={0}'.format(history[1]))
     if v2featureSettings.historyLength3:
-        featSet.add('hisotry3={0}'.format(history))
+        featSet.add('hisotry3={0}'.format(history[2]))
     return featSet
 
 
-def extractDicBased(trans):
-    config = trans.configuration
+def extractDicBased(config):
     featSet = set()
     if config.stack and isinstance(config.stack[-1], Token):
-        if trans.configuration.stack[-1].getLemma() in mwtDictionary and v2featureSettings.smartMWTDetection:
+        if config.stack[-1].getLemma() in mwtDictionary and v2featureSettings.smartMWTDetection:
             featSet.add('S0isMWT')
     if config.stack and (v2featureSettings.enhanceMerge or v2featureSettings.useLexicon):
         s0 = config.stack[-1]
@@ -142,8 +181,14 @@ def extractDicBased(trans):
             if t.getLemma() in mweTokenDictionary:
                 featSet.add('S0_T{0}=MWE Token'.format(tIdx))
         s0LemmaStr = s0LemmaStr[:-1]
-        if s0LemmaStr in mweDictionary:
+        if s0LemmaStr in mweDictionary and v2featureSettings.generateS0TokensareMWEFeatures:
             featSet.add('S0=MWE')
+    if config.stack and len(config.stack) > 1and (v2featureSettings.enhanceMerge or v2featureSettings.useLexicon):
+        s1Tokens = getTokens(config.stack[-2])
+        for t in s1Tokens:
+            tIdx = s1Tokens.index(t)
+            if t.getLemma() in mweTokenDictionary:
+                featSet.add('S1_T{0}=MWE Token'.format(tIdx))
     if len(config.stack) > 1:
         s1 = config.stack[-2]
         s1Tokens = getTokens(s1)

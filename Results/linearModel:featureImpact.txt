@@ -1,0 +1,145 @@
+Using Theano backend.
+WARNING:root:****************************************
+WARNING:root:Standard settings:  A B C E I J K L
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 1921668
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken 6 minutes!
+WARNING:root:Ordinary : F-Score: 0.742, Recall: 0.809, Precision: 0.686
+WARNING:root:lvc : F-Score: 0.53, Recall: 0.64, Precision: 0.453
+WARNING:root:ireflv : F-Score: 0.869, Recall: 0.889, Precision: 0.85
+WARNING:root:id : F-Score: 0.721, Recall: 0.779, Precision: 0.671
+WARNING:root:********************
+WARNING:root:****************************************
+WARNING:root:Without syntax: A C E I J K L
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 1626298
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken 5 minutes!
+WARNING:root:Ordinary : F-Score: 0.733, Recall: 0.791, Precision: 0.683
+WARNING:root:lvc : F-Score: 0.525, Recall: 0.634, Precision: 0.449
+WARNING:root:ireflv : F-Score: 0.849, Recall: 0.855, Precision: 0.842
+WARNING:root:id : F-Score: 0.708, Recall: 0.757, Precision: 0.665
+WARNING:root:********************
+WARNING:root:****************************************
+WARNING:root:Without BiGram: A B E I J K L
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 525876
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken 3 minutes!
+WARNING:root:Ordinary : F-Score: 0.639, Recall: 0.692, Precision: 0.594
+WARNING:root:lvc : F-Score: 0.312, Recall: 0.412, Precision: 0.251
+WARNING:root:ireflv : F-Score: 0.812, Recall: 0.801, Precision: 0.824
+WARNING:root:id : F-Score: 0.549, Recall: 0.579, Precision: 0.522
+WARNING:root:********************
+WARNING:root:****************************************
+WARNING:root:Without S0B2Bigram: A B C I J K L
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 1439558
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken 5 minutes!
+WARNING:root:Ordinary : F-Score: 0.74, Recall: 0.793, Precision: 0.693
+WARNING:root:lvc : F-Score: 0.563, Recall: 0.647, Precision: 0.498
+WARNING:root:ireflv : F-Score: 0.849, Recall: 0.875, Precision: 0.824
+WARNING:root:id : F-Score: 0.737, Recall: 0.781, Precision: 0.697
+WARNING:root:********************
+WARNING:root:****************************************
+WARNING:root:Without S0B2Bigram: A B C E J K L
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 1921635
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken 8 minutes!
+WARNING:root:Ordinary : F-Score: 0.747, Recall: 0.808, Precision: 0.695
+WARNING:root:lvc : F-Score: 0.529, Recall: 0.645, Precision: 0.449
+WARNING:root:ireflv : F-Score: 0.871, Recall: 0.892, Precision: 0.85
+WARNING:root:id : F-Score: 0.717, Recall: 0.754, Precision: 0.682
+WARNING:root:********************
+WARNING:root:****************************************
+WARNING:root:Without S0B2Bigram: A B C E I K L
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 1921647
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken -55 minutes!
+WARNING:root:Ordinary : F-Score: 0.742, Recall: 0.809, Precision: 0.686
+WARNING:root:lvc : F-Score: 0.533, Recall: 0.647, Precision: 0.453
+WARNING:root:ireflv : F-Score: 0.867, Recall: 0.885, Precision: 0.85
+WARNING:root:id : F-Score: 0.72, Recall: 0.777, Precision: 0.671
+WARNING:root:********************
+WARNING:root:****************************************
+WARNING:root:Standard settings:  A B C E I J L
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 1848065
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken 6 minutes!
+WARNING:root:Ordinary : F-Score: 0.736, Recall: 0.804, Precision: 0.679
+WARNING:root:lvc : F-Score: 0.506, Recall: 0.619, Precision: 0.428
+WARNING:root:ireflv : F-Score: 0.869, Recall: 0.886, Precision: 0.853
+WARNING:root:id : F-Score: 0.712, Recall: 0.772, Precision: 0.662
+WARNING:root:********************
+WARNING:root:****************************************
+WARNING:root:Standard settings:  A B C E I J K
+WARNING:root:****************************************
+WARNING:root:********************
+WARNING:root:Language: FR
+WARNING:root:****************************************
+WARNING:root:Language : FR
+WARNING:root:****************************************
+WARNING:root:Auto pos conllu files are used!
+WARNING:root:Development mode: train: 14304, test:3576
+WARNING:root:Feature number: 1921651
+WARNING:root:Training has started, SVM Output Code Classifier is used!
+WARNING:root:Training is over, it has taken 5 minutes!
+WARNING:root:Ordinary : F-Score: 0.744, Recall: 0.817, Precision: 0.682
+WARNING:root:lvc : F-Score: 0.508, Recall: 0.579, Precision: 0.453
+WARNING:root:ireflv : F-Score: 0.869, Recall: 0.889, Precision: 0.85
+WARNING:root:id : F-Score: 0.746, Recall: 0.854, Precision: 0.662
+WARNING:root:********************

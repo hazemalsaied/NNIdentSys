@@ -1,23 +1,24 @@
+# A B C E I J K L
 # A
 useLemma = True
 usePOS = True
 useToken = True
 # A'
-useSufixes = False
+useSufixes = True
 # B
 useSyntax = True
 # C
 useBiGram = True
 # D
-useTriGram = True
+useTriGram = False
 # E
 generateS0B2Bigram = True
 # F
-historyLength1 = True
+historyLength1 = False
 # G
-historyLength2 = True
+historyLength2 = False
 # H
-historyLength3 = True
+historyLength3 = False
 # I
 useS0B0Distance = True
 # J
@@ -28,12 +29,15 @@ useB1 = True
 useLexicon = True
 enhanceMerge = True
 # M
-useStackLength = True
+useStackLength = False
 # N
-smartMWTDetection = True
+smartMWTDetection = False
 
-useAbstractSyntax = True
+useAbstractSyntax = False
 
+bufferElements = 5
+
+generateS0TokensareMWEFeatures = False
 import json
 import os
 

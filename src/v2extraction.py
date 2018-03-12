@@ -38,7 +38,7 @@ def getFeatures(transition, sent):
             featureDictionary[conf.stack[-1].getLemma() + '_isMWT'] = True
     # TODO return transDic directly in this case
     if v2featureSettings.useStackLength and len(conf.stack) > 1:
-        featureDictionary['StackLengthIs'] = len(conf.stack)
+        featureDictionary['StackLength'] = len(conf.stack)
 
     if len(conf.stack) >= 2:
         stackElements = [conf.stack[-2], conf.stack[-1]]
