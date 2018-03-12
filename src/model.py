@@ -41,7 +41,7 @@ class Network(object):
                 EarlyStopping(monitor='val_acc', min_delta=.5, patience=2, verbose=settings.NN_VERBOSE))
         time = datetime.datetime.now()
         logging.warn('Training started!')
-        labels, data = normalizer.generateLearningData(corpus)
+        labels, data = normalizer.generateLearningData(corpus,seperatedModules=settings.USE_SEPERATED_EMB_MODULE)
         labels = to_categorical(labels, num_classes=CLASS_NUM)
         history = self.model.fit(data, labels, validation_split=0.2, epochs=settings.NN_EPOCHS,
                                  batch_size=settings.NN_BATCH_SIZE,
@@ -197,7 +197,7 @@ class Normalizer(object):
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
 
-    def generateLearningData(self, corpus):
+    def generateLearningData(self, corpus, seperatedModules=False):
         data, labels = [], []
         if self.inputListDimension != 1:
             for i in range(self.inputListDimension):
@@ -205,7 +205,7 @@ class Normalizer(object):
         for sent in corpus:
             trans = sent.initialTransition
             while trans.next:
-                dataEntry = self.normalize(trans)
+                dataEntry = self.normalize(trans, seperatedModules=seperatedModules)
                 for i in range(self.inputListDimension):
                     if self.inputListDimension != 1:
                         data[i].append(dataEntry[i])
@@ -223,26 +223,41 @@ class Normalizer(object):
     def normalize(self, trans):
         pass
 
-    def getIndices(self, tokens):
+    def getIndices(self, tokens, usePos=False, useToken=False):
         result = []
         for token in tokens:
-            key = self.getKey(token)
-            result.append(self.vocabulary.indices[key])
+            key = self.getKey(token, usePos=usePos, useToken=useToken)
+            if usePos:
+                result.append(self.vocabulary.posIndices[key])
+            elif useToken:
+                result.append(self.vocabulary.tokenIndices[key])
+            else:
+                result.append(self.vocabulary.indices[key])
         return np.asarray(result)
 
-    def getKey(self, token):
+    def getKey(self, token, usePos=False, useToken=False):
         if any(ch.isdigit() for ch in token.getTokenOrLemma()):
             key = number
+            if useToken: return key
             if settings.USE_POS_EMB:
                 posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
                 key += '_' + posTag
+                if usePos: return posTag
             return key
-        key = token.getStandardKey()
-        if key in self.vocabulary.indices:
-            return key
+        key = token.getStandardKey(usePos=usePos, useToken=useToken)
+        if usePos and key in self.vocabulary.posIndices:
+                return key
+        elif useToken and key in self.vocabulary.tokenIndices:
+                return key
+        elif key in self.vocabulary.indices:
+                return key
         tokenTxt = unknown if token.getTokenOrLemma() not in self.vocabulary.tokenIndices else token.getTokenOrLemma()
+        if useToken:
+            return tokenTxt
         if settings.USE_POS_EMB:
             posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
+            if usePos:
+                return posTag
 
         if settings.USE_POS_EMB:
             if tokenTxt + '_' + posTag in self.vocabulary.indices:

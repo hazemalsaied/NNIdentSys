@@ -50,20 +50,61 @@ class NormalizerMLPSimple(Normalizer):
     def __init__(self, corpus):
         super(NormalizerMLPSimple, self).__init__(corpus, 2)
 
-    def normalize(self, trans):
+    # def normalize(self, trans):
+    #     dataEntry1, dataEntry2, dataEntry3, dataEntry4 = [], [], [], []
+    #     if trans.configuration.stack:
+    #         dataEntry1 = self.getIndices(getTokens(trans.configuration.stack[-1]))
+    #         if len(trans.configuration.stack) > 1:
+    #             dataEntry2 = self.getIndices(getTokens(trans.configuration.stack[-2]))
+    #     if trans.configuration.buffer:
+    #         dataEntry3 = self.getIndices(trans.configuration.buffer[:2])
+    #     dataEntry4 = self.nnExtractor.vectorize(trans)
+    #     emptyIdx = self.vocabulary.indices[empty]
+    #
+    #     dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
+    #     dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
+    #     dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
+    #
+    #     dataEntry1 = np.concatenate((dataEntry1, dataEntry2, dataEntry3), axis=0)
+    #     return [dataEntry1, np.asarray(dataEntry4)]
+
+
+    def normalize(self, trans, seperatedModules=False):
         dataEntry1, dataEntry2, dataEntry3, dataEntry4 = [], [], [], []
         if trans.configuration.stack:
-            dataEntry1 = self.getIndices(getTokens(trans.configuration.stack[-1]))
+            if seperatedModules:
+                dataEntry1 = self.getIndices(getTokens(trans.configuration.stack[-1]),usePos=True)
+                dataEntry11 = self.getIndices(getTokens(trans.configuration.stack[-1]), useToken=True)
+            else:
+                dataEntry1 = self.getIndices(getTokens(trans.configuration.stack[-1]))
             if len(trans.configuration.stack) > 1:
-                dataEntry2 = self.getIndices(getTokens(trans.configuration.stack[-2]))
+                if seperatedModules:
+                    dataEntry2 = self.getIndices(getTokens(trans.configuration.stack[-2]),usePos=True)
+                    dataEntry22 = self.getIndices(getTokens(trans.configuration.stack[-2]),useToken=True)
+                else:
+                    dataEntry2 = self.getIndices(getTokens(trans.configuration.stack[-2]))
         if trans.configuration.buffer:
-            dataEntry3 = self.getIndices(trans.configuration.buffer[:2])
+            if seperatedModules:
+                dataEntry3 = self.getIndices(trans.configuration.buffer[:2],usePos=True)
+                dataEntry33 = self.getIndices(trans.configuration.buffer[:2],useToken=True)
+            else:
+                dataEntry3 = self.getIndices(trans.configuration.buffer[:2])
         dataEntry4 = self.nnExtractor.vectorize(trans)
         emptyIdx = self.vocabulary.indices[empty]
+        if seperatedModules:
+            dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
+            dataEntry11 = np.asarray(pad_sequences([dataEntry11], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
+            dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
+            dataEntry22 = np.asarray(pad_sequences([dataEntry22], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
+            dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
+            dataEntry33 = np.asarray(pad_sequences([dataEntry33], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
 
-        dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
-        dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
-        dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
+            dataEntry1 = np.concatenate((dataEntry1,dataEntry11, dataEntry2,dataEntry22, dataEntry3,dataEntry33), axis=0)
+            return [dataEntry1, np.asarray(dataEntry4)]
+        else:
+            dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
+            dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
+            dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
 
-        dataEntry1 = np.concatenate((dataEntry1, dataEntry2, dataEntry3), axis=0)
-        return [dataEntry1, np.asarray(dataEntry4)]
+            dataEntry1 = np.concatenate((dataEntry1, dataEntry2, dataEntry3), axis=0)
+            return [dataEntry1, np.asarray(dataEntry4)]

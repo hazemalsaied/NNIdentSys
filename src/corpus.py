@@ -660,8 +660,12 @@ class Token:
             return self.lemma.lower()
         return self.text.lower()
 
-    def getStandardKey(self):
+    def getStandardKey(self, usePos=False, useToken=False):
         if settings.USE_POS_EMB:
+            if usePos:
+                return self.posTag.lower()
+            if useToken:
+                return self.getTokenOrLemma()
             return self.getTokenOrLemma() + '_' + self.posTag.lower()
         return self.getTokenOrLemma()
 
@@ -995,5 +999,3 @@ def getVMWEByTokens(tokens):
     if vmwes:
         return vmwes[0]
     return None
-
-
