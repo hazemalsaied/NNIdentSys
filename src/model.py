@@ -192,7 +192,7 @@ class Normalizer(object):
             for tokenKey in self.vocabulary.indices:
                 self.weightMatrix[self.vocabulary.indices[tokenKey]] = self.vocabulary.embeddings[tokenKey]
             del self.vocabulary.embeddings
-            self.inputListDimension = INPUT_LIST_NUM
+        self.inputListDimension = INPUT_LIST_NUM
         if extractor:
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
