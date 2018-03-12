@@ -127,20 +127,20 @@ class Network(object):
     @staticmethod
     def createPOSEmbeddingModule(wordNum, normalizer):
         # Buffer-based Embedding Module
-        wordLayer = Input(shape=(wordNum,), name='word')
+        wordLayer = Input(shape=(wordNum,), name='pos')
         if settings.INITIALIZE_EMBEDDING:
             embLayer = Embedding(output_dim=normalizer.vocabulary.postagDim, input_dim=len(normalizer.vocabulary.posIndices),
                                  weights=[normalizer.posWeightMatrix], trainable=settings.TRAINABLE_EMBEDDING)(wordLayer)
         else:
             embLayer = Embedding(output_dim=normalizer.vocabulary.postagDim, input_dim=len(normalizer.vocabulary.posIndices))(
                 wordLayer)
-        flattenLayer = Flatten(name='flatten')(embLayer)
+        flattenLayer = Flatten(name='posFlatten')(embLayer)
         return wordLayer, flattenLayer
 
     @staticmethod
     def createTokenEmbeddingModule(wordNum, normalizer):
         # Buffer-based Embedding Module
-        wordLayer = Input(shape=(wordNum,), name='word')
+        wordLayer = Input(shape=(wordNum,), name='token')
         if settings.INITIALIZE_EMBEDDING:
             embLayer = Embedding(output_dim=normalizer.vocabulary.tokenDim,
                                  input_dim=len(normalizer.vocabulary.tokenIndices),
@@ -150,7 +150,7 @@ class Network(object):
             embLayer = Embedding(output_dim=normalizer.vocabulary.tokenDim,
                                  input_dim=len(normalizer.vocabulary.tokenIndices))(
                 wordLayer)
-        flattenLayer = Flatten(name='flatten')(embLayer)
+        flattenLayer = Flatten(name='tokenFlatten')(embLayer)
         return wordLayer, flattenLayer
 
     @staticmethod

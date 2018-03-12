@@ -33,9 +33,10 @@ class Vocabulary:
         self.size = len(self.indices)
 
         logging.warn('Vocabulary size: {0}'.format(self.size))
-        #if settings.USE_POS_EMB:
-            #del self.posEmbeddings
-        #del self.tokenEmbeddings
+        if not settings.USE_SEPERATED_EMB_MODULE:
+            if settings.USE_POS_EMB:
+                del self.posEmbeddings
+            del self.tokenEmbeddings
 
     def getEmbeddingMatrices(self, corpus):
         indices, embeddings, idx = self.generateUnknownKeys()
@@ -161,7 +162,7 @@ def getPOSEmbeddingMatrices(corpus, dimension, taux, window=3):
             indices[elem.lower()] = idx
             idx += 1
     embeddings[unknown] = getRandomVector(dimension)
-    indices[unknown] = len(traindEmb.wv.vocab)
+    indices[unknown] = idx
     logging.warn('{0} Pos tags'.format(len(traindEmb.wv.vocab) + 1))
     return indices, embeddings
 
