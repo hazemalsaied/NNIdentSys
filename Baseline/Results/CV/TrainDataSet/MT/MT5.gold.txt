@@ -2864,7 +2864,7 @@
 21	b’	_	_
 22	ċertifikat	_	_
 23	father	_	_
-24	unknown	_	_
+24	configuration["constants"]["unk"]	_	_
 25	”	_	_
 26	.	_	_
 

@@ -2,16 +2,20 @@ import logging
 
 import numpy as np
 
-import v2featureSettings
+from config import configuration
 from corpus import Token, getTokens
 
 mwtDictionary = None
 mweDictionary = None
 mweTokenDictionary = None
 
+featureSetting = None
+
 
 class Extractor:
     def __init__(self, corpus):
+        global featureSetting
+        featureSetting = configuration["features"]
         global mwtDictionary, mweDictionary, mweTokenDictionary
         mwtDictionary = corpus.mwtDictionary
         mweDictionary = corpus.mweDictionary
@@ -43,21 +47,18 @@ def extractSent(sent):
 
 
 def extractTrans(trans):
-    #if trans and trans.type and trans.type.value > 1:
-    #    print trans
     featSet = set()
     featSet.update(extractDicBased(trans.configuration))
-    featSet.update(extractSyntaxic(trans.configuration))
-    #if trans and trans.type and trans.type.value > 1:
-    #    print featSet
+    featSet.update(abstractSyntaxic(trans.configuration))
     featSet.update(extractDistance(trans))
     featSet.update(extractHistory(trans))
     return featSet
 
 
-def extractSyntaxic(config):
+def abstractSyntaxic(config):
+    syntaxConf = configuration["features"]["syntax"]
     featSet = set()
-    if not v2featureSettings.useSyntax:
+    if not syntaxConf["active"]:
         return featSet
     if config.stack:
         s0Tokens = getTokens(config.stack[-1])
@@ -78,7 +79,7 @@ def extractSyntaxic(config):
                 else:
                     featSet.add('SyntaxicRel(S0T{0},S0T{1})= null'.format(tIdx, t1Idx))
             # Righ dependence of S0 betwwen the first n elements of the buffer
-            for bElem in config.buffer[:v2featureSettings.bufferElements]:
+            for bElem in config.buffer[:syntaxConf["bufferElements"]]:
                 if bElem.dependencyParent == t.position:
                     biIdx = config.buffer.index(bElem)
                     # syntacticFeatDic['hasRighDep_' + bElem.dependencyLabel] = True
@@ -86,7 +87,7 @@ def extractSyntaxic(config):
                     featSet.add('RightDependent(S0T{0}) = B{1}'.format(tIdx, biIdx))
             # S0 token Gouverner present in the buffer
             if t.dependencyParent > t.position:
-                for bElem in config.buffer[:v2featureSettings.bufferElements]:
+                for bElem in config.buffer[:syntaxConf["bufferElements"]]:
                     if bElem.position == t.dependencyParent:
                         biIdx = config.buffer.index(bElem)
                         featSet.add('Gouverner(S0T{0}) = B{1}'.format(tIdx, biIdx))
@@ -125,12 +126,13 @@ def extractDistance(trans):
     config = trans.configuration
     sent = trans.sent
     featSet = set()
-    if v2featureSettings.useStackLength:
+    if configuration["features"]["stackLength"]:
         featSet.add('len(S)={0}'.format(len(trans.configuration.stack)))
     if config.stack:
         stackTokens = getTokens(config.stack[-1])
+        distanceConfig = configuration["features"]["distance"]
         if config.buffer:
-            if v2featureSettings.useS0B0Distance:
+            if distanceConfig["s0b0"]:
                 b0Idx = sent.tokens.index(config.buffer[0])
                 s0Idx = sent.tokens.index(stackTokens[-1])
                 featSet.add('Distance(S0,B0)={0}'.format(b0Idx - s0Idx))
@@ -138,7 +140,7 @@ def extractDistance(trans):
             #print trans
             s0Tokens = getTokens(config.stack[-1])
             s1Tokens = getTokens(config.stack[-1])
-            if v2featureSettings.useS0S1Distance:
+            if distanceConfig["s0s1"]:
                 s0Idx = sent.tokens.index(s0Tokens[0])
                 s1Idx = sent.tokens.index(s1Tokens[-1])
                 featSet.add('Distance(S0,S1)={0}'.format(s0Idx - s1Idx))
@@ -156,22 +158,23 @@ def extractHistory(trans):
         idx += 1
     while len(history) < 3:
         history += '-'
-
-    if v2featureSettings.historyLength1:
+    histConfig = configuration["features"]["history"]
+    if histConfig["1"]:
         featSet.add('hisotry1={0}'.format(history[0]))
-    if v2featureSettings.historyLength2:
+    if histConfig["2"]:
         featSet.add('hisotry2={0}'.format(history[1]))
-    if v2featureSettings.historyLength3:
+    if histConfig["3"]:
         featSet.add('hisotry3={0}'.format(history[2]))
     return featSet
 
 
 def extractDicBased(config):
     featSet = set()
+    dicConfig = configuration["features"]["dictionary"]
     if config.stack and isinstance(config.stack[-1], Token):
-        if config.stack[-1].getLemma() in mwtDictionary and v2featureSettings.smartMWTDetection:
+        if config.stack[-1].getLemma() in mwtDictionary and dicConfig["mwt"]:
             featSet.add('S0isMWT')
-    if config.stack and (v2featureSettings.enhanceMerge or v2featureSettings.useLexicon):
+    if config.stack and dicConfig["s0TokenIsMWEToken"]:
         s0 = config.stack[-1]
         s0Tokens = getTokens(s0)
         s0LemmaStr = ''
@@ -181,14 +184,14 @@ def extractDicBased(config):
             if t.getLemma() in mweTokenDictionary:
                 featSet.add('S0_T{0}=MWE Token'.format(tIdx))
         s0LemmaStr = s0LemmaStr[:-1]
-        if s0LemmaStr in mweDictionary and v2featureSettings.generateS0TokensareMWEFeatures:
+        if s0LemmaStr in mweDictionary and dicConfig["s0TokensAreMWE"]:
             featSet.add('S0=MWE')
-    if config.stack and len(config.stack) > 1and (v2featureSettings.enhanceMerge or v2featureSettings.useLexicon):
-        s1Tokens = getTokens(config.stack[-2])
-        for t in s1Tokens:
-            tIdx = s1Tokens.index(t)
-            if t.getLemma() in mweTokenDictionary:
-                featSet.add('S1_T{0}=MWE Token'.format(tIdx))
+        if config.stack and len(config.stack) > 1:
+            s1Tokens = getTokens(config.stack[-2])
+            for t in s1Tokens:
+                tIdx = s1Tokens.index(t)
+                if t.getLemma() in mweTokenDictionary:
+                    featSet.add('S1_T{0}=MWE Token'.format(tIdx))
     if len(config.stack) > 1:
         s1 = config.stack[-2]
         s1Tokens = getTokens(s1)

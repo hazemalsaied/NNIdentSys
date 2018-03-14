@@ -208,7 +208,7 @@ WARNING:root:Settings are saved in : /home/halsaied/NNIdenSys/Reports/FR-35/sett
 WARNING:root:Scores are saved in : /home/halsaied/NNIdenSys/Reports/FR-35/scoers.csv
 (venv) halsaied@graphique-2:~$ Connection to graphique-2.nancy.grid5000.fr closed by remote host.
 Connection to graphique-2.nancy.grid5000.fr closed.
-[ERROR] An unknown error occured : 65280
+[ERROR] An configuration["constants"]["unk"] error occured : 65280
 Disconnected from OAR job 1516300
 
 
@@ -285,4 +285,4 @@ WARNING:root:Settings are saved in : /home/halsaied/NNIdenSys/Reports/FR-39/sett
 WARNING:root:Scores are saved in : /home/halsaied/NNIdenSys/Reports/FR-39/scoers.csv
 (venv) halsaied@graphique-1:~$ Connection to graphique-1.nancy.grid5000.fr closed by remote host.
 Connection to graphique-1.nancy.grid5000.fr closed.
-[ERROR] An unknown error occured : 65280
+[ERROR] An configuration["constants"]["unk"] error occured : 65280

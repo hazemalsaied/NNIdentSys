@@ -10,76 +10,39 @@ import reports
 from extraction import Extractor
 from reports import *
 from transitions import TransitionType
-from vocabulary import unknown, number, Vocabulary
+from vocabulary import unk, number, Vocabulary
 
 CLASS_NUM = len(TransitionType)
-OPTIMIZER = 'rmsprop'
-ADAM_OPTIMIZER = 'adam'
-BEST_WEIGHT_FILE = 'bestWeigths.hdf5'
-LOSS = 'categorical_crossentropy'
 
 
-class Network(object):
+class AbstractNetwork(object):
     def __init__(self):
         reports.saveNetwork(self.model)
 
     def train(self, normalizer, corpus):
+        trainConf = configuration["model"]["train"]
         print self.model.summary()
-        if settings.USE_ADAM:
-            self.model.compile(loss=LOSS, optimizer=ADAM_OPTIMIZER, metrics=['accuracy'])
-        else:
-            self.model.compile(loss=LOSS, optimizer=OPTIMIZER, metrics=['accuracy'])
-        bestWeightPath = os.path.join(reports.XP_CURRENT_DIR_PATH, BEST_WEIGHT_FILE)
-        if settings.XP_CROSS_VALIDATION:
-            bestWeightPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-                                          BEST_WEIGHT_FILE)
+        self.model.compile(loss=trainConf["loss"], optimizer=trainConf["optimizer"], metrics=['accuracy'])
+        bestWeightPath = reports.getBestWeightFilePath()
         callbacks = [
             ModelCheckpoint(bestWeightPath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
-        ] if not settings.XP_LOAD_MODEL or not settings.XP_DEBUG_DATA_SET else []
-        if settings.EARLY_STOP:
-            callbacks.append(
-                EarlyStopping(monitor='val_acc', min_delta=.5, patience=2, verbose=settings.NN_VERBOSE))
+        ] if bestWeightPath else []
+        if trainConf["earlyStop"]:
+            callbacks.append(EarlyStopping(monitor='val_acc', min_delta=.5, patience=2, verbose=trainConf["verbose"]))
         time = datetime.datetime.now()
         logging.warn('Training started!')
-        labels, data = normalizer.generateLearningData(corpus,seperatedModules=settings.USE_SEPERATED_EMB_MODULE)
+        labels, data = normalizer.generateLearningData(corpus)
         labels = to_categorical(labels, num_classes=CLASS_NUM)
-        history = self.model.fit(data, labels, validation_split=0.2, epochs=settings.NN_EPOCHS,
-                                 batch_size=settings.NN_BATCH_SIZE,
-                                 verbose=settings.NN_VERBOSE,
+        history = self.model.fit(data, labels, validation_split=0.2,
+                                 epochs=trainConf["epochs"],
+                                 batch_size=trainConf["batchSize"],
+                                 verbose=trainConf["verbose"],
                                  callbacks=callbacks)
         logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
-        #reports.saveHistory(history)
-        if not settings.USE_CLUSTER:
-            self.plotTraining(history)
+        # reports.saveHistory(history)
+        if not configuration["evaluation"]["cluster"]:
+            plotTraining(history)
         reports.saveModel(self.model)
-
-    def plotTraining(self, history):
-        # summarize history for accuracy
-        plt.plot(history.history['acc'])
-        plt.plot(history.history['val_acc'])
-        plt.title('model accuracy')
-        plt.ylabel('accuracy')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='upper left')
-        modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'accuracy-epoch.png')
-        if settings.XP_CROSS_VALIDATION:
-            modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-                                        'accuracy-epoch.png')
-        plt.savefig(modelAccPath)
-        # plt.show()
-        # summarize history for loss
-        plt.plot(history.history['loss'])
-        plt.plot(history.history['val_loss'])
-        plt.title('model loss')
-        plt.ylabel('loss')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='upper left')
-        modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'loss-epochs.png')
-        if settings.XP_CROSS_VALIDATION:
-            modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION),
-                                         'loss-epochs.png')
-        plt.savefig(modelLossPath)
-        # plt.show()
 
     def predict(self, trans, normalizer):
         pass
@@ -95,16 +58,19 @@ class Network(object):
 
     @staticmethod
     def createMLPModule(inputLayer):
-        dense1Layer = Dense(settings.MLP_LAYER_1_UNIT_NUM, activation=Network.getActiviation1())(inputLayer)
+        mlpConf = configuration["model"]["topology"]["mlp"]
+        dense1Layer = Dense(mlpConf["dense1"]["unitNumber"], activation=mlpConf["dense1"]["activation"])(inputLayer)
         dropoutLayer = Dropout(0.2)(dense1Layer)
-        if settings.USE_DENSE_2:
-            dense2Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=Network.getActiviation1())(dropoutLayer)
+        if mlpConf["dense2"]["active"]:
+            dense2Layer = Dense(mlpConf["dense2"]["unitNumber"], activation=mlpConf["dense2"]["activation"])(
+                dropoutLayer)
             dropout2Layer = Dropout(0.2)(dense2Layer)
         else:
             mainOutputLayer = Dense(CLASS_NUM, activation='softmax', name='mainOutputLayer')(dropoutLayer)
             return mainOutputLayer
-        if settings.USE_DENSE_3:
-            dense3Layer = Dense(settings.MLP_LAYER_2_UNIT_NUM, activation=Network.getActiviation2())(dropout2Layer)
+        if mlpConf["dense3"]["active"]:
+            dense3Layer = Dense(mlpConf["dense3"]["unitNumber"], activation=mlpConf["dense3"]["activation"])(
+                dropout2Layer)
             dropout3Layer = Dropout(0.2)(dense3Layer)
             mainOutputLayer = Dense(CLASS_NUM, activation='softmax', name='mainOutputLayer')(dropout3Layer)
         else:
@@ -113,99 +79,104 @@ class Network(object):
 
     @staticmethod
     def createEmbeddingModule(wordNum, normalizer):
+        embConf = configuration["model"]["embedding"]
         # Buffer-based Embedding Module
         wordLayer = Input(shape=(wordNum,), name='word')
-        if settings.INITIALIZE_EMBEDDING:
+        if embConf["initialisation"]:
             embLayer = Embedding(output_dim=normalizer.vocabulary.embDim, input_dim=normalizer.vocabulary.size,
-                                 weights=[normalizer.weightMatrix], trainable=settings.TRAINABLE_EMBEDDING)(wordLayer)
+                                 weights=[normalizer.weightMatrix], trainable=True)(wordLayer)
         else:
-            embLayer = Embedding(output_dim=normalizer.vocabulary.embDim, input_dim=normalizer.vocabulary.size)(
+            embLayer = Embedding(output_dim=embConf["posEmb"] + embConf["tokenEmb"],
+                                 input_dim=normalizer.vocabulary.size)(
                 wordLayer)
         flattenLayer = Flatten(name='flatten')(embLayer)
         return wordLayer, flattenLayer
 
     @staticmethod
     def createPOSEmbeddingModule(wordNum, normalizer):
+        embConf = configuration["model"]["embedding"]
         # Buffer-based Embedding Module
         wordLayer = Input(shape=(wordNum,), name='pos')
-        if settings.INITIALIZE_EMBEDDING:
-            embLayer = Embedding(output_dim=normalizer.vocabulary.postagDim, input_dim=len(normalizer.vocabulary.posIndices),
-                                 weights=[normalizer.posWeightMatrix], trainable=settings.TRAINABLE_EMBEDDING)(wordLayer)
+        if embConf["initialisation"]:
+            embLayer = Embedding(output_dim=normalizer.vocabulary.postagDim,
+                                 input_dim=len(normalizer.vocabulary.posIndices),
+                                 weights=[normalizer.posWeightMatrix], trainable=True)(wordLayer)
         else:
-            embLayer = Embedding(output_dim=normalizer.vocabulary.postagDim, input_dim=len(normalizer.vocabulary.posIndices))(
+            embLayer = Embedding(output_dim=embConf["posEmb"], input_dim=len(normalizer.vocabulary.posIndices))(
                 wordLayer)
         flattenLayer = Flatten(name='posFlatten')(embLayer)
         return wordLayer, flattenLayer
 
     @staticmethod
     def createTokenEmbeddingModule(wordNum, normalizer):
+        embConf = configuration["model"]["embedding"]
         # Buffer-based Embedding Module
         wordLayer = Input(shape=(wordNum,), name='token')
-        if settings.INITIALIZE_EMBEDDING:
+        if embConf["initialisation"]:
             embLayer = Embedding(output_dim=normalizer.vocabulary.tokenDim,
                                  input_dim=len(normalizer.vocabulary.tokenIndices),
-                                 weights=[normalizer.tokenWeightMatrix], trainable=settings.TRAINABLE_EMBEDDING)(
+                                 weights=[normalizer.tokenWeightMatrix], trainable=True)(
                 wordLayer)
         else:
-            embLayer = Embedding(output_dim=normalizer.vocabulary.tokenDim,
-                                 input_dim=len(normalizer.vocabulary.tokenIndices))(
-                wordLayer)
+            embLayer = Embedding(output_dim=embConf["tokenEmb"], input_dim=len(normalizer.vocabulary.tokenIndices)
+                                 )(wordLayer)
         flattenLayer = Flatten(name='tokenFlatten')(embLayer)
         return wordLayer, flattenLayer
 
-    @staticmethod
-    def getActiviation1():
-        if settings.MLP_USE_RELU_1:
-            return 'relu'
-        if settings.MLP_USE_TANH_1:
-            return 'tanh'
-        return 'relu'
 
-    @staticmethod
-    def getActiviation2():
-        if settings.MLP_USE_RELU_2:
-            return 'relu'
-        if settings.MLP_USE_SIGMOID_2:
-            return 'sigmoid'
-        if settings.MLP_USE_TANH_2:
-            return 'tanh'
-        return 'relu'
-
-
-class Normalizer(object):
-    def __init__(self, corpus, INPUT_LIST_NUM, extractor=True):
+class AbstractNormalizer(object):
+    def __init__(self, corpus,  extractor=True):
         self.vocabulary = Vocabulary(corpus)
 
-        if settings.USE_SEPERATED_EMB_MODULE:
+        if not configuration["model"]["embedding"]["concatenation"]:
             self.posWeightMatrix = np.zeros((len(self.vocabulary.posIndices), self.vocabulary.postagDim))
-            for tokenKey in self.vocabulary.posIndices:
-                self.posWeightMatrix[self.vocabulary.posIndices[tokenKey]] = self.vocabulary.posEmbeddings[tokenKey]
+            if not configuration["model"]["embedding"]["initialisation"]:
+                for tokenKey in self.vocabulary.posIndices:
+                    self.posWeightMatrix[self.vocabulary.posIndices[tokenKey]] = self.vocabulary.posEmbeddings[tokenKey]
             del self.vocabulary.posEmbeddings
 
             self.tokenWeightMatrix = np.zeros((len(self.vocabulary.tokenIndices), self.vocabulary.tokenDim))
-            for tokenKey in self.vocabulary.tokenIndices:
-                self.tokenWeightMatrix[self.vocabulary.tokenIndices[tokenKey]] = self.vocabulary.tokenEmbeddings[tokenKey]
+            if not configuration["model"]["embedding"]["initialisation"]:
+                for tokenKey in self.vocabulary.tokenIndices:
+                    self.tokenWeightMatrix[self.vocabulary.tokenIndices[tokenKey]] = self.vocabulary.tokenEmbeddings[
+                        tokenKey]
             del self.vocabulary.tokenEmbeddings
 
         else:
             self.weightMatrix = np.zeros((len(self.vocabulary.indices), self.vocabulary.embDim))
-            for tokenKey in self.vocabulary.indices:
-                self.weightMatrix[self.vocabulary.indices[tokenKey]] = self.vocabulary.embeddings[tokenKey]
+            if not configuration["model"]["embedding"]["initialisation"]:
+                for tokenKey in self.vocabulary.indices:
+                    self.weightMatrix[self.vocabulary.indices[tokenKey]] = self.vocabulary.embeddings[tokenKey]
             del self.vocabulary.embeddings
-        self.inputListDimension = INPUT_LIST_NUM
+        #self.inputListDimension = INPUT_LIST_NUM
         if extractor:
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
 
-    def generateLearningData(self, corpus, seperatedModules=False):
+    def generateLearningData(self, corpus):
         data, labels = [], []
-        if self.inputListDimension != 1:
-            for i in range(self.inputListDimension):
-                data.append(list())
+        useEmbedding = configuration["model"]["embedding"]["active"]
+        useConcatenation = configuration["model"]["embedding"]["concatenation"]
+        usePos = configuration["model"]["embedding"]["pos"]
+        useFeatures = configuration["features"]["active"]
+        logging.warn('Learning data generation has started with: Features: {0}; Embedding: {1}; concatenation: {2}; POS: {3}'.
+            format(useFeatures,useConcatenation,useEmbedding, usePos))
+        #if self.inputListDimension != 1:
+        #    for i in range(self.inputListDimension):
+        #       data.append(list())
+        data = None
         for sent in corpus:
             trans = sent.initialTransition
             while trans.next:
-                dataEntry = self.normalize(trans, seperatedModules=seperatedModules)
+                dataEntry = self.normalize(trans, useConcatenation=useConcatenation, useEmbedding=useEmbedding,
+                                           usePos=usePos, useFeatures=useFeatures)
+                # First iteration only
+                if not data:
+                    data = []
+                    self.inputListDimension = len(dataEntry)
+                    if len(dataEntry) >1:
+                        for i in range(len(dataEntry)):
+                            data.append(list())
                 for i in range(self.inputListDimension):
                     if self.inputListDimension != 1:
                         data[i].append(dataEntry[i])
@@ -220,54 +191,76 @@ class Normalizer(object):
             data = np.asarray(data)
         return np.asarray(labels), data
 
-    def normalize(self, trans):
-        pass
-
-    def getIndices(self, tokens, usePos=False, useToken=False):
+    def normalize(self, trans, useConcatenation=False, useEmbedding=False,
+                  usePos=False, useFeatures=False):
+        return []
+    def getIndices(self, tokens, getPos=False, getToken=False):
         result = []
         for token in tokens:
-            key = self.getKey(token, usePos=usePos, useToken=useToken)
-            if usePos:
+            key = self.getKey(token, getPos=getPos, getToken=getToken)
+            if getPos:
                 result.append(self.vocabulary.posIndices[key])
-            elif useToken:
+            elif getToken:
                 result.append(self.vocabulary.tokenIndices[key])
             else:
                 result.append(self.vocabulary.indices[key])
         return np.asarray(result)
 
-    def getKey(self, token, usePos=False, useToken=False):
-        if any(ch.isdigit() for ch in token.getTokenOrLemma()):
-            key = number
-            if useToken: return key
-            if settings.USE_POS_EMB:
-                posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
-                key += '_' + posTag
-                if usePos: return posTag
-            return key
-        key = token.getStandardKey(usePos=usePos, useToken=useToken)
-        if usePos and key in self.vocabulary.posIndices:
-                return key
-        elif useToken and key in self.vocabulary.tokenIndices:
-                return key
-        elif key in self.vocabulary.indices:
-                return key
-        tokenTxt = unknown if token.getTokenOrLemma() not in self.vocabulary.tokenIndices else token.getTokenOrLemma()
-        if useToken:
-            return tokenTxt
-        if settings.USE_POS_EMB:
-            posTag = unknown if token.posTag not in self.vocabulary.posIndices else token.posTag
-            if usePos:
-                return posTag
+    def getKey(self, token, getPos=False, getToken=False):
 
-        if settings.USE_POS_EMB:
-            if tokenTxt + '_' + posTag in self.vocabulary.indices:
-                return tokenTxt + '_' + posTag
-            if tokenTxt + '_' + unknown in self.vocabulary.indices:
-                return tokenTxt + '_' + unknown
-            if unknown + '_' + posTag in self.vocabulary.indices:
-                return unknown + '_' + posTag
-            return unknown + '_' + unknown
+        if getToken:
+            if any(ch.isdigit() for ch in token.getTokenOrLemma()):
+                key = number
+                return key
+            key = token.getStandardKey(getPos=False, getToken=True)
+            if key in self.vocabulary.tokenIndices:
+                return key
+            return unk
+        elif getPos:
+            key = token.getStandardKey(getPos=True, getToken=False)
+            if key in self.vocabulary.posIndices:
+                return key
+            return unk
+
         else:
-            if tokenTxt in self.vocabulary.indices:
-                return tokenTxt
-            return unknown
+            if any(ch.isdigit() for ch in token.getTokenOrLemma()):
+                key = number
+                posKey = token.getStandardKey(getPos=True, getToken=False)
+                if key + '_' + posKey in self.vocabulary.indices:
+                    return key + '_' + posKey
+                return key + '_' + unk
+            key = token.getStandardKey(getPos=False, getToken=False)
+            if key in self.vocabulary.indices:
+                return key
+            return unk + '_' + unk
+
+
+def plotTraining(history):
+    # summarize history for accuracy
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['val_acc'])
+    plt.title('model accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'accuracy-epoch.png')
+    if not configuration["evaluation"]["cv"]["active"]:
+        modelAccPath = os.path.join(reports.XP_CURRENT_DIR_PATH,
+                                    str(not configuration["evaluation"]["cv"]["currentIter"]),
+                                    'accuracy-epoch.png')
+    plt.savefig(modelAccPath)
+    # plt.show()
+    # summarize history for loss
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('model loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH, 'loss-epochs.png')
+    if not configuration["evaluation"]["cv"]["active"]:
+        modelLossPath = os.path.join(reports.XP_CURRENT_DIR_PATH,
+                                     str(not configuration["evaluation"]["cv"]["currentIter"]),
+                                     'loss-epochs.png')
+    plt.savefig(modelLossPath)
+    # plt.show()

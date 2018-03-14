@@ -4,6 +4,7 @@ import os
 import sys
 
 from Src.corpus import Corpus, VMWE
+
 from src.evaluation import evaluate
 
 # from Src.param import XPParams

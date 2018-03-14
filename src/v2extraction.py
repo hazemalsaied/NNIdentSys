@@ -1,5 +1,5 @@
-import v2featureSettings
 from corpus import Token, getTokens, getTokenLemmas
+from config import configuration
 
 mwtDictionary = {}
 mweDictionary = {}
@@ -31,13 +31,13 @@ def extractSent(sent):
 def getFeatures(transition, sent):
     featureDictionary = {}
     conf = transition.configuration
-
-    if v2featureSettings.smartMWTDetection:
+    dicFeat = configuration["features"]["dictionary"]
+    if dicFeat["mwt"]:
         if conf.stack and isinstance(conf.stack[-1], Token) and conf.stack[-1].getLemma() in mwtDictionary:
             featureDictionary['S0_isMWT'] = True
             featureDictionary[conf.stack[-1].getLemma() + '_isMWT'] = True
     # TODO return transDic directly in this case
-    if v2featureSettings.useStackLength and len(conf.stack) > 1:
+    if configuration["features"]["stackLength"] and len(conf.stack) > 1:
         featureDictionary['StackLength'] = len(conf.stack)
 
     if len(conf.stack) >= 2:
@@ -55,11 +55,11 @@ def getFeatures(transition, sent):
     if len(conf.buffer) > 0:
         generateLinguisticFeatures(conf.buffer[0], 'B0', featureDictionary)
 
-        if v2featureSettings.useB1 and len(conf.buffer) > 1:
+        if configuration["features"]["unigram"]["b1"] and len(conf.buffer) > 1:
             generateLinguisticFeatures(conf.buffer[1], 'B1', featureDictionary)
 
     # Bi-Gram Generation
-    if v2featureSettings.useBiGram:
+    if configuration["features"]["bigram"]["active"]:
         if len(stackElements) > 1:
             # Generate a Bi-gram S1S0 S0B0 S1B0 S0B1
             generateBiGram(stackElements[-2], stackElements[-1], 'S1S0', featureDictionary)
@@ -69,66 +69,66 @@ def getFeatures(transition, sent):
                 generateBiGram(stackElements[-2], conf.buffer[0], 'S1B0', featureDictionary)
             if len(conf.buffer) > 1:
                 generateBiGram(stackElements[-1], conf.buffer[1], 'S0B1', featureDictionary)
-                if v2featureSettings.generateS0B2Bigram and len(conf.buffer) > 2:
+                if configuration["features"]["bigram"]["s0b2"] and len(conf.buffer) > 2:
                     generateBiGram(stackElements[-1], conf.buffer[2], 'S0B2', featureDictionary)
 
     # Tri-Gram Generation
-    if v2featureSettings.useTriGram and len(stackElements) > 1 and len(conf.buffer) > 0:
+    if configuration["features"]["trigram"] and len(stackElements) > 1 and len(conf.buffer) > 0:
         generateTriGram(stackElements[-2], stackElements[-1], conf.buffer[0], 'S1S0B0', featureDictionary)
 
     # Syntaxic Informations
-    if stackElements and v2featureSettings.useSyntax:
+    if stackElements and configuration["features"]["syntax"]["active"]:
         generateSyntaxicFeatures(conf.stack, conf.buffer, featureDictionary)
 
-    if stackElements and v2featureSettings.useAbstractSyntax:
+    if stackElements and configuration["features"]["syntax"]["abstract"]:
         generateAbstractSyntaxicFeatures(conf.stack, conf.buffer, featureDictionary)
 
     # Distance information
-    if v2featureSettings.useS0B0Distance and conf.stack and conf.buffer:
+    if configuration["features"]["distance"]["s0b0"] and conf.stack and conf.buffer:
         stackTokens = getTokens(conf.stack[-1])
         # sent.tokens.index(conf.buffer[0].position) - sent.tokens.index(stackTokens[-1])
         featureDictionary['S0B0Distance'] = str(conf.buffer[0].position - stackTokens[-1].position)
-    if v2featureSettings.useS0S1Distance and len(conf.stack) > 1 and isinstance(conf.stack[-1], Token) \
+    if configuration["features"]["distance"]["s0s1"] and len(conf.stack) > 1 and isinstance(conf.stack[-1], Token) \
             and isinstance(conf.stack[-2], Token):
         featureDictionary['S0S1Distance'] = str(
             sent.tokens.index(conf.stack[-1]) - sent.tokens.index(conf.stack[-2]))
     addTransitionHistory(transition, featureDictionary)
 
-    if v2featureSettings.useLexicon and conf.buffer and conf.stack:
+    if configuration["features"]["dictionary"]["active"] and conf.buffer and conf.stack:
         generateDisconinousFeatures(conf, sent, featureDictionary)
 
-    enhanceMerge(transition, featureDictionary)
+        enhanceMerge(transition, featureDictionary)
 
     return featureDictionary
 
 
 def enhanceMerge(transition, transDic):
-    if not v2featureSettings.enhanceMerge:
+    if not configuration["features"]["dictionary"]["active"]:
         return
     config = transition.configuration
     if transition.type and transition.type.value != 0 and len(config.buffer) > 0 and len(
             config.stack) > 0 and isinstance(config.stack[-1], Token):
         if isinstance(config.stack[-1], Token) and areInLexic([config.stack[-1], config.buffer[0]]):
-            transDic['S0B0InLexic'] = True
+            transDic['S0B0InLexicon'] = True
         if len(config.buffer) > 1 and areInLexic([config.stack[-1], config.buffer[0], config.buffer[1]]):
-            transDic['S0B0B1InLexic'] = True
+            transDic['S0B0B1InLexicon'] = True
         if len(config.buffer) > 2 and areInLexic(
                 [config.stack[-1], config.buffer[0], config.buffer[1], config.buffer[2]]):
-            transDic['S0B0B1B2InLexic'] = True
+            transDic['S0B0B1B2InLexicon'] = True
         if len(config.buffer) > 1 and len(config.stack) > 1 and areInLexic(
                 [config.stack[-2], config.stack[-1], config.buffer[1]]):
-            transDic['S1S0B1InLexic'] = True
+            transDic['S1S0B1InLexicon'] = True
 
     if len(config.buffer) > 0 and len(config.stack) > 1 and areInLexic(
             [config.stack[-2], config.buffer[0]]) and not areInLexic(
         [config.stack[-1], config.buffer[0]]):
-        transDic['S1B0InLexic'] = True
-        transDic['S0B0tInLexic'] = False
+        transDic['S1B0InLexicon'] = True
+        transDic['S0B0tInLexicon'] = False
         if len(config.buffer) > 1 and areInLexic(
                 [config.stack[-2], config.buffer[1]]) and not areInLexic(
             [config.stack[-1], config.buffer[1]]):
-            transDic['S1B1InLexic'] = True
-            transDic['S0B1InLexic'] = False
+            transDic['S1B1InLexicon'] = True
+            transDic['S0B1InLexicon'] = False
 
 
 def generateDisconinousFeatures(configuration, sent, transDic):
@@ -144,7 +144,7 @@ def generateDisconinousFeatures(configuration, sent, transDic):
             for bufElem in configuration.buffer[:5]:
                 if bufElem.lemma != '' and (
                         (tokenTxt + ' ' + bufElem.lemma) in key or (bufElem.lemma + ' ' + tokenTxt) in key):
-                    transDic['S0B' + str(bufidx) + 'ArePartsOfMWE'] = True
+                    transDic['S0B' + str(bufidx) + 'AreMWETokens'] = True
                     transDic['S0B' + str(bufidx) + 'ArePartsOfMWEDistance'] = sent.tokens.index(
                         bufElem) - sent.tokens.index(tokens[-1])
                 bufidx += 1
@@ -157,11 +157,11 @@ def generateLinguisticFeatures(token, label, featureDictionary):
     else:
         token = concatenateTokens([token])[0]
     featureDictionary[label + 'Token'] = token.text
-    if v2featureSettings.usePOS and token.posTag and token.posTag.strip() != '':
+    if configuration["features"]["unigram"]["pos"] and token.posTag and token.posTag.strip() != '':
         featureDictionary[label + 'POS'] = token.posTag
-    if v2featureSettings.useLemma and token.lemma and token.lemma.strip() != '':
+    if configuration["features"]["unigram"]["lemma"] and token.lemma and token.lemma.strip() != '':
         featureDictionary[label + 'Lemma'] = token.lemma
-    if v2featureSettings.useSufixes:
+    if configuration["features"]["unigram"]["suffix"]:
         featureDictionary[label + '_LastThreeLetters'] = token.text[-3:]
         featureDictionary[label + '_LastTwoLetters'] = token.text[-2:]
         # @TODO reintegrer
@@ -273,13 +273,13 @@ def getFeatureInfo(dic, label, tokens, features):
     idx, feature = 0, ''
     for token in tokens:
         if features[idx].lower() == 'l':
-            if v2featureSettings.useLemma:
+            if configuration["features"]["unigram"]["lemma"]:
                 if token.lemma.strip() != '':
                     feature += token.lemma.strip() + '_'
                 else:
                     feature += '*' + '_'
         elif features[idx].lower() == 'p':
-            if v2featureSettings.usePOS:
+            if configuration["features"]["unigram"]["pos"]:
                 if token.posTag.strip() != '':
                     feature += token.posTag.strip() + '_'
                 else:
@@ -302,11 +302,11 @@ def areInLexic(tokensList):
 
 
 def addTransitionHistory(transition, transDic):
-    if v2featureSettings.historyLength1:
+    if configuration["features"]["history"]["1"]:
         getTransitionHistory(transition, 1, 'TransHistory1', transDic)
-    if v2featureSettings.historyLength2:
+    if configuration["features"]["history"]["2"]:
         getTransitionHistory(transition, 2, 'TransHistory2', transDic)
-    if v2featureSettings.historyLength3:
+    if configuration["features"]["history"]["3"]:
         getTransitionHistory(transition, 3, 'TransHistory3', transDic)
 
 

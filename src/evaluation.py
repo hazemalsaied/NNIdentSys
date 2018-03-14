@@ -4,7 +4,7 @@ import logging
 import os
 
 import reports
-import settings
+from config import configuration
 
 
 def evaluate(corpus, foldIdx=-1):
@@ -16,7 +16,7 @@ def evaluate(corpus, foldIdx=-1):
         tp, p, t = getCategoryStatistics(corpus, cat)
         scores += calculateScores(tp, p, t, cat)
     createMWEFiles(corpus, foldIdx)
-    reports.saveSettings()
+    #reports.saveSettings()
     reports.saveScores(scores)
     return scores
 
@@ -114,12 +114,13 @@ def calculateScores(tp, p, t, title):
 
 
 def createMWEFiles(corpus, x=-1):
-    if settings.XP_CROSS_VALIDATION:
+    cv = configuration["evaluation"]["cv"]["active"]
+    if cv:
         return
-    folder = settings.XP_RESULT_PATH
-    if settings.XP_CROSS_VALIDATION:
+    folder = configuration["path"]["results"]
+    if cv:
         folder += '/CV/' + corpus.langName
-    elif settings.XP_CORPUS_DATA_SET:
+    elif configuration["evaluation"]["corpus"]:
         folder += '/testSet/'
     else:
         return

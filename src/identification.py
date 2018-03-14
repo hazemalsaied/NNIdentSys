@@ -1,27 +1,24 @@
 import sys
 
-import numpy
+import numpy, random
 
-import modelConfTrans
-import modelLstmInTwoDirections
-import modelMLPLSTM2
 import modelMlpAuxSimple
 import modelMlpHyperSimple
 import modelMlpLstm
 import modelMlpSimple
 import oracle
 import v2classification as v2
-import v2featureSettings as v2S
 from corpus import *
 from evaluation import evaluate
 from parser import parse
+from config import configuration
 
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
 
 
 def identify(loadFolderPath='', load=False):
-    settings.XP_LOAD_MODEL = load
+    configuration["evaluation"]["load"] = load
     for lang in langs:
         corpus = Corpus(lang)
         normalizer, network = parseAndTrain(corpus, loadFolderPath)
@@ -30,13 +27,14 @@ def identify(loadFolderPath='', load=False):
 
 
 def crossValidation(debug=False):
-    settings.XP_CROSS_VALIDATION, scores, iterations = True, [0.] * 28, 5
+    configuration["evaluation"]["cv"]["active"], scores, iterations = True, [0.] * 28, 5
     for lang in langs:
         reports.createReportFolder(lang)
-        for cvIdx in range(settings.CV_ITERATIONS):
+        for cvIdx in range(configuration["evaluation"]["cv"]["currentIter"]):
             reports.createHeader('Iteration no.{0}'.format(cvIdx))
-            settings.CV_CURRENT_ITERATION = cvIdx
-            cvCurrentIterFolder = os.path.join(reports.XP_CURRENT_DIR_PATH, str(settings.CV_CURRENT_ITERATION))
+            configuration["evaluation"]["cv"]["currentIter"] = cvIdx
+            cvCurrentIterFolder = os.path.join(reports.XP_CURRENT_DIR_PATH,
+                                               str(configuration["evaluation"]["currentIter"]))
             if not os.path.isdir(cvCurrentIterFolder):
                 os.makedirs(cvCurrentIterFolder)
             corpus = Corpus(lang)
@@ -69,68 +67,58 @@ def getTrainAndTestSents(corpus, testRange, trainRange):
 
 
 def parseAndTrain(corpus, loadFolderPath=''):
-    if settings.XP_LOAD_MODEL:
+    if configuration["evaluation"]["load"]:
         normalizer = reports.loadNormalizer(loadFolderPath)
         logging.warn('Vocabulary size:{0}'.format(len(normalizer.vocabulary.indices)))
-        network = initNetword(normalizer)
+        network = init(corpus, normalizer=normalizer)
         network.model = reports.loadModel(loadFolderPath)
     else:
-        if not settings.XP_CROSS_VALIDATION:
+        if not configuration["evaluation"]["cv"]["active"]:
             reports.createReportFolder(corpus.langName)
         oracle.parse(corpus)
-        normalizer = initNormaliser(corpus)
-        network = initNetword(normalizer)
+        normalizer, network = init(corpus)
         network.train(normalizer, corpus)
     return normalizer, network
 
 
-def initNormaliser(corpus):
-    if settings.USE_MODEL_CONF_TRANS:
-        normalizer = modelConfTrans.NormalizerConfTrans(corpus)
-        return normalizer
-    if settings.USE_MODEL_LSTM_IN_TWO_DIRS:
-        normalizer = modelLstmInTwoDirections.NormalizerLstmInTwoDirections(corpus)
-        return normalizer
-    if settings.USE_MODEL_MLP_AUX_SIMPLE:
-        normalizer = modelMlpAuxSimple.NormalizerMLPAuxSimple(corpus)
-        return normalizer
-    if settings.USE_MODEL_MLP_Hyper_SIMPLE:
-        normalizer = modelMlpHyperSimple.NormalizerMLPHyperSimple(corpus)
-        return normalizer
-    if settings.USE_MODEL_MLP_SIMPLE:
-        normalizer = modelMlpSimple.NormalizerMLPSimple(corpus)
-        return normalizer
-    if settings.USE_MODEL_MLP_LSTM:
-        normalizer = modelMlpLstm.NormalizerMlpLstm(corpus)
-        return normalizer
-    if settings.USE_MODEL_MLP_LSTM_2:
-        normalizer = modelMLPLSTM2.NormalizerMlpLstm2(corpus)
-        return normalizer
-    raise ValueError('initNormaliser: No model Selected!')
-
-
-def initNetword(normalizer):
-    if settings.USE_MODEL_CONF_TRANS:
-        network = modelConfTrans.NetworkConfTrans(normalizer)
-        return network
-    if settings.USE_MODEL_MLP_AUX_SIMPLE:
-        network = modelMlpAuxSimple.NetworkMLPAuxSimple(normalizer)
-        return network
-    if settings.USE_MODEL_LSTM_IN_TWO_DIRS:
-        network = modelLstmInTwoDirections.NetworkLstmInTwoDirections(normalizer)
-        return network
-    if settings.USE_MODEL_MLP_Hyper_SIMPLE:
-        network = modelMlpHyperSimple.NetworkMLPHyperSimple(normalizer)
-        return network
-    if settings.USE_MODEL_MLP_SIMPLE:
-        network = modelMlpSimple.NetworkMLPSimple(normalizer)
-        return network
-    if settings.USE_MODEL_MLP_LSTM:
-        network = modelMlpLstm.NetworkMlpLstm(normalizer)
-        return network
-    if settings.USE_MODEL_MLP_LSTM_2:
-        network = modelMLPLSTM2.NetworkMlpLstm2(normalizer)
-        return network
+def init(corpus, normalizer=None):
+    emb = configuration["model"]["embedding"]["active"]
+    mlp = configuration["model"]["topology"]["mlp"]["active"]
+    rnn = configuration["model"]["topology"]["rnn"]["active"]
+    feats = configuration["features"]["active"]
+    # if settings.USE_MODEL_CONF_TRANS:
+    #     network = modelConfTrans.NetworkConfTrans(normalizer)
+    #     return network
+    if mlp and feats and not emb and not rnn:
+        if not normalizer:
+            normalizer = modelMlpAuxSimple.Normalizer(corpus)
+        network = modelMlpAuxSimple.Networ(normalizer)
+        reports.createHeader('MLP (Features)')
+        return normalizer, network
+    # if settings.USE_MODEL_LSTM_IN_TWO_DIRS:
+    #     network = modelLstmInTwoDirections.NetworkLstmInTwoDirections(normalizer)
+    #     return network
+    if mlp and emb and not feats and not rnn:
+        if not normalizer:
+            normalizer = modelMlpHyperSimple.Normalizer(corpus)
+        network = modelMlpHyperSimple.Network(normalizer)
+        reports.createHeader('MLP (Words)')
+        return normalizer, network
+    if mlp and emb and feats and not rnn:
+        if not normalizer:
+            normalizer = modelMlpSimple.Normalizer(corpus)
+        network = modelMlpSimple.Network(normalizer)
+        reports.createHeader('MLP (Features + Words)')
+        return normalizer, network
+    if emb and mlp and feats and rnn:
+        if not normalizer:
+            normalizer = modelMlpLstm.Normalizer(corpus)
+        network = modelMlpLstm.Network(normalizer)
+        reports.createHeader('MLP LSTM (Features + Words)')
+        return normalizer, network
+    # if settings.USE_MODEL_MLP_LSTM_2:
+    #     network = modelMLPLSTM2.NetworkMlpLstm2(normalizer)
+    #     return network
     raise ValueError('initNetword: No model Selected!')
 
 
@@ -147,21 +135,22 @@ def identifyV2():
 
 
 def xp(train=False, cv=False, xpNum=1):
-    settings.USE_CLUSTER = True
+    evlaConf = configuration["evaluation"]
+    evlaConf["cluster"] = True
     if train:
         ######################################
         #   Debug
         ######################################
-        settings.XP_DEBUG_DATA_SET = True
         identify()
         ######################################
         #   Train
         ######################################
-        settings.XP_DEBUG_DATA_SET = False
-        settings.XP_TRAIN_DATA_SET = True
+        evlaConf["debug"] = False
+        evlaConf["train"] = True
         for i in range(xpNum):
             identify()
-        settings.XP_TRAIN_DATA_SET = False
+        evlaConf["debug"] = True
+        evlaConf["train"] = False
     if cv:
         ######################################
         #   CV Debug
@@ -176,35 +165,29 @@ def xp(train=False, cv=False, xpNum=1):
         #   Load
         ######################################
         # preTrainedPath= '/home/halsaied/nancy/NNIdenSys/NNIdenSys/Reports/FR-12/12-FR-modelWeigth.hdf5'
-        # identify(load=settings.XP_LOAD_MODEL, loadFolderPath=loadFolderPath)
+        # identify(load=configuration["evaluation"]["load"], loadFolderPath=loadFolderPath)
 
 
-def xpGRU(moreUnits=False, stacked=False, gru=False, cv=False):
-    settings.USE_MODEL_MLP_LSTM = True
-    if moreUnits:
-        settings.LSTM_1_UNIT_NUM = 1024
-        settings.LSTM_2_UNIT_NUM = 1024
-    settings.STACKED = stacked
-    settings.USE_GRU = gru
-    title = ''
-    title += '' if not stacked else 'Stacked '
+def xpGRU(stacked=False, gru=False, cv=False):
+    rnnConf = configuration["model"]["topology"]["rnn"]
+    rnnConf["active"] = True
+    rnnConf["gru"] = True
+    rnnConf["stacked"] = True
+    title = '' if not stacked else 'Stacked '
     title += ' LSTM ' if not gru else ' GRU '
-    title += ' Expanded Unit Num ' if moreUnits else ''
     reports.createHeader(title)
     if cv:
         xp(cv=True)
     else:
         xp(train=True)
 
-    settings.LSTM_1_UNIT_NUM = 512
-    settings.LSTM_2_UNIT_NUM = 512
-    settings.USE_MODEL_MLP_LSTM = False
-    settings.STACKED = False
-    settings.USE_GRU = False
+    rnnConf["active"] = False
+    rnnConf["gru"] = False
+    rnnConf["stacked"] = False
 
 
 def xpMLPAux(cv=False):
-    settings.USE_MODEL_MLP_AUX_SIMPLE = True
+    configuration["model"]["embedding"]["active"] = False
     reports.createHeader('MLP Aux')
     if cv:
         xp(cv=True)
@@ -213,154 +196,165 @@ def xpMLPAux(cv=False):
 
 
 def xpMLPTotal(cv=False, train=False, xpNum=5):
-    settings.USE_MODEL_MLP_SIMPLE = True
+    mlpConfig = configuration["model"]["topology"]["mlp"]
 
     reports.createHeader('Standard')
     xp(cv=cv, train=train, xpNum=xpNum)
 
-    reports.createHeader('Optimizer = ADAM ')
-    settings.USE_ADAM = True
-    xp(cv=cv, train=train, xpNum=xpNum)
-    settings.USE_ADAM = False
-
     reports.createHeader('Dense 2 not activated')
-    settings.USE_DENSE_2 = False
+    mlpConfig["dense2"]["active"] = False
     xp(cv=cv, train=train, xpNum=xpNum)
-    settings.USE_DENSE_2 = True
+    mlpConfig["dense2"]["active"] = True
 
     reports.createHeader('Dense 3 activated')
-    settings.USE_DENSE_3 = True
+    mlpConfig["dense3"]["active"] = True
     xp(cv=cv, train=train, xpNum=xpNum)
-    settings.USE_DENSE_3 = False
+    mlpConfig["dense3"]["active"] = False
 
     reports.createHeader('Tahn is activated')
-    settings.MLP_USE_TANH_1 = True
-    settings.MLP_USE_TANH_2 = True
+    mlpConfig["dense1"]["activation"] = "tanh"
+    mlpConfig["dense2"]["activation"] = "tanh"
     xp(cv=cv, train=train, xpNum=xpNum)
-    settings.MLP_USE_TANH_1 = False
-    settings.MLP_USE_TANH_2 = False
+    mlpConfig["dense1"]["activation"] = "relu"
+    mlpConfig["dense2"]["activation"] = "relu"
+
+    embConfig = configuration["model"]["embedding"]
 
     reports.createHeader('Without weight matrix')
-    settings.INITIALIZE_EMBEDDING = False
+    embConfig["initialisation"] = False
     xp(cv=cv, train=train, xpNum=xpNum)
-    settings.INITIALIZE_EMBEDDING = True
+    embConfig["initialisation"] = True
 
     reports.createHeader('Maximized weight matrix')
-    settings.REMOVE_NON_FREQUENT_WORDS = False
+    embConfig["frequentTokens"] = False
     xp(cv=cv, train=train, xpNum=xpNum)
-    settings.REMOVE_NON_FREQUENT_WORDS = True
-
-    reports.createHeader('Batch size = 64')
-    settings.NN_BATCH_SIZE = 64
-    xp(cv=cv, train=train, xpNum=xpNum)
-    settings.NN_BATCH_SIZE = 128
-
-    reports.createHeader('Batch size = 256')
-    settings.NN_BATCH_SIZE = 256
-    xp(cv=cv, train=train, xpNum=xpNum)
-    settings.NN_BATCH_SIZE = 128
-
-    reports.createHeader('No early stop')
-    settings.EARLY_STOP = False
-    xp(cv=cv, train=train, xpNum=xpNum)
-    settings.EARLY_STOP = True
+    embConfig["frequentTokens"] = True
 
     reports.createHeader('Use Lemma')
-    settings.M1_USE_TOKEN = False
+    embConfig["lemma"] = True
     xp(cv=cv, train=train, xpNum=xpNum)
-    settings.M1_USE_TOKEN = True
+    embConfig["lemma"] = False
 
     reports.createHeader('No POS emb')
-    settings.USE_POS_EMB = False
+    embConfig["pos"] = False
     xp(cv=cv, train=train, xpNum=xpNum)
-    settings.USE_POS_EMB = True
+    embConfig["pos"] = True
+
+    trainConfig = configuration["model"]["train"]
+
+    reports.createHeader('Batch size = 64')
+    trainConfig["batchSize"] = 64
+    xp(cv=cv, train=train, xpNum=xpNum)
+    trainConfig["batchSize"] = 128
+
+    reports.createHeader('Batch size = 256')
+    trainConfig["batchSize"] = 256
+    xp(cv=cv, train=train, xpNum=xpNum)
+    trainConfig["batchSize"] = 128
+
+    reports.createHeader('No early stop')
+    trainConfig["earlyStop"] = False
+    xp(cv=cv, train=train, xpNum=xpNum)
+    trainConfig["earlyStop"] = True
 
 
-
-
-def xpConfTrans(stacked=False, gru=False, cv=False):
-    settings.USE_MODEL_CONF_TRANS = True
-    settings.STACKED = stacked
-    settings.USE_GRU = gru
-    title = 'Conf <=> Trans: '
-    title += '' if not stacked else 'Stacked '
-    title += ' LSTM ' if not gru else ' GRU '
-    reports.createHeader(title)
-    if cv:
-        xp(cv=True)
-    else:
-        xp(train=True)
-
-    settings.USE_MODEL_CONF_TRANS = False
-    settings.STACKED = False
-    settings.USE_GRU = False
+# def xpConfTrans(stacked=False, gru=False, cv=False):
+#     settings.USE_MODEL_CONF_TRANS = True
+#     configuration["model"]["topology"]["rnn"]["stacked"] = stacked
+#     configuration["model"]["topology"]["rnn"]["gru"] = gru
+#     title = 'Conf <=> Trans: '
+#     title += '' if not stacked else 'Stacked '
+#     title += ' LSTM ' if not gru else ' GRU '
+#     reports.createHeader(title)
+#     if cv:
+#         xp(cv=True)
+#     else:
+#         xp(train=True)
+#
+#     settings.USE_MODEL_CONF_TRANS = False
+#     configuration["model"]["topology"]["rnn"]["stacked"] = False
+#     configuration["model"]["topology"]["rnn"]["gru"] = False
 
 
 def linearModelImpact():
-    settings.XP_TRAIN_DATA_SET = True
+    evalConfig = configuration["evaluation"]
+    evalConfig["debug"] = False
+    evalConfig["train"] = True
 
-    reports.createHeader('Words Pos + token + lemma only:  A ')
-    v2S.useSyntax = False
-    v2S.useBiGram = False
-    v2S.useLexicon = False
-    v2S.enhanceMerge = False
-    v2S.useB1 = False
-    v2S.useS0S1Distance = False
-    v2S.useS0B0Distance = False
-    v2S.generateS0B2Bigram = False
-    identifyV2()
-
-
+    featConf = configuration["features"]
 
     reports.createHeader('Standard settings:  A B C E I J K L')
     identifyV2()
 
     reports.createHeader('Without syntax: A C E I J K L')
-    v2S.useSyntax = False
+    featConf["syntax"]["active"] = False
     identifyV2()
-    v2S.useSyntax = True
+    featConf["syntax"]["active"] = True
 
     reports.createHeader('Without BiGram: A B E I J K L')
-    v2S.useBiGram = False
+    featConf["bigram"]["s0b2"] = False
     identifyV2()
-    v2S.useBiGram = True
+    featConf["bigram"]["s0b2"] = True
 
     reports.createHeader('Without S0B2Bigram: A B C I J K L')
-    v2S.generateS0B2Bigram = False
+    featConf["bigram"]["s0b2"] = False
     identifyV2()
-    v2S.generateS0B2Bigram = True
+    featConf["bigram"]["s0b2"] = True
 
     reports.createHeader('Without S0B0Distance: A B C E J K L')
-    v2S.useS0B0Distance = False
+    featConf["distance"]["s0b0"] = False
     identifyV2()
-    v2S.useS0B0Distance = True
+    featConf["distance"]["s0b0"] = True
 
     reports.createHeader('Without S0S1Distance: A B C E I K L')
-    v2S.useS0S1Distance = False
+    featConf["distance"]["s0s1"] = False
     identifyV2()
-    v2S.useS0S1Distance = True
+    featConf["distance"]["s0s1"] = True
 
     reports.createHeader('without B1:  A B C E I J L')
-    v2S.useB1 = False
+    featConf["unigram"]["b1"] = False
     identifyV2()
-    v2S.useB1 = True
+    featConf["unigram"]["b1"] = True
 
     reports.createHeader('without lexicon:  A B C E I J K')
-    v2S.useLexicon = False
-    v2S.enhanceMerge = False
+    featConf["dictionary"]["active"] = False
     identifyV2()
-    v2S.useLexicon = True
-    v2S.enhanceMerge = True
+    featConf["dictionary"]["active"] = False
 
+    featConf["syntax"]["active"] = False
+    featConf["bigram"]["active"] = False
+
+    featConf["dictionary"]["active"] = False
+    featConf["unigram"]["b1"] = False
+    featConf["bigram"]["s0b2"] = False
+    featConf["distance"]["s0s1"] = False
+    featConf["distance"]["s0b0"] = False
+    reports.createHeader('Unigram only:  A ')
+    identifyV2()
+
+    featConf["unigram"]["pos"] = False
+    featConf["unigram"]["lemma"] = False
+    reports.createHeader('token  only')
+    identifyV2()
+
+    reports.createHeader('lemma + token ')
+    featConf["unigram"]["lemma"] = True
+    identifyV2()
+
+    reports.createHeader('Pos + token')
+    featConf["unigram"]["lemma"] = False
+    featConf["unigram"]["pos"] = True
+    identifyV2()
 
 
 reload(sys)
 sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
 numpy.random.seed(7)
+random.seed(0)
 
-settings.USE_MODEL_MLP_SIMPLE = True
-settings.USE_SEPERATED_EMB_MODULE = True
-settings.USE_CLUSTER = True
+
 xp(train=True)
 
+
+#linearModelImpact()

@@ -5,41 +5,41 @@ from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from numpy import argmax
 
-import settings
+from config import configuration
 from corpus import getTokens
-from model import Network, Normalizer
+from model import AbstractNetwork, AbstractNormalizer
 from vocabulary import empty
 
 PREDICT_VERBOSE = 0
 
-INPUT_WORDS = settings.PADDING_ON_S0 + settings.PADDING_ON_S1 + settings.PADDING_ON_B0
+INPUT_WORDS = configuration["model"]["embedding"]["s0Padding"] + configuration["model"]["embedding"]["s1Padding"] + configuration["model"]["embedding"]["bPadding"]
 
 
-class NetworkMlpLstm(Network):
+class Network(AbstractNetwork):
     def __init__(self, normalizer):
         # Auxiliary feature vectors
         auxFeatureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='aux_feature_Layer')
         wordLayer = Input(shape=(INPUT_WORDS,), name='word_layer')
         embeddingLayer = Embedding(output_dim=normalizer.vocabulary.embDim, input_dim=normalizer.vocabulary.size,
                                    weights=[normalizer.weightMatrix], trainable=True, name='emb_layer')(wordLayer)
-        if settings.USE_GRU:
-            if settings.STACKED:
-                gru1 = GRU(settings.LSTM_1_UNIT_NUM, name='GRU_1', return_sequences=True)(embeddingLayer)
-                gru2 = GRU(settings.LSTM_2_UNIT_NUM, name='GRU_2')(gru1)
+        if configuration["model"]["topology"]["rnn"]["gru"]:
+            if configuration["model"]["topology"]["rnn"]["stacked"]:
+                gru1 = GRU(configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"], name='GRU_1', return_sequences=True)(embeddingLayer)
+                gru2 = GRU(configuration["model"]["topology"]["rnn"]["rnn2"]["unitNumber"], name='GRU_2')(gru1)
             else:
-                gru2 = GRU(settings.LSTM_1_UNIT_NUM, name='GRU_1')(embeddingLayer)
+                gru2 = GRU(configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"], name='GRU_1')(embeddingLayer)
             concLayer = keras.layers.concatenate([gru2, auxFeatureLayer])
         else:
-            if settings.STACKED:
-                lstmLayer1 = LSTM(settings.LSTM_1_UNIT_NUM, name='lstm_1', return_sequences=True)(embeddingLayer)
-                lstmLayer2 = LSTM(settings.LSTM_2_UNIT_NUM, name='lstm_2')(lstmLayer1)
+            if configuration["model"]["topology"]["rnn"]["stacked"]:
+                lstmLayer1 = LSTM(configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"], name='lstm_1', return_sequences=True)(embeddingLayer)
+                lstmLayer2 = LSTM(configuration["model"]["topology"]["rnn"]["rnn2"]["unitNumber"], name='lstm_2')(lstmLayer1)
             else:
-                lstmLayer2 = LSTM(settings.LSTM_1_UNIT_NUM, name='lstm_2')(embeddingLayer)
+                lstmLayer2 = LSTM(configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"], name='lstm_2')(embeddingLayer)
             concLayer = keras.layers.concatenate([lstmLayer2, auxFeatureLayer])
         # MLP module
         mainOutputLayer = self.createMLPModule(concLayer)
         self.model = Model(inputs=[wordLayer, auxFeatureLayer], outputs=mainOutputLayer)
-        super(NetworkMlpLstm, self).__init__()
+        super(Network, self).__init__()
 
     def predict(self, trans, normalizer):
         dataEntry = normalizer.normalize(trans)
@@ -48,13 +48,13 @@ class NetworkMlpLstm(Network):
         return argmax(oneHotRep)
 
 
-class NormalizerMlpLstm(Normalizer):
+class Normalizer(AbstractNormalizer):
     """
         Reponsable for tranforming the (config, trans) into training data for the network training
     """
 
     def __init__(self, corpus):
-        super(NormalizerMlpLstm, self).__init__(corpus, 2)
+        super(Normalizer, self).__init__(corpus, 2)
 
     def normalize(self, trans):
         dataEntry1, dataEntry2, dataEntry3, dataEntry4 = [], [], [], []
@@ -67,9 +67,9 @@ class NormalizerMlpLstm(Normalizer):
         dataEntry4 = self.nnExtractor.vectorize(trans)
         emptyIdx = self.vocabulary.indices[empty]
 
-        dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=settings.PADDING_ON_S0, value=emptyIdx))[0]
-        dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=settings.PADDING_ON_S1, value=emptyIdx))[0]
-        dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=settings.PADDING_ON_B0, value=emptyIdx))[0]
+        dataEntry1 = np.asarray(pad_sequences([dataEntry1], maxlen=configuration["model"]["embedding"]["s0Padding"], value=emptyIdx))[0]
+        dataEntry2 = np.asarray(pad_sequences([dataEntry2], maxlen=configuration["model"]["embedding"]["s1Padding"], value=emptyIdx))[0]
+        dataEntry3 = np.asarray(pad_sequences([dataEntry3], maxlen=configuration["model"]["embedding"]["bPadding"], value=emptyIdx))[0]
 
         dataEntry1 = np.concatenate((dataEntry1, dataEntry2, dataEntry3), axis=0)
         return [dataEntry1, np.asarray(dataEntry4)]

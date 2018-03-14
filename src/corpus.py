@@ -5,15 +5,8 @@ import logging
 import os
 
 import reports
-import settings
-
-CORPORA_PATH = os.path.join(settings.PROJECT_PATH, "ressources/sharedtask/")
-TRAIN_FILE = 'train.conllu'
-TEST_FILE = 'test.conllu'
-AUTO_DEP_FILE = 'train.conllu.autoPOS.autoDep'
-AUTO_DEP_TEST_FILE = 'test.conllu.autoPOS.autoDep'
-AUTO_POS_TRAIN_FILE = 'train.conllu.autoPOS'
-AUTO_POS_TEST_FILE = 'test.conllu.autoPOS'
+# from config from config import configuration
+from config import configuration
 
 
 class Corpus:
@@ -32,26 +25,26 @@ class Corpus:
         self.langName = langName
         self.trainingSents, self.testingSents = [], []
         self.mweDictionary, self.mwtDictionary, self.mweTokenDictionary = dict(), dict(), dict()
-        path = os.path.join(CORPORA_PATH, langName)
+        path = os.path.join(configuration["path"]["projectPath"], configuration["path"]["corpusRelativePath"], langName)
         # print 'corpora path', path
         mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
         conlluFile, testConllu = getTrainAndTestConlluPath(path)
         if conlluFile and testConllu:
-            # if not settings.XP_LOAD_MODEL:
+            # if not configuration["evaluation"]["load"]:
             self.trainDataSet = readConlluFile(conlluFile)
             integrateMweFile(mweFile, self.trainDataSet)
             self.testDataSet = readConlluFile(testConllu)
             integrateMweFile(testMweFile, self.testDataSet)
         else:
-            # if not settings.XP_LOAD_MODEL:
+            # if not configuration["evaluation"]["load"]:
             self.trainDataSet = readMWEFile(mweFile)
             self.testDataSet = readMWEFile(testMweFile)
-        # if not settings.XP_LOAD_MODEL:
+        # if not configuration["evaluation"]["load"]:
         self.analyzeSents()
         # Sorting parents to get the direct parent on the top of parentVMWEs list
         self.text = self.toText()
         self.orderParentVMWEs()
-        if not settings.XP_CROSS_VALIDATION:
+        if not configuration["evaluation"]["cv"]["active"]:
             self.getTrainAndTest()
             self.extractDictionaries()
 
@@ -150,30 +143,25 @@ class Corpus:
         return mweDictionary
 
     def getTrainAndTest(self):
-        if settings.XP_DEBUG_DATA_SET:
-            self.trainingSents = getVMWESents(self.trainDataSet, int(settings.XP_SMALL_TRAIN_SENT_NUM / 10))
-            self.testingSents = getVMWESents(self.testDataSet, int(settings.XP_SMALL_TEST_SENT_NUM))
+        evalConfig = configuration["evaluation"]
+        if evalConfig["debug"]:
+            debugTrainNum = evalConfig["debugTrainNum"]
+            self.trainingSents = getVMWESents(self.trainDataSet, debugTrainNum)
+            self.testingSents = getVMWESents(self.testDataSet, debugTrainNum)
             logging.warn('Debug mode: train: {0}, test:{1}'.format(len(self.trainingSents),
                                                                    len(self.testingSents)))
-        elif settings.XP_SMALL_DATA_SET:
-            self.trainingSents = getVMWESents(self.trainDataSet, settings.XP_SMALL_TRAIN_SENT_NUM)
-            self.testingSents = getVMWESents(self.testDataSet, settings.XP_SMALL_TEST_SENT_NUM)
-            logging.warn('Mini mode: train: {0}, test:{1}'.format(len(self.trainingSents),
-                                                                  len(self.testingSents)))
-        elif settings.XP_TRAIN_DATA_SET:
+        elif evalConfig["train"]:
             pointer = int(len(self.trainDataSet) * 0.8)
             self.trainingSents = self.trainDataSet[:pointer]
             self.testingSents = self.trainDataSet[pointer:]
             logging.warn('Development mode: train: {0}, test:{1}'.format(len(self.trainingSents),
                                                                          len(self.testingSents)))
 
-        elif settings.XP_CORPUS_DATA_SET:
+        elif evalConfig["corpus"]:
             self.trainingSents = self.trainDataSet
             self.testingSents = self.testDataSet
-            logging.warn('Experiment mode: train: {0}, test:{1}'.format(len(self.trainingSents),
-                                                                        len(self.testingSents)))
-            # for sent in self.trainingSents + self.testingSents:
-            #     print sent.text
+            logging.warn('Experiment mode: corpus: {0}, test:{1}'.format(len(self.trainingSents),
+                                                                         len(self.testingSents)))
 
     def analyzeSents(self):
         for sent in self.trainDataSet:
@@ -654,20 +642,19 @@ class Token:
         return None
 
     def getTokenOrLemma(self):
-        if settings.M1_USE_TOKEN:
+        useLemma = configuration["model"]["embedding"]["lemma"]
+        if not useLemma:
             return self.text.lower()
         if self.lemma:
             return self.lemma.lower()
         return self.text.lower()
 
-    def getStandardKey(self, usePos=False, useToken=False):
-        if settings.USE_POS_EMB:
-            if usePos:
-                return self.posTag.lower()
-            if useToken:
-                return self.getTokenOrLemma()
-            return self.getTokenOrLemma() + '_' + self.posTag.lower()
-        return self.getTokenOrLemma()
+    def getStandardKey(self, getPos=False, getToken=False):
+        if getPos:
+            return self.posTag.lower()
+        if getToken:
+            return self.getTokenOrLemma()
+        return self.getTokenOrLemma() + '_' + self.posTag.lower()
 
     def __str__(self):
         parentTxt = ' '
@@ -725,7 +712,8 @@ def readConlluFile(conlluFile):
                     token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2],
                                   abstractPosTag=lineParts[3], morphologicalInfo=morpho,
                                   dependencyLabel=lineParts[7])
-                if settings.CORPUS_USE_UNIVERSAL_POS_TAGS:
+                useUniversalPOS = configuration["preprocessing"]["data"]["universalPOS"]
+                if useUniversalPOS:
                     token.posTag = lineParts[3]
                 else:
                     if lineParts[4] != '_':
@@ -739,22 +727,24 @@ def readConlluFile(conlluFile):
 
 
 def getTrainAndTestConlluPath(path):
+    testFiles = configuration["files"]["test"]
+    trainFiles = configuration["files"]["train"]
     if os.path.isfile(
-            os.path.join(path, AUTO_DEP_FILE)):
-        conlluFile = os.path.join(path, AUTO_DEP_FILE)
-        testConllu = os.path.join(path, AUTO_DEP_TEST_FILE)
+            os.path.join(path, trainFiles["depAuto"])):
+        conlluFile = os.path.join(path, trainFiles["depAuto"])
+        testConllu = os.path.join(path, testFiles["depAuto"])
         logging.warn('Auto dep conllu files are used!')
         return conlluFile, testConllu
 
-    if os.path.isfile(os.path.join(path, AUTO_POS_TRAIN_FILE)):
-        conlluFile = os.path.join(path, AUTO_POS_TRAIN_FILE)
-        testConllu = os.path.join(path, AUTO_POS_TEST_FILE)
+    if os.path.isfile(os.path.join(path, trainFiles["posAuto"])):
+        conlluFile = os.path.join(path, trainFiles["posAuto"])
+        testConllu = os.path.join(path, testFiles["posAuto"])
         logging.warn('Auto pos conllu files are used!')
         return conlluFile, testConllu
 
-    if os.path.isfile(os.path.join(path, TRAIN_FILE)):
-        conlluFile = os.path.join(path, TRAIN_FILE)
-        testConllu = os.path.join(path, TEST_FILE)
+    if os.path.isfile(os.path.join(path, trainFiles["conllu"])):
+        conlluFile = os.path.join(path, trainFiles["conllu"])
+        testConllu = os.path.join(path, testFiles["conllu"])
         logging.warn('Conllu files are used!')
         return conlluFile, testConllu
     logging.warn('No conllu files are used!')
@@ -860,7 +850,8 @@ def integrateMweFile(mweFile, sentences):
 
 def getVMWESents(sents, num):
     result, idx = [], 0
-    if settings.XP_DEBUG_DATA_SET or settings.XP_SMALL_DATA_SET:
+    evalConfig = configuration["evaluation"]
+    if evalConfig["debug"]:
         # if settings.CORPUS_SHUFFLE:
         #     shuffle(sents)
         for sent in sents:
