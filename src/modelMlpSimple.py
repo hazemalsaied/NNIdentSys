@@ -37,12 +37,15 @@ class Network(AbstractNetwork):
         super(Network, self).__init__()
 
     def predict(self, trans, normalizer):
-        dataEntry = normalizer.normalize(trans,
-                                         seperatedModules=not embConf["concatenation"])
-        if not embConf["concatenation"]:
-            inputVec = [np.asarray([dataEntry[0]]), np.asarray([dataEntry[1]]), np.asarray([dataEntry[2]])]
-        else:
-            inputVec = [np.asarray([dataEntry[0]]), np.asarray([dataEntry[1]])]
+        useEmbedding = configuration["model"]["embedding"]["active"]
+        useConcatenation = configuration["model"]["embedding"]["concatenation"]
+        usePos = configuration["model"]["embedding"]["pos"]
+        useFeatures = configuration["features"]["active"]
+
+        dataEntry = normalizer.normalize(trans,useFeatures=useFeatures, useEmbedding=useEmbedding,useConcatenation=useConcatenation,usePos=usePos )
+        inputVec = []
+        for i in range(normalizer.inputListDimension):
+            inputVec.append(np.asarray([dataEntry[i]]))
         oneHotRep = self.model.predict(inputVec, batch_size=1, verbose=configuration["model"]["predict"]["verbose"])
         return argmax(oneHotRep)
 

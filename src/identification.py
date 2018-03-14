@@ -353,7 +353,6 @@ logging.basicConfig(level=logging.WARNING)
 numpy.random.seed(7)
 random.seed(0)
 
-
 xp(train=True)
 
 
