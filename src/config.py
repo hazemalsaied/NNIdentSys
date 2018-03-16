@@ -11,6 +11,7 @@ configuration = {
         "debugTrainNum": 400,
         "validation": 0.2,
         "load": False,
+        "save": False,
         "cluster": True
     },
     "preprocessing": {
@@ -31,7 +32,7 @@ configuration = {
             "s0Padding": 5,
             "s1Padding": 5,
             "bPadding": 2,
-            "initialisation": True,
+            "initialisation": False,
             "lemma": False,
             "frequentTokens": True,
             "concatenation": True
@@ -63,7 +64,7 @@ configuration = {
                 "gru": False,
                 "stacked": False,
                 "rnn1": {"unitNumber": 512},
-                "rnn2": {}
+                "rnn2": {"unitNumber": 512}
             }
         },
         "train": {
@@ -73,8 +74,7 @@ configuration = {
             "batchSize": 128,
             "epochs": 15,
             "earlyStop": True,
-            "chickPoint": False,
-            "save": False
+            "chickPoint": False
         },
         "predict": {
             "verbose": 0
@@ -93,7 +93,7 @@ configuration = {
             "active": True,
             "s0b2": True
         },
-        "trigram": False,
+        "trigram": True,
         "syntax": {
             "active": True,
             "abstract": True,
@@ -107,10 +107,10 @@ configuration = {
             "s0TokensAreMWE": False
         },
         "history": {
-            "1": False,
-            "2": False,
-            "3": False
-        }, "stackLength": False,
+            "1": True,
+            "2": True,
+            "3": True
+        }, "stackLength": True,
         "distance": {
             "s0s1": True,
             "s0b0": True
@@ -132,17 +132,28 @@ configuration = {
             "posAuto": "test.conllu.autoPOS",
             "depAuto": "test.conllu.autoPOS.autoDep"
         },
-        "embedding":{"frWac200":"ressources/wordEmb/frWac/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin"}
+        "embedding": {
+            "frWac200": "ressources/wordEmb/frWac/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin"
+        }, "reports": {
+            "summary": "'summary.json'",
+            "normaliser": "normaliser.pkl",
+            "config": "setting.txt",
+            "scores": "scores.csv",
+            "schema": "schema.png",
+            "history": "history.pkl",
+            "model": "model.hdf5"
+
+        }
+
     },
     "constants": {
         "unk": "*unknown*",
         "empty": "*empty*",
         "number": "*number*",
-        "alpha":0.2
+        "alpha": 0.2
     }
 
 }
-
 
 import os
 

@@ -17,29 +17,16 @@ class Vocabulary:
     def __init__(self, corpus, taux=1):
         global embConf
         embConf = configuration["model"]["embedding"]
-        if embConf["pos"]:
-            self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(
-                corpus, embConf["posEmb"], taux=taux)
-            self.postagDim = len(self.posEmbeddings.values()[0])
+        self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, embConf["posEmb"], taux=taux)
+        self.postagDim = len(self.posEmbeddings.values()[0])
 
         self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, taux=taux)
-        self.tokenDim = len(self.tokenEmbeddings.values()[0])
+        self.tokenDim = len(self.tokenEmbeddings.values()[0]) if embConf["initialisation"] else embConf["tokenEmb"]
 
         self.indices, self.embeddings = self.getEmbeddingMatrices(corpus)
-        self.embDim = self.tokenDim + self.postagDim if embConf["pos"] else self.tokenDim
+        self.embDim = self.tokenDim + self.postagDim if embConf["concatenation"] and embConf["pos"] else self.tokenDim
         self.size = len(self.indices)
-
         logging.warn('Vocabulary size: {0}'.format(self.size))
-        if embConf["concatenation"]:
-            if embConf["pos"]:
-                del self.posEmbeddings
-            del self.tokenEmbeddings
-        if not embConf["initialisation"]:
-            self.embDim = embConf["posEmb"] + embConf[
-                "tokenEmb"]
-            self.tokenDim = embConf["tokenEmb"]
-            self.postagDim = embConf["posEmb"]
-            del self.embeddings
 
     def getEmbeddingMatrices(self, corpus):
         indices, embeddings, idx = self.generateUnknownKeys()
@@ -105,7 +92,51 @@ class Vocabulary:
         idx += 1
         return indices, embeddings, idx
 
+    def getIndices(self, tokens, getPos=False, getToken=False):
+        result = []
+        for token in tokens:
+            key = self.getKey(token, getPos=getPos, getToken=getToken)
+            if getPos:
+                result.append(self.posIndices[key])
+            elif getToken:
+                result.append(self.tokenIndices[key])
+            else:
+                result.append(self.indices[key])
+        return np.asarray(result)
 
+    def getKey(self, token, getPos=False, getToken=False):
+
+        if getToken:
+            if any(ch.isdigit() for ch in token.getTokenOrLemma()):
+                key = number
+                return key
+            key = token.getStandardKey(getPos=False, getToken=True)
+            if key in self.tokenIndices:
+                return key
+            return unk
+        elif getPos:
+            key = token.getStandardKey(getPos=True, getToken=False)
+            if key in self.posIndices:
+                return key
+            return unk
+
+        else:
+            if any(ch.isdigit() for ch in token.getTokenOrLemma()):
+                key = number
+                posKey = token.getStandardKey(getPos=True, getToken=False)
+                if key + '_' + posKey in self.indices:
+                    return key + '_' + posKey
+                return key + '_' + unk
+            key = token.getStandardKey(getPos=False, getToken=False)
+            if key in self.indices:
+                return key
+            return unk + '_' + unk
+    def getEmptyIdx(self, getPos=False, getToken=False):
+        if getPos:
+            return self.posIndices[empty]
+        if getToken:
+            return self.tokenIndices[empty]
+        return self.indices[empty]
 def getTokenEmbeddingMatrices(corpus, taux):
     # get a dictionary of train tokens with their frequencies (occurrences)
     tokenFreqDic = getFreqDic(corpus)

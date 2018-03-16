@@ -1,17 +1,15 @@
+import random
 import sys
 
-import numpy, random
+import numpy
 
-import modelMlpAuxSimple
-import modelMlpHyperSimple
-import modelMlpLstm
-import modelMlpSimple
 import oracle
 import v2classification as v2
 from corpus import *
 from evaluation import evaluate
+from network import Network, train
+from normalisation import Normalizer
 from parser import parse
-from config import configuration
 
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
@@ -77,49 +75,56 @@ def parseAndTrain(corpus, loadFolderPath=''):
             reports.createReportFolder(corpus.langName)
         oracle.parse(corpus)
         normalizer, network = init(corpus)
-        network.train(normalizer, corpus)
+        train(network.model, normalizer, corpus)
     return normalizer, network
 
 
 def init(corpus, normalizer=None):
-    emb = configuration["model"]["embedding"]["active"]
-    mlp = configuration["model"]["topology"]["mlp"]["active"]
-    rnn = configuration["model"]["topology"]["rnn"]["active"]
-    feats = configuration["features"]["active"]
+    # emb = configuration["model"]["embedding"]["active"]
+    # mlp = configuration["model"]["topology"]["mlp"]["active"]
+    # rnn = configuration["model"]["topology"]["rnn"]["active"]
+    # feats = configuration["features"]["active"]
+
+    if not normalizer:
+        normalizer = Normalizer(corpus)
+    network = Network(normalizer)
+    return normalizer, network
     # if settings.USE_MODEL_CONF_TRANS:
     #     network = modelConfTrans.NetworkConfTrans(normalizer)
     #     return network
-    if mlp and feats and not emb and not rnn:
-        if not normalizer:
-            normalizer = modelMlpAuxSimple.Normalizer(corpus)
-        network = modelMlpAuxSimple.Networ(normalizer)
-        reports.createHeader('MLP (Features)')
-        return normalizer, network
+
+    # if mlp and feats and not emb and not rnn:
+    #     if not normalizer:
+    #         normalizer = modelMlpAuxSimple.Normalizer(corpus)
+    #     network = modelMlpAuxSimple.Networ(normalizer)
+    #     reports.createHeader('MLP (Features)')
+    #     return normalizer, network
+
     # if settings.USE_MODEL_LSTM_IN_TWO_DIRS:
     #     network = modelLstmInTwoDirections.NetworkLstmInTwoDirections(normalizer)
     #     return network
-    if mlp and emb and not feats and not rnn:
-        if not normalizer:
-            normalizer = modelMlpHyperSimple.Normalizer(corpus)
-        network = modelMlpHyperSimple.Network(normalizer)
-        reports.createHeader('MLP (Words)')
-        return normalizer, network
-    if mlp and emb and feats and not rnn:
-        if not normalizer:
-            normalizer = modelMlpSimple.Normalizer(corpus)
-        network = modelMlpSimple.Network(normalizer)
-        reports.createHeader('MLP (Features + Words)')
-        return normalizer, network
-    if emb and mlp and feats and rnn:
-        if not normalizer:
-            normalizer = modelMlpLstm.Normalizer(corpus)
-        network = modelMlpLstm.Network(normalizer)
-        reports.createHeader('MLP LSTM (Features + Words)')
-        return normalizer, network
+    # if mlp and emb and not feats and not rnn:
+    #     if not normalizer:
+    #         normalizer = modelMlpHyperSimple.Normalizer(corpus)
+    #     network = modelMlpHyperSimple.Network(normalizer)
+    #     reports.createHeader('MLP (Words)')
+    #     return normalizer, network
+    # if mlp and emb and feats and not rnn:
+    #     if not normalizer:
+    #         normalizer = modelMlpSimple.Normalizer(corpus)
+    #     network = modelMlpSimple.Network(normalizer)
+    #     reports.createHeader('MLP (Features + Words)')
+    #     return normalizer, network
+    # if emb and mlp and feats and rnn:
+    #     if not normalizer:
+    #         normalizer = modelMlpLstm.Normalizer(corpus)
+    #     network = modelMlpLstm.Network(normalizer)
+    #     reports.createHeader('MLP LSTM (Features + Words)')
+    #     return normalizer, network
     # if settings.USE_MODEL_MLP_LSTM_2:
     #     network = modelMLPLSTM2.NetworkMlpLstm2(normalizer)
     #     return network
-    raise ValueError('initNetword: No model Selected!')
+    # raise ValueError('initNetword: No model Selected!')
 
 
 def identifyV2():
@@ -141,13 +146,18 @@ def xp(train=False, cv=False, xpNum=1):
         ######################################
         #   Debug
         ######################################
-        identify()
+        # evlaConf["debug"] = True
+        # evlaConf["train"] = False
+        # identify()
         ######################################
         #   Train
         ######################################
         evlaConf["debug"] = False
         evlaConf["train"] = True
         for i in range(xpNum):
+            seed += 1
+            numpy.random.seed(seed)
+            random.seed(seed)
             identify()
         evlaConf["debug"] = True
         evlaConf["train"] = False
@@ -160,6 +170,10 @@ def xp(train=False, cv=False, xpNum=1):
         #   CV
         ######################################
         for i in range(xpNum):
+            global seed
+            seed += 1
+            numpy.random.seed(seed)
+            random.seed(seed)
             crossValidation()
         ######################################
         #   Load
@@ -195,67 +209,190 @@ def xpMLPAux(cv=False):
         xp(train=True)
 
 
-def xpMLPTotal(cv=False, train=False, xpNum=5):
-    mlpConfig = configuration["model"]["topology"]["mlp"]
+def xpMLPTotal(train=False, cv=False, xpNum=5):
+    configuration["evaluation"]["debug"] = False
+    configuration["evaluation"]["train"] = True
 
-    reports.createHeader('Standard')
-    xp(cv=cv, train=train, xpNum=xpNum)
+    configuration["features"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["active"] = False
+    configuration["model"]["embedding"]["active"] = False
+    configuration["model"]["embedding"]["initialisation"] = False
+    configuration["model"]["embedding"]["concatenation"] = False
 
-    reports.createHeader('Dense 2 not activated')
-    mlpConfig["dense2"]["active"] = False
-    xp(cv=cv, train=train, xpNum=xpNum)
-    mlpConfig["dense2"]["active"] = True
+    reports.createHeader('Features Only')
+    xp(train=train, cv=cv, xpNum=xpNum)
 
-    reports.createHeader('Dense 3 activated')
-    mlpConfig["dense3"]["active"] = True
-    xp(cv=cv, train=train, xpNum=xpNum)
-    mlpConfig["dense3"]["active"] = False
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
 
-    reports.createHeader('Tahn is activated')
-    mlpConfig["dense1"]["activation"] = "tanh"
-    mlpConfig["dense2"]["activation"] = "tanh"
-    xp(cv=cv, train=train, xpNum=xpNum)
-    mlpConfig["dense1"]["activation"] = "relu"
-    mlpConfig["dense2"]["activation"] = "relu"
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 256
+    reports.createHeader('Features Only + Dense_1(256)')
+    xp(train=train, cv=cv, xpNum=xpNum)
 
-    embConfig = configuration["model"]["embedding"]
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 512
+    reports.createHeader('Features Only + Dense_1(512)')
+    xp(train=train, cv=cv, xpNum=xpNum)
 
-    reports.createHeader('Without weight matrix')
-    embConfig["initialisation"] = False
-    xp(cv=cv, train=train, xpNum=xpNum)
-    embConfig["initialisation"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = False
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 1024
 
-    reports.createHeader('Maximized weight matrix')
-    embConfig["frequentTokens"] = False
-    xp(cv=cv, train=train, xpNum=xpNum)
-    embConfig["frequentTokens"] = True
+    configuration["model"]["embedding"]["active"] = True
+    configuration["model"]["embedding"]["pos"] = False
+    reports.createHeader('Features + Tokens')
+    xp(train=train, cv=cv, xpNum=xpNum)
 
-    reports.createHeader('Use Lemma')
-    embConfig["lemma"] = True
-    xp(cv=cv, train=train, xpNum=xpNum)
-    embConfig["lemma"] = False
+    configuration["model"]["embedding"]["tokenEmb"] = 100
+    reports.createHeader('Features + Tokens (emb = 100)')
+    xp(train=train, cv=cv, xpNum=xpNum)
+    configuration["model"]["embedding"]["tokenEmb"] = 200
 
-    reports.createHeader('No POS emb')
-    embConfig["pos"] = False
-    xp(cv=cv, train=train, xpNum=xpNum)
-    embConfig["pos"] = True
+    reports.createHeader('Features + Tokens  + Dense 128')
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 128
+    xp(train=train, cv=cv, xpNum=xpNum)
 
-    trainConfig = configuration["model"]["train"]
+    reports.createHeader('Features + Tokens  + Dense 256')
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 256
+    xp(train=train, cv=cv, xpNum=xpNum)
 
-    reports.createHeader('Batch size = 64')
-    trainConfig["batchSize"] = 64
-    xp(cv=cv, train=train, xpNum=xpNum)
-    trainConfig["batchSize"] = 128
+    reports.createHeader('Features + Tokens  + Dense 128 + LSTM 256')
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 128
+    configuration["model"]["topology"]["rnn"]["active"] = True
+    configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"] = 256
+    xp(train=train, cv=cv, xpNum=xpNum)
+    configuration["model"]["topology"]["rnn"]["active"] = False
+    configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"] = 512
 
-    reports.createHeader('Batch size = 256')
-    trainConfig["batchSize"] = 256
-    xp(cv=cv, train=train, xpNum=xpNum)
-    trainConfig["batchSize"] = 128
+    configuration["model"]["embedding"]["initialisation"] = True
+    reports.createHeader('Features + Tokens + initialisation')
+    xp(train=train, cv=cv, xpNum=xpNum)
+    configuration["model"]["embedding"]["initialisation"] = False
 
-    reports.createHeader('No early stop')
-    trainConfig["earlyStop"] = False
-    xp(cv=cv, train=train, xpNum=xpNum)
-    trainConfig["earlyStop"] = True
+    configuration["model"]["embedding"]["pos"] = True
+    reports.createHeader('Features + Tokens + POS')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["posEmb"] = 50
+    configuration["model"]["embedding"]["tokenEmb"] = 100
+    reports.createHeader('Features + Tokens 100 + POS 50')
+    xp(train=train, cv=cv, xpNum=xpNum)
+    configuration["model"]["embedding"]["posEmb"] = 25
+    configuration["model"]["embedding"]["tokenEmb"] = 200
+
+    configuration["model"]["embedding"]["initialisation"] = True
+    reports.createHeader('Features + Tokens + POS + initialisation')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["initialisation"] = False
+    reports.createHeader('Features + Tokens + POS + Dense 128')
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 128
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    reports.createHeader('Features + Tokens + POS + Dense 256')
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 256
+    xp(train=train, cv=cv, xpNum=xpNum)
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = False
+
+    reports.createHeader('Features + Concatenation')
+    configuration["model"]["embedding"]["initialisation"] = False
+    configuration["model"]["embedding"]["concatenation"] = True
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    reports.createHeader('Features + Concatenation + Initialisation')
+    configuration["model"]["embedding"]["initialisation"] = True
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    reports.createHeader('Features + Concatenation + Initialisation + Dense 128')
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 128
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    reports.createHeader('Features + Concatenation + Initialisation + Dense 256')
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 256
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    reports.createHeader('Features + Concatenation + Initialisation + Dense 512')
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 512
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["features"]["active"] = True
+    configuration["model"]["embedding"]["active"] = True
+    configuration["model"]["embedding"]["initialisation"] = False
+    configuration["model"]["embedding"]["concatenation"] = True
+    configuration["model"]["topology"]["rnn"]["active"] = True
+    configuration["model"]["topology"]["rnn"]["gru"] = True
+    reports.createHeader('Features + Concatenation + Dense 256 + gru 512')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    reports.createHeader('Features + Concatenation + Dense 256 + gru 256')
+    configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"] = 256
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    reports.createHeader('Features + Concatenation + Dense 256 + lstm 256')
+    configuration["model"]["topology"]["rnn"]["gru"] = False
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    # reports.createHeader('Standard')
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    #
+    # reports.createHeader('Dense 2 not activated')
+    # mlpConfig["dense2"]["active"] = False
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # mlpConfig["dense2"]["active"] = True
+    #
+    # reports.createHeader('Dense 3 activated')
+    # mlpConfig["dense3"]["active"] = True
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # mlpConfig["dense3"]["active"] = False
+    #
+    # reports.createHeader('Tahn is activated')
+    # mlpConfig["dense1"]["activation"] = "tanh"
+    # mlpConfig["dense2"]["activation"] = "tanh"
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # mlpConfig["dense1"]["activation"] = "relu"
+    # mlpConfig["dense2"]["activation"] = "relu"
+    #
+    # embConfig = configuration["model"]["embedding"]
+    #
+    # reports.createHeader('Without weight matrix')
+    # embConfig["initialisation"] = False
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # embConfig["initialisation"] = True
+    #
+    # reports.createHeader('Maximized weight matrix')
+    # embConfig["frequentTokens"] = False
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # embConfig["frequentTokens"] = True
+    #
+    # reports.createHeader('Use Lemma')
+    # embConfig["lemma"] = True
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # embConfig["lemma"] = False
+    #
+    # reports.createHeader('No POS emb')
+    # embConfig["pos"] = False
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # embConfig["pos"] = True
+    #
+    # trainConfig = configuration["model"]["train"]
+    #
+    # reports.createHeader('Batch size = 64')
+    # trainConfig["batchSize"] = 64
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # trainConfig["batchSize"] = 128
+    #
+    # reports.createHeader('Batch size = 256')
+    # trainConfig["batchSize"] = 256
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # trainConfig["batchSize"] = 128
+    #
+    # reports.createHeader('No early stop')
+    # trainConfig["earlyStop"] = False
+    # xp(cv=cv, train=train, xpNum=xpNum)
+    # trainConfig["earlyStop"] = True
 
 
 # def xpConfTrans(stacked=False, gru=False, cv=False):
@@ -347,13 +484,31 @@ def linearModelImpact():
     identifyV2()
 
 
+global seed
+seed = 0
 reload(sys)
 sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
-numpy.random.seed(7)
-random.seed(0)
+numpy.random.seed(seed)
+random.seed(seed)
 
-xp(train=True)
+# Standard configuration:
+# Evaluation: Debug, Cluster
+# Embedding: Active POS Concatenation frequentTokens
+# TOPOLOGY: MLP NO DEENSE
+# Features: ALL except(suffix + mwt)
 
 
-#linearModelImpact()
+xpMLPTotal(train=True, xpNum=5)
+# configuration["evaluation"]["debug"] = False
+# configuration["evaluation"]["train"] = True
+#
+# configuration["features"]["active"] = True
+# configuration["model"]["embedding"]["active"] = True
+# configuration["model"]["embedding"]["initialisation"] = True
+# configuration["model"]["embedding"]["concatenation"] = True
+# configuration["model"]["topology"]["rnn"]["active"] = True
+# configuration["model"]["topology"]["rnn"]["gru"] = True
+# configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"] = 256
+#
+# identify()

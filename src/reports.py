@@ -2,8 +2,9 @@ import cPickle as pickle
 import errno
 import logging
 import os
+import random
 
-# from keras.models import load_model
+from keras.models import load_model
 from keras.utils import plot_model
 
 from config import configuration
@@ -14,42 +15,51 @@ try:
     reportPath = os.path.join(configuration["path"]["projectPath"], PATH_ROOT_REPORTS_DIR)
     if not os.path.isdir(reportPath):
         os.makedirs(reportPath)
+    schemaFolder =  os.path.join(reportPath, 'schemas')
+    if not os.path.isdir(schemaFolder):
+        os.makedirs(schemaFolder)
 except OSError as e:
     if e.errno != errno.EEXIST:
         raise
 
 XP_CURRENT_DIR_PATH = ''
+evalConf = configuration["evaluation"]
+repFiles = configuration["files"]["reports"]
 
 
-def getXPDirectory(langName, xpNum):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
-        return
-    cvTxt = '-CV' if configuration["evaluation"]["cv"]["active"] else ''
-    prefix = langName + cvTxt + '-' + str(xpNum)
-    global XP_CURRENT_DIR_PATH
-    XP_CURRENT_DIR_PATH = os.path.join(reportPath, prefix)
+# def getXPDirectory(langName, xpNum):
+#
+#     if evalConf["load"] or evalConf["debug"]:
+#         return
+#     cvTxt = '-CV' if evalConf["cv"]["active"] else ''
+#     prefix = langName + cvTxt + '-' + str(xpNum)
+#     global XP_CURRENT_DIR_PATH
+#     XP_CURRENT_DIR_PATH = os.path.join(reportPath, prefix)
 
 
-def createXPDirectory():
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
-        return
-    try:
-        if not os.path.isdir(XP_CURRENT_DIR_PATH):
-            os.makedirs(XP_CURRENT_DIR_PATH)
-    except OSError as err:
-        if err.errno != errno.EEXIST:
-            raise
+# def createXPDirectory():
+#     if evalConf["load"] or evalConf["debug"]:
+#         return
+#     try:
+#         if not os.path.isdir(XP_CURRENT_DIR_PATH):
+#             os.makedirs(XP_CURRENT_DIR_PATH)
+#     except OSError as err:
+#         if err.errno != errno.EEXIST:
+#             raise
 
 
 def createReportFolder(lang):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+    if not mustSave():
         return
     xpNum = getXPNum()
-    if configuration["model"]["train"]["save"]:
-        getXPDirectory(lang, xpNum)
-        if not configuration["evaluation"]["load"]:
-            logging.warn('Result folder: {0}'.format(XP_CURRENT_DIR_PATH.split('/')[-1]))
-            createXPDirectory()
+    cvTxt = '-CV' if evalConf["cv"]["active"] else ''
+    prefix = lang + cvTxt + '-' + str(xpNum)
+    global XP_CURRENT_DIR_PATH
+    XP_CURRENT_DIR_PATH = os.path.join(reportPath, prefix)
+    if not evalConf["load"]:
+        logging.warn('Result folder: {0}'.format(XP_CURRENT_DIR_PATH.split('/')[-1]))
+        if not os.path.isdir(XP_CURRENT_DIR_PATH):
+            os.makedirs(XP_CURRENT_DIR_PATH)
 
 
 def getXPNum():
@@ -71,42 +81,33 @@ def getXPNum():
     return xpNum
 
 
-MODEL_SUMMARY_FILE_NAME = 'summary.json'
-
-
 def saveModelSummary(model):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+    if not mustSave():
         return
     json_string = model.to_json()
-    summaryFile = os.path.join(XP_CURRENT_DIR_PATH, MODEL_SUMMARY_FILE_NAME)
-    if configuration["evaluation"]["cv"]["active"]:
-        summaryFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration["evaluation"]["cv"]["currentIter"]),
-                                   MODEL_SUMMARY_FILE_NAME)
+    summaryFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["summary"])
+    if evalConf["cv"]["active"]:
+        summaryFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
+                                   repFiles["summary"])
     with open(summaryFile, 'a') as f:
         f.write(json_string)
 
 
-NORMALIZER_OBLJ_FILE_NAME = 'normalizer.pkl'
-
-
 def saveNormalizer(normalizer):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+    if not mustSave():
         return
-    vectFile = os.path.join(XP_CURRENT_DIR_PATH, NORMALIZER_OBLJ_FILE_NAME)
-    if configuration["evaluation"]["cv"]["active"]:
-        vectFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration["evaluation"]["cv"]["currentIter"]),
-                                NORMALIZER_OBLJ_FILE_NAME)
+    vectFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["normaliser"])
+    if evalConf["cv"]["active"]:
+        vectFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]), repFiles["normaliser"])
     filehandler = open(vectFile, 'w')
     pickle.dump(normalizer, filehandler, pickle.HIGHEST_PROTOCOL)
 
 
-SETTINGS_FILE = 'setting.txt'
-
 # def saveSettings():
-#     if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+#     if evalConf["load"] or evalConf["debug"]:
 #         return
-#     if configuration["evaluation"]["cv"]["active"]:
-#         settFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration["evaluation"]["cv"]["currentIter"]), SETTINGS_FILE)
+#     if evalConf["cv"]["active"]:
+#         settFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]), SETTINGS_FILE)
 #     else:
 #         settFile = os.path.join(XP_CURRENT_DIR_PATH, SETTINGS_FILE)
 #     settStr = settings.toString()
@@ -114,11 +115,8 @@ SETTINGS_FILE = 'setting.txt'
 #         f.write(settStr)
 
 
-SCORES_FILE = 'scoers.csv'
-
-
 def saveScores(scores):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+    if not mustSave():
         return
     results, line = '', ''
     for i in range(1, len(scores) + 1):
@@ -126,10 +124,9 @@ def saveScores(scores):
         if i % 4 == 0:
             results += line[:-1] + '\n'
             line = ''
-    scoresFile = os.path.join(XP_CURRENT_DIR_PATH, SCORES_FILE)
-    if configuration["evaluation"]["cv"]["active"]:
-        scoresFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration["evaluation"]["cv"]["currentIter"]),
-                                  SCORES_FILE)
+    scoresFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["scores"])
+    if evalConf["cv"]["active"]:
+        scoresFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]), repFiles["scores"])
     with open(scoresFile, 'w') as f:
         f.write(results)
 
@@ -146,22 +143,21 @@ LOADED_MODEL_PATH = ''
 
 
 def loadNormalizer(loadFolderPath):
-    normalizerPath = os.path.join(loadFolderPath, NORMALIZER_OBLJ_FILE_NAME)
+    normalizerPath = os.path.join(loadFolderPath, repFiles["normaliser"])
     return pickle.load(open(normalizerPath, "rb"))
 
 
-MODEL_FILE = 'model.h5'
-MODEL_WEIGHT_FILE = 'model.hdf5'
-MODEL_SCHEMA = 'model.png'
-
-
 def saveNetwork(model):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+    if not mustSave():
+        rI = random.randint(100, 500)
+        shemaFile = os.path.join(configuration["path"]["projectPath"], 'Reports/schemas/shema{0}.png'.format(rI))
+        logging.warn("Schema file: {0}".format(rI))
+        plot_model(model, to_file=shemaFile)
         return
-    schemaPath = os.path.join(XP_CURRENT_DIR_PATH, MODEL_SCHEMA)
-    if configuration["evaluation"]["cv"]["active"]:
-        schemaPath = os.path.join(XP_CURRENT_DIR_PATH, str(configuration["evaluation"]["cv"]["currentIter"]),
-                                  MODEL_SCHEMA)
+    schemaPath = os.path.join(XP_CURRENT_DIR_PATH, repFiles["schema"])
+    if evalConf["cv"]["active"]:
+        schemaPath = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
+                                  repFiles["schema"])
     plot_model(model, to_file=schemaPath)
     logging.warn('Parameter number: {0}'.format(model.count_params()))
     saveModelSummary(model)
@@ -169,19 +165,19 @@ def saveNetwork(model):
 
 
 def saveModel(model):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+    if not mustSave():
         return
-    if configuration["evaluation"]["cv"]["active"]:
-        modelFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration["evaluation"]["cv"]["currentIter"]),
-                                 MODEL_WEIGHT_FILE)
+    if evalConf["cv"]["active"]:
+        modelFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
+                                 repFiles["model"])
     else:
-        modelFile = os.path.join(XP_CURRENT_DIR_PATH, MODEL_WEIGHT_FILE)
-    if not os.path.isfile(modelFile) and configuration["model"]["train"]["save"]:
+        modelFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["model"])
+    if not os.path.isfile(modelFile) and evalConf["save"]:
         model.save(modelFile)
 
 
 def loadModel(loadFolderPath):
-    modelPath = os.path.join(loadFolderPath, MODEL_WEIGHT_FILE)
+    modelPath = os.path.join(loadFolderPath, repFiles["model"])
     loaded_model = load_model(modelPath)
     logging.warn('Model is loaded from : {0}'.format(modelPath))
 
@@ -197,26 +193,25 @@ def loadModel(loadFolderPath):
 
 
 def saveCVScores(scores):
-    if configuration["evaluation"]["load"] or not configuration["evaluation"]["cv"]["active"] or \
-            configuration["evaluation"]["debug"]:
+    if not mustSave() or not evalConf["cv"]["active"]:
         return
     results = ''
     for i in range(len(scores)):
         if i == 0 or i % 4 == 0:
             tmpScores = '{0} : F-score: {1}, Rappel: {2}, Precsion: {3}'.format(
-                scores[i], scores[i + 1] / configuration["evaluation"]["cv"]["currentIter"],
-                           scores[i + 2] / configuration["evaluation"]["cv"]["currentIter"],
-                           scores[i + 3] / configuration["evaluation"]["cv"]["currentIter"])
+                scores[i], scores[i + 1] / evalConf["cv"]["currentIter"],
+                           scores[i + 2] / evalConf["cv"]["currentIter"],
+                           scores[i + 3] / evalConf["cv"]["currentIter"])
             if not tmpScores.startswith('0.0'):
                 logging.warn(tmpScores)
                 results += tmpScores + '\n'
-    scoresFile = os.path.join(XP_CURRENT_DIR_PATH, SCORES_FILE)
+    scoresFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["scores"])
     with open(scoresFile, 'w') as f:
         f.write(results)
 
 
 def settingsToDic():
-    settFile = os.path.join(LOADED_MODEL_PATH, SETTINGS_FILE)
+    settFile = os.path.join(LOADED_MODEL_PATH, repFiles["config"])
     results = {}
     with open(settFile, 'r') as f:
         for line in f:
@@ -228,12 +223,12 @@ def settingsToDic():
 
 
 def saveHistory(history):
-    if configuration["evaluation"]["load"] or configuration["evaluation"]["debug"]:
+    if not mustSave():
         return
-    historyFile = os.path.join(XP_CURRENT_DIR_PATH, 'history.pkl')
-    if configuration["evaluation"]["cv"]["active"]:
-        historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration["evaluation"]["cv"]["currentIter"]),
-                                   'history.pkl')
+    historyFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["history"])
+    if evalConf["cv"]["active"]:
+        historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
+                                   repFiles["history"])
     with open(historyFile, 'wb') as f:
         pickle.dump(history, f, pickle.HIGHEST_PROTOCOL)
 
@@ -243,12 +238,23 @@ def createHeader(value):
     logging.warn("{0}".format(value))
     logging.warn("*" * 40)
 
+
 def getBestWeightFilePath():
     if not configuration["model"]["train"]["chickPoint"]:
         return None
     bestWeightPath = os.path.join(XP_CURRENT_DIR_PATH, configuration["files"]["bestWeights"])
-    if configuration["evaluation"]["cv"]["active"]:
+    if evalConf["cv"]["active"]:
         bestWeightPath = os.path.join(XP_CURRENT_DIR_PATH,
-                                      str(configuration["evaluation"]["cv"]["currentIter"]),
+                                      str(evalConf["cv"]["currentIter"]),
                                       configuration["files"]["bestWeights"])
     return bestWeightPath
+
+
+def mustSave():
+    global evalConf
+    evalConf = configuration["evaluation"]
+    if evalConf["load"] or evalConf["debug"]:
+        return False
+    if evalConf["save"]:
+        return True
+    return False
