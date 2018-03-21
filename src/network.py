@@ -126,7 +126,7 @@ def elemModule(elemNum, normalizer, usePos=False, useToken=False):
     rnnLayer = rnnModule(embLayer)
     if rnnLayer:
         return wordLayer, rnnLayer
-    flattenLayer = Flatten(name='flatten')(embLayer)
+    flattenLayer = Flatten(name='{0}Flatten'.format(name))(embLayer)
     return wordLayer, flattenLayer
 
 
