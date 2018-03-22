@@ -10,6 +10,7 @@ from evaluation import evaluate
 from network import Network, train
 from normalisation import Normalizer
 from parser import parse
+import linarKerasModel as lkm
 
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
@@ -23,6 +24,16 @@ def identify(loadFolderPath='', load=False):
         parse(corpus, network, normalizer)
         evaluate(corpus)
 
+
+def identifyLinearKeras():
+    for lang in langs:
+        corpus = Corpus(lang)
+        oracle.parse(corpus)
+        normalizer = lkm.Normalizer(corpus)
+        network = lkm.LinearKerasModel(len(normalizer.tokens))
+        lkm.train(network.model, corpus ,normalizer)
+        parse(corpus, network, normalizer)
+        evaluate(corpus)
 
 def crossValidation(debug=False):
     configuration["evaluation"]["cv"]["active"], scores, iterations = True, [0.] * 28, 5
@@ -498,8 +509,11 @@ random.seed(seed)
 # TOPOLOGY: MLP NO DEENSE
 # Features: ALL except(suffix + mwt)
 
+identifyLinearKeras()
+#xpMLPTotal(train=True, xpNum=5)
 
-xpMLPTotal(train=True, xpNum=5)
+
+
 # configuration["evaluation"]["debug"] = False
 # configuration["evaluation"]["train"] = True
 #

@@ -5,7 +5,7 @@ ssh halsaied@access.grid5000.fr
 ```
 ssh nancy
 ```
-###Lancer une expérimentation en mode passif:
+### Lancer une expérimentation en mode passif:
 ```
 oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=5 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O out -E HUmlpErr
 ```
@@ -20,7 +20,6 @@ source miniconda2/bin/activate
 ```
 oarsub -p "gpu<>'NO'" -l nodes=1,walltime=5 -q production -I 
 ```
-
 ```
 oarsub -p "cluster='graphique'"  -l nodes=1,walltime=5 -q production -I
 ```
@@ -45,10 +44,7 @@ scp -r  NNIdenSys halsaied@access.grid5000.fr:/home/halsaied/
 ```
 ### Supprimer un dossier
 ```
-rm -rf /home/halsaied/NNIdenSys/Reports
-```
-```
-rm -rf NNIdenSys/src
+rm -rf NNIdenSys/Reports
 ```
 ### Créer un dossier
 ```
