@@ -3,6 +3,7 @@ import sys
 
 import numpy
 
+import linarKerasModel as lkm
 import oracle
 import v2classification as v2
 from corpus import *
@@ -10,7 +11,6 @@ from evaluation import evaluate
 from network import Network, train
 from normalisation import Normalizer
 from parser import parse
-import linarKerasModel as lkm
 
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
@@ -30,10 +30,11 @@ def identifyLinearKeras():
         corpus = Corpus(lang)
         oracle.parse(corpus)
         normalizer = lkm.Normalizer(corpus)
-        network = lkm.LinearKerasModel(len(normalizer.tokens))
-        lkm.train(network.model, corpus ,normalizer)
+        network = lkm.LinearKerasModel(len(normalizer.tokens) + len(normalizer.pos))
+        lkm.train(network.model, corpus, normalizer)
         parse(corpus, network, normalizer)
         evaluate(corpus)
+
 
 def crossValidation(debug=False):
     configuration["evaluation"]["cv"]["active"], scores, iterations = True, [0.] * 28, 5
@@ -231,17 +232,17 @@ def xpMLPTotal(train=False, cv=False, xpNum=5):
     configuration["model"]["embedding"]["concatenation"] = False
 
     reports.createHeader('Features Only')
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
 
     configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
 
     configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 256
     reports.createHeader('Features Only + Dense_1(256)')
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
 
     configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 512
     reports.createHeader('Features Only + Dense_1(512)')
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
 
     configuration["model"]["topology"]["mlp"]["dense1"]["active"] = False
     configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 1024
@@ -249,35 +250,35 @@ def xpMLPTotal(train=False, cv=False, xpNum=5):
     configuration["model"]["embedding"]["active"] = True
     configuration["model"]["embedding"]["pos"] = False
     reports.createHeader('Features + Tokens')
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
 
     configuration["model"]["embedding"]["tokenEmb"] = 100
     reports.createHeader('Features + Tokens (emb = 100)')
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
     configuration["model"]["embedding"]["tokenEmb"] = 200
 
     reports.createHeader('Features + Tokens  + Dense 128')
     configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
     configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 128
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
 
     reports.createHeader('Features + Tokens  + Dense 256')
     configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
     configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 256
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
 
     reports.createHeader('Features + Tokens  + Dense 128 + LSTM 256')
     configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
     configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = 128
     configuration["model"]["topology"]["rnn"]["active"] = True
     configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"] = 256
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
     configuration["model"]["topology"]["rnn"]["active"] = False
     configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"] = 512
 
     configuration["model"]["embedding"]["initialisation"] = True
     reports.createHeader('Features + Tokens + initialisation')
-    #xp(train=train, cv=cv, xpNum=xpNum)
+    # xp(train=train, cv=cv, xpNum=xpNum)
     configuration["model"]["embedding"]["initialisation"] = False
 
     configuration["model"]["embedding"]["pos"] = True
@@ -510,8 +511,7 @@ random.seed(seed)
 # Features: ALL except(suffix + mwt)
 
 identifyLinearKeras()
-#xpMLPTotal(train=True, xpNum=5)
-
+# xpMLPTotal(train=True, xpNum=5)
 
 
 # configuration["evaluation"]["debug"] = False
