@@ -23,8 +23,8 @@ class LinearKerasModel:
     def predict(self, trans, normalizer):
         dataEntry = normalizer.vectorize(trans.configuration)
         dataEntry = np.asarray(dataEntry)
-        np.reshape(dataEntry, (None, len(dataEntry)))
-        oneHotRep = self.model.predict(np.asarray(dataEntry), batch_size=1,
+        dataEntry = np.reshape(dataEntry, (1, len(dataEntry)))
+        oneHotRep = self.model.predict(dataEntry, batch_size=1,
                                        verbose=configuration["model"]["predict"]["verbose"])
         return argmax(oneHotRep)
 
@@ -35,7 +35,7 @@ def train(model, corpus, normaliser):
     labels, data = generateLearningData(corpus, normaliser)
     data = np.asarray(data)
     labels = to_categorical(labels, num_classes=len(TransitionType))
-    model.fit(data, labels, epochs=1,#trainConf["epochs"],
+    model.fit(data, labels, epochs=trainConf["epochs"],
               batch_size=trainConf["batchSize"],
               verbose=trainConf["verbose"])
     logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))

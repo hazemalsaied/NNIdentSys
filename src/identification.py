@@ -26,6 +26,10 @@ def identify(loadFolderPath='', load=False):
 
 
 def identifyLinearKeras():
+    evlaConf = configuration["evaluation"]
+    evlaConf["cluster"] = True
+    evlaConf["debug"] = False
+    evlaConf["train"] = True
     for lang in langs:
         corpus = Corpus(lang)
         oracle.parse(corpus)
