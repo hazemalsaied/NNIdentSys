@@ -156,7 +156,8 @@ def generateLinguisticFeatures(token, label, featureDictionary):
         token = concatenateTokens(token)[0]
     else:
         token = concatenateTokens([token])[0]
-    featureDictionary[label + 'Token'] = token.text
+    if configuration["features"]["unigram"]["token"]:
+        featureDictionary[label + 'Token'] = token.text
     if configuration["features"]["unigram"]["pos"] and token.posTag and token.posTag.strip() != '':
         featureDictionary[label + 'POS'] = token.posTag
     if configuration["features"]["unigram"]["lemma"] and token.lemma and token.lemma.strip() != '':
@@ -271,15 +272,20 @@ def concatenateTokens(elements):
 
 def getFeatureInfo(dic, label, tokens, features):
     idx, feature = 0, ''
+    if not configuration["features"]["unigram"]["token"] and 't' in features:
+        return
+    if not configuration["features"]["unigram"]["lemma"] and 'l' in features:
+        return
+    if not configuration["features"]["unigram"]["pos"] and 'p' in features:
+        return
+
     for token in tokens:
         if features[idx].lower() == 'l':
-            if configuration["features"]["unigram"]["lemma"]:
                 if token.lemma.strip() != '':
                     feature += token.lemma.strip() + '_'
                 else:
                     feature += '*' + '_'
         elif features[idx].lower() == 'p':
-            if configuration["features"]["unigram"]["pos"]:
                 if token.posTag.strip() != '':
                     feature += token.posTag.strip() + '_'
                 else:
@@ -291,7 +297,6 @@ def getFeatureInfo(dic, label, tokens, features):
     if len(feature) > 0:
         feature = feature[:-1]
         dic[label] = feature
-
     return ''
 
 

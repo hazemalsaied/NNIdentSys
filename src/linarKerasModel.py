@@ -1,7 +1,8 @@
 import datetime
 
 import numpy as np
-from keras.layers import Dense
+from keras.layers import Dense, Input
+from keras.models import Model
 from keras.models import Sequential
 from keras.utils import to_categorical
 from numpy import argmax
@@ -14,9 +15,14 @@ from vocabulary import Vocabulary
 
 class LinearKerasModel:
     def __init__(self, vocabSize):
-        self.model = Sequential()
-        self.model.add(Dense(100, input_dim=vocabSize * tokenNum))
-        self.model.add(Dense(len(TransitionType), activation='softmax'))
+        inputs = Input(shape=(vocabSize * tokenNum,))
+        x = Dense(8, activation='softmax')(inputs)
+        # predictions = Dense(10, activation='softmax')(x)
+        self.model = Model(inputs=inputs, outputs=x)
+
+        # self.model = Sequential()
+        # self.model.add(Dense(100, input_dim=vocabSize * tokenNum))
+        # self.model.add(Dense(len(TransitionType), activation='softmax'))
         self.model.compile(optimizer='adam', loss='categorical_crossentropy',
                            metrics=['accuracy'])
 

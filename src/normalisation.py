@@ -27,7 +27,7 @@ class Normalizer:
                 del self.vocabulary.tokenEmbeddings
 
                 del self.vocabulary.embeddings
-        if configuration["features"]:
+        if configuration["features"]["active"]:
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
 

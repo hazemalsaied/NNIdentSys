@@ -8,7 +8,7 @@ configuration = {
         "corpus": False,
         "dataset": "train",
         "debug": True,
-        "debugTrainNum": 400,
+        "debugTrainNum": 200,
         "validation": 0.2,
         "load": False,
         "save": False,

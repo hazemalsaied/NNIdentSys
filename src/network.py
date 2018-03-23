@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 import keras
 import matplotlib.pyplot as plt
@@ -32,7 +33,7 @@ class Network:
                 tokenLayer, tokenflattenLayer = elemModule(elemNum, normalizer, useToken=True)
                 inputLayers.append(tokenLayer)
                 concLayers.append(tokenflattenLayer)
-        if configuration["features"]:
+        if configuration["features"]["active"]:
             featureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='Features')
             inputLayers.append(featureLayer)
             concLayers.append(featureLayer)
@@ -41,6 +42,8 @@ class Network:
         # MLP module
         output = mlpModule(concLayer)
         self.model = Model(inputs=inputLayers, outputs=output)
+        logging.warn('Parameter number: {0}'.format(self.model.count_params()))
+        print self.model.summary()
         reports.saveNetwork(self.model)
 
     def predict(self, trans, normalizer):

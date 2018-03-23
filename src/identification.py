@@ -17,6 +17,12 @@ langs = ['FR']
 
 
 def identify(loadFolderPath='', load=False):
+    print configuration["evaluation"]
+    print configuration["model"]["embedding"]
+    print configuration["model"]["topology"]
+    print configuration["model"]["train"]
+    print configuration["features"]
+
     configuration["evaluation"]["load"] = load
     for lang in langs:
         corpus = Corpus(lang)
@@ -29,6 +35,7 @@ def identifyLinearKeras():
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
     evlaConf["debug"] = False
+    evlaConf["debugTrainNum"] = 200
     evlaConf["train"] = True
     for lang in langs:
         corpus = Corpus(lang)
@@ -144,6 +151,7 @@ def init(corpus, normalizer=None):
 
 
 def identifyV2():
+    print configuration["features"]
     for lang in langs:
         logging.warn('*' * 20)
         logging.warn('Language: {0}'.format(lang))
@@ -162,9 +170,9 @@ def xp(train=False, cv=False, xpNum=1):
         ######################################
         #   Debug
         ######################################
-        # evlaConf["debug"] = True
-        # evlaConf["train"] = False
-        # identify()
+        evlaConf["debug"] = True
+        evlaConf["train"] = False
+        identify()
         ######################################
         #   Train
         ######################################
@@ -223,6 +231,49 @@ def xpMLPAux(cv=False):
         xp(cv=True)
     else:
         xp(train=True)
+
+
+def xpTokenEmb(train=False, cv=False, xpNum=5, usePos=False):
+    configuration["evaluation"]["debug"] = False
+    configuration["evaluation"]["train"] = True
+
+    configuration["features"]["active"] = False
+    configuration["model"]["topology"]["mlp"]["active"] = False
+    configuration["model"]["embedding"]["active"] = False
+    configuration["model"]["embedding"]["initialisation"] = False
+    configuration["model"]["embedding"]["concatenation"] = False
+
+    configuration["model"]["embedding"]["active"] = True
+    configuration["model"]["embedding"]["pos"] = usePos
+
+    configuration["model"]["embedding"]["tokenEmb"] = 50
+    reports.createHeader('Tokens (emb = 50)')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["tokenEmb"] = 100
+    reports.createHeader('Tokens (emb = 100)')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["tokenEmb"] = 150
+    reports.createHeader('Tokens (emb = 150)')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["tokenEmb"] = 200
+    reports.createHeader('Features + Tokens (emb = 200)')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["tokenEmb"] = 250
+    reports.createHeader('Features + Tokens (emb = 250)')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["tokenEmb"] = 300
+    reports.createHeader('Features + Tokens (emb = 300)')
+    xp(train=train, cv=cv, xpNum=xpNum)
+
+    configuration["model"]["embedding"]["tokenEmb"] = 200
+    configuration["model"]["embedding"]["initialisation"] = True
+    xp(train=train, cv=cv, xpNum=xpNum)
+    configuration["model"]["embedding"]["initialisation"] = False
 
 
 def xpMLPTotal(train=False, cv=False, xpNum=5):
@@ -436,68 +487,208 @@ def linearModelImpact():
 
     featConf = configuration["features"]
 
-    reports.createHeader('Standard settings:  A B C E I J K L')
-    identifyV2()
-
-    reports.createHeader('Without syntax: A C E I J K L')
     featConf["syntax"]["active"] = False
-    identifyV2()
-    featConf["syntax"]["active"] = True
-
-    reports.createHeader('Without BiGram: A B E I J K L')
+    featConf["syntax"]["abstract"] = False
     featConf["bigram"]["s0b2"] = False
-    identifyV2()
-    featConf["bigram"]["s0b2"] = True
-
-    reports.createHeader('Without S0B2Bigram: A B C I J K L')
-    featConf["bigram"]["s0b2"] = False
-    identifyV2()
-    featConf["bigram"]["s0b2"] = True
-
-    reports.createHeader('Without S0B0Distance: A B C E J K L')
-    featConf["distance"]["s0b0"] = False
-    identifyV2()
-    featConf["distance"]["s0b0"] = True
-
-    reports.createHeader('Without S0S1Distance: A B C E I K L')
-    featConf["distance"]["s0s1"] = False
-    identifyV2()
-    featConf["distance"]["s0s1"] = True
-
-    reports.createHeader('without B1:  A B C E I J L')
-    featConf["unigram"]["b1"] = False
-    identifyV2()
-    featConf["unigram"]["b1"] = True
-
-    reports.createHeader('without lexicon:  A B C E I J K')
-    featConf["dictionary"]["active"] = False
-    identifyV2()
-    featConf["dictionary"]["active"] = False
-
-    featConf["syntax"]["active"] = False
     featConf["bigram"]["active"] = False
-
-    featConf["dictionary"]["active"] = False
-    featConf["unigram"]["b1"] = False
-    featConf["bigram"]["s0b2"] = False
-    featConf["distance"]["s0s1"] = False
+    featConf["trigram"] = False
     featConf["distance"]["s0b0"] = False
-    reports.createHeader('Unigram only:  A ')
-    identifyV2()
-
+    featConf["distance"]["s0s1"] = False
+    featConf["stackLength"] = False
+    featConf["unigram"]["b1"] = False
+    featConf["dictionary"]["active"] = False
+    featConf["history"]["1"] = False
+    featConf["history"]["2"] = False
+    featConf["history"]["3"] = False
     featConf["unigram"]["pos"] = False
     featConf["unigram"]["lemma"] = False
-    reports.createHeader('token  only')
+
+    # token
+    reports.createHeader('unigram: token')
     identifyV2()
 
-    reports.createHeader('lemma + token ')
-    featConf["unigram"]["lemma"] = True
+    featConf["bigram"]["active"] = True
+    reports.createHeader('unigram + bigram: token')
     identifyV2()
+    featConf["bigram"]["active"] = False
 
-    reports.createHeader('Pos + token')
-    featConf["unigram"]["lemma"] = False
+    featConf["bigram"]["active"] = True
+    featConf["trigram"] = True
+    reports.createHeader('unigram + bigram + trigram: token')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+    featConf["trigram"] = False
+
+    # pos
+    featConf["unigram"]["token"] = False
     featConf["unigram"]["pos"] = True
+
+    reports.createHeader('unigram: pos')
     identifyV2()
+
+    featConf["bigram"]["active"] = True
+    reports.createHeader('unigram + bigram: pos')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+
+    featConf["bigram"]["active"] = True
+    featConf["trigram"] = True
+    reports.createHeader('unigram + bigram + trigram: pos')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+    featConf["trigram"] = False
+
+    # lemma
+    featConf["unigram"]["pos"] = False
+    featConf["unigram"]["lemma"] = True
+    reports.createHeader('unigram: lemma')
+    identifyV2()
+
+    featConf["bigram"]["active"] = True
+    reports.createHeader('unigram + bigram: lemma')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+
+    featConf["bigram"]["active"] = True
+    featConf["trigram"] = True
+    reports.createHeader('unigram + bigram + trigram: lemma')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+    featConf["trigram"] = False
+    featConf["unigram"]["lemma"] = False
+
+    # pos + token
+    featConf["unigram"]["pos"] = True
+    featConf["unigram"]["token"] = True
+
+    reports.createHeader('unigram: pos + token')
+    identifyV2()
+
+    featConf["bigram"]["active"] = True
+    reports.createHeader('unigram + bigram: pos + token')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+
+    featConf["bigram"]["active"] = True
+    featConf["trigram"] = True
+    reports.createHeader('unigram + bigram + trigram: pos + token')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+    featConf["trigram"] = False
+
+    # pos + lemma
+    featConf["unigram"]["pos"] = True
+    featConf["unigram"]["token"] = False
+    featConf["unigram"]["lemma"] = True
+
+    reports.createHeader('unigram: pos + lemma')
+    identifyV2()
+
+    featConf["bigram"]["active"] = True
+    reports.createHeader('unigram + bigram: pos + lemma')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+
+    featConf["bigram"]["active"] = True
+    featConf["trigram"] = True
+    reports.createHeader('unigram + bigram + trigram: pos + lemma')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+    featConf["trigram"] = False
+
+    # token + lemma
+    featConf["unigram"]["pos"] = False
+    featConf["unigram"]["token"] = True
+    featConf["unigram"]["lemma"] = True
+
+    reports.createHeader('unigram: token + lemma')
+    identifyV2()
+
+    featConf["bigram"]["active"] = True
+    reports.createHeader('unigram + bigram: token + lemma')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+
+    featConf["bigram"]["active"] = True
+    featConf["trigram"] = True
+    reports.createHeader('unigram + bigram + trigram: token + lemma')
+    identifyV2()
+    featConf["bigram"]["active"] = False
+    featConf["trigram"] = False
+
+    # reports.createHeader('unigram: token + pos')
+    # identifyV2()
+    # featConf["unigram"]["pos"] = False
+    #
+    # featConf["unigram"]["lemma"] = True
+    # reports.createHeader('unigram: token + lemma')
+    # identifyV2()
+    # featConf["unigram"]["lemma"] = False
+    #
+    #
+    #
+    # reports.createHeader('Standard settings:  A B C E I J K L')
+    # identifyV2()
+    #
+    # reports.createHeader('Without syntax: A C E I J K L')
+    # featConf["syntax"]["active"] = False
+    # identifyV2()
+    # featConf["syntax"]["active"] = True
+    #
+    # reports.createHeader('Without BiGram: A B E I J K L')
+    # featConf["bigram"]["s0b2"] = False
+    # identifyV2()
+    # featConf["bigram"]["s0b2"] = True
+    #
+    # reports.createHeader('Without S0B2Bigram: A B C I J K L')
+    # featConf["bigram"]["s0b2"] = False
+    # identifyV2()
+    # featConf["bigram"]["s0b2"] = True
+    #
+    # reports.createHeader('Without S0B0Distance: A B C E J K L')
+    # featConf["distance"]["s0b0"] = False
+    # identifyV2()
+    # featConf["distance"]["s0b0"] = True
+    #
+    # reports.createHeader('Without S0S1Distance: A B C E I K L')
+    # featConf["distance"]["s0s1"] = False
+    # identifyV2()
+    # featConf["distance"]["s0s1"] = True
+    #
+    # reports.createHeader('without B1:  A B C E I J L')
+    # featConf["unigram"]["b1"] = False
+    # identifyV2()
+    # featConf["unigram"]["b1"] = True
+    #
+    # reports.createHeader('without lexicon:  A B C E I J K')
+    # featConf["dictionary"]["active"] = False
+    # identifyV2()
+    # featConf["dictionary"]["active"] = False
+    #
+    # featConf["syntax"]["active"] = False
+    # featConf["bigram"]["active"] = False
+    # featConf["bigram"]["s0b2"] = False
+    # featConf["dictionary"]["active"] = False
+    # featConf["unigram"]["b1"] = False
+    #
+    # featConf["distance"]["s0s1"] = False
+    # featConf["distance"]["s0b0"] = False
+    # reports.createHeader('Unigram only:  A ')
+    # identifyV2()
+    #
+    # featConf["unigram"]["pos"] = False
+    # featConf["unigram"]["lemma"] = False
+    # reports.createHeader('token  only')
+    # identifyV2()
+    #
+    # reports.createHeader('lemma + token ')
+    # featConf["unigram"]["lemma"] = True
+    # identifyV2()
+    #
+    # reports.createHeader('Pos + token')
+    # featConf["unigram"]["lemma"] = False
+    # featConf["unigram"]["pos"] = True
+    # identifyV2()
 
 
 global seed
@@ -514,19 +705,9 @@ random.seed(seed)
 # TOPOLOGY: MLP NO DEENSE
 # Features: ALL except(suffix + mwt)
 
-identifyLinearKeras()
-# xpMLPTotal(train=True, xpNum=5)
-
-
-# configuration["evaluation"]["debug"] = False
-# configuration["evaluation"]["train"] = True
-#
-# configuration["features"]["active"] = True
-# configuration["model"]["embedding"]["active"] = True
-# configuration["model"]["embedding"]["initialisation"] = True
-# configuration["model"]["embedding"]["concatenation"] = True
-# configuration["model"]["topology"]["rnn"]["active"] = True
-# configuration["model"]["topology"]["rnn"]["gru"] = True
-# configuration["model"]["topology"]["rnn"]["rnn1"]["unitNumber"] = 256
-#
-# identify()
+# linearModelImpact()
+#langs = ['PT']
+xpTokenEmb(train=True, xpNum=5)
+xpTokenEmb(train=True, xpNum=5, usePos=True)
+xpMLPTotal(train=True, xpNum=5)
+# identifyLinearKeras()
