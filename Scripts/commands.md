@@ -50,3 +50,7 @@ rm -rf NNIdenSys/Reports
 ```
 mkdir /home/halsaied/NNIdenSys/Reports
 ```
+### Vider les caches de Theano
+``` 
+rm -rf .theano
+```

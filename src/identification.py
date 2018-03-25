@@ -15,6 +15,9 @@ from parser import parse
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 langs = ['FR']
 
+global seed
+seed = 0
+
 
 def identify(loadFolderPath='', load=False):
     print configuration["evaluation"]
@@ -199,11 +202,11 @@ def xp(train=False, cv=False, xpNum=1):
             numpy.random.seed(seed)
             random.seed(seed)
             crossValidation()
-        ######################################
-        #   Load
-        ######################################
-        # preTrainedPath= '/home/halsaied/nancy/NNIdenSys/NNIdenSys/Reports/FR-12/12-FR-modelWeigth.hdf5'
-        # identify(load=configuration["evaluation"]["load"], loadFolderPath=loadFolderPath)
+            ######################################
+            #   Load
+            ######################################
+            # preTrainedPath= '/home/halsaied/nancy/NNIdenSys/NNIdenSys/Reports/FR-12/12-FR-modelWeigth.hdf5'
+            # identify(load=configuration["evaluation"]["load"], loadFolderPath=loadFolderPath)
 
 
 def xpGRU(stacked=False, gru=False, cv=False):
@@ -691,8 +694,20 @@ def linearModelImpact():
     # identifyV2()
 
 
-global seed
-seed = 0
+import newNetwork
+
+
+def identifyAttached():
+    for lang in langs:
+        corpus = Corpus(lang)
+        oracle.parse(corpus)
+        normalizer = Normalizer(corpus)
+        network = newNetwork.Network(normalizer)
+        newNetwork.train(network.model, normalizer, corpus)
+        parse(corpus, network, normalizer)
+        evaluate(corpus)
+
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 logging.basicConfig(level=logging.WARNING)
@@ -706,8 +721,12 @@ random.seed(seed)
 # Features: ALL except(suffix + mwt)
 
 # linearModelImpact()
-#langs = ['PT']
-xpTokenEmb(train=True, xpNum=5)
-xpTokenEmb(train=True, xpNum=5, usePos=True)
-xpMLPTotal(train=True, xpNum=5)
+# langs = ['PT']
+configuration["evaluation"]["debug"] = False
+configuration["evaluation"]["train"] = True
+identifyAttached()
+# identify()
+# xpTokenEmb(train=True, xpNum=5)
+# xpTokenEmb(train=True, xpNum=5, usePos=True)
+# xpMLPTotal(train=True, xpNum=5)
 # identifyLinearKeras()

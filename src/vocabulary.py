@@ -7,6 +7,7 @@ import numpy as np
 import word2vec
 
 from config import configuration
+from corpus import getTokens
 
 unk = configuration["constants"]["unk"]
 empty = configuration["constants"]["empty"]
@@ -15,6 +16,10 @@ number = configuration["constants"]["number"]
 
 class Vocabulary:
     def __init__(self, corpus, taux=1):
+
+        self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
+        print 'self.attachedTokens:', len(self.attachedTokens)
+        print 'self.attachedPos:', len(self.attachedPos)
         global embConf
         embConf = configuration["model"]["embedding"]
         self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, embConf["posEmb"], taux=taux)
@@ -104,6 +109,92 @@ class Vocabulary:
                 result.append(self.indices[key])
         return np.asarray(result)
 
+    def getAttachedVoc(self, corpus):
+        tokenVocab, posVocab = dict(), dict()
+        for sent in corpus:
+            trans = sent.initialTransition
+            for token in sent.tokens:
+                tokenTxt = token.text.lower()
+                if tokenTxt not in tokenVocab:
+                    tokenVocab[tokenTxt] = 1
+                else:
+                    tokenVocab[tokenTxt] += 1
+                posTxt = token.posTag.lower()
+                if posTxt not in posVocab:
+                    posVocab[posTxt] = 1
+                else:
+                    posVocab[posTxt] += 1
+            while trans:
+                if trans.configuration.stack:
+                    tokens = getTokens(trans.configuration.stack[0])
+                    if tokens and len(tokens) > 1:
+                        tokenTxt, posTxt = self.attachTokens(tokens)
+                        if tokenTxt not in tokenVocab:
+                            tokenVocab[tokenTxt] = 1
+                        else:
+                            tokenVocab[tokenTxt] += 1
+                        if posTxt not in posVocab:
+                            posVocab[posTxt] = 1
+                        else:
+                            posVocab[posTxt] += 1
+                    if len(trans.configuration.stack) > 1:
+                        tokens = getTokens(trans.configuration.stack[-2])
+                        if len(tokens) > 1:
+                            tokenTxt, posTxt = self.attachTokens(tokens)
+                            if tokenTxt not in tokenVocab:
+                                tokenVocab[tokenTxt] = 1
+                            else:
+                                tokenVocab[tokenTxt] += 1
+                            if posTxt not in posVocab:
+                                posVocab[posTxt] = 1
+                            else:
+                                posVocab[posTxt] += 1
+                trans = trans.next
+        for k in tokenVocab.keys():
+            if tokenVocab[k] == 1 and '_' not in k:
+                del tokenVocab[k]
+
+        for k in posVocab.keys():
+            if posVocab[k] == 1 and '_' not in k:
+                del posVocab[k]
+        tokenVocab[unk] = 1
+        tokenVocab[number] = 1
+        tokenVocab[empty] = 1
+        posVocab[unk] = 1
+        posVocab[number] = 1
+        posVocab[empty] = 1
+
+        idx = 0
+        for k in tokenVocab.keys():
+            tokenVocab[k] = idx
+            idx += 1
+        idx = 0
+        for k in posVocab.keys():
+            posVocab[k] = idx
+            idx += 1
+        return tokenVocab, posVocab
+
+    def getAttachedIndices(self, tokens):
+        tokenTxt, posTxt = self.attachTokens(tokens)
+        if tokenTxt in self.attachedTokens:
+            tokenIdx = self.attachedTokens[tokenTxt]
+        else:
+            tokenIdx = self.attachedTokens[unk]
+        if posTxt in self.attachedPos:
+            posIdx = self.attachedPos[posTxt]
+        else:
+            posIdx = self.attachedPos[unk]
+        return tokenIdx, posIdx
+
+    def attachTokens(self, tokens):
+        tokenTxt, posTxt = '', ''
+        for t in tokens:
+            tokenTxt += t.text.lower() + '_'
+            posTxt += t.posTag + '_'
+        tokenTxt = tokenTxt[:-1]
+        posTxt = posTxt[:-1].lower()
+        return tokenTxt, posTxt
+
     def getKey(self, token, getPos=False, getToken=False):
 
         if getToken:
@@ -131,12 +222,15 @@ class Vocabulary:
             if key in self.indices:
                 return key
             return unk + '_' + unk
+
     def getEmptyIdx(self, getPos=False, getToken=False):
         if getPos:
             return self.posIndices[empty]
         if getToken:
             return self.tokenIndices[empty]
         return self.indices[empty]
+
+
 def getTokenEmbeddingMatrices(corpus, taux):
     # get a dictionary of train tokens with their frequencies (occurrences)
     tokenFreqDic = getFreqDic(corpus)

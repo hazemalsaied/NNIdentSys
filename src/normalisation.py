@@ -5,7 +5,7 @@ import reports
 from corpus import getTokens
 from extraction import Extractor
 from reports import *
-from vocabulary import Vocabulary
+from vocabulary import Vocabulary, empty
 
 
 class Normalizer:
@@ -20,7 +20,7 @@ class Normalizer:
             if embConf["concatenation"]:
                 self.weightMatrix = initMatrix(self.vocabulary)
             else:
-                self.posWeightMatrix = initMatrix(self.vocabulary,usePos=True)
+                self.posWeightMatrix = initMatrix(self.vocabulary, usePos=True)
                 del self.vocabulary.posEmbeddings
 
                 self.tokenWeightMatrix = initMatrix(self.vocabulary, useToken=True)
@@ -68,6 +68,19 @@ class Normalizer:
             data = np.asarray(data)
         return np.asarray(labels), data
 
+    def generateLearningDataAttached(self, corpus):
+        labels, tokenData, posData = [], [], []
+        for sent in corpus.trainingSents:
+            trans = sent.initialTransition
+            while trans.next:
+                tokenIdxs, posIdxs = self.getAttachedIndices(trans)
+                tokenData.append(np.asarray(tokenIdxs))
+                posData.append(np.asarray(posIdxs))
+                #data.append(np.asarray([tokenIdxs, posIdxs]))
+                labels = np.append(labels, trans.next.type.value)
+                trans = trans.next
+        return np.asarray(labels), np.asarray(tokenData), np.asarray(posData)
+
     def normalize(self, trans, useEmbedding=False, useConcatenation=False, usePos=False, useFeatures=False):
         results = []
         if useEmbedding:
@@ -102,6 +115,48 @@ class Normalizer:
         belems = padSequence(belems, "bPadding", emptyIdx)
         words = np.concatenate((s0elems, s1elems, belems), axis=0)
         return words
+
+    def getAttachedIndices(self, trans):
+        emptyTokenIdx = self.vocabulary.attachedTokens[empty]
+        emptyPosIdx = self.vocabulary.attachedPos[empty]
+        tokenIdxs, posIdxs = [], []
+        if trans.configuration.stack:
+            s0Tokens = getTokens(trans.configuration.stack[-1])
+            tokenIdx, posIdx = self.vocabulary.getAttachedIndices(s0Tokens)
+            tokenIdxs.append(tokenIdx)
+            posIdxs.append(posIdx)
+            if len(trans.configuration.stack) > 1:
+                s1Tokens = getTokens(trans.configuration.stack[-2])
+                tokenIdx, posIdx = self.vocabulary.getAttachedIndices(s1Tokens)
+                tokenIdxs.append(tokenIdx)
+                posIdxs.append(posIdx)
+            else:
+                tokenIdxs.append(emptyTokenIdx)
+                posIdxs.append(emptyPosIdx)
+        else:
+            tokenIdxs.append(emptyTokenIdx)
+            tokenIdxs.append(emptyTokenIdx)
+            posIdxs.append(emptyPosIdx)
+            posIdxs.append(emptyPosIdx)
+
+        if trans.configuration.buffer:
+            tokenIdx, posIdx = self.vocabulary.getAttachedIndices([trans.configuration.buffer[0]])
+            tokenIdxs.append(tokenIdx)
+            posIdxs.append(posIdx)
+            if len(trans.configuration.buffer) > 1:
+                tokenIdx, posIdx = self.vocabulary.getAttachedIndices([trans.configuration.buffer[1]])
+                tokenIdxs.append(tokenIdx)
+                posIdxs.append(posIdx)
+            else:
+                tokenIdxs.append(emptyTokenIdx)
+                posIdxs.append(emptyPosIdx)
+        else:
+            tokenIdxs.append(emptyTokenIdx)
+            tokenIdxs.append(emptyTokenIdx)
+            posIdxs.append(emptyPosIdx)
+            posIdxs.append(emptyPosIdx)
+
+        return np.asarray(tokenIdxs), np.asarray(posIdxs)
 
 
 def padSequence(seq, label, emptyIdx):
