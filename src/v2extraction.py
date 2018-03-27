@@ -1,5 +1,5 @@
-from corpus import Token, getTokens, getTokenLemmas
 from config import configuration
+from corpus import Token, getTokens, getTokenLemmas
 
 mwtDictionary = {}
 mweDictionary = {}
@@ -281,15 +281,15 @@ def getFeatureInfo(dic, label, tokens, features):
 
     for token in tokens:
         if features[idx].lower() == 'l':
-                if token.lemma.strip() != '':
-                    feature += token.lemma.strip() + '_'
-                else:
-                    feature += '*' + '_'
+            if token.lemma.strip() != '':
+                feature += token.lemma.strip() + '_'
+            else:
+                feature += '*' + '_'
         elif features[idx].lower() == 'p':
-                if token.posTag.strip() != '':
-                    feature += token.posTag.strip() + '_'
-                else:
-                    feature += '*' + '_'
+            if token.posTag.strip() != '':
+                feature += token.posTag.strip() + '_'
+            else:
+                feature += '*' + '_'
         elif features[idx].lower() == 't':
             if token.text.strip() != '':
                 feature += token.text.strip() + '_'

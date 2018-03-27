@@ -16,7 +16,7 @@ def evaluate(corpus, foldIdx=-1):
         tp, p, t = getCategoryStatistics(corpus, cat)
         scores += calculateScores(tp, p, t, cat)
     createMWEFiles(corpus, foldIdx)
-    #reports.saveSettings()
+    # reports.saveSettings()
     reports.saveScores(scores)
     return scores
 

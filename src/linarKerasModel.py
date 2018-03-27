@@ -3,7 +3,6 @@ import datetime
 import numpy as np
 from keras.layers import Dense, Input
 from keras.models import Model
-from keras.models import Sequential
 from keras.utils import to_categorical
 from numpy import argmax
 

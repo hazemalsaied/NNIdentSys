@@ -14,11 +14,14 @@ class Normalizer:
     """
 
     def __init__(self, corpus):
+        global embConf, initConf
         embConf = configuration["model"]["embedding"]
+        initConf = embConf["initialisation"]
         self.vocabulary = Vocabulary(corpus)
-        if embConf["initialisation"]:
+        if initConf["active"]:
             if embConf["concatenation"]:
                 self.weightMatrix = initMatrix(self.vocabulary)
+                del self.vocabulary.embeddings
             else:
                 self.posWeightMatrix = initMatrix(self.vocabulary, usePos=True)
                 del self.vocabulary.posEmbeddings
@@ -26,7 +29,6 @@ class Normalizer:
                 self.tokenWeightMatrix = initMatrix(self.vocabulary, useToken=True)
                 del self.vocabulary.tokenEmbeddings
 
-                del self.vocabulary.embeddings
         if configuration["features"]["active"]:
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
@@ -36,7 +38,7 @@ class Normalizer:
         data, labels = [], []
         useEmbedding = embConf["active"]
         useConcatenation = embConf["concatenation"]
-        usePos = embConf["pos"]
+        usePos = embConf["usePos"]
         useFeatures = configuration["features"]["active"]
         logging.warn(
             'Learning data generation has started with: Features: {0}; Embedding: {1}; concatenation: {2}; POS: {3}'.
@@ -76,7 +78,7 @@ class Normalizer:
                 tokenIdxs, posIdxs = self.getAttachedIndices(trans)
                 tokenData.append(np.asarray(tokenIdxs))
                 posData.append(np.asarray(posIdxs))
-                #data.append(np.asarray([tokenIdxs, posIdxs]))
+                # data.append(np.asarray([tokenIdxs, posIdxs]))
                 labels = np.append(labels, trans.next.type.value)
                 trans = trans.next
         return np.asarray(labels), np.asarray(tokenData), np.asarray(posData)
@@ -160,18 +162,22 @@ class Normalizer:
 
 
 def padSequence(seq, label, emptyIdx):
-    embConf = configuration["model"]["embedding"]
+    embConf = configuration["model"]["padding"]
     return np.asarray(pad_sequences([seq], maxlen=embConf[label], value=emptyIdx))[0]
 
 
 def initMatrix(vocabulary, usePos=False, useToken=False):
     if usePos:
+        if not configuration["model"]["embedding"]["initialisation"]["pos"]:
+            return None
         indices = vocabulary.posIndices
-        dim = vocabulary.postagDim
+        dim = embConf["posEmb"]
         embeddings = vocabulary.posEmbeddings
     elif useToken:
+        if not configuration["model"]["embedding"]["initialisation"]["token"]:
+            return None
         indices = vocabulary.tokenIndices
-        dim = vocabulary.tokenDim
+        dim = embConf["tokenEmb"]
         embeddings = vocabulary.tokenEmbeddings
     else:
         indices = vocabulary.indices

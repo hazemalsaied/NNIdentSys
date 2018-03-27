@@ -5,6 +5,7 @@ from random import uniform
 import gensim
 import numpy as np
 import word2vec
+from keras.utils import to_categorical
 
 from config import configuration
 from corpus import getTokens
@@ -15,87 +16,173 @@ number = configuration["constants"]["number"]
 
 
 class Vocabulary:
-    def __init__(self, corpus, taux=1):
-
-        self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
-        print 'self.attachedTokens:', len(self.attachedTokens)
-        print 'self.attachedPos:', len(self.attachedPos)
-        global embConf
+    def __init__(self, corpus):
+        global embConf, initConf
         embConf = configuration["model"]["embedding"]
-        self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, embConf["posEmb"], taux=taux)
-        self.postagDim = len(self.posEmbeddings.values()[0])
+        initConf = configuration["model"]["embedding"]["initialisation"]
 
-        self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, taux=taux)
-        self.tokenDim = len(self.tokenEmbeddings.values()[0]) if embConf["initialisation"] else embConf["tokenEmb"]
+        if not configuration["model"]["padding"]:
+            logging.warn('No padding used. Concatenated tokens: {0} Concatenated POS: {1}'.
+                         format(len(self.attachedTokens), len(self.attachedPos)))
+            self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
 
+        self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus)
+        self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus)
         self.indices, self.embeddings = self.getEmbeddingMatrices(corpus)
-        self.embDim = self.tokenDim + self.postagDim if embConf["concatenation"] and embConf["pos"] else self.tokenDim
-        self.size = len(self.indices)
-        logging.warn('Vocabulary size: {0}'.format(self.size))
+        self.embDim = embConf["tokenEmb"] + embConf["posEmb"] if embConf["concatenation"] or embConf["usePos"] else \
+            embConf["tokenEmb"]
 
     def getEmbeddingMatrices(self, corpus):
+        shouldInit = initConf["active"]
+        if not embConf["concatenation"]:
+            return None, None
+        logging.warn('Concatenation is active')
+        if shouldInit:
+            logging.warn('Concatenation Embedding is being loaded!')
         indices, embeddings, idx = self.generateUnknownKeys()
         for sent in corpus.trainingSents + corpus.testingSents:
             for token in sent.tokens:
                 tokenKey = token.getTokenOrLemma() if token.getTokenOrLemma() in self.tokenIndices else unk
                 key = tokenKey
-                if embConf["pos"]:
+                if embConf["usePos"]:
                     posKey = token.posTag.lower() if token.posTag.lower() in self.posIndices else unk
                     key += '_' + posKey
                 if key not in indices:
-                    if embConf["pos"]:
-                        embeddings[key] = np.concatenate((self.tokenEmbeddings[tokenKey],
-                                                          self.posEmbeddings[posKey]))
-                    else:
-                        embeddings[key] = self.tokenEmbeddings[tokenKey]
+                    if shouldInit:
+                        if embConf["usePos"]:
+                            embeddings[key] = np.concatenate((self.tokenEmbeddings[tokenKey],
+                                                              self.posEmbeddings[posKey]))
+                        else:
+                            embeddings[key] = self.tokenEmbeddings[tokenKey]
 
                     indices[key] = idx
                     idx += 1
         return indices, embeddings
 
     def generateUnknownKeys(self):
+        shouldInit = initConf["active"]
         indices, embeddings, idx = dict(), dict(), 0
-        if embConf["pos"]:
+        if embConf["usePos"]:
             for posTag in self.posIndices.keys():
                 key = unk + '_' + posTag.lower()
                 if key not in indices:
-                    embeddings[key] = np.concatenate(
-                        (self.tokenEmbeddings[unk], self.posEmbeddings[posTag.lower()]))
+                    if shouldInit:
+                        embeddings[key] = np.concatenate(
+                            (self.tokenEmbeddings[unk], self.posEmbeddings[posTag.lower()]))
                     indices[key] = idx
                     idx += 1
                 key1 = number + '_' + posTag.lower()
                 if key1 not in indices:
-                    embeddings[key1] = np.concatenate(
-                        (self.tokenEmbeddings[number], self.posEmbeddings[posTag.lower()]))
+                    if shouldInit:
+                        embeddings[key1] = np.concatenate(
+                            (self.tokenEmbeddings[number], self.posEmbeddings[posTag.lower()]))
                     indices[key1] = idx
                     idx += 1
         key = unk
-        if embConf["pos"]:
+        if embConf["usePos"]:
             key += '_' + unk
         if key not in indices:
-            if embConf["pos"]:
-                embeddings[key] = np.concatenate((self.tokenEmbeddings[unk], self.posEmbeddings[unk]))
-            else:
-                embeddings[key] = self.tokenEmbeddings[unk]
+            if shouldInit:
+                if embConf["usePos"]:
+                    embeddings[key] = np.concatenate((self.tokenEmbeddings[unk], self.posEmbeddings[unk]))
+                else:
+                    embeddings[key] = self.tokenEmbeddings[unk]
             indices[key] = idx
             idx += 1
         key1 = number
-        if embConf["pos"]:
+        if embConf["usePos"]:
             key1 += '_' + unk
         if key1 not in indices:
-            if embConf["pos"]:
-                embeddings[key1] = np.concatenate((self.tokenEmbeddings[number], self.posEmbeddings[unk]))
-            else:
-                embeddings[key1] = self.tokenEmbeddings[unk]
+            if shouldInit:
+                if initConf["pos"]:
+                    embeddings[key1] = np.concatenate((self.tokenEmbeddings[number], self.posEmbeddings[unk]))
+                else:
+                    embeddings[key1] = self.tokenEmbeddings[unk]
             indices[key1] = idx
             idx += 1
-        if embConf["pos"]:
-            embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0]) + len(self.posEmbeddings.values()[0])))
-        else:
-            embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0])))
+        if shouldInit:
+            if embConf["usePos"]:
+                embeddings[empty] = np.zeros(
+                    (len(self.tokenEmbeddings.values()[0]) + len(self.posEmbeddings.values()[0])))
+            else:
+                embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0])))
         indices[empty] = idx
         idx += 1
         return indices, embeddings, idx
+
+    #
+    #
+    # def generateUnknownEmbedding(self):
+    #     indices, embeddings, idx = dict(), dict(), 0
+    #     if embConf["usePos"]:
+    #         for posTag in self.posIndices.keys():
+    #             key = unk + '_' + posTag.lower()
+    #             if key not in indices:
+    #                 embeddings[key] = np.concatenate(
+    #                     (self.tokenEmbeddings[unk], self.posEmbeddings[posTag.lower()]))
+    #                 indices[key] = idx
+    #                 idx += 1
+    #             key1 = number + '_' + posTag.lower()
+    #             if key1 not in indices:
+    #                 embeddings[key1] = np.concatenate(
+    #                     (self.tokenEmbeddings[number], self.posEmbeddings[posTag.lower()]))
+    #                 indices[key1] = idx
+    #                 idx += 1
+    #     key = unk
+    #     if embConf["usePos"]:
+    #         key += '_' + unk
+    #     if key not in indices:
+    #         if embConf["usePos"]:
+    #             embeddings[key] = np.concatenate((self.tokenEmbeddings[unk], self.posEmbeddings[unk]))
+    #         else:
+    #             embeddings[key] = self.tokenEmbeddings[unk]
+    #         indices[key] = idx
+    #         idx += 1
+    #     key1 = number
+    #     if embConf["usePos"]:
+    #         key1 += '_' + unk
+    #     if key1 not in indices:
+    #         if initConf["pos"]:
+    #             embeddings[key1] = np.concatenate((self.tokenEmbeddings[number], self.posEmbeddings[unk]))
+    #         else:
+    #             embeddings[key1] = self.tokenEmbeddings[unk]
+    #         indices[key1] = idx
+    #         idx += 1
+    #     if embConf["usePos"]:
+    #         embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0]) + len(self.posEmbeddings.values()[0])))
+    #     else:
+    #         embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0])))
+    #     indices[empty] = idx
+    #     idx += 1
+    #     return indices, embeddings, idx
+
+    def generateUnknownIndices(self):
+        indices, idx = dict(), 0
+        if embConf["usePos"]:
+            for posTag in self.posIndices.keys():
+                key = unk + '_' + posTag.lower()
+                if key not in indices:
+                    indices[key] = idx
+                    idx += 1
+                key1 = number + '_' + posTag.lower()
+                if key1 not in indices:
+                    indices[key1] = idx
+                    idx += 1
+        key = unk
+        if embConf["usePos"]:
+            key += '_' + unk
+        if key not in indices:
+            indices[key] = idx
+            idx += 1
+        key1 = number
+        if embConf["usePos"]:
+            key1 += '_' + unk
+        if key1 not in indices:
+            indices[key1] = idx
+            idx += 1
+        indices[empty] = idx
+        idx += 1
+        return indices, idx
 
     def getIndices(self, tokens, getPos=False, getToken=False):
         result = []
@@ -172,6 +259,9 @@ class Vocabulary:
         for k in posVocab.keys():
             posVocab[k] = idx
             idx += 1
+
+        logging.warn('Token Vocabulary : {0}'.format(len(self.attachedTokens)))
+        logging.warn('POS Vocabulary : {0}'.format(len(self.attachedPos)))
         return tokenVocab, posVocab
 
     def getAttachedIndices(self, tokens):
@@ -231,16 +321,75 @@ class Vocabulary:
         return self.indices[empty]
 
 
-def getTokenEmbeddingMatrices(corpus, taux):
-    # get a dictionary of train tokens with their frequencies (occurrences)
-    tokenFreqDic = getFreqDic(corpus)
+def getTokenEmbeddingMatrices(corpus):
     # load the pre-trained embeddings
     preTrainedEmb = word2vec.load(
         os.path.join(configuration["path"]["projectPath"], configuration["files"]["embedding"]["frWac200"]))
-    # indices and embeddings are the reslut of the function
-    # indices is a dictionary mappng token => index; this index will help us in building
-    # weight matrix and in generating training data
-    indices, embeddings, idx, generatedRandomly, pretrained, testOnlyTokens, testOnlyTokensWithRandVect = dict(), dict(), 0, 0, 0, 0, 0
+    indices = getTokenVocabulary(corpus, preTrainedEmb)
+    logging.warn('Token vocabuary loaded!')
+    if initConf["active"] and initConf["token"]:
+        embeddings = initialiseToken(indices, preTrainedEmb)
+        logging.warn('Token embedding inisilaised!')
+        return indices, embeddings
+    return indices, None
+
+
+#     # get a dictionary of train tokens with their frequencies (occurrences)
+#     tokenFreqDic = getFreqDic(corpus)
+#     # load the pre-trained embeddings
+#     preTrainedEmb = word2vec.load(
+#         os.path.join(configuration["path"]["projectPath"], configuration["files"]["embedding"]["frWac200"]))
+#     # indices and embeddings are the reslut of the function
+#     # indices is a dictionary mappng token => index; this index will help us in building
+#     # weight matrix and in generating training data
+#     indices, embeddings, idx, generatedRandomly, pretrained, testOnlyTokens, testOnlyTokensWithRandVect = dict(), dict(), 0, 0, 0, 0, 0
+#     for sent in corpus.trainingSents + corpus.testingSents:
+#         for token in sent.tokens:
+#             tokenKey = token.getTokenOrLemma()
+#             if tokenKey in indices:
+#                 continue
+#             if any(ch.isdigit() for ch in tokenKey):
+#                 continue
+#             # Token in the train data set
+#             if tokenKey in tokenFreqDic:
+#                 if not embConf["frequentTokens"] or tokenKey in corpus.mweTokenDictionary or \
+#                         (embConf["frequentTokens"] and tokenFreqDic[tokenKey] > taux):
+#                     if tokenKey in preTrainedEmb.vocab:
+#                         tokenIdxInVocab = np.where(preTrainedEmb.vocab == tokenKey)[0][0]
+#                         embeddings[tokenKey] = preTrainedEmb.vectors[tokenIdxInVocab]
+#                         pretrained += 1
+#                     else:
+#                         embeddings[tokenKey] = getRandomVector(len(embeddings.values()[0]))
+#                         generatedRandomly += 1
+#                         # print tokenKey
+#                     indices[tokenKey] = idx
+#                     idx += 1
+#             # Token belongs to test only
+#             else:
+#                 testOnlyTokens += 1
+#                 if tokenKey in preTrainedEmb.vocab and uniform(0, 1) < configuration["constants"]["alpha"]:
+#                     tokenIdxInVocab = np.where(preTrainedEmb.vocab == tokenKey)[0][0]
+#                     embeddings[tokenKey] = preTrainedEmb.vectors[tokenIdxInVocab]
+#                     pretrained += 1
+#                     indices[tokenKey] = idx
+#                     idx += 1
+#     embeddings[unk] = getRandomVector(len(preTrainedEmb.vectors[0]))
+#     indices[unk] = idx
+#     idx += 1
+#     embeddings[number] = getRandomVector(len(preTrainedEmb.vectors[0]))
+#     indices[number] = idx
+#     idx += 1
+#     if not embConf["concatenation"]:
+#         embeddings[empty] = getRandomVector(len(preTrainedEmb.vectors[0]))
+#         indices[empty] = idx
+#     logging.warn('Filtered token frequency dic: {0}'.format(len(indices)))
+#     return indices, embeddings
+
+
+def getTokenVocabulary(corpus, preTrainedEmb):
+    # get a dictionary of train tokens with their frequencies (occurrences)
+    tokenFreqDic = getFreqDic(corpus)
+    indices, idx, generatedRandomly = dict(), 0, 0
     for sent in corpus.trainingSents + corpus.testingSents:
         for token in sent.tokens:
             tokenKey = token.getTokenOrLemma()
@@ -251,56 +400,103 @@ def getTokenEmbeddingMatrices(corpus, taux):
             # Token in the train data set
             if tokenKey in tokenFreqDic:
                 if not embConf["frequentTokens"] or tokenKey in corpus.mweTokenDictionary or \
-                        (embConf["frequentTokens"] and tokenFreqDic[tokenKey] > taux):
-                    if tokenKey in preTrainedEmb.vocab:
-                        tokenIdxInVocab = np.where(preTrainedEmb.vocab == tokenKey)[0][0]
-                        embeddings[tokenKey] = preTrainedEmb.vectors[tokenIdxInVocab]
-                        pretrained += 1
-                    else:
-                        embeddings[tokenKey] = getRandomVector(len(embeddings.values()[0]))
-                        generatedRandomly += 1
-                        # print tokenKey
+                        (embConf["frequentTokens"] and tokenFreqDic[tokenKey] > 1):
                     indices[tokenKey] = idx
                     idx += 1
             # Token belongs to test only
             else:
-                testOnlyTokens += 1
                 if tokenKey in preTrainedEmb.vocab and uniform(0, 1) < configuration["constants"]["alpha"]:
-                    tokenIdxInVocab = np.where(preTrainedEmb.vocab == tokenKey)[0][0]
-                    embeddings[tokenKey] = preTrainedEmb.vectors[tokenIdxInVocab]
-                    pretrained += 1
                     indices[tokenKey] = idx
                     idx += 1
-    embeddings[unk] = getRandomVector(len(preTrainedEmb.vectors[0]))
     indices[unk] = idx
     idx += 1
-    embeddings[number] = getRandomVector(len(preTrainedEmb.vectors[0]))
     indices[number] = idx
     idx += 1
     if not embConf["concatenation"]:
-        embeddings[empty] = getRandomVector(len(preTrainedEmb.vectors[0]))
         indices[empty] = idx
-    logging.warn('Filtered token frequency dic: {0}'.format(len(indices)))
-    return indices, embeddings
+    # logging.warn('Filtered token frequency dic: {0}'.format(len(indices)))
+    return indices
 
 
-def getPOSEmbeddingMatrices(corpus, dimension, taux, window=3):
-    indices, embeddings, idx = dict(), dict(), 0
-    freqDic = getFreqDic(corpus, posTag=True)
-    traindEmb = trainPosEmbWithWordToVec(corpus, dimension, window)
-    for elem in traindEmb.wv.vocab:
-        if elem.lower() in freqDic and freqDic[elem] > taux:
+def initialiseToken(indices, preTrainedEmb):
+    # weight matrix and in generating training data
+    embeddings = dict()
+    for tokenKey in indices:
+        if tokenKey in preTrainedEmb.vocab:
+            tokenIdxInVocab = np.where(preTrainedEmb.vocab == tokenKey)[0][0]
+            embeddings[tokenKey] = preTrainedEmb.vectors[tokenIdxInVocab]
+        else:
+            embeddings[tokenKey] = getRandomVector(len(embeddings.values()[0]))
+    embeddings[unk] = getRandomVector(len(preTrainedEmb.vectors[0]))
+    embeddings[number] = getRandomVector(len(preTrainedEmb.vectors[0]))
+    if not embConf["concatenation"]:
+        embeddings[empty] = getRandomVector(len(preTrainedEmb.vectors[0]))
+    return embeddings
+
+
+def getPOSEmbeddingMatrices(corpus):
+    if embConf["usePos"]:
+        indices = getPOSVocabulary(corpus)
+        logging.warn('POS vocabuary loaded!')
+
+        if initConf["oneHotPos"]:
+            embeddings =  {}
+            embConf["posEmb"] = len(indices)
+            oneHotVectors = to_categorical(indices.values(), num_classes=len(indices))
+            idx = 0
+            for v in indices.values():
+                kv = None
+                for k in indices:
+                    if indices[k] == v:
+                        kv = k
+                        break
+                if kv:
+                    embeddings[kv] = oneHotVectors[idx]
+                    idx += 1
+                else:
+                    pass
+            #embeddings = initialiseOneHotPOS(corpus, indices)
+            logging.warn('POS binary embedding initilaised!')
+            return indices, embeddings
+        elif initConf["active"] and initConf["pos"]:
+            embeddings = initialisePOS(corpus, indices)
+            logging.warn('POS embedding initilaised!')
+            return indices, embeddings
+        return indices, None
+    logging.warn('No pos vocabuary')
+    return None, None
+
+
+def initialisePOS(corpus, indices):
+    embeddings, idx = dict(), 0
+    traindEmb = trainPosEmbWithWordToVec(corpus)
+    for elem in indices:
+        if elem.lower() in traindEmb.wv.vocab:
             embeddings[elem.lower()] = traindEmb.wv[elem]
+        else:
+            embeddings[elem.lower()] = getRandomVector(embConf["posEmb"])
+    # for elem in traindEmb.wv.vocab:
+    #     if elem.lower() in indices and indices[elem] > 1:
+    #         embeddings[elem.lower()] = traindEmb.wv[elem]
+    embeddings[unk] = getRandomVector(embConf["posEmb"])
+    if not embConf["concatenation"]:
+        embeddings[empty] = getRandomVector(embConf["posEmb"])
+    return embeddings
+
+
+def getPOSVocabulary(corpus):
+    indices, idx = dict(), 0
+    freqDic = getFreqDic(corpus, posTag=True)
+    for elem in freqDic:
+        if elem in freqDic and freqDic[elem] > 1:
             indices[elem.lower()] = idx
             idx += 1
-    embeddings[unk] = getRandomVector(dimension)
     indices[unk] = idx
-    idx += 1
     if not embConf["concatenation"]:
-        embeddings[empty] = getRandomVector(dimension)
+        idx += 1
         indices[empty] = idx
-    logging.warn('{0} Pos tags'.format(len(traindEmb.wv.vocab) + 1))
-    return indices, embeddings
+    logging.warn('{0} Pos tags'.format(idx + 1))
+    return indices
 
 
 def getFreqDic(corpus, posTag=False):
@@ -312,18 +508,18 @@ def getFreqDic(corpus, posTag=False):
                 freqDic[key] = 1
             else:
                 freqDic[key] += 1
-    logging.warn('{0} frequency dic: {1}'.format('posTag' if posTag else 'token', len(freqDic)))
+    # logging.warn('{0} frequency dic: {1}'.format('posTag' if posTag else 'token', len(freqDic)))
     return freqDic
 
 
-def trainPosEmbWithWordToVec(corpus, dimension, window=3):
+def trainPosEmbWithWordToVec(corpus):
     normailsedSents = []
     for sent in corpus.trainingSents + corpus.testingSents:
         normailsedSent = []
         for token in sent.tokens:
             normailsedSent.append(token.posTag.lower())
         normailsedSents.append(normailsedSent)
-    model = gensim.models.Word2Vec(normailsedSents, size=dimension, window=window)
+    model = gensim.models.Word2Vec(normailsedSents, size=embConf["posEmb"], window=initConf["Word2VecWindow"])
     return model
 
 

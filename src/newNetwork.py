@@ -1,12 +1,12 @@
 import datetime
 
 import keras
+import numpy as np
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras.layers import Input, Dense, Flatten, Embedding
 from keras.models import Model
 from keras.utils import to_categorical
 from numpy import argmax
-import numpy as np
 
 import reports
 from reports import *
@@ -29,7 +29,8 @@ class Network:
 
     def predict(self, trans, normalizer):
         tokenIdxs, posIdxs = normalizer.getAttachedIndices(trans)
-        oneHotRep = self.model.predict([np.asarray([tokenIdxs]), np.asarray([posIdxs])], batch_size=1, verbose=configuration["model"]["predict"]["verbose"])
+        oneHotRep = self.model.predict([np.asarray([tokenIdxs]), np.asarray([posIdxs])], batch_size=1,
+                                       verbose=configuration["model"]["predict"]["verbose"])
         return argmax(oneHotRep)
 
 

@@ -15,7 +15,7 @@ try:
     reportPath = os.path.join(configuration["path"]["projectPath"], PATH_ROOT_REPORTS_DIR)
     if not os.path.isdir(reportPath):
         os.makedirs(reportPath)
-    schemaFolder =  os.path.join(reportPath, 'schemas')
+    schemaFolder = os.path.join(reportPath, 'schemas')
     if not os.path.isdir(schemaFolder):
         os.makedirs(schemaFolder)
 except OSError as e:
@@ -235,7 +235,7 @@ def saveHistory(history):
 
 def createHeader(value):
     logging.warn("*" * 40)
-    logging.warn("{0}".format(value))
+    logging.warn("Title: {0}".format(value))
     logging.warn("*" * 40)
 
 

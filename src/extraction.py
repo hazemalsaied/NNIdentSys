@@ -137,14 +137,14 @@ def extractDistance(trans):
                 s0Idx = sent.tokens.index(stackTokens[-1])
                 featSet.add('Distance(S0,B0)={0}'.format(b0Idx - s0Idx))
         if len(config.stack) > 1:
-            #print trans
+            # print trans
             s0Tokens = getTokens(config.stack[-1])
             s1Tokens = getTokens(config.stack[-1])
             if distanceConfig["s0s1"]:
                 s0Idx = sent.tokens.index(s0Tokens[0])
                 s1Idx = sent.tokens.index(s1Tokens[-1])
                 featSet.add('Distance(S0,S1)={0}'.format(s0Idx - s1Idx))
-                #print 'Distance(S0,S1)={0}'.format(s0Idx - s1Idx)
+                # print 'Distance(S0,S1)={0}'.format(s0Idx - s1Idx)
     return featSet
 
 

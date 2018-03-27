@@ -7,7 +7,7 @@ ssh nancy
 ```
 ### Lancer une expérimentation en mode passif:
 ```
-oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=5 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O out -E HUmlpErr
+oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O out -E HUmlpErr
 ```
 ```
 oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=5 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O out -E HUmlpErr

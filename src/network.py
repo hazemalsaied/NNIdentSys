@@ -1,5 +1,4 @@
 import datetime
-import logging
 
 import keras
 import matplotlib.pyplot as plt
@@ -18,7 +17,8 @@ from transitions import TransitionType
 class Network:
     def __init__(self, normalizer):
         embConf = configuration["model"]["embedding"]
-        elemNum = embConf["s0Padding"] + embConf["s1Padding"] + embConf["bPadding"]
+        paddingConf = configuration["model"]["padding"]
+        elemNum = paddingConf["s0Padding"] + paddingConf["s1Padding"] + paddingConf["bPadding"]
         concLayers, inputLayers = [], []
         if embConf["active"]:
             if embConf["concatenation"]:
@@ -26,7 +26,7 @@ class Network:
                 inputLayers.append(wordLayer)
                 concLayers.append(flattenLayer)
             else:
-                if embConf["pos"]:
+                if embConf["usePos"]:
                     posLayer, posflattenLayer = elemModule(elemNum, normalizer, usePos=True)
                     inputLayers.append(posLayer)
                     concLayers.append(posflattenLayer)
@@ -49,7 +49,7 @@ class Network:
     def predict(self, trans, normalizer):
         useEmbedding = configuration["model"]["embedding"]["active"]
         useConcatenation = configuration["model"]["embedding"]["concatenation"]
-        usePos = configuration["model"]["embedding"]["pos"]
+        usePos = configuration["model"]["embedding"]["usePos"]
         useFeatures = configuration["features"]["active"]
 
         dataEntry = normalizer.normalize(trans, useFeatures=useFeatures, useEmbedding=useEmbedding,
@@ -63,7 +63,6 @@ class Network:
 
 def train(model, normalizer, corpus):
     trainConf = configuration["model"]["train"]
-    print model.summary()
     model.compile(loss=trainConf["loss"], optimizer=trainConf["optimizer"], metrics=['accuracy'])
     bestWeightPath = reports.getBestWeightFilePath()
     callbacks = [
@@ -122,10 +121,13 @@ def elemModule(elemNum, normalizer, usePos=False, useToken=False):
     embConf = configuration["model"]["embedding"]
     name, inputDim, outputDim, weights = getInputConf(normalizer, usePos=usePos, useToken=useToken)
     wordLayer = Input(shape=(elemNum,), name=name)
-    if embConf["initialisation"]:
-        logging.warn('Weight matrix loaded')
+    if embConf["initialisation"]["active"] and ((usePos and embConf["initialisation"]["pos"])
+                                                or (useToken and embConf["initialisation"]["token"]) and not (
+                    useToken or usePos)):
+        logging.warn('Weight matrix loaded for {0}!'.format(name))
         embLayer = Embedding(inputDim, outputDim, weights=weights, trainable=True)(wordLayer)
     else:
+        logging.warn('No Weight matrix loaded for {0}!'.format(name))
         embLayer = Embedding(inputDim, outputDim)(wordLayer)
     rnnLayer = rnnModule(embLayer)
     if rnnLayer:
@@ -161,21 +163,24 @@ def getInputConf(normalizer, usePos=False, useToken=False):
     if usePos:
         name = 'pos'
         inputDim = len(normalizer.vocabulary.posIndices)
-        outputDim = normalizer.vocabulary.postagDim
-        if embConf["initialisation"]:
+        logging.warn('POS vocabulary : {0}'.format(inputDim))
+        outputDim = embConf["posEmb"]
+        if embConf["initialisation"]["active"] and embConf["initialisation"]["pos"]:
             weights = [normalizer.posWeightMatrix]
     elif useToken:
         name = 'token'
         inputDim = len(normalizer.vocabulary.tokenIndices)
-        outputDim = normalizer.vocabulary.tokenDim
-        if embConf["initialisation"]:
+        logging.warn('Token vocabulary : {0}'.format(inputDim))
+        outputDim = embConf["tokenEmb"]
+        if embConf["initialisation"]["active"] and embConf["initialisation"]["token"]:
             weights = [normalizer.tokenWeightMatrix]
     # Buffer-based Embedding Module
     else:
         name = 'words'
         inputDim = len(normalizer.vocabulary.indices)
+        logging.warn('Composite vocabulary : {0}'.format(inputDim))
         outputDim = normalizer.vocabulary.embDim
-        if embConf["initialisation"]:
+        if embConf["initialisation"]["active"]:
             weights = [normalizer.weightMatrix]
     return name, inputDim, outputDim, weights
 
