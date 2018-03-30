@@ -1,3 +1,6 @@
+import logging
+import sys
+
 import reports
 from config import configuration
 from identification import identifyV2
@@ -102,6 +105,28 @@ def exploreLexicalFeatures():
     explore(True, True, True)
 
 
+def explore(token=False, lemma=False, pos=False):
+    featConf = configuration["features"]
+    featConf["unigram"]["pos"] = pos
+    featConf["unigram"]["token"] = token
+    featConf["unigram"]["lemma"] = lemma
+    title = 'token ' if token else ''
+    title += 'lemma ' if lemma else ''
+    title += 'pos ' if pos else ''
+
+    reports.createHeader('uni: {0}'.format(title))
+    identifyV2()
+    featConf["bigram"]["active"] = True
+    reports.createHeader('uni + bi: {0}'.format(title))
+    identifyV2()
+    featConf["trigram"] = True
+    reports.createHeader('uni + bi + tri: {0}'.format(title))
+    identifyV2()
+    featConf["bigram"]["active"] = False
+    featConf["trigram"] = False
+    featConf["bigram"]["active"] = False
+
+
 def resetNonLexicalFeatures(desactivate=False):
     featConf = configuration["features"]
 
@@ -143,26 +168,8 @@ def resetFRStandardFeatures():
     featConf["history"]["3"] = False
 
 
-def explore(token=False, lemma=False, pos=False):
-    featConf = configuration["features"]
-    featConf["unigram"]["pos"] = pos
-    featConf["unigram"]["token"] = token
-    featConf["unigram"]["lemma"] = lemma
-    title = 'token ' if token else ''
-    title += 'lemma ' if lemma else ''
-    title += 'pos ' if pos else ''
-
-    reports.createHeader('uni: {0}'.format(title))
-    identifyV2()
-    featConf["bigram"]["active"] = True
-    reports.createHeader('uni + bi: {0}'.format(title))
-    identifyV2()
-    featConf["trigram"] = True
-    reports.createHeader('uni + bi + tri: {0}'.format(title))
-    identifyV2()
-    featConf["bigram"]["active"] = False
-    featConf["trigram"] = False
-    featConf["bigram"]["active"] = False
-
-
-exploreFeatures()
+if __name__ == '__main__':
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+    logging.basicConfig(level=logging.WARNING)
+    exploreFeatures()

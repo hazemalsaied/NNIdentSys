@@ -12,6 +12,9 @@ oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIden
 ```
 oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=5 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O out -E HUmlpErr
 ```
+```
+oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIdenSys/Scripts/attached-test-passive.sh -O out -E Reports/3-noPaddingPOSToken
+```
 ##Activer l'enveronnement virtuel
 ```
 source miniconda2/bin/activate
@@ -53,4 +56,7 @@ mkdir /home/halsaied/NNIdenSys/Reports
 ### Vider les caches de Theano
 ``` 
 rm -rf .theano
+```
+```
+chmod +x /home/halsaied/NNIdenSys/Scripts/deep-test-passive.sh
 ```

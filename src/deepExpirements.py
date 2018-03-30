@@ -5,6 +5,7 @@ import numpy
 
 from corpus import *
 from identification import identify, crossValidation
+from linearExpirements import resetFRStandardFeatures
 
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 
@@ -85,12 +86,12 @@ def exploreAuxFeatureImpact(denseDomain, train=False, cv=False, xpNum=5):
 
 def exploreDenseUnitNum(denseDomain, layer="dense1", train=False, cv=False, xpNum=5, title=''):
     configuration["model"]["topology"]["mlp"]["active"] = True
-    dense1Conf = configuration["model"]["topology"]["mlp"][layer]
-    dense1Conf["active"] = True
+    denseConf = configuration["model"]["topology"]["mlp"][layer]
+    denseConf["active"] = True
     for unitNum in denseDomain:
-        dense1Conf["unitNumber"] = unitNum
+        denseConf["unitNumber"] = unitNum
         xp(train=train, cv=cv, xpNum=xpNum, title='{0} + Dense {1}'.format(title, unitNum))
-    dense1Conf["active"] = False
+    denseConf["active"] = False
 
 
 def exploreRnnUnitNum(rnnDomain, train=False, cv=False, xpNum=5, title=''):
@@ -150,26 +151,35 @@ def exploreWeighMatrixImpact(train=False, cv=False, xpNum=5):
     configuration["model"]["embedding"]["tokenEmb"] = 200
     configuration["model"]["embedding"]["posEmb"] = 50
     # without weight matrix
-    xp(train=train, cv=cv, xpNum=xpNum, title='Token + POS + No initialisation')
+    # xp(train=train, cv=cv, xpNum=xpNum, title='Token + POS + No initialisation')
     configuration["model"]["embedding"]["initialisation"]["active"] = True
     # with weight matrix
-    xp(train=train, cv=cv, xpNum=xpNum, title='Token + POS + initialisation')
+    # xp(train=train, cv=cv, xpNum=xpNum, title='Token + POS + initialisation')
 
     # with maximized weight matrix
     configuration["model"]["embedding"]["frequentTokens"] = False
     configuration["model"]["embedding"]["initialisation"]["active"] = False
-    xp(train=train, cv=cv, xpNum=xpNum, title='Token POS maximized + no inisialisation')
+    # xp(train=train, cv=cv, xpNum=xpNum, title='Token POS maximized + no inisialisation')
     configuration["model"]["embedding"]["initialisation"]["active"] = True
-    xp(train=train, cv=cv, xpNum=xpNum, title='Token POS maxilized + initilaisation')
+    # xp(train=train, cv=cv, xpNum=xpNum, title='Token POS maxilized + initilaisation')
     configuration["model"]["embedding"]["frequentTokens"] = True
 
     # with lemma-based weight matrix without initialisation
     configuration["model"]["embedding"]["lemma"] = True
     configuration["model"]["embedding"]["initialisation"]["active"] = False
-    xp(train=train, cv=cv, xpNum=xpNum, title='Lemma + POS + No initialisation')
+    # xp(train=train, cv=cv, xpNum=xpNum, title='Lemma + POS + No initialisation')
     # with lemma-based weight matrix without initialisation
     configuration["model"]["embedding"]["initialisation"]["active"] = True
-    xp(train=train, cv=cv, xpNum=xpNum, title='Lemma + POS + initialisation')
+    # xp(train=train, cv=cv, xpNum=xpNum, title='Lemma + POS + initialisation')
+
+    # with maximized lemma-based weight matrix without initialisation
+    configuration["model"]["embedding"]["frequentTokens"] = False
+    configuration["model"]["embedding"]["initialisation"]["active"] = False
+    xp(train=train, cv=cv, xpNum=xpNum, title='Lemma + POS + No initialisation + Maximization')
+    # with maximized lemma-based weight matrix without initialisation
+    configuration["model"]["embedding"]["initialisation"]["active"] = True
+    xp(train=train, cv=cv, xpNum=xpNum, title='Lemma + POS + initialisation + Maximization')
+    configuration["model"]["embedding"]["frequentTokens"] = True
     configuration["model"]["embedding"]["lemma"] = False
 
 
@@ -205,14 +215,22 @@ def tokenPOSEmbImpact():
     exploreTokenPosEmbImpact([25, 50, 100, 150, 200, 250, 300], train=True, xpNum=10, usePos=False)
     configuration["model"]["embedding"]["tokenEmb"] = 50
     exploreTokenPosEmbImpact([8, 16, 24, 32, 40, 48, 56], train=True, xpNum=10, usePos=True)
-
-
-def exploreDense1Impact():
-    configuration["model"]["embedding"]["active"] = True
-    configuration["model"]["embedding"]["usePos"] = True
+    configuration["model"]["embedding"]["tokenEmb"] = 100
+    exploreTokenPosEmbImpact([8, 16, 24, 32, 40, 48, 56], train=True, xpNum=10, usePos=True)
+    configuration["model"]["embedding"]["tokenEmb"] = 150
+    exploreTokenPosEmbImpact([8, 16, 24, 32, 40, 48, 56], train=True, xpNum=10, usePos=True)
     configuration["model"]["embedding"]["tokenEmb"] = 200
-    configuration["model"]["embedding"]["posEmb"] = 50
-    exploreDenseUnitNum([32, 64, 128, 256, 512, 1024], train=True, title='')
+    exploreTokenPosEmbImpact([8, 16, 24, 32, 40, 48, 56], train=True, xpNum=10, usePos=True)
+
+
+def exploreDenseImpact(domain, train=False, cv=False, xpNum=5):
+    desactivateMainConf()
+    embConf = configuration["model"]["embedding"]
+    embConf["active"] = True
+    embConf["usePos"] = True
+    configuration["model"]["embedding"]["posEmb"] = 24
+    configuration["model"]["embedding"]["tokenEmb"] = 50
+    exploreDenseUnitNum(domain, train=train, cv=cv, xpNum=xpNum, title='Token + POS')
 
 
 def exploreBinaryPOSEmb(domain, train=False, cv=False, xpNum=5, title=''):
@@ -228,12 +246,30 @@ def exploreBinaryPOSEmb(domain, train=False, cv=False, xpNum=5, title=''):
         xp(train=train, cv=cv, xpNum=xpNum, title='{0} Token {1}+ Binary POS Emb '.format(title, embDim))
 
 
-reload(sys)
-sys.setdefaultencoding('utf8')
-logging.basicConfig(level=logging.WARNING)
+def exploreStandardXP(train=False, cv=False, xpNum=5):
+    desactivateMainConf()
+    embConf = configuration["model"]["embedding"]
+    embConf["active"] = True
+    embConf["usePos"] = True
+    configuration["model"]["embedding"]["posEmb"] = 25
+    configuration["model"]["embedding"]["tokenEmb"] = 200
+    configuration["model"]["topology"]["mlp"]["active"] = True
+    denseConf = configuration["model"]["topology"]["mlp"]["dense1"]
+    denseConf["active"] = True
+    denseConf["unitNumber"] = 256
+    configuration["features"]["active"] = True
+    resetFRStandardFeatures()
+    xp(train=train, xpNum=xpNum)
 
+
+if __name__ == '__main__':
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+    logging.basicConfig(level=logging.WARNING)
+    exploreStandardXP(train=True, xpNum=10)
+
+# exploreDenseImpact([16, 32, 64, 128, 256, 512, 1024], train=True, xpNum=10)
 # tokenPOSEmbImpact()
 # exploreWeighMatrixImpact(train=True)
 # exploreDense1Impact()
 
-exploreBinaryPOSEmb([25, 50, 100, 150, 200], train=True)

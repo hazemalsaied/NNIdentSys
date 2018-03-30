@@ -22,15 +22,16 @@ class Vocabulary:
         initConf = configuration["model"]["embedding"]["initialisation"]
 
         if not configuration["model"]["padding"]:
+            self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
             logging.warn('No padding used. Concatenated tokens: {0} Concatenated POS: {1}'.
                          format(len(self.attachedTokens), len(self.attachedPos)))
-            self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
 
-        self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus)
-        self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus)
-        self.indices, self.embeddings = self.getEmbeddingMatrices(corpus)
-        self.embDim = embConf["tokenEmb"] + embConf["posEmb"] if embConf["concatenation"] or embConf["usePos"] else \
-            embConf["tokenEmb"]
+        else:
+            self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus)
+            self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus)
+            self.indices, self.embeddings = self.getEmbeddingMatrices(corpus)
+            self.embDim = embConf["tokenEmb"] + embConf["posEmb"] if embConf["concatenation"] or embConf["usePos"] else \
+                embConf["tokenEmb"]
 
     def getEmbeddingMatrices(self, corpus):
         shouldInit = initConf["active"]
@@ -260,8 +261,8 @@ class Vocabulary:
             posVocab[k] = idx
             idx += 1
 
-        logging.warn('Token Vocabulary : {0}'.format(len(self.attachedTokens)))
-        logging.warn('POS Vocabulary : {0}'.format(len(self.attachedPos)))
+        logging.warn('Token Vocabulary : {0}'.format(len(tokenVocab)))
+        logging.warn('POS Vocabulary : {0}'.format(len(posVocab)))
         return tokenVocab, posVocab
 
     def getAttachedIndices(self, tokens):

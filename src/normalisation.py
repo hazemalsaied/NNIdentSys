@@ -71,7 +71,8 @@ class Normalizer:
         return np.asarray(labels), data
 
     def generateLearningDataAttached(self, corpus):
-        labels, tokenData, posData = [], [], []
+        labels, tokenData, posData, featureData = [], [], [], []
+        useFeatures = configuration["features"]["active"]
         for sent in corpus.trainingSents:
             trans = sent.initialTransition
             while trans.next:
@@ -79,9 +80,14 @@ class Normalizer:
                 tokenData.append(np.asarray(tokenIdxs))
                 posData.append(np.asarray(posIdxs))
                 # data.append(np.asarray([tokenIdxs, posIdxs]))
+                if useFeatures:
+                    features = np.asarray(self.nnExtractor.vectorize(trans))
+                    featureData.append(np.asarray(features))
                 labels = np.append(labels, trans.next.type.value)
                 trans = trans.next
-        return np.asarray(labels), np.asarray(tokenData), np.asarray(posData)
+        if useFeatures:
+            return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(featureData)]
+        return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
 
     def normalize(self, trans, useEmbedding=False, useConcatenation=False, usePos=False, useFeatures=False):
         results = []

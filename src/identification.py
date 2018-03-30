@@ -1,3 +1,7 @@
+import sys
+
+import numpy
+
 import linarKerasModel as lkm
 import newNetwork
 import oracle
@@ -116,21 +120,78 @@ def identifyAttached():
         evaluate(corpus)
 
 
-def getScores(path):
+def getScores(path, xpNum=5):
     titles, params, scores = [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
             paramLine = 'WARNING:root:Parameter number: '
             if line.startswith(paramLine):
-                params.append(line[len(paramLine):len(paramLine) + 8].strip())
-            scoreLine = 'WARNING:root:Ordinary : F-Score: '
+                paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
+                params.append(round(int(paramsValue) / 1000000., 2))
+            scoreLine = 'WARNING:root:Ordinary : F-Score: 0'
             if line.startswith(scoreLine):
-                scores.append(line[len(scoreLine):len(scoreLine) + 5].strip())
+                fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
+                while len(fScore) < 4:
+                    fScore = fScore + '0'
+                scores.append(round(int(fScore) / 10000., 4))
             titleLine = 'WARNING:root:Title: '
-            if line.startswith(titleLine):
-                titles.append(line[len(titleLine):len(scoreLine) + 5].strip())
-    resTxt = ''
+            if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
+                titles.append(line[len(titleLine):].strip())
+    addedItems, newScores, newTitles, newParams = 0, [], [], []
+    for i in range(1, len(scores)):
+        if addedItems == xpNum:
+            addedItems = 0
+            continue
+        newScores.append(scores[i])
+        newParams.append(params[i])
+        newTitles.append(titles[i])
+
+        addedItems += 1
+    scores = newScores
+    titles = newTitles
+    params = newParams
+
+    idx, avg, paramAvg, resTxt = 0, 0, 0, ''
+    avgTitles, avgScores, avgParams, variances, scorePopulation = [], [], [], [], []
+    for i in range(len(scores) + 1):
+        if i != 0 and i % xpNum == 0:
+            avgScores.append(round(avg / float(xpNum), 2))
+            avgParams.append((round(paramAvg / float(xpNum), 2)))
+            avgTitles.append(titles[i - 1])
+            var = round(numpy.var(scorePopulation) * 100, 2)
+            variances.append(var)
+            if i != len(scores):
+                avg = scores[i]
+                paramAvg = params[i]
+                scorePopulation = [scores[i]]
+        else:
+            avg += scores[i]
+            paramAvg += params[i]
+            scorePopulation.append(scores[i])
+    resDetailed = ''
     for i in range(len(scores)):
-        resTxt += str(scores[i]) + ',' + str(params[i]) + '\n'
-    with open('../Results/res.csv', 'w') as res:
+        resDetailed += str(titles[i]) + ',' + str(scores[i]) + ',' + str(params[i]) + '\n'
+    with open('../Reports/res1.csv', 'w') as res:
+        res.write(resDetailed)
+
+    for i in range(len(avgScores)):
+        resTxt += '{0}\t&\t{1}\t&{2}\t&{3}\t\\\\\n'.format(avgTitles[i], avgScores[i], variances[i], avgParams[i])
+    with open('../Reports/res.csv', 'w') as res:
         res.write(resTxt)
+
+
+def toNum(text, addPoint=False):
+    textBuf = ''
+    for c in text:
+        if c.isdigit():
+            textBuf += c
+    if addPoint and textBuf.strip() != '0':
+        return float(textBuf) / (pow(10, len(textBuf)))
+    return textBuf
+
+
+if __name__ == '__main__':
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+    logging.basicConfig(level=logging.WARNING)
+    getScores('../Reports/embeddingImpact2', xpNum=10)
