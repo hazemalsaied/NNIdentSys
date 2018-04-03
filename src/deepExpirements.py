@@ -266,9 +266,9 @@ if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    exploreStandardXP(train=True, xpNum=10)
-
-# exploreDenseImpact([16, 32, 64, 128, 256, 512, 1024], train=True, xpNum=10)
+    # exploreStandardXP(train=True, xpNum=10)
+    configuration["features"]["active"] = True
+    exploreDenseImpact([16, 32, 64, 96, 128, 160, 256, 512], train=True, xpNum=10)
 # tokenPOSEmbImpact()
 # exploreWeighMatrixImpact(train=True)
 # exploreDense1Impact()

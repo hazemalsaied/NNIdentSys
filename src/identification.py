@@ -120,12 +120,13 @@ def identifyAttached():
         evaluate(corpus)
 
 
-def getScores(path, xpNum=5):
+def getScores(newFile, xpNum=5, getTitle=True, getParams=True):
+    path ='../Reports/{0}'.format(newFile)
     titles, params, scores = [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
             paramLine = 'WARNING:root:Parameter number: '
-            if line.startswith(paramLine):
+            if getParams and line.startswith(paramLine):
                 paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
                 params.append(round(int(paramsValue) / 1000000., 2))
             scoreLine = 'WARNING:root:Ordinary : F-Score: 0'
@@ -135,7 +136,7 @@ def getScores(path, xpNum=5):
                     fScore = fScore + '0'
                 scores.append(round(int(fScore) / 10000., 4))
             titleLine = 'WARNING:root:Title: '
-            if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
+            if getTitle and line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
                 titles.append(line[len(titleLine):].strip())
     addedItems, newScores, newTitles, newParams = 0, [], [], []
     for i in range(1, len(scores)):
@@ -143,40 +144,55 @@ def getScores(path, xpNum=5):
             addedItems = 0
             continue
         newScores.append(scores[i])
-        newParams.append(params[i])
-        newTitles.append(titles[i])
-
+        if getParams:
+            newParams.append(params[i])
+        if getTitle:
+            newTitles.append(titles[i])
         addedItems += 1
     scores = newScores
-    titles = newTitles
-    params = newParams
+    if getTitle :
+        titles = newTitles
+    if getParams:
+        params = newParams
 
     idx, avg, paramAvg, resTxt = 0, 0, 0, ''
-    avgTitles, avgScores, avgParams, variances, scorePopulation = [], [], [], [], []
+    avgTitles, avgScores, avgParams, variances, scorePopulation, bestScores = [], [], [], [], [], []
     for i in range(len(scores) + 1):
         if i != 0 and i % xpNum == 0:
             avgScores.append(round(avg / float(xpNum), 2))
             avgParams.append((round(paramAvg / float(xpNum), 2)))
-            avgTitles.append(titles[i - 1])
+            bestScores.append(max(scorePopulation))
+            if getTitle:
+                avgTitles.append(titles[i - 1])
             var = round(numpy.var(scorePopulation) * 100, 2)
             variances.append(var)
             if i != len(scores):
                 avg = scores[i]
-                paramAvg = params[i]
+                if getParams:
+                    paramAvg = params[i]
                 scorePopulation = [scores[i]]
         else:
             avg += scores[i]
-            paramAvg += params[i]
+            if getParams:
+                paramAvg += params[i]
             scorePopulation.append(scores[i])
     resDetailed = ''
-    for i in range(len(scores)):
-        resDetailed += str(titles[i]) + ',' + str(scores[i]) + ',' + str(params[i]) + '\n'
-    with open('../Reports/res1.csv', 'w') as res:
-        res.write(resDetailed)
+    # for i in range(len(scores)):
+    #     resDetailed += str(titles[i]) + ',' + str(scores[i]) + ',' + str(params[i]) + '\n'
+    # with open('../Reports/res1.csv', 'w') as res:
+    #     res.write(resDetailed)
 
     for i in range(len(avgScores)):
-        resTxt += '{0}\t&\t{1}\t&{2}\t&{3}\t\\\\\n'.format(avgTitles[i], avgScores[i], variances[i], avgParams[i])
-    with open('../Reports/res.csv', 'w') as res:
+        if not getParams and not getTitle:
+            resTxt += '{0}\t&{1}\t&{2}\\\\\n'.format(avgScores[i], bestScores[i], variances[i])
+        elif  not getTitle:
+            resTxt += '{0}\t&{1}\t&{2}\t&{3}\t\\\\\n'.format(avgScores[i],bestScores[i], variances[i], avgParams[i])
+        elif not getParams:
+            resTxt += '{0}\t&\t{1}&\t{2}\t&{3}\\\\\n'.format(avgTitles[i], avgScores[i], bestScores[i],
+                                                                   variances[i])
+        else:
+            resTxt += '{0}\t&\t{1}&\t{2}\t&{3}\t&{4}\\\\\n'.format(avgTitles[i], avgScores[i],bestScores[i], variances[i], avgParams[i])
+    with open('../Reports/{0}.csv'.format(newFile), 'w') as res:
         res.write(resTxt)
 
 
@@ -194,4 +210,4 @@ if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    getScores('../Reports/embeddingImpact2', xpNum=10)
+    getScores('5-StandardXP', xpNum=10, getTitle=False, getParams=False)

@@ -96,28 +96,28 @@ def exploreDenseImpact(denseUniNumDomain, tokenEmb, posEmb, train=False, cv=Fals
 if __name__ == '__main__':
     configuration["model"]["padding"] = False
     # 1. explore token pos impact
-    exploreTokenPOSImpact([25, 50, 75, 100, 125, 150, 175, 200], [8, 16, 24, 32, 40, 48, 56], train=True)
+    #exploreTokenPOSImpact([25, 50, 75, 100, 125, 150, 175, 200], [8, 16, 24, 32, 40, 48, 56], train=True)
 
     ## 2. Add features as input:
-    # configuration["features"]["active"] = True
-    # resetFRStandardFeatures()
-    # tokenEmb, posEmb =
-    # configuration["model"]["embedding"]["tokenEmb"] = tokenEmb
-    # configuration["model"]["embedding"]["posEmb"] = posEmb
-    # xp(train=True, title='Token {0} POS {1} Features'.format(tokenEmb, posEmb))
-    # configuration["features"]["active"] = False
+    configuration["features"]["active"] = True
+    resetFRStandardFeatures()
+    tokenEmb, posEmb = 175, 56
+    configuration["model"]["embedding"]["tokenEmb"] = tokenEmb
+    configuration["model"]["embedding"]["posEmb"] = posEmb
+    #xp(train=True, title='Token {0} POS {1} Features'.format(tokenEmb, posEmb))
+    configuration["features"]["active"] = False
 
     ## 3. Add dense to get bigram effect
-    # configuration["model"]["embedding"]["active"] = True
-    #exploreDenseImpact([32,64,96,128,160,256, 384, 512,768, 1024], tokenEmb=, posEmb=, train=True)
+    configuration["model"]["embedding"]["active"] = True
+    #exploreDenseImpact([32,64,96,128,160,256, 384, 512,768, 1024], tokenEmb=175, posEmb=56, train=True)
 
     ## 4. Standard Model: Token POS Features  Dense
-    # configuration["features"]["active"] = True
-    # tokenEmb, posEmb, denseUnitNum =
-    # configuration["model"]["embedding"]["tokenEmb"] = tokenEmb
-    # configuration["model"]["embedding"]["posEmb"] = posEmb
-    # configuration["model"]["topology"]["mlp"]["active"] = True
-    # configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
-    # configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = denseUnitNum
-    # title = 'Token {0} POS {1} Dense {2} Features'.format(tokenEmb, posEmb, denseUnitNum)
-    # xp(train=True, title=title)
+    configuration["features"]["active"] = True
+    tokenEmb, posEmb, denseUnitNum = 175, 56, 768
+    configuration["model"]["embedding"]["tokenEmb"] = tokenEmb
+    configuration["model"]["embedding"]["posEmb"] = posEmb
+    configuration["model"]["topology"]["mlp"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = True
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = denseUnitNum
+    title = 'Token {0} POS {1} Dense {2} Features'.format(tokenEmb, posEmb, denseUnitNum)
+    xp(train=True, title=title)
