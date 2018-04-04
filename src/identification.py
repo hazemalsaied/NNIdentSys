@@ -120,13 +120,13 @@ def identifyAttached():
         evaluate(corpus)
 
 
-def getScores(newFile, xpNum=5, getTitle=True, getParams=True):
-    path ='../Reports/{0}'.format(newFile)
+def mineFile(newFile):
+    path = '../Reports/{0}'.format(newFile)
     titles, params, scores = [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
             paramLine = 'WARNING:root:Parameter number: '
-            if getParams and line.startswith(paramLine):
+            if line.startswith(paramLine):
                 paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
                 params.append(round(int(paramsValue) / 1000000., 2))
             scoreLine = 'WARNING:root:Ordinary : F-Score: 0'
@@ -134,66 +134,78 @@ def getScores(newFile, xpNum=5, getTitle=True, getParams=True):
                 fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
                 while len(fScore) < 4:
                     fScore = fScore + '0'
-                scores.append(round(int(fScore) / 10000., 4))
+                scores.append(round(int(fScore) / 10000., 4) * 100)
             titleLine = 'WARNING:root:Title: '
-            if getTitle and line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
+            if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
                 titles.append(line[len(titleLine):].strip())
+    return titles, scores, params
+
+
+def clean(titles, scores, params, xpNum):
     addedItems, newScores, newTitles, newParams = 0, [], [], []
     for i in range(1, len(scores)):
         if addedItems == xpNum:
             addedItems = 0
             continue
         newScores.append(scores[i])
-        if getParams:
+        if i < len(params):
             newParams.append(params[i])
-        if getTitle:
+        if i < len(titles):
             newTitles.append(titles[i])
         addedItems += 1
-    scores = newScores
-    if getTitle :
-        titles = newTitles
-    if getParams:
-        params = newParams
+    return newTitles, newScores, newParams
 
-    idx, avg, paramAvg, resTxt = 0, 0, 0, ''
-    avgTitles, avgScores, avgParams, variances, scorePopulation, bestScores = [], [], [], [], [], []
-    for i in range(len(scores) + 1):
-        if i != 0 and i % xpNum == 0:
-            avgScores.append(round(avg / float(xpNum), 2))
-            avgParams.append((round(paramAvg / float(xpNum), 2)))
-            bestScores.append(max(scorePopulation))
-            if getTitle:
-                avgTitles.append(titles[i - 1])
-            var = round(numpy.var(scorePopulation) * 100, 2)
-            variances.append(var)
-            if i != len(scores):
-                avg = scores[i]
-                if getParams:
-                    paramAvg = params[i]
-                scorePopulation = [scores[i]]
-        else:
-            avg += scores[i]
-            if getParams:
-                paramAvg += params[i]
-            scorePopulation.append(scores[i])
+
+def divide(list, subListLength):
+    stepNum, newList = len(list) / subListLength, []
+    if stepNum:
+        for i in range(stepNum):
+            newList.append(list[i * subListLength: (i + 1) * subListLength])
+        return newList
+    return None
+
+
+def getScores(newFile, xpNum=5):
+    titles, scores, params = mineFile(newFile)
+    titles, scores, params = clean(titles, scores, params, xpNum)
+    getDetailedScores(newFile, scores, titles, params)
+    getBrefScores(newFile, scores, titles, params, xpNum)
     resDetailed = ''
     # for i in range(len(scores)):
     #     resDetailed += str(titles[i]) + ',' + str(scores[i]) + ',' + str(params[i]) + '\n'
     # with open('../Reports/res1.csv', 'w') as res:
     #     res.write(resDetailed)
 
-    for i in range(len(avgScores)):
-        if not getParams and not getTitle:
-            resTxt += '{0}\t&{1}\t&{2}\\\\\n'.format(avgScores[i], bestScores[i], variances[i])
-        elif  not getTitle:
-            resTxt += '{0}\t&{1}\t&{2}\t&{3}\t\\\\\n'.format(avgScores[i],bestScores[i], variances[i], avgParams[i])
-        elif not getParams:
-            resTxt += '{0}\t&\t{1}&\t{2}\t&{3}\\\\\n'.format(avgTitles[i], avgScores[i], bestScores[i],
-                                                                   variances[i])
-        else:
-            resTxt += '{0}\t&\t{1}&\t{2}\t&{3}\t&{4}\\\\\n'.format(avgTitles[i], avgScores[i],bestScores[i], variances[i], avgParams[i])
+
+def getDetailedScores(newFile, scores, titles, params):
+    text = '\\textbf{title}\t\t&\t\t\\textbf{F}\t\t\\textbf{P}\t\t\\\\\\hline\n'
+    for i in range(len(scores)):
+        titleText = titles[i] if i < len(titles) else ''
+        paramsText = '\t\t&\t\t{0}\t'.format(params[i] if i < len(params) else '')
+        paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
+        text += '{0}\t\t&\t\t{1}{2}\\\\\n'.format(titleText, scores[i], paramsText)
+    with open('../Reports/{0}.detailed.csv'.format(newFile), 'w') as res:
+        res.write(text)
+
+
+def getBrefScores(newFile, scores, titles, params, xpNum):
+    scores = divide(scores, xpNum)
+    params = divide(params, xpNum)
+    titles = divide(titles, xpNum)
+    text = '\\textbf{title}\t\t&\t\t\\textbf{F$_{mean}$}\t\t&\t\t\\textbf{F$_{max}$}\t\t&' \
+           '\t\t\\textbf{MAD}\t\t&\t\t\\textbf{P}\t\t\\\\\\hline\n'
+    for i in range(len(scores)):
+        titleText = titles[i][0] if titles else ''
+        population = scores[i]
+        meanValue = round(numpy.mean(population), 1)
+        maxValue = round(max(population), 1)
+        mad = getMeanAbsoluteDeviation(population)
+        paramsText = '\t\t&{0}\t\t'.format(round(numpy.mean(params[i]), 3) if params else '')
+        paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
+        text += '{0}\t\t&\t\t{1}\t\t&\t\t{2}\t\t&\t\t{3}{4}\t\t\\\\\n'.format(
+            titleText, meanValue, maxValue, mad, paramsText)
     with open('../Reports/{0}.csv'.format(newFile), 'w') as res:
-        res.write(resTxt)
+        res.write(text)
 
 
 def toNum(text, addPoint=False):
@@ -206,8 +218,19 @@ def toNum(text, addPoint=False):
     return textBuf
 
 
+def getMeanAbsoluteDeviation(domain):
+    avg = numpy.mean(domain)
+    distances = []
+    for v in domain:
+        dis = v - avg
+        if dis < 0:
+            dis *= -1
+        distances.append(dis)
+    return round(sum(distances) / len(distances), 1)
+
+
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    getScores('5-StandardXP', xpNum=10, getTitle=False, getParams=False)
+    #getScores('6-DenseImpactWithFeatures', xpNum=10)

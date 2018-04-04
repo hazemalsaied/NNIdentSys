@@ -164,6 +164,39 @@ configuration = {
 
 }
 
+
+def desactivateMainConf():
+    configuration["features"]["active"] = False
+
+    configuration["model"]["topology"]["mlp"]["active"] = False
+    configuration["model"]["topology"]["rnn"]["active"] = False
+
+    configuration["model"]["embedding"]["active"] = False
+    configuration["model"]["embedding"]["initialisation"]["active"] = False
+    configuration["model"]["embedding"]["concatenation"] = False
+    configuration["model"]["embedding"]["usePos"] = False
+
+
+def setFeatureConf(active=True):
+    configuration["features"]["active"] = active
+
+
+def setDense1Conf(active=True, unitNumber=128):
+    configuration["model"]["topology"]["mlp"]["active"] = active
+    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = active
+    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = unitNumber
+
+
+def setEmbConf(active=True, useToken=True, usePos=True, tokenEmb=200, posEmb=25, init=False):
+    embConf = configuration["model"]["embedding"]
+    embConf["active"] = active
+    embConf["tokenEmb"] = tokenEmb
+    embConf["posEmb"] = posEmb
+    embConf["usePos"] = usePos
+    embConf["useToken"] = useToken
+    embConf["initialisation"]["active"] = init
+
+
 import os
 
 configuration["path"]["projectPath"] = os.path.dirname(__file__)[:-len(os.path.basename(os.path.dirname(__file__)))]

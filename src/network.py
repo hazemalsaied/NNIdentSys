@@ -69,8 +69,8 @@ def train(model, normalizer, corpus):
         ModelCheckpoint(bestWeightPath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
     ] if bestWeightPath else []
     if trainConf["earlyStop"]:
-        callbacks.append(EarlyStopping(
-            monitor='val_acc', min_delta=.5, patience=2, verbose=trainConf["verbose"]))
+        callbacks.append(EarlyStopping(monitor='val_acc', min_delta=.5,
+                                       patience=2, verbose=trainConf["verbose"]))
     time = datetime.datetime.now()
     logging.warn('Training started!')
     labels, data = normalizer.generateLearningData(corpus)

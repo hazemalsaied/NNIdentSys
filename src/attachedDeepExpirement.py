@@ -9,6 +9,7 @@ from deepExpirements import desactivateMainConf
 from identification import identifyAttached, crossValidation
 from linearExpirements import resetFRStandardFeatures
 
+
 def xp(train=False, cv=False, xpNum=10, title=''):
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
@@ -96,7 +97,7 @@ def exploreDenseImpact(denseUniNumDomain, tokenEmb, posEmb, train=False, cv=Fals
 if __name__ == '__main__':
     configuration["model"]["padding"] = False
     # 1. explore token pos impact
-    #exploreTokenPOSImpact([25, 50, 75, 100, 125, 150, 175, 200], [8, 16, 24, 32, 40, 48, 56], train=True)
+    # exploreTokenPOSImpact([25, 50, 75, 100, 125, 150, 175, 200], [8, 16, 24, 32, 40, 48, 56], train=True)
 
     ## 2. Add features as input:
     configuration["features"]["active"] = True
@@ -104,12 +105,12 @@ if __name__ == '__main__':
     tokenEmb, posEmb = 175, 56
     configuration["model"]["embedding"]["tokenEmb"] = tokenEmb
     configuration["model"]["embedding"]["posEmb"] = posEmb
-    #xp(train=True, title='Token {0} POS {1} Features'.format(tokenEmb, posEmb))
+    # xp(train=True, title='Token {0} POS {1} Features'.format(tokenEmb, posEmb))
     configuration["features"]["active"] = False
 
     ## 3. Add dense to get bigram effect
     configuration["model"]["embedding"]["active"] = True
-    #exploreDenseImpact([32,64,96,128,160,256, 384, 512,768, 1024], tokenEmb=175, posEmb=56, train=True)
+    # exploreDenseImpact([32,64,96,128,160,256, 384, 512,768, 1024], tokenEmb=175, posEmb=56, train=True)
 
     ## 4. Standard Model: Token POS Features  Dense
     configuration["features"]["active"] = True

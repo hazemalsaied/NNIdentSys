@@ -42,6 +42,7 @@ class Network:
             lastLayer = dropoutLayer
         softmax = Dense(8, activation='softmax')(lastLayer)
         self.model = Model(inputs=inputLayers, outputs=softmax)
+        logging.warn('Parameter number: {0}'.format(self.model.count_params()))
         print self.model.summary()
 
     def predict(self, trans, normalizer):
