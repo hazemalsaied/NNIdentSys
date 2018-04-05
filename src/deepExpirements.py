@@ -1,12 +1,11 @@
-import random
 import sys
 
 import numpy
 
+from config import *
 from corpus import *
 from identification import identify, crossValidation
 from linearExpirements import resetFRStandardFeatures
-from config import *
 
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 
@@ -204,8 +203,6 @@ def exploreBatchSizeImpact(domain, train=False, cv=False, xpNum=5, title=''):
     configuration["model"]["train"]["batchSize"] = 128
 
 
-
-
 def tokenPOSEmbImpact():
     exploreTokenPosEmbImpact([25, 50, 100, 150, 200, 250, 300], train=True, xpNum=10, usePos=False)
     configuration["model"]["embedding"]["tokenEmb"] = 50
@@ -257,8 +254,6 @@ def exploreStandardXP(train=False, cv=False, xpNum=5):
     xp(train=train, xpNum=xpNum)
 
 
-
-
 def table3(train=False, cv=False, xpNum=10):
     desactivateMainConf()
     setFeatureConf()
@@ -274,7 +269,7 @@ def table3(train=False, cv=False, xpNum=10):
     setDense1Conf(unitNumber=256)
     xp(train=train, cv=cv, xpNum=xpNum, title='Features Token 200 Dense 256')
     setDense1Conf(active=False)
-    setEmbConf(usePos=False,init=True)
+    setEmbConf(usePos=False, init=True)
     xp(train=train, cv=cv, xpNum=xpNum, title='Features Token 200 Init')
     setEmbConf(usePos=True, init=False)
     xp(train=train, cv=cv, xpNum=xpNum, title='Features Token 200 POS 25')
@@ -288,12 +283,30 @@ def table3(train=False, cv=False, xpNum=10):
     setDense1Conf(unitNumber=256)
     xp(train=train, cv=cv, xpNum=xpNum, title='Features Token 200 POS 25 Dense 256')
 
+def exploreEarlyStopParams(train=False, cv=False, xpNum=10):
+    desactivateMainConf()
+    setFeatureConf()
+    setDense1Conf()
+    setEmbConf()
+    trainConf = configuration["model"]["train"]
+    # monitor :  val_loss
+    trainConf["monitor"] = 'val_loss'
+    minDeltaDomain = [.3,.2,.1,.05,.01]
+    for minDelta in minDeltaDomain:
+        trainConf["minDelta"] = minDelta
+        xp(train=train, cv=cv, xpNum=xpNum)
+    trainConf["monitor"] = 'val_acc'
+    for minDelta in minDeltaDomain:
+        trainConf["minDelta"] = minDelta
+        xp(train=train, cv=cv, xpNum=xpNum)
 
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    table3(train=True)
+    # sys.stdout.write('hazem\n')
+    #exploreEarlyStopParams(train=True)
+    table3(train=True, xpNum=10)
     # exploreStandardXP(train=True, xpNum=10)
     # configuration["features"]["active"] = True
     # exploreDenseImpact([16, 32, 64, 96, 128, 160, 256, 512], train=True, xpNum=10)

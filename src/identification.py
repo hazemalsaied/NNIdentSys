@@ -5,7 +5,7 @@ import numpy
 import linarKerasModel as lkm
 import newNetwork
 import oracle
-import v2classification as v2
+import linearModel
 from corpus import *
 from evaluation import evaluate
 from network import Network, train
@@ -103,8 +103,8 @@ def identifyV2():
         logging.warn('Language: {0}'.format(lang))
         corpus = Corpus(lang)
         oracle.parse(corpus)
-        clf, vec = v2.train(corpus)
-        v2.parse(corpus, clf, vec)
+        clf, vec = linearModel.train(corpus)
+        linearModel.parse(corpus, clf, vec)
         evaluate(corpus)
         logging.warn('*' * 20)
 
@@ -192,7 +192,7 @@ def getBrefScores(newFile, scores, titles, params, xpNum):
     scores = divide(scores, xpNum)
     params = divide(params, xpNum)
     titles = divide(titles, xpNum)
-    text = '\\textbf{title}\t\t&\t\t\\textbf{F$_{mean}$}\t\t&\t\t\\textbf{F$_{max}$}\t\t&' \
+    text = '\\textbf{title}\t&\t\\textbf{F$_{mean}$}\t&\t\\textbf{F$_{max}$}\t&' \
            '\t\t\\textbf{MAD}\t\t&\t\t\\textbf{P}\t\t\\\\\\hline\n'
     for i in range(len(scores)):
         titleText = titles[i][0] if titles else ''
@@ -218,6 +218,7 @@ def toNum(text, addPoint=False):
     return textBuf
 
 
+
 def getMeanAbsoluteDeviation(domain):
     avg = numpy.mean(domain)
     distances = []
@@ -233,4 +234,4 @@ if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    #getScores('6-DenseImpactWithFeatures', xpNum=10)
+    getScores('8-earlyStoppingErr', xpNum=10)

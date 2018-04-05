@@ -63,16 +63,16 @@ def train(model, normalizer, corpus):
     model.compile(loss=trainConf["loss"], optimizer=trainConf["optimizer"], metrics=['accuracy'])
     bestWeightPath = reports.getBestWeightFilePath()
     callbacks = [
-        ModelCheckpoint(bestWeightPath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+        ModelCheckpoint(bestWeightPath, monitor=trainConf["monitor"], verbose=1, save_best_only=True, mode='max')
     ] if bestWeightPath else []
     if trainConf["earlyStop"]:
         callbacks.append(EarlyStopping(
-            monitor='val_acc', min_delta=.5, patience=2, verbose=trainConf["verbose"]))
+            monitor=trainConf["monitor"], min_delta=.5, patience=2, verbose=trainConf["verbose"]))
     time = datetime.datetime.now()
     logging.warn('Training started!')
     labels, data = normalizer.generateLearningDataAttached(corpus)
     labels = to_categorical(labels, num_classes=len(TransitionType))
-    model.fit(data, labels, validation_split=0.2,
+    model.fit(data, labels, validation_split=trainConf["validationSplit"],
               epochs=trainConf["epochs"],
               batch_size=trainConf["batchSize"],
               verbose=trainConf["verbose"],

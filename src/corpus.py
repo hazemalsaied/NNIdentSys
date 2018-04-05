@@ -3,6 +3,8 @@
 import itertools
 import logging
 import os
+import pickle
+import random
 
 import reports
 # from config from config import configuration
@@ -45,6 +47,8 @@ class Corpus:
         self.text = self.toText()
         self.orderParentVMWEs()
         if not configuration["evaluation"]["cv"]["active"]:
+            self.shuffleSent()
+            self.distributeSent()
             self.getTrainAndTest()
             self.extractDictionaries()
 
@@ -151,7 +155,7 @@ class Corpus:
             logging.warn('Debug mode: train: {0}, test:{1}'.format(len(self.trainingSents),
                                                                    len(self.testingSents)))
         elif evalConfig["train"]:
-            pointer = int(len(self.trainDataSet) * 0.8)
+            pointer = int(len(self.trainDataSet) * (1 - evalConfig["test"]))
             self.trainingSents = self.trainDataSet[:pointer]
             self.testingSents = self.trainDataSet[pointer:]
             logging.warn('Development mode: train: {0}, test:{1}'.format(len(self.trainingSents),
@@ -162,6 +166,29 @@ class Corpus:
             self.testingSents = self.testDataSet
             logging.warn('Experiment mode: corpus: {0}, test:{1}'.format(len(self.trainingSents),
                                                                          len(self.testingSents)))
+
+    def distributeSent(self):
+        if configuration["evaluation"]["shuffleTrain"]:
+            return
+        idxDic = loadObj('idxDic')
+        newTrainingSentSet = []
+        for key in idxDic.keys():
+            newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
+        self.trainDataSet = newTrainingSentSet
+
+    def shuffleSent(self):
+        if not configuration["evaluation"]["shuffleTrain"]:
+            return
+        idxDic = dict()
+        idxList = range(len(self.trainDataSet))
+        random.shuffle(idxList)
+        for i in range(len(self.trainDataSet)):
+            idxDic[i] = idxList[i]
+        newTrainingSentSet = []
+        for key in idxDic.keys():
+            newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
+        self.trainDataSet = newTrainingSentSet
+        saveObj(idxDic, 'idxDic')
 
     def analyzeSents(self):
         for sent in self.trainDataSet:
@@ -665,6 +692,16 @@ class Token:
                 else:
                     parentTxt += str(par.id)
         return str(self.position) + ' : ' + self.text + ' : ' + self.posTag + parentTxt + '\n'
+
+
+def saveObj(obj, name):
+    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/' + name + '.pkl'), 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+
+def loadObj(name):
+    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/' + name + '.pkl'), 'rb') as f:
+        return pickle.load(f)
 
 
 def readConlluFile(conlluFile):

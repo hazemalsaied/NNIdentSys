@@ -2,7 +2,7 @@ import logging
 import sys
 
 import reports
-from config import configuration
+from config import configuration, resetFRStandardFeatures
 from identification import identifyV2
 
 
@@ -147,25 +147,6 @@ def resetNonLexicalFeatures(desactivate=False):
     featConf["unigram"]["lemma"] = desactivate
 
 
-def resetFRStandardFeatures():
-    featConf = configuration["features"]
-
-    featConf["unigram"]["token"] = True
-    featConf["unigram"]["pos"] = True
-    featConf["unigram"]["lemma"] = True
-    featConf["syntax"]["active"] = True
-    featConf["syntax"]["abstract"] = True
-    featConf["bigram"]["s0b2"] = True
-    featConf["bigram"]["active"] = True
-    featConf["trigram"] = False
-    featConf["distance"]["s0b0"] = True
-    featConf["distance"]["s0s1"] = True
-    featConf["stackLength"] = False
-    featConf["unigram"]["b1"] = True
-    featConf["dictionary"]["active"] = True
-    featConf["history"]["1"] = False
-    featConf["history"]["2"] = False
-    featConf["history"]["3"] = False
 
 
 if __name__ == '__main__':

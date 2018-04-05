@@ -3,16 +3,17 @@ configuration = {
         "train": False,
         "cv": {"active": False,
                "currentIter": -1,
-               "cvFolds": 5
+               "cvFolds": 5,
                },
         "corpus": False,
         "dataset": "train",
         "debug": True,
         "debugTrainNum": 200,
-        "validation": 0.2,
+        "test": 0.1,
         "load": False,
         "save": False,
-        "cluster": True
+        "cluster": True,
+        "shuffleTrain": False
     },
     "preprocessing": {
         "data": {
@@ -83,7 +84,10 @@ configuration = {
             "batchSize": 128,
             "epochs": 15,
             "earlyStop": True,
-            "chickPoint": False
+            "chickPoint": False,
+            "validationSplit": .1,
+            "monitor": 'val_loss',
+            "minDelta": .1
         },
         "predict": {
             "verbose": 0
@@ -116,9 +120,9 @@ configuration = {
             "s0TokensAreMWE": False
         },
         "history": {
-            "1": True,
-            "2": True,
-            "3": True
+            "1": False,
+            "2": False,
+            "3": False
         }, "stackLength": True,
         "distance": {
             "s0s1": True,
@@ -169,6 +173,7 @@ def desactivateMainConf():
     configuration["features"]["active"] = False
 
     configuration["model"]["topology"]["mlp"]["active"] = False
+    configuration["model"]["topology"]["mlp"]["dense1"] = False
     configuration["model"]["topology"]["rnn"]["active"] = False
 
     configuration["model"]["embedding"]["active"] = False
@@ -177,7 +182,29 @@ def desactivateMainConf():
     configuration["model"]["embedding"]["usePos"] = False
 
 
+def resetFRStandardFeatures():
+    featConf = configuration["features"]
+
+    featConf["unigram"]["token"] = True
+    featConf["unigram"]["pos"] = True
+    featConf["unigram"]["lemma"] = True
+    featConf["syntax"]["active"] = True
+    featConf["syntax"]["abstract"] = True
+    featConf["bigram"]["s0b2"] = True
+    featConf["bigram"]["active"] = True
+    featConf["trigram"] = False
+    featConf["distance"]["s0b0"] = True
+    featConf["distance"]["s0s1"] = True
+    featConf["stackLength"] = False
+    featConf["unigram"]["b1"] = True
+    featConf["dictionary"]["active"] = True
+    featConf["history"]["1"] = False
+    featConf["history"]["2"] = False
+    featConf["history"]["3"] = False
+
+
 def setFeatureConf(active=True):
+    resetFRStandardFeatures()
     configuration["features"]["active"] = active
 
 

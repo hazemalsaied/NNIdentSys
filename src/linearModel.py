@@ -6,8 +6,7 @@ from sklearn.multiclass import OutputCodeClassifier
 from sklearn.svm import LinearSVC
 
 from transitions import *
-from v2extraction import extract
-from v2extraction import getFeatures
+from linearFeatures import extract, getFeatures
 
 
 def train(corpus):

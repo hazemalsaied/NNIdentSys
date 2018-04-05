@@ -66,20 +66,27 @@ def train(model, normalizer, corpus):
     model.compile(loss=trainConf["loss"], optimizer=trainConf["optimizer"], metrics=['accuracy'])
     bestWeightPath = reports.getBestWeightFilePath()
     callbacks = [
-        ModelCheckpoint(bestWeightPath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+        ModelCheckpoint(bestWeightPath, monitor=trainConf["monitor"], verbose=1, save_best_only=True, mode='max')
     ] if bestWeightPath else []
     if trainConf["earlyStop"]:
-        callbacks.append(EarlyStopping(monitor='val_acc', min_delta=.5,
+        callbacks.append(EarlyStopping(monitor=trainConf["monitor"], min_delta=trainConf["minDelta"],
                                        patience=2, verbose=trainConf["verbose"]))
     time = datetime.datetime.now()
     logging.warn('Training started!')
     labels, data = normalizer.generateLearningData(corpus)
     labels = to_categorical(labels, num_classes=len(TransitionType))
-    history = model.fit(data, labels, validation_split=0.2,
+    history = model.fit(data, labels, validation_split=trainConf["validationSplit"],
                         epochs=trainConf["epochs"],
                         batch_size=trainConf["batchSize"],
                         verbose=trainConf["verbose"],
                         callbacks=callbacks)
+    #TODO
+    validationData = []
+    for dataTensor in data:
+        validationData.append(dataTensor[int(len(dataTensor) * (1-trainConf["validationSplit"])):])
+    validationLabel = labels[int(len(labels) * (1-trainConf["validationSplit"])):]
+    history = model.fit(validationData, validationLabel, epochs=len(history.epoch),batch_size=trainConf["batchSize"],
+                        verbose=trainConf["verbose"])
     logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
     # reports.saveHistory(history)
     if not configuration["evaluation"]["cluster"]:
