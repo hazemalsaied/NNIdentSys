@@ -47,35 +47,32 @@ configuration = {
             },
             "frequentTokens": True
         },
-        "topology": {
-            "mlp": {
-                "active": True,
-                "dense1": {
-                    "active": False,
-                    "unitNumber": 1024,
-                    "activation": "relu",
-                    "dropout": 0.2
-                },
-                "dense2": {
-                    "active": False,
-                    "unitNumber": 512,
-                    "activation": "relu",
-                    "dropout": 0.2
-                },
-                "dense3": {
-                    "active": False,
-                    "unitNumber": 512,
-                    "activation": "relu",
-                    "dropout": 0.2
-                }
-            },
-            "rnn": {
+        "mlp": {
+            "dense1": {
                 "active": False,
-                "gru": False,
-                "stacked": False,
-                "rnn1": {"unitNumber": 512},
-                "rnn2": {"unitNumber": 512}
+                "unitNumber": 1024,
+                "activation": "relu",
+                "dropout": 0.2
+            },
+            "dense2": {
+                "active": False,
+                "unitNumber": 512,
+                "activation": "relu",
+                "dropout": 0.2
+            },
+            "dense3": {
+                "active": False,
+                "unitNumber": 512,
+                "activation": "relu",
+                "dropout": 0.2
             }
+        },
+        "rnn": {
+            "active": False,
+            "gru": False,
+            "stacked": False,
+            "rnn1": {"unitNumber": 512},
+            "rnn2": {"unitNumber": 512}
         },
         "train": {
             "optimizer": "ADAM",
@@ -87,7 +84,7 @@ configuration = {
             "chickPoint": False,
             "validationSplit": .1,
             "monitor": 'val_loss',
-            "minDelta": .1
+            "minDelta": .2
         },
         "predict": {
             "verbose": 0
@@ -172,9 +169,8 @@ configuration = {
 def desactivateMainConf():
     configuration["features"]["active"] = False
 
-    configuration["model"]["topology"]["mlp"]["active"] = False
-    configuration["model"]["topology"]["mlp"]["dense1"] = False
-    configuration["model"]["topology"]["rnn"]["active"] = False
+    configuration["model"]["mlp"]["dense1"]["active"] = False
+    configuration["model"]["rnn"]["active"] = False
 
     configuration["model"]["embedding"]["active"] = False
     configuration["model"]["embedding"]["initialisation"]["active"] = False
@@ -209,18 +205,17 @@ def setFeatureConf(active=True):
 
 
 def setDense1Conf(active=True, unitNumber=128):
-    configuration["model"]["topology"]["mlp"]["active"] = active
-    configuration["model"]["topology"]["mlp"]["dense1"]["active"] = active
-    configuration["model"]["topology"]["mlp"]["dense1"]["unitNumber"] = unitNumber
+    configuration["model"]["mlp"]["dense1"]["active"] = active
+    configuration["model"]["mlp"]["dense1"]["unitNumber"] = unitNumber
 
 
 def setEmbConf(active=True, useToken=True, usePos=True, tokenEmb=200, posEmb=25, init=False):
     embConf = configuration["model"]["embedding"]
     embConf["active"] = active
-    embConf["tokenEmb"] = tokenEmb
-    embConf["posEmb"] = posEmb
-    embConf["usePos"] = usePos
     embConf["useToken"] = useToken
+    embConf["tokenEmb"] = tokenEmb
+    embConf["usePos"] = usePos
+    embConf["posEmb"] = posEmb
     embConf["initialisation"]["active"] = init
 
 

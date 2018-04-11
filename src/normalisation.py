@@ -17,18 +17,21 @@ class Normalizer:
         global embConf, initConf
         embConf = configuration["model"]["embedding"]
         initConf = embConf["initialisation"]
-        self.vocabulary = Vocabulary(corpus)
-        if initConf["active"]:
-            if embConf["concatenation"]:
-                self.weightMatrix = initMatrix(self.vocabulary)
-                del self.vocabulary.embeddings
-            else:
-                self.posWeightMatrix = initMatrix(self.vocabulary, usePos=True)
-                del self.vocabulary.posEmbeddings
+        self.nnExtractor, self.vocabulary, self.posWeightMatrix, self.weightMatrix, self.tokenWeightMatrix = \
+            None, None, None, None, None
+        if embConf["active"]:
+            self.vocabulary = Vocabulary(corpus)
+            if initConf["active"]:
+                if embConf["concatenation"]:
+                    self.weightMatrix = initMatrix(self.vocabulary)
+                    del self.vocabulary.embeddings
+                else:
+                    if embConf["usePos"]:
+                        self.posWeightMatrix = initMatrix(self.vocabulary, usePos=True)
+                        del self.vocabulary.posEmbeddings
 
-                self.tokenWeightMatrix = initMatrix(self.vocabulary, useToken=True)
-                del self.vocabulary.tokenEmbeddings
-
+                    self.tokenWeightMatrix = initMatrix(self.vocabulary, useToken=True)
+                    del self.vocabulary.tokenEmbeddings
         if configuration["features"]["active"]:
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
@@ -40,9 +43,6 @@ class Normalizer:
         useConcatenation = embConf["concatenation"]
         usePos = embConf["usePos"]
         useFeatures = configuration["features"]["active"]
-        logging.warn(
-            'Learning data generation has started with: Features: {0}; Embedding: {1}; concatenation: {2}; POS: {3}'.
-                format(useFeatures, useEmbedding, useConcatenation, usePos))
         data = None
         for sent in corpus:
             trans = sent.initialTransition
@@ -86,8 +86,14 @@ class Normalizer:
                 labels = np.append(labels, trans.next.type.value)
                 trans = trans.next
         if useFeatures:
-            return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(featureData)]
-        return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
+            if configuration["model"]["embedding"]["usePos"]:
+                return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(featureData)]
+            else:
+                return np.asarray(labels), [np.asarray(tokenData),  np.asarray(featureData)]
+        if configuration["model"]["embedding"]["usePos"]:
+            return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
+        else:
+            return np.asarray(labels), np.asarray(tokenData)
 
     def normalize(self, trans, useEmbedding=False, useConcatenation=False, usePos=False, useFeatures=False):
         results = []

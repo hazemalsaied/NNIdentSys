@@ -43,7 +43,7 @@ def train(model, corpus, normaliser):
     model.fit(data, labels, epochs=trainConf["epochs"],
               batch_size=trainConf["batchSize"],
               verbose=trainConf["verbose"])
-    logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
+    sys.stdout.write('# Training time = {0}\n'.format(datetime.datetime.now() - time))
 
 
 s0Padding = 4

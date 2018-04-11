@@ -17,23 +17,29 @@ class Network:
     def __init__(self, normalizer):
         inputLayers, concLayers = [], []
         inputToken = Input((4,))
-        inputPos = Input((4,))
         inputLayers.append(inputToken)
-        inputLayers.append(inputPos)
         tokenEmb = configuration["model"]["embedding"]["tokenEmb"]
-        posEmb = configuration["model"]["embedding"]["posEmb"]
         tokenEmb = Embedding(len(normalizer.vocabulary.attachedTokens), tokenEmb)(inputToken)
-        posEmb = Embedding(len(normalizer.vocabulary.attachedPos), posEmb)(inputPos)
         tokenFlatten = Flatten()(tokenEmb)
-        posFlatten = Flatten()(posEmb)
         concLayers.append(tokenFlatten)
-        concLayers.append(posFlatten)
+
+        if configuration["model"]["embedding"]["usePos"]:
+            inputPos = Input((4,))
+            inputLayers.append(inputPos)
+            posEmb = configuration["model"]["embedding"]["posEmb"]
+            posEmb = Embedding(len(normalizer.vocabulary.attachedPos), posEmb)(inputPos)
+            posFlatten = Flatten()(posEmb)
+            concLayers.append(posFlatten)
+
         if configuration["features"]["active"]:
             featureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='Features')
             inputLayers.append(featureLayer)
             concLayers.append(featureLayer)
-        conc = keras.layers.concatenate(concLayers)
-        mlpConf = configuration["model"]["topology"]["mlp"]
+        if len(concLayers) > 1:
+            conc = keras.layers.concatenate(concLayers)
+        else:
+            conc = concLayers[0]
+        mlpConf = configuration["model"]["mlp"]
         lastLayer = conc
         dense1Conf = mlpConf["dense1"]
         if dense1Conf["active"]:
@@ -42,14 +48,15 @@ class Network:
             lastLayer = dropoutLayer
         softmax = Dense(8, activation='softmax')(lastLayer)
         self.model = Model(inputs=inputLayers, outputs=softmax)
-        logging.warn('Parameter number: {0}'.format(self.model.count_params()))
+        sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
         print self.model.summary()
 
     def predict(self, trans, normalizer):
         inputs = []
         tokenIdxs, posIdxs = normalizer.getAttachedIndices(trans)
         inputs.append(np.asarray([tokenIdxs]))
-        inputs.append(np.asarray([posIdxs]))
+        if configuration["model"]["embedding"]["usePos"]:
+            inputs.append(np.asarray([posIdxs]))
         if configuration["features"]["active"]:
             features = np.asarray(normalizer.nnExtractor.vectorize(trans))
             inputs.append(np.asarray([features]))
@@ -67,9 +74,8 @@ def train(model, normalizer, corpus):
     ] if bestWeightPath else []
     if trainConf["earlyStop"]:
         callbacks.append(EarlyStopping(
-            monitor=trainConf["monitor"], min_delta=.5, patience=2, verbose=trainConf["verbose"]))
+            monitor=trainConf["monitor"], min_delta=trainConf["minDelta"], patience=2, verbose=trainConf["verbose"]))
     time = datetime.datetime.now()
-    logging.warn('Training started!')
     labels, data = normalizer.generateLearningDataAttached(corpus)
     labels = to_categorical(labels, num_classes=len(TransitionType))
     model.fit(data, labels, validation_split=trainConf["validationSplit"],
@@ -77,4 +83,4 @@ def train(model, normalizer, corpus):
               batch_size=trainConf["batchSize"],
               verbose=trainConf["verbose"],
               callbacks=callbacks)
-    logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
+    sys.stdout.write('# Training time = {0}\n'.format(datetime.datetime.now() - time))

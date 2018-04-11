@@ -1,7 +1,7 @@
 from __future__ import division
 
-import logging
 import os
+import sys
 
 import reports
 from config import configuration
@@ -99,7 +99,7 @@ def calculateScores(tp, p, t, title):
     """
     if p == 0 or t == 0 or tp == 0:
         if title == 'Ordinary':
-            logging.warn('{0} : F-Score: {1}, Recall: {2}, Precision: {3}'.format(title, 0, 0, 0))
+            sys.stdout.write('# F-Score({0}) = {1}, Recall: {2}, Precision: {3}\n'.format(title, 0, 0, 0))
         return ['', 0, 0, 0]
 
     p = float(tp / p)
@@ -108,8 +108,7 @@ def calculateScores(tp, p, t, title):
     f = round(2 * (r * p) / (r + p), 3)
     r = round(r, 3)
     p = round(p, 3)
-    logging.warn('{0} : F-Score: {1}, Recall: {2}, Precision: {3}'.format(title, f, r, p))
-
+    sys.stdout.write('# F-Score({0}) = {1}, Recall: {2}, Precision: {3}\n'.format(title, f, r, p))
     return [title, f, r, p]
 
 

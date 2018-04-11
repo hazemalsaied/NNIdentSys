@@ -5,6 +5,7 @@ import logging
 import os
 import pickle
 import random
+import sys
 
 import reports
 # from config from config import configuration
@@ -23,7 +24,7 @@ class Corpus:
 
             This function iterate over the lines of corpus document to create the precedent ontology
         """
-        reports.createHeader('Language : {0}'.format(langName))
+        sys.stdout.write('# Language = {0}\n'.format(langName))
         self.langName = langName
         self.trainingSents, self.testingSents = [], []
         self.mweDictionary, self.mwtDictionary, self.mweTokenDictionary = dict(), dict(), dict()
@@ -150,22 +151,18 @@ class Corpus:
         evalConfig = configuration["evaluation"]
         if evalConfig["debug"]:
             debugTrainNum = evalConfig["debugTrainNum"]
-            self.trainingSents = getVMWESents(self.trainDataSet, debugTrainNum)
-            self.testingSents = getVMWESents(self.testDataSet, debugTrainNum)
-            logging.warn('Debug mode: train: {0}, test:{1}'.format(len(self.trainingSents),
-                                                                   len(self.testingSents)))
+            self.trainingSents =self.trainDataSet[:debugTrainNum]  #getVMWESents(self.trainDataSet, debugTrainNum)
+            self.testingSents = self.trainDataSet[debugTrainNum:]#getVMWESents(self.testDataSet, debugTrainNum)
         elif evalConfig["train"]:
             pointer = int(len(self.trainDataSet) * (1 - evalConfig["test"]))
             self.trainingSents = self.trainDataSet[:pointer]
             self.testingSents = self.trainDataSet[pointer:]
-            logging.warn('Development mode: train: {0}, test:{1}'.format(len(self.trainingSents),
-                                                                         len(self.testingSents)))
-
         elif evalConfig["corpus"]:
             self.trainingSents = self.trainDataSet
             self.testingSents = self.testDataSet
-            logging.warn('Experiment mode: corpus: {0}, test:{1}'.format(len(self.trainingSents),
-                                                                         len(self.testingSents)))
+
+        sys.stdout.write('# Train = {0}\n'.format(len(self.trainingSents)))
+        sys.stdout.write('# Test = {0}\n'.format(len(self.testingSents)))
 
     def distributeSent(self):
         if configuration["evaluation"]["shuffleTrain"]:
@@ -770,22 +767,17 @@ def getTrainAndTestConlluPath(path):
             os.path.join(path, trainFiles["depAuto"])):
         conlluFile = os.path.join(path, trainFiles["depAuto"])
         testConllu = os.path.join(path, testFiles["depAuto"])
-        logging.warn('Auto dep conllu files are used!')
-        return conlluFile, testConllu
-
-    if os.path.isfile(os.path.join(path, trainFiles["posAuto"])):
+    elif os.path.isfile(os.path.join(path, trainFiles["posAuto"])):
         conlluFile = os.path.join(path, trainFiles["posAuto"])
         testConllu = os.path.join(path, testFiles["posAuto"])
-        logging.warn('Auto pos conllu files are used!')
-        return conlluFile, testConllu
-
-    if os.path.isfile(os.path.join(path, trainFiles["conllu"])):
+    elif os.path.isfile(os.path.join(path, trainFiles["conllu"])):
         conlluFile = os.path.join(path, trainFiles["conllu"])
         testConllu = os.path.join(path, testFiles["conllu"])
-        logging.warn('Conllu files are used!')
-        return conlluFile, testConllu
-    logging.warn('No conllu files are used!')
-    return None, None
+    else:
+        conlluFile, testConllu = None, None
+    sys.stdout.write('# Train file = {0}\n'.format(conlluFile.split('/')[-1]))
+    sys.stdout.write('# Test file = {0}\n'.format(testConllu.split('/')[-1]))
+    return conlluFile, testConllu
 
 
 def readMWEFile(mweFile):

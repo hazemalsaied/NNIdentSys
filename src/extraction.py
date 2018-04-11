@@ -1,4 +1,4 @@
-import logging
+import sys
 
 import numpy as np
 
@@ -25,7 +25,7 @@ class Extractor:
             featSet.update(extractSent(sent))
         self.featList = list(featSet)
         self.featureNum = len(self.featList)
-        logging.warn('Extracted feature number: {0}'.format(self.featureNum))
+
 
     def vectorize(self, trans):
         result = np.zeros(self.featureNum, dtype='int32')

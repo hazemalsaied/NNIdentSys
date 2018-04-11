@@ -1,4 +1,4 @@
-import logging
+import sys
 from datetime import datetime
 
 from sklearn.feature_extraction import DictVectorizer
@@ -15,11 +15,11 @@ def train(corpus):
 
     vec = DictVectorizer()
     features = vec.fit_transform(featureDicss)
-    logging.warn('Feature number: {0}'.format(len(vec.vocabulary_)))
+    sys.stdout.write('# Feature number = {0}\n'.format(len(vec.vocabulary_)))
     clf = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=0)
-    logging.warn('Training has started, SVM Output Code Classifier is used!')
+    sys.stdout.write('# model = LinearSVC\n')
     clf.fit(features, labels)
-    logging.warn('Training is over, it has taken {0} minutes!'.format(str(datetime.now().minute - startTime.minute)))
+    sys.stdout.write('# Training time = {0} minutes!\n'.format(str(datetime.now().minute - startTime.minute)))
     return clf, vec
 
 
@@ -27,8 +27,6 @@ def parse(corpus, clf, vectoeizer):
     initializeSent(corpus)
     printt, debug = False, False
     for sent in corpus.testingSents:
-        if sent.text.startswith('bei der anschlie'):
-            pass
         if len(sent.vMWEs) >= 1:
             debug = True
         sent.initialTransition = Transition(None, isInitial=True, sent=sent)

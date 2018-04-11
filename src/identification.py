@@ -1,11 +1,9 @@
-import sys
 
-import numpy
 
 import linarKerasModel as lkm
+import linearModel
 import newNetwork
 import oracle
-import linearModel
 from corpus import *
 from evaluation import evaluate
 from network import Network, train
@@ -16,18 +14,20 @@ langs = ['FR']
 
 
 def identify(loadFolderPath='', load=False):
+    sys.stdout.write('*' * 20 + '\n')
+    sys.stdout.write('Deep model(Padding) \n')
     configuration["evaluation"]["load"] = load
     for lang in langs:
         corpus = Corpus(lang)
         normalizer, network = parseAndTrain(corpus, loadFolderPath)
         parse(corpus, network, normalizer)
         evaluate(corpus)
+        sys.stdout.write('*' * 20 + '\n')
 
 
 def parseAndTrain(corpus, loadFolderPath=''):
     if configuration["evaluation"]["load"]:
         normalizer = reports.loadNormalizer(loadFolderPath)
-        logging.warn('Vocabulary size:{0}'.format(len(normalizer.vocabulary.indices)))
         network = Network(normalizer)
         network.model = reports.loadModel(loadFolderPath)
     else:
@@ -35,9 +35,30 @@ def parseAndTrain(corpus, loadFolderPath=''):
             reports.createReportFolder(corpus.langName)
         oracle.parse(corpus)
         normalizer = Normalizer(corpus)
+        printReport(normalizer)
         network = Network(normalizer)
         train(network.model, normalizer, corpus)
     return normalizer, network
+
+
+def printReport(normalizer):
+    sys.stdout.write('# Padding = {0}\n'.format(configuration["model"]["padding"]))
+    embConf = configuration["model"]["embedding"]
+    sys.stdout.write('# Embedding = {0}\n'.format(embConf["active"]))
+    if embConf["active"]:
+        sys.stdout.write('# Initialisation = {0}\n'.format(embConf["initialisation"]["active"]))
+        sys.stdout.write('# Concatenation = {0}\n'.format(embConf["concatenation"]))
+        if embConf["concatenation"]:
+            sys.stdout.write('# Emb = {0}\n'.format(embConf["posEmb"] + embConf["tokenEmb"]))
+        else:
+            sys.stdout.write('# Lemma  = {0}\n'.format(embConf["lemma"]))
+            sys.stdout.write('# Token/Lemma emb = {0}\n'.format(embConf["tokenEmb"]))
+            sys.stdout.write('# POS = {0}\n'.format(embConf["usePos"]))
+            if embConf["usePos"]:
+                sys.stdout.write('# POS emb = {0}\n'.format(embConf["posEmb"]))
+    sys.stdout.write('# Features = {0}\n'.format(configuration["features"]["active"]))
+    if normalizer.nnExtractor:
+        sys.stdout.write('# Features = {0}\n'.format(normalizer.nnExtractor.featureNum))
 
 
 def crossValidation(debug=False):
@@ -81,6 +102,8 @@ def getTrainAndTestSents(corpus, testRange, trainRange):
 
 
 def identifyLinearKeras():
+    sys.stdout.write('*' * 20 + '\n')
+    sys.stdout.write('Linear model in KERAS\n')
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
     evlaConf["debug"] = False
@@ -94,144 +117,42 @@ def identifyLinearKeras():
         lkm.train(network.model, corpus, normalizer)
         parse(corpus, network, normalizer)
         evaluate(corpus)
+        sys.stdout.write('*' * 20 + '\n')
 
 
 def identifyV2():
+    sys.stdout.write('*' * 20 + '\n')
+    sys.stdout.write('Linear model\n')
     print configuration["features"]
     for lang in langs:
-        logging.warn('*' * 20)
-        logging.warn('Language: {0}'.format(lang))
         corpus = Corpus(lang)
         oracle.parse(corpus)
         clf, vec = linearModel.train(corpus)
         linearModel.parse(corpus, clf, vec)
         evaluate(corpus)
-        logging.warn('*' * 20)
+        sys.stdout.write('*' * 20 + '\n')
 
 
 def identifyAttached():
+    sys.stdout.write('*' * 20 + '\n')
+    sys.stdout.write('Deep model(No padding)\n')
     for lang in langs:
         corpus = Corpus(lang)
         oracle.parse(corpus)
         normalizer = Normalizer(corpus)
+        printReport(normalizer)
         network = newNetwork.Network(normalizer)
         newNetwork.train(network.model, normalizer, corpus)
         parse(corpus, network, normalizer)
         evaluate(corpus)
-
-
-def mineFile(newFile):
-    path = '../Reports/{0}'.format(newFile)
-    titles, params, scores = [], [], []
-    with open(path, 'r') as log:
-        for line in log.readlines():
-            paramLine = 'WARNING:root:Parameter number: '
-            if line.startswith(paramLine):
-                paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
-                params.append(round(int(paramsValue) / 1000000., 2))
-            scoreLine = 'WARNING:root:Ordinary : F-Score: 0'
-            if line.startswith(scoreLine):
-                fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
-                while len(fScore) < 4:
-                    fScore = fScore + '0'
-                scores.append(round(int(fScore) / 10000., 4) * 100)
-            titleLine = 'WARNING:root:Title: '
-            if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
-                titles.append(line[len(titleLine):].strip())
-    return titles, scores, params
-
-
-def clean(titles, scores, params, xpNum):
-    addedItems, newScores, newTitles, newParams = 0, [], [], []
-    for i in range(1, len(scores)):
-        if addedItems == xpNum:
-            addedItems = 0
-            continue
-        newScores.append(scores[i])
-        if i < len(params):
-            newParams.append(params[i])
-        if i < len(titles):
-            newTitles.append(titles[i])
-        addedItems += 1
-    return newTitles, newScores, newParams
-
-
-def divide(list, subListLength):
-    stepNum, newList = len(list) / subListLength, []
-    if stepNum:
-        for i in range(stepNum):
-            newList.append(list[i * subListLength: (i + 1) * subListLength])
-        return newList
-    return None
-
-
-def getScores(newFile, xpNum=5):
-    titles, scores, params = mineFile(newFile)
-    titles, scores, params = clean(titles, scores, params, xpNum)
-    getDetailedScores(newFile, scores, titles, params)
-    getBrefScores(newFile, scores, titles, params, xpNum)
-    resDetailed = ''
-    # for i in range(len(scores)):
-    #     resDetailed += str(titles[i]) + ',' + str(scores[i]) + ',' + str(params[i]) + '\n'
-    # with open('../Reports/res1.csv', 'w') as res:
-    #     res.write(resDetailed)
-
-
-def getDetailedScores(newFile, scores, titles, params):
-    text = '\\textbf{title}\t\t&\t\t\\textbf{F}\t\t\\textbf{P}\t\t\\\\\\hline\n'
-    for i in range(len(scores)):
-        titleText = titles[i] if i < len(titles) else ''
-        paramsText = '\t\t&\t\t{0}\t'.format(params[i] if i < len(params) else '')
-        paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
-        text += '{0}\t\t&\t\t{1}{2}\\\\\n'.format(titleText, scores[i], paramsText)
-    with open('../Reports/{0}.detailed.csv'.format(newFile), 'w') as res:
-        res.write(text)
-
-
-def getBrefScores(newFile, scores, titles, params, xpNum):
-    scores = divide(scores, xpNum)
-    params = divide(params, xpNum)
-    titles = divide(titles, xpNum)
-    text = '\\textbf{title}\t&\t\\textbf{F$_{mean}$}\t&\t\\textbf{F$_{max}$}\t&' \
-           '\t\t\\textbf{MAD}\t\t&\t\t\\textbf{P}\t\t\\\\\\hline\n'
-    for i in range(len(scores)):
-        titleText = titles[i][0] if titles else ''
-        population = scores[i]
-        meanValue = round(numpy.mean(population), 1)
-        maxValue = round(max(population), 1)
-        mad = getMeanAbsoluteDeviation(population)
-        paramsText = '\t\t&{0}\t\t'.format(round(numpy.mean(params[i]), 3) if params else '')
-        paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
-        text += '{0}\t\t&\t\t{1}\t\t&\t\t{2}\t\t&\t\t{3}{4}\t\t\\\\\n'.format(
-            titleText, meanValue, maxValue, mad, paramsText)
-    with open('../Reports/{0}.csv'.format(newFile), 'w') as res:
-        res.write(text)
-
-
-def toNum(text, addPoint=False):
-    textBuf = ''
-    for c in text:
-        if c.isdigit():
-            textBuf += c
-    if addPoint and textBuf.strip() != '0':
-        return float(textBuf) / (pow(10, len(textBuf)))
-    return textBuf
+        sys.stdout.write('*' * 20 + '\n')
 
 
 
-def getMeanAbsoluteDeviation(domain):
-    avg = numpy.mean(domain)
-    distances = []
-    for v in domain:
-        dis = v - avg
-        if dis < 0:
-            dis *= -1
-        distances.append(dis)
-    return round(sum(distances) / len(distances), 1)
 
 
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    getScores('8-earlyStoppingErr', xpNum=10)
+    #getScores('8-earlyStoppingErr', xpNum=10)

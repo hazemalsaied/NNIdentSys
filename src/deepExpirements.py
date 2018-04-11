@@ -1,5 +1,3 @@
-import sys
-
 import numpy
 
 from config import *
@@ -10,31 +8,32 @@ from linearExpirements import resetFRStandardFeatures
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 
 
-def xp(train=False, cv=False, xpNum=1, title=''):
+def xp(debug=True, train=False, cv=False, xpNum=1, title=''):
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
     global seed
     seed = 0
-    if train:
+    if debug and not train:
         ######################################
         #   Debug
         ######################################
         evlaConf["debug"] = True
         evlaConf["train"] = False
+        sys.stdout.write('Debug enabled\n')
         if title:
             reports.createHeader(title)
         identify()
+    if train:
         ######################################
         #   Train
         ######################################
         evlaConf["debug"] = False
         evlaConf["train"] = True
+        sys.stdout.write('Train enabled\n')
         for i in range(xpNum):
             numpy.random.seed(seed)
             random.seed(seed)
-            logging.warn("*" * 40)
-            logging.warn('Seed : {0}'.format(seed))
-            logging.warn("*" * 40)
+            sys.stdout.write('# Seed = {0}\n'.format(seed))
             if title:
                 reports.createHeader(title)
             identify()
@@ -45,6 +44,7 @@ def xp(train=False, cv=False, xpNum=1, title=''):
         ######################################
         #   CV Debug
         ######################################
+        sys.stdout.write('CV debug enabled\n')
         crossValidation(debug=True)
         ######################################
         #   CV
@@ -55,12 +55,34 @@ def xp(train=False, cv=False, xpNum=1, title=''):
             random.seed(seed)
             if title:
                 reports.createHeader(title)
+            sys.stdout.write('CV enabled\n')
             crossValidation()
             ######################################
             #   Load
             ######################################
             # preTrainedPath= '/home/halsaied/nancy/NNIdenSys/NNIdenSys/Reports/FR-12/12-FR-modelWeigth.hdf5'
             # identify(load=configuration["evaluation"]["load"], loadFolderPath=loadFolderPath)
+
+
+def exploreEmbImpact(tokenEmbs, posEmbs=None, useLemma=False, usePos=False, train=False, cv=False, xpNum=5, title=''):
+    embConf = configuration["model"]["embedding"]
+    embConf["active"] = True
+    embConf["usePos"] = usePos
+    embConf["lemma"] = useLemma
+    for tokenEmb in tokenEmbs:
+        if usePos:
+            for posEmb in posEmbs:
+                embConf["posEmb"] = posEmb
+                embConf["tokenEmb"] = tokenEmb
+                newtitle = 'Tokens({0}) POS({1}) {2}'.format(tokenEmb, posEmb, title)
+                xp(train=train, cv=cv, xpNum=xpNum, title=newtitle)
+        else:
+            embConf["tokenEmb"] = tokenEmb
+            newtitle = 'Tokens({0}) {1}'.format(tokenEmb, title)
+            xp(train=train, cv=cv, xpNum=xpNum, title=newtitle)
+
+    embConf["usePos"] = False
+    embConf["lemma"] = False
 
 
 def exploreTokenPosEmbImpact(domain, train=False, cv=False, xpNum=5, usePos=False):
@@ -88,18 +110,16 @@ def exploreAuxFeatureImpact(denseDomain, train=False, cv=False, xpNum=5):
 
 
 def exploreDenseUnitNum(denseDomain, layer="dense1", train=False, cv=False, xpNum=5, title=''):
-    configuration["model"]["topology"]["mlp"]["active"] = True
-    denseConf = configuration["model"]["topology"]["mlp"][layer]
+    denseConf = configuration["model"]["mlp"][layer]
     denseConf["active"] = True
     for unitNum in denseDomain:
         denseConf["unitNumber"] = unitNum
         xp(train=train, cv=cv, xpNum=xpNum, title='{0} + Dense {1}'.format(title, unitNum))
-    configuration["model"]["topology"]["mlp"]["active"] = False
     denseConf["active"] = False
 
 
 def exploreRnnUnitNum(rnnDomain, train=False, cv=False, xpNum=5, title=''):
-    rnnConf = configuration["model"]["topology"]["rnn"]["rnn1"]
+    rnnConf = configuration["model"]["rnn"]["rnn1"]
     rnnConf["active"] = True
     for unitNum in rnnDomain:
         rnnConf["unitNumber"] = unitNum
@@ -108,7 +128,7 @@ def exploreRnnUnitNum(rnnDomain, train=False, cv=False, xpNum=5, title=''):
 
 
 def xpGRU(stacked=False, gru=False, cv=False):
-    rnnConf = configuration["model"]["topology"]["rnn"]
+    rnnConf = configuration["model"]["rnn"]
     rnnConf["active"] = True
     rnnConf["gru"] = True
     rnnConf["stacked"] = True
@@ -123,7 +143,7 @@ def xpGRU(stacked=False, gru=False, cv=False):
 def exploreMLPDepth(train=False, cv=False, xpNum=5, title=''):
     pass
     # TODO
-    # mlpConfig = configuration["model"]["topology"]["mlp"]
+    # mlpConfig = configuration["model"]["mlp"]
     # reports.createHeader('Dense 2 not activated')
     # mlpConfig["dense2"]["active"] = False
     # xp(cv=cv, train=train, xpNum=xpNum)
@@ -138,7 +158,7 @@ def exploreMLPDepth(train=False, cv=False, xpNum=5, title=''):
 def exploreActivationFunImpact(train=False, cv=False, xpNum=5, title=''):
     pass
     # TODO
-    # mlpConfig = configuration["model"]["topology"]["mlp"]
+    # mlpConfig = configuration["model"]["mlp"]
     # reports.createHeader('Tahn is activated')
     # mlpConfig["dense1"]["activation"] = "tanh"
     # mlpConfig["dense2"]["activation"] = "tanh"
@@ -245,8 +265,7 @@ def exploreStandardXP(train=False, cv=False, xpNum=5):
     embConf["usePos"] = True
     configuration["model"]["embedding"]["posEmb"] = 25
     configuration["model"]["embedding"]["tokenEmb"] = 200
-    configuration["model"]["topology"]["mlp"]["active"] = True
-    denseConf = configuration["model"]["topology"]["mlp"]["dense1"]
+    denseConf = configuration["model"]["mlp"]["dense1"]
     denseConf["active"] = True
     denseConf["unitNumber"] = 256
     configuration["features"]["active"] = True
@@ -283,6 +302,7 @@ def table3(train=False, cv=False, xpNum=10):
     setDense1Conf(unitNumber=256)
     xp(train=train, cv=cv, xpNum=xpNum, title='Features Token 200 POS 25 Dense 256')
 
+
 def exploreEarlyStopParams(train=False, cv=False, xpNum=10):
     desactivateMainConf()
     setFeatureConf()
@@ -291,7 +311,7 @@ def exploreEarlyStopParams(train=False, cv=False, xpNum=10):
     trainConf = configuration["model"]["train"]
     # monitor :  val_loss
     trainConf["monitor"] = 'val_loss'
-    minDeltaDomain = [.3,.2,.1,.05,.01]
+    minDeltaDomain = [.3, .2, .1, .05, .01]
     for minDelta in minDeltaDomain:
         trainConf["minDelta"] = minDelta
         xp(train=train, cv=cv, xpNum=xpNum)
@@ -300,16 +320,38 @@ def exploreEarlyStopParams(train=False, cv=False, xpNum=10):
         trainConf["minDelta"] = minDelta
         xp(train=train, cv=cv, xpNum=xpNum)
 
+
+def tableEmb(useFeatures=False, train=False, cv=False, xpNum=10):
+    #tokenDmain = [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300]
+    #posDomain = [8, 16, 24, 32, 40, 48, 56, 64, 72]
+    tokenDmain = [25, 50, 75, 100, 125, 150]
+    posDomain = [16, 24, 32]
+    title = ''
+    desactivateMainConf()
+    if useFeatures:
+        configuration["features"]["active"] = True
+        title = 'Features '
+    setEmbConf(usePos=False, init=False)
+    exploreEmbImpact(tokenDmain, train=train, cv=cv, xpNum=xpNum, title=title)
+    exploreEmbImpact(tokenDmain, useLemma=True, train=train, cv=cv, xpNum=xpNum, title=title)
+    exploreEmbImpact(tokenDmain, posDomain, usePos=True, train=train, cv=cv, xpNum=xpNum, title=title)
+    exploreEmbImpact(tokenDmain, posDomain, usePos=True, useLemma=True, train=train, cv=cv, xpNum=xpNum, title=title)
+
+
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    # sys.stdout.write('hazem\n')
-    #exploreEarlyStopParams(train=True)
-    table3(train=True, xpNum=10)
-    # exploreStandardXP(train=True, xpNum=10)
+
+    tokenDmain = [25, 50, 75, 100, 125, 150]
+    posDomain = [8, 16, 24, 32]
+    desactivateMainConf()
+    setEmbConf(usePos=False, init=False)
+    # 1 token + POS
+    exploreEmbImpact(tokenDmain, posDomain, usePos=True, useLemma=True, train=True)
+    # 2 Lemma + POS
+    # exploreEmbImpact(tokenDmain, posDomain, useLemma=True, usePos=True, train=True)
+    # # 3 Lemma + POS + Feature
     # configuration["features"]["active"] = True
-    # exploreDenseImpact([16, 32, 64, 96, 128, 160, 256, 512], train=True, xpNum=10)
-# tokenPOSEmbImpact()
-# exploreWeighMatrixImpact(train=True)
-# exploreDense1Impact()
+    # title = 'Features '
+    # exploreEmbImpact(tokenDmain, posDomain, useLemma=True, usePos=True, train=True, title=title)

@@ -1,5 +1,5 @@
-import logging
 import os
+import sys
 from random import uniform
 
 import gensim
@@ -23,9 +23,6 @@ class Vocabulary:
 
         if not configuration["model"]["padding"]:
             self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
-            logging.warn('No padding used. Concatenated tokens: {0} Concatenated POS: {1}'.
-                         format(len(self.attachedTokens), len(self.attachedPos)))
-
         else:
             self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus)
             self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus)
@@ -37,9 +34,6 @@ class Vocabulary:
         shouldInit = initConf["active"]
         if not embConf["concatenation"]:
             return None, None
-        logging.warn('Concatenation is active')
-        if shouldInit:
-            logging.warn('Concatenation Embedding is being loaded!')
         indices, embeddings, idx = self.generateUnknownKeys()
         for sent in corpus.trainingSents + corpus.testingSents:
             for token in sent.tokens:
@@ -202,7 +196,7 @@ class Vocabulary:
         for sent in corpus:
             trans = sent.initialTransition
             for token in sent.tokens:
-                tokenTxt = token.text.lower()
+                tokenTxt = token.getTokenOrLemma()
                 if tokenTxt not in tokenVocab:
                     tokenVocab[tokenTxt] = 1
                 else:
@@ -214,7 +208,7 @@ class Vocabulary:
                     posVocab[posTxt] += 1
             while trans:
                 if trans.configuration.stack:
-                    tokens = getTokens(trans.configuration.stack[0])
+                    tokens = getTokens(trans.configuration.stack[-1])
                     if tokens and len(tokens) > 1:
                         tokenTxt, posTxt = self.attachTokens(tokens)
                         if tokenTxt not in tokenVocab:
@@ -261,8 +255,8 @@ class Vocabulary:
             posVocab[k] = idx
             idx += 1
 
-        logging.warn('Token Vocabulary : {0}'.format(len(tokenVocab)))
-        logging.warn('POS Vocabulary : {0}'.format(len(posVocab)))
+        sys.stdout.write('# Tokens vocabulary = {0}\n'.format(len(tokenVocab)))
+        sys.stdout.write('# POSs vocabulary = {0}\n'.format(len(posVocab)))
         return tokenVocab, posVocab
 
     def getAttachedIndices(self, tokens):
@@ -280,7 +274,7 @@ class Vocabulary:
     def attachTokens(self, tokens):
         tokenTxt, posTxt = '', ''
         for t in tokens:
-            tokenTxt += t.text.lower() + '_'
+            tokenTxt += t.getTokenOrLemma() + '_'
             posTxt += t.posTag + '_'
         tokenTxt = tokenTxt[:-1]
         posTxt = posTxt[:-1].lower()
@@ -327,10 +321,8 @@ def getTokenEmbeddingMatrices(corpus):
     preTrainedEmb = word2vec.load(
         os.path.join(configuration["path"]["projectPath"], configuration["files"]["embedding"]["frWac200"]))
     indices = getTokenVocabulary(corpus, preTrainedEmb)
-    logging.warn('Token vocabuary loaded!')
     if initConf["active"] and initConf["token"]:
         embeddings = initialiseToken(indices, preTrainedEmb)
-        logging.warn('Token embedding inisilaised!')
         return indices, embeddings
     return indices, None
 
@@ -383,7 +375,7 @@ def getTokenEmbeddingMatrices(corpus):
 #     if not embConf["concatenation"]:
 #         embeddings[empty] = getRandomVector(len(preTrainedEmb.vectors[0]))
 #         indices[empty] = idx
-#     logging.warn('Filtered token frequency dic: {0}'.format(len(indices)))
+#     sys.stdout.write('Filtered token frequency dic: {0}'.format(len(indices)))
 #     return indices, embeddings
 
 
@@ -415,7 +407,7 @@ def getTokenVocabulary(corpus, preTrainedEmb):
     idx += 1
     if not embConf["concatenation"]:
         indices[empty] = idx
-    # logging.warn('Filtered token frequency dic: {0}'.format(len(indices)))
+    # sys.stdout.write('Filtered token frequency dic: {0}'.format(len(indices)))
     return indices
 
 
@@ -438,10 +430,8 @@ def initialiseToken(indices, preTrainedEmb):
 def getPOSEmbeddingMatrices(corpus):
     if embConf["usePos"]:
         indices = getPOSVocabulary(corpus)
-        logging.warn('POS vocabuary loaded!')
-
         if initConf["oneHotPos"]:
-            embeddings =  {}
+            embeddings = {}
             embConf["posEmb"] = len(indices)
             oneHotVectors = to_categorical(indices.values(), num_classes=len(indices))
             idx = 0
@@ -456,15 +446,12 @@ def getPOSEmbeddingMatrices(corpus):
                     idx += 1
                 else:
                     pass
-            #embeddings = initialiseOneHotPOS(corpus, indices)
-            logging.warn('POS binary embedding initilaised!')
+            # embeddings = initialiseOneHotPOS(corpus, indices)
             return indices, embeddings
         elif initConf["active"] and initConf["pos"]:
             embeddings = initialisePOS(corpus, indices)
-            logging.warn('POS embedding initilaised!')
             return indices, embeddings
         return indices, None
-    logging.warn('No pos vocabuary')
     return None, None
 
 
@@ -496,7 +483,6 @@ def getPOSVocabulary(corpus):
     if not embConf["concatenation"]:
         idx += 1
         indices[empty] = idx
-    logging.warn('{0} Pos tags'.format(idx + 1))
     return indices
 
 
@@ -509,7 +495,7 @@ def getFreqDic(corpus, posTag=False):
                 freqDic[key] = 1
             else:
                 freqDic[key] += 1
-    # logging.warn('{0} frequency dic: {1}'.format('posTag' if posTag else 'token', len(freqDic)))
+    # sys.stdout.write('{0} frequency dic: {1}'.format('posTag' if posTag else 'token', len(freqDic)))
     return freqDic
 
 

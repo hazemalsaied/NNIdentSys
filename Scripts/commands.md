@@ -10,7 +10,7 @@ ssh nancy
 oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O out -E HUmlpErr
 ```
 ```
-oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=5 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -O out -E HUmlpErr
+oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=5 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -n HUmlpErr -O out -E HUmlpErr
 ```
 ```
 oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIdenSys/Scripts/attached-test-passive.sh -O out -E Reports/3-noPaddingPOSToken

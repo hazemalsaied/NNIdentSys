@@ -6,8 +6,7 @@ def analyzeCorporaAndOracle(langs):
     header = 'Non recognizable,Interleaving,Embedded,Distributed Embedded,Left Embedded,Right Embedded,Middle Embedded'
     analysisReport = header + '\n'
     for lang in langs:
-        logging.warn('*' * 20)
-        logging.warn('Language: {0}'.format(lang))
+        sys.stdout.write('Language = {0}\n'.format(lang))
         corpus = Corpus(lang)
         analysisReport += corpus.getVMWEReport() + '\n'
         oracle.parse(corpus)

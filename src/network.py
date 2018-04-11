@@ -42,9 +42,10 @@ class Network:
         # MLP module
         output = mlpModule(concLayer)
         self.model = Model(inputs=inputLayers, outputs=output)
-        logging.warn('Parameter number: {0}'.format(self.model.count_params()))
+        sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
         print self.model.summary()
         reports.saveNetwork(self.model)
+
 
     def predict(self, trans, normalizer):
         useEmbedding = configuration["model"]["embedding"]["active"]
@@ -72,7 +73,6 @@ def train(model, normalizer, corpus):
         callbacks.append(EarlyStopping(monitor=trainConf["monitor"], min_delta=trainConf["minDelta"],
                                        patience=2, verbose=trainConf["verbose"]))
     time = datetime.datetime.now()
-    logging.warn('Training started!')
     labels, data = normalizer.generateLearningData(corpus)
     labels = to_categorical(labels, num_classes=len(TransitionType))
     history = model.fit(data, labels, validation_split=trainConf["validationSplit"],
@@ -80,14 +80,17 @@ def train(model, normalizer, corpus):
                         batch_size=trainConf["batchSize"],
                         verbose=trainConf["verbose"],
                         callbacks=callbacks)
-    #TODO
+    # TODO
     validationData = []
-    for dataTensor in data:
-        validationData.append(dataTensor[int(len(dataTensor) * (1-trainConf["validationSplit"])):])
-    validationLabel = labels[int(len(labels) * (1-trainConf["validationSplit"])):]
-    history = model.fit(validationData, validationLabel, epochs=len(history.epoch),batch_size=trainConf["batchSize"],
+    if normalizer.inputListDimension != 1:
+        for dataTensor in data:
+            validationData.append(dataTensor[int(len(dataTensor) * (1 - trainConf["validationSplit"])):])
+    else:
+        validationData = data[int(len(data) * (1 - trainConf["validationSplit"])):]
+    validationLabel = labels[int(len(labels) * (1 - trainConf["validationSplit"])):]
+    history = model.fit(validationData, validationLabel, epochs=len(history.epoch), batch_size=trainConf["batchSize"],
                         verbose=trainConf["verbose"])
-    logging.warn('Training has taken: {0}!'.format(datetime.datetime.now() - time))
+    sys.stdout.write('# Training time = {0}!\n'.format(datetime.datetime.now() - time))
     # reports.saveHistory(history)
     if not configuration["evaluation"]["cluster"]:
         plot(history)
@@ -102,9 +105,8 @@ def lstmModule(unitNum, name, sharedEmbedding, sharedLSTM, sharedLSTM2=None):
         outputLayer = sharedLSTM(sharedEmbedding(inputLayer))
     return inputLayer, outputLayer
 
-
 def mlpModule(inputLayer):
-    mlpConf = configuration["model"]["topology"]["mlp"]
+    mlpConf = configuration["model"]["mlp"]
     lastLayer = inputLayer
     dense1Conf = mlpConf["dense1"]
     if dense1Conf["active"]:
@@ -131,10 +133,10 @@ def elemModule(elemNum, normalizer, usePos=False, useToken=False):
     if embConf["initialisation"]["active"] and ((usePos and embConf["initialisation"]["pos"])
                                                 or (useToken and embConf["initialisation"]["token"]) and not (
                     useToken or usePos)):
-        logging.warn('Weight matrix loaded for {0}!'.format(name))
+        sys.stdout.write('# {0} weight matrix = True\n'.format(name))
         embLayer = Embedding(inputDim, outputDim, weights=weights, trainable=True)(wordLayer)
     else:
-        logging.warn('No Weight matrix loaded for {0}!'.format(name))
+        sys.stdout.write('# {0} weight matrix = False\n'.format(name))
         embLayer = Embedding(inputDim, outputDim)(wordLayer)
     rnnLayer = rnnModule(embLayer)
     if rnnLayer:
@@ -144,7 +146,7 @@ def elemModule(elemNum, normalizer, usePos=False, useToken=False):
 
 
 def rnnModule(embLayer):
-    rnnConfig = configuration["model"]["topology"]["rnn"]
+    rnnConfig = configuration["model"]["rnn"]
     if rnnConfig["active"]:
         if rnnConfig["gru"]:
             if rnnConfig["stacked"]:
@@ -170,14 +172,12 @@ def getInputConf(normalizer, usePos=False, useToken=False):
     if usePos:
         name = 'pos'
         inputDim = len(normalizer.vocabulary.posIndices)
-        logging.warn('POS vocabulary : {0}'.format(inputDim))
         outputDim = embConf["posEmb"]
         if embConf["initialisation"]["active"] and embConf["initialisation"]["pos"]:
             weights = [normalizer.posWeightMatrix]
     elif useToken:
         name = 'token'
         inputDim = len(normalizer.vocabulary.tokenIndices)
-        logging.warn('Token vocabulary : {0}'.format(inputDim))
         outputDim = embConf["tokenEmb"]
         if embConf["initialisation"]["active"] and embConf["initialisation"]["token"]:
             weights = [normalizer.tokenWeightMatrix]
@@ -185,7 +185,6 @@ def getInputConf(normalizer, usePos=False, useToken=False):
     else:
         name = 'words'
         inputDim = len(normalizer.vocabulary.indices)
-        logging.warn('Composite vocabulary : {0}'.format(inputDim))
         outputDim = normalizer.vocabulary.embDim
         if embConf["initialisation"]["active"]:
             weights = [normalizer.weightMatrix]
