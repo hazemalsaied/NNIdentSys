@@ -64,7 +64,7 @@ def xp(debug=True, train=False, cv=False, xpNum=1, title=''):
             # identify(load=configuration["evaluation"]["load"], loadFolderPath=loadFolderPath)
 
 
-def exploreEmbImpact(tokenEmbs, posEmbs=None, useLemma=False, usePos=False, train=False, cv=False, xpNum=5, title=''):
+def exploreEmbImpact(tokenEmbs, posEmbs=None, useLemma=False, usePos=False, train=False, cv=False, xpNum=10, title=''):
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True
     embConf["usePos"] = usePos
@@ -85,7 +85,7 @@ def exploreEmbImpact(tokenEmbs, posEmbs=None, useLemma=False, usePos=False, trai
     embConf["lemma"] = False
 
 
-def exploreTokenPosEmbImpact(domain, train=False, cv=False, xpNum=5, usePos=False):
+def exploreTokenPosEmbImpact(domain, train=False, cv=False, xpNum=10, usePos=False):
     # desactivateMainConf()
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True
@@ -101,7 +101,7 @@ def exploreTokenPosEmbImpact(domain, train=False, cv=False, xpNum=5, usePos=Fals
         xp(train=train, cv=cv, xpNum=xpNum, title=title)
 
 
-def exploreAuxFeatureImpact(denseDomain, train=False, cv=False, xpNum=5):
+def exploreAuxFeatureImpact(denseDomain, train=False, cv=False, xpNum=10):
     # desactivateMainConf()
     configuration["features"]["active"] = True
     xp(train=train, cv=cv, xpNum=xpNum, title='Features')
@@ -109,7 +109,7 @@ def exploreAuxFeatureImpact(denseDomain, train=False, cv=False, xpNum=5):
     configuration["features"]["active"] = False
 
 
-def exploreDenseUnitNum(denseDomain, layer="dense1", train=False, cv=False, xpNum=5, title=''):
+def exploreDenseUnitNum(denseDomain, layer="dense1", train=False, cv=False, xpNum=10, title=''):
     denseConf = configuration["model"]["mlp"][layer]
     denseConf["active"] = True
     for unitNum in denseDomain:
@@ -118,7 +118,7 @@ def exploreDenseUnitNum(denseDomain, layer="dense1", train=False, cv=False, xpNu
     denseConf["active"] = False
 
 
-def exploreRnnUnitNum(rnnDomain, train=False, cv=False, xpNum=5, title=''):
+def exploreRnnUnitNum(rnnDomain, train=False, cv=False, xpNum=10, title=''):
     rnnConf = configuration["model"]["rnn"]["rnn1"]
     rnnConf["active"] = True
     for unitNum in rnnDomain:
@@ -140,7 +140,7 @@ def xpGRU(stacked=False, gru=False, cv=False):
     rnnConf["stacked"] = False
 
 
-def exploreMLPDepth(train=False, cv=False, xpNum=5, title=''):
+def exploreMLPDepth(train=False, cv=False, xpNum=10, title=''):
     pass
     # TODO
     # mlpConfig = configuration["model"]["mlp"]
@@ -155,7 +155,7 @@ def exploreMLPDepth(train=False, cv=False, xpNum=5, title=''):
     # mlpConfig["dense3"]["active"] = False
 
 
-def exploreActivationFunImpact(train=False, cv=False, xpNum=5, title=''):
+def exploreActivationFunImpact(train=False, cv=False, xpNum=10, title=''):
     pass
     # TODO
     # mlpConfig = configuration["model"]["mlp"]
@@ -167,7 +167,7 @@ def exploreActivationFunImpact(train=False, cv=False, xpNum=5, title=''):
     # mlpConfig["dense2"]["activation"] = "relu"
 
 
-def exploreWeighMatrixImpact(train=False, cv=False, xpNum=5):
+def exploreWeighMatrixImpact(train=False, cv=False, xpNum=10):
     desactivateMainConf()
     configuration["model"]["embedding"]["active"] = True
     configuration["model"]["embedding"]["usePos"] = True
@@ -207,7 +207,7 @@ def exploreWeighMatrixImpact(train=False, cv=False, xpNum=5):
     configuration["model"]["embedding"]["lemma"] = False
 
 
-def exploreTrainParamsImpact(train=False, cv=False, xpNum=5, title=''):
+def exploreTrainParamsImpact(train=False, cv=False, xpNum=10, title=''):
     trainConfig = configuration["model"]["train"]
     exploreBatchSizeImpact([32, 64, 128, 256, 512], train=train, cv=cv, xpNum=xpNum, title=title)
 
@@ -216,7 +216,7 @@ def exploreTrainParamsImpact(train=False, cv=False, xpNum=5, title=''):
     trainConfig["earlyStop"] = True
 
 
-def exploreBatchSizeImpact(domain, train=False, cv=False, xpNum=5, title=''):
+def exploreBatchSizeImpact(domain, train=False, cv=False, xpNum=10, title=''):
     for item in domain:
         configuration["model"]["train"]["batchSize"] = item
         xp(train=train, cv=cv, xpNum=xpNum, title='{0} + BatchSize {1}'.format(title, item))
@@ -235,7 +235,7 @@ def tokenPOSEmbImpact():
     exploreTokenPosEmbImpact([8, 16, 24, 32, 40, 48, 56], train=True, xpNum=10, usePos=True)
 
 
-def exploreDenseImpact(domain, usePos=True, train=False, cv=False, xpNum=5):
+def exploreDenseImpact(domain, usePos=True, train=False, cv=False, xpNum=10):
     desactivateMainConf()
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True
@@ -245,7 +245,7 @@ def exploreDenseImpact(domain, usePos=True, train=False, cv=False, xpNum=5):
     exploreDenseUnitNum(domain, train=train, cv=cv, xpNum=xpNum, title='Token + POS')
 
 
-def exploreBinaryPOSEmb(domain, train=False, cv=False, xpNum=5, title=''):
+def exploreBinaryPOSEmb(domain, train=False, cv=False, xpNum=10, title=''):
     desactivateMainConf()
     configuration["model"]["embedding"]["active"] = True
     configuration["model"]["embedding"]["usePos"] = True
@@ -258,7 +258,7 @@ def exploreBinaryPOSEmb(domain, train=False, cv=False, xpNum=5, title=''):
         xp(train=train, cv=cv, xpNum=xpNum, title='{0} Token {1}+ Binary POS Emb '.format(title, embDim))
 
 
-def exploreStandardXP(train=False, cv=False, xpNum=5):
+def exploreStandardXP(train=False, cv=False, xpNum=10):
     desactivateMainConf()
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True

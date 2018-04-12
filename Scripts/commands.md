@@ -14,6 +14,7 @@ oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=5 /home/halsai
 ```
 ```
 oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIdenSys/Scripts/attached-test-passive.sh -O out -E Reports/3-noPaddingPOSToken
+oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=75 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -n token.pos.noPadding -O 5.token.pos.noPadding -E 5.token.pos.noPadding.err
 ```
 ##Activer l'enveronnement virtuel
 ```
