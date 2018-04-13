@@ -1,7 +1,6 @@
 
 
 import linarKerasModel as lkm
-import linearModel
 import newNetwork
 import oracle
 from corpus import *
@@ -9,7 +8,7 @@ from evaluation import evaluate
 from network import Network, train
 from normalisation import Normalizer
 from parser import parse
-
+import linearModel
 langs = ['FR']
 
 

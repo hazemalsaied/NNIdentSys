@@ -144,7 +144,7 @@ if __name__ == '__main__':
     posDomain = [24, 32, 40, 48, 56, 64]
     desactivateMainConf()
     setEmbConf(usePos=True, init=False)
-    exploreEmbImpact(tokenDmain, posDomain, useLemma=False, train=True)
+    exploreEmbImpact(tokenDmain, posDomain, useLemma=False, usePos=True, train=True)
 
     # tableEmb(train=True)
     # tableEmb(train=True,useFeatures=True)

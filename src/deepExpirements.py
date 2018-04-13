@@ -3,7 +3,6 @@ import numpy
 from config import *
 from corpus import *
 from identification import identify, crossValidation
-from linearExpirements import resetFRStandardFeatures
 
 allLangs = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT', 'LT', 'MT', 'PL', 'PT', 'RO', 'SL', 'SV', 'TR']
 
@@ -348,7 +347,7 @@ if __name__ == '__main__':
     desactivateMainConf()
     setEmbConf(usePos=False, init=False)
     # 1 token + POS
-    exploreEmbImpact(tokenDmain, posDomain, usePos=True, useLemma=True, train=True)
+    exploreEmbImpact(tokenDmain, posDomain, usePos=True, useLemma=False, train=True)
     # 2 Lemma + POS
     # exploreEmbImpact(tokenDmain, posDomain, useLemma=True, usePos=True, train=True)
     # # 3 Lemma + POS + Feature

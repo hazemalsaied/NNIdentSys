@@ -152,7 +152,7 @@ class Corpus:
         if evalConfig["debug"]:
             debugTrainNum = evalConfig["debugTrainNum"]
             self.trainingSents =self.trainDataSet[:debugTrainNum]  #getVMWESents(self.trainDataSet, debugTrainNum)
-            self.testingSents = self.trainDataSet[debugTrainNum:]#getVMWESents(self.testDataSet, debugTrainNum)
+            self.testingSents = self.trainDataSet[debugTrainNum:debugTrainNum*2]#getVMWESents(self.testDataSet, debugTrainNum)
         elif evalConfig["train"]:
             pointer = int(len(self.trainDataSet) * (1 - evalConfig["test"]))
             self.trainingSents = self.trainDataSet[:pointer]

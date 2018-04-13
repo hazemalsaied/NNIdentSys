@@ -60,4 +60,3 @@ def initializeSent(corpus):
     for sent in corpus.testingSents:
         sent.identifiedVMWEs = []
         sent.initialTransition = None
-sh

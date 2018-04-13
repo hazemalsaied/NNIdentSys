@@ -266,7 +266,7 @@ titleLine = '# XP = '
 
 
 def mineLinearFile(newFile):
-    path = '../Reports/{0}'.format(newFile)
+    path = '../Reports/Reports/{0}'.format(newFile)
     titles, params, scores = [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
@@ -284,7 +284,7 @@ def mineLinearFile(newFile):
 
 
 def mineFile(newFile):
-    path = '../Reports/{0}'.format(newFile)
+    path = '../Reports/Reports/{0}'.format(newFile)
     titles, params, scores = [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
@@ -374,7 +374,7 @@ def getBrefScores(newFile, scores, titles, params, xpNum, showTitle=True):
         paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
         text += '{0}{1}\t\t&\t\t{2}\t\t&\t\t{3}{4}\t\t\\\\\n'.format(
             titleText, meanValue, maxValue, mad, paramsText)
-    with open('../Reports/{0}.csv'.format(newFile), 'w') as res:
+    with open('../Reports/Reports/{0}.tex'.format(newFile), 'w') as res:
         res.write(text)
 
 
@@ -400,4 +400,6 @@ def getMeanAbsoluteDeviation(domain):
 
 
 if __name__ == '__main__':
-    getScores('4.lemmeNoPadding125-300', xpNum=5, shouldClean=True, showTitle=False)
+    for file in os.listdir('../Reports/reports'):
+        if not file.endswith('.tex') and not file.lower().endswith('err'):
+            getScores(file, shouldClean=True, showTitle=True)
