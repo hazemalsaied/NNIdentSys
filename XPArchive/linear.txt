@@ -1,0 +1,264 @@
+/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /Users/hazemalsaied/Development/Python/PycharmProjects/NNIdentSys/src/linearExpirements.py
+/Users/hazemalsaied/Library/Python/2.7/lib/python/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+********************
+Linear model
+{'trigram': True, 'unigram': {'b1': True, 'lemma': True, 'token': False, 'pos': True, 'suffix': False}, 'dictionary': {'active': True, 's0TokensAreMWE': False, 's0TokenIsMWEToken': True, 'mwt': False}, 'stackLength': True, 'active': True, 'bigram': {'active': True, 's0b2': True}, 'history': {'1': False, '3': False, '2': False}, 'distance': {'s0s1': True, 's0b0': True}, 'syntax': {'active': True, 'abstract': True, 'lexicalised': False, 'bufferElements': 5}}
+# Language = FR
+# Train file = train.conllu.autoPOS.autoDep
+# Test file = test.conllu.autoPOS.autoDep
+FRidxDic
+# Train = 16091
+# Test = 1788
+# Feature number = 1382405
+# model = LinearSVC
+# Training time = 4 minutes!
+# F-Score(Ordinary) = 0.765, Recall: 0.819, Precision: 0.718
+# F-Score(lvc) = 0.604, Recall: 0.689, Precision: 0.538
+# F-Score(ireflv) = 0.864, Recall: 0.868, Precision: 0.861
+# F-Score(id) = 0.748, Recall: 0.804, Precision: 0.699
+********************
+********************
+Linear model
+{'trigram': True, 'unigram': {'b1': True, 'lemma': True, 'token': False, 'pos': True, 'suffix': False}, 'dictionary': {'active': True, 's0TokensAreMWE': False, 's0TokenIsMWEToken': True, 'mwt': False}, 'stackLength': True, 'active': True, 'bigram': {'active': True, 's0b2': True}, 'history': {'1': False, '3': False, '2': False}, 'distance': {'s0s1': True, 's0b0': True}, 'syntax': {'active': True, 'abstract': True, 'lexicalised': False, 'bufferElements': 5}}
+# Language = FR
+# Train file = train.conllu.autoPOS.autoDep
+# Test file = test.conllu.autoPOS.autoDep
+FRidxDic
+# Train = 16091
+# Test = 1788
+# Feature number = 1382405
+# model = LinearSVC
+# Training time = 4 minutes!
+# F-Score(Ordinary) = 0.765, Recall: 0.819, Precision: 0.718
+# F-Score(lvc) = 0.604, Recall: 0.689, Precision: 0.538
+# F-Score(ireflv) = 0.864, Recall: 0.868, Precision: 0.861
+# F-Score(id) = 0.748, Recall: 0.804, Precision: 0.699
+********************
+********************
+# XP =  Title: uni + bi: lemma pos
+********************
+********************
+Linear model
+{'trigram': False, 'unigram': {'b1': False, 'lemma': True, 'token': False, 'pos': True, 'suffix': False}, 'dictionary': {'active': False, 's0TokensAreMWE': False, 's0TokenIsMWEToken': True, 'mwt': False}, 'stackLength': False, 'active': True, 'bigram': {'active': True, 's0b2': False}, 'history': {'1': False, '3': False, '2': False}, 'distance': {'s0s1': False, 's0b0': False}, 'syntax': {'active': False, 'abstract': False, 'lexicalised': False, 'bufferElements': 5}}
+# Language = BG
+BGidxDic
+# Train = 6221
+# Test = 692
+# Feature number = 176
+# model = LinearSVC
+# Training time = 6 minutes!
+# F-Score(Ordinary) = 0, Recall: 0, Precision: 0
+********************
+# Language = CS
+# Train file = train.conllu.autoPOS
+# Test file = test.conllu.autoPOS
+CSidxDic
+# Train = 39559
+# Test = 4396
+# Feature number = 1244494
+# model = LinearSVC
+# Training time = 9 minutes!
+# F-Score(Ordinary) = 0.75, Recall: 0.781, Precision: 0.721
+# F-Score(lvc) = 0.538, Recall: 0.645, Precision: 0.462
+# F-Score(ireflv) = 0.831, Recall: 0.81, Precision: 0.855
+# F-Score(id) = 0.43, Recall: 0.676, Precision: 0.315
+********************
+# Language = DE
+# Train file = train.conllu
+# Test file = test.conllu
+DEidxDic
+# Train = 5634
+# Test = 627
+# Feature number = 360958
+# model = LinearSVC
+# Training time = 2 minutes!
+# F-Score(Ordinary) = 0.267, Recall: 0.438, Precision: 0.192
+# F-Score(lvc) = 0.125, Recall: 0.286, Precision: 0.08
+# F-Score(vpc) = 0.228, Recall: 0.708, Precision: 0.136
+# F-Score(id) = 0.28, Recall: 0.329, Precision: 0.245
+********************
+# Language = EL
+# Train file = train.conllu
+# Test file = test.conllu
+ELidxDic
+# Train = 4719
+# Test = 525
+# Feature number = 285273
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.676, Recall: 0.721, Precision: 0.635
+# F-Score(lvc) = 0.613, Recall: 0.622, Precision: 0.604
+# F-Score(vpc) = 0.444, Recall: 0.4, Precision: 0.5
+# F-Score(id) = 0.562, Recall: 0.694, Precision: 0.472
+# F-Score(oth) = 1.0, Recall: 1.0, Precision: 1.0
+********************
+# Language = ES
+# Train file = train.conllu
+# Test file = test.conllu
+ESidxDic
+# Train = 2251
+# Test = 251
+# Feature number = 191354
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.672, Recall: 0.736, Precision: 0.619
+# F-Score(lvc) = 0.5, Recall: 0.5, Precision: 0.5
+# F-Score(ireflv) = 0.794, Recall: 0.833, Precision: 0.758
+# F-Score(id) = 0.353, Recall: 0.6, Precision: 0.25
+********************
+# Language = FA
+# Train file = train.conllu
+# Test file = test.conllu
+FAidxDic
+# Train = 2462
+# Test = 274
+# Feature number = 119923
+# model = LinearSVC
+# Training time = 0 minutes!
+# F-Score(Ordinary) = 0.859, Recall: 0.856, Precision: 0.862
+# F-Score(oth) = 0.857, Recall: 0.855, Precision: 0.858
+********************
+# Language = FR
+# Train file = train.conllu.autoPOS.autoDep
+# Test file = test.conllu.autoPOS.autoDep
+FRidxDic
+# Train = 16091
+# Test = 1788
+# Feature number = 672280
+# model = LinearSVC
+# Training time = 4 minutes!
+# F-Score(Ordinary) = 0.771, Recall: 0.821, Precision: 0.727
+# F-Score(lvc) = 0.641, Recall: 0.654, Precision: 0.629
+# F-Score(ireflv) = 0.824, Recall: 0.845, Precision: 0.803
+# F-Score(id) = 0.757, Recall: 0.856, Precision: 0.679
+********************
+# Language = HE
+HEidxDic
+# Train = 4205
+# Test = 468
+# Feature number = 412
+# model = LinearSVC
+# Training time = 3 minutes!
+# F-Score(Ordinary) = 0, Recall: 0, Precision: 0
+********************
+# Language = HU
+# Train file = train.conllu.autoPOS.autoDep
+# Test file = test.conllu.autoPOS.autoDep
+HUidxDic
+# Train = 3212
+# Test = 357
+# Feature number = 136767
+# model = LinearSVC
+# Training time = 0 minutes!
+# F-Score(Ordinary) = 0.241, Recall: 0.691, Precision: 0.146
+# F-Score(lvc) = 0.66, Recall: 0.744, Precision: 0.593
+# F-Score(vpc) = 0.102, Recall: 0.6, Precision: 0.056
+********************
+# Language = IT
+# Train file = train.conllu
+# Test file = test.conllu
+ITidxDic
+# Train = 14155
+# Test = 1573
+# Feature number = 623408
+# model = LinearSVC
+# Training time = 4 minutes!
+# F-Score(Ordinary) = 0.348, Recall: 0.477, Precision: 0.274
+# F-Score(lvc) = 0.333, Recall: 0.406, Precision: 0.283
+# F-Score(ireflv) = 0.36, Recall: 0.471, Precision: 0.291
+# F-Score(vpc) = 0.727, Recall: 0.8, Precision: 0.667
+# F-Score(id) = 0.261, Recall: 0.441, Precision: 0.185
+********************
+# Language = LT
+LTidxDic
+# Train = 10937
+# Test = 1216
+# Feature number = 144
+# model = LinearSVC
+# Training time = 3 minutes!
+# F-Score(Ordinary) = 0, Recall: 0, Precision: 0
+********************
+# Language = MT
+# Train file = train.conllu
+# Test file = test.conllu
+MTidxDic
+# Train = 5368
+# Test = 597
+# Feature number = 225813
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.143, Recall: 0.32, Precision: 0.092
+# F-Score(lvc) = 0.145, Recall: 0.286, Precision: 0.098
+# F-Score(id) = 0.044, Recall: 0.111, Precision: 0.028
+********************
+# Language = PL
+# Train file = train.conllu.autoPOS
+# Test file = test.conllu.autoPOS
+PLidxDic
+# Train = 10420
+# Test = 1158
+# Feature number = 435449
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.752, Recall: 0.801, Precision: 0.708
+# F-Score(lvc) = 0.58, Recall: 0.619, Precision: 0.545
+# F-Score(ireflv) = 0.884, Recall: 0.924, Precision: 0.847
+# F-Score(id) = 0.625, Recall: 0.75, Precision: 0.536
+********************
+# Language = PT
+# Train file = train.conllu
+# Test file = test.conllu
+PTidxDic
+# Train = 17676
+# Test = 1964
+# Feature number = 533694
+# model = LinearSVC
+# Training time = 4 minutes!
+# F-Score(Ordinary) = 0.686, Recall: 0.739, Precision: 0.64
+# F-Score(lvc) = 0.685, Recall: 0.682, Precision: 0.688
+# F-Score(ireflv) = 0.65, Recall: 0.839, Precision: 0.531
+# F-Score(id) = 0.557, Recall: 0.744, Precision: 0.444
+********************
+# Language = RO
+# Train file = train.conllu
+# Test file = test.conllu
+ROidxDic
+# Train = 40922
+# Test = 4547
+# Feature number = 902904
+# model = LinearSVC
+# Training time = 14 minutes!
+# F-Score(Ordinary) = 0.802, Recall: 0.88, Precision: 0.736
+# F-Score(lvc) = 0.877, Recall: 0.881, Precision: 0.873
+# F-Score(ireflv) = 0.736, Recall: 0.857, Precision: 0.645
+# F-Score(id) = 0.682, Recall: 0.714, Precision: 0.652
+********************
+# Language = SV
+# Train file = train.conllu
+# Test file = test.conllu
+SVidxDic
+# Train = 180
+# Test = 20
+# Feature number = 15851
+# model = LinearSVC
+# Training time = 0 minutes!
+# F-Score(Ordinary) = 0, Recall: 0, Precision: 0
+********************
+# Language = TR
+# Train file = train.conllu
+# Test file = test.conllu
+TRidxDic
+# Train = 15043
+# Test = 1672
+# Feature number = 465345
+# model = LinearSVC
+# Training time = 2 minutes!
+# F-Score(Ordinary) = 0.591, Recall: 0.637, Precision: 0.552
+# F-Score(lvc) = 0.616, Recall: 0.652, Precision: 0.584
+# F-Score(id) = 0.476, Recall: 0.518, Precision: 0.439
+# F-Score(oth) = 0.516, Recall: 0.571, Precision: 0.471
+********************
+
+Process finished with exit code 0

@@ -1,6 +1,5 @@
-
-
 import linarKerasModel as lkm
+import linearModel
 import newNetwork
 import oracle
 from corpus import *
@@ -8,11 +7,9 @@ from evaluation import evaluate
 from network import Network, train
 from normalisation import Normalizer
 from parser import parse
-import linearModel
-langs = ['FR']
 
 
-def identify(loadFolderPath='', load=False):
+def identify(langs=['FR'], loadFolderPath='', load=False):
     sys.stdout.write('*' * 20 + '\n')
     sys.stdout.write('Deep model(Padding) \n')
     configuration["evaluation"]["load"] = load
@@ -60,7 +57,7 @@ def printReport(normalizer):
         sys.stdout.write('# Features = {0}\n'.format(normalizer.nnExtractor.featureNum))
 
 
-def crossValidation(debug=False):
+def crossValidation(langs=['FR'], debug=False):
     configuration["evaluation"]["cv"]["active"], scores, iterations = True, [0.] * 28, 5
     for lang in langs:
         reports.createReportFolder(lang)
@@ -100,7 +97,7 @@ def getTrainAndTestSents(corpus, testRange, trainRange):
         corpus.trainingSents = sent[trainRange[0]:trainRange[1]] + sent[trainRange[2]:trainRange[3]]
 
 
-def identifyLinearKeras():
+def identifyLinearKeras(langs=['FR'], ):
     sys.stdout.write('*' * 20 + '\n')
     sys.stdout.write('Linear model in KERAS\n')
     evlaConf = configuration["evaluation"]
@@ -119,7 +116,7 @@ def identifyLinearKeras():
         sys.stdout.write('*' * 20 + '\n')
 
 
-def identifyV2():
+def identifyV2(langs=['FR'] ):
     sys.stdout.write('*' * 20 + '\n')
     sys.stdout.write('Linear model\n')
     print configuration["features"]
@@ -132,26 +129,22 @@ def identifyV2():
         sys.stdout.write('*' * 20 + '\n')
 
 
-def identifyAttached():
+def identifyAttached(lang='FR'):
     sys.stdout.write('*' * 20 + '\n')
     sys.stdout.write('Deep model(No padding)\n')
-    for lang in langs:
-        corpus = Corpus(lang)
-        oracle.parse(corpus)
-        normalizer = Normalizer(corpus)
-        printReport(normalizer)
-        network = newNetwork.Network(normalizer)
-        newNetwork.train(network.model, normalizer, corpus)
-        parse(corpus, network, normalizer)
-        evaluate(corpus)
-        sys.stdout.write('*' * 20 + '\n')
-
-
-
+    corpus = Corpus(lang)
+    oracle.parse(corpus)
+    normalizer = Normalizer(corpus)
+    printReport(normalizer)
+    network = newNetwork.Network(normalizer)
+    newNetwork.train(network.model, normalizer, corpus)
+    parse(corpus, network, normalizer)
+    evaluate(corpus)
+    sys.stdout.write('*' * 20 + '\n')
 
 
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    #getScores('8-earlyStoppingErr', xpNum=10)
+    # getScores('8-earlyStoppingErr', xpNum=10)

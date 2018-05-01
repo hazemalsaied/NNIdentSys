@@ -58,28 +58,38 @@ def exploreNonLexicalFeatures():
     identifyV2()
 
 
-def exploreLexicalFeatures():
+def exploreLexicalFeatures(langs):
     evalConfig = configuration["evaluation"]
     evalConfig["debug"] = False
     evalConfig["train"] = True
     resetNonLexicalFeatures()
     # token
-    explore(True, False, False)
+    #explore(True, False, False)
     # pos
-    explore(False, False, True)
+    #explore(False, False, True)
     # lemma
-    explore(False, True, False)
+    #explore(False, True, False)
     # pos + token
-    explore(True, False, True)
+    #explore(True, False, True)
     # pos + lemma
-    explore(False, True, True)
+    explore(langs, False, True, True)
     # token + lemma
-    explore(True, True, False)
+    #explore(True, True, False)
     # token + lemma + POS
-    explore(True, True, True)
+    #explore(True, True, True)
+
+def exploreAbstractSyntax():
+    featConf = configuration["features"]
+    featConf["unigram"]["pos"] = True
+    featConf["unigram"]["token"] = False
+    featConf["unigram"]["lemma"] = True
+    featConf["bigram"]["active"] = True
+    identifyV2()
+    featConf["syntax"]["abstract"] = True
+    identifyV2()
 
 
-def explore(token=False, lemma=False, pos=False):
+def explore(langs, token=False, lemma=False, pos=False):
     featConf = configuration["features"]
     featConf["unigram"]["pos"] = pos
     featConf["unigram"]["token"] = token
@@ -88,17 +98,17 @@ def explore(token=False, lemma=False, pos=False):
     title += 'lemma ' if lemma else ''
     title += 'pos ' if pos else ''
 
-    reports.createHeader(' Title: uni: {0}'.format(title))
-    identifyV2()
+    #reports.createHeader(' Title: uni: {0}'.format(title))
+    #identifyV2()
     featConf["bigram"]["active"] = True
     reports.createHeader(' Title: uni + bi: {0}'.format(title))
-    identifyV2()
-    featConf["trigram"] = True
-    reports.createHeader(' Title: uni + bi + tri: {0}'.format(title))
-    identifyV2()
-    featConf["bigram"]["active"] = False
-    featConf["trigram"] = False
-    featConf["bigram"]["active"] = False
+    identifyV2(langs)
+    #featConf["trigram"] = True
+    #reports.createHeader(' Title: uni + bi + tri: {0}'.format(title))
+    #identifyV2()
+    #featConf["bigram"]["active"] = False
+    #featConf["trigram"] = False
+    #featConf["bigram"]["active"] = False
 
 
 def resetNonLexicalFeatures(desactivate=False):
@@ -125,4 +135,10 @@ if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    exploreFeatures()
+
+    evalConfig = configuration["evaluation"]
+    evalConfig["debug"] = False
+    evalConfig["train"] = True
+
+    exploreAbstractSyntax()
+    exploreLexicalFeatures(['BG','CS', 'DE', 'EL','ES','FA','FR','HE','HU','IT','LT','MT','PL','PT','RO','SV','TR'] )

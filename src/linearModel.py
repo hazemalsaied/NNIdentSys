@@ -12,7 +12,6 @@ from linearFeatures import extract, getFeatures
 def train(corpus):
     labels, featureDicss = extract(corpus)
     startTime = datetime.now()
-
     vec = DictVectorizer()
     features = vec.fit_transform(featureDicss)
     sys.stdout.write('# Feature number = {0}\n'.format(len(vec.vocabulary_)))

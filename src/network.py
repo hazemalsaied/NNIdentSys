@@ -46,7 +46,6 @@ class Network:
         print self.model.summary()
         reports.saveNetwork(self.model)
 
-
     def predict(self, trans, normalizer):
         useEmbedding = configuration["model"]["embedding"]["active"]
         useConcatenation = configuration["model"]["embedding"]["concatenation"]
@@ -105,6 +104,7 @@ def lstmModule(unitNum, name, sharedEmbedding, sharedLSTM, sharedLSTM2=None):
         outputLayer = sharedLSTM(sharedEmbedding(inputLayer))
     return inputLayer, outputLayer
 
+
 def mlpModule(inputLayer):
     mlpConf = configuration["model"]["mlp"]
     lastLayer = inputLayer
@@ -131,8 +131,8 @@ def elemModule(elemNum, normalizer, usePos=False, useToken=False):
     name, inputDim, outputDim, weights = getInputConf(normalizer, usePos=usePos, useToken=useToken)
     wordLayer = Input(shape=(elemNum,), name=name)
     if embConf["initialisation"]["active"] and ((usePos and embConf["initialisation"]["pos"])
-                                                or (useToken and embConf["initialisation"]["token"]) and not (
-                    useToken or usePos)):
+                                                or (useToken and embConf["initialisation"]["token"]) or not (
+                useToken or usePos)):
         sys.stdout.write('# {0} weight matrix = True\n'.format(name))
         embLayer = Embedding(inputDim, outputDim, weights=weights, trainable=True)(wordLayer)
     else:

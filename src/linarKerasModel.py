@@ -40,7 +40,7 @@ def train(model, corpus, normaliser):
     labels, data = generateLearningData(corpus, normaliser)
     data = np.asarray(data)
     labels = to_categorical(labels, num_classes=len(TransitionType))
-    model.fit(data, labels, epochs=trainConf["epochs"],
+    model.fit(data, labels.toarray(), epochs=trainConf["epochs"],
               batch_size=trainConf["batchSize"],
               verbose=trainConf["verbose"])
     sys.stdout.write('# Training time = {0}\n'.format(datetime.datetime.now() - time))

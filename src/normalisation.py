@@ -12,7 +12,6 @@ class Normalizer:
     """
         Reponsable for tranforming the (config, trans) into training data for the network training
     """
-
     def __init__(self, corpus):
         global embConf, initConf
         embConf = configuration["model"]["embedding"]
@@ -74,6 +73,8 @@ class Normalizer:
         labels, tokenData, posData, featureData = [], [], [], []
         useFeatures = configuration["features"]["active"]
         for sent in corpus.trainingSents:
+            #if not sent.vMWEs:
+            #    continue
             trans = sent.initialTransition
             while trans.next:
                 tokenIdxs, posIdxs = self.getAttachedIndices(trans)

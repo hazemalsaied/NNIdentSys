@@ -43,7 +43,8 @@ configuration = {
                 "oneHotPos": False,
                 "pos": True,
                 "token": True,
-                "Word2VecWindow": 3
+                "Word2VecWindow": 3,
+                "type": "dataFR.profiles.min.250"  # "frWac200"
             },
             "frequentTokens": True
         },
@@ -71,8 +72,8 @@ configuration = {
             "active": False,
             "gru": False,
             "stacked": False,
-            "rnn1": {"unitNumber": 512},
-            "rnn2": {"unitNumber": 512}
+            "rnn1": {"unitNumber": 128,"posUnitNumber":32},
+            "rnn2": {"unitNumber": 128}
         },
         "train": {
             "optimizer": "ADAM",
@@ -143,7 +144,8 @@ configuration = {
             "depAuto": "test.conllu.autoPOS.autoDep"
         },
         "embedding": {
-            "frWac200": "ressources/wordEmb/frWac/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin"
+            "frWac200": "ressources/WordEmb/frWac/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin",
+            "dataFR.profiles.min.250": "ressources/WordEmb/dataFR.profiles.min"
         }, "reports": {
             "summary": "'summary.json'",
             "normaliser": "normaliser.pkl",

@@ -23,6 +23,10 @@ class Vocabulary:
 
         if not configuration["model"]["padding"]:
             self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
+            self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, self.attachedPos)
+            self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, self.attachedTokens)
+            sys.stdout.write('# token vocabulary = {0}\n'.format(len(self.tokenIndices)))
+            sys.stdout.write('# POS vocabulary = {0}\n'.format(len(self.posIndices)))
         else:
             self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus)
             self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus)
@@ -105,8 +109,6 @@ class Vocabulary:
         idx += 1
         return indices, embeddings, idx
 
-    #
-    #
     # def generateUnknownEmbedding(self):
     #     indices, embeddings, idx = dict(), dict(), 0
     #     if embConf["usePos"]:
@@ -232,13 +234,13 @@ class Vocabulary:
                             else:
                                 posVocab[posTxt] += 1
                 trans = trans.next
-        for k in tokenVocab.keys():
-            if tokenVocab[k] == 1 and '_' not in k:
-                del tokenVocab[k]
-
-        for k in posVocab.keys():
-            if posVocab[k] == 1 and '_' not in k:
-                del posVocab[k]
+        if embConf["frequentTokens"]:
+            for k in tokenVocab.keys():
+                if tokenVocab[k] == 1 and '_' not in k:
+                    del tokenVocab[k]
+            for k in posVocab.keys():
+                if posVocab[k] == 1 and '_' not in k:
+                    del posVocab[k]
         tokenVocab[unk] = 1
         tokenVocab[number] = 1
         tokenVocab[empty] = 1
@@ -316,11 +318,31 @@ class Vocabulary:
         return self.indices[empty]
 
 
-def getTokenEmbeddingMatrices(corpus):
+def getTokenEmbeddingMatrices(corpus, attachedTokens=None):
     # load the pre-trained embeddings
-    preTrainedEmb = word2vec.load(
-        os.path.join(configuration["path"]["projectPath"], configuration["files"]["embedding"]["frWac200"]))
-    indices = getTokenVocabulary(corpus, preTrainedEmb)
+    initType = configuration["model"]["embedding"]["initialisation"]["type"]
+    relativeP = configuration["files"]["embedding"][initType]
+    preTrainedEmb = dict()
+    corpusTokens = set(getFreqDic(corpus).keys())
+    if initType == "frWac200":
+        preTrainedEmbModel = word2vec.load(
+            os.path.join(configuration["path"]["projectPath"], relativeP))
+        for item in preTrainedEmbModel.vocab:
+            if item in corpusTokens:
+                tokenIdxInVocab = np.where(preTrainedEmbModel.vocab == item)[0][0]
+                preTrainedEmb[item] = preTrainedEmbModel.vectors[tokenIdxInVocab]
+    else:
+        with open(os.path.join(configuration["path"]["projectPath"], relativeP), 'r') as embF:
+            for line in embF:
+                if line.strip():
+                    preTrainedEmb[line.split(' ')[0]] = line.split(' ')[1:-1]
+
+    sys.stdout.write('# embedding: {0}\n'.format(relativeP.split('/')[-1]))
+
+    if not configuration["model"]["padding"]:
+        indices = attachedTokens
+    else:
+        indices = getTokenVocabulary(corpus, preTrainedEmb)
     if initConf["active"] and initConf["token"]:
         embeddings = initialiseToken(indices, preTrainedEmb)
         return indices, embeddings
@@ -398,7 +420,7 @@ def getTokenVocabulary(corpus, preTrainedEmb):
                     idx += 1
             # Token belongs to test only
             else:
-                if tokenKey in preTrainedEmb.vocab and uniform(0, 1) < configuration["constants"]["alpha"]:
+                if tokenKey in preTrainedEmb and uniform(0, 1) < configuration["constants"]["alpha"]:
                     indices[tokenKey] = idx
                     idx += 1
     indices[unk] = idx
@@ -407,7 +429,7 @@ def getTokenVocabulary(corpus, preTrainedEmb):
     idx += 1
     if not embConf["concatenation"]:
         indices[empty] = idx
-    # sys.stdout.write('Filtered token frequency dic: {0}'.format(len(indices)))
+    sys.stdout.write('Token vocabulary: {0}'.format(len(indices)))
     return indices
 
 
@@ -415,21 +437,25 @@ def initialiseToken(indices, preTrainedEmb):
     # weight matrix and in generating training data
     embeddings = dict()
     for tokenKey in indices:
-        if tokenKey in preTrainedEmb.vocab:
-            tokenIdxInVocab = np.where(preTrainedEmb.vocab == tokenKey)[0][0]
-            embeddings[tokenKey] = preTrainedEmb.vectors[tokenIdxInVocab]
+        if tokenKey in preTrainedEmb:
+            # tokenIdxInVocab = np.where(preTrainedEmb.vocab == tokenKey)[0][0]
+            # embeddings[tokenKey] = preTrainedEmb.vectors[tokenIdxInVocab]
+            embeddings[tokenKey] = preTrainedEmb[tokenKey]
         else:
-            embeddings[tokenKey] = getRandomVector(len(embeddings.values()[0]))
-    embeddings[unk] = getRandomVector(len(preTrainedEmb.vectors[0]))
-    embeddings[number] = getRandomVector(len(preTrainedEmb.vectors[0]))
+            embeddings[tokenKey] = getRandomVector(len(preTrainedEmb.values()[0]))
+    embeddings[unk] = getRandomVector(len(preTrainedEmb.values()[0]))
+    embeddings[number] = getRandomVector(len(preTrainedEmb.values()[0]))
     if not embConf["concatenation"]:
-        embeddings[empty] = getRandomVector(len(preTrainedEmb.vectors[0]))
+        embeddings[empty] = getRandomVector(len(preTrainedEmb.values()[0]))
     return embeddings
 
 
-def getPOSEmbeddingMatrices(corpus):
+def getPOSEmbeddingMatrices(corpus, attachedPos=None):
     if embConf["usePos"]:
-        indices = getPOSVocabulary(corpus)
+        if not configuration["model"]["padding"]:
+            indices = attachedPos
+        else:
+            indices = getPOSVocabulary(corpus)
         if initConf["oneHotPos"]:
             embeddings = {}
             embConf["posEmb"] = len(indices)
@@ -495,7 +521,6 @@ def getFreqDic(corpus, posTag=False):
                 freqDic[key] = 1
             else:
                 freqDic[key] += 1
-    # sys.stdout.write('{0} frequency dic: {1}'.format('posTag' if posTag else 'token', len(freqDic)))
     return freqDic
 
 
@@ -512,5 +537,3 @@ def trainPosEmbWithWordToVec(corpus):
 
 def getRandomVector(length):
     return np.asarray([float(val) for val in np.random.uniform(low=-0.01, high=0.01, size=int(length))])
-
-

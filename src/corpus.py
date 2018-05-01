@@ -48,8 +48,8 @@ class Corpus:
         self.text = self.toText()
         self.orderParentVMWEs()
         if not configuration["evaluation"]["cv"]["active"]:
-            self.shuffleSent()
-            self.distributeSent()
+            self.shuffleSent(langName)
+            self.distributeSent(langName)
             self.getTrainAndTest()
             self.extractDictionaries()
 
@@ -164,16 +164,17 @@ class Corpus:
         sys.stdout.write('# Train = {0}\n'.format(len(self.trainingSents)))
         sys.stdout.write('# Test = {0}\n'.format(len(self.testingSents)))
 
-    def distributeSent(self):
+    def distributeSent(self,lang):
         if configuration["evaluation"]["shuffleTrain"]:
             return
-        idxDic = loadObj('idxDic')
+        print lang +'idxDic'
+        idxDic = loadObj(lang +'idxDic')
         newTrainingSentSet = []
         for key in idxDic.keys():
             newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
         self.trainDataSet = newTrainingSentSet
 
-    def shuffleSent(self):
+    def shuffleSent(self, lang):
         if not configuration["evaluation"]["shuffleTrain"]:
             return
         idxDic = dict()
@@ -185,7 +186,7 @@ class Corpus:
         for key in idxDic.keys():
             newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
         self.trainDataSet = newTrainingSentSet
-        saveObj(idxDic, 'idxDic')
+        saveObj(idxDic, lang+'idxDic')
 
     def analyzeSents(self):
         for sent in self.trainDataSet:
@@ -775,8 +776,9 @@ def getTrainAndTestConlluPath(path):
         testConllu = os.path.join(path, testFiles["conllu"])
     else:
         conlluFile, testConllu = None, None
-    sys.stdout.write('# Train file = {0}\n'.format(conlluFile.split('/')[-1]))
-    sys.stdout.write('# Test file = {0}\n'.format(testConllu.split('/')[-1]))
+    if conlluFile and testConllu:
+        sys.stdout.write('# Train file = {0}\n'.format(conlluFile.split('/')[-1]))
+        sys.stdout.write('# Test file = {0}\n'.format(testConllu.split('/')[-1]))
     return conlluFile, testConllu
 
 
