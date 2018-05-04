@@ -282,4 +282,6 @@ def exploreRnn(train=True,useDense=True):
 
 if __name__ == '__main__':
     configuration["model"]["padding"] = False
+
+    configuration["evaluation"]["shuffleTrain"] = True
     exploreRnn(True,False)

@@ -7,13 +7,13 @@ from corpus import getParents, isOrphanToken, getVMWEByTokens
 from transitions import *
 
 
-def parse(corpus,printReport=False):
+def parse(corpus, printReport=True):
     printSentIdx, printSentNum = 0, 5
     report = ''
     transNum = {}
     for sent in corpus:
-        #if not sent.vMWEs:
-        #    continue
+        if not sent.vMWEs:
+            continue
         sent.initialTransition = Transition(isInitial=True, sent=sent)
         transition = sent.initialTransition
         while not transition.isTerminal():
@@ -30,6 +30,7 @@ def parse(corpus,printReport=False):
             print sent
             printSentIdx += 1
     if printReport:
+        print sum(transNum.values())
         print transNum
     if report and False:
         directory = '../Results/Oracle/'
@@ -38,6 +39,23 @@ def parse(corpus,printReport=False):
             os.makedirs(directory)
         with open(os.path.join(directory, fileName), 'w') as f:
             f.write(report)
+
+    transNum = {}
+    for sent in corpus:
+        if sent.vMWEs:
+            transition = sent.initialTransition
+            while not transition.isTerminal():
+                if transition.isImportant():
+                    if transition.type not in transNum:
+                        transNum[transition.type] = 1
+                    else:
+                        transNum[transition.type] += 1
+                transition = transition.next
+        pass
+
+    print transNum.values()
+    for t in transNum:
+        print t, ' : ', round((transNum[t] / float(sum(transNum.values()))) * 100, 2)
 
 
 def Next(config):
@@ -139,7 +157,7 @@ def validate(corpus):
 
 def isIdentifiedVMWE(element):
     return isinstance(element, list) and len(element) == 1
-#{<TransitionType.MARK_AS_LVC: 6>: 1196,
+# {<TransitionType.MARK_AS_LVC: 6>: 1196,
 # <TransitionType.MARK_AS_ID: 5>: 1593,
 # <TransitionType.MARK_AS_IREFLV: 4>: 1191}
 # <TransitionType.MARK_AS_OTH: 7>: 1,
@@ -147,5 +165,3 @@ def isIdentifiedVMWE(element):
 
 # <TransitionType.SHIFT: 0>: 104082,
 # <TransitionType.REDUCE: 1>: 98992,
-
-

@@ -69,6 +69,23 @@ class Transition(object):
             return False
         return True
 
+    def isImportant(self, window=4):
+        idx = 0
+        nexTrans = self
+        while nexTrans and idx < window:
+            if nexTrans.type and nexTrans.type != TransitionType.SHIFT and nexTrans.type != TransitionType.REDUCE:
+                return True
+            nexTrans = nexTrans.next
+            idx += 1
+        idx = 0
+        prevTrans = self
+        while prevTrans and idx < window:
+            if prevTrans.type and prevTrans.type != TransitionType.SHIFT and prevTrans.type != TransitionType.REDUCE:
+                return True
+            prevTrans = prevTrans.previous
+            idx += 1
+        return False
+
     def __str__(self):
         configuration = str(self.configuration)
         typeStr = '{0}'.format(self.type.name) if self.type else ''
