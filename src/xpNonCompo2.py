@@ -341,26 +341,26 @@ if __name__ == '__main__':
     # parser.add_argument('xpLbl')
     # args = parser.parse_args()
     # xp1, xp2, xp3, xp4, xp5, xp6, xp7, xp8 = [30], [40], [50], [60], [70], [100], [125], [150]
-    xpDic = {
-        'xp1': [30], 'xp2': [40], 'xp3': [50], 'xp4': [60]
-        #'xp5': [70], 'xp6': [100], 'xp7': [125], 'xp8': [150]
-    }
+    # xpDic = {
+    #     'xp1': [30], 'xp2': [40], 'xp3': [50], 'xp4': [60],
+    #     'xp5': [70], 'xp6': [100], 'xp7': [125], 'xp8': [150]
+    # }
     # if args.xpLbl == 'learning2':
     #    print 'learning2'
-    # exploreLearning2(train=True)
+    exploreLearning2(train=True)
 
     # if args.xpLbl.startswith('xp'):
     #    if args.xpLbl in xpDic:
     # print args.xpLbl
     # exploreEmbImpact(xpDic[args.xpLbl], [15, 25, 35, 50], [25, 75, 125, 250],
     #                 useLemma=True, usePos=True, train=False, xpNum=5, langs=['FR'])
-    for dom in xpDic.values():
-        exploreEmbImpact(dom, [15, 25, 35, 50], [25, 75, 125, 250],
-                         useLemma=True, usePos=True, train=False, xpNum=5, langs=['FR'])
+    # for dom in xpDic.values():
+    #     exploreEmbImpact(dom, [15, 25, 35, 50], [25, 75, 125, 250],
+    #                      useLemma=True, usePos=True, train=False, xpNum=5, langs=['FR'])
 
     # if args.xpLbl == 'coeff':
-    # for coeff in [15, 20, 25, 30]:
-    #     configuration["model"]["train"]["favorisationCoeff"] = coeff
-    #     xpMinimal(True, 5)
+    for coeff in [15, 20, 25, 30]:
+        configuration["model"]["train"]["favorisationCoeff"] = coeff
+        xpMinimal(True, 5)
     # configuration["xp"]["pytorch"] = True
     # xpMinimal(True, 1)
