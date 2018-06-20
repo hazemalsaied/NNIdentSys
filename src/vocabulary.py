@@ -2,17 +2,13 @@ import os
 import sys
 from random import uniform
 
-import gensim
 import numpy as np
 import word2vec
 from keras.utils import to_categorical
 
 from config import configuration
 from corpus import getTokens
-
-unk = configuration["constants"]["unk"]
-empty = configuration["constants"]["empty"]
-number = configuration["constants"]["number"]
+from wordEmbLoader import getRandomVector, getFreqDic, initialisePOS, unk, empty, number
 
 
 class Vocabulary:
@@ -21,7 +17,7 @@ class Vocabulary:
         embConf = configuration["model"]["embedding"]
         initConf = configuration["model"]["embedding"]["initialisation"]
 
-        if not configuration["model"]["padding"]:
+        if not configuration["xp"]["compo"]:
             self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
             self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, self.attachedPos)
             self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, self.attachedTokens)
@@ -146,7 +142,8 @@ class Vocabulary:
     #         indices[key1] = idx
     #         idx += 1
     #     if embConf["usePos"]:
-    #         embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0]) + len(self.posEmbeddings.values()[0])))
+    #         embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0]) + \
+    # len(self.posEmbeddings.values()[0])))
     #     else:
     #         embeddings[empty] = np.zeros((len(self.tokenEmbeddings.values()[0])))
     #     indices[empty] = idx
@@ -331,6 +328,11 @@ def getTokenEmbeddingMatrices(corpus, attachedTokens=None):
             if item in corpusTokens:
                 tokenIdxInVocab = np.where(preTrainedEmbModel.vocab == item)[0][0]
                 preTrainedEmb[item] = preTrainedEmbModel.vectors[tokenIdxInVocab]
+    elif initType == "frWiki50":
+        with open(os.path.join(configuration["path"]["projectPath"], relativeP), 'r') as embF:
+            for line in embF:
+                if line.strip():
+                    preTrainedEmb[line.split(' ')[0]] = line.split(' ')[1:-1]
     else:
         with open(os.path.join(configuration["path"]["projectPath"], relativeP), 'r') as embF:
             for line in embF:
@@ -339,7 +341,7 @@ def getTokenEmbeddingMatrices(corpus, attachedTokens=None):
 
     sys.stdout.write('# embedding: {0}\n'.format(relativeP.split('/')[-1]))
 
-    if not configuration["model"]["padding"]:
+    if not configuration["xp"]["compo"]:
         indices = attachedTokens
     else:
         indices = getTokenVocabulary(corpus, preTrainedEmb)
@@ -357,7 +359,8 @@ def getTokenEmbeddingMatrices(corpus, attachedTokens=None):
 #     # indices and embeddings are the reslut of the function
 #     # indices is a dictionary mappng token => index; this index will help us in building
 #     # weight matrix and in generating training data
-#     indices, embeddings, idx, generatedRandomly, pretrained, testOnlyTokens, testOnlyTokensWithRandVect = dict(), dict(), 0, 0, 0, 0, 0
+#     indices, embeddings, idx, generatedRandomly, pretrained, testOnlyTokens, testOnlyTokensWithRandVect = \
+#       dict(), dict(), 0, 0, 0, 0, 0
 #     for sent in corpus.trainingSents + corpus.testingSents:
 #         for token in sent.tokens:
 #             tokenKey = token.getTokenOrLemma()
@@ -452,7 +455,7 @@ def initialiseToken(indices, preTrainedEmb):
 
 def getPOSEmbeddingMatrices(corpus, attachedPos=None):
     if embConf["usePos"]:
-        if not configuration["model"]["padding"]:
+        if not configuration["xp"]["compo"]:
             indices = attachedPos
         else:
             indices = getPOSVocabulary(corpus)
@@ -481,23 +484,6 @@ def getPOSEmbeddingMatrices(corpus, attachedPos=None):
     return None, None
 
 
-def initialisePOS(corpus, indices):
-    embeddings, idx = dict(), 0
-    traindEmb = trainPosEmbWithWordToVec(corpus)
-    for elem in indices:
-        if elem.lower() in traindEmb.wv.vocab:
-            embeddings[elem.lower()] = traindEmb.wv[elem]
-        else:
-            embeddings[elem.lower()] = getRandomVector(embConf["posEmb"])
-    # for elem in traindEmb.wv.vocab:
-    #     if elem.lower() in indices and indices[elem] > 1:
-    #         embeddings[elem.lower()] = traindEmb.wv[elem]
-    embeddings[unk] = getRandomVector(embConf["posEmb"])
-    if not embConf["concatenation"]:
-        embeddings[empty] = getRandomVector(embConf["posEmb"])
-    return embeddings
-
-
 def getPOSVocabulary(corpus):
     indices, idx = dict(), 0
     freqDic = getFreqDic(corpus, posTag=True)
@@ -510,30 +496,3 @@ def getPOSVocabulary(corpus):
         idx += 1
         indices[empty] = idx
     return indices
-
-
-def getFreqDic(corpus, posTag=False):
-    freqDic = dict()
-    for sent in corpus.trainingSents:
-        for token in sent.tokens:
-            key = token.posTag.lower() if posTag else token.getTokenOrLemma().lower()
-            if key not in freqDic:
-                freqDic[key] = 1
-            else:
-                freqDic[key] += 1
-    return freqDic
-
-
-def trainPosEmbWithWordToVec(corpus):
-    normailsedSents = []
-    for sent in corpus.trainingSents + corpus.testingSents:
-        normailsedSent = []
-        for token in sent.tokens:
-            normailsedSent.append(token.posTag.lower())
-        normailsedSents.append(normailsedSent)
-    model = gensim.models.Word2Vec(normailsedSents, size=embConf["posEmb"], window=initConf["Word2VecWindow"])
-    return model
-
-
-def getRandomVector(length):
-    return np.asarray([float(val) for val in np.random.uniform(low=-0.01, high=0.01, size=int(length))])

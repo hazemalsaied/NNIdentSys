@@ -1,13 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import itertools
-import logging
 import os
 import pickle
 import random
 import sys
 
-import reports
 # from config from config import configuration
 from config import configuration
 
@@ -26,30 +24,41 @@ class Corpus:
         """
         sys.stdout.write('# Language = {0}\n'.format(langName))
         self.langName = langName
-        self.trainingSents, self.testingSents = [], []
+        self.trainingSents, self.testingSents, self.devDataSet = [], [], []
         self.mweDictionary, self.mwtDictionary, self.mweTokenDictionary = dict(), dict(), dict()
-        path = os.path.join(configuration["path"]["projectPath"], configuration["path"]["corpusRelativePath"], langName)
-        # print 'corpora path', path
-        mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
-        conlluFile, testConllu = getTrainAndTestConlluPath(path)
-        if conlluFile and testConllu:
-            # if not configuration["evaluation"]["load"]:
-            self.trainDataSet = readConlluFile(conlluFile)
-            integrateMweFile(mweFile, self.trainDataSet)
-            self.testDataSet = readConlluFile(testConllu)
-            integrateMweFile(testMweFile, self.testDataSet)
+        sharedtaskVersion = '.2' if configuration["evaluation"]["sharedtask2"] else ''
+        path = os.path.join(configuration["path"]["projectPath"],
+                            configuration["path"]["corpusRelativePath"] + sharedtaskVersion, langName)
+        if sharedtaskVersion:
+            self.trainDataSet = readCuptFile(os.path.join(path, 'train.cupt'))
+            sys.stdout.write(getStats(self.trainDataSet))
+            self.devDataSet = readCuptFile(os.path.join(path, 'dev.cupt'))
+            sys.stdout.write(getStats(self.devDataSet))
+            self.testDataSet = readCuptFile(os.path.join(path, 'test.cupt'))
+            sys.stdout.write(getStats(self.testDataSet))
         else:
-            # if not configuration["evaluation"]["load"]:
-            self.trainDataSet = readMWEFile(mweFile)
-            self.testDataSet = readMWEFile(testMweFile)
+            # print 'corpora path', path
+            mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
+            conlluFile, testConllu = getTrainAndTestConlluPath(path)
+            if conlluFile and testConllu:
+                # if not configuration["evaluation"]["load"]:
+                self.trainDataSet = readConlluFile(conlluFile)
+                integrateMweFile(mweFile, self.trainDataSet)
+                self.testDataSet = readConlluFile(testConllu)
+                integrateMweFile(testMweFile, self.testDataSet)
+            else:
+                # if not configuration["evaluation"]["load"]:
+                self.trainDataSet = readMWEFile(mweFile)
+                self.testDataSet = readMWEFile(testMweFile)
         # if not configuration["evaluation"]["load"]:
         self.analyzeSents()
         # Sorting parents to get the direct parent on the top of parentVMWEs list
         self.text = self.toText()
         self.orderParentVMWEs()
         if not configuration["evaluation"]["cv"]["active"]:
-            self.shuffleSent(langName)
-            self.distributeSent(langName)
+            if not sharedtaskVersion:  # //TODO
+                self.shuffleSent(langName)
+                self.distributeSent(langName)
             self.getTrainAndTest()
             self.extractDictionaries()
 
@@ -148,27 +157,36 @@ class Corpus:
         return mweDictionary
 
     def getTrainAndTest(self):
+
         evalConfig = configuration["evaluation"]
         if evalConfig["debug"]:
             debugTrainNum = evalConfig["debugTrainNum"]
-            self.trainingSents =self.trainDataSet[:debugTrainNum]  #getVMWESents(self.trainDataSet, debugTrainNum)
-            self.testingSents = self.trainDataSet[debugTrainNum:debugTrainNum*2]#getVMWESents(self.testDataSet, debugTrainNum)
+            self.trainingSents = self.trainDataSet[:debugTrainNum]  # getVMWESents(self.trainDataSet, debugTrainNum)
+            self.testingSents = self.trainDataSet[
+                                debugTrainNum:debugTrainNum * 2]  # getVMWESents(self.testDataSet, debugTrainNum)
         elif evalConfig["train"]:
-            pointer = int(len(self.trainDataSet) * (1 - evalConfig["test"]))
-            self.trainingSents = self.trainDataSet[:pointer]
-            self.testingSents = self.trainDataSet[pointer:]
+            if configuration["evaluation"]["sharedtask2"] and self.devDataSet:
+                self.trainingSents = self.trainDataSet
+                self.testingSents = self.devDataSet
+            else:
+                pointer = int(len(self.trainDataSet) * (1 - evalConfig["test"]))
+                self.trainingSents = self.trainDataSet[:pointer]
+                self.testingSents = self.trainDataSet[pointer:]
         elif evalConfig["corpus"]:
-            self.trainingSents = self.trainDataSet
-            self.testingSents = self.testDataSet
+            if configuration["evaluation"]["sharedtask2"]:
+                self.trainingSents = self.trainDataSet + self.devDataSet
+                self.testingSents = self.testDataSet
+            else:
+                self.trainingSents = self.trainDataSet
+                self.testingSents = self.testDataSet
 
-        sys.stdout.write('# Train = {0}\n'.format(len(self.trainingSents)))
-        sys.stdout.write('# Test = {0}\n'.format(len(self.testingSents)))
+        sys.stdout.write('# Train = {0}, Test = {1}\n'.format(len(self.trainingSents), len(self.testingSents)))
 
-    def distributeSent(self,lang):
+    def distributeSent(self, lang):
         if configuration["evaluation"]["shuffleTrain"]:
             return
-        print lang +'idxDic'
-        idxDic = loadObj(lang +'idxDic')
+        print lang + 'idxDic'
+        idxDic = loadObj(lang + 'idxDic')
         newTrainingSentSet = []
         for key in idxDic.keys():
             newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
@@ -186,7 +204,7 @@ class Corpus:
         for key in idxDic.keys():
             newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
         self.trainDataSet = newTrainingSentSet
-        saveObj(idxDic, lang+'idxDic')
+        saveObj(idxDic, lang + 'idxDic')
 
     def analyzeSents(self):
         for sent in self.trainDataSet:
@@ -260,6 +278,24 @@ class Corpus:
     def __iter__(self):
         for sent in self.trainingSents:
             yield sent
+
+    def getTransDistribution(self):
+        transNum = {}
+        for sent in self:
+            if sent.vMWEs:
+                transition = sent.initialTransition
+                while not transition.isTerminal():
+                    if transition.isImportant():
+                        if transition.type not in transNum:
+                            transNum[transition.type] = 1
+                        else:
+                            transNum[transition.type] += 1
+                    transition = transition.next
+            pass
+
+        print transNum.values()
+        for t in transNum:
+            print t, ' : ', round((transNum[t] / float(sum(transNum.values()))) * 100, 2)
 
 
 class Sentence:
@@ -693,12 +729,12 @@ class Token:
 
 
 def saveObj(obj, name):
-    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/' + name + '.pkl'), 'wb') as f:
+    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/LangDist/' + name + '.pkl'), 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
 
 def loadObj(name):
-    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/' + name + '.pkl'), 'rb') as f:
+    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/LangDist/' + name + '.pkl'), 'rb') as f:
         return pickle.load(f)
 
 
@@ -1021,3 +1057,94 @@ def getVMWEByTokens(tokens):
     if vmwes:
         return vmwes[0]
     return None
+
+
+def readCuptFile(cuptFile):
+    sentences = []
+    with open(cuptFile, 'r') as corpusFile:
+        sent, senIdx = None, 0
+        for line in corpusFile:
+            if line and line.endswith('\n'):
+                line = line[:-1]
+            if line.startswith('#'):
+                continue
+            if line.startswith('1\t'):
+                if sent:
+                    sent.text = sent.text.strip()
+                    sent.recognizeEmbedded()
+                    sent.recognizeInterleaving()
+                sent = Sentence(senIdx)
+                sentences.append(sent)
+                senIdx += 1
+
+            lineParts = line.split('\t')
+            if len(lineParts) != 11 or '-' in lineParts[0] or '.' in lineParts[0]:
+                continue
+            token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2].lower(),
+                          abstractPosTag=lineParts[3] if lineParts[3] != '_' else lineParts[4],
+                          dependencyParent=int(lineParts[6]) if (lineParts[6] != '_' and lineParts[6] != '-') else -1,
+                          dependencyLabel=lineParts[7] if lineParts[7] != '_' else '')
+            sent.tokens.append(token)
+            sent.text += token.text + ' '
+            if lineParts[10] != '*':
+                vMWEids = lineParts[10].split(';')
+                for vMWEid in vMWEids:
+                    idx = int(vMWEid.split(':')[0])
+                    if idx not in sent.getWMWEIds():
+                        type = str(vMWEid.split(':')[1])
+                        vMWE = VMWE(idx, [token], getType(type))
+                        sent.vMWEs.append(vMWE)
+                    else:
+                        vMWE = sent.getVMWE(idx)
+                        if vMWE:
+                            vMWE.tokens.append(token)
+                    token.setParent(vMWE)
+    return sentences
+
+
+def getType(type):
+    type = type.lower()
+    if type.startswith('lvc') or type == 'mvc':
+        return 'lvc'
+    if type.startswith('vpc') or type == 'iav':
+        return 'vpc'
+    if type == 'vid':
+        return 'id'
+    if type == 'irv' or type == 'ls.icv':
+        return 'ireflv'
+
+
+def getStats(sents, asCSV=False):
+    res = 'Sent num = {0}\n'.format(len(sents))
+    tokNum, mweNum, mwtNum, irefNum, idNum, lvcNum, vpcNum = 0, 0, 0, 0, 0, 0, 0
+
+    for s in sents:
+        mweNum += len(s.vMWEs)
+        tokNum += len(s.tokens)
+        for v in s.vMWEs:
+            mwtNum += 1 if len(v.tokens) == 1 else 0
+            if v.type:
+                if v.type.lower() == 'lvc':
+                    lvcNum += 1
+                if v.type.lower() == 'ireflv':
+                    irefNum += 1
+                if v.type.lower() == 'id':
+                    idNum += 1
+                if v.type.lower() == 'vpc':
+                    vpcNum += 1
+            else:
+                print s.text
+    if asCSV:
+        res = ''
+        for stat in [len(sents), tokNum, mweNum, mwtNum, irefNum, lvcNum, idNum, vpcNum]:
+            res += str(stat) + ','
+        res = res[:-1]
+    else:
+        res += 'Tokens: {0}\n'.format(tokNum)
+        res += 'Total VMWEs: {0}\n'.format(mweNum)
+        res += 'Total MWTs: {0}\n'.format(mwtNum)
+        res += 'Ireflv: {0}\n'.format(irefNum)
+        res += 'lvc: {0}\n'.format(lvcNum)
+        res += 'id: {0}\n'.format(idNum)
+        res += 'vpc: {0}\n'.format(vpcNum)
+    return res

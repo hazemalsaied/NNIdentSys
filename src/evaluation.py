@@ -123,6 +123,7 @@ def createMWEFiles(corpus, x=-1):
         folder += '/testSet/'
     else:
         return
+    folder = os.path.join(configuration["path"]["projectPath"], folder)
     if not os.path.exists(folder):
         os.makedirs(folder)
     if x == -1:

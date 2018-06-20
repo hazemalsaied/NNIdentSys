@@ -1,40 +1,119 @@
-import linarKerasModel as lkm
-import linearModel
-import newNetwork
+import logging, datetime
+
+import numpy
+
+import modelCompo
+import modelLinear
+import modelLinearKeras as lkm
+import modelNonCompo
+import modelPytorch
 import oracle
+import reports
 from corpus import *
 from evaluation import evaluate
-from network import Network, train
 from normalisation import Normalizer
 from parser import parse
+import torch
+
+def xp(langs=['FR'], train=False, cv=False, xpNum=5, title='', initSeed=0):
+    evlaConf = configuration["evaluation"]
+    evlaConf["cluster"] = True
+    global seed
+    seed = initSeed
+    numpy.random.seed(seed)
+    random.seed(seed)
+    torch.manual_seed(seed)
+    if not cv and not train:
+        ######################################
+        #   Debug
+        ######################################
+        evlaConf["debug"], evlaConf["train"] = True, False
+        for lang in langs:
+            sys.stdout.write('Debug enabled\n')
+            reports.createHeader(lang + ': ' + title)
+            identify(lang)
+    if train:
+        ######################################
+        #   Train
+        ######################################
+        evlaConf["debug"], evlaConf["train"] = False, True
+        for lang in langs:
+            for i in range(xpNum):
+                numpy.random.seed(seed)
+                random.seed(seed)
+                torch.manual_seed(seed)
+                reports.createHeader(lang + ': ' + title)
+                identify(lang)
+                seed += 1
+    if cv:
+        sys.stdout.write('#' * 50 + '\n')
+        sys.stdout.write('#' * 50 + '\n')
+        sys.stdout.write('#' * 50 + '\n')
+        sys.stdout.write("CV is not available yet for this model!\n")
+        sys.stdout.write('#' * 50 + '\n')
+        sys.stdout.write('#' * 50 + '\n')
+        sys.stdout.write('#' * 50 + '\n')
+        ######################################
+        #   CV Debug
+        ######################################
+        crossValidation(langs=langs, debug=True)
+        ######################################
+        #   CV
+        ######################################
+        for i in range(xpNum):
+            seed += 1
+            numpy.random.seed(seed)
+            random.seed(seed)
+            torch.manual_seed(seed)
+            if title:
+                reports.createHeader(title)
+            # crossValidation()
+            ######################################
+            #   Load
+            ######################################
+            # preTrainedPath= '/home/halsaied/nancy/NNIdenSys/NNIdenSys/Reports/FR-12/12-FR-modelWeigth.hdf5'
+            # identify(load=configuration["evaluation"]["load"], loadFolderPath=loadFolderPath)
 
 
-def identify(langs=['FR'], loadFolderPath='', load=False):
+def identify(lang, loadFolderPath='', load=False):
     sys.stdout.write('*' * 20 + '\n')
-    sys.stdout.write('Deep model(Padding) \n')
     configuration["evaluation"]["load"] = load
-    for lang in langs:
-        corpus = Corpus(lang)
-        normalizer, network = parseAndTrain(corpus, loadFolderPath)
+    corpus = Corpus(lang)
+    network, normalizer = parseAndTrain(corpus, loadFolderPath)
+    if configuration["xp"]["linear"]:
+        modelLinear.parse(corpus, network, normalizer)
+    else:
         parse(corpus, network, normalizer)
-        evaluate(corpus)
-        sys.stdout.write('*' * 20 + '\n')
+    evaluate(corpus)
+    sys.stdout.write('*' * 20 + '\n')
 
 
 def parseAndTrain(corpus, loadFolderPath=''):
+    sys.stdout.write('Training started')
     if configuration["evaluation"]["load"]:
+        # TODO rewrite the load part
         normalizer = reports.loadNormalizer(loadFolderPath)
-        network = Network(normalizer)
+        network = modelCompo.Network(normalizer)
         network.model = reports.loadModel(loadFolderPath)
     else:
         if not configuration["evaluation"]["cv"]["active"]:
             reports.createReportFolder(corpus.langName)
         oracle.parse(corpus)
+        if configuration["xp"]["linear"]:
+            return modelLinear.train(corpus)
         normalizer = Normalizer(corpus)
         printReport(normalizer)
-        network = Network(normalizer)
-        train(network.model, normalizer, corpus)
-    return normalizer, network
+        if configuration["xp"]["pytorch"]:
+            network = modelPytorch.PytorchModel(normalizer)
+            modelPytorch.main(network, corpus, normalizer)
+        elif configuration["xp"]["compo"]:
+            network = modelCompo.Network(normalizer)
+            modelCompo.train(network.model, normalizer, corpus)
+        else:
+            network = modelNonCompo.Network(normalizer)
+            modelNonCompo.train(network.model, normalizer, corpus)
+
+    return network, normalizer
 
 
 def printReport(normalizer):
@@ -116,31 +195,54 @@ def identifyLinearKeras(langs=['FR'], ):
         sys.stdout.write('*' * 20 + '\n')
 
 
-def identifyV2(langs=['FR'] ):
-    sys.stdout.write('*' * 20 + '\n')
-    sys.stdout.write('Linear model\n')
-    print configuration["features"]
+# def identifyV2(langs=['FR']):
+#     sys.stdout.write('*' * 20 + '\n')
+#     sys.stdout.write('Linear model\n')
+#     print configuration["features"]
+#     for lang in langs:
+#         corpus = Corpus(lang)
+#         oracle.parse(corpus)
+#         clf, vec = linearModel.train(corpus)
+#         linearModel.parse(corpus, clf, vec)
+#         evaluate(corpus)
+#         sys.stdout.write('*' * 20 + '\n')
+
+
+def getAllLangStats(langs=['FR']):
+    res = ''
     for lang in langs:
         corpus = Corpus(lang)
+        res += corpus.langName + ',' + getStats(corpus.trainDataSet, asCSV=True) + ',' + \
+               getStats(corpus.devDataSet, asCSV=True) + ',' + \
+               getStats(corpus.testDataSet, asCSV=True) + '\n'
+    return res
+
+
+def analyzeCorporaAndOracle(langs):
+    header = 'Non recognizable,Interleaving,Embedded,Distributed Embedded,Left Embedded,Right Embedded,Middle Embedded'
+    analysisReport = header + '\n'
+    for lang in langs:
+        sys.stdout.write('Language = {0}\n'.format(lang))
+        corpus = Corpus(lang)
+        analysisReport += corpus.getVMWEReport() + '\n'
         oracle.parse(corpus)
-        clf, vec = linearModel.train(corpus)
-        linearModel.parse(corpus, clf, vec)
-        evaluate(corpus)
-        sys.stdout.write('*' * 20 + '\n')
+        oracle.validate(corpus)
+    with open('../Results/VMWE.Analysis.csv', 'w') as f:
+        f.write(analysisReport)
 
 
-def identifyAttached(lang='FR'):
-    sys.stdout.write('*' * 20 + '\n')
-    sys.stdout.write('Deep model(No padding)\n')
-    corpus = Corpus(lang)
-    oracle.parse(corpus)
-    normalizer = Normalizer(corpus)
-    printReport(normalizer)
-    network = newNetwork.Network(normalizer)
-    newNetwork.train(network.model, normalizer, corpus)
-    parse(corpus, network, normalizer)
-    evaluate(corpus)
-    sys.stdout.write('*' * 20 + '\n')
+# def identifyAttached(lang='FR'):
+#     sys.stdout.write('*' * 20 + '\n')
+#     sys.stdout.write('Deep model(No padding)\n')
+#     corpus = Corpus(lang)
+#     oracle.parse(corpus)
+#     normalizer = Normalizer(corpus)
+#     printReport(normalizer)
+#     network = newNetwork.Network(normalizer)
+#     newNetwork.train(network.model, normalizer, corpus)
+#     parse(corpus, network, normalizer)
+#     evaluate(corpus)
+#     sys.stdout.write('*' * 20 + '\n')
 
 
 if __name__ == '__main__':

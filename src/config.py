@@ -1,19 +1,27 @@
 configuration = {
+    "xp": {
+        "linear": False,
+        "compo": False,
+        "pytorch": False
+
+    },
     "evaluation": {
-        "train": False,
+
         "cv": {"active": False,
                "currentIter": -1,
                "cvFolds": 5,
                },
+        "debug": True,
+        "train": False,
         "corpus": False,
         "dataset": "train",
-        "debug": True,
         "debugTrainNum": 200,
         "test": 0.1,
         "load": False,
         "save": False,
         "cluster": True,
-        "shuffleTrain": False
+        "shuffleTrain": False,
+        "sharedtask2": False
     },
     "preprocessing": {
         "data": {
@@ -40,11 +48,12 @@ configuration = {
             "lemma": False,
             "initialisation": {
                 "active": False,
+                "modifiable": True,
                 "oneHotPos": False,
                 "pos": True,
                 "token": True,
                 "Word2VecWindow": 3,
-                "type": "dataFR.profiles.min.250"  # "frWac200"
+                "type": "frWac200"  # "dataFR.profiles.min.250"  # "frWac200"
             },
             "frequentTokens": True
         },
@@ -72,27 +81,37 @@ configuration = {
             "active": False,
             "gru": False,
             "stacked": False,
-            "rnn1": {"unitNumber": 128,"posUnitNumber":32},
+            "rnn1": {"unitNumber": 128, "posUnitNumber": 32},
             "rnn2": {"unitNumber": 128}
         },
         "train": {
-            "optimizer": "ADAM",
+            "sampling": {
+                "overSampling": False,
+                "importantSentences": False,
+                "importantTransitions": False,
+            },
+            "sampleWeight": False,
+            "visualisation": {"batchStep": 50},
+            "manipulateClassWeights": True,
+            "favorisationCoeff": 1,
+            "optimizer": "adam",
             "loss": "categorical_crossentropy",
-            "verbose": 2,
-            "batchSize": 128,
-            "epochs": 15,
-            "earlyStop": True,
+            "verbose": 0,
+            "batchSize": 64,
+            "epochs": 40,
+            "earlyStop": False,
             "chickPoint": False,
             "validationSplit": .1,
             "monitor": 'val_loss',
-            "minDelta": .2
+            "minDelta": .2,
+            "lr": 0.001
         },
         "predict": {
             "verbose": 0
         },
     },
     "features": {
-        "active": True,
+        "active": False,
         "unigram": {
             "lemma": True,
             "token": True,
@@ -128,9 +147,9 @@ configuration = {
         }
     },
     "path": {
-        "results": '/Results',
+        "results": 'Results',
         "projectPath": '',
-        'corpusRelativePath': "ressources/sharedtask/"
+        'corpusRelativePath': "ressources/sharedtask"
     },
     "files": {
         "bestWeights": "bestWeigths.hdf5",
@@ -145,7 +164,8 @@ configuration = {
         },
         "embedding": {
             "frWac200": "ressources/WordEmb/frWac/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin",
-            "dataFR.profiles.min.250": "ressources/WordEmb/dataFR.profiles.min"
+            "dataFR.profiles.min.250": "ressources/WordEmb/dataFR.profiles.min",
+            "frWiki50":"ressources/WordEmb/vecs50-linear-frwiki"
         }, "reports": {
             "summary": "'summary.json'",
             "normaliser": "normaliser.pkl",
@@ -240,7 +260,7 @@ def printConf():
 
     paddingConf = configuration["model"]["padding"]
     paddingTxt = ''
-    if paddingConf["active"]:
+    if configuration["xp"]["compo"]:
         paddingTxt += 'Padding is active, S0:{0} S1:{1} B:{2}'.format(
             paddingConf["s0Padding"], paddingConf["s1Padding"], paddingConf["bPadding"])
     embConf = configuration["model"]["embedding"]

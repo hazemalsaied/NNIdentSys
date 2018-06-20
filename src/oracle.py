@@ -6,32 +6,26 @@ import os
 from corpus import getParents, isOrphanToken, getVMWEByTokens
 from transitions import *
 
+mwtDictionary = {}
 
-def parse(corpus, printReport=True):
+
+def parse(corpus, printReport=False):
     printSentIdx, printSentNum = 0, 5
     report = ''
-    transNum = {}
+    global mwtDictionary
+    mwtDictionary = corpus.mwtDictionary
     for sent in corpus:
-        if not sent.vMWEs:
-            continue
         sent.initialTransition = Transition(isInitial=True, sent=sent)
         transition = sent.initialTransition
         while not transition.isTerminal():
             nextTransn = Next(transition.configuration)
             nextTransn.apply(transition, sent=transition.sent)
             transition = nextTransn
-            if transition.type not in transNum:
-                transNum[transition.type] = 1
-            else:
-                transNum[transition.type] += 1
         if sent.containsEmbedding or sent.containsInterleaving:
             report += str(sent) + '\n'
         if printReport and len(sent.vMWEs) > 1 and printSentIdx < printSentNum:
             print sent
             printSentIdx += 1
-    if printReport:
-        print sum(transNum.values())
-        print transNum
     if report and False:
         directory = '../Results/Oracle/'
         fileName = '{0}-parsing.embed.interleaving.txt'.format(corpus.langName)
@@ -39,23 +33,6 @@ def parse(corpus, printReport=True):
             os.makedirs(directory)
         with open(os.path.join(directory, fileName), 'w') as f:
             f.write(report)
-
-    transNum = {}
-    for sent in corpus:
-        if sent.vMWEs:
-            transition = sent.initialTransition
-            while not transition.isTerminal():
-                if transition.isImportant():
-                    if transition.type not in transNum:
-                        transNum[transition.type] = 1
-                    else:
-                        transNum[transition.type] += 1
-                transition = transition.next
-        pass
-
-    print transNum.values()
-    for t in transNum:
-        print t, ' : ', round((transNum[t] / float(sum(transNum.values()))) * 100, 2)
 
 
 def Next(config):
@@ -73,8 +50,12 @@ def Next(config):
 
 
 def isMarkAs(config):
+    s0Tokens = getTokens(config.stack[-1]) if config.stack else []
     if config.stack and not isIdentifiedVMWE(config.stack[-1]):
-        s0Tokens = getTokens(config.stack[-1])
+        # if s0Tokens and ((len(s0Tokens) == 1 and s0Tokens[-1] in mwtDictionary) or not isIdentifiedVMWE(config.stack[-1])):
+        # if s0Tokens and len(s0Tokens) == 1 and s0Tokens[-1].getLemma() in mwtDictionary:
+        #    pass
+        # s0Tokens = getTokens(config.stack[-1])
         selectedParents = getParents(s0Tokens)
         if selectedParents:
             if len(selectedParents) == 1:
@@ -157,11 +138,3 @@ def validate(corpus):
 
 def isIdentifiedVMWE(element):
     return isinstance(element, list) and len(element) == 1
-# {<TransitionType.MARK_AS_LVC: 6>: 1196,
-# <TransitionType.MARK_AS_ID: 5>: 1593,
-# <TransitionType.MARK_AS_IREFLV: 4>: 1191}
-# <TransitionType.MARK_AS_OTH: 7>: 1,
-# <TransitionType.MERGE: 2>: 5090,
-
-# <TransitionType.SHIFT: 0>: 104082,
-# <TransitionType.REDUCE: 1>: 98992,

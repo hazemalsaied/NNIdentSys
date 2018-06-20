@@ -261,7 +261,7 @@ featureNumLine = '# Feature number = '
 linearParamLine = '# Feature number = '
 paramLine = '# Parameters = '
 scoreLine = '# F-Score(Ordinary) = 0'
-linearTitleLine = '# XP =  Title: '
+linearTitleLine = '# Language = '
 titleLine = '# XP = '
 
 
@@ -280,6 +280,9 @@ def mineLinearFile(newFile):
                 scores.append(round(int(fScore) / 10000., 4) * 100)
             if line.startswith(linearTitleLine):
                 titles.append(line[len(linearTitleLine):].strip())
+    for i in range(len(scores)):
+        if i < len(titles):
+            print scores[i]  # titles[i]#, scores[i]
     return titles, scores, params
 
 
@@ -414,8 +417,9 @@ def attaachTwoFiles(f1, f2):
 
 if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
-    getScores('FR.max',xpNum=60, showTitle=False, shouldClean=False)
-    # for f in os.listdir('../Reports/Reports'):
-    #     print f
-    #     if not f.endswith('.tex') and not f.lower().endswith('err'):
-    #         getScores(f, shouldClean=False, showTitle=True, xpNum=10)
+    # mineLinearFile('sharedtask2.min.txt')
+    # getScores('tunning4', xpNum=5, showTitle=True, shouldClean=False)
+    for f in os.listdir('../Reports/Reports'):
+        print f
+        if not f.endswith('.tex') and not f.lower().endswith('err'):
+            getScores(f, shouldClean=False, showTitle=True, xpNum=5)

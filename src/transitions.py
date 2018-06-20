@@ -1,5 +1,6 @@
 from enum import Enum
 
+from config import configuration
 from corpus import VMWE, getTokens
 
 
@@ -44,7 +45,9 @@ class Transition(object):
             return config.legalTrans
         transitions = {}
         if config.stack:
-            if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2:
+            if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2 or \
+                    (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token' and
+                     configuration["features"]["dictionary"]["mwt"]):
                 transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,
                                                                 sent=self.sent)
                 transitions[TransitionType.MARK_AS_VPC] = MarkAs(type=TransitionType.MARK_AS_VPC,
@@ -59,6 +62,26 @@ class Transition(object):
                 whiteMerge = Merge(sent=self.sent)
                 transitions[TransitionType.MERGE] = whiteMerge
             transitions[TransitionType.REDUCE] = Reduce(sent=self.sent)
+
+        # if config.stack:
+        #     transitions[TransitionType.REDUCE] = Reduce(sent=self.sent)
+        #     if (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token' and configuration["features"]["dictionary"]["mwt"]) or \
+        #     len(config.stack)> 1:
+        #         #if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2:
+        #         transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,
+        #                                                         sent=self.sent)
+        #         transitions[TransitionType.MARK_AS_VPC] = MarkAs(type=TransitionType.MARK_AS_VPC,
+        #                                                          sent=self.sent)
+        #         transitions[TransitionType.MARK_AS_LVC] = MarkAs(type=TransitionType.MARK_AS_LVC,
+        #                                                          sent=self.sent)
+        #         transitions[TransitionType.MARK_AS_IREFLV] = MarkAs(type=TransitionType.MARK_AS_IREFLV,
+        #                                                             sent=self.sent)
+        #         transitions[TransitionType.MARK_AS_OTH] = MarkAs(type=TransitionType.MARK_AS_OTH,
+        #                                                              sent=self.sent)
+        #     if len(config.stack) > 1:
+        #         whiteMerge = Merge(sent=self.sent)
+        #         transitions[TransitionType.MERGE] = whiteMerge
+
         if config.buffer:
             transitions[TransitionType.SHIFT] = Shift(sent=self.sent)
         config.legalTrans = transitions
@@ -233,14 +256,15 @@ def getType(idx):
 
 
 def getMWTTypeFromStr(type):
-    if type.lower() == 'vpc':
-        return TransitionType.MARK_AS_VPC
-    if type.lower() == 'ireflv':
-        return TransitionType.MARK_AS_IREFLV
-    if type.lower() == 'lvc':
-        return TransitionType.MARK_AS_LVC
-    if type.lower() == 'id':
-        return TransitionType.MARK_AS_ID
+    if type:
+        if type.lower() == 'vpc':
+            return TransitionType.MARK_AS_VPC
+        if type.lower() == 'ireflv':
+            return TransitionType.MARK_AS_IREFLV
+        if type.lower() == 'lvc':
+            return TransitionType.MARK_AS_LVC
+        if type.lower() == 'id':
+            return TransitionType.MARK_AS_ID
     return TransitionType.MARK_AS_OTH
 
 

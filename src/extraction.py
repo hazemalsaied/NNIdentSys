@@ -1,5 +1,3 @@
-import sys
-
 import numpy as np
 
 from config import configuration
@@ -25,7 +23,6 @@ class Extractor:
             featSet.update(extractSent(sent))
         self.featList = list(featSet)
         self.featureNum = len(self.featList)
-
 
     def vectorize(self, trans):
         result = np.zeros(self.featureNum, dtype='int32')

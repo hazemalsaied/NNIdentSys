@@ -13,6 +13,9 @@ oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIden
 oarsub -p "cluster='graphique'" -q production -l nodes=1,walltime=5 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -n HUmlpErr -O out -E HUmlpErr
 ```
 ```
+env MKL_THREADING_LAYER=GNU  python NNIdenSys/src/xpNonCompo.py
+```
+```
 oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=50 /home/halsaied/NNIdenSys/Scripts/attached-test-passive.sh -O out -E Reports/3-noPaddingPOSToken
 oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=75 /home/halsaied/NNIdenSys/Scripts/test-passive.sh -n token.pos.noPadding -O 5.token.pos.noPadding -E 5.token.pos.noPadding.err
 ```
@@ -22,7 +25,7 @@ source miniconda2/bin/activate
 ```
 #Lancer une expérimentation en mode Interactif:
 ```
-oarsub -p "gpu<>'NO'" -l nodes=1,walltime=5 -q production -I 
+oarsub -p "gpu<>'NO'" -l nodes=1,walltime=5 -q production -I
 ```
 ```
 oarsub -p "cluster='graphique'"  -l nodes=1,walltime=5 -q production -I
@@ -60,4 +63,12 @@ rm -rf .theano
 ```
 ```
 chmod +x /home/halsaied/NNIdenSys/Scripts/deep-test-passive.sh
+```
+
+
+oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=20 "NNIdenSys/Scripts/nonCompo.sh xpLbl=learning2" -n learning2 -O Reports/learning2 -E Reports/err
+
+### Mode interactive
+```
+pLbl=xp8  NNIdenSys/Scripts/nonCompoI.sh
 ```

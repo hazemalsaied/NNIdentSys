@@ -21,6 +21,8 @@ def nextTrans(transition, sent, clf, normalizer):
     if len(legalTansDic) == 1:
         return initialize(legalTansDic.keys()[0], sent)
     transTypeValue = clf.predict(transition, normalizer)
+    if configuration["xp"]["pytorch"]:
+        transTypeValue = transTypeValue.view(-1)
     # transTypeValue = normalizer.labelScaler.toRealLabels(transTypeValue)
     transType = getType(transTypeValue)
     if transType in legalTansDic:

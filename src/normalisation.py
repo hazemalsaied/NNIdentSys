@@ -1,4 +1,7 @@
+from collections import Counter
+
 import numpy as np
+from imblearn.over_sampling import RandomOverSampler
 from keras.preprocessing.sequence import pad_sequences
 
 import reports
@@ -12,7 +15,9 @@ class Normalizer:
     """
         Reponsable for tranforming the (config, trans) into training data for the network training
     """
+
     def __init__(self, corpus):
+        self.inputListDimension = 2
         global embConf, initConf
         embConf = configuration["model"]["embedding"]
         initConf = embConf["initialisation"]
@@ -67,33 +72,50 @@ class Normalizer:
                 data[i] = np.asarray(data[i])
         if self.inputListDimension == 1:
             data = np.asarray(data)
+
         return np.asarray(labels), data
 
     def generateLearningDataAttached(self, corpus):
-        labels, tokenData, posData, featureData = [], [], [], []
+        labels, tokenData, posData, featureData, data = [], [], [], [], []
         useFeatures = configuration["features"]["active"]
         for sent in corpus.trainingSents:
-            #if not sent.vMWEs:
-            #    continue
+            if (configuration["model"]["train"]["sampling"]["importantTransitions"] or
+                configuration["model"]["train"]["sampling"]["importantSentences"]) and not sent.vMWEs:
+                continue
             trans = sent.initialTransition
-            while trans.next:
-                tokenIdxs, posIdxs = self.getAttachedIndices(trans)
-                tokenData.append(np.asarray(tokenIdxs))
-                posData.append(np.asarray(posIdxs))
-                # data.append(np.asarray([tokenIdxs, posIdxs]))
-                if useFeatures:
-                    features = np.asarray(self.nnExtractor.vectorize(trans))
-                    featureData.append(np.asarray(features))
-                labels = np.append(labels, trans.next.type.value)
-                trans = trans.next
+            while trans and trans.next:
+                if configuration["model"]["train"]["sampling"]["importantTransitions"] and not trans.isImportant():
+                    trans = trans.next
+                else:
+                    tokenIdxs, posIdxs = self.getAttachedIndices(trans)
+                    tokenData.append(np.asarray(tokenIdxs))
+                    posData.append(np.asarray(posIdxs))
+                    # TODO generalise
+                    data.append(np.asarray(np.concatenate((tokenIdxs, posIdxs))))
+                    if useFeatures:
+                        features = np.asarray(self.nnExtractor.vectorize(trans))
+                        featureData.append(np.asarray(features))
+                    labels = np.append(labels, trans.next.type.value)
+                    trans = trans.next
+
         if useFeatures:
             if configuration["model"]["embedding"]["usePos"]:
                 return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(featureData)]
             else:
-                return np.asarray(labels), [np.asarray(tokenData),  np.asarray(featureData)]
+                return np.asarray(labels), [np.asarray(tokenData), np.asarray(featureData)]
         if configuration["model"]["embedding"]["usePos"]:
-            return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
+            # labels, data = eleminateMarginalClasses(labels, data)
+            self.inputListDimension = 2
+            # labels, data = overSample(data, labels)
+
+            # labels, data = shuffleTwoArrayInParallel(labels, [np.asarray(tokenData), np.asarray(posData)])
+            # data, labels = ros.fit_sample(np.asarray([np.asarray(tokenData), np.asarray(posData)]),
+            # np.asarray(labels))
+            return overSample(data, labels)
+            # np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]  # labels, data #
+            # return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
         else:
+            self.inputListDimension = 1
             return np.asarray(labels), np.asarray(tokenData)
 
     def normalize(self, trans, useEmbedding=False, useConcatenation=False, usePos=False, useFeatures=False):
@@ -174,9 +196,26 @@ class Normalizer:
         return np.asarray(tokenIdxs), np.asarray(posIdxs)
 
 
+def overSample(data, labels):
+    tokenData, posData = [], []
+    if not configuration["model"]["train"]["sampling"]["overSampling"]:
+        for item in data:
+            tokenData.append(np.asarray(item[:4]))
+            posData.append(np.asarray(item[4:]))
+        return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
+    sys.stdout.write('data size before sampling = {0}\n'.format(len(labels)))
+    ros = RandomOverSampler(random_state=0)
+    data, labels = ros.fit_sample(data, labels)
+    for item in data:
+        tokenData.append(np.asarray(item[:4]))
+        posData.append(np.asarray(item[4:]))
+    sys.stdout.write('data size after sampling = {0}\n'.format(len(labels)))
+    return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
+
+
 def padSequence(seq, label, emptyIdx):
-    embConf = configuration["model"]["padding"]
-    return np.asarray(pad_sequences([seq], maxlen=embConf[label], value=emptyIdx))[0]
+    padConf = configuration["model"]["padding"]
+    return np.asarray(pad_sequences([seq], maxlen=padConf[label], value=emptyIdx))[0]
 
 
 def initMatrix(vocabulary, usePos=False, useToken=False):
@@ -201,3 +240,41 @@ def initMatrix(vocabulary, usePos=False, useToken=False):
     for elem in indices:
         matrix[indices[elem]] = embeddings[elem]
     return matrix
+
+
+def eleminateMarginalClasses(labels, data, taux=5):
+    statTuples = sorted(Counter(labels).items())
+    print statTuples
+    for t in statTuples:
+        if t[1] < taux:
+            indices = [i for i, x in enumerate(labels) if x == t[0]]
+            for idx in list(reversed(indices)):
+                labels = numpy.delete(labels, idx)
+                data = numpy.delete(data, idx)
+    print sorted(Counter(labels).items())
+    return labels, data
+
+
+def shuffleTwoArrayInParallel(a, b):
+    a = np.asarray(a)
+    b = np.asarray(b)
+    print a.shape, a.size, b.shape, b.size
+    assert b.shape[0] == 2
+    rangee = range(a.shape[0])
+    random.shuffle(rangee)
+    aTmp, bTmp, cTmp = [], [], []
+    for i in rangee:
+        aTmp.append(a[i])
+        bTmp.append(b[0][i])
+        cTmp.append(b[1][i])
+    return np.asarray(aTmp), [np.asarray(bTmp), np.asarray(cTmp)]
+
+
+def test():
+    a = [1, 2, 3, 4, 5, 6]
+    b = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
+    print shuffleTwoArrayInParallel(np.asarray(a), np.asarray(b))
+
+
+if __name__ == '__main__':
+    test()
