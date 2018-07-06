@@ -5,11 +5,12 @@ import random
 import sys
 
 import numpy
-from keras.models import load_model
-from keras.utils import plot_model
 
 from config import configuration
 
+# from keras.models import load_model
+# from keras.utils import plot_model
+tabs, seperator, doubleSep, finalLine = '\t', '\n' + '_' * 98 + '\n', '\n' + '=' * 98 + '\n', '\n' + '*|' * 49 + '\n'
 PATH_ROOT_REPORTS_DIR = os.path.join(configuration["path"]["projectPath"], 'Reports')
 
 try:
@@ -160,7 +161,7 @@ def saveNetwork(model):
         schemaPath = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
                                   repFiles["schema"])
     plot_model(model, to_file=schemaPath)
-    sys.stdout.write('# Parameters = {0}\n'.format(model.count_params()))
+    # sys.stdout.write('# Parameters = {0}\n'.format(model.count_params()))
     saveModelSummary(model)
     # saveModel(model)
 
@@ -231,9 +232,7 @@ def saveHistory(history):
 
 
 def createHeader(value):
-    sys.stdout.write("*" * 20 + '\n')
-    sys.stdout.write("# XP = {0}\n".format(value))
-    sys.stdout.write("*" * 20 + '\n')
+    sys.stdout.write(doubleSep + doubleSep + tabs + "{0}\n".format(value) + doubleSep)
 
 
 def getBestWeightFilePath():
@@ -257,10 +256,10 @@ def mustSave():
     return False
 
 
-featureNumLine = '# Feature number = '
+featureNumLine = 'Trainable params: '
 linearParamLine = '# Feature number = '
-paramLine = '# Parameters = '
-scoreLine = '# F-Score(Ordinary) = 0'
+paramLine = 'Trainable params: '
+scoreLine = tabs + 'Identification : 0'
 linearTitleLine = '# Language = '
 titleLine = '# XP = '
 
@@ -378,6 +377,7 @@ def getBrefScores(newFile, scores, titles, params, xpNum, showTitle=True):
         paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
         text += '{0}{1}\t\t&\t\t{2}\t\t&\t\t{3}{4}\t\t\\\\\n'.format(
             titleText, meanValue, maxValue, mad, paramsText)
+        print meanValue
     with open('../Reports/Reports/{0}.tex'.format(newFile), 'w') as res:
         res.write(text)
 
@@ -415,11 +415,92 @@ def attaachTwoFiles(f1, f2):
     print res
 
 
+def getStats(newFile):
+    path = '../Reports/Reports/{0}'.format(newFile)
+    langs, mweLEngth, oldMWEs, newMWEs, params, dataSize, scores, correctlyIdentifiedList, nonIdentifiedList \
+        = [], [], [], [], [], [], [], [], []
+    langLine = tabs + 'Language : '
+    mweLengthLine = tabs + 'MWE length mean : '
+    oldMWEsLine = tabs + 'Seen MWEs : '
+    newMWEsLine = tabs + 'New MWEs : '
+    paramLine = 'Total params: '
+    dataSizeLine = tabs + 'data size after sampling = '
+    scoreLine = tabs + 'Identification : '
+    correctlyIdentifiedLine = tabs + 'Correctly identified MWEs'
+    nonIdentifiedLine =  'Non Identified MWEs'
+    correctlyIdentified, nonIdentified = False, False
+    nonIdentifiedDic, nonIdentifiedDic = dict(), dict()
+    with open(path, 'r') as log:
+        for line in log:
+            line = line[:-1]
+            if line.startswith(langLine):
+                langs.append(line[len(langLine):].strip())
+            elif line.startswith(mweLengthLine):
+                mweLEngth.append(line[len(mweLengthLine):].strip())
+            elif line.startswith(oldMWEsLine):
+                oldMWEs.append(line[len(oldMWEsLine)+ 5 :-3].strip())
+            elif line.startswith(newMWEsLine):
+                newMWEs.append(line[len(newMWEsLine)+ 5 :-3].strip())
+            elif line.startswith(paramLine):
+                params.append(line[len(paramLine):].strip())
+            elif line.startswith(dataSizeLine):
+                dataSize.append(line[len(dataSizeLine):].strip())
+            elif line.startswith(scoreLine):
+                scores.append(round(float(line[len(scoreLine):].strip())* 100, 2))
+
+            if line.startswith(correctlyIdentifiedLine):
+                correctlyIdentified = True
+                correctlyIdentifiedDic = {}
+            if correctlyIdentified and line.strip() and not line.startswith('-') and not line.startswith('='):
+                line = line.strip()
+                parts = line.split(' : ')
+                if len(parts) == 2:
+                    correctlyIdentifiedDic[parts[0]] = parts[1]
+
+            if nonIdentifiedLine in line: #line.startswith(nonIdentifiedLine):
+                correctlyIdentified = False
+                correctlyIdentifiedList.append(correctlyIdentifiedDic)
+                correctlyIdentifiedDic = dict()
+                nonIdentified = True
+                nonIdentifiedDic = dict()
+
+            if nonIdentified and line.strip() and not line.startswith('-') and not line.startswith('='):
+                line = line.strip()
+                parts = line.split(' : ')
+                if len(parts) == 2:
+                    nonIdentifiedDic[parts[0]] = parts[1]
+
+            if line.startswith('*|'):
+                nonIdentified = False
+                nonIdentifiedList.append(nonIdentifiedDic)
+    for i in range(len(correctlyIdentifiedList)):
+        for k in correctlyIdentifiedList[i].keys():
+            if int(correctlyIdentifiedList[i][k]) < 5:
+                del correctlyIdentifiedList[i][k]
+        for k in nonIdentifiedList[i].keys():
+            if int(nonIdentifiedList[i][k]) < 3:
+                del nonIdentifiedList[i][k]
+    for i in range(len(correctlyIdentifiedList)):
+        nonIdentifiedList[i] = str(nonIdentifiedList[i]).replace(',', '-')
+        correctlyIdentifiedList[i] = str(correctlyIdentifiedList[i]).replace(',', '-')
+        params[i] = params[i].replace(',', ' ')
+        scores[i] = str(scores[i]).replace(',', '.')
+    res = ''
+
+    for i in range(len(scores)):
+        res += '{0},{1},{2},{3},{4},{5},{6},{7},{8}\n'.format(langs[i], scores[i], mweLEngth[i], oldMWEs[i], newMWEs[i],
+                                                    params[i], dataSize[i], correctlyIdentifiedList[i],
+                                                    nonIdentifiedList[i])
+    with open(path + '.csv', 'w') as f:
+        f.write(res)
+    print res
+
 if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
-    # getScores('tunning4', xpNum=5, showTitle=True, shouldClean=False)
-    for f in os.listdir('../Reports/Reports'):
-        print f
-        if not f.endswith('.tex') and not f.lower().endswith('err'):
-            getScores(f, shouldClean=False, showTitle=True, xpNum=5)
+    getStats('sharedtask2.new')
+    # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
+    # for f in os.listdir('../Reports/Reports'):
+    #     print f
+    #     if not f.endswith('.tex') and not f.lower().endswith('err'):
+    #         getScores(f, shouldClean=False, showTitle=True, xpNum=5)

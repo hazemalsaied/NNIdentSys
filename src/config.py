@@ -2,11 +2,24 @@ configuration = {
     "xp": {
         "linear": False,
         "compo": False,
-        "pytorch": False
-
+        "pytorch": False,
+        "kiperwasser": False,
+        "verbose": 1
+    },
+    "dataset": {
+        "sharedtask2": False,
+        "FTB": False
+    },
+    "sampling": {
+        "overSampling": False,
+        "importantSentences": False,
+        "importantTransitions": False,
+        "sampleWeight": False,
+        "favorisationCoeff": 1,
+        "mweRepeition": 35,
+        "focused": True
     },
     "evaluation": {
-
         "cv": {"active": False,
                "currentIter": -1,
                "cvFolds": 5,
@@ -15,13 +28,12 @@ configuration = {
         "train": False,
         "corpus": False,
         "dataset": "train",
-        "debugTrainNum": 200,
+        "debugTrainNum": 50,
         "test": 0.1,
         "load": False,
         "save": False,
         "cluster": True,
         "shuffleTrain": False,
-        "sharedtask2": False
     },
     "preprocessing": {
         "data": {
@@ -34,14 +46,14 @@ configuration = {
     },
     "model": {
         "padding": {
-            "active": True,
+            "active": False,
             "s0Padding": 5,
             "s1Padding": 5,
             "bPadding": 2,
         },
         "embedding": {
             "active": True,
-            "concatenation": True,
+            "concatenation": False,
             "posEmb": 25,
             "tokenEmb": 200,
             "usePos": True,
@@ -85,15 +97,8 @@ configuration = {
             "rnn2": {"unitNumber": 128}
         },
         "train": {
-            "sampling": {
-                "overSampling": False,
-                "importantSentences": False,
-                "importantTransitions": False,
-            },
-            "sampleWeight": False,
             "visualisation": {"batchStep": 50},
             "manipulateClassWeights": True,
-            "favorisationCoeff": 1,
             "optimizer": "adam",
             "loss": "categorical_crossentropy",
             "verbose": 0,
@@ -132,7 +137,7 @@ configuration = {
         },
         "dictionary": {
             "active": True,
-            "mwt": False,
+            "mwt": True,
             "s0TokenIsMWEToken": True,
             "s0TokensAreMWE": False
         },
@@ -165,7 +170,7 @@ configuration = {
         "embedding": {
             "frWac200": "ressources/WordEmb/frWac/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin",
             "dataFR.profiles.min.250": "ressources/WordEmb/dataFR.profiles.min",
-            "frWiki50":"ressources/WordEmb/vecs50-linear-frwiki"
+            "frWiki50": "ressources/WordEmb/vecs50-linear-frwiki"
         }, "reports": {
             "summary": "'summary.json'",
             "normaliser": "normaliser.pkl",

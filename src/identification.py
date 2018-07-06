@@ -1,8 +1,9 @@
-import logging, datetime
+import logging
 
-import numpy
+import torch
 
 import modelCompo
+import modelKiperwasser
 import modelLinear
 import modelLinearKeras as lkm
 import modelNonCompo
@@ -13,9 +14,9 @@ from corpus import *
 from evaluation import evaluate
 from normalisation import Normalizer
 from parser import parse
-import torch
 
-def xp(langs=['FR'], train=False, cv=False, xpNum=5, title='', initSeed=0):
+
+def xp(langs=['FR'], train=False, corpus=False, cv=False, xpNum=5, title='', initSeed=0):
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
     global seed
@@ -23,50 +24,53 @@ def xp(langs=['FR'], train=False, cv=False, xpNum=5, title='', initSeed=0):
     numpy.random.seed(seed)
     random.seed(seed)
     torch.manual_seed(seed)
+    if title:
+        reports.createHeader(title)
     if not cv and not train:
-        ######################################
-        #   Debug
-        ######################################
-        evlaConf["debug"], evlaConf["train"] = True, False
-        for lang in langs:
-            sys.stdout.write('Debug enabled\n')
-            reports.createHeader(lang + ': ' + title)
-            identify(lang)
-    if train:
+        if corpus:
+            ######################################
+            #   Corpus
+            ######################################
+            evlaConf["debug"], evlaConf["corpus"] = False, True
+            sys.stdout.write(reports.doubleSep + reports.tabs + 'Corpus Mode' + reports.doubleSep)
+            for lang in langs:
+                identify(lang)
+        else:
+            ######################################
+            #   Debug
+            ######################################
+            evlaConf["debug"], evlaConf["train"] = True, False
+            sys.stdout.write(reports.doubleSep + reports.tabs + 'Debug Mode' + reports.doubleSep)
+            for lang in langs:
+                identify(lang)
+    elif train:
         ######################################
         #   Train
         ######################################
-        evlaConf["debug"], evlaConf["train"] = False, True
+        evlaConf["debug"], evlaConf["train"] = False, train
+        sys.stdout.write(reports.doubleSep + reports.tabs + 'Dev Mode' + reports.doubleSep)
         for lang in langs:
             for i in range(xpNum):
                 numpy.random.seed(seed)
                 random.seed(seed)
                 torch.manual_seed(seed)
-                reports.createHeader(lang + ': ' + title)
                 identify(lang)
                 seed += 1
-    if cv:
-        sys.stdout.write('#' * 50 + '\n')
-        sys.stdout.write('#' * 50 + '\n')
-        sys.stdout.write('#' * 50 + '\n')
-        sys.stdout.write("CV is not available yet for this model!\n")
-        sys.stdout.write('#' * 50 + '\n')
-        sys.stdout.write('#' * 50 + '\n')
-        sys.stdout.write('#' * 50 + '\n')
+    elif cv:
         ######################################
         #   CV Debug
         ######################################
+        sys.stdout.write(reports.doubleSep + reports.tabs + 'Debug CV Mode' + reports.doubleSep)
         crossValidation(langs=langs, debug=True)
         ######################################
         #   CV
         ######################################
+        sys.stdout.write(reports.doubleSep + reports.tabs + 'Debug Mode' + reports.doubleSep)
         for i in range(xpNum):
             seed += 1
             numpy.random.seed(seed)
             random.seed(seed)
             torch.manual_seed(seed)
-            if title:
-                reports.createHeader(title)
             # crossValidation()
             ######################################
             #   Load
@@ -76,20 +80,18 @@ def xp(langs=['FR'], train=False, cv=False, xpNum=5, title='', initSeed=0):
 
 
 def identify(lang, loadFolderPath='', load=False):
-    sys.stdout.write('*' * 20 + '\n')
     configuration["evaluation"]["load"] = load
     corpus = Corpus(lang)
+    # corpus.getNewMWEPercentage()
     network, normalizer = parseAndTrain(corpus, loadFolderPath)
     if configuration["xp"]["linear"]:
         modelLinear.parse(corpus, network, normalizer)
     else:
         parse(corpus, network, normalizer)
     evaluate(corpus)
-    sys.stdout.write('*' * 20 + '\n')
 
 
 def parseAndTrain(corpus, loadFolderPath=''):
-    sys.stdout.write('Training started')
     if configuration["evaluation"]["load"]:
         # TODO rewrite the load part
         normalizer = reports.loadNormalizer(loadFolderPath)
@@ -99,11 +101,13 @@ def parseAndTrain(corpus, loadFolderPath=''):
         if not configuration["evaluation"]["cv"]["active"]:
             reports.createReportFolder(corpus.langName)
         oracle.parse(corpus)
+        # corpus.getTransDistribution()
         if configuration["xp"]["linear"]:
             return modelLinear.train(corpus)
         normalizer = Normalizer(corpus)
-        printReport(normalizer)
-        if configuration["xp"]["pytorch"]:
+        if configuration["xp"]["kiperwasser"]:
+            network = modelKiperwasser.train(corpus, normalizer)
+        elif configuration["xp"]["pytorch"]:
             network = modelPytorch.PytorchModel(normalizer)
             modelPytorch.main(network, corpus, normalizer)
         elif configuration["xp"]["compo"]:
@@ -114,26 +118,6 @@ def parseAndTrain(corpus, loadFolderPath=''):
             modelNonCompo.train(network.model, normalizer, corpus)
 
     return network, normalizer
-
-
-def printReport(normalizer):
-    sys.stdout.write('# Padding = {0}\n'.format(configuration["model"]["padding"]))
-    embConf = configuration["model"]["embedding"]
-    sys.stdout.write('# Embedding = {0}\n'.format(embConf["active"]))
-    if embConf["active"]:
-        sys.stdout.write('# Initialisation = {0}\n'.format(embConf["initialisation"]["active"]))
-        sys.stdout.write('# Concatenation = {0}\n'.format(embConf["concatenation"]))
-        if embConf["concatenation"]:
-            sys.stdout.write('# Emb = {0}\n'.format(embConf["posEmb"] + embConf["tokenEmb"]))
-        else:
-            sys.stdout.write('# Lemma  = {0}\n'.format(embConf["lemma"]))
-            sys.stdout.write('# Token/Lemma emb = {0}\n'.format(embConf["tokenEmb"]))
-            sys.stdout.write('# POS = {0}\n'.format(embConf["usePos"]))
-            if embConf["usePos"]:
-                sys.stdout.write('# POS emb = {0}\n'.format(embConf["posEmb"]))
-    sys.stdout.write('# Features = {0}\n'.format(configuration["features"]["active"]))
-    if normalizer.nnExtractor:
-        sys.stdout.write('# Features = {0}\n'.format(normalizer.nnExtractor.featureNum))
 
 
 def crossValidation(langs=['FR'], debug=False):
@@ -177,8 +161,7 @@ def getTrainAndTestSents(corpus, testRange, trainRange):
 
 
 def identifyLinearKeras(langs=['FR'], ):
-    sys.stdout.write('*' * 20 + '\n')
-    sys.stdout.write('Linear model in KERAS\n')
+    sys.stdout.write(reports.doubleSep + reports.tabs + 'Linear model in KERAS' + reports.seperator)
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
     evlaConf["debug"] = False
@@ -192,20 +175,6 @@ def identifyLinearKeras(langs=['FR'], ):
         lkm.train(network.model, corpus, normalizer)
         parse(corpus, network, normalizer)
         evaluate(corpus)
-        sys.stdout.write('*' * 20 + '\n')
-
-
-# def identifyV2(langs=['FR']):
-#     sys.stdout.write('*' * 20 + '\n')
-#     sys.stdout.write('Linear model\n')
-#     print configuration["features"]
-#     for lang in langs:
-#         corpus = Corpus(lang)
-#         oracle.parse(corpus)
-#         clf, vec = linearModel.train(corpus)
-#         linearModel.parse(corpus, clf, vec)
-#         evaluate(corpus)
-#         sys.stdout.write('*' * 20 + '\n')
 
 
 def getAllLangStats(langs=['FR']):
@@ -229,6 +198,7 @@ def analyzeCorporaAndOracle(langs):
         oracle.validate(corpus)
     with open('../Results/VMWE.Analysis.csv', 'w') as f:
         f.write(analysisReport)
+
 
 
 # def identifyAttached(lang='FR'):

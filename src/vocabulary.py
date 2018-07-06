@@ -8,6 +8,7 @@ from keras.utils import to_categorical
 
 from config import configuration
 from corpus import getTokens
+from reports import tabs, seperator, doubleSep
 from wordEmbLoader import getRandomVector, getFreqDic, initialisePOS, unk, empty, number
 
 
@@ -21,14 +22,22 @@ class Vocabulary:
             self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
             self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, self.attachedPos)
             self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, self.attachedTokens)
-            sys.stdout.write('# token vocabulary = {0}\n'.format(len(self.tokenIndices)))
-            sys.stdout.write('# POS vocabulary = {0}\n'.format(len(self.posIndices)))
         else:
             self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus)
             self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus)
             self.indices, self.embeddings = self.getEmbeddingMatrices(corpus)
             self.embDim = embConf["tokenEmb"] + embConf["posEmb"] if embConf["concatenation"] or embConf["usePos"] else \
                 embConf["tokenEmb"]
+
+        if configuration["xp"]["verbose"] == 1:
+            sys.stdout.write(str(self))
+
+    def __str__(self):
+        res = seperator + tabs + 'Vocabulary' + doubleSep
+        res += tabs + 'Tokens := {0} * POS : {1}'.format(len(self.attachedTokens), len(self.attachedPos)) \
+            if not configuration["xp"]["compo"] else ''
+        res += seperator
+        return res
 
     def getEmbeddingMatrices(self, corpus):
         shouldInit = initConf["active"]
@@ -233,7 +242,7 @@ class Vocabulary:
                 trans = trans.next
         if embConf["frequentTokens"]:
             for k in tokenVocab.keys():
-                if tokenVocab[k] == 1 and '_' not in k:
+                if tokenVocab[k] == 1 and k.lower() not in corpus.mweTokenDictionary and '_' not in k:
                     del tokenVocab[k]
             for k in posVocab.keys():
                 if posVocab[k] == 1 and '_' not in k:
@@ -253,9 +262,6 @@ class Vocabulary:
         for k in posVocab.keys():
             posVocab[k] = idx
             idx += 1
-
-        sys.stdout.write('# Tokens vocabulary = {0}\n'.format(len(tokenVocab)))
-        sys.stdout.write('# POSs vocabulary = {0}\n'.format(len(posVocab)))
         return tokenVocab, posVocab
 
     def getAttachedIndices(self, tokens):
@@ -338,9 +344,6 @@ def getTokenEmbeddingMatrices(corpus, attachedTokens=None):
             for line in embF:
                 if line.strip():
                     preTrainedEmb[line.split(' ')[0]] = line.split(' ')[1:-1]
-
-    sys.stdout.write('# embedding: {0}\n'.format(relativeP.split('/')[-1]))
-
     if not configuration["xp"]["compo"]:
         indices = attachedTokens
     else:

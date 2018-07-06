@@ -90,7 +90,8 @@ def train(model, normalizer, corpus):
     validationLabel = labels[int(len(labels) * (1 - trainConf["validationSplit"])):]
     history = model.fit(validationData, validationLabel, epochs=len(history.epoch), batch_size=trainConf["batchSize"],
                         verbose=trainConf["verbose"])
-    sys.stdout.write('# Training time = {0}!\n'.format(datetime.datetime.now() - time))
+    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.datetime.now() - time)
+                     + reports.doubleSep)
     # reports.saveHistory(history)
     if not configuration["evaluation"]["cluster"]:
         plot(history)

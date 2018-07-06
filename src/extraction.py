@@ -1,7 +1,10 @@
+import sys
+
 import numpy as np
 
 from config import configuration
 from corpus import Token, getTokens
+from reports import seperator, tabs, doubleSep
 
 mwtDictionary = None
 mweDictionary = None
@@ -23,6 +26,13 @@ class Extractor:
             featSet.update(extractSent(sent))
         self.featList = list(featSet)
         self.featureNum = len(self.featList)
+        if configuration["xp"]["verbose"] == 1:
+            sys.stdout.write(str(self))
+
+    def __str__(self):
+        report = seperator + tabs + 'Features' + doubleSep
+        report += tabs + ' Features Num: {0}\n'.format(self.featureNum) + seperator
+        return report
 
     def vectorize(self, trans):
         result = np.zeros(self.featureNum, dtype='int32')

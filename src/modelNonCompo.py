@@ -150,7 +150,7 @@ class Network:
             lastLayer = Dropout(0.2)(dense2Layer)
         softmax = Dense(8, activation='softmax')(lastLayer)
         self.model = Model(inputs=inputLayers, outputs=softmax)
-        sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
+        # sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
         print self.model.summary()
 
     def predict(self, trans, normalizer):
@@ -179,18 +179,21 @@ def train(model, normalizer, corpus):
                         validation_split=trainConf["validationSplit"],
                         epochs=trainConf["epochs"],
                         batch_size=trainConf["batchSize"],
-                        verbose=0,
+                        verbose=2,
                         callbacks=getCallBacks(),
                         sample_weight=sampleWeights)
     if trainConf["verbose"]:
         sys.stdout.write('Epoch Losses= ' + str(history.history['loss']))
     trainValidationData(model, normalizer, data, labels, classWeightDic, history)
-    sys.stdout.write('# Training time = {0}\n'.format(datetime.datetime.now() - time))
+    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.datetime.now() - time)
+                     + reports.doubleSep)
 
 
 def getOptimizer():
     trainConf = configuration["model"]["train"]
-    sys.stdout.write('# Network optimizer = {0}, learning rate = {1}\n'.format(trainConf["optimizer"], trainConf["lr"]))
+    sys.stdout.write(reports.seperator + reports.tabs +
+                     'Optimizer : {0},  learning rate = {1}'.format(trainConf["optimizer"], trainConf["lr"])
+                     + reports.seperator)
     lr = trainConf["lr"]
     if trainConf["optimizer"] == 'sgd':
         return optimizers.SGD(lr=lr, momentum=0.9, decay=0.0, nesterov=False)
@@ -211,7 +214,7 @@ def getOptimizer():
 
 
 def trainValidationData(model, normalizer, data, labels, classWeightDic, history):
-    sys.stdout.write('Training over validation data')
+    # sys.stdout.write('Training over validation data\n')
     trainConf = configuration["model"]["train"]
     data, labels = getValidationData(normalizer, data, labels)
     validationLabelsAsInt = [np.where(r == 1)[0][0] for r in labels]
@@ -252,7 +255,7 @@ def getCallBacks():
 
 
 def getSampleWeightArray(labels, classWeightDic):
-    if not configuration["model"]["train"]["sampleWeight"]:
+    if not configuration["sampling"]["sampleWeight"]:
         return None
     sampleWeights = []
     for l in labels:
@@ -267,7 +270,7 @@ def getClassWeights(labels):
     class_weight = sklearn.utils.class_weight.compute_class_weight('balanced', classes, labels)
     res = dict()
     for i, v in enumerate(classes):
-        res[v] = class_weight[i] * configuration["model"]["train"]["favorisationCoeff"] if v > 1 \
-            else class_weight[i]
-    sys.stdout.write('class_weight' + str(res) + '\n')
+        res[int(v)] = int(class_weight[i] * configuration["sampling"]["favorisationCoeff"]) if v > 1 \
+            else int(class_weight[i])
+    sys.stdout.write(reports.tabs + 'Class weights : ' + str(res))
     return res

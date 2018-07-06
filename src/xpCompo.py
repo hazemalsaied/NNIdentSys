@@ -185,7 +185,7 @@ if __name__ == '__main__':
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
 
-    initImpactTotal(train=True, langs=['FR'])
+    # initImpactTotal(train=True, langs=['FR'])
 
     # exploreInitParams(useLemma=True, train=True)
     # denseImpact(useLemma=True, train=True)

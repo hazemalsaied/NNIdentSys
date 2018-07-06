@@ -6,27 +6,32 @@ from extractionLinear import extract, getFeatures
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.multiclass import OutputCodeClassifier
 from sklearn.svm import LinearSVC
-
+from sklearn.linear_model import  LogisticRegression
 from transitions import *
+import reports
 
-
-def train(corpus):
+def train(corpus, svm=False):
     sys.stdout.write('Linear model \n')
     labels, featureDicss = extract(corpus)
     startTime = datetime.now()
     vec = DictVectorizer()
     features = vec.fit_transform(featureDicss)
     sys.stdout.write('# Feature number = {0}\n'.format(len(vec.vocabulary_)))
-    clf = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=0)
+    if svm:
+        clf = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=0)
+    else:
+        clf = LogisticRegression(solver='sag')
     sys.stdout.write('# model = LinearSVC\n')
-    if configuration["model"]["train"]["sampling"]["overSampling"]:
+    if configuration["sampling"]["overSampling"]:
         sys.stdout.write('Train data = {0}, '.format(features.shape[0]))
         ros = RandomOverSampler(random_state=0)
         features, labels = ros.fit_sample(features, labels)
         sys.stdout.write('Train data = {0}, '.format(features.shape[0]))
 
+    # clf.fit(features.toarray(), labels) .tocsr()
     clf.fit(features, labels)
-    sys.stdout.write('# Training time = {0} minutes!\n'.format(str(datetime.now().minute - startTime.minute)))
+    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.datetime.now() - time)
+                     + reports.doubleSep)
     return clf, vec
 
 
@@ -67,3 +72,4 @@ def initializeSent(corpus):
     for sent in corpus.testingSents:
         sent.identifiedVMWEs = []
         sent.initialTransition = None
+

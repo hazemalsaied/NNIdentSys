@@ -1,8 +1,21 @@
+import sys
+
 from config import *
 from identification import xp
 
+langs = ['FR']
+xpNum = 5
+train = True
+cv = False
 
-def exploreTokenPOSImpact(tokenDomain, posDomain, train=False, cv=False, xpNum=10, langs=['FR']):
+allSharedtask1Lang = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT',
+                      'LT', 'MT', 'PL', 'PT', 'RO', 'SV', 'SL', 'TR']
+
+allSharedtask2Lang = ['BG', 'DE', 'EL', 'EN', 'ES', 'EU', 'FA', 'FR', 'HE', 'HI',
+                      'HR', 'HU', 'IT', 'LT', 'PL', 'PT', 'RO', 'SL', 'TR']
+
+
+def exploreTokenPOSImpact(tokenDomain, posDomain):
     desactivateMainConf()
     configuration["model"]["embedding"]["active"] = True
     for tokenEmb in tokenDomain:
@@ -15,7 +28,7 @@ def exploreTokenPOSImpact(tokenDomain, posDomain, train=False, cv=False, xpNum=1
             mlpConf["active"] = True
 
 
-def exploreDenseImpact(denseUniNumDomain, tokenEmb, posEmb, train=False, cv=False, xpNum=10, title='', langs=['FR']):
+def exploreDenseImpact(denseUniNumDomain, tokenEmb, posEmb, title=''):
     desactivateMainConf()
     configuration["model"]["embedding"]["tokenEmb"] = tokenEmb
     configuration["model"]["embedding"]["posEmb"] = posEmb
@@ -27,7 +40,7 @@ def exploreDenseImpact(denseUniNumDomain, tokenEmb, posEmb, train=False, cv=Fals
         xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title=title)
 
 
-def tableEmb(useFeatures=False, train=False, cv=False, xpNum=10, langs=['FR']):
+def tableEmb(useFeatures=False):
     tokenDmain = [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300]
     posDomain = [8, 16, 24, 32, 40, 48, 56, 64, 72]
     title = ''
@@ -36,15 +49,13 @@ def tableEmb(useFeatures=False, train=False, cv=False, xpNum=10, langs=['FR']):
         configuration["features"]["active"] = True
         title = 'Features '
     setEmbConf(usePos=False, init=False)
-    exploreEmbImpact(tokenDmain, train=train, cv=cv, xpNum=xpNum, title=title)
-    exploreEmbImpact(tokenDmain, useLemma=True, train=train, cv=cv, xpNum=xpNum, title=title)
-    exploreEmbImpact(tokenDmain, posDomain, usePos=True, train=train, cv=cv, xpNum=xpNum, title=title)
-    exploreEmbImpact(tokenDmain, posDomain, usePos=True, useLemma=True, train=train, cv=cv, xpNum=xpNum, title=title)
+    exploreEmbImpact(tokenDmain, title=title)
+    exploreEmbImpact(tokenDmain, useLemma=True, title=title)
+    exploreEmbImpact(tokenDmain, posDomain, usePos=True, title=title)
+    exploreEmbImpact(tokenDmain, posDomain, usePos=True, useLemma=True, title=title)
 
 
-def exploreEmbImpact(tokenEmbs, posEmbs=None, denseDomain=None, useLemma=False, usePos=False, train=False, cv=False,
-                     xpNum=10, title='',
-                     langs=['FR']):
+def exploreEmbImpact(tokenEmbs, posEmbs=None, denseDomain=None, useLemma=False, usePos=False, title=''):
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True
     embConf["usePos"] = usePos
@@ -73,10 +84,10 @@ def exploreEmbImpact(tokenEmbs, posEmbs=None, denseDomain=None, useLemma=False, 
     embConf["lemma"] = False
 
 
-def denseImpact(useLemma=False, train=True, langs=['FR']):
+def denseImpact(useLemma=False):
     embConf = configuration["model"]["embedding"]
     desactivateMainConf()
-    tokenEmbDic = {}
+    tokenEmbDic = dict()
     tokenEmbDic[125] = [56, 64]
     tokenEmbDic[150] = [64]
     tokenEmbDic[175] = [64]
@@ -94,7 +105,7 @@ def denseImpact(useLemma=False, train=True, langs=['FR']):
                    title=res + ' {0} POS {1} Dense {2}'.format(tokenEmb, posEmb, denseUnitNum))
 
 
-def dense2Impact(useLemma=False, train=True, langs=['FR']):
+def dense2Impact(useLemma=False):
     embConf = configuration["model"]["embedding"]
     desactivateMainConf()
     if useLemma:
@@ -119,7 +130,7 @@ def dense2Impact(useLemma=False, train=True, langs=['FR']):
            format(tokenEmb, posEmb, dense1UniNum, denseUnitNum))
 
 
-def exploreInitParams(useLemma=False, train=True, langs=['FR']):
+def exploreInitParams(useLemma=False):
     embConf = configuration["model"]["embedding"]
     desactivateMainConf()
     tokenEmbs = [200, 250]
@@ -138,7 +149,7 @@ def exploreInitParams(useLemma=False, train=True, langs=['FR']):
                    format(tokenEmb, posEmb, dense1UnitNum))
 
 
-def initImpact(tokenEmb, posEmb, DenseUnitNum, initType="frWac200", useLemma=False, train=True, xpNum=10, langs=['FR']):
+def initImpact(tokenEmb, posEmb, DenseUnitNum, initType="frWac200", useLemma=False):
     embConf = configuration["model"]["embedding"]
     setEmbConf(tokenEmb=tokenEmb, posEmb=posEmb, usePos=True, init=True)
     embConf["lemma"] = useLemma
@@ -149,33 +160,33 @@ def initImpact(tokenEmb, posEmb, DenseUnitNum, initType="frWac200", useLemma=Fal
        format('Lemma' if useLemma else 'Token', tokenEmb, posEmb, DenseUnitNum, initType, maximisation))
 
 
-def initImpactTotal(train=False, langs=['FR']):
+def initImpactTotal():
     desactivateMainConf()
-    initImpact(200, 96, 384, initType="frWac200", train=train, langs=langs)
-    initImpact(200, 96, 384, initType="frWac200", useLemma=True, train=train, langs=langs)
+    initImpact(200, 96, 384, initType="frWac200")
+    initImpact(200, 96, 384, initType="frWac200", useLemma=True)
     configuration["model"]["embedding"]["frequentTokens"] = False
-    initImpact(200, 96, 384, initType="frWac200", train=train, langs=langs)
-    initImpact(200, 96, 384, initType="frWac200", useLemma=True, train=train, langs=langs)
+    initImpact(200, 96, 384, initType="frWac200")
+    initImpact(200, 96, 384, initType="frWac200", useLemma=True)
 
     configuration["model"]["embedding"]["frequentTokens"] = True
 
-    initImpact(250, 128, 384, initType="dataFR.profiles.min.250", train=train, langs=langs)
-    initImpact(250, 128, 512, initType="dataFR.profiles.min.250", useLemma=True, train=train, langs=langs)
+    initImpact(250, 128, 384, initType="dataFR.profiles.min.250")
+    initImpact(250, 128, 512, initType="dataFR.profiles.min.250", useLemma=True)
     configuration["model"]["embedding"]["frequentTokens"] = False
-    initImpact(250, 128, 384, initType="dataFR.profiles.min.250", train=train, langs=langs)
-    initImpact(250, 128, 512, initType="dataFR.profiles.min.250", useLemma=True, train=train, langs=langs)
+    initImpact(250, 128, 384, initType="dataFR.profiles.min.250")
+    initImpact(250, 128, 512, initType="dataFR.profiles.min.250", useLemma=True)
 
 
-def initImpactTotal2(train=False, langs=['FR'], xpNum=20):
+def initImpactTotal2():
     desactivateMainConf()
-    initImpact(200, 56, 32, initType="frWac200", useLemma=True, train=train, langs=langs, xpNum=xpNum)
-    initImpact(200, 64, 64, initType="frWac200", useLemma=True, train=train, langs=langs, xpNum=xpNum)
+    initImpact(200, 56, 32, initType="frWac200", useLemma=True)
+    initImpact(200, 64, 64, initType="frWac200", useLemma=True)
 
-    initImpact(250, 56, 32, initType="dataFR.profiles.min.250", useLemma=True, train=train, langs=langs, xpNum=xpNum)
-    initImpact(250, 64, 64, initType="dataFR.profiles.min.250", useLemma=True, train=train, langs=langs, xpNum=xpNum)
+    initImpact(250, 56, 32, initType="dataFR.profiles.min.250", useLemma=True)
+    initImpact(250, 64, 64, initType="dataFR.profiles.min.250", useLemma=True)
 
 
-def exploreFRMax(train=False, xpNum=10, initSeed=0):
+def exploreFRMax(initSeed=0):
     desactivateMainConf()
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True
@@ -206,7 +217,7 @@ def exploreAllLangs(shuffle=False):
     xp(langs=['RO', 'CS', 'PT', 'TR', 'IT', 'LT', 'PL'], train=True)
 
 
-def exploreRnn(train=True, useDense=True):
+def exploreRnn(useDense=True):
     desactivateMainConf()
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True
@@ -224,24 +235,30 @@ def exploreRnn(train=True, useDense=True):
     xp(langs=['FR'], train=train)
 
 
-def xpMinimal(train=False, xpNum=10, title='', initSeed=0):
+def xpMinimal(title='', initSeed=0, enableInit=False):
     desactivateMainConf()
     embConf = configuration["model"]["embedding"]
     embConf["active"] = True
     embConf["lemma"] = True
     embConf["usePos"] = True
-    embConf["tokenEmb"] = 48
-    embConf["posEmb"] = 24
+    embConf["tokenEmb"] = 50
+    embConf["posEmb"] = 25
+    if enableInit:
+        initConf = configuration["model"]["embedding"]["initialisation"]
+        initConf["active"] = True
+        initConf["type"] = 'frWiki50'
+
     dense1 = configuration["model"]["mlp"]["dense1"]
     dense1["active"] = True
     dense1["unitNumber"] = 24
-    xp(langs=['FR'], train=train, xpNum=xpNum, title=title, initSeed=initSeed)
+
+    xp(langs=langs, train=train, xpNum=xpNum, title=title, initSeed=initSeed)
 
 
-def exploreSampling(train=True):
+def exploreSampling():
     configuration["xp"]["compo"] = False
     configuration["evaluation"]["shuffleTrain"] = False
-    fcDomain = [1, 2, 5, 10]
+    # fcDomain = [1, 2, 5, 10]
     fcOSDomain = [2, 5, 10]
     # xpSampling(train=train, title='referencial')
     #
@@ -265,34 +282,34 @@ def exploreSampling(train=True):
     # for fc in fcOSDomain:
     #     xpSampling(train=train, impSent=True, OS=True, FC=fc)
 
-    xpSampling(train=train, OS=True)
+    xpSampling(OS=True)
 
     for fc in fcOSDomain:
-        xpSampling(train=train, OS=True, FC=fc)
+        xpSampling(OS=True, FC=fc)
 
 
-def xpSampling(train=True, xpNum=10, impSent=False, impTrans=False, OS=False, FC=0, title=''):
+def xpSampling(impSent=False, impTrans=False, OS=False, FC=0, title=''):
     title += 'impSent ' if impSent else ''
     title += 'impTrans ' if impTrans else ''
     title += 'overSampling ' if OS else ''
     title += 'favorisationCoeff = {0}'.format(FC) if FC else ''
 
-    configuration["model"]["train"]["sampling"]["overSampling"] = OS
-    configuration["model"]["train"]["favorisationCoeff"] = FC
-    configuration["model"]["train"]["sampleWeight"] = True if FC else False
+    configuration["sampling"]["overSampling"] = OS
+    configuration["sampling"]["favorisationCoeff"] = FC
+    configuration["sampling"]["sampleWeight"] = True if FC else False
 
-    configuration["model"]["train"]["sampling"]["importantSentences"] = impSent
-    configuration["model"]["train"]["sampling"]["importantTransitions"] = impTrans
-    xpMinimal(train=train, xpNum=xpNum, title=title)
-    configuration["model"]["train"]["sampling"]["importantTransitions"] = False
-    configuration["model"]["train"]["sampling"]["importantSentences"] = False
+    configuration["sampling"]["importantSentences"] = impSent
+    configuration["sampling"]["importantTransitions"] = impTrans
+    xpMinimal(title=title)
+    configuration["sampling"]["importantTransitions"] = False
+    configuration["sampling"]["importantSentences"] = False
 
 
-def exploreLearning(train=True, xpNum=5):
-    configuration["model"]["train"]["sampling"]["importantSentences"] = True
-    configuration["model"]["train"]["sampling"]["overSampling"] = True
-    configuration["model"]["train"]["favorisationCoeff"] = 10
-    configuration["model"]["train"]["sampleWeight"] = True
+def exploreLearning():
+    configuration["sampling"]["importantSentences"] = True
+    configuration["sampling"]["overSampling"] = True
+    configuration["sampling"]["favorisationCoeff"] = 10
+    configuration["sampling"]["sampleWeight"] = True
     lrDomain = dict()
     lrDomain['sgd'] = [0.005, 0.01, 0.02, 0.05, 0.1]
     lrDomain['rmsprop'] = [0.0005, 0.001, 0.002, 0.005, 0.01]
@@ -306,61 +323,141 @@ def exploreLearning(train=True, xpNum=5):
         trainConf["optimizer"] = opt
         for lr in lrDomain[opt]:
             trainConf["lr"] = lr
-            xpMinimal(train=train, xpNum=xpNum, title='')
+            xpMinimal(title='')
 
 
-def exploreLearning2(train=True, xpNum=5):
+def exploreLearning2():
     lrDomain = dict()
-    lrDomain['sgd'] = [0.001, 0.0008, 0.0005, 0.0001]
-    lrDomain['adadelta'] = [0.05, 0.02, 0.01, 0.005]
-    lrDomain['adamax'] = [0.02, 0.05, 0.08, 0.1]
+    # lrDomain['sgd'] = [0.001, 0.0008, 0.0005, 0.0001]
+    # lrDomain['sgd'] = [0.005]
+    lrDomain['adadelta'] = [0.5, 0.05, 0.02, 0.01, 0.005]
+    lrDomain['adamax'] = [0.002, 0.025, 0.05, 0.08, 0.1]
     trainConf = configuration["model"]["train"]
-    for opt in ['sgd', 'adagrad', 'adamax']:
+    for opt in ['adadelta', 'adamax']:
         trainConf["optimizer"] = opt
         for lr in lrDomain[opt]:
             trainConf["lr"] = lr
-            xpMinimal(train=train, xpNum=xpNum, title='')
+            xpMinimal()
 
 
 def expolreFavorisationCoeff():
-    configuration["model"]["train"]["sampling"]["importantSentences"] = True
-    configuration["model"]["train"]["sampling"]["overSampling"] = False
-    for coeff in [15, 25, 40, 50, 75, 90, 125]:
-        configuration["model"]["train"]["favorisationCoeff"] = coeff
-        xpMinimal(True, xpNum=5)
+    configuration["sampling"]["importantSentences"] = True
+    configuration["sampling"]["overSampling"] = False
+    configuration["sampling"]["sampleWeight"] = True
+
+    for coeff in [25, 50, 75, 90, 115, 140]:
+        configuration["sampling"]["favorisationCoeff"] = coeff
+        xpMinimal()
+
+
+def setOptimalParameters():
+    samling = configuration["sampling"]
+    samling["importantSentences"] = True
+    samling["overSampling"] = True
+    samling["sampleWeight"] = True
+    samling["favorisationCoeff"] = 10
+
+    configuration["model"]["train"]["optimizer"] = 'adagrad'
+    configuration["model"]["train"]["lr"] = 0.02
+
+    embConf = configuration["model"]["embedding"]
+    embConf["active"] = True
+    embConf["usePos"] = True
+    embConf["lemma"] = True
+    embConf["posEmb"] = 15
+    embConf["tokenEmb"] = 200
+    setDense1Conf(unitNumber=25)
+
+
+def dautresXps1():
+    setOptimalParameters()
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum)
+
+    setDense1Conf(unitNumber=20)
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='Dense 20')
+
+    setDense1Conf(unitNumber=15)
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='Dense 15')
+
+    setDense1Conf(unitNumber=10)
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='Dense 10')
+
+
+def dautresXps2():
+    setOptimalParameters()
+    setDense1Conf(active=False)
+    # xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='No Dense')
+
+    setOptimalParameters()
+    initConf = configuration["model"]["embedding"]["initialisation"]
+    initConf["active"] = True
+    initConf["type"] = "dataFR.profiles.min.250"
+    embConf = configuration["model"]["embedding"]
+    embConf["tokenEmb"] = 250
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='Init selvio')
+    initConf["type"] = "frWac200"
+    embConf["tokenEmb"] = 200
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='Init fauconnier')
+    initConf["active"] = False
+
+
+def dautresXps3():
+    setOptimalParameters()
+
+    configuration["sampling"]["favorisationCoeff"] = 15
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='favorisationCoeff 15')
+
+    configuration["sampling"]["favorisationCoeff"] = 20
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='favorisationCoeff 20')
+
+    configuration["sampling"]["favorisationCoeff"] = 30
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='favorisationCoeff 30')
+
+
+def FTB(train=False, corpus=False, useAdam=False,epochs=40):
+    configuration["dataset"]["FTB"] = True
+    setOptimalParameters()
+    if useAdam:
+        configuration["model"]["train"]["optimizer"] = 'adam'
+        configuration["model"]["train"]["lr"] = 0.01
+    configuration["model"]["train"]["epochs"] = epochs
+    xp(['FR'], train=train, corpus=corpus)
+    # for tokEmb in [50, 100, 200]:
+    #     configuration["model"]["embedding"]["tokenEmb"] = tokEmb
+    #     xp(['FR'], train=True)
+    #
+    # configuration["model"]["embedding"]["tokenEmb"] = 50
+    #
+    # samling = configuration["sampling"]
+    # samling["sampleWeight"] = False
+    # xp(['FR'], train=True)
+    # samling["overSampling"] = False
+    # xp(['FR'], train=True)
+
+
+def allLangs(languages, sharedtask2=False, train=False, lemmaEmb=200):
+    configuration["dataset"]["sharedtask2"] = sharedtask2
+    setOptimalParameters()
+    configuration["model"]["embedding"]["tokenEmb"] = lemmaEmb
+    xp(languages, corpus=True,train=train)
+
+
+def runKiperwasser(train=False, epochs=3):
+    configuration["xp"]["kiperwasser"] = True
+    configuration["model"]["train"]["epochs"] = epochs
+    setOptimalParameters()
+    xp(['FR'], train=train)
 
 
 if __name__ == '__main__':
-    configuration["model"]["train"]["sampling"]["importantSentences"] = True
-    configuration["model"]["train"]["sampling"]["overSampling"] = True
-    configuration["model"]["train"]["sampleWeight"] = True
-    configuration["model"]["train"]["favorisationCoeff"] = 10
+    reload(sys)
+    sys.setdefaultencoding('utf8')
 
-    # parser = argparse.ArgumentParser(description='Process some xps.')
+    # runKiperwasser(train=False, epochs=2)
 
-    # parser.add_argument('xpLbl')
-    # args = parser.parse_args()
-    # xp1, xp2, xp3, xp4, xp5, xp6, xp7, xp8 = [30], [40], [50], [60], [70], [100], [125], [150]
-    xpDic = {
-        'xp1': [30], 'xp2': [40], 'xp3': [50], 'xp4': [60]
-        #'xp5': [70], 'xp6': [100], 'xp7': [125], 'xp8': [150]
-    }
-    # if args.xpLbl == 'learning2':
-    #    print 'learning2'
-    # exploreLearning2(train=True)
-
-    # if args.xpLbl.startswith('xp'):
-    #    if args.xpLbl in xpDic:
-    # print args.xpLbl
-    # exploreEmbImpact(xpDic[args.xpLbl], [15, 25, 35, 50], [25, 75, 125, 250],
-    #                 useLemma=True, usePos=True, train=False, xpNum=5, langs=['FR'])
-    for dom in xpDic.values():
-        exploreEmbImpact(dom, [15, 25, 35, 50], [25, 75, 125, 250],
-                         useLemma=True, usePos=True, train=False, xpNum=5, langs=['FR'])
-
-    # if args.xpLbl == 'coeff':
-    # for coeff in [15, 20, 25, 30]:
-    #     configuration["model"]["train"]["favorisationCoeff"] = coeff
-    #     xpMinimal(True, 5)
-    # configuration["xp"]["pytorch"] = True
-    # xpMinimal(True, 1)
+    # allLangs(allSharedtask1Lang, sharedtask2=False)
+    # allLangs(allSharedtask2Lang, sharedtask2=True)
+    configuration["sampling"]["focused"] = True
+    configuration["sampling"]["mweRepeition"] = 40
+    allLangs(['FR'], train=True, sharedtask2=False)
+    # FTB(corpus=False, epochs=40)

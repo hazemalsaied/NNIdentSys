@@ -10,7 +10,7 @@ from corpus import getTokens
 from reports import *
 from transitions import TransitionType
 from vocabulary import Vocabulary
-
+import reports
 
 class LinearKerasModel:
     def __init__(self, vocabSize):
@@ -43,7 +43,8 @@ def train(model, corpus, normaliser):
     model.fit(data, labels.toarray(), epochs=trainConf["epochs"],
               batch_size=trainConf["batchSize"],
               verbose=trainConf["verbose"])
-    sys.stdout.write('# Training time = {0}\n'.format(datetime.datetime.now() - time))
+    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.datetime.now() - time)
+                     + reports.doubleSep)
 
 
 s0Padding = 4

@@ -65,7 +65,8 @@ class Transition(object):
 
         # if config.stack:
         #     transitions[TransitionType.REDUCE] = Reduce(sent=self.sent)
-        #     if (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token' and configuration["features"]["dictionary"]["mwt"]) or \
+        #     if (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token' and
+        #           configuration["features"]["dictionary"]["mwt"]) or \
         #     len(config.stack)> 1:
         #         #if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2:
         #         transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,

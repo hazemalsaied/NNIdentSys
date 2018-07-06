@@ -7,17 +7,20 @@ import reports
 from config import configuration
 
 
-def evaluate(corpus, foldIdx=-1):
+def evaluate(corpus, foldIdx=-1, categorization=False):
     tp, p, t, tpCat, pCat, tCat = getStatistics(corpus)
-    scores = calculateScores(tp, p, t, 'Ordinary')
-    scores += calculateScores(tpCat, pCat, tCat, 'Categorization')
-    catList = ['lvc', 'ireflv', 'vpc', 'id', 'oth']
-    for cat in catList:
-        tp, p, t = getCategoryStatistics(corpus, cat)
-        scores += calculateScores(tp, p, t, cat)
+    scores = calculateScores(tp, p, t, 'Identification')
+    if categorization:
+        scores += calculateScores(tpCat, pCat, tCat, 'Categorization')
+        catList = ['lvc', 'ireflv', 'vpc', 'id', 'oth']
+        for cat in catList:
+            tp, p, t = getCategoryStatistics(corpus, cat)
+            scores += calculateScores(tp, p, t, cat)
     createMWEFiles(corpus, foldIdx)
     # reports.saveSettings()
     reports.saveScores(scores)
+    corpus.analyzeTestSet()
+    sys.stdout.write(reports.finalLine)
     return scores
 
 
@@ -98,8 +101,8 @@ def calculateScores(tp, p, t, title):
     :return: Fscore, recall, precision
     """
     if p == 0 or t == 0 or tp == 0:
-        if title == 'Ordinary':
-            sys.stdout.write('# F-Score({0}) = {1}, Recall: {2}, Precision: {3}\n'.format(title, 0, 0, 0))
+        if title == 'Identification':
+            sys.stdout.write(reports.tabs + '{0} : {1}\n'.format(title, 0))
         return ['', 0, 0, 0]
 
     p = float(tp / p)
@@ -108,7 +111,7 @@ def calculateScores(tp, p, t, title):
     f = round(2 * (r * p) / (r + p), 3)
     r = round(r, 3)
     p = round(p, 3)
-    sys.stdout.write('# F-Score({0}) = {1}, Recall: {2}, Precision: {3}\n'.format(title, f, r, p))
+    sys.stdout.write(reports.tabs + '{0} : {1}\n'.format(title, f))
     return [title, f, r, p]
 
 

@@ -25,6 +25,7 @@ class Normalizer:
             None, None, None, None, None
         if embConf["active"]:
             self.vocabulary = Vocabulary(corpus)
+            self.allImportantLemmasInVocab(corpus)
             if initConf["active"]:
                 if embConf["concatenation"]:
                     self.weightMatrix = initMatrix(self.vocabulary)
@@ -39,6 +40,31 @@ class Normalizer:
         if configuration["features"]["active"]:
             self.nnExtractor = Extractor(corpus)
         reports.saveNormalizer(self)
+        if configuration["xp"]["verbose"] == 1:
+            sys.stdout.write(str(self))
+
+    def allImportantLemmasInVocab(self, corpus):
+        importantsAsUnk = 0
+        for t in corpus.mweTokenDictionary:
+            if t not in self.vocabulary.tokenIndices:
+                importantsAsUnk += 1
+        if importantsAsUnk:
+            sys.stdout.write(tabs + 'Attention: important lemmas are not in vocbulary')
+        return importantsAsUnk
+
+    def __str__(self):
+        report = seperator + tabs + 'Padding is activated' + doubleSep \
+            if configuration["model"]["padding"]["active"] else ''
+        if embConf["active"]:
+            report += tabs + 'Embedding' + doubleSep
+            report += tabs + 'Initialisation = {0}\n\tConcatenation = {1}\n'. \
+                format(embConf["initialisation"]["type"] if embConf["initialisation"]["active"] else 'None',
+                       embConf["concatenation"])
+            report += tabs + '{0} : {1}\n\tPOS = {2} \n'. \
+                format('Lemma' if embConf["lemma"] else 'Token',
+                       embConf["tokenEmb"],
+                       embConf["posEmb"] if embConf["usePos"] else 'None')
+        return report
 
     def generateLearningData(self, corpus):
         embConf = configuration["model"]["embedding"]
@@ -76,15 +102,17 @@ class Normalizer:
         return np.asarray(labels), data
 
     def generateLearningDataAttached(self, corpus):
+        imporSents = len(corpus.trainingSents)
         labels, tokenData, posData, featureData, data = [], [], [], [], []
         useFeatures = configuration["features"]["active"]
         for sent in corpus.trainingSents:
-            if (configuration["model"]["train"]["sampling"]["importantTransitions"] or
-                configuration["model"]["train"]["sampling"]["importantSentences"]) and not sent.vMWEs:
+            if (configuration["sampling"]["importantTransitions"] or
+                configuration["sampling"]["importantSentences"]) and not sent.vMWEs:
+                imporSents -= 1
                 continue
             trans = sent.initialTransition
             while trans and trans.next:
-                if configuration["model"]["train"]["sampling"]["importantTransitions"] and not trans.isImportant():
+                if configuration["sampling"]["importantTransitions"] and not trans.isImportant():
                     trans = trans.next
                 else:
                     tokenIdxs, posIdxs = self.getAttachedIndices(trans)
@@ -98,6 +126,9 @@ class Normalizer:
                     labels = np.append(labels, trans.next.type.value)
                     trans = trans.next
 
+        sys.stdout.write(reports.seperator + reports.tabs + 'Sampling' + reports.doubleSep)
+        sys.stdout.write(reports.tabs + '{0} importatnt sents of {1}\n'.
+                         format(imporSents, len(corpus.trainingSents)))
         if useFeatures:
             if configuration["model"]["embedding"]["usePos"]:
                 return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(featureData)]
@@ -111,7 +142,10 @@ class Normalizer:
             # labels, data = shuffleTwoArrayInParallel(labels, [np.asarray(tokenData), np.asarray(posData)])
             # data, labels = ros.fit_sample(np.asarray([np.asarray(tokenData), np.asarray(posData)]),
             # np.asarray(labels))
+            if configuration["sampling"]["focused"]:
+                data, labels = overSampleImporTrans(data, labels, corpus, self)
             return overSample(data, labels)
+            # return overSample(data, labels)
             # np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]  # labels, data #
             # return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
         else:
@@ -198,19 +232,78 @@ class Normalizer:
 
 def overSample(data, labels):
     tokenData, posData = [], []
-    if not configuration["model"]["train"]["sampling"]["overSampling"]:
+    if not configuration["sampling"]["overSampling"]:
         for item in data:
             tokenData.append(np.asarray(item[:4]))
             posData.append(np.asarray(item[4:]))
         return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
-    sys.stdout.write('data size before sampling = {0}\n'.format(len(labels)))
+    sys.stdout.write(reports.tabs + 'data size before sampling = {0}\n'.format(len(labels)))
     ros = RandomOverSampler(random_state=0)
     data, labels = ros.fit_sample(data, labels)
     for item in data:
         tokenData.append(np.asarray(item[:4]))
         posData.append(np.asarray(item[4:]))
-    sys.stdout.write('data size after sampling = {0}\n'.format(len(labels)))
+    sys.stdout.write(reports.tabs + 'data size after sampling = {0}\n'.format(len(labels)))
+    labelsDic = dict()
+    for item in labels:
+        if item not in labelsDic:
+            labelsDic[item] = 1
+        else:
+            labelsDic[item] += 1
+    print labelsDic
     return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
+
+
+def getMWEDicAsIdxs(corpus, normalizer):
+    result = dict()
+    for mwe in corpus.mweDictionary:
+        result[getIdxsStrForMWE(mwe, normalizer)] = mwe
+    return result
+
+
+def getIdxsStrForMWE(mwe, normalizer):
+    tokenLemmas = mwe.replace(' ', '_')
+    if tokenLemmas in normalizer.vocabulary.tokenIndices:
+        return normalizer.vocabulary.tokenIndices[tokenLemmas]
+    else:
+        assert 'Something went wrong while transforming a MWE to Idx String'
+    # idxs = ''
+    # for tokenLemma in tokenLemmas:
+    #     if tokenLemma in normalizer.vocabulary.tokenIndices:
+    #         idxs += str(normalizer.vocabulary.tokenIndices[tokenLemma]) + '.'
+    #     else:
+    #         assert 'Something went wrong while transforming a MWE to Idx String'
+    # return idxs[:-1]
+
+
+def overSampleImporTrans(data, labels, corpus, normalizer, oversamplingTaux=configuration["sampling"]["mweRepeition"]):
+    tokenData, newLabels = [], []
+    traitedMWEs = set()
+    mWEDicAsIdxs = getMWEDicAsIdxs(corpus, normalizer)
+    for i in range(len(labels)):
+        if labels[i] > 2:
+            mweIdx = data[i][0]
+            if mweIdx in mWEDicAsIdxs and mweIdx not in traitedMWEs:
+                traitedMWEs.add(mweIdx)
+                mwe = mWEDicAsIdxs[mweIdx]
+                mweLength = len(mwe.split(' '))
+                mweOccurrence = corpus.mweDictionary[mwe]
+                if mweOccurrence < oversamplingTaux:
+                    for underProcessingTransIdx in range(i - (2 * mweLength - 1) + 1, i + 1):
+                        for j in range(oversamplingTaux - mweOccurrence):
+                            tokenData.append(data[underProcessingTransIdx])
+                            newLabels.append(labels[underProcessingTransIdx])
+    sys.stdout.write(reports.tabs + 'data size before focused sampling = {0}\n'.format(len(labels)))
+    labels = np.concatenate((labels, newLabels))
+    sys.stdout.write(reports.tabs + 'data size after focused sampling = {0}\n'.format(len(labels)))
+    data = np.concatenate((data, tokenData))
+    return np.asarray(data), np.asarray(labels)
+
+
+def getStackLemmaString(stack):
+    if not stack:
+        return None
+    return ' '.join(t.getLemmaOrToken() for t in getTokens(stack[-1]))
 
 
 def padSequence(seq, label, emptyIdx):
