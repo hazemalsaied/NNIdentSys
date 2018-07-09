@@ -240,6 +240,11 @@ class Vocabulary:
                             else:
                                 posVocab[posTxt] += 1
                 trans = trans.next
+        if embConf["compactVocab"]:
+            for k in tokenVocab.keys():
+                if k.lower() not in corpus.mweTokenDictionary and '_' not in k:
+                    del tokenVocab[k]
+
         if embConf["frequentTokens"]:
             for k in tokenVocab.keys():
                 if tokenVocab[k] == 1 and k.lower() not in corpus.mweTokenDictionary and '_' not in k:
@@ -247,6 +252,9 @@ class Vocabulary:
             for k in posVocab.keys():
                 if posVocab[k] == 1 and '_' not in k:
                     del posVocab[k]
+
+
+
         tokenVocab[unk] = 1
         tokenVocab[number] = 1
         tokenVocab[empty] = 1

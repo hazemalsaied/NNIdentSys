@@ -189,14 +189,14 @@ def selectRows(tensor, idxs):
     return torch.cat(results)
 
 
-def getCorpusLoss(sents, normalizer, model, loss_function):
+def getCorpusLoss(sents, normalizer, model, loss_function, device):
     """
     returns the loss for a list of gold dgs
     """
     loss = 0.0
     for sent in sents:
         # sys.stdout.write(str(sent) + '\n')
-        sentLoss = getSentLoss(sent, normalizer, model, loss_function)
+        sentLoss = getSentLoss(sent, normalizer, model, loss_function, device)
         loss += sentLoss.item() if sentLoss else 0.  # transform into float
     return loss
 
@@ -241,7 +241,7 @@ def getFocusedElems(config):
     return sorted(idxs)
 
 
-def getSentLoss(sent, normalizer, model, loss_function):
+def getSentLoss(sent, normalizer, model, loss_function, device):
     """
     returns the whole loss for the sentence in gold_dg
     (return type is that of Torch.nn losses: differentiable Tensor of size 1)
@@ -253,6 +253,9 @@ def getSentLoss(sent, normalizer, model, loss_function):
     # list of losses after each decision (transition) for the sentence
     sentence_losses = []
     tokenIdxs, posIdxs = getIdxs(sent, normalizer)
+
+    #tokenIdxs, posIdxs = tokenIdxs.to(device), posIdxs.to(device)
+
     sentEmb = model.getContextualizedEmbs(tokenIdxs, posIdxs)
     trans = sent.initialTransition
     while trans and trans.next:
@@ -260,6 +263,7 @@ def getSentLoss(sent, normalizer, model, loss_function):
         y = trans.next.type.value
         # print("gold trans %s is to apply on config: %s" % (t, c))
         focused_lidxs = getFocusedElems(trans.configuration)
+        # focused_lidxs = focused_lidxs.to(device)
         # prediction
         y_pred_vec = model(sentEmb, focused_lidxs)
         # loss
@@ -279,6 +283,10 @@ def train(corpus, normalizer):
     # nb of sentence positions taken to build
     # input vector representing a parse configuration
     model = TransitionClassifier(normalizer)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    sys.stdout.write(reports.tabs + 'Code is running on {0}'.
+                     format('GPU ' + str(device) if torch.cuda.is_available() else 'CPU') + reports.doubleSep)
+    #model.to(device)
     optimizer = getOptimizer(model.parameters())
     loss_function = nn.NLLLoss()
     # losses of validation set for each epoch
@@ -313,7 +321,7 @@ def train(corpus, normalizer):
             # and the lstm hidden states
             model.lstm_hidden_and_cell = model.init_lstm_hidden_and_cell()
 
-            sentLoss = getSentLoss(sent, normalizer, model, loss_function)
+            sentLoss = getSentLoss(sent, normalizer, model, loss_function, device)
             # if a gold transition sequence was extracted all right,
             # backpropagate the full sentence loss
             if sentLoss:
@@ -331,7 +339,7 @@ def train(corpus, normalizer):
         # logstream.write("Total loss for epoch %d: %f\n" % (epoch, epoch_loss))
         # check validation losses
         if validSents:
-            valLoss = getCorpusLoss(validSents, normalizer, model, loss_function)
+            valLoss = getCorpusLoss(validSents, normalizer, model, loss_function, device)
             sys.stderr.write("validation loss after epoch %d : %f\n" % (epoch, valLoss))
             validLosses.append(valLoss)
             # logstream.write("validation loss after epoch %d : %f\n" % (epoch, valLoss))

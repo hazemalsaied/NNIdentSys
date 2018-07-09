@@ -5,11 +5,11 @@ import random
 import sys
 
 import numpy
+from keras.models import load_model
+from keras.utils import plot_model
 
 from config import configuration
 
-# from keras.models import load_model
-# from keras.utils import plot_model
 tabs, seperator, doubleSep, finalLine = '\t', '\n' + '_' * 98 + '\n', '\n' + '=' * 98 + '\n', '\n' + '*|' * 49 + '\n'
 PATH_ROOT_REPORTS_DIR = os.path.join(configuration["path"]["projectPath"], 'Reports')
 
@@ -427,7 +427,7 @@ def getStats(newFile):
     dataSizeLine = tabs + 'data size after sampling = '
     scoreLine = tabs + 'Identification : '
     correctlyIdentifiedLine = tabs + 'Correctly identified MWEs'
-    nonIdentifiedLine =  'Non Identified MWEs'
+    nonIdentifiedLine = 'Non Identified MWEs'
     correctlyIdentified, nonIdentified = False, False
     nonIdentifiedDic, nonIdentifiedDic = dict(), dict()
     with open(path, 'r') as log:
@@ -438,15 +438,15 @@ def getStats(newFile):
             elif line.startswith(mweLengthLine):
                 mweLEngth.append(line[len(mweLengthLine):].strip())
             elif line.startswith(oldMWEsLine):
-                oldMWEs.append(line[len(oldMWEsLine)+ 5 :-3].strip())
+                oldMWEs.append(line[len(oldMWEsLine) + 5:-3].strip())
             elif line.startswith(newMWEsLine):
-                newMWEs.append(line[len(newMWEsLine)+ 5 :-3].strip())
+                newMWEs.append(line[len(newMWEsLine) + 5:-3].strip())
             elif line.startswith(paramLine):
                 params.append(line[len(paramLine):].strip())
             elif line.startswith(dataSizeLine):
                 dataSize.append(line[len(dataSizeLine):].strip())
             elif line.startswith(scoreLine):
-                scores.append(round(float(line[len(scoreLine):].strip())* 100, 2))
+                scores.append(round(float(line[len(scoreLine):].strip()) * 100, 2))
 
             if line.startswith(correctlyIdentifiedLine):
                 correctlyIdentified = True
@@ -457,7 +457,7 @@ def getStats(newFile):
                 if len(parts) == 2:
                     correctlyIdentifiedDic[parts[0]] = parts[1]
 
-            if nonIdentifiedLine in line: #line.startswith(nonIdentifiedLine):
+            if nonIdentifiedLine in line:  # line.startswith(nonIdentifiedLine):
                 correctlyIdentified = False
                 correctlyIdentifiedList.append(correctlyIdentifiedDic)
                 correctlyIdentifiedDic = dict()
@@ -489,16 +489,17 @@ def getStats(newFile):
 
     for i in range(len(scores)):
         res += '{0},{1},{2},{3},{4},{5},{6},{7},{8}\n'.format(langs[i], scores[i], mweLEngth[i], oldMWEs[i], newMWEs[i],
-                                                    params[i], dataSize[i], correctlyIdentifiedList[i],
-                                                    nonIdentifiedList[i])
+                                                              params[i], dataSize[i], correctlyIdentifiedList[i],
+                                                              nonIdentifiedList[i])
     with open(path + '.csv', 'w') as f:
         f.write(res)
     print res
 
+
 if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
-    getStats('sharedtask2.new')
+    getStats('sharedtask1.new')
     # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
     # for f in os.listdir('../Reports/Reports'):
     #     print f

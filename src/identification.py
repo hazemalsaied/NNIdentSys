@@ -1,6 +1,7 @@
 import logging
 
 import torch
+from theano import function, config, shared, tensor
 
 import modelCompo
 import modelKiperwasser
@@ -17,6 +18,7 @@ from parser import parse
 
 
 def xp(langs=['FR'], train=False, corpus=False, cv=False, xpNum=5, title='', initSeed=0):
+    verifyGPU()
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
     global seed
@@ -199,6 +201,18 @@ def analyzeCorporaAndOracle(langs):
     with open('../Results/VMWE.Analysis.csv', 'w') as f:
         f.write(analysisReport)
 
+
+def verifyGPU():
+    vlen = 10 * 30 * 768
+    rng = numpy.random.RandomState(22)
+    x = shared(numpy.asarray(rng.rand(vlen), config.floatX))
+    f = function([], tensor.exp(x))
+    if numpy.any([isinstance(x.op, tensor.Elemwise) and
+                  ('Gpu' not in type(x.op).__name__)
+                  for x in f.maker.fgraph.toposort()]):
+        sys.stdout.write(tabs + 'Attention: CPU used')
+    else:
+        sys.stdout.write(tabs + 'GPU Enabled')
 
 
 # def identifyAttached(lang='FR'):

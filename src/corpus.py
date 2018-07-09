@@ -87,12 +87,10 @@ class Corpus:
 
     def getOccurrenceRang(self, occ):
         occurrenceRang = [5, 25, 50, 100, 200, 300, 500]
-        if occ == 0:
-            return 0
         for i in reversed(occurrenceRang):
             if occ >= i:
                 return i
-        return None
+        return 0
 
     def analyzeTestSet(self):
         occurrenceDic, nonIdentifiedOccurrenceDic = dict(), dict()

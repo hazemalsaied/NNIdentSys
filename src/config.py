@@ -17,7 +17,7 @@ configuration = {
         "sampleWeight": False,
         "favorisationCoeff": 1,
         "mweRepeition": 35,
-        "focused": True
+        "focused": False
     },
     "evaluation": {
         "cv": {"active": False,
@@ -67,7 +67,8 @@ configuration = {
                 "Word2VecWindow": 3,
                 "type": "frWac200"  # "dataFR.profiles.min.250"  # "frWac200"
             },
-            "frequentTokens": True
+            "frequentTokens": True,
+            "compactVocab" : False
         },
         "mlp": {
             "dense1": {

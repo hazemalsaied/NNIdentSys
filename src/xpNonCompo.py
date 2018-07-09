@@ -414,12 +414,22 @@ def dautresXps3():
     xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='favorisationCoeff 30')
 
 
-def FTB(train=False, corpus=False, useAdam=False,epochs=40):
+def FTB(train=False, corpus=False, useAdam=False, epochs=40, focusedSampling=False,compactVocab=False, sampling=True):
     configuration["dataset"]["FTB"] = True
     setOptimalParameters()
     if useAdam:
         configuration["model"]["train"]["optimizer"] = 'adam'
         configuration["model"]["train"]["lr"] = 0.01
+    if not sampling:
+        samling = configuration["sampling"]
+        samling["overSampling"] = False
+        samling["sampleWeight"] = False
+
+    if focusedSampling:
+        configuration["sampling"]["focused"] = False
+        configuration["sampling"]["mweRepeition"] = 40
+    if compactVocab:
+        configuration["model"]["embedding"]["compactVocab"] = True
     configuration["model"]["train"]["epochs"] = epochs
     xp(['FR'], train=train, corpus=corpus)
     # for tokEmb in [50, 100, 200]:
@@ -439,7 +449,7 @@ def allLangs(languages, sharedtask2=False, train=False, lemmaEmb=200):
     configuration["dataset"]["sharedtask2"] = sharedtask2
     setOptimalParameters()
     configuration["model"]["embedding"]["tokenEmb"] = lemmaEmb
-    xp(languages, corpus=True,train=train)
+    xp(languages, corpus=True, train=train)
 
 
 def runKiperwasser(train=False, epochs=3):
@@ -452,12 +462,8 @@ def runKiperwasser(train=False, epochs=3):
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
-
-    # runKiperwasser(train=False, epochs=2)
-
+    runKiperwasser(train=False, epochs=2)
     # allLangs(allSharedtask1Lang, sharedtask2=False)
     # allLangs(allSharedtask2Lang, sharedtask2=True)
-    configuration["sampling"]["focused"] = True
-    configuration["sampling"]["mweRepeition"] = 40
-    allLangs(['FR'], train=True, sharedtask2=False)
-    # FTB(corpus=False, epochs=40)
+    # allLangs(['FR'], train=True, sharedtask2=False)
+    # FTB(corpus=True)
