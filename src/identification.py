@@ -17,7 +17,7 @@ from normalisation import Normalizer
 from parser import parse
 
 
-def xp(langs=['FR'], train=False, corpus=False, cv=False, xpNum=5, title='', initSeed=0):
+def xp(langs, train=False,fixedSize=False, corpus=False, cv=False, xpNum=3, title='', initSeed=0):
     verifyGPU()
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
@@ -28,7 +28,7 @@ def xp(langs=['FR'], train=False, corpus=False, cv=False, xpNum=5, title='', ini
     torch.manual_seed(seed)
     if title:
         reports.createHeader(title)
-    if not cv and not train:
+    if not cv and not train and not fixedSize:
         if corpus:
             ######################################
             #   Corpus
@@ -41,23 +41,25 @@ def xp(langs=['FR'], train=False, corpus=False, cv=False, xpNum=5, title='', ini
             ######################################
             #   Debug
             ######################################
-            evlaConf["debug"], evlaConf["train"] = True, False
+            evlaConf["debug"], evlaConf["train"], evlaConf["fixedSize"] = True, False, False
             sys.stdout.write(reports.doubleSep + reports.tabs + 'Debug Mode' + reports.doubleSep)
+            # configuration["model"]["train"]["epochs"] = 3
             for lang in langs:
                 identify(lang)
-    elif train:
+            configuration["model"]["train"]["epochs"] = 40
+    elif train or fixedSize:
         ######################################
         #   Train
         ######################################
-        evlaConf["debug"], evlaConf["train"] = False, train
+        evlaConf["debug"], evlaConf["train"], evlaConf["fixedSize"] = False, train, fixedSize
         sys.stdout.write(reports.doubleSep + reports.tabs + 'Dev Mode' + reports.doubleSep)
         for lang in langs:
             for i in range(xpNum):
-                numpy.random.seed(seed)
-                random.seed(seed)
-                torch.manual_seed(seed)
+                # numpy.random.seed(seed)
+                # random.seed(seed)
+                # torch.manual_seed(seed)
                 identify(lang)
-                seed += 1
+                # seed += 1
     elif cv:
         ######################################
         #   CV Debug
@@ -69,11 +71,11 @@ def xp(langs=['FR'], train=False, corpus=False, cv=False, xpNum=5, title='', ini
         ######################################
         sys.stdout.write(reports.doubleSep + reports.tabs + 'Debug Mode' + reports.doubleSep)
         for i in range(xpNum):
-            seed += 1
-            numpy.random.seed(seed)
-            random.seed(seed)
-            torch.manual_seed(seed)
-            # crossValidation()
+            # seed += 1
+            # numpy.random.seed(seed)
+            # random.seed(seed)
+            # torch.manual_seed(seed)
+            crossValidation(langs)
             ######################################
             #   Load
             ######################################
@@ -122,7 +124,7 @@ def parseAndTrain(corpus, loadFolderPath=''):
     return network, normalizer
 
 
-def crossValidation(langs=['FR'], debug=False):
+def crossValidation(langs, debug=False):
     configuration["evaluation"]["cv"]["active"], scores, iterations = True, [0.] * 28, 5
     for lang in langs:
         reports.createReportFolder(lang)
@@ -162,7 +164,7 @@ def getTrainAndTestSents(corpus, testRange, trainRange):
         corpus.trainingSents = sent[trainRange[0]:trainRange[1]] + sent[trainRange[2]:trainRange[3]]
 
 
-def identifyLinearKeras(langs=['FR'], ):
+def identifyLinearKeras(langs, ):
     sys.stdout.write(reports.doubleSep + reports.tabs + 'Linear model in KERAS' + reports.seperator)
     evlaConf = configuration["evaluation"]
     evlaConf["cluster"] = True
@@ -179,7 +181,7 @@ def identifyLinearKeras(langs=['FR'], ):
         evaluate(corpus)
 
 
-def getAllLangStats(langs=['FR']):
+def getAllLangStats(langs):
     res = ''
     for lang in langs:
         corpus = Corpus(lang)
@@ -213,20 +215,8 @@ def verifyGPU():
         sys.stdout.write(tabs + 'Attention: CPU used')
     else:
         sys.stdout.write(tabs + 'GPU Enabled')
+        configuration["xp"]["cuda"] = True
 
-
-# def identifyAttached(lang='FR'):
-#     sys.stdout.write('*' * 20 + '\n')
-#     sys.stdout.write('Deep model(No padding)\n')
-#     corpus = Corpus(lang)
-#     oracle.parse(corpus)
-#     normalizer = Normalizer(corpus)
-#     printReport(normalizer)
-#     network = newNetwork.Network(normalizer)
-#     newNetwork.train(network.model, normalizer, corpus)
-#     parse(corpus, network, normalizer)
-#     evaluate(corpus)
-#     sys.stdout.write('*' * 20 + '\n')
 
 
 if __name__ == '__main__':

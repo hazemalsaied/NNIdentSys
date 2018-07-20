@@ -72,3 +72,8 @@ oarsub -p "gpu<>'NO'" -q production -l nodes=1,walltime=20 "NNIdenSys/Scripts/no
 ```
 pLbl=xp8  NNIdenSys/Scripts/nonCompoI.sh
 ```
+
+### Cudnn version
+```
+nvcc --version
+```

@@ -1,14 +1,18 @@
+import os
+
 configuration = {
     "xp": {
         "linear": False,
         "compo": False,
         "pytorch": False,
         "kiperwasser": False,
-        "verbose": 1
+        "verbose": 1,
+        "cuda": False
     },
     "dataset": {
         "sharedtask2": False,
-        "FTB": False
+        "FTB": False,
+        "deleteNumericalMWEs": False
     },
     "sampling": {
         "overSampling": False,
@@ -26,6 +30,9 @@ configuration = {
                },
         "debug": True,
         "train": False,
+        "fixedSize": False,
+        "tokenAvg": 270000,
+        "testTokenAvg": 43000,
         "corpus": False,
         "dataset": "train",
         "debugTrainNum": 50,
@@ -68,7 +75,7 @@ configuration = {
                 "type": "frWac200"  # "dataFR.profiles.min.250"  # "frWac200"
             },
             "frequentTokens": True,
-            "compactVocab" : False
+            "compactVocab": False
         },
         "mlp": {
             "dense1": {
@@ -100,7 +107,7 @@ configuration = {
         "train": {
             "visualisation": {"batchStep": 50},
             "manipulateClassWeights": True,
-            "optimizer": "adam",
+            "optimizer": "adagrad",
             "loss": "categorical_crossentropy",
             "verbose": 0,
             "batchSize": 64,
@@ -110,7 +117,7 @@ configuration = {
             "validationSplit": .1,
             "monitor": 'val_loss',
             "minDelta": .2,
-            "lr": 0.001
+            "lr": 0.02
         },
         "predict": {
             "verbose": 0
@@ -139,7 +146,7 @@ configuration = {
         "dictionary": {
             "active": True,
             "mwt": True,
-            "s0TokenIsMWEToken": True,
+            "s0TokenIsMWEToken": False,
             "s0TokensAreMWE": False
         },
         "history": {
@@ -180,15 +187,13 @@ configuration = {
             "schema": "schema.png",
             "history": "history.pkl",
             "model": "model.hdf5"
-
         }
-
     },
     "constants": {
         "unk": "*unknown*",
         "empty": "*empty*",
         "number": "*number*",
-        "alpha": 0.2
+        "alpha": 0.5
     }
 
 }
@@ -247,68 +252,4 @@ def setEmbConf(active=True, useToken=True, usePos=True, tokenEmb=200, posEmb=25,
     embConf["initialisation"]["active"] = init
 
 
-import os
-
 configuration["path"]["projectPath"] = os.path.dirname(__file__)[:-len(os.path.basename(os.path.dirname(__file__)))]
-
-
-def printConf():
-    # TODO
-    evalConf = configuration["evaluation"]
-    evalTxt = 'Dataset: '
-    if evalConf["debug"]:
-        evalTxt += ' Debug '
-    if evalConf["train"]:
-        evalTxt += ' Train '
-    if evalConf["train"]:
-        evalTxt += ' CV '
-    evalTxt += '\n'
-
-    paddingConf = configuration["model"]["padding"]
-    paddingTxt = ''
-    if configuration["xp"]["compo"]:
-        paddingTxt += 'Padding is active, S0:{0} S1:{1} B:{2}'.format(
-            paddingConf["s0Padding"], paddingConf["s1Padding"], paddingConf["bPadding"])
-    embConf = configuration["model"]["embedding"]
-    embTxt = ''
-    if embConf["active"]:
-        embTxt += 'Embedding is active, '
-
-    pass
-
-
-def getConfig():
-    res = ''
-    featConf = configuration["features"]
-    if featConf["unigram"]["pos"] and featConf["unigram"]["lemma"]:
-        res += 'A '
-    if not featConf["unigram"]["pos"] and not featConf["unigram"]["lemma"]:
-        res += 'A\''
-    if featConf["syntax"]["active"]:
-        res += 'B '
-    if featConf["bigram"]["active"]:
-        res += 'C '
-    if featConf["trigram"]:
-        res += 'D '
-    if featConf["bigram"]["s0b2"]:
-        res += 'E '
-    if featConf["history"]["1"]:
-        res += 'F '
-    if featConf["history"]["2"]:
-        res += 'G '
-    if featConf["history"]["3"]:
-        res += 'H '
-    if featConf["distance"]["s0b0"]:
-        res += 'I '
-    if featConf["distance"]["s0s1"]:
-        res += 'J '
-    if featConf["unigram"]["b1"]:
-        res += 'K '
-    if featConf["dictionary"]:
-        res += 'L '
-    if featConf["stackLength"]:
-        res += 'M '
-    if featConf["dictionary"]["mwt"]:
-        res += 'N '
-    print res
-    return res

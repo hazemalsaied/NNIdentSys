@@ -19,9 +19,9 @@ class Vocabulary:
         initConf = configuration["model"]["embedding"]["initialisation"]
 
         if not configuration["xp"]["compo"]:
-            self.attachedTokens, self.attachedPos = self.getAttachedVoc(corpus)
-            self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, self.attachedPos)
-            self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, self.attachedTokens)
+            self.tokenIndices, self.posIndices = self.getAttachedVoc(corpus)
+            self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus, self.posIndices)
+            self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus, self.tokenIndices)
         else:
             self.posIndices, self.posEmbeddings = getPOSEmbeddingMatrices(corpus)
             self.tokenIndices, self.tokenEmbeddings = getTokenEmbeddingMatrices(corpus)
@@ -34,7 +34,7 @@ class Vocabulary:
 
     def __str__(self):
         res = seperator + tabs + 'Vocabulary' + doubleSep
-        res += tabs + 'Tokens := {0} * POS : {1}'.format(len(self.attachedTokens), len(self.attachedPos)) \
+        res += tabs + 'Tokens := {0} * POS : {1}'.format(len(self.tokenIndices), len(self.posIndices)) \
             if not configuration["xp"]["compo"] else ''
         res += seperator
         return res
@@ -253,8 +253,6 @@ class Vocabulary:
                 if posVocab[k] == 1 and '_' not in k:
                     del posVocab[k]
 
-
-
         tokenVocab[unk] = 1
         tokenVocab[number] = 1
         tokenVocab[empty] = 1
@@ -274,14 +272,14 @@ class Vocabulary:
 
     def getAttachedIndices(self, tokens):
         tokenTxt, posTxt = self.attachTokens(tokens)
-        if tokenTxt in self.attachedTokens:
-            tokenIdx = self.attachedTokens[tokenTxt]
+        if tokenTxt in self.tokenIndices:
+            tokenIdx = self.tokenIndices[tokenTxt]
         else:
-            tokenIdx = self.attachedTokens[unk]
-        if posTxt in self.attachedPos:
-            posIdx = self.attachedPos[posTxt]
+            tokenIdx = self.tokenIndices[unk]
+        if posTxt in self.posIndices:
+            posIdx = self.posIndices[posTxt]
         else:
-            posIdx = self.attachedPos[unk]
+            posIdx = self.posIndices[unk]
         return tokenIdx, posIdx
 
     def attachTokens(self, tokens):
@@ -329,7 +327,7 @@ class Vocabulary:
         return self.indices[empty]
 
 
-def getTokenEmbeddingMatrices(corpus, attachedTokens=None):
+def getTokenEmbeddingMatrices(corpus, tokenIndices=None):
     # load the pre-trained embeddings
     initType = configuration["model"]["embedding"]["initialisation"]["type"]
     relativeP = configuration["files"]["embedding"][initType]
@@ -353,7 +351,7 @@ def getTokenEmbeddingMatrices(corpus, attachedTokens=None):
                 if line.strip():
                     preTrainedEmb[line.split(' ')[0]] = line.split(' ')[1:-1]
     if not configuration["xp"]["compo"]:
-        indices = attachedTokens
+        indices = tokenIndices
     else:
         indices = getTokenVocabulary(corpus, preTrainedEmb)
     if initConf["active"] and initConf["token"]:
@@ -464,10 +462,10 @@ def initialiseToken(indices, preTrainedEmb):
     return embeddings
 
 
-def getPOSEmbeddingMatrices(corpus, attachedPos=None):
+def getPOSEmbeddingMatrices(corpus, posIndices=None):
     if embConf["usePos"]:
         if not configuration["xp"]["compo"]:
-            indices = attachedPos
+            indices = posIndices
         else:
             indices = getPOSVocabulary(corpus)
         if initConf["oneHotPos"]:

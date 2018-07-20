@@ -59,9 +59,7 @@ class Corpus:
         self.text = self.toText()
         self.orderParentVMWEs()
         if not configuration["evaluation"]["cv"]["active"]:
-            if not configuration["evaluation"]["corpus"] and not sharedtaskVersion and \
-                    not configuration["dataset"]["FTB"]:
-                # TODO
+            if not configuration["evaluation"]["corpus"]:
                 self.shuffleSent(langName)
                 self.distributeSent(langName)
             self.getTrainAndTest()
@@ -69,14 +67,15 @@ class Corpus:
         sys.stdout.write(self.printConlusion())
         self.getMWEMeanLength()
         self.createMWEDict()
-        # self.duplicateImportantSent()
+        if configuration['dataset']['deleteNumericalMWEs']:
+            self.duplicateImportantSent()
         self.getNewMWEPercentage()
 
     def getNewMWEPercentage(self):
         newMWE, oldMWE = 0, 0
         for s in self.testingSents:
             for v in s.vMWEs:
-                if v.getLemmaString() not in self.mweDictionary:
+                if v.getTokenOrLemmaString() not in self.mweDictionary:
                     newMWE += 1
                 else:
                     oldMWE += 1
@@ -102,26 +101,26 @@ class Corpus:
             for v in sent.identifiedVMWEs:
                 sentIdentifiedVMWEs.append(v.getTokenPositionString())
                 if v.getTokenPositionString() in sentVMWEs:
-                    if v.getLemmaString() in self.mweDictionary:
-                        occurrence = self.getOccurrenceRang(self.mweDictionary[v.getLemmaString()])
+                    if v.getTokenOrLemmaString() in self.mweDictionary:
+                        occurrence = self.getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
                         if occurrence not in occurrenceDic:
                             occurrenceDic[occurrence] = set()
-                        occurrenceDic[occurrence].add(v.getLemmaString())
+                        occurrenceDic[occurrence].add(v.getTokenOrLemmaString())
                     else:
                         if 0 not in occurrenceDic:
                             occurrenceDic[0] = set()
-                        occurrenceDic[0].add(v.getLemmaString())
+                        occurrenceDic[0].add(v.getTokenOrLemmaString())
             for v in sent.vMWEs:
                 if v.getTokenPositionString() not in sentIdentifiedVMWEs:
-                    if v.getLemmaString() in self.mweDictionary:
-                        occurrence = self.getOccurrenceRang(self.mweDictionary[v.getLemmaString()])
+                    if v.getTokenOrLemmaString() in self.mweDictionary:
+                        occurrence = self.getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
                         if occurrence not in nonIdentifiedOccurrenceDic:
                             nonIdentifiedOccurrenceDic[occurrence] = set()
-                        nonIdentifiedOccurrenceDic[occurrence].add(v.getLemmaString())
+                        nonIdentifiedOccurrenceDic[occurrence].add(v.getTokenOrLemmaString())
                     else:
                         if 0 not in nonIdentifiedOccurrenceDic:
                             nonIdentifiedOccurrenceDic[0] = set()
-                        nonIdentifiedOccurrenceDic[0].add(v.getLemmaString())
+                        nonIdentifiedOccurrenceDic[0].add(v.getTokenOrLemmaString())
         res = '## Correctly identified MWEs\n'
         for k in sorted(occurrenceDic.keys()):
             res += '### ' + str(k) + '\n'
@@ -157,11 +156,11 @@ class Corpus:
             if idx != 0 and idx % 1000 == 0:
                 self.mweDictionary = self.getMWEDictionary()
             for v in sent.vMWEs:
-                if v.getLemmaString() in self.mweDictionary and v.getLemmaString() not in traitedMWEs \
-                        and self.mweDictionary[v.getLemmaString()] < taux:
+                if v.getTokenOrLemmaString() in self.mweDictionary and v.getTokenOrLemmaString() not in traitedMWEs \
+                        and self.mweDictionary[v.getTokenOrLemmaString()] < taux:
                     for v1 in sent.vMWEs:
-                        traitedMWEs.add(v1.getLemmaString())
-                    for i in range(0, taux - self.mweDictionary[v.getLemmaString()]):
+                        traitedMWEs.add(v1.getTokenOrLemmaString())
+                    for i in range(0, taux - self.mweDictionary[v.getTokenOrLemmaString()]):
                         newSents.append(copy.deepcopy(sent))
                     break
             idx += 1
@@ -217,7 +216,7 @@ class Corpus:
                 v.shouldBeDeleted = False
                 if len(v.tokens) == 1:
                     v.shouldBeDeleted = True
-                for c in v.getLemmaString():
+                for c in v.getTokenOrLemmaString():
                     if c.isdigit():
                         v.shouldBeDeleted = True
                         break
@@ -263,10 +262,12 @@ class Corpus:
         sents = self.testingSents if onTest else self.trainingSents
         for sent in sents:
             for mwe in sent.vMWEs:
+                if not mwe.isRecognizable:
+                    continue
                 if mwtOnly:
                     if len(mwe.tokens) != 1:
                         continue
-                lemmaString = mwe.getLemmaString()
+                lemmaString = mwe.getTokenOrLemmaString()
                 if lemmaString in mweDictionary:
                     mweDictionary[lemmaString] += 1
                 else:
@@ -325,7 +326,7 @@ class Corpus:
                             windows += ';' + distance
                         else:
                             windows = distance
-                lemmaString = mwe.getLemmaString()
+                lemmaString = mwe.getTokenOrLemmaString()
                 if lemmaString in mweDictionary and mweDictionary[lemmaString] != windows:
                     oldWindow = mweDictionary[lemmaString]
                     oldWindowDistances = oldWindow.split(';')
@@ -343,13 +344,25 @@ class Corpus:
         return mweDictionary
 
     def getTrainAndTest(self):
-
         evalConfig = configuration["evaluation"]
         if evalConfig["debug"]:
             debugTrainNum = evalConfig["debugTrainNum"]
             self.trainingSents = self.trainDataSet[:debugTrainNum]  # getVMWESents(self.trainDataSet, debugTrainNum)
             self.testingSents = self.trainDataSet[
                                 debugTrainNum:debugTrainNum * 2]  # getVMWESents(self.testDataSet, debugTrainNum)
+        elif evalConfig["fixedSize"]:
+            tokenNum = 0
+            for sent in self.trainDataSet:
+                self.trainingSents.append(sent)
+                tokenNum += len(sent.tokens)
+                if tokenNum >= evalConfig['tokenAvg']:
+                    break
+            testTokenNum = 0
+            for sent in reversed(self.trainDataSet):
+                self.testingSents.append(sent)
+                testTokenNum += len(sent.tokens)
+                if testTokenNum >= evalConfig['testTokenAvg']:
+                    break
         elif evalConfig["train"]:
             if (configuration["dataset"]["sharedtask2"] or configuration["dataset"]["FTB"]) and self.devDataSet:
                 self.trainingSents = self.trainDataSet
@@ -371,7 +384,7 @@ class Corpus:
                 if s.vMWEs:
                     sents.append(s)
             self.trainingSents = sents
-        self.deleteNumericalExpressions()
+        # self.deleteNumericalExpressions()
 
     def distributeSent(self, lang):
         if configuration["evaluation"]["shuffleTrain"]:
@@ -383,18 +396,23 @@ class Corpus:
         self.trainDataSet = newTrainingSentSet
 
     def shuffleSent(self, lang):
-        if not configuration["evaluation"]["shuffleTrain"]:
-            return
-        idxDic = dict()
-        idxList = range(len(self.trainDataSet))
-        random.shuffle(idxList)
-        for i in range(len(self.trainDataSet)):
-            idxDic[i] = idxList[i]
-        newTrainingSentSet = []
-        for key in idxDic.keys():
-            newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
-        self.trainDataSet = newTrainingSentSet
-        saveObj(idxDic, lang + 'idxDic')
+        datasetFolder = 'sharedtask.2' if configuration["dataset"]["sharedtask2"] else 'sharedtask'
+        if configuration["dataset"]['FTB']:
+            datasetFolder = 'FTB'
+        idxPath = os.path.join(configuration["path"]["projectPath"], 'ressources/LangDist/' + datasetFolder,
+                               lang + 'idxDic.pkl')
+        if configuration["evaluation"]["shuffleTrain"] or not os.path.lexists(idxPath):
+            sys.stdout.write(tabs + "train data set has been shuffled\n" + doubleSep)
+            idxDic = dict()
+            idxList = range(len(self.trainDataSet))
+            random.shuffle(idxList)
+            for i in range(len(self.trainDataSet)):
+                idxDic[i] = idxList[i]
+            newTrainingSentSet = []
+            for key in idxDic.keys():
+                newTrainingSentSet.append(self.trainDataSet[idxDic[key]])
+            self.trainDataSet = newTrainingSentSet
+            saveObj(idxDic, lang + 'idxDic')
 
     def analyzeSents(self):
         for sent in self.trainDataSet:
@@ -758,13 +776,24 @@ class VMWE:
         return result[:-1].lower()
 
     def getLemmaString(self):
-        result = ''
-        for token in self.tokens:
-            if token.lemma.strip():
-                result += token.lemma + ' '
-            else:
-                result += token.text + ' '
-        return result[:-1].lower()
+        return ' '.join(t.text.lower() for t in self.tokens)
+
+    def getTokenOrLemmaString(self):
+        useLemma = configuration["model"]["embedding"]["lemma"]
+        if not useLemma:
+            return ' '.join(t.text.lower() for t in self.tokens)
+            # for token in self.tokens:
+            #    result += token.text.lower() + ' '
+            # return result[:-1].lower()
+        else:
+            return ' '.join(t.lemma if t.lemma else t.text for t in self.tokens).lower()
+            # result = ''
+            # for token in self.tokens:
+            #     if token.lemma.lower():
+            #         result += token.lemma + ' '
+            #     else:
+            #         result += token.text + ' '
+            # return result[:-1].lower()
 
     def getTokenPositionString(self):
         result = '.'
@@ -919,12 +948,20 @@ class Token:
 
 
 def saveObj(obj, name):
-    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/LangDist/' + name + '.pkl'), 'wb') as f:
+    datasetFolder = 'sharedtask.2' if configuration["dataset"]["sharedtask2"] else 'sharedtask'
+    if configuration["dataset"]['FTB']:
+        datasetFolder = 'FTB'
+    with open(os.path.join(configuration["path"]["projectPath"],
+                           'ressources/LangDist/' + datasetFolder, name + '.pkl'), 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
 
 def loadObj(name):
-    with open(os.path.join(configuration["path"]["projectPath"], 'ressources/LangDist/' + name + '.pkl'), 'rb') as f:
+    datasetFolder = 'sharedtask.2' if configuration["dataset"]["sharedtask2"] else 'sharedtask'
+    if configuration["dataset"]['FTB']:
+        datasetFolder = 'FTB'
+    with open(os.path.join(configuration["path"]["projectPath"],
+                           'ressources/LangDist/' + datasetFolder, name + '.pkl'), 'rb') as f:
         return pickle.load(f)
 
 
@@ -1331,8 +1368,10 @@ def getStats(sents, asCSV=False):
     return res
 
 
-def readFTB(ftbFile):
+def readFTB(ftbFile, reportBugs=False):
     sentences = []
+    if reportBugs:
+        print ftbFile
     with open(ftbFile, 'r') as corpusFile:
         sent, senIdx, mweIdx, lineNum = None, 0, 1, 0
         for line in corpusFile:
@@ -1363,22 +1402,33 @@ def readFTB(ftbFile):
             sent.text += token.text + ' '
             morpho = getMorphological(lineParts[5].lower())
             if 'mwehead' in morpho:
-                vMWE = VMWE(mweIdx, [token], 'oth')
-                vMWE.type2 = morpho['mwehead']
-                sent.vMWEs.append(vMWE)
-                token.setParent(vMWE)
-            if lineParts[7] == 'dep_cpd':
+                if lineParts[7] == 'dep_cpd':
+                    if reportBugs:
+                        sys.stdout.write('Annotation bug: line: {0}, word: {1}\n'.format(lineNum, lineParts[1]))
+                else:
+                    vMWE = VMWE(mweIdx, [token], 'oth')
+                    vMWE.type2 = morpho['mwehead']
+                    sent.vMWEs.append(vMWE)
+                    token.setParent(vMWE)
+            if lineParts[7] == 'dep_cpd' and 'mwehead' not in morpho:
                 if sent.vMWEs:
-                    sent.vMWEs[-1].tokens.append(token)
-                    token.setParent(sent.vMWEs[-1])
+                    if token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
+                        sent.vMWEs[-1].tokens.append(token)
+                        token.setParent(sent.vMWEs[-1])
+                    else:
+                        if reportBugs:
+                            sys.stdout.write(
+                                'Annotation bug dep_cpd without dep parent: line: {0}, word:'
+                                ' {1} DependencyParent: {2}, head Position: {3} \n'.
+                                    format(lineNum, lineParts[1], token.dependencyParent,
+                                           sent.vMWEs[-1].tokens[0].position))
+                        if sent.vMWEs:
+                            sent.vMWEs = sent.vMWEs[:-1]
                 else:
                     assert ' Annotation error {0} : {1}'.format(lineNum, sent)
-    vmweNum = 0
-    for s in sentences:
-        if s.vMWEs:
-            vmweNum += len(s.vMWEs)
-            # print s
-    # print ftbFile.split('/')[-1], str(vmweNum)
+    # print universalPosTags
+    # print xposTags
+    # print len(universalPosTags), len(xposTags)
     return sentences
 
 
@@ -1396,7 +1446,12 @@ def getMorphological(morphoStr):
     return result
 
 
+# universalPosTags = set()
+# xposTags = set()
+
 def getPosTag(token, lineParts3, lineParts4):
+    # universalPosTags.add(lineParts3.lower())
+    # xposTags.add(lineParts4.lower())
     useUniversalPOS = configuration["preprocessing"]["data"]["universalPOS"]
     if useUniversalPOS:
         token.posTag = lineParts3

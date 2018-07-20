@@ -167,8 +167,11 @@ if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    langs = ['FR']
+    langs = ['BG', 'PT', 'TR']
     configuration["xp"]["linear"] = True
     configuration["evaluation"]["debug"] = False
-    configuration["evaluation"]["corpus"] = True
-    exploreFTB()
+    configuration["evaluation"]["fixedSize"] = True
+    configuration["dataset"]["sharedtask2"] = True
+    exploreSharedtask2()
+    # configuration["evaluation"]["corpus"] = True
+    # exploreFTB()

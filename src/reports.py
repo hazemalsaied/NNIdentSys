@@ -496,10 +496,65 @@ def getStats(newFile):
     print res
 
 
+def mineNewFile(newFile):
+    path = '../Reports/Reports/{0}'.format(newFile)
+    titles, params, scores = [], [], []
+    with open(path, 'r') as log:
+        for line in log.readlines():
+            if '_True_' in line or '_False_' in line:
+                titles.append(line[:-1])
+            if line.startswith(paramLine):
+                paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
+                params.append(round(int(paramsValue) / 1000000., 2))
+            if line.startswith(scoreLine):
+                fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
+                while len(fScore) < 4:
+                    fScore = fScore + '0'
+                scores.append(round(int(fScore) / 10000., 4) * 100)
+            if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
+                titles.append(line[len(titleLine):].strip())
+    return titles, scores, params
+
+
+def getAvgScores(scores, langNum=3, trialNum=3):
+    result, xpScores, langSum = [], [], 0
+    for i, v in enumerate(scores):
+        if i != 0 and i % trialNum == 0:
+            xpScores.append(round(float(langSum) / langNum, 1))
+            langSum = 0
+        if i != 0 and i % (trialNum * langNum) == 0:
+            result.append(xpScores)
+            xpScores = []
+        langSum += float(v)
+    xpScores.append(round(float(langSum) / langNum, 1))
+    result.append(xpScores)
+    return result
+
+
+def getNewScores(files):
+    for f in files:
+        f = str(f)
+        titles, scores, params = mineNewFile(f)
+        results = getAvgScores(scores)
+        for i, t in enumerate(titles):
+            t = t.replace(',', '.').replace('_', ',')
+            ii = i * 9
+            print f, ',', \
+                t, \
+                str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
+                results[i][0], \
+                str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
+                results[i][1], \
+                str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
+                results[i][2], ',', \
+                round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
+
+
 if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
-    getStats('sharedtask1.new')
+    getNewScores([ '22'])
+    # getStats('shar,edtask1.new')
     # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
     # for f in os.listdir('../Reports/Reports'):
     #     print f

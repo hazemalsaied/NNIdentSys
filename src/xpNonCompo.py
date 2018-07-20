@@ -14,6 +14,8 @@ allSharedtask1Lang = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT'
 allSharedtask2Lang = ['BG', 'DE', 'EL', 'EN', 'ES', 'EU', 'FA', 'FR', 'HE', 'HI',
                       'HR', 'HU', 'IT', 'LT', 'PL', 'PT', 'RO', 'SL', 'TR']
 
+pilotLangs = ['BG', 'PT', 'TR']
+
 
 def exploreTokenPOSImpact(tokenDomain, posDomain):
     desactivateMainConf()
@@ -122,10 +124,11 @@ def dense2Impact(useLemma=False):
     embConf["tokenEmb"] = tokenEmb
     embConf["posEmb"] = posEmb
     setDense1Conf(unitNumber=dense1UniNum)
-    configuration["model"]["mlp"]["dense2"]["active"] = True
+    dense2Conf = configuration["model"]["mlp"]["dense2"]
+    dense2Conf["active"] = True
     res = 'Lemma' if useLemma else 'Token'
     for denseUnitNum in dense2Domain:
-        configuration["model"]["mlp"]["dense2"]["unitNumber"] = denseUnitNum
+        dense2Conf["unitNumber"] = denseUnitNum
         xp(langs=langs, train=train, title=res + ' {0} POS {1} Dense1 {2} Dense2 {3}'.
            format(tokenEmb, posEmb, dense1UniNum, denseUnitNum))
 
@@ -414,7 +417,7 @@ def dautresXps3():
     xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='favorisationCoeff 30')
 
 
-def FTB(train=False, corpus=False, useAdam=False, epochs=40, focusedSampling=False,compactVocab=False, sampling=True):
+def FTB(train=False, corpus=False, useAdam=False, epochs=40, focusedSampling=False, compactVocab=False, sampling=True):
     configuration["dataset"]["FTB"] = True
     setOptimalParameters()
     if useAdam:
@@ -445,15 +448,16 @@ def FTB(train=False, corpus=False, useAdam=False, epochs=40, focusedSampling=Fal
     # xp(['FR'], train=True)
 
 
-def allLangs(languages, sharedtask2=False, train=False, lemmaEmb=200):
+def allLangs(languages, sharedtask2=False, fixedSize=False, train=False, corpus=False, lemmaEmb=200):
     configuration["dataset"]["sharedtask2"] = sharedtask2
     setOptimalParameters()
     configuration["model"]["embedding"]["tokenEmb"] = lemmaEmb
-    xp(languages, corpus=True, train=train)
+    xp(languages, fixedSize=fixedSize, corpus=corpus, train=train)
 
 
-def runKiperwasser(train=False, epochs=3):
+def runKiperwasser(train=False, epochs=3, cuda=False):
     configuration["xp"]["kiperwasser"] = True
+    configuration["xp"]["cuda"] = cuda
     configuration["model"]["train"]["epochs"] = epochs
     setOptimalParameters()
     xp(['FR'], train=train)
@@ -462,8 +466,16 @@ def runKiperwasser(train=False, epochs=3):
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
-    runKiperwasser(train=False, epochs=2)
+    import randomSearchGrid
+
+    configuration["model"]["train"]["earlyStop"] = True
+    # randomSearchGrid.createRandomSearchGrid()
+    randomSearchGrid.runRandomSearchGridXps(pilotLangs, fixedSize=True, xpNum1=150)
+
+    # configuration["evaluation"]["shuffleTrain"] = True
+    # runKiperwasser(train=False, epochs=2, cuda=True)
     # allLangs(allSharedtask1Lang, sharedtask2=False)
-    # allLangs(allSharedtask2Lang, sharedtask2=True)
-    # allLangs(['FR'], train=True, sharedtask2=False)
+    # configuration["model"]["train"]["earlyStop"] = True
+    # allLangs(pilotLangs, sharedtask2=True, fixedSize=True)
+    # allLangs(['FR'], train=False, corpus=False, sharedtask2=False)
     # FTB(corpus=True)

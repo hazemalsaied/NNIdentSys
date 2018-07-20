@@ -6,11 +6,13 @@ from keras.models import Model
 from keras.utils import to_categorical
 from numpy import argmax
 
+import compoVocabulary
+import nonCompoVocabulary
+import reports
 from corpus import getTokens
 from reports import *
 from transitions import TransitionType
-from vocabulary import Vocabulary
-import reports
+
 
 class LinearKerasModel:
     def __init__(self, vocabSize):
@@ -62,7 +64,10 @@ class Normalizer:
     """
 
     def __init__(self, corpus):
-        self.vocabulary = Vocabulary(corpus)
+        if configuration["xp"]["compo"]:
+            self.vocabulary = compoVocabulary.Vocabulary(corpus)
+        else:
+            self.vocabulary = nonCompoVocabulary.Vocabulary(corpus)
         self.tokens = self.vocabulary.tokenIndices.keys()
         self.pos = self.vocabulary.posIndices.keys()
         self.tokens.append(unk)

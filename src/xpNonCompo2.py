@@ -1,6 +1,7 @@
-from config import *
 import sys
-from xpNonCompo import exploreEmbImpact, exploreLearning2, dautresXps3, FTB
+
+from config import *
+from xpNonCompo import FTB
 
 if __name__ == '__main__':
     reload(sys)

@@ -2,13 +2,15 @@ import sys
 from datetime import datetime
 
 from imblearn.over_sampling import RandomOverSampler
-from extractionLinear import extract, getFeatures
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.linear_model import LogisticRegression
 from sklearn.multiclass import OutputCodeClassifier
 from sklearn.svm import LinearSVC
-from sklearn.linear_model import  LogisticRegression
-from transitions import *
+
 import reports
+from extractionLinear import extract, getFeatures
+from transitions import *
+
 
 def train(corpus, svm=False):
     sys.stdout.write('Linear model \n')
@@ -30,7 +32,7 @@ def train(corpus, svm=False):
 
     # clf.fit(features.toarray(), labels) .tocsr()
     clf.fit(features, labels)
-    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.datetime.now() - time)
+    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.now() - startTime)
                      + reports.doubleSep)
     return clf, vec
 
@@ -72,4 +74,3 @@ def initializeSent(corpus):
     for sent in corpus.testingSents:
         sent.identifiedVMWEs = []
         sent.initialTransition = None
-

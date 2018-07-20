@@ -4,11 +4,13 @@ import numpy as np
 from imblearn.over_sampling import RandomOverSampler
 from keras.preprocessing.sequence import pad_sequences
 
+import compoVocabulary
+import nonCompoVocabulary
 import reports
 from corpus import getTokens
 from extraction import Extractor
 from reports import *
-from vocabulary import Vocabulary, empty
+from wordEmbLoader import empty
 
 
 class Normalizer:
@@ -21,10 +23,13 @@ class Normalizer:
         global embConf, initConf
         embConf = configuration["model"]["embedding"]
         initConf = embConf["initialisation"]
-        self.nnExtractor, self.vocabulary, self.posWeightMatrix, self.weightMatrix, self.tokenWeightMatrix = \
-            None, None, None, None, None
+        self.vocabulary, self.posWeightMatrix, self.weightMatrix, self.tokenWeightMatrix = \
+            None, None, None, None
         if embConf["active"]:
-            self.vocabulary = Vocabulary(corpus)
+            if configuration["xp"]["compo"]:
+                self.vocabulary = compoVocabulary.Vocabulary(corpus)
+            else:
+                self.vocabulary = nonCompoVocabulary.Vocabulary(corpus)
             self.allImportantLemmasInVocab(corpus)
             if initConf["active"]:
                 if embConf["concatenation"]:
@@ -34,11 +39,9 @@ class Normalizer:
                     if embConf["usePos"]:
                         self.posWeightMatrix = initMatrix(self.vocabulary, usePos=True)
                         del self.vocabulary.posEmbeddings
-
                     self.tokenWeightMatrix = initMatrix(self.vocabulary, useToken=True)
                     del self.vocabulary.tokenEmbeddings
-        if configuration["features"]["active"]:
-            self.nnExtractor = Extractor(corpus)
+        self.nnExtractor = Extractor(corpus) if configuration["features"]["active"] else None
         reports.saveNormalizer(self)
         if configuration["xp"]["verbose"] == 1:
             sys.stdout.write(str(self))
@@ -67,6 +70,7 @@ class Normalizer:
         return report
 
     def generateLearningData(self, corpus):
+        global embConf
         embConf = configuration["model"]["embedding"]
         data, labels = [], []
         useEmbedding = embConf["active"]
@@ -102,33 +106,20 @@ class Normalizer:
         return np.asarray(labels), data
 
     def generateLearningDataAttached(self, corpus):
-        imporSents = len(corpus.trainingSents)
         labels, tokenData, posData, featureData, data = [], [], [], [], []
         useFeatures = configuration["features"]["active"]
         for sent in corpus.trainingSents:
-            if (configuration["sampling"]["importantTransitions"] or
-                configuration["sampling"]["importantSentences"]) and not sent.vMWEs:
-                imporSents -= 1
-                continue
             trans = sent.initialTransition
             while trans and trans.next:
-                if configuration["sampling"]["importantTransitions"] and not trans.isImportant():
-                    trans = trans.next
-                else:
+                if not configuration["sampling"]["importantTransitions"] or trans.isImportant():
                     tokenIdxs, posIdxs = self.getAttachedIndices(trans)
                     tokenData.append(np.asarray(tokenIdxs))
                     posData.append(np.asarray(posIdxs))
-                    # TODO generalise
                     data.append(np.asarray(np.concatenate((tokenIdxs, posIdxs))))
-                    if useFeatures:
-                        features = np.asarray(self.nnExtractor.vectorize(trans))
-                        featureData.append(np.asarray(features))
                     labels = np.append(labels, trans.next.type.value)
-                    trans = trans.next
+                trans = trans.next
 
         sys.stdout.write(reports.seperator + reports.tabs + 'Sampling' + reports.doubleSep)
-        sys.stdout.write(reports.tabs + '{0} importatnt sents of {1}\n'.
-                         format(imporSents, len(corpus.trainingSents)))
         if useFeatures:
             if configuration["model"]["embedding"]["usePos"]:
                 return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(featureData)]
@@ -143,8 +134,13 @@ class Normalizer:
             # data, labels = ros.fit_sample(np.asarray([np.asarray(tokenData), np.asarray(posData)]),
             # np.asarray(labels))
             if configuration["sampling"]["focused"]:
+                # To stablize the learning by increasing the data volume
                 data, labels = overSampleImporTrans(data, labels, corpus, self)
-            return overSample(data, labels)
+            labels, data = overSample(labels, data)
+            if configuration['model']['train']['earlyStop']:
+                # To make sure that we will get a random validation dataset
+                labels, data = shuffleTwoArrayInParallel(labels, data)
+            return labels, data
             # return overSample(data, labels)
             # np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]  # labels, data #
             # return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
@@ -188,17 +184,17 @@ class Normalizer:
         return words
 
     def getAttachedIndices(self, trans):
-        emptyTokenIdx = self.vocabulary.attachedTokens[empty]
-        emptyPosIdx = self.vocabulary.attachedPos[empty]
+        emptyTokenIdx = self.vocabulary.tokenIndices[empty]
+        emptyPosIdx = self.vocabulary.posIndices[empty]
         tokenIdxs, posIdxs = [], []
         if trans.configuration.stack:
             s0Tokens = getTokens(trans.configuration.stack[-1])
-            tokenIdx, posIdx = self.vocabulary.getAttachedIndices(s0Tokens)
+            tokenIdx, posIdx = self.vocabulary.getIndices(s0Tokens)
             tokenIdxs.append(tokenIdx)
             posIdxs.append(posIdx)
             if len(trans.configuration.stack) > 1:
                 s1Tokens = getTokens(trans.configuration.stack[-2])
-                tokenIdx, posIdx = self.vocabulary.getAttachedIndices(s1Tokens)
+                tokenIdx, posIdx = self.vocabulary.getIndices(s1Tokens)
                 tokenIdxs.append(tokenIdx)
                 posIdxs.append(posIdx)
             else:
@@ -211,11 +207,11 @@ class Normalizer:
             posIdxs.append(emptyPosIdx)
 
         if trans.configuration.buffer:
-            tokenIdx, posIdx = self.vocabulary.getAttachedIndices([trans.configuration.buffer[0]])
+            tokenIdx, posIdx = self.vocabulary.getIndices([trans.configuration.buffer[0]])
             tokenIdxs.append(tokenIdx)
             posIdxs.append(posIdx)
             if len(trans.configuration.buffer) > 1:
-                tokenIdx, posIdx = self.vocabulary.getAttachedIndices([trans.configuration.buffer[1]])
+                tokenIdx, posIdx = self.vocabulary.getIndices([trans.configuration.buffer[1]])
                 tokenIdxs.append(tokenIdx)
                 posIdxs.append(posIdx)
             else:
@@ -230,7 +226,7 @@ class Normalizer:
         return np.asarray(tokenIdxs), np.asarray(posIdxs)
 
 
-def overSample(data, labels):
+def overSample(labels, data):
     tokenData, posData = [], []
     if not configuration["sampling"]["overSampling"]:
         for item in data:
@@ -244,13 +240,6 @@ def overSample(data, labels):
         tokenData.append(np.asarray(item[:4]))
         posData.append(np.asarray(item[4:]))
     sys.stdout.write(reports.tabs + 'data size after sampling = {0}\n'.format(len(labels)))
-    labelsDic = dict()
-    for item in labels:
-        if item not in labelsDic:
-            labelsDic[item] = 1
-        else:
-            labelsDic[item] += 1
-    print labelsDic
     return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
 
 
@@ -300,12 +289,6 @@ def overSampleImporTrans(data, labels, corpus, normalizer, oversamplingTaux=conf
     return np.asarray(data), np.asarray(labels)
 
 
-def getStackLemmaString(stack):
-    if not stack:
-        return None
-    return ' '.join(t.getLemmaOrToken() for t in getTokens(stack[-1]))
-
-
 def padSequence(seq, label, emptyIdx):
     padConf = configuration["model"]["padding"]
     return np.asarray(pad_sequences([seq], maxlen=padConf[label], value=emptyIdx))[0]
@@ -351,16 +334,22 @@ def eleminateMarginalClasses(labels, data, taux=5):
 def shuffleTwoArrayInParallel(a, b):
     a = np.asarray(a)
     b = np.asarray(b)
-    print a.shape, a.size, b.shape, b.size
-    assert b.shape[0] == 2
     rangee = range(a.shape[0])
     random.shuffle(rangee)
-    aTmp, bTmp, cTmp = [], [], []
-    for i in rangee:
-        aTmp.append(a[i])
-        bTmp.append(b[0][i])
-        cTmp.append(b[1][i])
-    return np.asarray(aTmp), [np.asarray(bTmp), np.asarray(cTmp)]
+    if b.shape[0] == 2:
+        aTmp, bTmp, cTmp = [], [], []
+        for i in rangee:
+            aTmp.append(a[i])
+            bTmp.append(b[0][i])
+            cTmp.append(b[1][i])
+        return np.asarray(aTmp), [np.asarray(bTmp), np.asarray(cTmp)]
+    elif b.shape[1] == 8:
+        aTmp, bTmp = [], []
+        for i in rangee:
+            aTmp.append(a[i])
+            bTmp.append(b[i])
+        return np.asarray(aTmp), np.asarray(bTmp)
+    assert 'Irrelevent array size!'
 
 
 def test():

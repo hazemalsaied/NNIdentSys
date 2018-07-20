@@ -1,6 +1,6 @@
-from transitions import *
 import modelKiperwasser
-import torch
+from transitions import *
+
 
 def parse(corpus, clf, normalizer):
     printSentIdx, printSentNum = 0, 0

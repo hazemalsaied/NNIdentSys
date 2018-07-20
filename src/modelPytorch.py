@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from torchvision import datasets, transforms
 from torch.utils.data import Dataset
+
 from config import configuration
 from transitions import TransitionType
 
@@ -30,9 +30,9 @@ class PytorchModel(nn.Module):
         context_size = 4
 
         super(PytorchModel, self).__init__()
-        self.tokenEmbeddings = nn.Embedding(len(normalizer.vocabulary.attachedTokens), tokenEmb)
+        self.tokenEmbeddings = nn.Embedding(len(normalizer.vocabulary.tokenIndices), tokenEmb)
         # , _weight=tokenWeights)
-        self.posEmbeddings = nn.Embedding(len(normalizer.vocabulary.attachedPos), posEmb)
+        self.posEmbeddings = nn.Embedding(len(normalizer.vocabulary.posIndices), posEmb)
         # , _weight=posWeights)
         self.linear1 = nn.Linear(context_size * (tokenEmb + posEmb), 24)
         self.linear2 = nn.Linear(24, len(TransitionType))
@@ -262,12 +262,12 @@ def main(model, corpus, normalizer):
     #     ])),
     #     batch_size=1, shuffle=True, **kwargs)
 
-    #model = PytorchModel().to(device)
+    # model = PytorchModel().to(device)
     optimizer = optim.Adagrad(model.parameters(), lr=0.02)
 
     for epoch in range(1, epochs + 1):
         train(model, device, train_loader, optimizer, epoch)
-        #test(model, device, test_loader)
+        # test(model, device, test_loader)
 
 
 if __name__ == '__main__':

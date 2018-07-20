@@ -1,5 +1,5 @@
 import datetime
-
+from collections import Counter
 import keras
 import numpy as np
 import sklearn.utils
@@ -106,7 +106,7 @@ class Network:
             tokenEmb = Embedding(len(tokenWeights[0]), tokenEmb, weights=tokenWeights,
                                  trainable=True)(inputToken)
         else:
-            tokenEmb = Embedding(len(normalizer.vocabulary.attachedTokens), tokenEmb)(inputToken)
+            tokenEmb = Embedding(len(normalizer.vocabulary.tokenIndices), tokenEmb)(inputToken)
         if rnnConf["active"]:
             tokenRnn = GRU(rnnConf["rnn1"]["unitNumber"])(tokenEmb)  # , return_sequences=True)
             concLayers.append(tokenRnn)
@@ -122,10 +122,10 @@ class Network:
             if embConf["initialisation"]["active"] and embConf["initialisation"]["pos"]:
                 sys.stdout.write('# POS weight matrix used')
                 weights = [normalizer.posWeightMatrix]
-                posEmb = Embedding(len(normalizer.vocabulary.attachedPos), posEmb, weights=weights, trainable=True)(
+                posEmb = Embedding(len(normalizer.vocabulary.posIndices), posEmb, weights=weights, trainable=True)(
                     inputPos)
             else:
-                posEmb = Embedding(len(normalizer.vocabulary.attachedPos), posEmb)(inputPos)
+                posEmb = Embedding(len(normalizer.vocabulary.posIndices), posEmb)(inputPos)
             if rnnConf["active"]:
                 posRnn = GRU(rnnConf["rnn1"]["posUnitNumber"])(posEmb)  # , return_sequences=True)
                 concLayers.append(posRnn)
@@ -143,11 +143,11 @@ class Network:
         dense1Conf = mlpConf["dense1"]
         if dense1Conf["active"]:
             dense1Layer = Dense(dense1Conf["unitNumber"], activation=dense1Conf["activation"])(conc)
-            lastLayer = Dropout(0.2)(dense1Layer)
-        dense2Conf = mlpConf["dense2"]
-        if dense2Conf["active"]:
-            dense2Layer = Dense(dense2Conf["unitNumber"], activation=dense2Conf["activation"])(lastLayer)
-            lastLayer = Dropout(0.2)(dense2Layer)
+            lastLayer = Dropout(dense1Conf["dropout"])(dense1Layer)
+            dense2Conf = mlpConf["dense2"]
+            if dense2Conf["active"]:
+                dense2Layer = Dense(dense2Conf["unitNumber"], activation=dense2Conf["activation"])(lastLayer)
+                lastLayer = Dropout(dense2Conf["dropout"])(dense2Layer)
         softmax = Dense(8, activation='softmax')(lastLayer)
         self.model = Model(inputs=inputLayers, outputs=softmax)
         # sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
@@ -171,9 +171,13 @@ def train(model, normalizer, corpus):
     time = datetime.datetime.now()
     trainConf = configuration["model"]["train"]
     labels, data = normalizer.generateLearningDataAttached(corpus)
+    lblDitribution = Counter(labels)
+    sys.stdout.write(tabs + '{0} Labels in train : {1}\n'.format(len(lblDitribution), lblDitribution))
+    valDistribution = Counter(labels[int(len(labels) * (1 - trainConf["validationSplit"])):])
+    sys.stdout.write(tabs + '{0} Labels in valid : {1}\n'.format(len(valDistribution), valDistribution))
     classWeightDic = getClassWeights(labels)
     sampleWeights = getSampleWeightArray(labels, classWeightDic)
-    labels = to_categorical(labels, num_classes=len(TransitionType))
+    labels = to_categorical(labels, num_classes=8)
     model.compile(loss=trainConf["loss"], optimizer=getOptimizer(), metrics=['accuracy'])
     history = model.fit(data, labels,
                         validation_split=trainConf["validationSplit"],
@@ -245,12 +249,13 @@ def getCallBacks():
     callbacks = [
         ModelCheckpoint(bestWeightPath, monitor=trainConf["monitor"], verbose=1, save_best_only=True, mode='max')
     ] if bestWeightPath else []
-    callbacks.append(plot_losses)
+    # callbacks.append(plot_losses)
     if trainConf["earlyStop"]:
-        callbacks.append(EarlyStopping(monitor=trainConf["monitor"],
-                                       min_delta=trainConf["minDelta"],
-                                       patience=2,
-                                       verbose=trainConf["verbose"]))
+        callbacks.append(
+            EarlyStopping(monitor=trainConf["monitor"],
+                          min_delta=trainConf["minDelta"],
+                          patience=2,
+                          verbose=trainConf["verbose"]))
     return callbacks
 
 
@@ -272,5 +277,6 @@ def getClassWeights(labels):
     for i, v in enumerate(classes):
         res[int(v)] = int(class_weight[i] * configuration["sampling"]["favorisationCoeff"]) if v > 1 \
             else int(class_weight[i])
-    sys.stdout.write(reports.tabs + 'Class weights : ' + str(res))
+    sys.stdout.write(reports.tabs + 'Favorisation Coeff : {0}\n'.format(configuration["sampling"]["favorisationCoeff"]))
+
     return res
