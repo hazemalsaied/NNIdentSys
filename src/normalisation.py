@@ -210,18 +210,20 @@ class Normalizer:
             tokenIdx, posIdx = self.vocabulary.getIndices([trans.configuration.buffer[0]])
             tokenIdxs.append(tokenIdx)
             posIdxs.append(posIdx)
-            if len(trans.configuration.buffer) > 1:
-                tokenIdx, posIdx = self.vocabulary.getIndices([trans.configuration.buffer[1]])
-                tokenIdxs.append(tokenIdx)
-                posIdxs.append(posIdx)
-            else:
-                tokenIdxs.append(emptyTokenIdx)
-                posIdxs.append(emptyPosIdx)
+            if configuration['model']['inputItems'] == 4:
+                if len(trans.configuration.buffer) > 1:
+                    tokenIdx, posIdx = self.vocabulary.getIndices([trans.configuration.buffer[1]])
+                    tokenIdxs.append(tokenIdx)
+                    posIdxs.append(posIdx)
+                else:
+                    tokenIdxs.append(emptyTokenIdx)
+                    posIdxs.append(emptyPosIdx)
         else:
             tokenIdxs.append(emptyTokenIdx)
-            tokenIdxs.append(emptyTokenIdx)
             posIdxs.append(emptyPosIdx)
-            posIdxs.append(emptyPosIdx)
+            if configuration['model']['inputItems'] == 4:
+                tokenIdxs.append(emptyTokenIdx)
+                posIdxs.append(emptyPosIdx)
 
         return np.asarray(tokenIdxs), np.asarray(posIdxs)
 
@@ -230,15 +232,15 @@ def overSample(labels, data):
     tokenData, posData = [], []
     if not configuration["sampling"]["overSampling"]:
         for item in data:
-            tokenData.append(np.asarray(item[:4]))
-            posData.append(np.asarray(item[4:]))
+            tokenData.append(np.asarray(item[:configuration['model']['inputItems']]))
+            posData.append(np.asarray(item[configuration['model']['inputItems']:]))
         return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
     sys.stdout.write(reports.tabs + 'data size before sampling = {0}\n'.format(len(labels)))
     ros = RandomOverSampler(random_state=0)
     data, labels = ros.fit_sample(data, labels)
     for item in data:
-        tokenData.append(np.asarray(item[:4]))
-        posData.append(np.asarray(item[4:]))
+        tokenData.append(np.asarray(item[:configuration['model']['inputItems']]))
+        posData.append(np.asarray(item[configuration['model']['inputItems']:]))
     sys.stdout.write(reports.tabs + 'data size after sampling = {0}\n'.format(len(labels)))
     return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
 
@@ -246,23 +248,17 @@ def overSample(labels, data):
 def getMWEDicAsIdxs(corpus, normalizer):
     result = dict()
     for mwe in corpus.mweDictionary:
-        result[getIdxsStrForMWE(mwe, normalizer)] = mwe
+        idx = getIdxsStrForMWE(mwe, normalizer)
+        if idx:
+            result[idx] = mwe
     return result
 
 
 def getIdxsStrForMWE(mwe, normalizer):
     tokenLemmas = mwe.replace(' ', '_')
-    if tokenLemmas in normalizer.vocabulary.tokenIndices:
-        return normalizer.vocabulary.tokenIndices[tokenLemmas]
-    else:
-        assert 'Something went wrong while transforming a MWE to Idx String'
-    # idxs = ''
-    # for tokenLemma in tokenLemmas:
-    #     if tokenLemma in normalizer.vocabulary.tokenIndices:
-    #         idxs += str(normalizer.vocabulary.tokenIndices[tokenLemma]) + '.'
-    #     else:
-    #         assert 'Something went wrong while transforming a MWE to Idx String'
-    # return idxs[:-1]
+    if tokenLemmas not in normalizer.vocabulary.tokenIndices:
+        return None
+    return normalizer.vocabulary.tokenIndices[tokenLemmas]
 
 
 def overSampleImporTrans(data, labels, corpus, normalizer, oversamplingTaux=configuration["sampling"]["mweRepeition"]):
@@ -343,7 +339,7 @@ def shuffleTwoArrayInParallel(a, b):
             bTmp.append(b[0][i])
             cTmp.append(b[1][i])
         return np.asarray(aTmp), [np.asarray(bTmp), np.asarray(cTmp)]
-    elif b.shape[1] == 8:
+    elif b.shape[1] == configuration['model']['inputItems'] * 2:
         aTmp, bTmp = [], []
         for i in rangee:
             aTmp.append(a[i])

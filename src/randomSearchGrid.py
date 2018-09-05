@@ -1,3 +1,4 @@
+import math
 import os
 import pickle
 import random
@@ -7,12 +8,11 @@ from config import configuration
 from identification import xp
 
 
-def runRandomSearchGridXps(langs, xpNum1=25, train=False, fixedSize=False, sharedtask2=True):
+def runRandomSearchGridXps(langs, xpNum1=25, sharedtask2=True):
     randomSearchGridPath = os.path.join(configuration["path"]["projectPath"], 'ressources', "randomSearchGrid.p")
     configuration["dataset"]["sharedtask2"] = sharedtask2
-    choosenXps = set()
     resultDic = pickle.load(open(randomSearchGridPath, "rb"))
-    idx = 0
+    choosenXps, idx = set(), 0
     while idx < xpNum1:
         choosenConfigIdx = random.randint(0, len(resultDic))
         choosenConfigKey = resultDic.keys()[choosenConfigIdx]
@@ -24,26 +24,26 @@ def runRandomSearchGridXps(langs, xpNum1=25, train=False, fixedSize=False, share
     for k in choosenXps:
         sys.stdout.write(k + '\n')
         setConfig(k)
-        xp(langs, train=train, fixedSize=fixedSize)
+        xp(langs, train=False, fixedSize=True)
+        xp(langs, train=True, fixedSize=False)
         resultDic = pickle.load(open(randomSearchGridPath, "rb"))
         resultDic[k] = True
         pickle.dump(resultDic, open(randomSearchGridPath, "w+b"))
 
 
-def createRandomSearchGrid():
+def createRandomSearchGrid(minimal=False):
     resultDic = dict()
     for i in range(1000):
-        resultDic['_'.join(generateConfig())] = False
+        if minimal:
+            resultDic['_'.join(generateMinimalConfig())] = False
+        else:
+            resultDic['_'.join(generateConfig())] = False
 
     pickle.dump(resultDic,
-                open(os.path.join(configuration["path"]["projectPath"], 'ressources', "randomSearchGrid.p"), "wb"))
-
-    # resultDicStr = ''
-    # for k in resultDic:
-    #    print k.replace('_', ',')
-    #    resultDicStr += k + ':' + str(False) + '\n'
-    # with open('RandomSearchGrid.txt', 'w') as f:
-    #     f.write(resultDicStr)
+                open(os.path.join(configuration["path"]["projectPath"], 'ressources', "randomSearchGrid.p"),
+                     "wb"))
+    for k in resultDic:
+        print k.replace('_', ',')
 
 
 def generateConfig():
@@ -79,6 +79,53 @@ def generateConfig():
     trainConf["lr"] = round(generateValue([.001, 2], continousPlage=True), 3)
     trainConf["batchSize"] = int(generateValue([16, 256], continousPlage=True))
     trainConf["epochs"] = int(generateValue([30, 100], continousPlage=True))
+
+    res = [str(sampConf["favorisationCoeff"]),
+           str(sampConf["focused"]),
+           str(embConf["lemma"]),
+           str(embConf["tokenEmb"]),
+           str(embConf["posEmb"]),
+           str(vocabType),
+           str(dense1Conf["active"]),
+           str(dense1Conf["unitNumber"]),
+           str(dense1Conf["activation"]),
+           str(dense1Conf["dropout"]),
+           str(dense2Conf['active']),
+           str(dense2Conf["unitNumber"]),
+           str(dense2Conf["activation"]),
+           str(dense2Conf["dropout"]),
+           str(trainConf["optimizer"]),
+           str(trainConf["lr"]),
+           str(trainConf["batchSize"]),
+           str(trainConf["epochs"])]
+    return res
+
+
+def generateMinimalConfig():
+    sampConf = configuration["sampling"]
+    sampConf["favorisationCoeff"] = int(generateValue([5, 35], continousPlage=True))
+    sampConf["focused"] = True # generateValue([True, False])
+
+    embConf = configuration["model"]["embedding"]
+    embConf["lemma"] = True # generateValue([True, False])
+    embConf["tokenEmb"] = int(generateValue([150, 500], continousPlage=True))
+    embConf["posEmb"] = int(generateValue([25, 150], continousPlage=True))
+    vocabType = generateValue(['frequent', 'compact'])
+    embConf["frequent"] = False if vocabType == 'all' else True
+    embConf["compactVocab"] = True if vocabType == 'compact' else False
+
+    dense1Conf = configuration["model"]["mlp"]["dense1"]
+    dense2Conf = configuration["model"]["mlp"]["dense2"]
+    dense1Conf["active"] = True # generateValue([True, False])
+    dense1Conf["unitNumber"] = int(generateValue([5, 75], continousPlage=True))
+    dense1Conf["activation"] = 'relu'  # generateValue(['relu'])
+    dense1Conf["dropout"] = round(generateValue([.2, .6], continousPlage=True), 3)
+    dense2Conf['active'] = False
+    trainConf = configuration["model"]["train"]
+    trainConf["optimizer"] = 'adagrad'  # generateValue(['adagrad'])
+    trainConf["lr"] = round(generateValue([.01, 0.09], continousPlage=True), 3)
+    trainConf["batchSize"] = 128  # int(generateValue([64, 256], continousPlage=True))
+    trainConf["epochs"] = 40
 
     res = [str(sampConf["favorisationCoeff"]),
            str(sampConf["focused"]),
@@ -157,9 +204,12 @@ def generateConfigWithFavorisation():
     return res
 
 
-def generateValue(plage, continousPlage=False):
+def generateValue(plage, continousPlage=False, uniform=False):
     if continousPlage:
-        return random.uniform(plage[0], plage[-1])
+        if uniform:
+            return random.uniform(plage[0], plage[-1])
+        else:
+            return pow(2, random.uniform(math.log(plage[0], 2), math.log(plage[-1], 2)))
     else:
         return plage[random.randint(0, len(plage) - 1)]
 
@@ -235,11 +285,17 @@ def test():
     print importantV, nonImportantV
 
 
-if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding('utf8')
-    pilotLangs = ['BG', 'PT', 'TR']
+def test2():
+    x1, x2 = [], []
+    for i in range(1000):
+        x2.append(generateValueWithFavorisation([18, 1024], [18, 128], 70, continousPlage=True))
+        x1.append(generateValue([18, 1024], continousPlage=True, uniform=False))
+    import matplotlib.pyplot as plt
 
-    configuration["model"]["train"]["earlyStop"] = True
-    createRandomSearchGrid()
-    runRandomSearchGridXps(['BG'], fixedSize=False, xpNum1=20)
+    plt.plot(x1, 'ro')
+    plt.ylabel('Drawn geometrically')
+    plt.show()
+
+    plt.plot(x2, 'ro')
+    plt.ylabel('Zone prioritaire')
+    plt.show()

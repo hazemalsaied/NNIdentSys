@@ -37,7 +37,6 @@ class LinearKerasModel:
 
 
 def train(model, corpus, normaliser):
-    time = datetime.datetime.now()
     trainConf = configuration["model"]["train"]
     labels, data = generateLearningData(corpus, normaliser)
     data = np.asarray(data)
@@ -45,8 +44,6 @@ def train(model, corpus, normaliser):
     model.fit(data, labels.toarray(), epochs=trainConf["epochs"],
               batch_size=trainConf["batchSize"],
               verbose=trainConf["verbose"])
-    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.datetime.now() - time)
-                     + reports.doubleSep)
 
 
 s0Padding = 4

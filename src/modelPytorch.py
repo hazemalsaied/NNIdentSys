@@ -50,8 +50,12 @@ class PytorchModel(nn.Module):
         tokenItemsAsTensor = torch.tensor(tokenIdxs, dtype=torch.long)
         posItemsAsTensor = torch.tensor(posIdxs, dtype=torch.long)
         outputs = self.forward(tokenItemsAsTensor, posItemsAsTensor)
-        _, predicted = torch.max(outputs, 1)
-        return predicted
+        _, sortedIndices = torch.sort(outputs[0], descending=True)
+        # return sorted_scores, sorted_indices
+        return sortedIndices
+
+        # _, predicted = torch.max(outputs, 1)
+        # return predicted
 
 
 class TrainingDataSet(Dataset):

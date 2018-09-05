@@ -38,8 +38,10 @@ class Vocabulary:
         else:
             posIdx = self.posIndices[unk]
         return tokenIdx, posIdx
+
     def getEmptyIdx(self, getPos=False, getToken=False):
         pass
+
     def verify(self, corpus):
         importTokens = 0
         for t in corpus.mweTokenDictionary:

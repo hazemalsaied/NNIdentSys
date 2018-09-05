@@ -8,25 +8,41 @@ import pickle
 from reports import *
 
 
+class DepenecyLabelManager():
+    def __init__(self, corpus):
+        depLbls = set()
+        for s in corpus.trainingSents:
+            for t in s.tokens:
+                depLbls.add(t.dependencyLabel)
+        self.depLbls = sorted(depLbls)
+
+    def getArcIdx(self, lbl, right=True):
+        if lbl in self.depLbls:
+            if right:
+                return self.depLbls.index(lbl)
+            return len(self.depLbls) + self.depLbls.index(lbl)
+        return None
+
+
 class Corpus:
-    """
+    '''
         a class used to encapsulate all the information of the corpus
-    """
+    '''
 
     def __init__(self, langName):
-        """
+        '''
             an initializer of the corpus, responsible of creating a structure of objects encapsulating all the
             information of the corpus, its sentences, tokens and MWEs.
 
             This function iterate over the lines of corpus document to create the precedent ontology
-        """
+        '''
         # sys.stdout.write('# Language = {0}\n'.format(langName))
         self.langName = langName
         self.trainingSents, self.testingSents, self.devDataSet = [], [], []
         self.mweDictionary, self.mwtDictionary, self.mweTokenDictionary = dict(), dict(), dict()
-        sharedtaskVersion = '.2' if configuration["dataset"]["sharedtask2"] else ''
-        path = os.path.join(configuration["path"]["projectPath"],
-                            configuration["path"]["corpusRelativePath"] + sharedtaskVersion, langName)
+        sharedtaskVersion = '.2' if configuration['dataset']['sharedtask2'] else ''
+        path = os.path.join(configuration['path']['projectPath'],
+                            configuration['path']['corpusRelativePath'] + sharedtaskVersion, langName)
         if sharedtaskVersion:
             self.trainDataSet = readCuptFile(os.path.join(path, 'train.cupt'))
             # sys.stdout.write(getStats(self.trainDataSet))
@@ -34,8 +50,8 @@ class Corpus:
             # sys.stdout.write(getStats(self.devDataSet))
             self.testDataSet = readCuptFile(os.path.join(path, 'test.cupt'))
             # sys.stdout.write(getStats(self.testDataSet))
-        elif configuration["dataset"]["FTB"]:
-            path = os.path.join(configuration["path"]["projectPath"], 'ressources/FTB')
+        elif configuration['dataset']['FTB']:
+            path = os.path.join(configuration['path']['projectPath'], 'ressources/FTB')
             self.trainDataSet = readFTB(os.path.join(path, 'train.cupt'))
             self.devDataSet = readFTB(os.path.join(path, 'dev.cupt'))
             self.testDataSet = readFTB(os.path.join(path, 'test.cupt'))
@@ -44,32 +60,32 @@ class Corpus:
             mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
             conlluFile, testConllu = getTrainAndTestConlluPath(path)
             if conlluFile and testConllu:
-                # if not configuration["evaluation"]["load"]:
+                # if not configuration['evaluation']['load']:
                 self.trainDataSet = readConlluFile(conlluFile)
                 integrateMweFile(mweFile, self.trainDataSet)
                 self.testDataSet = readConlluFile(testConllu)
                 integrateMweFile(testMweFile, self.testDataSet)
             else:
-                # if not configuration["evaluation"]["load"]:
+                # if not configuration['evaluation']['load']:
                 self.trainDataSet = readMWEFile(mweFile)
                 self.testDataSet = readMWEFile(testMweFile)
-        # if not configuration["evaluation"]["load"]:
+        # if not configuration['evaluation']['load']:
         self.analyzeSents()
         # Sorting parents to get the direct parent on the top of parentVMWEs list
         self.text = self.toText()
         self.orderParentVMWEs()
-        if not configuration["evaluation"]["cv"]["active"]:
-            if not configuration["evaluation"]["corpus"]:
+        if not configuration['evaluation']['cv']['active']:
+            if not configuration['evaluation']['corpus']:
                 self.shuffleSent(langName)
                 self.distributeSent(langName)
             self.getTrainAndTest()
             self.extractDictionaries()
         sys.stdout.write(self.printConlusion())
         self.getMWEMeanLength()
-        self.createMWEDict()
         if configuration['dataset']['deleteNumericalMWEs']:
             self.duplicateImportantSent()
         self.getNewMWEPercentage()
+        self.depLblMgr = DepenecyLabelManager(self)
 
     def getNewMWEPercentage(self):
         newMWE, oldMWE = 0, 0
@@ -135,15 +151,15 @@ class Corpus:
             for v in nonIdentifiedOccurrenceDic[k]:
                 res += '\t' + str(idx) + '. ' + v + '\n'
                 idx += 1
-        with open(os.path.join(configuration["path"]["projectPath"], 'Reports/testAnalysis.md'), 'w') as f:
-            f.write(res)
+        # with open(os.path.join(configuration['path']['projectPath'], 'Reports/testAnalysis.md'), 'w') as f:
+        #    f.write(res)
         res = tabs + 'Test analysis' + doubleSep
         res += tabs + 'Correctly identified MWEs' + doubleSep
         for k in occurrenceDic:
-            res += tabs + str(k) + ' : ' + str(len(occurrenceDic[k])) + "\n"
+            res += tabs + str(k) + ' : ' + str(len(occurrenceDic[k])) + '\n'
         res += seperator + tabs + 'Non Identified MWEs' + doubleSep
         for k in nonIdentifiedOccurrenceDic:
-            res += tabs + str(k) + ' : ' + str(len(nonIdentifiedOccurrenceDic[k])) + "\n"
+            res += tabs + str(k) + ' : ' + str(len(nonIdentifiedOccurrenceDic[k])) + '\n'
         sys.stdout.write(res)
 
     def duplicateImportantSent(self, taux=25):
@@ -171,14 +187,14 @@ class Corpus:
     def printConlusion(self):
         res = tabs + 'Language : {0}'.format(self.langName) + doubleSep
         res += tabs + 'Dataset : '
-        if configuration["dataset"]["sharedtask2"]:
+        if configuration['dataset']['sharedtask2']:
             res += 'Sharedtask 1.1\n'
-        elif configuration["dataset"]["FTB"]:
+        elif configuration['dataset']['FTB']:
             res += 'FTB\n'
         else:
             res += 'Sharedtask 1.0\n'
         res += tabs + 'Training {0} : {1}, Test : {2}\n'. \
-            format('(Important)' if configuration["sampling"]["importantSentences"] else '', len(self.trainingSents),
+            format('(Important)' if configuration['sampling']['importantSentences'] else '', len(self.trainingSents),
                    len(self.testingSents))
         res += tabs + 'MWEs in tain : {0}, occurrences : {1}\n'.format(len(self.mweDictionary),
                                                                        sum(self.mweDictionary.values()))
@@ -197,7 +213,7 @@ class Corpus:
         res = ''
         for k in self.mweDictionary:
             res += k + ' :' + str(self.mweDictionary[k]) + '\n'
-        with open(os.path.join(configuration["path"]["projectPath"], 'Reports/dict.txt'), 'w') as f:
+        with open(os.path.join(configuration['path']['projectPath'], 'Reports/dict.txt'), 'w') as f:
             f.write(res)
 
     def extractDictionaries(self):
@@ -205,8 +221,15 @@ class Corpus:
         self.mwtDictionary = self.getMWEDictionary(mwtOnly=True)
         self.mweTokenDictionary = self.getMWETokenDictionary()
 
+    def getDepLblsSet(self):
+        depLbls = set()
+        for s in self.trainingSents:
+            for t in s.tokens:
+                depLbls.add(t.dependencyLabel)
+        return sorted(depLbls)
+
     def deleteNumericalExpressions(self):
-        if not configuration["dataset"]["FTB"]:
+        if not configuration['dataset']['FTB']:
             return
         percentage = self.getNumericalExpressionPercentage()
         sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
@@ -344,50 +367,62 @@ class Corpus:
         return mweDictionary
 
     def getTrainAndTest(self):
-        evalConfig = configuration["evaluation"]
-        if evalConfig["debug"]:
-            debugTrainNum = evalConfig["debugTrainNum"]
-            self.trainingSents = self.trainDataSet[:debugTrainNum]  # getVMWESents(self.trainDataSet, debugTrainNum)
-            self.testingSents = self.trainDataSet[
-                                debugTrainNum:debugTrainNum * 2]  # getVMWESents(self.testDataSet, debugTrainNum)
-        elif evalConfig["fixedSize"]:
+        evalConfig = configuration['evaluation']
+        if evalConfig['fixedSize']:
             tokenNum = 0
             for sent in self.trainDataSet:
                 self.trainingSents.append(sent)
                 tokenNum += len(sent.tokens)
                 if tokenNum >= evalConfig['tokenAvg']:
                     break
-            testTokenNum = 0
-            for sent in reversed(self.trainDataSet):
-                self.testingSents.append(sent)
-                testTokenNum += len(sent.tokens)
-                if testTokenNum >= evalConfig['testTokenAvg']:
-                    break
-        elif evalConfig["train"]:
-            if (configuration["dataset"]["sharedtask2"] or configuration["dataset"]["FTB"]) and self.devDataSet:
+            if self.devDataSet:
+                self.testingSents = self.devDataSet
+            else:
+                tokenNum = 0
+                for sent in reversed(self.trainDataSet):
+                    self.testingSents.append(sent)
+                    tokenNum += len(sent.tokens)
+                    if tokenNum >= evalConfig['testTokenAvg']:
+                        break
+        elif evalConfig['dev']:
+            if (configuration['dataset']['sharedtask2'] or configuration['dataset']['FTB']) and self.devDataSet:
                 self.trainingSents = self.trainDataSet
                 self.testingSents = self.devDataSet
             else:
-                pointer = int(len(self.trainDataSet) * (1 - evalConfig["test"]))
+                pointer = int(len(self.trainDataSet) * (1 - evalConfig['test']))
                 self.trainingSents = self.trainDataSet[:pointer]
                 self.testingSents = self.trainDataSet[pointer:]
-        elif evalConfig["corpus"]:
-            if configuration["dataset"]["sharedtask2"] or configuration["dataset"]["FTB"]:
+        elif evalConfig['corpus']:
+            if configuration['dataset']['sharedtask2'] or configuration['dataset']['FTB']:
                 self.trainingSents = self.trainDataSet + self.devDataSet
                 self.testingSents = self.testDataSet
             else:
                 self.trainingSents = self.trainDataSet
                 self.testingSents = self.testDataSet
-        sents = []
-        if configuration["sampling"]["importantSentences"] or configuration["sampling"]["importantTransitions"]:
+        elif evalConfig['trainVsTest']:
+            self.trainingSents = self.trainDataSet
+            self.testingSents = self.testDataSet
+        elif evalConfig['trainVsDev']:
+            self.trainingSents = self.trainDataSet
+            self.testingSents = self.devDataSet if self.devDataSet else self.testDataSet
+        else:
+            debugTrainNum, idx, self.trainingSents = evalConfig['debugTrainNum'], 0, []
+            for s in self.trainDataSet:
+                if s.vMWEs and idx < debugTrainNum:
+                    self.trainingSents.append(s)
+                    idx += 1
+                if idx == debugTrainNum:
+                    break
+            self.testingSents = self.trainingSents
+        if configuration['sampling']['importantSentences'] or configuration['sampling']['importantTransitions']:
+            imporTrainSents = []
             for s in self.trainingSents:
                 if s.vMWEs:
-                    sents.append(s)
-            self.trainingSents = sents
-        # self.deleteNumericalExpressions()
+                    imporTrainSents.append(s)
+            self.trainingSents = imporTrainSents
 
     def distributeSent(self, lang):
-        if configuration["evaluation"]["shuffleTrain"]:
+        if configuration['evaluation']['shuffleTrain']:
             return
         idxDic = loadObj(lang + 'idxDic')
         newTrainingSentSet = []
@@ -396,13 +431,13 @@ class Corpus:
         self.trainDataSet = newTrainingSentSet
 
     def shuffleSent(self, lang):
-        datasetFolder = 'sharedtask.2' if configuration["dataset"]["sharedtask2"] else 'sharedtask'
-        if configuration["dataset"]['FTB']:
+        datasetFolder = 'sharedtask.2' if configuration['dataset']['sharedtask2'] else 'sharedtask'
+        if configuration['dataset']['FTB']:
             datasetFolder = 'FTB'
-        idxPath = os.path.join(configuration["path"]["projectPath"], 'ressources/LangDist/' + datasetFolder,
+        idxPath = os.path.join(configuration['path']['projectPath'], 'ressources/LangDist/' + datasetFolder,
                                lang + 'idxDic.pkl')
-        if configuration["evaluation"]["shuffleTrain"] or not os.path.lexists(idxPath):
-            sys.stdout.write(tabs + "train data set has been shuffled\n" + doubleSep)
+        if configuration['evaluation']['shuffleTrain'] or not os.path.lexists(idxPath):
+            sys.stdout.write(tabs + 'train data set has been shuffled\n' + doubleSep)
             idxDic = dict()
             idxList = range(len(self.trainDataSet))
             random.shuffle(idxList)
@@ -447,7 +482,7 @@ class Corpus:
         res = '{0},{1},{2},{3},{4},{5},{6}'.format(nonRecognizableNum, interleavingNum,
                                                    embeddedNum, distributedEmbeddedNum, leftEmbeddedNum,
                                                    rightEmbeddedNum, middleEmbeddedNum)
-        print res
+        # print res
         return res
 
     def getRangs(self):
@@ -507,9 +542,9 @@ class Corpus:
 
 
 class Sentence:
-    """
+    '''
        a class used to encapsulate all the information of a sentence
-    """
+    '''
 
     def __init__(self, idx, sentid=''):
 
@@ -686,6 +721,10 @@ class Sentence:
             else:
                 token.parent = None
 
+    def isProjective(self):
+        # TODO
+        return True
+
     def __str__(self):
 
         vMWEText, identifiedMWE = '', ''
@@ -723,9 +762,9 @@ class Sentence:
 
 
 class VMWE:
-    """
+    '''
         A class used to encapsulate the information of a verbal multi-word expression
-    """
+    '''
 
     def __init__(self, idx, tokens=None, type='', isEmbedded=False, isEmbedder=False, isLeftEmbedded=False,
                  isLeftEmbedder=False, isRightEmbedded=False, isRightEmbedder=False, isInterleaving=False,
@@ -779,7 +818,7 @@ class VMWE:
         return ' '.join(t.text.lower() for t in self.tokens)
 
     def getTokenOrLemmaString(self):
-        useLemma = configuration["model"]["embedding"]["lemma"]
+        useLemma = configuration['model']['embedding']['lemma']
         if not useLemma:
             return ' '.join(t.text.lower() for t in self.tokens)
             # for token in self.tokens:
@@ -855,9 +894,9 @@ class VMWE:
 
 
 class Token:
-    """
+    '''
         a class used to encapsulate all the information of a sentence tokens
-    """
+    '''
 
     def __init__(self, position, txt, lemma='', posTag='', abstractPosTag='', morphologicalInfo=None,
                  dependencyParent=-1,
@@ -921,8 +960,14 @@ class Token:
                     return vmw
         return None
 
+    def isNumber(self):
+        for l in self.getTokenOrLemma():
+            if l.isdigit():
+                return True
+        return False
+
     def getTokenOrLemma(self):
-        useLemma = configuration["model"]["embedding"]["lemma"]
+        useLemma = configuration['model']['embedding']['lemma']
         if not useLemma:
             return self.text.lower()
         if self.lemma:
@@ -948,19 +993,19 @@ class Token:
 
 
 def saveObj(obj, name):
-    datasetFolder = 'sharedtask.2' if configuration["dataset"]["sharedtask2"] else 'sharedtask'
-    if configuration["dataset"]['FTB']:
+    datasetFolder = 'sharedtask.2' if configuration['dataset']['sharedtask2'] else 'sharedtask'
+    if configuration['dataset']['FTB']:
         datasetFolder = 'FTB'
-    with open(os.path.join(configuration["path"]["projectPath"],
+    with open(os.path.join(configuration['path']['projectPath'],
                            'ressources/LangDist/' + datasetFolder, name + '.pkl'), 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
 
 def loadObj(name):
-    datasetFolder = 'sharedtask.2' if configuration["dataset"]["sharedtask2"] else 'sharedtask'
-    if configuration["dataset"]['FTB']:
+    datasetFolder = 'sharedtask.2' if configuration['dataset']['sharedtask2'] else 'sharedtask'
+    if configuration['dataset']['FTB']:
         datasetFolder = 'FTB'
-    with open(os.path.join(configuration["path"]["projectPath"],
+    with open(os.path.join(configuration['path']['projectPath'],
                            'ressources/LangDist/' + datasetFolder, name + '.pkl'), 'rb') as f:
         return pickle.load(f)
 
@@ -1018,18 +1063,18 @@ def readConlluFile(conlluFile):
 
 
 def getTrainAndTestConlluPath(path):
-    testFiles = configuration["files"]["test"]
-    trainFiles = configuration["files"]["train"]
+    testFiles = configuration['files']['test']
+    trainFiles = configuration['files']['train']
     if os.path.isfile(
-            os.path.join(path, trainFiles["depAuto"])):
-        conlluFile = os.path.join(path, trainFiles["depAuto"])
-        testConllu = os.path.join(path, testFiles["depAuto"])
-    elif os.path.isfile(os.path.join(path, trainFiles["posAuto"])):
-        conlluFile = os.path.join(path, trainFiles["posAuto"])
-        testConllu = os.path.join(path, testFiles["posAuto"])
-    elif os.path.isfile(os.path.join(path, trainFiles["conllu"])):
-        conlluFile = os.path.join(path, trainFiles["conllu"])
-        testConllu = os.path.join(path, testFiles["conllu"])
+            os.path.join(path, trainFiles['depAuto'])):
+        conlluFile = os.path.join(path, trainFiles['depAuto'])
+        testConllu = os.path.join(path, testFiles['depAuto'])
+    elif os.path.isfile(os.path.join(path, trainFiles['posAuto'])):
+        conlluFile = os.path.join(path, trainFiles['posAuto'])
+        testConllu = os.path.join(path, testFiles['posAuto'])
+    elif os.path.isfile(os.path.join(path, trainFiles['conllu'])):
+        conlluFile = os.path.join(path, trainFiles['conllu'])
+        testConllu = os.path.join(path, testFiles['conllu'])
     else:
         conlluFile, testConllu = None, None
     return conlluFile, testConllu
@@ -1060,7 +1105,7 @@ def readMWEFile(mweFile):
 
             lineParts = line.split('\t')
 
-            # Empty line or lines of the form: "8-9	can't	_	_"
+            # Empty line or lines of the form: '8-9	can't	_	_'
             if len(lineParts) != 4 or '-' in lineParts[0]:
                 continue
             token = Token(lineParts[0], lineParts[1])
@@ -1134,40 +1179,19 @@ def integrateMweFile(mweFile, sentences):
 
 def getVMWESents(sents, num):
     result, idx = [], 0
-    evalConfig = configuration["evaluation"]
-    if evalConfig["debug"]:
-        # if settings.CORPUS_SHUFFLE:
-        #     shuffle(sents)
+    for sent in sents:
+        result.append(sent)
+        idx += 1
+        if idx >= num:
+            return result
+    if len(result) < num:
         for sent in sents:
-            # if sent.vMWEs:
-            result.append(sent)
-            idx += 1
-            if idx >= num:
+            if sent not in result:
+                result.append(sent)
+            if len(result) >= num:
                 return result
-        if len(result) < num:
-            for sent in sents:
-                if sent not in result:
-                    result.append(sent)
-                if len(result) >= num:
-                    return result
-        return result
-    # result, idx = [], 0
-    return sents[:num]
-    # if settings.CORPUS_SHUFFLE:
-    #     shuffle(sents)
-    # for sent in sents:
-    #     # if sent.vMWEs:
-    #     result.append(sent)
-    #     idx += 1
-    #     if idx >= num:
-    #         return result
-    # if len(result) < num:
-    #     for sent in sents:
-    #         if sent not in result:
-    #             result.append(sent)
-    #         if len(result) >= num:
-    #             return result
-    # return result
+    return result[:num]
+
 
 
 def getTokens(elemlist):
@@ -1411,21 +1435,19 @@ def readFTB(ftbFile, reportBugs=False):
                     sent.vMWEs.append(vMWE)
                     token.setParent(vMWE)
             if lineParts[7] == 'dep_cpd' and 'mwehead' not in morpho:
-                if sent.vMWEs:
-                    if token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
-                        sent.vMWEs[-1].tokens.append(token)
-                        token.setParent(sent.vMWEs[-1])
-                    else:
-                        if reportBugs:
-                            sys.stdout.write(
-                                'Annotation bug dep_cpd without dep parent: line: {0}, word:'
-                                ' {1} DependencyParent: {2}, head Position: {3} \n'.
-                                    format(lineNum, lineParts[1], token.dependencyParent,
-                                           sent.vMWEs[-1].tokens[0].position))
-                        if sent.vMWEs:
-                            sent.vMWEs = sent.vMWEs[:-1]
+                assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
+                if token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
+                    sent.vMWEs[-1].tokens.append(token)
+                    token.setParent(sent.vMWEs[-1])
                 else:
-                    assert ' Annotation error {0} : {1}'.format(lineNum, sent)
+                    if reportBugs:
+                        sys.stdout.write(
+                            'Annotation bug dep_cpd without dep parent: line: {0}, word:'
+                            ' {1} DependencyParent: {2}, head Position: {3} \n'.
+                                format(lineNum, lineParts[1], token.dependencyParent,
+                                       sent.vMWEs[-1].tokens[0].position))
+                    if sent.vMWEs:
+                        sent.vMWEs = sent.vMWEs[:-1]
     # print universalPosTags
     # print xposTags
     # print len(universalPosTags), len(xposTags)
@@ -1439,10 +1461,8 @@ def getMorphological(morphoStr):
     morphAttribs = morphoStr.split('|')
     for attib in morphAttribs:
         attribComposants = attib.split('=')
-        if len(attribComposants) > 1:
-            result[attribComposants[0]] = attribComposants[1]
-        else:
-            assert 'Morpho annotation error : {0}'.format(morphoStr)
+        assert len(attribComposants) <= 1, 'Morpho annotation error : {0}'.format(morphoStr)
+        result[attribComposants[0]] = attribComposants[1]
     return result
 
 
@@ -1452,7 +1472,7 @@ def getMorphological(morphoStr):
 def getPosTag(token, lineParts3, lineParts4):
     # universalPosTags.add(lineParts3.lower())
     # xposTags.add(lineParts4.lower())
-    useUniversalPOS = configuration["preprocessing"]["data"]["universalPOS"]
+    useUniversalPOS = configuration['preprocessing']['data']['universalPOS']
     if useUniversalPOS:
         token.posTag = lineParts3
     else:

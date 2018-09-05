@@ -3,80 +3,63 @@ import sys
 
 import reports
 from config import configuration, resetFRStandardFeatures
-from identification import identify
-
-allSharedtask1Lang = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT',
-                      'LT', 'MT', 'PL', 'PT', 'RO', 'SV', 'TR']
-
-allSharedtask2Lang = ['BG', 'DE', 'EL', 'EN', 'ES', 'EU', 'FA', 'FR', 'HE', 'HI',
-                      'HR', 'HU', 'IT', 'LT', 'PL', 'PT', 'RO', 'SL', 'TR']
-
-langs = ['FR']
+from identification import xp
 
 
 def exploreFeatures():
-    evalConfig = configuration["evaluation"]
-    evalConfig["debug"] = False
-    evalConfig["train"] = True
+    evalConfig = configuration['evaluation']
+    evalConfig['dev'] = True
 
     exploreLexicalFeatures()
     exploreNonLexicalFeatures()
 
 
 def exploreNonLexicalFeatures():
-    featConf = configuration["features"]
+    featConf = configuration['features']
 
     resetFRStandardFeatures()
 
     reports.createHeader(' Title: Standard settings:  A B C E I J K L')
-    for lang in langs:
-        identify(lang)
+    xp(langs, xpNum=1)
 
     reports.createHeader(' Title: Without syntax: A C E I J K L')
-    featConf["syntax"]["active"] = False
-    for lang in langs:
-        identify(lang)
-    featConf["syntax"]["active"] = True
+    featConf['syntax']['active'] = False
+    xp(langs, xpNum=1)
+    featConf['syntax']['active'] = True
 
     reports.createHeader(' Title: Without BiGram: A B E I J K L')
-    featConf["bigram"]["s0b2"] = False
-    for lang in langs:
-        identify(lang)
-    featConf["bigram"]["s0b2"] = True
+    featConf['bigram']['s0b2'] = False
+    xp(langs, xpNum=1)
+    featConf['bigram']['s0b2'] = True
 
     reports.createHeader(' Title: Without S0B2Bigram: A B C I J K L')
-    featConf["bigram"]["s0b2"] = False
-    for lang in langs:
-        identify(lang)
-    featConf["bigram"]["s0b2"] = True
+    featConf['bigram']['s0b2'] = False
+    xp(langs, xpNum=1)
+    featConf['bigram']['s0b2'] = True
 
     reports.createHeader(' Title: Without S0B0Distance: A B C E J K L')
-    featConf["distance"]["s0b0"] = False
-    for lang in langs:
-        identify(lang)
-    featConf["distance"]["s0b0"] = True
+    featConf['distance']['s0b0'] = False
+    xp(langs, xpNum=1)
+    featConf['distance']['s0b0'] = True
 
     reports.createHeader(' Title: Without S0S1Distance: A B C E I K L')
-    featConf["distance"]["s0s1"] = False
-    for lang in langs:
-        identify(lang)
-    featConf["distance"]["s0s1"] = True
+    featConf['distance']['s0s1'] = False
+    xp(langs, xpNum=1)
+    featConf['distance']['s0s1'] = True
 
     reports.createHeader(' Title: without B1:  A B C E I J L')
-    featConf["unigram"]["b1"] = False
-    for lang in langs:
-        identify(lang)
-    featConf["unigram"]["b1"] = True
+    featConf['unigram']['b1'] = False
+    xp(langs, xpNum=1)
+    featConf['unigram']['b1'] = True
 
     reports.createHeader(' Title: without lexicon:  A B C E I J K')
-    featConf["dictionary"]["active"] = False
-    identify(langs)
+    featConf['dictionary']['active'] = False
+    xp(langs, xpNum=1)
 
 
 def exploreLexicalFeatures():
-    evalConfig = configuration["evaluation"]
-    evalConfig["debug"] = False
-    evalConfig["train"] = True
+    evalConfig = configuration['evaluation']
+    evalConfig['dev'] = True
     resetNonLexicalFeatures()
     # token
     explore(True, False, False)
@@ -95,83 +78,87 @@ def exploreLexicalFeatures():
 
 
 def exploreAbstractSyntax():
-    featConf = configuration["features"]
-    featConf["unigram"]["pos"] = True
-    featConf["unigram"]["token"] = False
-    featConf["unigram"]["lemma"] = True
-    featConf["bigram"]["active"] = True
-    for lang in langs:
-        identify(lang)
-    featConf["syntax"]["abstract"] = True
-    for lang in langs:
-        identify(lang)
+    featConf = configuration['features']
+    featConf['unigram']['pos'] = True
+    featConf['unigram']['token'] = False
+    featConf['unigram']['lemma'] = True
+    featConf['bigram']['active'] = True
+    xp(langs, xpNum=1)
+    featConf['syntax']['abstract'] = True
+    xp(langs, xpNum=1)
 
 
 def explore(token=False, lemma=False, pos=False, mwt=False):
-    featConf = configuration["features"]
-    featConf["unigram"]["pos"] = pos
-    featConf["unigram"]["token"] = token
-    featConf["unigram"]["lemma"] = lemma
-    featConf["bigram"]["active"] = True
-    featConf["dictionary"]["mwt"] = mwt
+    featConf = configuration['features']
+    featConf['unigram']['pos'] = pos
+    featConf['unigram']['token'] = token
+    featConf['unigram']['lemma'] = lemma
+    featConf['bigram']['active'] = True
+    featConf['dictionary']['mwt'] = mwt
     title = 'token ' if token else ''
     title += 'lemma ' if lemma else ''
     title += 'pos ' if pos else ''
     reports.createHeader(' Title: uni + bi: {0}'.format(title))
-    for lang in langs:
-        identify(lang)
+    xp(langs, xpNum=1)
 
 
-def resetNonLexicalFeatures(desactivate=False):
-    featConf = configuration["features"]
-    featConf["syntax"]["active"] = desactivate
-    featConf["syntax"]["abstract"] = desactivate
-    featConf["bigram"]["s0b2"] = desactivate
-    featConf["bigram"]["active"] = desactivate
-    featConf["trigram"] = desactivate
-    featConf["distance"]["s0b0"] = desactivate
-    featConf["distance"]["s0s1"] = desactivate
-    featConf["stackLength"] = desactivate
-    featConf["unigram"]["b1"] = desactivate
-    featConf["dictionary"]["active"] = desactivate
-    featConf["history"]["1"] = desactivate
-    featConf["history"]["2"] = desactivate
-    featConf["history"]["3"] = desactivate
-    featConf["unigram"]["pos"] = desactivate
-    featConf["unigram"]["lemma"] = desactivate
+def resetNonLexicalFeatures(value=False):
+    featConf = configuration['features']
+    featConf['syntax']['active'] = value
+    featConf['syntax']['abstract'] = value
+    featConf['bigram']['s0b2'] = value
+    featConf['bigram']['active'] = value
+    featConf['trigram'] = value
+    featConf['distance']['s0b0'] = value
+    featConf['distance']['s0s1'] = value
+    featConf['stackLength'] = value
+    featConf['unigram']['b1'] = value
+    featConf['dictionary']['active'] = value
+    featConf['history']['1'] = value
+    featConf['history']['2'] = value
+    featConf['history']['3'] = value
+    featConf['unigram']['pos'] = value
+    featConf['unigram']['lemma'] = value
 
 
 def discoverSampling(importantSentences=True, overSampling=True):
     resetNonLexicalFeatures()
-    configuration["sampling"]["importantSentences"] = importantSentences
-    configuration["sampling"]["overSampling"] = overSampling
+    configuration['sampling']['importantSentences'] = importantSentences
+    configuration['sampling']['overSampling'] = overSampling
     explore(lemma=True, pos=True, token=False)
 
 
 def exploreSharedtask2():
-    configuration["dataset"]["sharedtask2"] = True
+    configuration['dataset']['sharedtask2'] = True
     resetNonLexicalFeatures()
-    explore(lemma=True, pos=True, token=False)
+    explore(lemma=True, pos=True, token=False, mwt=True)
 
 
 def exploreFTB():
-    configuration["dataset"]["FTB"] = True
+    configuration['dataset']['FTB'] = True
     resetFRStandardFeatures()
     # resetNonLexicalFeatures()
     # explore(lemma=True, pos=True, token=False)
-    for lang in langs:
-        identify(lang)
+    xp(langs, xpNum=1)
 
 
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    langs = ['BG', 'PT', 'TR']
-    configuration["xp"]["linear"] = True
-    configuration["evaluation"]["debug"] = False
-    configuration["evaluation"]["fixedSize"] = True
-    configuration["dataset"]["sharedtask2"] = True
+    configuration['xp']['linear'] = True
+
+    from xpNonCompo import allSharedtask2Lang
+
+    langs = allSharedtask2Lang  # ['FR']
+    configuration['dataset']['sharedtask2'] = True
+    configuration['linear']['svm'] = True
+
+    configuration['evaluation']['corpus'] = True
     exploreSharedtask2()
-    # configuration["evaluation"]["corpus"] = True
-    # exploreFTB()
+
+    configuration['evaluation']['trainVsTest'] = True
+    exploreSharedtask2()
+
+    configuration['evaluation']['trainVsDev'] = True
+    exploreSharedtask2()

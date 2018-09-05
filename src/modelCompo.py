@@ -59,7 +59,7 @@ class Network:
         for i in range(normalizer.inputListDimension):
             inputVec.append(np.asarray([dataEntry[i]]))
         oneHotRep = self.model.predict(inputVec, batch_size=1, verbose=configuration["model"]["predict"]["verbose"])
-        return argmax(oneHotRep)
+        return oneHotRep[0]
 
 
 def train(model, normalizer, corpus):
@@ -72,7 +72,6 @@ def train(model, normalizer, corpus):
     if trainConf["earlyStop"]:
         callbacks.append(EarlyStopping(monitor=trainConf["monitor"], min_delta=trainConf["minDelta"],
                                        patience=2, verbose=trainConf["verbose"]))
-    time = datetime.datetime.now()
     labels, data = normalizer.generateLearningData(corpus)
     labels = to_categorical(labels, num_classes=len(TransitionType))
     history = model.fit(data, labels, validation_split=trainConf["validationSplit"],
@@ -90,8 +89,6 @@ def train(model, normalizer, corpus):
     validationLabel = labels[int(len(labels) * (1 - trainConf["validationSplit"])):]
     history = model.fit(validationData, validationLabel, epochs=len(history.epoch), batch_size=trainConf["batchSize"],
                         verbose=trainConf["verbose"])
-    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.format(datetime.datetime.now() - time)
-                     + reports.doubleSep)
     # reports.saveHistory(history)
     if not configuration["evaluation"]["cluster"]:
         plot(history)

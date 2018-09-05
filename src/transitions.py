@@ -8,21 +8,23 @@ class TransitionType(Enum):
     SHIFT = 0
     REDUCE = 1
     MERGE = 2
-    MARK_AS_VPC = 3
+    MARK_AS_OTH = 3
     MARK_AS_IREFLV = 4
     MARK_AS_ID = 5
     MARK_AS_LVC = 6
-    MARK_AS_OTH = 7
+    MARK_AS_VPC = 7
 
 
 class Transition(object):
-    def __init__(self, type=None, config=None, previous=None, next=None, isInitial=False, sent=None):
+    def __init__(self, type=None, config=None, previous=None, next=None, isInitial=False, sent=None, isClassified=False):
 
         self.sent = sent
+        self.isClassified = isClassified
         if isInitial:
             self.configuration = Configuration([], sent.tokens, [], sent, self, isInitial=True)
             self.type = None
             sent.initialTransition = self
+            self.isLegal = True
         else:
             self.configuration = config
         if type:
@@ -93,6 +95,14 @@ class Transition(object):
             return False
         return True
 
+    def isImportantTrans(self):
+        if self.next:
+            if self.next.type == TransitionType.SHIFT and self.configuration.stack:
+                return True
+            if self.next.type != TransitionType.SHIFT and self.next.type != TransitionType.REDUCE:
+                return True
+        return False
+
     def isImportant(self, window=4):
         idx = 0
         nexTrans = self
@@ -111,11 +121,11 @@ class Transition(object):
         return False
 
     def __str__(self):
-        configuration = str(self.configuration)
         typeStr = '{0}'.format(self.type.name) if self.type else ''
-        typeStr += ' ' * (15 - len(typeStr))
+        transSelectionType = 'C' if self.isClassified else 'L'
+        typeStr += ': ' + transSelectionType + ' ' * (15 - len(typeStr))
 
-        return '\n{0} - {1} : {2}'.format(self.id, typeStr, configuration)
+        return '\n{0} - {1} \n{2}'.format(self.id, typeStr, str(self.configuration), )
 
 
 class Shift(Transition):
@@ -123,13 +133,13 @@ class Shift(Transition):
         super(Shift, self).__init__(type, config, previous, next, isInitial, sent)
         self.type = TransitionType.SHIFT
 
-    def apply(self, parent, sent, parse=False):
+    def apply(self, parent, sent, parse=False, isClassified=False):
         config = parent.configuration
         lastToken = config.buffer[0]
         newStack = list(config.stack)
         newStack.append(lastToken)
         newConfig = Configuration(newStack, config.buffer[1:], list(config.tokens), sent, self)
-        super(Shift, self).__init__(config=newConfig, previous=parent, sent=sent)
+        super(Shift, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.buffer:
@@ -141,14 +151,14 @@ class Reduce(Transition):
     def __init__(self, type=TransitionType.REDUCE, config=None, previous=None, next=None, isInitial=False, sent=None):
         super(Reduce, self).__init__(type, config, previous, next, isInitial, sent)
 
-    def apply(self, parent, sent, parse=False):
+    def apply(self, parent, sent, parse=False, isClassified=False):
         config = parent.configuration
         newBuffer = list(config.buffer)
         newStack = list(config.stack)
         newStack = newStack[:-1]
         newTokens = list(config.tokens)
         newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
-        super(Reduce, self).__init__(config=newConfig, previous=parent, sent=sent)
+        super(Reduce, self).__init__(config=newConfig, previous=parent, sent=sent,isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.stack:
@@ -160,7 +170,7 @@ class Merge(Transition):
     def __init__(self, config=None, previous=None, next=None, isInitial=False, sent=None):
         super(Merge, self).__init__(TransitionType.MERGE, config, previous, next, isInitial, sent)
 
-    def apply(self, parent, sent, parse=False):
+    def apply(self, parent, sent, parse=False, isClassified=False):
         config = parent.configuration
         newBuffer = list(config.buffer)
         newStack = list(config.stack)[:-2]
@@ -168,7 +178,7 @@ class Merge(Transition):
         newTokens = list(config.tokens)
         newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
 
-        super(Merge, self).__init__(config=newConfig, previous=parent, sent=sent)
+        super(Merge, self).__init__(config=newConfig, previous=parent, sent=sent,isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.stack and len(self.configuration.stack) > 1:
@@ -180,7 +190,7 @@ class MarkAs(Transition):
     def __init__(self, type, config=None, previous=None, next=None, isInitial=False, sent=None):
         super(MarkAs, self).__init__(type, config, previous, next, isInitial, sent)
 
-    def apply(self, parent, sent, parse=False):
+    def apply(self, parent, sent, parse=False, isClassified=False):
         config = parent.configuration
         newBuffer = list(config.buffer)
         newStack = list(config.stack)[:-1]
@@ -199,7 +209,7 @@ class MarkAs(Transition):
         #         raise
         newTokens.append(vMWETokens)
         newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
-        super(MarkAs, self).__init__(config=newConfig, previous=parent, sent=sent)
+        super(MarkAs, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.stack:

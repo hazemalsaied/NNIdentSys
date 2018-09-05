@@ -7,7 +7,7 @@ import reports
 from config import configuration
 
 
-def evaluate(corpus, foldIdx=-1, categorization=False):
+def evaluate(corpus, foldIdx=-1, categorization=True):
     tp, p, t, tpCat, pCat, tCat = getStatistics(corpus)
     scores = calculateScores(tp, p, t, 'Identification')
     if categorization:
@@ -92,14 +92,14 @@ def getMWTStatistics(corpus):
 
 
 def calculateScores(tp, p, t, title):
-    """
+    '''
 
     :param tp: True positive
     :param p: positive
     :param t: true
     :param title: logging indicator
     :return: Fscore, recall, precision
-    """
+    '''
     if p == 0 or t == 0 or tp == 0:
         if title == 'Identification':
             sys.stdout.write(reports.tabs + '{0} : {1}\n'.format(title, 0))
@@ -116,17 +116,19 @@ def calculateScores(tp, p, t, title):
 
 
 def createMWEFiles(corpus, x=-1):
-    cv = configuration["evaluation"]["cv"]["active"]
+    cv = configuration['evaluation']['cv']['active']
     if cv:
         return
-    folder = configuration["path"]["results"]
-    if cv:
-        folder += '/CV/' + corpus.langName
-    elif configuration["evaluation"]["corpus"]:
-        folder += '/testSet/'
+    folder = configuration['path']['results']
+    if configuration['dataset']['sharedtask2']:
+        folder += '/ST2'
+    elif configuration['evaluation']['corpus']:
+        folder += '/corpus/'
+    elif configuration['evaluation']['trainVsTest']:
+        folder += '/corpusWithoutDev/'
     else:
         return
-    folder = os.path.join(configuration["path"]["projectPath"], folder)
+    folder = os.path.join(configuration['path']['projectPath'], folder)
     if not os.path.exists(folder):
         os.makedirs(folder)
     if x == -1:

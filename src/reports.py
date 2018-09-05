@@ -17,9 +17,9 @@ try:
     reportPath = os.path.join(configuration["path"]["projectPath"], PATH_ROOT_REPORTS_DIR)
     if not os.path.isdir(reportPath):
         os.makedirs(reportPath)
-    schemaFolder = os.path.join(reportPath, 'schemas')
-    if not os.path.isdir(schemaFolder):
-        os.makedirs(schemaFolder)
+    # schemaFolder = os.path.join(reportPath, 'schemas')
+    # if not os.path.isdir(schemaFolder):
+    #    os.makedirs(schemaFolder)
 except OSError as e:
     if e.errno != errno.EEXIST:
         raise
@@ -31,7 +31,7 @@ repFiles = configuration["files"]["reports"]
 
 # def getXPDirectory(langName, xpNum):
 #
-#     if evalConf["load"] or evalConf["debug"]:
+#     if evalConf["load"]:
 #         return
 #     cvTxt = '-CV' if evalConf["cv"]["active"] else ''
 #     prefix = langName + cvTxt + '-' + str(xpNum)
@@ -40,7 +40,7 @@ repFiles = configuration["files"]["reports"]
 
 
 # def createXPDirectory():
-#     if evalConf["load"] or evalConf["debug"]:
+#     if evalConf["load"] :
 #         return
 #     try:
 #         if not os.path.isdir(XP_CURRENT_DIR_PATH):
@@ -48,6 +48,14 @@ repFiles = configuration["files"]["reports"]
 #     except OSError as err:
 #         if err.errno != errno.EEXIST:
 #             raise
+
+
+def printParsedSents(corpus, sentNum):
+    printSentIdx, printSentNum = 0, sentNum
+    for s in corpus.testingSents:
+        if s.vMWEs and printSentIdx < printSentNum:
+            sys.stdout.write(str(s) + '\n')
+            printSentIdx += 1
 
 
 def createReportFolder(lang):
@@ -106,7 +114,7 @@ def saveNormalizer(normalizer):
 
 
 # def saveSettings():
-#     if evalConf["load"] or evalConf["debug"]:
+#     if evalConf["load"]:
 #         return
 #     if evalConf["cv"]["active"]:
 #         settFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]), SETTINGS_FILE)
@@ -232,7 +240,8 @@ def saveHistory(history):
 
 
 def createHeader(value):
-    sys.stdout.write(doubleSep + doubleSep + tabs + "{0}\n".format(value) + doubleSep)
+    if value:
+        sys.stdout.write(doubleSep + doubleSep + tabs + "{0}\n".format(value) + doubleSep)
 
 
 def getBestWeightFilePath():
@@ -249,17 +258,32 @@ def getBestWeightFilePath():
 def mustSave():
     global evalConf
     evalConf = configuration["evaluation"]
-    if evalConf["load"] or evalConf["debug"]:
+    if evalConf["load"]:
         return False
     if evalConf["save"]:
         return True
     return False
 
 
+def printMode():
+    evalConf = configuration['evaluation']
+    res = 'Debug'
+    if evalConf['dev']:
+        res = 'Train vs Dev'
+    elif evalConf['corpus']:
+        res = 'Train + Dev vs Test'
+    elif evalConf['fixedSize']:
+        res = 'Fixed Size'
+    elif evalConf['trainVsTest']:
+        res = 'Train vs Test'
+    if res:
+        sys.stdout.write(doubleSep + tabs + '{0} Mode'.format(res) + doubleSep)
+
+
 featureNumLine = 'Trainable params: '
 linearParamLine = '# Feature number = '
 paramLine = 'Trainable params: '
-scoreLine = tabs + 'Identification : 0'
+scoreLine = 'Identification : 0'  # tabs + 'Identification : 0'
 linearTitleLine = '# Language = '
 titleLine = '# XP = '
 
@@ -496,11 +520,16 @@ def getStats(newFile):
     print res
 
 
+langLine = '	Language : '
+
+
 def mineNewFile(newFile):
     path = '../Reports/Reports/{0}'.format(newFile)
-    titles, params, scores = [], [], []
+    titles, params, scores, langs = [], [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
+            if line.startswith(langLine):
+                langs.append(line[len(langLine):len(langLine) + 2])
             if '_True_' in line or '_False_' in line:
                 titles.append(line[:-1])
             if line.startswith(paramLine):
@@ -513,20 +542,20 @@ def mineNewFile(newFile):
                 scores.append(round(int(fScore) / 10000., 4) * 100)
             if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
                 titles.append(line[len(titleLine):].strip())
-    return titles, scores, params
+    return titles, scores, params, langs
 
 
 def getAvgScores(scores, langNum=3, trialNum=3):
     result, xpScores, langSum = [], [], 0
     for i, v in enumerate(scores):
         if i != 0 and i % trialNum == 0:
-            xpScores.append(round(float(langSum) / langNum, 1))
+            xpScores.append(round(float(langSum) / trialNum, 1))
             langSum = 0
         if i != 0 and i % (trialNum * langNum) == 0:
             result.append(xpScores)
             xpScores = []
         langSum += float(v)
-    xpScores.append(round(float(langSum) / langNum, 1))
+    xpScores.append(round(float(langSum) / trialNum, 1))
     result.append(xpScores)
     return result
 
@@ -534,27 +563,28 @@ def getAvgScores(scores, langNum=3, trialNum=3):
 def getNewScores(files):
     for f in files:
         f = str(f)
-        titles, scores, params = mineNewFile(f)
-        results = getAvgScores(scores)
-        for i, t in enumerate(titles):
-            t = t.replace(',', '.').replace('_', ',')
-            ii = i * 9
-            print f, ',', \
-                t, \
-                str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
-                results[i][0], \
-                str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
-                results[i][1], \
-                str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
-                results[i][2], ',', \
-                round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
+        titles, scores, params, langs = mineNewFile(f)
+        # results = getAvgScores(scores, 6)
+        for i, t in enumerate(scores):
+            print scores[i]
+            # t = t.replace(',', '.').replace('_', ',')
+            # print f, ',', \
+            #    t, str(results[i]).replace('[', ',').replace(']', ','), round(sum(results[i]) / 6, 1)
+            # ii = i * 9 * 2
+            # str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
+            # results[i][0], \
+            # str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
+            # results[i][1], \
+            # str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
+            # results[i][2], ',', \
+            # round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
 
 
 if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
-    getNewScores([ '22'])
-    # getStats('shar,edtask1.new')
+    getNewScores(['trainVsDev.linear'])
+    # getStats('earlyStopping.st2.corpus')
     # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
     # for f in os.listdir('../Reports/Reports'):
     #     print f

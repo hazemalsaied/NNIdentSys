@@ -77,3 +77,7 @@ pLbl=xp8  NNIdenSys/Scripts/nonCompoI.sh
 ```
 nvcc --version
 ```
+### Kiperwasser
+```
+oarsub -p "cluster='grimani'" -q production -l nodes=1,walltime=3 -I
+```
