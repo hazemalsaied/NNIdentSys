@@ -1,110 +1,170 @@
 import datetime
 import logging
+import math
 import random
 
 import torch
-from theano import function, config, shared, tensor
 
+import modelCompactKiper
 import modelKiperwasser
 import oracle
+import parserCompact
 import reports
 from corpus import *
 from evaluation import evaluate
 from parser import parse
 
 
-def xp(langs, xpNum=3, title='', seed=0):
-    verifyGPU()
-    evlaConf = configuration['evaluation']
-    evlaConf['cluster'] = True
-    numpy.random.seed(seed)
-    random.seed(seed)
-    torch.manual_seed(seed)
+def xp(langs, xpNum=3, title='', compact=False):
     reports.createHeader(title)
-    reports.printMode()
     for lang in langs:
-        for i in range(xpNum):
+        for _ in range(xpNum):
             corpus = Corpus(lang)
             oracle.parse(corpus)
             startTime = datetime.datetime.now()
-            network = modelKiperwasser.train(corpus)
+            network = modelKiperwasser.train(corpus) if not compact else modelCompactKiper.train(corpus)
             sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.
                              format(datetime.datetime.now() - startTime) + reports.doubleSep)
-            parse(corpus, network)
+            if compact:
+                parserCompact.parse(corpus, network)
+            else:
+                parse(corpus, network)
             evaluate(corpus)
 
 
-def getTrainAndTestSents(corpus, testRange, trainRange):
-    sent = corpus.trainDataSet
-    corpus.testingSents = sent[testRange[0]:testRange[1]]
-    corpus.trainingSents = sent[trainRange[0]:trainRange[1]] if len(trainRange) == 2 else \
-        sent[trainRange[0]:trainRange[1]] + sent[trainRange[2]:trainRange[3]]
+def generateConf():
+    kiperConf = configuration['kiperwasser']
+    kiperConf['wordDim'] = int(generateValue([20, 150], True))
+    kiperConf['posDim'] = int(generateValue([5, 50], True))
+    kiperConf['denseActivation'] = str(generateValue(['tanh', 'relu'], False))
+    kiperConf['optimizer'] = 'adagrad'  # str(generateValue(['adam', 'adagrad'], False))
+    kiperConf['lr'] = 0.07  # round(generateValue([.01, .09], True), 3)
+    # round(generateValue([.08, .3], True), 3) if kiperConf['optimizer'] == 'adam' else \
+    #    round(generateValue([.001, .009], True), 3)
+    kiperConf['dense1'] = int(generateValue([10, 100], True))
+    kiperConf['lstmDropout'] = round(generateValue([.1, .5], True), 2)
+    kiperConf['lstmUnitNum'] = int(generateValue([10, 100], True))
+    kiperConf['lstmLayerNum'] = generateValue([1, 2], False)
+
+    configuration['model']['embedding']['compactVocab'] = generateValue([True, False], False)
+    configuration['model']['embedding']['lemma'] = generateValue([True, False], False)
+
+    # sys.stdout.write('KIPER CONF: word = {0} - pos {1} - lstmLayers {2} - lstmUnits {3} - lstmDrop {4} ' \
+    #                  '- denseUnits {5} - dnenseActiv {6} - optim {7} lr {8} compactVocab {9} Lemma {10} \n'.
+    #                  format(kiperConf['wordDim'],
+    #                         kiperConf['posDim'],
+    #                         kiperConf['lstmLayerNum'],
+    #                         kiperConf['lstmUnitNum'],
+    #                         kiperConf['lstmDropout'],
+    #                         kiperConf['dense1'],
+    #                         kiperConf['denseActivation'],
+    #                         kiperConf['optimizer'],
+    #                         kiperConf['lr'],
+    #                         configuration['model']['embedding']['compactVocab'],
+    #                         configuration['model']['embedding']['lemma']
+    #                         ))
 
 
-def getAllLangStats(langs):
-    res = ''
-    for lang in langs:
-        corpus = Corpus(lang)
-        res += corpus.langName + ',' + getStats(corpus.trainDataSet, asCSV=True) + ',' + \
-               getStats(corpus.devDataSet, asCSV=True) + ',' + \
-               getStats(corpus.testDataSet, asCSV=True) + '\n'
-    return res
+def createRSGGrid(filename='kiperGrid.p'):
+    conf = dict()
+    for i in range(500):
+        generateConf()
+        conf[i] = [False, dict(configuration['kiperwasser']), dict(configuration['model']['embedding'])]
+    pickle.dump(conf, open(os.path.join(configuration["path"]["projectPath"], 'ressources', filename), "wb"))
+    return conf
 
 
-def analyzeCorporaAndOracle(langs):
-    header = 'Non recognizable,Interleaving,Embedded,Distributed Embedded,Left Embedded,Right Embedded,Middle Embedded'
-    analysisReport = header + '\n'
-    for lang in langs:
-        sys.stdout.write('Language = {0}\n'.format(lang))
-        corpus = Corpus(lang)
-        analysisReport += corpus.getVMWEReport() + '\n'
-        oracle.parse(corpus)
-        oracle.validate(corpus)
-    with open('../Results/VMWE.Analysis.csv', 'w') as f:
-        f.write(analysisReport)
+def getRSGrid(filename='kiperGrid.p'):
+    randomSearchGridPath = os.path.join(configuration["path"]["projectPath"], 'ressources', filename)
+    return pickle.load(open(randomSearchGridPath, "rb"))
 
 
-def verifyGPU():
-    vlen = 10 * 30 * 768
-    rng = numpy.random.RandomState(22)
-    x = shared(numpy.asarray(rng.rand(vlen), config.floatX))
-    f = function([], tensor.exp(x))
-    if numpy.any([isinstance(x.op, tensor.Elemwise) and
-                  ('Gpu' not in type(x.op).__name__)
-                  for x in f.maker.fgraph.toposort()]):
-        sys.stdout.write(tabs + 'Attention: CPU used\n')
+def generateValue(plage, continousPlage=False, uniform=False):
+    if continousPlage:
+        if uniform:
+            return random.uniform(plage[0], plage[-1])
+        else:
+            return pow(2, random.uniform(math.log(plage[0], 2), math.log(plage[-1], 2)))
     else:
-        sys.stdout.write(tabs + 'GPU Enabled')
+        return plage[random.randint(0, len(plage) - 1)]
+
+
+def getActiveConfs():
+    confs = getRSGrid()
+    activeCons = 0
+    for i in range(len(confs)):
+        if confs[i][0]:
+            print confs[i][1]
+            activeCons += 1
+    print activeCons
+
+
+def runRSGThread(langs, xpNum=30, compact=False, filename='kiperGrid.p'):
+    for i in range(xpNum):
+        confs = getRSGrid(filename=filename)
+        while True:
+            confIdx = random.randint(1, len(confs)) - 1
+            isRead = confs[confIdx][0]
+            if not isRead:
+                break
+        confs[confIdx][0] = True
+        pickle.dump(confs, open(os.path.join(configuration["path"]["projectPath"], 'ressources', "kiperGrid.p"), "wb"))
+        configuration['kiperwasser'].update(confs[confIdx][1])
+        configuration['model']['embedding'].update(confs[confIdx][2])
+        print '# Kiper conf: ' + str(configuration['kiperwasser']) + str(
+            configuration['model']['embedding']['lemma']) + ',' + str(
+            configuration['model']['embedding']['compactVocab'])
+        xp(langs, xpNum=1, compact=compact)
+
+
+def exploreLR(langs, compact=False):
+    lr = .0
+    while True:
+        lr += .01
+        print '# Learning Rate : {0}'.format(lr)
+        configuration['kiperwasser']['lr'] = lr
+        xp(langs, xpNum=1, compact=compact)
+        if lr >= .2:
+            break
 
 
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    configuration['xp']['kiperwasser'] = True
+    # langs = ['BG']
+    random.seed(0)
+    torch.manual_seed(0)
 
-    configuration['kiperwasser'] = {
-        'wordDim': 25,  # 100,
-        'posDim': 5,  # 25,
-        'layerNum': 2,
-        'activation': 'tanh',
-        'optimizer': 'adam',
-        'lr': 0.1,
-        'dropout': .3,
-        'epochs': 40,
-        'batch': 1,
-        'dense1': 25,  # 100,
+    configuration['kiperwasser'].update({
+        'focusedElemNum': 8,
+        'wordDim': 100,
+        'posDim': 30,
+        'denseActivation': 'tanh',
+        'dense1': 30,
         'dense2': 0,
         'denseDropout': False,
-        'lstmDropout': 0.25,
-        'lstmLayerNum': 2,
-        'focusedElemNum': 8,
-        'lstmUnitNum': 8  # 125
-    }
+        'optimizer': 'adagrad',
+        'lr': 0.07,
+        'epochs': 30,
+        'batch': 1,
+        'lstmDropout': .2,
+        'lstmLayerNum': 1,
+        'lstmUnitNum': 60,
+        'verbose': False,
+        'file': 'kiperwasser.p'
+    })
     configuration["sampling"]["importantSentences"] = True
+
     # configuration["evaluation"]["fixedSize"] = True
-    configuration["evaluation"]["debugTrainNum"] = 10
+    configuration['dataset']['sharedtask2'] = True
+    configuration['xp']['kiperwasser'] = True
 
-    sys.stdout.write(str(configuration['kiperwasser']))
+    # configuration['model']['embedding']['compactVocab'] = True
+    # configuration['model']['embedding']['lemma'] = True
 
-    xp(['FR'], xpNum=1)
+    xp(['FR'], xpNum=1, compact=False)
+    # exploreLR(['BG'], True)
+    # createGrid()
+    # getActiveConfs()
+    # runRSGThread()

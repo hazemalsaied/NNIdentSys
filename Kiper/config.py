@@ -13,11 +13,9 @@ configuration = {
     'kiperwasser': {
         'wordDim': 25,
         'posDim': 5,
-        'layerNum': 2,
-        'activation': 'tanh',
+        'denseActivation': 'relu',
         'optimizer': 'adam',
         'lr': 0.1,
-        'dropout': .3,
         'epochs': 15,
         'batch': 1,
         'dense1': 25,
@@ -26,12 +24,13 @@ configuration = {
         'lstmDropout': 0.3,
         'lstmLayerNum': 2,
         'focusedElemNum': 8,
-        'lstmUnitNum': 8
+        'lstmUnitNum': 8,
+        'earlyStop': False,
+        'moreTrans': False
     },
     'dataset': {
         'sharedtask2': True,
-        'FTB': False,
-        'deleteNumericalMWEs': False
+        'FTB': False
     },
     'sampling': {
         'overSampling': False,
@@ -55,11 +54,10 @@ configuration = {
         'tokenAvg': 270000,
         'testTokenAvg': 43000,
         'dataset': 'train',
-        'debugTrainNum': 250,
+        'debugTrainNum': 25,
         'test': 0.1,
         'load': False,
         'save': False,
-        'cluster': True,
         'shuffleTrain': False,
     },
     'preprocessing': {

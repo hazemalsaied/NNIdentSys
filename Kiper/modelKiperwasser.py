@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import datetime
+import os
 import sys
 from collections import Counter
 from random import shuffle
@@ -18,15 +19,15 @@ from config import configuration
 from corpus import getTokens
 from reports import seperator, doubleSep, tabs
 
-
-device = 'cpu'
+device = "cpu"
 dtype = torch.float
 
 enableCategorization = False
 
-unk = configuration["constants"]["unk"]
-empty = configuration["constants"]["empty"]
-number = configuration["constants"]["number"]
+unk = configuration['constants']['unk']
+empty = configuration['constants']['empty']
+number = configuration['constants']['number']
+
 
 class TransitionClassifier(nn.Module):
     """
@@ -40,34 +41,35 @@ class TransitionClassifier(nn.Module):
         """
         super(TransitionClassifier, self).__init__()
         self.tokenVocab, self.posVocab = getVocab(corpus)
-        kiperConf = configuration["kiperwasser"]
-        self.p_embeddings = nn.Embedding(len(self.posVocab), kiperConf["posDim"])
-        self.w_embeddings = nn.Embedding(len(self.tokenVocab), kiperConf["wordDim"])
-        embeddingDim = kiperConf["wordDim"] + kiperConf["posDim"]
+        kiperConf = configuration['kiperwasser']
+        self.p_embeddings = nn.Embedding(len(self.posVocab), kiperConf['posDim'])
+        self.w_embeddings = nn.Embedding(len(self.tokenVocab), kiperConf['wordDim'])
+        embeddingDim = kiperConf['wordDim'] + kiperConf['posDim']
         self.lstm = nn.LSTM(embeddingDim,
                             kiperConf['lstmUnitNum'],
                             bidirectional=True,
                             num_layers=kiperConf['lstmLayerNum'],
-                            dropout=kiperConf['lstmDropout'])
+                            dropout=kiperConf['lstmDropout'] if kiperConf['lstmLayerNum'] > 1 else 0)
         # init hidden and cell states h0 c0
-        self.lstm_hidden_and_cell = init_lstm_hidden_and_cell()
+        self.hiddenLstm = initHiddenLstm()
         # * 2 because bidirectional
-        self.linear1 = nn.Linear(kiperConf['focusedElemNum'] * kiperConf['lstmUnitNum'] * 2, kiperConf["dense1"])
+        self.linear1 = nn.Linear(kiperConf['focusedElemNum'] * kiperConf['lstmUnitNum'] * 2, kiperConf['dense1'])
         # dropout here is very detrimental
         # self.dropout1 = nn.Dropout(p=0.3)
-        self.linear2 = nn.Linear(kiperConf["dense1"], 8 if enableCategorization else 4)
+        self.linear2 = nn.Linear(kiperConf['dense1'], 8 if enableCategorization else 4)
 
     def forward(self, sentEmbs, activeElemIdxs):
-        """ propagation avant, pour prediction d'une transition
+        """ propagation avant, pour prediction d"une transition
         input =
         - embeddings as output from compute_contextualized_embeddings
         (contextualized with lstm layer)
         - the list of the lidxs of the nodes to focus on, according to current configuration
         """
-        kiperConf = configuration["kiperwasser"]
+        kiperConf = configuration['kiperwasser']
         # select the contextualized embeddings for the focused_elements (given configuration)
         activeElems = selectRows(sentEmbs, activeElemIdxs).view((1, -1))
-        out = f.relu(self.linear1(activeElems))
+        out = f.relu(self.linear1(activeElems)) if kiperConf['denseActivation'] == 'relu' else f.tanh(
+            self.linear1(activeElems))
         if kiperConf['denseDropout']:
             out = self.dropout1(out)
         out = self.linear2(out)
@@ -80,7 +82,7 @@ class TransitionClassifier(nn.Module):
         Returns sorted score list / corresponding class id list
         """
         activeElemIdxs = getFocusedElems(trans.configuration)
-        # cet appel comprend l'appel de self.forward
+        # cet appel comprend l"appel de self.forward
         scores = self.forward(sentEmbs, activeElemIdxs)
         # on obtient par ex, si 3 transitions: tensor([[-1.3893, -1.6119, -0.5956]])
         # (cf. minibatch de 1)
@@ -100,111 +102,85 @@ class TransitionClassifier(nn.Module):
         output = tensor of shape (sequence length, self.embedding_dim)
         with lstm-contextualized vectors for each position, computed over non-contextualized embeddings
         """
-
         tokenEmbed = self.w_embeddings(tokenIdxs).to(device)
         posEmbed = self.p_embeddings(posIdxs).to(device)
         sentEmbed = torch.cat([tokenEmbed, posEmbed], 1).to(device)
-        lstmHiddenSeq, self.lstm_hidden_and_cell = \
-            self.lstm(sentEmbed.view(len(tokenIdxs), 1, -1), self.lstm_hidden_and_cell)
-        # self.lstm(sentEmbed.view(len(tokenIdxs), 1, -1), self.lstm_hidden_and_cell)
+        self.hiddenLstm = initHiddenLstm()
+        lstmHiddenSeq, self.hiddenLstm = self.lstm(sentEmbed.view(len(tokenIdxs), 1, -1), self.hiddenLstm)
         return lstmHiddenSeq.view(len(tokenIdxs), -1)
 
 
-def train(corpus):
+def train(corpus, trainValidation=False):
     """
     version avec bi-LSTM sur toute la phrase, et mise à jour des paramètres à chaque phrase
     (calcul de la perte pour une phrase complete)
     """
     global device
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    # nb of sentence positions taken to build
-    # input vector representing a parse configuration
+    kiperConf = configuration['kiperwasser']
+    # nb of sentence positions taken to build input vector representing a parse configuration
     model = TransitionClassifier(corpus).to(device)
     optimizer = getOptimizer(model.parameters())
-    lossFunction = nn.NLLLoss()  # nn.CrossEntropyLoss()# NLLLoss()
+    lossFunction = nn.NLLLoss()
     # losses of validation set for each epoch
     epochLosses, validLosses = [], []
-    sys.stderr.write(reports.tabs + str(model) + reports.doubleSep)
-    sys.stderr.write(reports.tabs + str(optimizer) + reports.doubleSep)
-    sys.stderr.write(reports.tabs + str(lossFunction) + reports.doubleSep)
+    if kiperConf['verbose']:
+        sys.stderr.write(reports.tabs + str(model) + reports.doubleSep)
+        sys.stderr.write(reports.tabs + str(optimizer) + reports.doubleSep)
+        sys.stderr.write(reports.tabs + str(lossFunction) + reports.doubleSep)
     # ------------ if validation asked -------------
-    validSeuil = configuration["model"]["train"]["validationSplit"]
+    validSeuil = configuration['model']['train']['validationSplit']
     pointer = int(len(corpus.trainingSents) * (1 - validSeuil))
-    trainSents = corpus.trainingSents[:pointer]
+    trainSents = corpus.trainingSents[:pointer] if not trainValidation else corpus.trainingSents[pointer:]
     validSents = corpus.trainingSents[pointer:]
-    # ------------ training ------------------------
-    # iterationIdx = 0
-    for epoch in range(configuration['kiperwasser']["epochs"]):
-        start = datetime.datetime.now()
-        sys.stderr.write(reports.tabs + "Epoch %d....\n" % epoch)
-        # epoch_loss = torch.Tensor([0])
-        epochLoss = 0
+
+    for epoch in range(kiperConf['epochs']):
+        sys.stderr.write(reports.tabs + "Epoch %d....\n" % epoch if kiperConf['verbose'] else '')
+        start, epochLoss, usedSents = datetime.datetime.now(), 0, 0
         # shuffle sentences
         sentRanks = range(len(trainSents))
         shuffle(sentRanks)
-        # cf. some of the dgs may not fulfill formal requirements
-        #     for a gold transition sequence to be found (eg projectivity)
-        usedSents = 0
         for i in sentRanks:
             sent = trainSents[i]
-            # reinitialize gradients for the whole sentence
             model.zero_grad()
-            # and the lstm hidden states
-            model.lstm_hidden_and_cell = init_lstm_hidden_and_cell()
-
-            sentLoss = getSentLoss(sent, model, lossFunction, optimizer)
-            # if a gold transition sequence was extracted all right,
-            # backpropagate the full sentence loss
+            sentLoss = getSentLoss(sent, model, lossFunction)
             if sentLoss:
                 usedSents += 1
                 epochLoss += sentLoss.item()
-                # backpropagate
                 sentLoss.backward()
-                # update parameters
                 optimizer.step()
-
         epochLosses.append(epochLoss)
-        # if not epoch:
-        sys.stderr.write("Number of used sentences in train = %d\n" % usedSents)
-        sys.stderr.write("Total loss for epoch %d: %f\n" % (epoch, epochLoss))
-        # logstream.write("Total loss for epoch %d: %f\n" % (epoch, epoch_loss))
-        # check validation losses
-        if validSents:
-            valLoss = getCorpusLoss(validSents, model, lossFunction, optimizer)  # , device)
-            sys.stderr.write("validation loss after epoch %d : %f\n" % (epoch, valLoss))
+        if kiperConf['verbose']:
+            sys.stderr.write("Number of used sentences in train = %d\n" % usedSents)
+            sys.stderr.write("Total loss for epoch %d: %f\n" % (epoch, epochLoss))
+        if not trainValidation:
+            filePath = os.path.join(configuration['path']['projectPath'], 'Reports', kiperConf['file'])
+            valLoss = getCorpusLoss(validSents, model, lossFunction)
+            if kiperConf['verbose']:
+                sys.stderr.write("validation loss after epoch %d : %f\n" % (epoch, valLoss))
+            # save model if validation loss has decreased
+            if not epoch or valLoss <= validLosses[-1]:
+                torch.save(model, filePath)
+            # early stopping
+            elif kiperConf['earlyStop'] and epoch and (valLoss > validLosses[-1]):
+                sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
+                sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
+                if validSeuil:
+                    kiperConf['epochs'] = epoch  # (cf. epoch est décalé de 1)
+                    return train(corpus, trainValidation=True)
+            # if no validation set: save iff loss on training set decreases
+            else:
+                if not epoch or epochLoss < epochLosses[-2]:
+                    torch.save(model, filePath)
             validLosses.append(valLoss)
-            # logstream.write("validation loss after epoch %d : %f\n" % (epoch, valLoss))
-            # save model if validation loss has decreased Todo
-            # if not epoch or valLoss <= validation_losses[-1]:
-            # model.current_nb_epochs = epoch + 1
-            # torch.save(model, opt['model_file'])
-
-            # early stopping TODO réintégrer
-            # elif trainConf["earlyStop"] and epoch and (l > validation_losses[-1]):
-            #     sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
-            #     logstream.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
-            #     if validSeuil:
-            #         # retrain on whole train+validation, using epoch-1 epochs
-            #         configuration["model"]["train"]["validationSplit"] = 0
-            #
-            #         opt['nb_epochs'] = epoch  # (cf. epoch est décalé de 1)
-            #         return train_transition_classifier(depgraphs, indices,
-            #               transition_parser, config_feats_description, opt, logstream)
-        # if no validation set: save iff loss on training set decreases
-        # else: TODO réintégrer
-        #     if (epoch == 0) or (epoch_loss < epoch_losses[-2]):
-        #         # torch.save(classifier.state_dict(), args.model_file)
-        #         # another_model = TransitionClassifier(*args, **kwargs)
-        #         # the_model.load_state_dict(torch.load(PATH))
-        #         model.current_nb_epochs = epoch + 1
-        #         torch.save(model, opt['model_file'])
-        sys.stdout.write('Epoch has taken {0}\n'.format(datetime.datetime.now() - start))
+        sys.stdout.write("Epoch has taken {0}\n".format(datetime.datetime.now() - start)
+                         if kiperConf['verbose'] else '')
     return model
 
 
-def init_lstm_hidden_and_cell():
+def initHiddenLstm():
     """
-    Before we've done anything, we dont have any hidden state.
+    Before we"ve done anything, we dont have any hidden state.
     The axes semantics are (num_layers, minibatch_size, hidden_dim)
     h_0 is of shape (num_layers * num_directions, batch, hidden_size):
                     tensor containing the initial hidden state for each element in the batch
@@ -235,14 +211,14 @@ def selectRows(sentEmbeds, idxs):
     return torch.cat(results)
 
 
-def getCorpusLoss(sents, model, loss_function, optimizer):  # , device):
+def getCorpusLoss(sents, model, lossFunction):
     """
     returns the loss for a list of gold dgs
     """
     loss = 0
     for sent in sents:
-        sentLoss = getSentLoss(sent, model, loss_function, optimizer)  # , device)
-        loss += sentLoss.item() if sentLoss else 0.  # transform into float
+        sentLoss = getSentLoss(sent, model, lossFunction)
+        loss += sentLoss.item() if sentLoss else 0.
     return loss
 
 
@@ -273,13 +249,13 @@ def getVocab(corpus):
         for t in s.tokens:
             tokenCounter.update({t.getTokenOrLemma(): 1})
             posCounter.update({t.posTag.lower(): 1})
-    if configuration["model"]["embedding"]["compactVocab"]:
+    if configuration['model']['embedding']['compactVocab']:
         for t in tokenCounter.keys():
             if t not in corpus.mweTokenDictionary:
                 del tokenCounter[t]
     else:
         for t in tokenCounter.keys():
-            if tokenCounter[t] == 1 and uniform(0, 1) < configuration["constants"]["alpha"]:
+            if tokenCounter[t] == 1 and uniform(0, 1) < configuration['constants']['alpha']:
                 del tokenCounter[t]
     tokenCounter.update({unk: 1, number: 1})
     posCounter.update({unk: 1})
@@ -288,9 +264,9 @@ def getVocab(corpus):
 
 
 def printVocabReport(tokenCounter, posCounter):
-    res = seperator + tabs + 'Vocabulary' + doubleSep
-    res += tabs + 'Tokens := {0} * POS : {1}'.format(len(tokenCounter), len(posCounter)) \
-        if not configuration["xp"]["compo"] else ''
+    res = seperator + tabs + "Vocabulary" + doubleSep
+    res += tabs + "Tokens := {0} * POS : {1}".format(len(tokenCounter), len(posCounter)) \
+        if not configuration['xp']['compo'] else ""
     res += seperator
     return res
 
@@ -319,7 +295,7 @@ def getFocusedElems(config):
     return idxs
 
 
-def getSentLoss(sent, model, lossFunction, optimizer):
+def getSentLoss(sent, model, lossFunction):
     """
     returns the whole loss for the sentence in gold_dg
     (return type is that of Torch.nn losses: differentiable Tensor of size 1)
@@ -335,7 +311,7 @@ def getSentLoss(sent, model, lossFunction, optimizer):
 
     trans = sent.initialTransition
 
-    transFeedNum, transRepetitionTaux = 0, 1
+    # transFeedNum, transRepetitionTaux = 0, 1
     while trans and trans.next:
         # Used to reduce the number of used transitions by replacing all Mark as transition by Mark as OTH
         goldT = 3 if trans.next.type.value > 2 and not enableCategorization else trans.next.type.value
@@ -362,23 +338,23 @@ def getSentLoss(sent, model, lossFunction, optimizer):
 
 
 def getOptimizer(params):
-    kiperConf = configuration["kiperwasser"]
-    sys.stdout.write('# Network optimizer = {0}, learning rate = {1}\n'.format(kiperConf["optimizer"], kiperConf["lr"]))
+    kiperConf = configuration['kiperwasser']
+    sys.stdout.write("# Network optimizer = {0}, learning rate = {1}\n".format(kiperConf['optimizer'], kiperConf['lr']))
     # lr = 0.1
-    lr = kiperConf["lr"]
-    if kiperConf["optimizer"] == 'sgd':
+    lr = kiperConf['lr']
+    if kiperConf['optimizer'] == "sgd":
         return optim.SGD(params, lr=lr)
-    if kiperConf["optimizer"] == 'adam':
+    if kiperConf['optimizer'] == "adam":
         return optim.Adam(params, lr=lr)
-    if kiperConf["optimizer"] == 'rmsprop':
+    if kiperConf['optimizer'] == "rmsprop":
         return optim.RMSprop(params, lr=lr)
-    if kiperConf["optimizer"] == 'adagrad':
+    if kiperConf['optimizer'] == "adagrad":
         return optim.Adagrad(params, lr=lr)
-    if kiperConf["optimizer"] == 'adadelta':
+    if kiperConf['optimizer'] == "adadelta":
         return optim.Adadelta(params, lr=lr)
-    if kiperConf["optimizer"] == 'adamax':
+    if kiperConf['optimizer'] == "adamax":
         return optim.Adamax(params, lr=lr)  # lr = 0.002
-    assert 'No optimizer found for training!'
+    assert "No optimizer found for training!"
 
 
 def toTensor(label):

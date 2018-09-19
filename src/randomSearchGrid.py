@@ -24,8 +24,12 @@ def runRandomSearchGridXps(langs, xpNum1=25, sharedtask2=True):
     for k in choosenXps:
         sys.stdout.write(k + '\n')
         setConfig(k)
-        xp(langs, train=False, fixedSize=True)
-        xp(langs, train=True, fixedSize=False)
+        configuration['evaluation']['fixedSize']=True
+        xp(langs)
+        configuration['evaluation']['fixedSize'] = False
+        configuration['evaluation']['train'] = True
+        xp(langs)
+        configuration['evaluation']['train'] = False
         resultDic = pickle.load(open(randomSearchGridPath, "rb"))
         resultDic[k] = True
         pickle.dump(resultDic, open(randomSearchGridPath, "w+b"))
@@ -44,6 +48,8 @@ def createRandomSearchGrid(minimal=False):
                      "wb"))
     for k in resultDic:
         print k.replace('_', ',')
+
+
 
 
 def generateConfig():
@@ -204,14 +210,20 @@ def generateConfigWithFavorisation():
     return res
 
 
-def generateValue(plage, continousPlage=False, uniform=False):
+def generateValue(plage, continousPlage=False, uniform=False, favorisationTaux=0.7):
     if continousPlage:
         if uniform:
             return random.uniform(plage[0], plage[-1])
         else:
             return pow(2, random.uniform(math.log(plage[0], 2), math.log(plage[-1], 2)))
     else:
-        return plage[random.randint(0, len(plage) - 1)]
+        if not uniform:
+            alpha = random.uniform(0, 1)
+            if alpha < favorisationTaux:
+                return plage[0]
+            return plage[random.randint(1, len(plage) - 1)]
+        else:
+            return plage[random.randint(0, len(plage) - 1)]
 
 
 def generateValueWithFavorisation(plage, importantPlage, favorisationRate=60, continousPlage=False):

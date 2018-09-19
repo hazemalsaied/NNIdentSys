@@ -1,5 +1,3 @@
-import datetime
-
 import keras
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,7 +5,6 @@ from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras.layers import Input, Dense, Dropout, Flatten, Embedding, GRU, LSTM
 from keras.models import Model
 from keras.utils import to_categorical
-from numpy import argmax
 
 import reports
 from reports import *
@@ -90,8 +87,7 @@ def train(model, normalizer, corpus):
     history = model.fit(validationData, validationLabel, epochs=len(history.epoch), batch_size=trainConf["batchSize"],
                         verbose=trainConf["verbose"])
     # reports.saveHistory(history)
-    if not configuration["evaluation"]["cluster"]:
-        plot(history)
+    # plot(history)
     reports.saveModel(model)
 
 

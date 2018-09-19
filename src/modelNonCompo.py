@@ -1,17 +1,14 @@
 import datetime
 from collections import Counter
-
+import sampling
 import keras
 import numpy as np
 import sklearn.utils
-from IPython.display import clear_output
 from keras import optimizers
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras.layers import Input, Dense, Flatten, Embedding, Dropout, GRU
 from keras.models import Model
 from keras.utils import to_categorical
-from matplotlib import pyplot as plt
-from numpy import argmax
 
 import reports
 from reports import *
@@ -107,8 +104,8 @@ def train(model, normalizer, corpus):
     sys.stdout.write(tabs + '{0} Labels in train : {1}\n'.format(len(lblDitribution), lblDitribution))
     valDistribution = Counter(labels[int(len(labels) * (1 - trainConf["validationSplit"])):])
     sys.stdout.write(tabs + '{0} Labels in valid : {1}\n'.format(len(valDistribution), valDistribution))
-    classWeightDic = getClassWeights(labels)
-    sampleWeights = getSampleWeightArray(labels, classWeightDic)
+    classWeightDic = sampling.getClassWeights(labels)
+    sampleWeights = sampling.getSampleWeightArray(labels, classWeightDic)
     labels = to_categorical(labels, num_classes=8)
     model.compile(loss=trainConf["loss"], optimizer=getOptimizer(), metrics=['accuracy'])
     history = model.fit(data, labels,
@@ -152,7 +149,7 @@ def trainValidationData(model, normalizer, data, labels, classWeightDic, history
     trainConf = configuration["model"]["train"]
     data, labels = getValidationData(normalizer, data, labels)
     validationLabelsAsInt = [np.where(r == 1)[0][0] for r in labels]
-    sampleWeights = getSampleWeightArray(validationLabelsAsInt, classWeightDic)
+    sampleWeights = sampling.getSampleWeightArray(validationLabelsAsInt, classWeightDic)
     history = model.fit(data, labels,
                         epochs=len(history.epoch),
                         batch_size=trainConf["batchSize"],
@@ -189,27 +186,9 @@ def getCallBacks():
     return callbacks
 
 
-def getSampleWeightArray(labels, classWeightDic):
-    if not configuration["sampling"]["sampleWeight"]:
-        return None
-    sampleWeights = []
-    for l in labels:
-        sampleWeights.append(classWeightDic[l])
-    return np.asarray(sampleWeights)
 
 
-def getClassWeights(labels):
-    if not configuration["model"]["train"]["manipulateClassWeights"]:
-        return {}
-    classes = np.unique(labels)
-    class_weight = sklearn.utils.class_weight.compute_class_weight('balanced', classes, labels)
-    res = dict()
-    for i, v in enumerate(classes):
-        res[int(v)] = int(class_weight[i] * configuration["sampling"]["favorisationCoeff"]) if v > 1 \
-            else int(class_weight[i])
-    sys.stdout.write(reports.tabs + 'Favorisation Coeff : {0}\n'.format(configuration["sampling"]["favorisationCoeff"]))
 
-    return res
 
 
 class PlotLosses(keras.callbacks.Callback):
@@ -262,19 +241,19 @@ class PlotLosses(keras.callbacks.Callback):
     #         self.batchAcc.append(logs.get('acc'))
     #         # self.batchValAcc.append(logs.get('val_acc'))
 
-    def on_train_end(self, logs=None):
-        if not configuration["evaluation"]["cluster"]:
-            f, ax1 = plt.subplots()
-            clear_output(wait=True)
-            ax1.set_yscale('log')
-            ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchLosses, label="loss ")
-            ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchAcc, label="Acc ")
-            # ax1.legend()
-
-            # ax2.plot(self.x, self.acc, label="accuracy")
-            # ax1.plot(range(len(self.batchAcc)), self.batchAcc, label="loss (batch)")
-            # ax2.legend()
-            plt.show()
+    # def on_train_end(self, logs=None):
+    #     if not configuration["evaluation"]["cluster"]:
+    #         f, ax1 = plt.subplots()
+    #         clear_output(wait=True)
+    #         ax1.set_yscale('log')
+    #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchLosses, label="loss ")
+    #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchAcc, label="Acc ")
+    #         # ax1.legend()
+    #
+    #         # ax2.plot(self.x, self.acc, label="accuracy")
+    #         # ax1.plot(range(len(self.batchAcc)), self.batchAcc, label="loss (batch)")
+    #         # ax2.legend()
+    #         plt.show()
 
 
 plot_losses = PlotLosses()

@@ -243,10 +243,10 @@ def test(model, device, test_loader):
 
 
 def main(model, corpus, normalizer):
-    use_cuda = configuration["evaluation"]["cluster"]
-    device = torch.device("cuda" if use_cuda else "cpu")
+    # use_cuda = configuration["evaluation"]["cluster"]
+    device = 'cpu' # torch.device("cuda" if use_cuda else "cpu")
 
-    kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
+    kwargs = {}# {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
     batchSize = configuration["model"]["train"]["batchSize"]
     epochs = configuration["model"]["train"]["epochs"]
     labels, data = normalizer.generateLearningDataAttached(corpus)

@@ -125,7 +125,7 @@ class Transition(object):
         transSelectionType = 'C' if self.isClassified else 'L'
         typeStr += ': ' + transSelectionType + ' ' * (15 - len(typeStr))
 
-        return '\n{0} - {1} \n{2}'.format(self.id, typeStr, str(self.configuration), )
+        return '\n{0} \n{1}'.format(typeStr, str(self.configuration), )
 
 
 class Shift(Transition):

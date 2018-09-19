@@ -16,7 +16,8 @@ class TransitionType(Enum):
 
 
 class Transition(object):
-    def __init__(self, type=None, config=None, previous=None, next=None, isInitial=False, sent=None, isClassified=False):
+    def __init__(self, type=None, config=None, previous=None, next=None, isInitial=False, sent=None,
+                 isClassified=False):
 
         self.sent = sent
         self.isClassified = isClassified
@@ -125,7 +126,7 @@ class Transition(object):
         transSelectionType = 'C' if self.isClassified else 'L'
         typeStr += ': ' + transSelectionType + ' ' * (15 - len(typeStr))
 
-        return '\n{0} - {1} \n{2}'.format(self.id, typeStr, str(self.configuration), )
+        return '\n{0} \n{1}'.format(typeStr, str(self.configuration), )
 
 
 class Shift(Transition):
@@ -158,7 +159,7 @@ class Reduce(Transition):
         newStack = newStack[:-1]
         newTokens = list(config.tokens)
         newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
-        super(Reduce, self).__init__(config=newConfig, previous=parent, sent=sent,isClassified=isClassified)
+        super(Reduce, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.stack:
@@ -178,7 +179,7 @@ class Merge(Transition):
         newTokens = list(config.tokens)
         newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
 
-        super(Merge, self).__init__(config=newConfig, previous=parent, sent=sent,isClassified=isClassified)
+        super(Merge, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.stack and len(self.configuration.stack) > 1:

@@ -81,3 +81,7 @@ nvcc --version
 ```
 oarsub -p "cluster='grimani'" -q production -l nodes=1,walltime=3 -I
 ```
+
+```
+python3 evaluate.py --gold ST2/RNN/FR.gold.txt --pred ST2/RNN/FR.txt --train ../ressources/sharedtask.2/FR/train.cupt
+```

@@ -7,7 +7,7 @@ import reports
 from config import configuration
 
 
-def evaluate(corpus, foldIdx=-1, categorization=True):
+def evaluate(corpus, categorization=True):
     tp, p, t, tpCat, pCat, tCat = getStatistics(corpus)
     scores = calculateScores(tp, p, t, 'Identification')
     if categorization:
@@ -16,7 +16,7 @@ def evaluate(corpus, foldIdx=-1, categorization=True):
         for cat in catList:
             tp, p, t = getCategoryStatistics(corpus, cat)
             scores += calculateScores(tp, p, t, cat)
-    createMWEFiles(corpus, foldIdx)
+    createMWEFiles(corpus)
     # reports.saveSettings()
     reports.saveScores(scores)
     corpus.analyzeTestSet()
@@ -115,25 +115,27 @@ def calculateScores(tp, p, t, title):
     return [title, f, r, p]
 
 
-def createMWEFiles(corpus, x=-1):
-    cv = configuration['evaluation']['cv']['active']
-    if cv:
-        return
-    folder = configuration['path']['results']
-    if configuration['dataset']['sharedtask2']:
-        folder += '/ST2'
-    elif configuration['evaluation']['corpus']:
-        folder += '/corpus/'
-    elif configuration['evaluation']['trainVsTest']:
-        folder += '/corpusWithoutDev/'
-    else:
-        return
-    folder = os.path.join(configuration['path']['projectPath'], folder)
+def createMWEFiles(corpus):
+    # if not configuration['evaluation']['corpus']:
+    #   return
+    datasetConf, modelConf = configuration['dataset'], configuration['xp']
+    dataset = 'ST2' if datasetConf['sharedtask2'] else \
+        ('FTB' if datasetConf['sharedtask2'] else 'ST1')
+    model = 'Linear' if modelConf['linear'] else (
+        'Kiperwasser' if modelConf['kiperwasser'] else (
+            'RNN' if modelConf['rnn'] else 'MLP'))
+
+    folder = os.path.join(configuration['path']['projectPath'], configuration['path']['results'], dataset, model)
     if not os.path.exists(folder):
         os.makedirs(folder)
-    if x == -1:
-        x = ''
-    with open(os.path.join(folder, corpus.langName + str(x) + '.txt'), 'w') as f:
-        f.write(str(corpus))
-    with open(os.path.join(folder, corpus.langName + str(x) + '.gold.txt'), 'w') as f:
-        f.write(corpus.getGoldenMWEFile())
+    predicted = corpus.toConllU()  # if dataset == 'ST2' else str(corpus)
+    gold = corpus.toConllU(gold=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
+    train = gold = corpus.toConllU(gold=True, train=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
+    import datetime
+    today = datetime.date.today().strftime("%Y.%B.%d.")
+    with open(os.path.join(folder, today + corpus.langName + '.txt'), 'w') as f:
+        f.write(predicted)
+    with open(os.path.join(folder, today + corpus.langName + '.gold.txt'), 'w') as f:
+        f.write(gold)
+    with open(os.path.join(folder, today + corpus.langName + '.train.txt'), 'w') as f:
+        f.write(train)

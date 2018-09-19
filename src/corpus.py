@@ -4,38 +4,21 @@ import copy
 import itertools
 import pickle
 
-# from config from config import configuration
 from reports import *
 
 
-class DepenecyLabelManager():
-    def __init__(self, corpus):
-        depLbls = set()
-        for s in corpus.trainingSents:
-            for t in s.tokens:
-                depLbls.add(t.dependencyLabel)
-        self.depLbls = sorted(depLbls)
-
-    def getArcIdx(self, lbl, right=True):
-        if lbl in self.depLbls:
-            if right:
-                return self.depLbls.index(lbl)
-            return len(self.depLbls) + self.depLbls.index(lbl)
-        return None
-
-
 class Corpus:
-    '''
+    """
         a class used to encapsulate all the information of the corpus
-    '''
+    """
 
     def __init__(self, langName):
-        '''
+        """
             an initializer of the corpus, responsible of creating a structure of objects encapsulating all the
             information of the corpus, its sentences, tokens and MWEs.
 
             This function iterate over the lines of corpus document to create the precedent ontology
-        '''
+        """
         # sys.stdout.write('# Language = {0}\n'.format(langName))
         self.langName = langName
         self.trainingSents, self.testingSents, self.devDataSet = [], [], []
@@ -45,18 +28,14 @@ class Corpus:
                             configuration['path']['corpusRelativePath'] + sharedtaskVersion, langName)
         if sharedtaskVersion:
             self.trainDataSet = readCuptFile(os.path.join(path, 'train.cupt'))
-            # sys.stdout.write(getStats(self.trainDataSet))
             self.devDataSet = readCuptFile(os.path.join(path, 'dev.cupt'))
-            # sys.stdout.write(getStats(self.devDataSet))
             self.testDataSet = readCuptFile(os.path.join(path, 'test.cupt'))
-            # sys.stdout.write(getStats(self.testDataSet))
         elif configuration['dataset']['FTB']:
             path = os.path.join(configuration['path']['projectPath'], 'ressources/FTB')
             self.trainDataSet = readFTB(os.path.join(path, 'train.cupt'))
             self.devDataSet = readFTB(os.path.join(path, 'dev.cupt'))
             self.testDataSet = readFTB(os.path.join(path, 'test.cupt'))
         else:
-            # print 'corpora path', path
             mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
             conlluFile, testConllu = getTrainAndTestConlluPath(path)
             if conlluFile and testConllu:
@@ -66,7 +45,7 @@ class Corpus:
                 self.testDataSet = readConlluFile(testConllu)
                 integrateMweFile(testMweFile, self.testDataSet)
             else:
-                # if not configuration['evaluation']['load']:
+
                 self.trainDataSet = readMWEFile(mweFile)
                 self.testDataSet = readMWEFile(testMweFile)
         # if not configuration['evaluation']['load']:
@@ -75,15 +54,13 @@ class Corpus:
         self.text = self.toText()
         self.orderParentVMWEs()
         if not configuration['evaluation']['cv']['active']:
-            if not configuration['evaluation']['corpus']:
+            if not configuration['evaluation']['corpus'] and not configuration['dataset']['FTB']:
                 self.shuffleSent(langName)
                 self.distributeSent(langName)
             self.getTrainAndTest()
             self.extractDictionaries()
         sys.stdout.write(self.printConlusion())
         self.getMWEMeanLength()
-        if configuration['dataset']['deleteNumericalMWEs']:
-            self.duplicateImportantSent()
         self.getNewMWEPercentage()
         self.depLblMgr = DepenecyLabelManager(self)
 
@@ -100,13 +77,6 @@ class Corpus:
         sys.stdout.write(tabs + 'New MWEs : {0} ({1} %)'.format(newMWE, str(
             int(100 * float(newMWE) / (oldMWE + newMWE)))) + doubleSep)
 
-    def getOccurrenceRang(self, occ):
-        occurrenceRang = [5, 25, 50, 100, 200, 300, 500]
-        for i in reversed(occurrenceRang):
-            if occ >= i:
-                return i
-        return 0
-
     def analyzeTestSet(self):
         occurrenceDic, nonIdentifiedOccurrenceDic = dict(), dict()
         # testMWEDic = self.getMWEDictionary(onTest=True)
@@ -118,7 +88,7 @@ class Corpus:
                 sentIdentifiedVMWEs.append(v.getTokenPositionString())
                 if v.getTokenPositionString() in sentVMWEs:
                     if v.getTokenOrLemmaString() in self.mweDictionary:
-                        occurrence = self.getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
+                        occurrence = getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
                         if occurrence not in occurrenceDic:
                             occurrenceDic[occurrence] = set()
                         occurrenceDic[occurrence].add(v.getTokenOrLemmaString())
@@ -129,7 +99,7 @@ class Corpus:
             for v in sent.vMWEs:
                 if v.getTokenPositionString() not in sentIdentifiedVMWEs:
                     if v.getTokenOrLemmaString() in self.mweDictionary:
-                        occurrence = self.getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
+                        occurrence = getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
                         if occurrence not in nonIdentifiedOccurrenceDic:
                             nonIdentifiedOccurrenceDic[occurrence] = set()
                         nonIdentifiedOccurrenceDic[occurrence].add(v.getTokenOrLemmaString())
@@ -186,13 +156,6 @@ class Corpus:
 
     def printConlusion(self):
         res = tabs + 'Language : {0}'.format(self.langName) + doubleSep
-        res += tabs + 'Dataset : '
-        if configuration['dataset']['sharedtask2']:
-            res += 'Sharedtask 1.1\n'
-        elif configuration['dataset']['FTB']:
-            res += 'FTB\n'
-        else:
-            res += 'Sharedtask 1.0\n'
         res += tabs + 'Training {0} : {1}, Test : {2}\n'. \
             format('(Important)' if configuration['sampling']['importantSentences'] else '', len(self.trainingSents),
                    len(self.testingSents))
@@ -282,15 +245,14 @@ class Corpus:
 
     def getMWEDictionary(self, mwtOnly=False, onTest=False):
         mweDictionary = {}
-        sents = self.testingSents if onTest else self.trainingSents
-        for sent in sents:
+        for sent in self.testingSents if onTest else self.trainingSents:
             for mwe in sent.vMWEs:
                 if not mwe.isRecognizable:
                     continue
                 if mwtOnly:
                     if len(mwe.tokens) != 1:
                         continue
-                lemmaString = mwe.getTokenOrLemmaString()
+                lemmaString = ' '.join(t.lemma if t.lemma else t.text for t in mwe.tokens).lower()
                 if lemmaString in mweDictionary:
                     mweDictionary[lemmaString] += 1
                 else:
@@ -301,8 +263,8 @@ class Corpus:
         mweTokenDictionary = {}
         for sent in self:
             for mwe in sent.vMWEs:
-                for token in mwe.tokens:
-                    mweTokenDictionary[token.getTokenOrLemma()] = True
+                for t in mwe.tokens:
+                    mweTokenDictionary[t.lemma.lower() if t.lemma else t.text.lower()] = True
         return mweTokenDictionary
 
     def divideCorpus(self, foldIdx, foldNum=5):
@@ -393,12 +355,8 @@ class Corpus:
                 self.trainingSents = self.trainDataSet[:pointer]
                 self.testingSents = self.trainDataSet[pointer:]
         elif evalConfig['corpus']:
-            if configuration['dataset']['sharedtask2'] or configuration['dataset']['FTB']:
-                self.trainingSents = self.trainDataSet + self.devDataSet
-                self.testingSents = self.testDataSet
-            else:
-                self.trainingSents = self.trainDataSet
-                self.testingSents = self.testDataSet
+            self.trainingSents = self.trainDataSet + self.devDataSet
+            self.testingSents = self.testDataSet
         elif evalConfig['trainVsTest']:
             self.trainingSents = self.trainDataSet
             self.testingSents = self.testDataSet
@@ -455,6 +413,8 @@ class Corpus:
             sent.recognizeInterleaving()
             sent.recognizeAlternating()
             sent.setTokenParent()
+            sent.recognizeAttached()
+            sent.recognizeNested()
 
     def orderParentVMWEs(self):
         for sent in self.trainDataSet:
@@ -486,13 +446,13 @@ class Corpus:
         return res
 
     def getRangs(self):
-        sents = self.trainDataSet
-        testNum = int(len(sents) * 0.2)
+        ss = self.trainDataSet
+        testNum = int(len(ss) * 0.2)
         testRanges = [[0, testNum], [testNum, 2 * testNum], [2 * testNum, 3 * testNum], [3 * testNum, 4 * testNum],
-                      [4 * testNum, len(sents)]]
+                      [4 * testNum, len(ss)]]
 
-        trainRanges = [[testNum, len(sents)], [0, testNum, 2 * testNum, len(sents)],
-                       [0, 2 * testNum, 3 * testNum, len(sents)], [0, 3 * testNum, 4 * testNum, len(sents)],
+        trainRanges = [[testNum, len(ss)], [0, testNum, 2 * testNum, len(ss)],
+                       [0, 2 * testNum, 3 * testNum, len(ss)], [0, 3 * testNum, 4 * testNum, len(ss)],
                        [0, 4 * testNum]]
 
         return testRanges, trainRanges
@@ -522,6 +482,10 @@ class Corpus:
         for sent in self.trainingSents:
             yield sent
 
+    def toConllU(self, useCupt=True, gold=False, train=False):
+        header = '# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC PARSEME:MWE\n'
+        return header + ''.join(s.toConllU(useCupt=useCupt, gold=gold) for s in (self.trainingSents if train else self.testingSents))
+
     def getTransDistribution(self):
         transNum = {}
         for sent in self:
@@ -542,9 +506,9 @@ class Corpus:
 
 
 class Sentence:
-    '''
-       a class used to encapsulate all the information of a sentence
-    '''
+    """
+       Encapsulate all the information of a sentence
+    """
 
     def __init__(self, idx, sentid=''):
 
@@ -579,6 +543,18 @@ class Sentence:
             self.text += token.text + ' '
             tokensTextList.append(token.text)
         self.text = self.text.strip()
+
+    def recognizeNested(self):
+        for vMwe1 in self.vMWEs:
+            for vMwe2 in self.vMWEs:
+                if vMwe1 is not vMwe2 and vMwe1.isNestedExp(vMwe2):
+                    vMwe1.isNested = True
+
+    def recognizeAttached(self):
+        for vMwe1 in self.vMWEs:
+            for vMwe2 in self.vMWEs:
+                if vMwe1 is not vMwe2 and vMwe1.isAttachedWith(vMwe2):
+                    vMwe1.isAttached = True
 
     def recognizeEmbedded(self):
         for vMwe1 in self.vMWEs:
@@ -723,7 +699,19 @@ class Sentence:
 
     def isProjective(self):
         # TODO
-        return True
+        pass
+
+    def toConllU(self, useCupt=True, gold=False):
+        labels = ['*'] * len(self.tokens)
+        for mwe in self.vMWEs if gold else self.identifiedVMWEs:
+            for token in mwe.tokens:
+                if labels[token.position - 1] == '*':
+                    labels[token.position - 1] = str(mwe.id)
+                else:
+                    labels[token.position - 1] += ';' + str(mwe.id)
+                if mwe.tokens[0] == token and mwe.type:
+                    labels[token.position - 1] += ':VID' # + mwe.type
+        return ''.join(t.toConllU(labels[i], useCupt=useCupt) for i, t in enumerate(self.tokens)) + '\n'
 
     def __str__(self):
 
@@ -762,16 +750,19 @@ class Sentence:
 
 
 class VMWE:
-    '''
+    """
         A class used to encapsulate the information of a verbal multi-word expression
-    '''
+    """
 
     def __init__(self, idx, tokens=None, type='', isEmbedded=False, isEmbedder=False, isLeftEmbedded=False,
                  isLeftEmbedder=False, isRightEmbedded=False, isRightEmbedder=False, isInterleaving=False,
-                 isContinous=False, isRecognizable=True, isMiddleEmbedded=False, isMiddleEmbedder=False, parent=None):
+                 isContinous=False, isRecognizable=True, isMiddleEmbedded=False, isMiddleEmbedder=False, isNested=False,
+                 isAttached=False, parent=None):
         self.id = int(idx)
         self.tokens = tokens if tokens else []
         self.type = type
+        self.isNested = isNested
+        self.isAttached = isAttached
         self.isEmbedded = isEmbedded
         self.isEmbedder = isEmbedder
         self.isLeftEmbedded = isLeftEmbedded
@@ -865,6 +856,25 @@ class VMWE:
                 res += 'Dist Embedded'
         return res
 
+    def isNestedExp(self, parentMWE):
+        if int(parentMWE.tokens[0].position) < int(self.tokens[0].position) < int(parentMWE.tokens[-1].position):
+            positions = []
+            for t in self.tokens:
+                positions.append(t.position)
+            minPos = min(positions)
+            maxPos = max(positions)
+            for t in parentMWE.tokens:
+                if minPos <= t.position <= maxPos:
+                    return False
+            return True
+        return False
+
+    def isAttachedWith(self, mwe2):
+        if self.tokens[-1].position + 1 == mwe2.tokens[0].position or \
+                self.tokens[-1].position + 2 == mwe2.tokens[0].position:
+            return True
+        return False
+
     def __iter__(self):
         for t in self.tokens:
             yield t
@@ -894,9 +904,9 @@ class VMWE:
 
 
 class Token:
-    '''
+    """
         a class used to encapsulate all the information of a sentence tokens
-    '''
+    """
 
     def __init__(self, position, txt, lemma='', posTag='', abstractPosTag='', morphologicalInfo=None,
                  dependencyParent=-1,
@@ -981,6 +991,20 @@ class Token:
             return self.getTokenOrLemma()
         return self.getTokenOrLemma() + '_' + self.posTag.lower()
 
+    def toConllU(self, mweInfo, useCupt=True):
+        return '{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}{10}\n'.format(
+            self.position,
+            self.text,
+            self.lemma,
+            self.abstractPosTag,
+            self.posTag,
+            self.morphologicalInfo,
+            self.dependencyParent,
+            self.dependencyLabel,
+            '_', '_',
+            '\t' + mweInfo if useCupt else ''
+        )
+
     def __str__(self):
         parentTxt = ' '
         if self.parentMWEs:
@@ -990,6 +1014,22 @@ class Token:
                 else:
                     parentTxt += str(par.id)
         return str(self.position) + ' : ' + self.text + ' : ' + self.posTag + parentTxt + '\n'
+
+
+class DepenecyLabelManager():
+    def __init__(self, corpus):
+        depLbls = set()
+        for s in corpus.trainingSents:
+            for t in s.tokens:
+                depLbls.add(t.dependencyLabel)
+        self.depLbls = sorted(depLbls)
+
+    def getArcIdx(self, lbl, right=True):
+        if lbl in self.depLbls:
+            if right:
+                return self.depLbls.index(lbl)
+            return len(self.depLbls) + self.depLbls.index(lbl)
+        return None
 
 
 def saveObj(obj, name):
@@ -1177,21 +1217,20 @@ def integrateMweFile(mweFile, sentences):
     return mweNum
 
 
-def getVMWESents(sents, num):
+def getVMWESents(ss, num):
     result, idx = [], 0
-    for sent in sents:
-        result.append(sent)
+    for s in ss:
+        result.append(s)
         idx += 1
         if idx >= num:
             return result
     if len(result) < num:
-        for sent in sents:
-            if sent not in result:
-                result.append(sent)
+        for s in ss:
+            if s not in result:
+                result.append(s)
             if len(result) >= num:
                 return result
     return result[:num]
-
 
 
 def getTokens(elemlist):
@@ -1356,11 +1395,11 @@ def getType(type):
         return 'ireflv'
 
 
-def getStats(sents, asCSV=False):
-    res = 'Sent num = {0}\n'.format(len(sents))
+def getStats(sentences, asCSV=False):
+    res = 'Sent num = {0}\n'.format(len(sentences))
     tokNum, mweNum, mwtNum, irefNum, idNum, lvcNum, vpcNum = 0, 0, 0, 0, 0, 0, 0
 
-    for s in sents:
+    for s in sentences:
         mweNum += len(s.vMWEs)
         tokNum += len(s.tokens)
         for v in s.vMWEs:
@@ -1378,7 +1417,7 @@ def getStats(sents, asCSV=False):
                 print s.text
     if asCSV:
         res = ''
-        for stat in [len(sents), tokNum, mweNum, mwtNum, irefNum, lvcNum, idNum, vpcNum]:
+        for stat in [len(sentences), tokNum, mweNum, mwtNum, irefNum, lvcNum, idNum, vpcNum]:
             res += str(stat) + ','
         res = res[:-1]
     else:
@@ -1393,6 +1432,7 @@ def getStats(sents, asCSV=False):
 
 
 def readFTB(ftbFile, reportBugs=False):
+    # bugNum, mweNum = 0, 0
     sentences = []
     if reportBugs:
         print ftbFile
@@ -1426,28 +1466,36 @@ def readFTB(ftbFile, reportBugs=False):
             sent.text += token.text + ' '
             morpho = getMorphological(lineParts[5].lower())
             if 'mwehead' in morpho:
-                if lineParts[7] == 'dep_cpd':
-                    if reportBugs:
-                        sys.stdout.write('Annotation bug: line: {0}, word: {1}\n'.format(lineNum, lineParts[1]))
-                else:
-                    vMWE = VMWE(mweIdx, [token], 'oth')
-                    vMWE.type2 = morpho['mwehead']
-                    sent.vMWEs.append(vMWE)
-                    token.setParent(vMWE)
-            if lineParts[7] == 'dep_cpd' and 'mwehead' not in morpho:
-                assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
-                if token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
+                # if lineParts[7] == 'dep_cpd':
+                #   if reportBugs:
+                #        sys.stdout.write('Annotation bug: line: {0}, word: {1}\n'.format(lineNum, lineParts[1]))
+                # else:
+                vMWE = VMWE(mweIdx, [token], 'oth')
+                vMWE.type2 = morpho['mwehead']
+                sent.vMWEs.append(vMWE)
+                token.setParent(vMWE)
+                # mweNum += 1
+            elif lineParts[7] == 'dep_cpd':  # and 'mwehead' not in morpho:
+                # if sent.vMWEs:
+                if sent.vMWEs and token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
                     sent.vMWEs[-1].tokens.append(token)
                     token.setParent(sent.vMWEs[-1])
                 else:
                     if reportBugs:
-                        sys.stdout.write(
-                            'Annotation bug dep_cpd without dep parent: line: {0}, word:'
-                            ' {1} DependencyParent: {2}, head Position: {3} \n'.
-                                format(lineNum, lineParts[1], token.dependencyParent,
-                                       sent.vMWEs[-1].tokens[0].position))
+                        sys.stdout.write('Annotation bug dep_cpd without dep parent: line: {0}, word:'
+                                         ' {1} DependencyParent: {2}, head Position: {3} \n'.
+                                         format(lineNum, lineParts[1], token.dependencyParent,
+                                                sent.vMWEs[-1].tokens[0].position))
                     if sent.vMWEs:
                         sent.vMWEs = sent.vMWEs[:-1]
+            # else:
+            #    if lineParts[7] == 'dep_cpd' and 'mwehead' in morpho:
+            #        bugNum += 1
+            # print line, sent
+            # else:
+            #   sys.stdout.write(' Annotation error {0} : {1}'.format(lineNum, sent))
+            # assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
+    # print 'Number of error {0}, number of MWE {1}'.format(bugNum,mweNum)
     # print universalPosTags
     # print xposTags
     # print len(universalPosTags), len(xposTags)
@@ -1461,9 +1509,19 @@ def getMorphological(morphoStr):
     morphAttribs = morphoStr.split('|')
     for attib in morphAttribs:
         attribComposants = attib.split('=')
-        assert len(attribComposants) <= 1, 'Morpho annotation error : {0}'.format(morphoStr)
-        result[attribComposants[0]] = attribComposants[1]
+        # sys.stdout.write('Morpho annotation error : {0}'.format(morphoStr))
+        # assert len(attribComposants) <= 1, 'Morpho annotation error : {0}'.format(morphoStr)
+        if len(attribComposants) > 1:
+            result[attribComposants[0]] = attribComposants[1]
     return result
+
+
+def getOccurrenceRang(occ):
+    occurrenceRang = [5, 25, 50, 100, 200, 300, 500]
+    for i in reversed(occurrenceRang):
+        if occ >= i:
+            return i
+    return 0
 
 
 # universalPosTags = set()

@@ -324,14 +324,6 @@ def getLinearScores(newFile):
     getDetailedScores(newFile, scores, titles, params)
 
 
-def getScores(newFile, xpNum=10, shouldClean=False, showTitle=True):
-    titles, scores, params = mineFile(newFile)
-    if shouldClean:
-        titles, scores, params = clean(titles, scores, params, xpNum)
-    # getDetailedScores(newFile, scores, titles, params)
-    getBrefScores(newFile, scores, titles, params, xpNum, showTitle=showTitle)
-
-
 def getDetailedScores(newFile, scores, titles, params):
     text = '\\textbf{title}\t\t&\t\t\\textbf{F}\t\t\\textbf{P}\t\t\\\\\\hline\n'
     for i in range(len(scores)):
@@ -340,37 +332,6 @@ def getDetailedScores(newFile, scores, titles, params):
         paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
         text += '{0}\t\t&\t\t{1}{2}\\\\\\hline\n'.format(titleText, scores[i], paramsText)
     with open('../Reports/{0}.detailed.csv'.format(newFile), 'w') as res:
-        res.write(text)
-
-
-def getBrefScores(newFile, scores, titles, params, xpNum, showTitle=True):
-    scores = divide(scores, xpNum)
-    params = divide(params, xpNum)
-    titles = divide(titles, xpNum)
-    # text = '\\textbf{title}\t&\t\\textbf{F$_{mean}$}\t&\t\\textbf{F$_{max}$}\t&' \
-    #       '\t\t\\textbf{MAD}\t\t&\t\t\\textbf{P}\t\t\\\\\\hline\n'
-    text = ''
-    for i in range(len(scores)):
-        # if i < 12:
-        #     header = '{0}\t\t&\t\t{1}\t\t'.format(dom[i], '')
-        # else:
-        #     header= '{0}\t\t&\t\t{1}\t\t'.format('', dom[i])
-        if showTitle:
-            titleText = titles[i][0] if titles else ''
-            if titleText:
-                titleText += '\t\t\t\t&'
-        else:
-            titleText = ''
-        population = scores[i]
-        meanValue = round(numpy.mean(population), 1)
-        maxValue = round(max(population), 1)
-        mad = getMeanAbsoluteDeviation(population)
-        paramsText = '\t\t&{0}\t\t'.format(round(numpy.mean(params[i]), 1) if params else '')
-        paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
-        text += '{0}{1}\t\t&\t\t{2}\t\t&\t\t{3}{4}\t\t\\\\\n'.format(
-            titleText, meanValue, maxValue, mad, paramsText)
-        print meanValue
-    with open('../Reports/Reports/{0}.tex'.format(newFile), 'w') as res:
         res.write(text)
 
 

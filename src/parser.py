@@ -4,7 +4,6 @@ import modelKiperwasser
 from extractionLinear import getFeatures
 from transitions import *
 
-randomlySelectedTrans = 0
 
 
 def parse(corpus, clf, normalizer):
@@ -21,12 +20,10 @@ def parse(corpus, clf, normalizer):
             newT = nextTrans(t, sent, clf, normalizer, sentEmbs)
             newT.apply(t, sent, parse=True, isClassified=newT.isClassified)
             t = newT
-    global randomlySelectedTrans
-    sys.stdout.write('\tRandomly Selected Transitions: {0}\n'.format(randomlySelectedTrans))
 
 
 def nextTrans(t, sent, clf, normalizer, sentEmbs=None):
-    legalTansDic = t.getLegalTransDic()
+    legalTansDic, predictedTrans = t.getLegalTransDic(), []
     if len(legalTansDic) == 1:
         return initialize(legalTansDic.keys()[0], sent)
     if configuration["xp"]["kiperwasser"]:
@@ -45,8 +42,6 @@ def nextTrans(t, sent, clf, normalizer, sentEmbs=None):
                 trans = legalTansDic[predTrans]
                 trans.isClassified = True
                 return trans
-            global randomlySelectedTrans
-            randomlySelectedTrans += 1
             for t in [TransitionType.SHIFT, TransitionType.MERGE, TransitionType.REDUCE, TransitionType.MARK_AS_OTH]:
                 if t in legalTansDic:
                     trans = legalTansDic[t]
@@ -58,8 +53,6 @@ def nextTrans(t, sent, clf, normalizer, sentEmbs=None):
     else:
         probVector = clf.predict(t, normalizer)
         predictedTrans = sorted(range(len(probVector)), key=lambda k: probVector[k], reverse=True)
-    # if configuration["xp"]["pytorch"]:
-    #    transTypeValue = transTypeValue.view(-1)
     for t in predictedTrans:
         transType = getType(t)
         if transType in legalTansDic:

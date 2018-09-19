@@ -53,7 +53,7 @@ repFiles = configuration["files"]["reports"]
 def printParsedSents(corpus, sentNum):
     printSentIdx, printSentNum = 0, sentNum
     for s in corpus.testingSents:
-        if s.vMWEs and printSentIdx < printSentNum:
+        if len(s.tokens) < 15 and len(s.vMWEs) == 1 and printSentIdx < printSentNum:
             sys.stdout.write(str(s) + '\n')
             printSentIdx += 1
 
@@ -283,7 +283,7 @@ def printMode():
 featureNumLine = 'Trainable params: '
 linearParamLine = '# Feature number = '
 paramLine = 'Trainable params: '
-scoreLine = 'Identification : 0'  # tabs + 'Identification : 0'
+scoreLine = '	Identification : 0'  # tabs + 'Identification : 0'
 linearTitleLine = '# Language = '
 titleLine = '# XP = '
 
@@ -523,28 +523,6 @@ def getStats(newFile):
 langLine = '	Language : '
 
 
-def mineNewFile(newFile):
-    path = '../Reports/Reports/{0}'.format(newFile)
-    titles, params, scores, langs = [], [], [], []
-    with open(path, 'r') as log:
-        for line in log.readlines():
-            if line.startswith(langLine):
-                langs.append(line[len(langLine):len(langLine) + 2])
-            if '_True_' in line or '_False_' in line:
-                titles.append(line[:-1])
-            if line.startswith(paramLine):
-                paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
-                params.append(round(int(paramsValue) / 1000000., 2))
-            if line.startswith(scoreLine):
-                fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
-                while len(fScore) < 4:
-                    fScore = fScore + '0'
-                scores.append(round(int(fScore) / 10000., 4) * 100)
-            if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
-                titles.append(line[len(titleLine):].strip())
-    return titles, scores, params, langs
-
-
 def getAvgScores(scores, langNum=3, trialNum=3):
     result, xpScores, langSum = [], [], 0
     for i, v in enumerate(scores):
@@ -563,27 +541,56 @@ def getAvgScores(scores, langNum=3, trialNum=3):
 def getNewScores(files):
     for f in files:
         f = str(f)
-        titles, scores, params, langs = mineNewFile(f)
+        titles, scores, params, langs, titles2 = mineNewFile(f)
         # results = getAvgScores(scores, 6)
-        for i, t in enumerate(scores):
-            print scores[i]
-            # t = t.replace(',', '.').replace('_', ',')
-            # print f, ',', \
-            #    t, str(results[i]).replace('[', ',').replace(']', ','), round(sum(results[i]) / 6, 1)
-            # ii = i * 9 * 2
-            # str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
-            # results[i][0], \
-            # str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
-            # results[i][1], \
-            # str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
-            # results[i][2], ',', \
-            # round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
+        # orderedScores = sorted(range(len(scores)), key=lambda k: scores[k], reverse=True)
+        for i, v in enumerate(titles):
+            print  scores[i * 3], ',', scores[i * 3 + 1], ',', scores[i * 3 + 2] , ',', v
+            # for i in range(len(titles)):
+        #    print scores[i * 3], scores[i * 3 + 1], scores[i * 3 + 2], ',', titles[i][:-1]
+        # for i, t in enumerate(scores):
+
+        #   print scores[i], titles[i]
+        # t = t.replace(',', '.').replace('_', ',')
+        # print f, ',', \
+        #    t, str(results[i]).replace('[', ',').replace(']', ','), round(sum(results[i]) / 6, 1)
+        # ii = i * 9 * 2
+        # str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
+        # results[i][0], \
+        # str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
+        # results[i][1], \
+        # str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
+        # results[i][2], ',', \
+        # round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
+
+
+def mineNewFile(newFile):
+    path = '../Reports/Reports/{0}'.format(newFile)
+    titles, params, scores, langs, titles2 = [], [], [], [], []
+    with open(path, 'r') as log:
+        for line in log.readlines():
+            if line.startswith('# Features Conf :{'):
+                titles.append(line)
+            if line.startswith(langLine):
+                langs.append(line[len(langLine):len(langLine) + 2])
+            if line.startswith(paramLine):
+                paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
+                params.append(round(int(paramsValue) / 1000000., 2))
+            if line.startswith(scoreLine):
+                fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
+                while len(fScore) < 4:
+                    fScore = fScore + '0'
+                scores.append(round(int(fScore) / 10000., 4) * 100)
+            if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
+                titles.append(line[len(titleLine):].strip())
+    return titles, scores, params, langs, titles2
 
 
 if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
-    getNewScores(['trainVsDev.linear'])
+    getNewScores(['linear1', 'linear2', 'linear3', 'linear4', 'linear5',
+                  'linear6', 'linear7', 'linear8', 'linear9', 'linear10'])
     # getStats('earlyStopping.st2.corpus')
     # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
     # for f in os.listdir('../Reports/Reports'):

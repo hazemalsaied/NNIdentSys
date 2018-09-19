@@ -10,8 +10,6 @@ def extract(corpus):
     global mweDictionary, mwtDictionary
     mweDictionary, mwtDictionary = corpus.mweDictionary, corpus.mwtDictionary
     for sent in corpus.trainingSents:
-        if configuration["sampling"]["importantSentences"] and not sent.vMWEs:
-            continue
         l, f = extractSent(sent)
         labels.extend(l)
         featureDicss.extend(f)

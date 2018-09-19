@@ -23,13 +23,11 @@ from parser import parse
 def xp(langs, xpNum=3, title='', seed=0):
     verifyGPU()
     evlaConf = configuration['evaluation']
-    evlaConf['cluster'] = True
     numpy.random.seed(seed)
     random.seed(seed)
     torch.manual_seed(seed)
     reports.createHeader(title)
     if not evlaConf['cv']['active']:
-        reports.printMode()
         for lang in langs:
             for i in range(xpNum):
                 corpus = Corpus(lang)
@@ -39,6 +37,7 @@ def xp(langs, xpNum=3, title='', seed=0):
                 sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.
                                  format(datetime.datetime.now() - startTime) + reports.doubleSep)
                 parse(corpus, network, normalizer)
+                reports.printParsedSents(corpus, 1)
                 evaluate(corpus)
     else:
         sys.stdout.write(reports.doubleSep + reports.tabs + 'CV Mode' + reports.doubleSep)
@@ -115,9 +114,6 @@ def getTrainAndTestSents(corpus, testRange, trainRange):
 
 
 def identifyLinearKeras(langs, ):
-    sys.stdout.write(reports.doubleSep + reports.tabs + 'Linear model in KERAS' + reports.seperator)
-    evlaConf = configuration['evaluation']
-    evlaConf['cluster'] = True
     for lang in langs:
         corpus = Corpus(lang)
         oracle.parse(corpus)
@@ -164,7 +160,57 @@ def verifyGPU():
         sys.stdout.write(tabs + 'GPU Enabled')
 
 
+from config import Evaluation, XpMode, Dataset
+
+
+def setTrainAndTest(v):
+    configuration['evaluation'].update({
+        'cv': {'active': True if v == Evaluation.cv else False},
+        'corpus': True if v == Evaluation.corpus else False,
+        'fixedSize': True if v == Evaluation.fixedSize else False,
+        'dev': True if v == Evaluation.dev else False,
+        'trainVsDev': True if v == Evaluation.trainVsDev else False,
+        'trainVsTest': True if v == Evaluation.trainVsTest else False,
+    })
+    trues, evaluation = 0, ''
+    for k in configuration['evaluation'].keys():
+        if configuration['evaluation'][k] == True and type(True) == type(configuration['evaluation'][k]):
+            evaluation = k.upper()
+            trues += 1
+    assert trues <= 1, 'There are more than one evaluation settings!'
+    sys.stdout.write( tabs + 'Division: {0}'.format(evaluation) + doubleSep)
+
+def setXPMode(v):
+    configuration['xp'].update({
+        'linear': True if v == XpMode.linear else False,
+        'compo': True if v == XpMode.compo else False,
+        'pytorch': True if v == XpMode.pytorch else False,
+        'kiperwasser': True if v == XpMode.kiperwasser else False,
+        'rnn': True if v == XpMode.rnn else False,
+        'rnnNonCompo': True if v == XpMode.rnnNonCompo else False,
+    })
+    trues, mode = 0, ''
+    for k in configuration['xp'].keys():
+        if configuration['xp'][k] == True and type(True) == type(configuration['xp'][k]):
+            mode = k.upper()
+            trues += 1
+    assert trues <= 1, 'There are more than one experimentation mode!'
+    sys.stdout.write( tabs + 'Mode: {0}'.format(mode) + doubleSep)
+
+def setDataSet(v):
+    configuration['dataset'].update(
+        {
+            'sharedtask2': True if v == Dataset.sharedtask2 else False,
+            'FTB': True if v == Dataset.FTB else False
+        })
+    assert configuration['dataset']['sharedtask2'] != configuration['dataset']['FTB'], 'Ambigious data set definition!'
+    ds = 'Sharedtask 1.1' if configuration['dataset']['sharedtask2'] else (
+        'FTB' if configuration['dataset']['FTB'] else 'Sharedtask 1.0')
+    sys.stdout.write( tabs + 'Dataset: {0}'.format(ds) + doubleSep)
+
+
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
+    xp(['FR'])

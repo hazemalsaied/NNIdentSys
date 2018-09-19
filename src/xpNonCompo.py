@@ -476,11 +476,24 @@ def allLangs(languages, sharedtask2=False, lemmaEmb=200):
     xp(languages)
 
 
+def exploreFTB():
+    configuration['dataset']['FTB'] = True
+    configuration['evaluation']['corpus'] = True
+    setOptimalRandomGridParameters()
+    xp(['FR'], xpNum=1)
+    configuration['evaluation']['corpus'] = False
+    configuration['evaluation']['trainVsTest'] = True
+    xp(['FR'], xpNum=1)
+    configuration['evaluation']['trainVsTest'] = False
+    configuration['evaluation']['trainVsDev'] = True
+    xp(['FR'], xpNum=1)
+
 
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
-    configuration['model']['train']['earlyStop'] = True
     configuration['dataset']['sharedtask2'] = True
+    # configuration['evaluation']['fixedSize'] = True
+    configuration['evaluation']['corpus'] = True
     setOptimalRandomGridParameters()
-    xp(allSharedtask2Lang)
+    xp(['FR'], xpNum=1)
