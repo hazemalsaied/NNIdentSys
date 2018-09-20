@@ -17,9 +17,9 @@ try:
     reportPath = os.path.join(configuration["path"]["projectPath"], PATH_ROOT_REPORTS_DIR)
     if not os.path.isdir(reportPath):
         os.makedirs(reportPath)
-    # schemaFolder = os.path.join(reportPath, 'schemas')
-    # if not os.path.isdir(schemaFolder):
-    #    os.makedirs(schemaFolder)
+        # schemaFolder = os.path.join(reportPath, 'schemas')
+        # if not os.path.isdir(schemaFolder):
+        #    os.makedirs(schemaFolder)
 except OSError as e:
     if e.errno != errno.EEXIST:
         raise
@@ -544,24 +544,28 @@ def getNewScores(files):
         titles, scores, params, langs, titles2 = mineNewFile(f)
         # results = getAvgScores(scores, 6)
         # orderedScores = sorted(range(len(scores)), key=lambda k: scores[k], reverse=True)
-        for i, v in enumerate(titles):
-            print  scores[i * 3], ',', scores[i * 3 + 1], ',', scores[i * 3 + 2] , ',', v
-            # for i in range(len(titles)):
-        #    print scores[i * 3], scores[i * 3 + 1], scores[i * 3 + 2], ',', titles[i][:-1]
-        # for i, t in enumerate(scores):
+        # for i, v in enumerate(scores):
+        #     print langs[i], ',', v, '\n'  # ',', , ',', v
+        for i in range(len(titles)):
+            print \
+                scores[i * 3] if i * 3 < len(scores)else '', ',', \
+                scores[i * 3 + 1] if i * 3 + 1 < len(scores)else '', ',', \
+                scores[i * 3 + 2] if i * 3 + 2 < len(scores)else '', ',', \
+                titles[i][:-1]
+            # for i, t in enumerate(scores):
 
-        #   print scores[i], titles[i]
-        # t = t.replace(',', '.').replace('_', ',')
-        # print f, ',', \
-        #    t, str(results[i]).replace('[', ',').replace(']', ','), round(sum(results[i]) / 6, 1)
-        # ii = i * 9 * 2
-        # str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
-        # results[i][0], \
-        # str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
-        # results[i][1], \
-        # str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
-        # results[i][2], ',', \
-        # round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
+            #   print scores[i], titles[i]
+            # t = t.replace(',', '.').replace('_', ',')
+            # print f, ',', \
+            #    t, str(results[i]).replace('[', ',').replace(']', ','), round(sum(results[i]) / 6, 1)
+            # ii = i * 9 * 2
+            # str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
+            # results[i][0], \
+            # str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
+            # results[i][1], \
+            # str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
+            # results[i][2], ',', \
+            # round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
 
 
 def mineNewFile(newFile):
@@ -569,7 +573,7 @@ def mineNewFile(newFile):
     titles, params, scores, langs, titles2 = [], [], [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
-            if line.startswith('# Features Conf :{'):
+            if line.startswith('# RNN Conf :'):
                 titles.append(line)
             if line.startswith(langLine):
                 langs.append(line[len(langLine):len(langLine) + 2])
@@ -589,8 +593,15 @@ def mineNewFile(newFile):
 if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
-    getNewScores(['linear1', 'linear2', 'linear3', 'linear4', 'linear5',
-                  'linear6', 'linear7', 'linear8', 'linear9', 'linear10'])
+    getNewScores([
+        'rnn.pilot.1', 'rnn.pilot.2', 'rnn.pilot.3', 'rnn.pilot.4', 'rnn.pilot.5', 'rnn.pilot.6',
+        'rnn.pilot.7', 'rnn.pilot.8', 'rnn.pilot.9', 'rnn.pilot.10', 'rnn.pilot.11', 'rnn.pilot.12'
+        # 'rnn.extra.sam'
+        # 'linear1', 'linear1', 'linear13', 'linear14', 'linear15',
+        # 'linear16', 'linear17', 'linear18', 'linear19', 'linear20',
+        # 'linear11', 'linear12', 'linear13', 'linear14', 'linear15',
+        # 'linear16', 'linear17', 'linear18', 'linear19', 'linear20'
+    ])
     # getStats('earlyStopping.st2.corpus')
     # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
     # for f in os.listdir('../Reports/Reports'):

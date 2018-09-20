@@ -32,11 +32,11 @@ def getFeatures(transition, sent):
     featureDictionary = {}
     conf = transition.configuration
     dicFeat = configuration["features"]["dictionary"]
-    if dicFeat["mwt"]:
-        if conf.stack and isinstance(conf.stack[-1], Token) and conf.stack[-1].getLemma() in mwtDictionary:
-            featureDictionary['S0_isMWT'] = True
-            featureDictionary[conf.stack[-1].getLemma() + '_isMWT'] = True
-            return featureDictionary
+    # if dicFeat["mwt"]:
+    if conf.stack and isinstance(conf.stack[-1], Token) and conf.stack[-1].getLemma() in mwtDictionary:
+        featureDictionary['S0_isMWT'] = True
+        featureDictionary[conf.stack[-1].getLemma() + '_isMWT'] = True
+        return featureDictionary
     # TODO return transDic directly in this case
     if configuration["features"]["stackLength"] and len(conf.stack) > 1:
         featureDictionary['StackLength'] = len(conf.stack)
@@ -46,7 +46,7 @@ def getFeatures(transition, sent):
     else:
         stackElements = conf.stack
 
-    # General linguistic Informations
+    # General linguistic Information
     if stackElements:
         elemIdx = len(stackElements) - 1
         for elem in stackElements:
@@ -97,7 +97,6 @@ def getFeatures(transition, sent):
 
     if configuration["features"]["dictionary"]["active"] and conf.buffer and conf.stack:
         generateDisconinousFeatures(conf, sent, featureDictionary)
-
         enhanceMerge(transition, featureDictionary)
 
     return featureDictionary
@@ -144,7 +143,7 @@ def generateDisconinousFeatures(configuration, sent, transDic):
             bufidx = 0
             for bufElem in configuration.buffer[:5]:
                 if bufElem.lemma != '' and (
-                        (tokenTxt + ' ' + bufElem.lemma) in key or (bufElem.lemma + ' ' + tokenTxt) in key):
+                                (tokenTxt + ' ' + bufElem.lemma) in key or (bufElem.lemma + ' ' + tokenTxt) in key):
                     transDic['S0B' + str(bufidx) + 'AreMWETokens'] = True
                     transDic['S0B' + str(bufidx) + 'ArePartsOfMWEDistance'] = sent.tokens.index(
                         bufElem) - sent.tokens.index(tokens[-1])

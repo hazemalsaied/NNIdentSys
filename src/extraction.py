@@ -72,7 +72,7 @@ def abstractSyntaxic(config):
         for t in reversed(s0Tokens):
             tIdx = len(s0Tokens) - s0Tokens.index(t) - 1
             if int(t.dependencyParent) == -1 or int(t.dependencyParent) == 0 or \
-                    t.dependencyLabel.strip() == '' or not config.buffer:
+                            t.dependencyLabel.strip() == '' or not config.buffer:
                 return dict()
             # Syntactic relation between S0 tokens
             for t1 in reversed(s0Tokens):

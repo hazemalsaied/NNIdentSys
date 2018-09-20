@@ -16,7 +16,8 @@ class TransitionType(Enum):
 
 
 class Transition(object):
-    def __init__(self, type=None, config=None, previous=None, next=None, isInitial=False, sent=None, isClassified=False):
+    def __init__(self, type=None, config=None, previous=None, next=None, isInitial=False, sent=None,
+                 isClassified=False):
 
         self.sent = sent
         self.isClassified = isClassified
@@ -49,7 +50,7 @@ class Transition(object):
         if config.stack:
             if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2 or \
                     (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token' and
-                     configuration["features"]["dictionary"]["mwt"]):
+                         configuration["features"]["dictionary"]["mwt"]):
                 transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,
                                                                 sent=self.sent)
                 transitions[TransitionType.MARK_AS_VPC] = MarkAs(type=TransitionType.MARK_AS_VPC,
@@ -158,7 +159,7 @@ class Reduce(Transition):
         newStack = newStack[:-1]
         newTokens = list(config.tokens)
         newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
-        super(Reduce, self).__init__(config=newConfig, previous=parent, sent=sent,isClassified=isClassified)
+        super(Reduce, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.stack:
@@ -178,7 +179,7 @@ class Merge(Transition):
         newTokens = list(config.tokens)
         newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
 
-        super(Merge, self).__init__(config=newConfig, previous=parent, sent=sent,isClassified=isClassified)
+        super(Merge, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
         if self.configuration.stack and len(self.configuration.stack) > 1:

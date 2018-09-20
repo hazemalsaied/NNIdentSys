@@ -16,7 +16,6 @@ enableCategorization = False
 
 
 class Network:
-
     def __init__(self, corpus):
         global tokenVocab, posVocab
         tokenVocab, posVocab = getVocab(corpus)

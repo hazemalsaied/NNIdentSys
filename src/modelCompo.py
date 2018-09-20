@@ -127,7 +127,7 @@ def elemModule(elemNum, normalizer, usePos=False, useToken=False):
     wordLayer = Input(shape=(elemNum,), name=name)
     if embConf["initialisation"]["active"] and ((usePos and embConf["initialisation"]["pos"])
                                                 or (useToken and embConf["initialisation"]["token"]) or not (
-                    useToken or usePos)):
+                useToken or usePos)):
         sys.stdout.write('# {0} weight matrix = True\n'.format(name))
         embLayer = Embedding(inputDim, outputDim, weights=weights, trainable=True)(wordLayer)
     else:

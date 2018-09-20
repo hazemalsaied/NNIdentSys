@@ -1,15 +1,14 @@
 import datetime
 import logging
 
-import torch
+import modelLinearKeras as lkm
+# import torch
 from theano import function, config, shared, tensor
 
 import modelCompo
-import modelKiperwasser
 import modelLinear
-import modelLinearKeras as lkm
 import modelNonCompo
-import modelPytorch
+# import modelPytorch
 import modelRnn
 import modelRnnNonCompo
 import oracle
@@ -25,7 +24,7 @@ def xp(langs, xpNum=3, title='', seed=0):
     evlaConf = configuration['evaluation']
     numpy.random.seed(seed)
     random.seed(seed)
-    torch.manual_seed(seed)
+    # torch.manual_seed(seed)
     reports.createHeader(title)
     if not evlaConf['cv']['active']:
         for lang in langs:
@@ -57,15 +56,15 @@ def parseAndTrain(corpus):
         network = modelRnnNonCompo.Network(corpus)
         modelRnnNonCompo.train(network, corpus)
         return network, None
-    if configuration['xp']['kiperwasser']:
-        network = modelKiperwasser.train(corpus)
-        normalizer = Normalizer(corpus)
-        return network, normalizer
+    # if configuration['xp']['kiperwasser']:
+    #     network = modelKiperwasser.train(corpus)
+    #     normalizer = Normalizer(corpus)
+    #     return network, normalizer
     normalizer = Normalizer(corpus)
-    if configuration['xp']['pytorch']:
-        network = modelPytorch.PytorchModel(normalizer)
-        modelPytorch.main(network, corpus, normalizer)
-    elif configuration['xp']['compo']:
+    # if configuration['xp']['pytorch']:
+    #     network = modelPytorch.PytorchModel(normalizer)
+    #     modelPytorch.main(network, corpus, normalizer)
+    if configuration['xp']['compo']:
         network = modelCompo.Network(normalizer)
         modelCompo.train(network.model, normalizer, corpus)
     else:
@@ -153,7 +152,7 @@ def verifyGPU():
     x = shared(numpy.asarray(rng.rand(vlen), config.floatX))
     f = function([], tensor.exp(x))
     if numpy.any([isinstance(x.op, tensor.Elemwise) and
-                  ('Gpu' not in type(x.op).__name__)
+                          ('Gpu' not in type(x.op).__name__)
                   for x in f.maker.fgraph.toposort()]):
         sys.stdout.write(tabs + 'Attention: CPU used\n')
     else:
@@ -178,7 +177,8 @@ def setTrainAndTest(v):
             evaluation = k.upper()
             trues += 1
     assert trues <= 1, 'There are more than one evaluation settings!'
-    sys.stdout.write( tabs + 'Division: {0}'.format(evaluation) + doubleSep)
+    sys.stdout.write(tabs + 'Division: {0}'.format(evaluation) + doubleSep)
+
 
 def setXPMode(v):
     configuration['xp'].update({
@@ -195,7 +195,8 @@ def setXPMode(v):
             mode = k.upper()
             trues += 1
     assert trues <= 1, 'There are more than one experimentation mode!'
-    sys.stdout.write( tabs + 'Mode: {0}'.format(mode) + doubleSep)
+    sys.stdout.write(tabs + 'Mode: {0}'.format(mode) + doubleSep)
+
 
 def setDataSet(v):
     configuration['dataset'].update(
@@ -206,7 +207,7 @@ def setDataSet(v):
     assert configuration['dataset']['sharedtask2'] != configuration['dataset']['FTB'], 'Ambigious data set definition!'
     ds = 'Sharedtask 1.1' if configuration['dataset']['sharedtask2'] else (
         'FTB' if configuration['dataset']['FTB'] else 'Sharedtask 1.0')
-    sys.stdout.write( tabs + 'Dataset: {0}'.format(ds) + doubleSep)
+    sys.stdout.write(tabs + 'Dataset: {0}'.format(ds) + doubleSep)
 
 
 if __name__ == '__main__':

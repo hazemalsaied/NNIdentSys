@@ -1,12 +1,12 @@
 from collections import Counter
-import sampling
-import numpy as np
 
+import numpy as np
 from keras.preprocessing.sequence import pad_sequences
 
 import compoVocabulary
 import nonCompoVocabulary
 import reports
+import sampling
 from corpus import getTokens
 from extraction import Extractor
 from reports import *
@@ -228,13 +228,6 @@ class Normalizer:
         return np.asarray(tokenIdxs), np.asarray(posIdxs)
 
 
-
-
-
-
-
-
-
 def padSequence(seq, label, emptyIdx):
     padConf = configuration["model"]["padding"]
     return np.asarray(pad_sequences([seq], maxlen=padConf[label], value=emptyIdx))[0]
@@ -275,6 +268,3 @@ def eleminateMarginalClasses(labels, data, taux=5):
                 data = numpy.delete(data, idx)
     print sorted(Counter(labels).items())
     return labels, data
-
-
-

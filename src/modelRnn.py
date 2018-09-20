@@ -6,7 +6,7 @@ import keras
 import numpy as np
 from imblearn.over_sampling import RandomOverSampler
 from keras.callbacks import EarlyStopping
-from keras.layers import Input, Dense, Embedding,Flatten,  GRU, Dropout, LSTM
+from keras.layers import Input, Dense, Embedding, Flatten, GRU, Dropout, LSTM
 from keras.models import Model
 from keras.utils import to_categorical
 
@@ -22,7 +22,6 @@ rnnConf = configuration['rnn']
 
 
 class Network:
-
     def __init__(self, corpus):
         global rnnConf
         rnnConf = configuration['rnn']

@@ -9,7 +9,7 @@ import mstlstm
 import utils
 
 mainP = os.path.dirname(__file__)[:-len(os.path.basename(os.path.dirname(__file__)))]
-# '/Users/halsaied/PycharmProjects/NNIdenSys/bist-parser/Pytorch/bmstparser'
+# '/Users/halsaied/PycharmProjects/NNIdenSys/BISTParser/Pytorch/bmstparser'
 
 if __name__ == '__main__':
     parser = OptionParser()

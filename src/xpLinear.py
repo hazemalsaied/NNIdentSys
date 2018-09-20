@@ -7,6 +7,7 @@ import sys
 import reports
 from config import Dataset, Evaluation, XpMode
 from config import configuration, resetFRStandardFeatures, resetStandardFeatures
+from identification import setDataSet, setTrainAndTest, setXPMode
 from identification import xp
 
 
@@ -245,17 +246,71 @@ def generateValue(favorisationTaux=0.5):
     return False
 
 
+def setOptimalRSGFeatures():
+    conf = {
+        'active': True,
+        'unigram': {
+            'lemma': True,
+            'token': False,
+            'pos': True,
+            'suffix': False,
+            'b1': False
+        },
+        'bigram': {
+            'active': True,
+            's0b2': False
+        },
+        'trigram': True,
+        'syntax': {
+            'active': False,
+            'abstract': False,
+            'lexicalised': False,
+            'bufferElements': 5
+        },
+        'dictionary': {
+            'active': False,
+            'mwt': True,
+            's0TokenIsMWEToken': False,
+            's0TokensAreMWE': False
+        },
+        'history': {
+            '1': True,
+            '2': True,
+            '3': True
+        },
+        'stackLength': False,
+        'distance': {
+            's0s1': True,
+            's0b0': True
+        }
+    }
+    configuration['features'].update(conf)
+
+
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    from identification import setDataSet, setTrainAndTest, setXPMode
-    setDataSet(Dataset.sharedtask2)
     setXPMode(XpMode.linear)
-    setTrainAndTest(Evaluation.fixedSize)
 
-    langs = ['BG', 'PT', 'TR']
+    langs = ['FR']
+
+    setDataSet(Dataset.sharedtask2)
+
+    from xpNonCompo import allSharedtask2Lang
+
+    setOptimalRSGFeatures()
+    setTrainAndTest(Evaluation.corpus)
+    xp(allSharedtask2Lang, xpNum=1)
+
+    setTrainAndTest(Evaluation.trainVsTest)
+    xp(allSharedtask2Lang, xpNum=1)
+
+    setTrainAndTest(Evaluation.trainVsDev)
+    xp(allSharedtask2Lang, xpNum=1)
+
+    # langs = ['BG', 'PT', 'TR']
     # configuration['linear']['svm'] = False
     # createRSGrid()
-    runRSG()
+    # runRSG()
     # getActivatedConf()

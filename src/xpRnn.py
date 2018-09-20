@@ -141,11 +141,11 @@ def exploreExtraSampling():
     configuration['rnn']['useDense'] = True
     configuration['rnn']['compactVocab'] = True
 
-    bestConfs = [[283, 25, 94, 0.1, 64, 37, 0, 64],
-                 [267, 78, 96, 0.3, 31, 40, 0, 16],
-                 [410, 54, 51, 0.1, 25, 15, 0.1, 16]]
-    configuration['sampling']['focused'] = True
+    bestConfs = [[410, 54, 51, 0.1, 25, 15, 0.1, 16]]
+    # [283, 25, 94, 0.1, 64, 37, 0, 64],
+    # [267, 78, 96, 0.3, 31, 40, 0, 16]]
     for c in bestConfs:
+
         configuration['rnn']['wordDim'] = c[0]
         configuration['rnn']['posDim'] = c[1]
         configuration['rnn']['denseUnitNum'] = c[2]
@@ -154,12 +154,15 @@ def exploreExtraSampling():
         configuration['rnn']['posRnnUnitNum'] = c[5]
         configuration['rnn']['rnnDropout'] = c[6]
         configuration['rnn']['batchSize'] = c[7]
-        xp(langs, xpNum=3)
+        xp(langs, xpNum=1)
+        configuration['sampling']['focused'] = True
+        xp(langs, xpNum=1)
         configuration['sampling']['sampleWeight'] = True
-        for fc in [5, 10, 15, 25]:
+        for fc in [5, 15, 25]:
             configuration['sampling']['favorisationCoeff'] = fc
             xp(langs, xpNum=3)
         configuration['sampling']['sampleWeight'] = False
+        configuration['sampling']['focused'] = False
 
 
 if __name__ == '__main__':
@@ -167,6 +170,7 @@ if __name__ == '__main__':
     sys.setdefaultencoding('utf8')
     import config
     from identification import setTrainAndTest, setXPMode, setDataSet
+
     setDataSet(config.Dataset.sharedtask2)
     setTrainAndTest(config.Evaluation.fixedSize)
     setXPMode(config.XpMode.rnn)
@@ -199,10 +203,11 @@ if __name__ == '__main__':
     configuration['sampling']['overSampling'] = True
     configuration['model']['embedding']['lemma'] = True
 
+    exploreExtraSampling()
     # exploreBestConfs()
     # xp(langs, xpNum=1)
 
-    runRSG(30, fileName='rnnCloserRsgGrid.p')
+    # runRSG(30, fileName='rnnCloserRsgGrid.p')
     # createCloserRSGrid()
     # createRSGrid()
     # runRSG()

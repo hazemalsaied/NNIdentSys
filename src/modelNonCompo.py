@@ -1,9 +1,7 @@
-import datetime
 from collections import Counter
-import sampling
+
 import keras
 import numpy as np
-import sklearn.utils
 from keras import optimizers
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras.layers import Input, Dense, Flatten, Embedding, Dropout, GRU
@@ -11,6 +9,7 @@ from keras.models import Model
 from keras.utils import to_categorical
 
 import reports
+import sampling
 from reports import *
 
 
@@ -77,8 +76,8 @@ class Network:
             if dense2Conf["active"]:
                 dense2Layer = Dense(dense2Conf["unitNumber"], activation=dense2Conf["activation"])(lastLayer)
                 lastLayer = Dropout(dense2Conf["dropout"])(dense2Layer)
-        softmax = Dense(8, activation='softmax')(lastLayer)
-        self.model = Model(inputs=inputLayers, outputs=softmax)
+        softmaxLayer = Dense(8, activation='softmax')(lastLayer)
+        self.model = Model(inputs=inputLayers, outputs=softmaxLayer)
         # sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
         print self.model.summary()
 
@@ -97,11 +96,10 @@ class Network:
 
 
 def train(model, normalizer, corpus):
-    time = datetime.datetime.now()
     trainConf = configuration["model"]["train"]
     labels, data = normalizer.generateLearningDataAttached(corpus)
-    lblDitribution = Counter(labels)
-    sys.stdout.write(tabs + '{0} Labels in train : {1}\n'.format(len(lblDitribution), lblDitribution))
+    lblDistribution = Counter(labels)
+    sys.stdout.write(tabs + '{0} Labels in train : {1}\n'.format(len(lblDistribution), lblDistribution))
     valDistribution = Counter(labels[int(len(labels) * (1 - trainConf["validationSplit"])):])
     sys.stdout.write(tabs + '{0} Labels in valid : {1}\n'.format(len(valDistribution), valDistribution))
     classWeightDic = sampling.getClassWeights(labels)
@@ -186,11 +184,6 @@ def getCallBacks():
     return callbacks
 
 
-
-
-
-
-
 class PlotLosses(keras.callbacks.Callback):
     def on_train_begin(self, logs={}):
         self.batchStep = configuration["model"]["train"]["visualisation"]["batchStep"]
@@ -208,52 +201,52 @@ class PlotLosses(keras.callbacks.Callback):
         self.batchValAcc = []
         self.logs = []
 
-    # def on_epoch_end(self, epoch, logs={}):
-    #     self.logs.append(logs)
-    #     self.x.append(self.i)
-    #     self.losses.append(logs.get('loss'))
-    #     self.val_losses.append(logs.get('val_loss'))
-    #     self.acc.append(logs.get('acc'))
-    #     self.val_acc.append(logs.get('val_acc'))
-    #
-    #
-    #     self.i += 1
-    #     f, (ax1, ax2) = plt.subplots(1, 2, sharex=True)
-    #
-    #     clear_output(wait=True)
-    #
-    #     ax1.set_yscale('log')
-    #     ax1.plot(self.x, self.losses, label="loss")
-    #     ax1.plot(self.x, self.val_losses, label="val_loss")
-    #     ax1.legend()
-    #
-    #     ax2.plot(self.x, self.acc, label="accuracy")
-    #     ax2.plot(self.x, self.val_acc, label="validation accuracy")
-    #     ax2.legend()
-    #
-    #     plt.show()
+        # def on_epoch_end(self, epoch, logs={}):
+        #     self.logs.append(logs)
+        #     self.x.append(self.i)
+        #     self.losses.append(logs.get('loss'))
+        #     self.val_losses.append(logs.get('val_loss'))
+        #     self.acc.append(logs.get('acc'))
+        #     self.val_acc.append(logs.get('val_acc'))
+        #
+        #
+        #     self.i += 1
+        #     f, (ax1, ax2) = plt.subplots(1, 2, sharex=True)
+        #
+        #     clear_output(wait=True)
+        #
+        #     ax1.set_yscale('log')
+        #     ax1.plot(self.x, self.losses, label="loss")
+        #     ax1.plot(self.x, self.val_losses, label="val_loss")
+        #     ax1.legend()
+        #
+        #     ax2.plot(self.x, self.acc, label="accuracy")
+        #     ax2.plot(self.x, self.val_acc, label="validation accuracy")
+        #     ax2.legend()
+        #
+        #     plt.show()
 
-    # def on_batch_end(self, batch, logs=None):
-    #     self.batchNum += 1
-    #     if self.batchNum % self.batchStep == 0:
-    #         self.batchLosses.append(logs.get('loss'))
-    #         # self.batchValLosses.append(logs.get('val_loss'))
-    #         self.batchAcc.append(logs.get('acc'))
-    #         # self.batchValAcc.append(logs.get('val_acc'))
+        # def on_batch_end(self, batch, logs=None):
+        #     self.batchNum += 1
+        #     if self.batchNum % self.batchStep == 0:
+        #         self.batchLosses.append(logs.get('loss'))
+        #         # self.batchValLosses.append(logs.get('val_loss'))
+        #         self.batchAcc.append(logs.get('acc'))
+        #         # self.batchValAcc.append(logs.get('val_acc'))
 
-    # def on_train_end(self, logs=None):
-    #     if not configuration["evaluation"]["cluster"]:
-    #         f, ax1 = plt.subplots()
-    #         clear_output(wait=True)
-    #         ax1.set_yscale('log')
-    #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchLosses, label="loss ")
-    #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchAcc, label="Acc ")
-    #         # ax1.legend()
-    #
-    #         # ax2.plot(self.x, self.acc, label="accuracy")
-    #         # ax1.plot(range(len(self.batchAcc)), self.batchAcc, label="loss (batch)")
-    #         # ax2.legend()
-    #         plt.show()
+        # def on_train_end(self, logs=None):
+        #     if not configuration["evaluation"]["cluster"]:
+        #         f, ax1 = plt.subplots()
+        #         clear_output(wait=True)
+        #         ax1.set_yscale('log')
+        #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchLosses, label="loss ")
+        #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchAcc, label="Acc ")
+        #         # ax1.legend()
+        #
+        #         # ax2.plot(self.x, self.acc, label="accuracy")
+        #         # ax1.plot(range(len(self.batchAcc)), self.batchAcc, label="loss (batch)")
+        #         # ax2.legend()
+        #         plt.show()
 
 
 plot_losses = PlotLosses()

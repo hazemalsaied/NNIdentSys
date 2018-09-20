@@ -24,7 +24,7 @@ def runRandomSearchGridXps(langs, xpNum1=25, sharedtask2=True):
     for k in choosenXps:
         sys.stdout.write(k + '\n')
         setConfig(k)
-        configuration['evaluation']['fixedSize']=True
+        configuration['evaluation']['fixedSize'] = True
         xp(langs)
         configuration['evaluation']['fixedSize'] = False
         configuration['evaluation']['train'] = True
@@ -48,8 +48,6 @@ def createRandomSearchGrid(minimal=False):
                      "wb"))
     for k in resultDic:
         print k.replace('_', ',')
-
-
 
 
 def generateConfig():
@@ -110,10 +108,10 @@ def generateConfig():
 def generateMinimalConfig():
     sampConf = configuration["sampling"]
     sampConf["favorisationCoeff"] = int(generateValue([5, 35], continousPlage=True))
-    sampConf["focused"] = True # generateValue([True, False])
+    sampConf["focused"] = True  # generateValue([True, False])
 
     embConf = configuration["model"]["embedding"]
-    embConf["lemma"] = True # generateValue([True, False])
+    embConf["lemma"] = True  # generateValue([True, False])
     embConf["tokenEmb"] = int(generateValue([150, 500], continousPlage=True))
     embConf["posEmb"] = int(generateValue([25, 150], continousPlage=True))
     vocabType = generateValue(['frequent', 'compact'])
@@ -122,7 +120,7 @@ def generateMinimalConfig():
 
     dense1Conf = configuration["model"]["mlp"]["dense1"]
     dense2Conf = configuration["model"]["mlp"]["dense2"]
-    dense1Conf["active"] = True # generateValue([True, False])
+    dense1Conf["active"] = True  # generateValue([True, False])
     dense1Conf["unitNumber"] = int(generateValue([5, 75], continousPlage=True))
     dense1Conf["activation"] = 'relu'  # generateValue(['relu'])
     dense1Conf["dropout"] = round(generateValue([.2, .6], continousPlage=True), 3)

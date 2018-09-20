@@ -290,19 +290,19 @@ Special_tokens_2_ftb4_cat = {
      ('en','CL'):'CLO',
      ('se','CL'):'CLR',
      ('s\'','CL'):'CLR',
-     ('vous','CL'):'CLO', # vérifié
+    ('vous', 'CL'): 'CLO',  # vérifié
      ('il','CL'):'CLS',
      ('elle','CL'):'CLS',
      ('on','CL'):'CLS',
      ('eux','CL'):'PRO', # correction erreur!
-     ('après','C'):'P', # correction erreur!
+    ('après', 'C'): 'P',  # correction erreur!
      ('ce','CL'):'CLS',
      ('c\'','CL'):'CLS',
      ('si','C'):'CS',
      ('s\'','C'):'CS',
      ('et','C'):'CC',
      ('ni','C'):'CC',
-     ('même','C'):'CC',
+    ('même', 'C'): 'CC',
      ('mais','C'):'CC',
      ('ou','C'):'CC',
      ('&','C'):'CC',
@@ -319,11 +319,11 @@ Special_tokens_2_ftb4_cat = {
      ('ie','V'):'VPP',
      ('is','V'):'VPP',
      ('ise','V'):'VPP',
-     ('ses','V'):'VPP', # j'ai vérifié: ce sont bien des VPP
-     ('é','V'):'VPP',
-     ('és','V'):'VPP',
-     ('ée','V'):'VPP',
-     ('ées','V'):'VPP',
+    ('ses', 'V'): 'VPP',  # j'ai vérifié: ce sont bien des VPP
+    ('é', 'V'): 'VPP',
+    ('és', 'V'): 'VPP',
+    ('ée', 'V'): 'VPP',
+    ('ées', 'V'): 'VPP',
      ('vre','V'):'VINF',
      ('ir','V'):'VINF',
      ('er','V'):'VINF',
@@ -348,7 +348,7 @@ def tagfixer2tagdict(tagfixer):
           dico[cat] = dict(tagfixer.mappings[cat][1])
           dico[cat]['coarsecat'] = tagfixer.mappings[cat][0]
      return dico
-          
+
 
 # marie : vite fait : features tels qu'utilisés dans LabelledTree, vers les features du XML ftb
 # PREREQUIS : le noeud est un tag node, et il porte une basecat

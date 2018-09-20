@@ -214,8 +214,8 @@ class Corpus:
                     for t in v.tokens:
                         t.parentMWEs.remove(v)
             sent.vMWEs = newVmwes
-        # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
-        #                str(self.getNumericalExpressionPercentage()) + doubleSep)
+            # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
+            #                str(self.getNumericalExpressionPercentage()) + doubleSep)
 
     def getNumericalExpressionPercentage(self):
         trainDigitalExps, allTrainExpOcc, testDigiralExps, allTestExpOcc = 0, 0, 0, 0
@@ -484,7 +484,8 @@ class Corpus:
 
     def toConllU(self, useCupt=True, gold=False, train=False):
         header = '# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC PARSEME:MWE\n'
-        return header + ''.join(s.toConllU(useCupt=useCupt, gold=gold) for s in (self.trainingSents if train else self.testingSents))
+        return header + ''.join(
+            s.toConllU(useCupt=useCupt, gold=gold) for s in (self.trainingSents if train else self.testingSents))
 
     def getTransDistribution(self):
         transNum = {}
@@ -710,7 +711,7 @@ class Sentence:
                 else:
                     labels[token.position - 1] += ';' + str(mwe.id)
                 if mwe.tokens[0] == token and mwe.type:
-                    labels[token.position - 1] += ':VID' # + mwe.type
+                    labels[token.position - 1] += ':VID'  # + mwe.type
         return ''.join(t.toConllU(labels[i], useCupt=useCupt) for i, t in enumerate(self.tokens)) + '\n'
 
     def __str__(self):
@@ -871,7 +872,7 @@ class VMWE:
 
     def isAttachedWith(self, mwe2):
         if self.tokens[-1].position + 1 == mwe2.tokens[0].position or \
-                self.tokens[-1].position + 2 == mwe2.tokens[0].position:
+                                self.tokens[-1].position + 2 == mwe2.tokens[0].position:
             return True
         return False
 
@@ -1181,7 +1182,7 @@ def integrateMweFile(mweFile, sentences):
         sentIdx = 0
         for line in lines:
             if line == '\n' or line.startswith('# sentence-text:') or (
-                    line.startswith('# sentid:') and noSentToAssign):
+                        line.startswith('# sentid:') and noSentToAssign):
                 continue
             if len(line) > 0 and line.endswith('\n'):
                 line = line[:-1]
@@ -1488,13 +1489,13 @@ def readFTB(ftbFile, reportBugs=False):
                                                 sent.vMWEs[-1].tokens[0].position))
                     if sent.vMWEs:
                         sent.vMWEs = sent.vMWEs[:-1]
-            # else:
-            #    if lineParts[7] == 'dep_cpd' and 'mwehead' in morpho:
-            #        bugNum += 1
-            # print line, sent
-            # else:
-            #   sys.stdout.write(' Annotation error {0} : {1}'.format(lineNum, sent))
-            # assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
+                        # else:
+                        #    if lineParts[7] == 'dep_cpd' and 'mwehead' in morpho:
+                        #        bugNum += 1
+                        # print line, sent
+                        # else:
+                        #   sys.stdout.write(' Annotation error {0} : {1}'.format(lineNum, sent))
+                        # assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
     # print 'Number of error {0}, number of MWE {1}'.format(bugNum,mweNum)
     # print universalPosTags
     # print xposTags

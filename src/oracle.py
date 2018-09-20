@@ -86,10 +86,10 @@ def isMerge(config):
             if sharedParents[0].isRightEmbedded and getParents(tokens) and getParents(tokens)[0].isRightEmbedded:
                 return Merge(sent=config.sent)
         if len(sharedParents) == 1 and (not sharedParents[0].isRightEmbedder or (
-                sharedParents[0].isRightEmbedder and sharedParents[0].child.parsedByOracle)) and (
-                not (tokens[0].parentMWEs[0].isMiddleEmbedded and tokens[0].parentMWEs[0].isRecognizable) or (
-                tokens[0].parentMWEs[0].isMiddleEmbedded and tokens[0].parentMWEs[0].isRecognizable and
-                tokens[0].parentMWEs[0].parsedByOracle)):
+                    sharedParents[0].isRightEmbedder and sharedParents[0].child.parsedByOracle)) and (
+                    not (tokens[0].parentMWEs[0].isMiddleEmbedded and tokens[0].parentMWEs[0].isRecognizable) or (
+                                tokens[0].parentMWEs[0].isMiddleEmbedded and tokens[0].parentMWEs[0].isRecognizable and
+                            tokens[0].parentMWEs[0].parsedByOracle)):
             return Merge(sent=config.sent)
     return None
 
@@ -103,7 +103,7 @@ def isReduce(config):
         # Identified VMWE on Stack
         vmwe = getVMWEByTokens(getTokens(config.stack[-1]))
         if isIdentifiedVMWE(config.stack[-1]) and (
-                not vmwe.isEmbedded or vmwe.isEmbedded and vmwe.parent.parsedByOracle):
+                    not vmwe.isEmbedded or vmwe.isEmbedded and vmwe.parent.parsedByOracle):
             return reduce
     # Empy Buffer With Full Stack
     if not config.buffer and config.stack:

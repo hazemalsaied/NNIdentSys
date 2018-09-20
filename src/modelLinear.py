@@ -21,7 +21,7 @@ def train(corpus):
     # svm_clf = SVC(probability=True)
     # clf = OneVsRestClassifier(LinearSVC(random_state=0)) if linearConf['svm'] else LogisticRegression(solver='sag')
     clf = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=0) if linearConf['svm'] else \
-       LogisticRegression(solver='sag')
+        LogisticRegression(solver='sag')
     sys.stdout.write(str(clf) + '\n')
     if configuration["sampling"]["overSampling"]:
         sys.stdout.write('Train data = {0}, '.format(features.shape[0]))

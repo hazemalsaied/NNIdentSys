@@ -1,9 +1,6 @@
-import sys
-
-import modelKiperwasser
+# import modelKiperwasser
 from extractionLinear import getFeatures
 from transitions import *
-
 
 
 def parse(corpus, clf, normalizer):
@@ -11,9 +8,9 @@ def parse(corpus, clf, normalizer):
         sent.identifiedVMWEs = []
         sent.initialTransition = None
         sentEmbs = None
-        if configuration["xp"]["kiperwasser"]:
-            tokenIdxs, posIdxs = modelKiperwasser.getIdxs(sent, clf)
-            sentEmbs = clf.getContextualizedEmbs(tokenIdxs, posIdxs)
+        # if configuration["xp"]["kiperwasser"]:
+        # tokenIdxs, posIdxs = modelKiperwasser.getIdxs(sent, clf)
+        # sentEmbs = clf.getContextualizedEmbs(tokenIdxs, posIdxs)
         sent.initialTransition = Transition(None, isInitial=True, sent=sent)
         t = sent.initialTransition
         while not t.isTerminal():
