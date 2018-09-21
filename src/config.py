@@ -42,7 +42,7 @@ configuration = {
         'denseDropout': .3,
         'denseUnitNum': 25,
         'optimizer': 'adagrad',
-        'lr': .01,
+        'lr': .05,
         'epochs': 20,
         'batchSize': 64,
         'earlyStop': True,

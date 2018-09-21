@@ -520,8 +520,8 @@ def getStats(newFile):
     print res
 
 
-langLine = '	Language : '
-
+langLine1 = '	Language : '
+langLine = '	GPU Enabled	Language : '
 
 def getAvgScores(scores, langNum=3, trialNum=3):
     result, xpScores, langSum = [], [], 0
@@ -544,14 +544,14 @@ def getNewScores(files):
         titles, scores, params, langs, titles2 = mineNewFile(f)
         # results = getAvgScores(scores, 6)
         # orderedScores = sorted(range(len(scores)), key=lambda k: scores[k], reverse=True)
-        # for i, v in enumerate(scores):
-        #     print langs[i], ',', v, '\n'  # ',', , ',', v
-        for i in range(len(titles)):
-            print \
-                scores[i * 3] if i * 3 < len(scores)else '', ',', \
-                scores[i * 3 + 1] if i * 3 + 1 < len(scores)else '', ',', \
-                scores[i * 3 + 2] if i * 3 + 2 < len(scores)else '', ',', \
-                titles[i][:-1]
+        for i, v in enumerate(scores):
+            print langs[i], ',', v, '\n'  # ',', , ',', v
+        # for i in range(len(titles)):
+        #     print \
+        #         scores[i * 3] if i * 3 < len(scores) else '', ',', \
+        #         scores[i * 3 + 1] if i * 3 + 1 < len(scores) else '', ',', \
+        #         scores[i * 3 + 2] if i * 3 + 2 < len(scores) else '', ',', \
+        #         titles[i][:-1]
             # for i, t in enumerate(scores):
 
             #   print scores[i], titles[i]
@@ -575,8 +575,11 @@ def mineNewFile(newFile):
         for line in log.readlines():
             if line.startswith('# RNN Conf :'):
                 titles.append(line)
-            if line.startswith(langLine):
-                langs.append(line[len(langLine):len(langLine) + 2])
+            if line.startswith(langLine) or line.startswith(langLine1):
+                if line.startswith(langLine):
+                    langs.append(line[len(langLine):len(langLine) + 2])
+                else:
+                    langs.append(line[len(langLine1):len(langLine1) + 2])
             if line.startswith(paramLine):
                 paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
                 params.append(round(int(paramsValue) / 1000000., 2))
@@ -594,8 +597,9 @@ if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
     getNewScores([
-        'rnn.pilot.1', 'rnn.pilot.2', 'rnn.pilot.3', 'rnn.pilot.4', 'rnn.pilot.5', 'rnn.pilot.6',
-        'rnn.pilot.7', 'rnn.pilot.8', 'rnn.pilot.9', 'rnn.pilot.10', 'rnn.pilot.11', 'rnn.pilot.12'
+        'MLP.EVAL'
+        # 'rnn.pilot.1', 'rnn.pilot.2', 'rnn.pilot.3', 'rnn.pilot.4', 'rnn.pilot.5', 'rnn.pilot.6',
+        # 'rnn.pilot.7', 'rnn.pilot.8', 'rnn.pilot.9', 'rnn.pilot.10', 'rnn.pilot.11', 'rnn.pilot.12'
         # 'rnn.extra.sam'
         # 'linear1', 'linear1', 'linear13', 'linear14', 'linear15',
         # 'linear16', 'linear17', 'linear18', 'linear19', 'linear20',

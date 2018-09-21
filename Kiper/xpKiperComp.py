@@ -44,7 +44,7 @@ if __name__ == '__main__':
     from identification import createRSGGrid, runRSGThread
 
     filename = 'compactKiperGrid.p'
-    langs = ['BG' ]  # , 'PT', 'TR']
-    createRSGGrid(filename=filename)
-    runRSGThread(langs, xpNum=200, compact=True, filename=filename)
+    langs = ['BG']  # , 'PT', 'TR']
+    # createRSGGrid(filename=filename)
+    runRSGThread(langs, xpNum=150, compact=True, filename=filename)
     # xp(['FR'], xpNum=1, compact=True)

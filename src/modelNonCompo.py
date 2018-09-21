@@ -4,7 +4,7 @@ import keras
 import numpy as np
 from keras import optimizers
 from keras.callbacks import ModelCheckpoint, EarlyStopping
-from keras.layers import Input, Dense, Flatten, Embedding, Dropout, GRU
+from keras.layers import Input, Dense, Flatten, Embedding, Dropout
 from keras.models import Model
 from keras.utils import to_categorical
 
@@ -16,8 +16,6 @@ from reports import *
 class Network:
     def __init__(self, normalizer):
         sys.stdout.write('Deep model(Non compositional)\n')
-        rnnConf = configuration["model"]["rnn"]
-
         embConf = configuration["model"]["embedding"]
         inputLayers, concLayers = [], []
         inputToken = Input((configuration['model']['inputItems'],))
@@ -35,36 +33,24 @@ class Network:
                                  trainable=True)(inputToken)
         else:
             tokenEmb = Embedding(len(normalizer.vocabulary.tokenIndices), tokenEmb)(inputToken)
-        if rnnConf["active"]:
-            tokenRnn = GRU(rnnConf["rnn1"]["unitNumber"])(tokenEmb)  # , return_sequences=True)
-            concLayers.append(tokenRnn)
+
+        tokenFlatten = Flatten()(tokenEmb)
+        concLayers.append(tokenFlatten)
+
+        inputPos = Input((configuration['model']['inputItems'],))
+        inputLayers.append(inputPos)
+        posEmb = configuration["model"]["embedding"]["posEmb"]
+
+        if embConf["initialisation"]["active"] and embConf["initialisation"]["pos"]:
+            sys.stdout.write('# POS weight matrix used')
+            weights = [normalizer.posWeightMatrix]
+            posEmb = Embedding(len(normalizer.vocabulary.posIndices), posEmb, weights=weights, trainable=True)(
+                inputPos)
         else:
-            tokenFlatten = Flatten()(tokenEmb)
-            concLayers.append(tokenFlatten)
+            posEmb = Embedding(len(normalizer.vocabulary.posIndices), posEmb)(inputPos)
+        posFlatten = Flatten()(posEmb)
+        concLayers.append(posFlatten)
 
-        if embConf["usePos"]:
-            inputPos = Input((configuration['model']['inputItems'],))
-            inputLayers.append(inputPos)
-            posEmb = configuration["model"]["embedding"]["posEmb"]
-
-            if embConf["initialisation"]["active"] and embConf["initialisation"]["pos"]:
-                sys.stdout.write('# POS weight matrix used')
-                weights = [normalizer.posWeightMatrix]
-                posEmb = Embedding(len(normalizer.vocabulary.posIndices), posEmb, weights=weights, trainable=True)(
-                    inputPos)
-            else:
-                posEmb = Embedding(len(normalizer.vocabulary.posIndices), posEmb)(inputPos)
-            if rnnConf["active"]:
-                posRnn = GRU(rnnConf["rnn1"]["posUnitNumber"])(posEmb)  # , return_sequences=True)
-                concLayers.append(posRnn)
-            else:
-                posFlatten = Flatten()(posEmb)
-                concLayers.append(posFlatten)
-
-        if configuration["features"]["active"]:
-            featureLayer = Input(shape=(normalizer.nnExtractor.featureNum,), name='Features')
-            inputLayers.append(featureLayer)
-            concLayers.append(featureLayer)
         conc = keras.layers.concatenate(concLayers) if len(concLayers) > 1 else concLayers[0]
         mlpConf = configuration["model"]["mlp"]
         lastLayer = conc
@@ -78,7 +64,7 @@ class Network:
                 lastLayer = Dropout(dense2Conf["dropout"])(dense2Layer)
         softmaxLayer = Dense(8, activation='softmax')(lastLayer)
         self.model = Model(inputs=inputLayers, outputs=softmaxLayer)
-        # sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
+        sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
         print self.model.summary()
 
     def predict(self, trans, normalizer):
@@ -98,6 +84,14 @@ class Network:
 def train(model, normalizer, corpus):
     trainConf = configuration["model"]["train"]
     labels, data = normalizer.generateLearningDataAttached(corpus)
+    sys.stdout.write(reports.seperator + reports.tabs + 'Sampling' + reports.doubleSep)
+    normalizer.inputListDimension = 2
+    if configuration["sampling"]["focused"]:
+        data, labels = sampling.overSampleImporTrans(data, labels, corpus, normalizer)
+    labels, data = sampling.overSample(labels, data)
+    if configuration['model']['train']['earlyStop']:
+        # To make sure that we will get a random validation dataset
+        labels, data = sampling.shuffleTwoArrayInParallel(labels, data)
     lblDistribution = Counter(labels)
     sys.stdout.write(tabs + '{0} Labels in train : {1}\n'.format(len(lblDistribution), lblDistribution))
     valDistribution = Counter(labels[int(len(labels) * (1 - trainConf["validationSplit"])):])
@@ -119,31 +113,13 @@ def train(model, normalizer, corpus):
 
 
 def getOptimizer():
-    trainConf = configuration["model"]["train"]
     sys.stdout.write(reports.seperator + reports.tabs +
-                     'Optimizer : {0},  learning rate = {1}'.format(trainConf["optimizer"], trainConf["lr"])
+                     'Optimizer : Adagrad,  learning rate = {0}'.format(configuration["model"]["train"]["lr"])
                      + reports.seperator)
-    lr = trainConf["lr"]
-    if trainConf["optimizer"] == 'sgd':
-        return optimizers.SGD(lr=lr, momentum=0.9, decay=0.0, nesterov=False)
-    if trainConf["optimizer"] == 'adam':
-        return optimizers.Adam(lr=lr, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
-    if trainConf["optimizer"] == 'rmsprop':
-        return optimizers.RMSprop(lr=lr, rho=0.9, epsilon=None, decay=0.0)
-    if trainConf["optimizer"] == 'adagrad':
-        return optimizers.Adagrad(lr=lr, epsilon=None, decay=0.0)
-    if trainConf["optimizer"] == 'adadelta':
-        return optimizers.Adadelta(lr=lr, rho=0.95, epsilon=None, decay=0.0)  # lr = 1.
-    if trainConf["optimizer"] == 'adamax':
-        return optimizers.Adamax(lr=lr, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0)  # lr = 0.002
-    if trainConf["optimizer"] == 'nadam':
-        return optimizers.Nadam(lr=lr, beta_1=0.9, beta_2=0.999, epsilon=None,
-                                schedule_decay=0.004)  # lr = 0.002
-    assert 'No optimizer found for training!'
+    return optimizers.Adagrad(lr=configuration["model"]["train"]["lr"], epsilon=None, decay=0.0)
 
 
 def trainValidationData(model, normalizer, data, labels, classWeightDic, history):
-    # sys.stdout.write('Training over validation data\n')
     trainConf = configuration["model"]["train"]
     data, labels = getValidationData(normalizer, data, labels)
     validationLabelsAsInt = [np.where(r == 1)[0][0] for r in labels]
@@ -176,77 +152,9 @@ def getCallBacks():
     ] if bestWeightPath else []
     # callbacks.append(plot_losses)
     if trainConf["earlyStop"]:
-        callbacks.append(
-            EarlyStopping(monitor=trainConf["monitor"],
-                          min_delta=trainConf["minDelta"],
-                          patience=2,
-                          verbose=trainConf["verbose"]))
+        es = EarlyStopping(monitor=trainConf["monitor"],
+                           min_delta=trainConf["minDelta"],
+                           patience=2,
+                           verbose=trainConf["verbose"])
+        callbacks.append(es)
     return callbacks
-
-
-class PlotLosses(keras.callbacks.Callback):
-    def on_train_begin(self, logs={}):
-        self.batchStep = configuration["model"]["train"]["visualisation"]["batchStep"]
-        self.i = 0
-        self.x = []
-        self.losses = []
-        self.val_losses = []
-        self.acc = []
-        self.val_acc = []
-        # self.fig = plt.figure()
-        self.batchNum = 0
-        self.batchLosses = []
-        self.batchValLosses = []
-        self.batchAcc = []
-        self.batchValAcc = []
-        self.logs = []
-
-        # def on_epoch_end(self, epoch, logs={}):
-        #     self.logs.append(logs)
-        #     self.x.append(self.i)
-        #     self.losses.append(logs.get('loss'))
-        #     self.val_losses.append(logs.get('val_loss'))
-        #     self.acc.append(logs.get('acc'))
-        #     self.val_acc.append(logs.get('val_acc'))
-        #
-        #
-        #     self.i += 1
-        #     f, (ax1, ax2) = plt.subplots(1, 2, sharex=True)
-        #
-        #     clear_output(wait=True)
-        #
-        #     ax1.set_yscale('log')
-        #     ax1.plot(self.x, self.losses, label="loss")
-        #     ax1.plot(self.x, self.val_losses, label="val_loss")
-        #     ax1.legend()
-        #
-        #     ax2.plot(self.x, self.acc, label="accuracy")
-        #     ax2.plot(self.x, self.val_acc, label="validation accuracy")
-        #     ax2.legend()
-        #
-        #     plt.show()
-
-        # def on_batch_end(self, batch, logs=None):
-        #     self.batchNum += 1
-        #     if self.batchNum % self.batchStep == 0:
-        #         self.batchLosses.append(logs.get('loss'))
-        #         # self.batchValLosses.append(logs.get('val_loss'))
-        #         self.batchAcc.append(logs.get('acc'))
-        #         # self.batchValAcc.append(logs.get('val_acc'))
-
-        # def on_train_end(self, logs=None):
-        #     if not configuration["evaluation"]["cluster"]:
-        #         f, ax1 = plt.subplots()
-        #         clear_output(wait=True)
-        #         ax1.set_yscale('log')
-        #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchLosses, label="loss ")
-        #         ax1.plot([(x + 1) * self.batchStep for x in range(len(self.batchAcc))], self.batchAcc, label="Acc ")
-        #         # ax1.legend()
-        #
-        #         # ax2.plot(self.x, self.acc, label="accuracy")
-        #         # ax1.plot(range(len(self.batchAcc)), self.batchAcc, label="loss (batch)")
-        #         # ax2.legend()
-        #         plt.show()
-
-
-plot_losses = PlotLosses()

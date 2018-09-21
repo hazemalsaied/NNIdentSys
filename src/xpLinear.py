@@ -309,8 +309,4 @@ if __name__ == '__main__':
     setTrainAndTest(Evaluation.trainVsDev)
     xp(allSharedtask2Lang, xpNum=1)
 
-    # langs = ['BG', 'PT', 'TR']
-    # configuration['linear']['svm'] = False
-    # createRSGrid()
-    # runRSG()
-    # getActivatedConf()
+

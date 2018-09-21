@@ -110,7 +110,7 @@ class TransitionClassifier(nn.Module):
         return lstmHiddenSeq.view(len(tokenIdxs), -1)
 
 
-def train(corpus, trainValidation=False):
+def train(corpus, trainedModel=None, trainValidation=False):
     """
     version avec bi-LSTM sur toute la phrase, et mise à jour des paramètres à chaque phrase
     (calcul de la perte pour une phrase complete)
@@ -119,21 +119,20 @@ def train(corpus, trainValidation=False):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     kiperConf = configuration['kiperwasser']
     # nb of sentence positions taken to build input vector representing a parse configuration
-    model = TransitionClassifier(corpus).to(device)
+    model = TransitionClassifier(corpus).to(device) if not trainValidation else trainedModel
     optimizer = getOptimizer(model.parameters())
     lossFunction = nn.NLLLoss()
     # losses of validation set for each epoch
     epochLosses, validLosses = [], []
-    if kiperConf['verbose']:
-        sys.stderr.write(reports.tabs + str(model) + reports.doubleSep)
-        sys.stderr.write(reports.tabs + str(optimizer) + reports.doubleSep)
-        sys.stderr.write(reports.tabs + str(lossFunction) + reports.doubleSep)
+    # if kiperConf['verbose']:
+    sys.stderr.write(reports.tabs + str(model) + reports.doubleSep if kiperConf['verbose'] else '')
+    sys.stderr.write(reports.tabs + str(optimizer) + reports.doubleSep if kiperConf['verbose'] else '')
+    sys.stderr.write(reports.tabs + str(lossFunction) + reports.doubleSep if kiperConf['verbose'] else '')
     # ------------ if validation asked -------------
     validSeuil = configuration['model']['train']['validationSplit']
     pointer = int(len(corpus.trainingSents) * (1 - validSeuil))
-    trainSents = corpus.trainingSents[:pointer] if not trainValidation else corpus.trainingSents[pointer:]
     validSents = corpus.trainingSents[pointer:]
-
+    trainSents = corpus.trainingSents[:pointer] if not trainValidation else validSents
     for epoch in range(kiperConf['epochs']):
         sys.stderr.write(reports.tabs + "Epoch %d....\n" % epoch if kiperConf['verbose'] else '')
         start, epochLoss, usedSents = datetime.datetime.now(), 0, 0
@@ -150,31 +149,34 @@ def train(corpus, trainValidation=False):
                 sentLoss.backward()
                 optimizer.step()
         epochLosses.append(epochLoss)
-        if kiperConf['verbose']:
-            sys.stderr.write("Number of used sentences in train = %d\n" % usedSents)
-            sys.stderr.write("Total loss for epoch %d: %f\n" % (epoch, epochLoss))
+        # if kiperConf['verbose']:
+        sys.stderr.write("Number of used sentences in train = %d\n" % usedSents if kiperConf['verbose'] else '')
+        sys.stderr.write("Total loss for epoch %d: %f\n" % (epoch, epochLoss) if kiperConf['verbose'] else '')
         if not trainValidation:
             filePath = os.path.join(configuration['path']['projectPath'], 'Reports', kiperConf['file'])
             valLoss = getCorpusLoss(validSents, model, lossFunction)
-            if kiperConf['verbose']:
-                sys.stderr.write("validation loss after epoch %d : %f\n" % (epoch, valLoss))
+            # if kiperConf['verbose']:
+            sys.stderr.write("validation loss after epoch %d : %f\n" % (epoch, valLoss) if kiperConf['verbose'] else '')
             # save model if validation loss has decreased
-            if not epoch or valLoss <= validLosses[-1]:
+            if validLosses and valLoss <= validLosses[-1]:
                 torch.save(model, filePath)
             # early stopping
-            elif kiperConf['earlyStop'] and epoch and (valLoss > validLosses[-1]):
+            elif kiperConf['earlyStop'] and validLosses and (valLoss >= validLosses[-1]):
                 sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
                 sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
                 if validSeuil:
-                    kiperConf['epochs'] = epoch  # (cf. epoch est décalé de 1)
-                    return train(corpus, trainValidation=True)
+                    kiperConf['epochs'] = epoch + 1  # (cf. epoch est décalé de 1)
+                    return train(corpus, model, trainValidation=True)
             # if no validation set: save iff loss on training set decreases
             else:
-                if not epoch or epochLoss < epochLosses[-2]:
+                if len(epochLosses) > 1 and epochLoss < epochLosses[-2]:
                     torch.save(model, filePath)
             validLosses.append(valLoss)
         sys.stdout.write("Epoch has taken {0}\n".format(datetime.datetime.now() - start)
                          if kiperConf['verbose'] else '')
+    if not trainValidation:
+        return train(corpus, model, trainValidation=True)
+
     return model
 
 
@@ -338,23 +340,8 @@ def getSentLoss(sent, model, lossFunction):
 
 
 def getOptimizer(params):
-    kiperConf = configuration['kiperwasser']
-    sys.stdout.write("# Network optimizer = {0}, learning rate = {1}\n".format(kiperConf['optimizer'], kiperConf['lr']))
-    # lr = 0.1
-    lr = kiperConf['lr']
-    if kiperConf['optimizer'] == "sgd":
-        return optim.SGD(params, lr=lr)
-    if kiperConf['optimizer'] == "adam":
-        return optim.Adam(params, lr=lr)
-    if kiperConf['optimizer'] == "rmsprop":
-        return optim.RMSprop(params, lr=lr)
-    if kiperConf['optimizer'] == "adagrad":
-        return optim.Adagrad(params, lr=lr)
-    if kiperConf['optimizer'] == "adadelta":
-        return optim.Adadelta(params, lr=lr)
-    if kiperConf['optimizer'] == "adamax":
-        return optim.Adamax(params, lr=lr)  # lr = 0.002
-    assert "No optimizer found for training!"
+    sys.stdout.write("# Network optimizer = Adagrad, learning rate = {0}\n".format(configuration['kiperwasser']['lr']))
+    return optim.Adagrad(params, lr=configuration['kiperwasser']['lr'])
 
 
 def toTensor(label):

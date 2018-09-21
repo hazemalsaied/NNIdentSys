@@ -116,8 +116,8 @@ def calculateScores(tp, p, t, title):
 
 
 def createMWEFiles(corpus):
-    # if not configuration['evaluation']['corpus']:
-    #   return
+    if not configuration['evaluation']['corpus']:
+       return
     datasetConf, modelConf = configuration['dataset'], configuration['xp']
     dataset = 'ST2' if datasetConf['sharedtask2'] else \
         ('FTB' if datasetConf['sharedtask2'] else 'ST1')
@@ -130,9 +130,9 @@ def createMWEFiles(corpus):
         os.makedirs(folder)
     predicted = corpus.toConllU()  # if dataset == 'ST2' else str(corpus)
     gold = corpus.toConllU(gold=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
-    train = gold = corpus.toConllU(gold=True, train=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
+    train = corpus.toConllU(gold=True, train=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
     import datetime
-    today = datetime.date.today().strftime("%Y.%B.%d.")
+    today = datetime.date.today().strftime("%d.")
     with open(os.path.join(folder, today + corpus.langName + '.txt'), 'w') as f:
         f.write(predicted)
     with open(os.path.join(folder, today + corpus.langName + '.gold.txt'), 'w') as f:

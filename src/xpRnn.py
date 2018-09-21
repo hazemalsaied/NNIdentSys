@@ -34,7 +34,7 @@ def getGrid(fileName):
     return pickle.load(open(randomSearchGridPath, 'rb'))
 
 
-def runLrRSG(fileName='lrGrid.p'):
+def runLrRSG(langs, fileName='lrGrid.p'):
     for i in range(30):
         lrs = getGrid(fileName)
         while True:
@@ -57,7 +57,7 @@ def runLrRSG(fileName='lrGrid.p'):
         xp(langs, xpNum=1)
 
 
-def runRSG(xpNumByThread=60, fileName='rnnRsgGrid.p', flipLemma=False):
+def runRSG(langs, xpNumByThread=60, fileName='rnnRsgGrid.p', flipLemma=False):
     for i in range(xpNumByThread):
         exps = getGrid(fileName)
         while True:
@@ -115,7 +115,7 @@ def createLRGrid(xpNum=150):
                                        'ressources', 'lrGrid.p'), 'wb'))
 
 
-def exploreBestConfs():
+def exploreBestConfs(langs):
     configuration['rnn']['gru'] = True
     configuration['rnn']['useDense'] = True
     configuration['rnn']['compactVocab'] = True
@@ -136,7 +136,26 @@ def exploreBestConfs():
         xp(langs, xpNum=1)
 
 
-def exploreExtraSampling():
+def setOptimalRSG():
+    configuration['rnn']['gru'] = True
+    configuration['rnn']['useDense'] = True
+    configuration['rnn']['compactVocab'] = True
+    configuration['model']['embedding']['lemma'] = True
+
+    configuration['sampling']['importantSentences'] = True
+    configuration['sampling']['overSampling'] = True
+
+    configuration['rnn']['wordDim'] = 410
+    configuration['rnn']['posDim'] = 54
+    configuration['rnn']['denseUnitNum'] = 51
+    configuration['rnn']['denseDropout'] = 0.1
+    configuration['rnn']['wordRnnUnitNum'] = 25
+    configuration['rnn']['posRnnUnitNum'] = 15
+    configuration['rnn']['rnnDropout'] = 0.1
+    configuration['rnn']['batchSize'] = 16
+
+
+def exploreExtraSampling(langs):
     configuration['rnn']['gru'] = True
     configuration['rnn']['useDense'] = True
     configuration['rnn']['compactVocab'] = True
@@ -170,50 +189,15 @@ if __name__ == '__main__':
     sys.setdefaultencoding('utf8')
     import config
     from identification import setTrainAndTest, setXPMode, setDataSet
+    from xpNonCompo import allSharedtask2Lang
 
-    setDataSet(config.Dataset.sharedtask2)
-    setTrainAndTest(config.Evaluation.fixedSize)
     setXPMode(config.XpMode.rnn)
+    setDataSet(config.Dataset.sharedtask2)
 
-    langs = ['BG', 'PT', 'TR']
-
-    configuration['rnn'].update({
-        'wordDim': 100,
-        'posDim': 25,
-        'compactVocab': True,
-        'gru': True,
-        'wordRnnUnitNum': 25,
-        'posRnnUnitNum': 10,
-        'rnnDropout': .3,
-        'useDense': True,
-        'denseDropout': .1,
-        'denseUnitNum': 25,
-        'optimizer': 'adagrad',
-        'lr': .05,
-        'epochs': 20,
-        'batchSize': 64,
-        'earlyStop': True,
-        's0TokenNum': 4,
-        's1TokenNum': 2,
-        'bTokenNum': 1,
-        'shuffle': False,
-        'rnnSequence': False
-    })
-    configuration['sampling']['importantSentences'] = True
-    configuration['sampling']['overSampling'] = True
-    configuration['model']['embedding']['lemma'] = True
-
-    exploreExtraSampling()
-    # exploreBestConfs()
-    # xp(langs, xpNum=1)
-
-    # runRSG(30, fileName='rnnCloserRsgGrid.p')
-    # createCloserRSGrid()
-    # createRSGrid()
-    # runRSG()
-    # langs = ['FR']
-    # xp(langs, xpNum=1)
-    # langs = ['BG']
-    # createLRGrid()
-    # runLrRSG(langs)
-    # xp(langs, xpNum=1)
+    setOptimalRSG()
+    setTrainAndTest(config.Evaluation.corpus)
+    xp(allSharedtask2Lang, xpNum=1)
+    setTrainAndTest(config.Evaluation.trainVsTest)
+    xp(allSharedtask2Lang, xpNum=1)
+    setTrainAndTest(config.Evaluation.trainVsDev)
+    xp(allSharedtask2Lang, xpNum=1)

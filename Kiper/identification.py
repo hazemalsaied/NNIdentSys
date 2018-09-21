@@ -132,7 +132,6 @@ if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    # langs = ['BG']
     random.seed(0)
     torch.manual_seed(0)
 
@@ -151,20 +150,21 @@ if __name__ == '__main__':
         'lstmDropout': .2,
         'lstmLayerNum': 1,
         'lstmUnitNum': 60,
-        'verbose': False,
+        'verbose': True,
         'file': 'kiperwasser.p'
     })
     configuration["sampling"]["importantSentences"] = True
-
-    # configuration["evaluation"]["fixedSize"] = True
+    configuration["evaluation"]["fixedSize"] = True
     configuration['dataset']['sharedtask2'] = True
     configuration['xp']['kiperwasser'] = True
-
     # configuration['model']['embedding']['compactVocab'] = True
     # configuration['model']['embedding']['lemma'] = True
-
-    xp(['FR'], xpNum=1, compact=False)
+    configuration['kiperwasser']['earlyStop'] = False
+    # for e in [5, 10, 15, 25, 35]:
+    #     configuration['kiperwasser']['epochs'] = e
+    #     xp(['FR'], xpNum=1, compact=False)
     # exploreLR(['BG'], True)
     # createGrid()
     # getActiveConfs()
-    # runRSGThread()
+    configuration['kiperwasser']['epochs'] = 20
+    runRSGThread(['BG'])

@@ -58,7 +58,8 @@ def getClassWeights(labels):
     class_weight = sklearn.utils.class_weight.compute_class_weight('balanced', classes, labels)
     res = dict()
     for c in classes:
-        res[c] = float(class_weight[c] * configuration["sampling"]["favorisationCoeff"]) if c > 1 else class_weight[c]
+        cIdx = classes.tolist().index(c)
+        res[c] = float(class_weight[cIdx] * configuration["sampling"]["favorisationCoeff"]) if c > 1 else class_weight[cIdx]
     sys.stdout.write(reports.tabs + 'Favorisation Coeff : {0}\n'.format(configuration["sampling"]["favorisationCoeff"]))
 
     return res

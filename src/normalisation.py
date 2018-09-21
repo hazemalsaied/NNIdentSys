@@ -6,7 +6,6 @@ from keras.preprocessing.sequence import pad_sequences
 import compoVocabulary
 import nonCompoVocabulary
 import reports
-import sampling
 from corpus import getTokens
 from extraction import Extractor
 from reports import *
@@ -106,47 +105,16 @@ class Normalizer:
         return np.asarray(labels), data
 
     def generateLearningDataAttached(self, corpus):
-        labels, tokenData, posData, featureData, data = [], [], [], [], []
-        useFeatures = configuration["features"]["active"]
+        labels, data = [], []
         for sent in corpus.trainingSents:
             trans = sent.initialTransition
             while trans and trans.next:
                 if not configuration["sampling"]["importantTransitions"] or trans.isImportant():
                     tokenIdxs, posIdxs = self.getAttachedIndices(trans)
-                    tokenData.append(np.asarray(tokenIdxs))
-                    posData.append(np.asarray(posIdxs))
                     data.append(np.asarray(np.concatenate((tokenIdxs, posIdxs))))
-                    labels = np.append(labels, trans.next.type.value)
+                    labels.append(trans.next.type.value)
                 trans = trans.next
-
-        sys.stdout.write(reports.seperator + reports.tabs + 'Sampling' + reports.doubleSep)
-        if useFeatures:
-            if configuration["model"]["embedding"]["usePos"]:
-                return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(featureData)]
-            else:
-                return np.asarray(labels), [np.asarray(tokenData), np.asarray(featureData)]
-        if configuration["model"]["embedding"]["usePos"]:
-            # labels, data = eleminateMarginalClasses(labels, data)
-            self.inputListDimension = 2
-            # labels, data = overSample(data, labels)
-
-            # labels, data = shuffleTwoArrayInParallel(labels, [np.asarray(tokenData), np.asarray(posData)])
-            # data, labels = ros.fit_sample(np.asarray([np.asarray(tokenData), np.asarray(posData)]),
-            # np.asarray(labels))
-            if configuration["sampling"]["focused"]:
-                # To stablize the learning by increasing the data volume
-                data, labels = sampling.overSampleImporTrans(data, labels, corpus, self)
-            labels, data = sampling.overSample(labels, data)
-            if configuration['model']['train']['earlyStop']:
-                # To make sure that we will get a random validation dataset
-                labels, data = sampling.shuffleTwoArrayInParallel(labels, data)
-            return labels, data
-            # return overSample(data, labels)
-            # np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]  # labels, data #
-            # return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
-        else:
-            self.inputListDimension = 1
-            return np.asarray(labels), np.asarray(tokenData)
+        return labels, data
 
     def normalize(self, trans, useEmbedding=False, useConcatenation=False, usePos=False, useFeatures=False):
         results = []
