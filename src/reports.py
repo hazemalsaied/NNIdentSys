@@ -544,8 +544,9 @@ def getNewScores(files):
         titles, scores, params, langs, titles2 = mineNewFile(f)
         # results = getAvgScores(scores, 6)
         # orderedScores = sorted(range(len(scores)), key=lambda k: scores[k], reverse=True)
-        for i, v in enumerate(scores):
-            print langs[i], ',', v, '\n'  # ',', , ',', v
+        for i, v in enumerate(titles):
+            print v
+            # print v, titles[i][:-1], '\n'  # ',', , ',', v
         # for i in range(len(titles)):
         #     print \
         #         scores[i * 3] if i * 3 < len(scores) else '', ',', \
@@ -573,7 +574,7 @@ def mineNewFile(newFile):
     titles, params, scores, langs, titles2 = [], [], [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
-            if line.startswith('# RNN Conf :'):
+            if line.startswith('validation loss after '):
                 titles.append(line)
             if line.startswith(langLine) or line.startswith(langLine1):
                 if line.startswith(langLine):
@@ -597,7 +598,12 @@ if __name__ == '__main__':
     # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
     getNewScores([
-        'MLP.EVAL'
+        'k.epochs'
+        # 'kc.bg.rsg.5', 'kc.bg.rsg.6', 'kc.bg.rsg.7', 'kc.bg.rsg.8' , 'kc.bg.rsg.9', 'kc.bg.rsg.10'
+        # 'bg.rsg.1', 'bg.rsg.2', 'bg.rsg.3', 'bg.rsg.4', 'bg.rsg.5','bg.rsg.6', 'bg.rsg.7', 'bg.rsg.8', 'bg.rsg.9',
+        # 'bg.rsg.10', 'bg.rsg.11','bg.rsg.12', 'bg.rsg.13', 'bg.rsg.14', 'bg.rsg.15', 'bg.rsg.16', 'bg.rsg.17',
+        # 'bg.rsg.18'
+        # 'RNN.EVAL'
         # 'rnn.pilot.1', 'rnn.pilot.2', 'rnn.pilot.3', 'rnn.pilot.4', 'rnn.pilot.5', 'rnn.pilot.6',
         # 'rnn.pilot.7', 'rnn.pilot.8', 'rnn.pilot.9', 'rnn.pilot.10', 'rnn.pilot.11', 'rnn.pilot.12'
         # 'rnn.extra.sam'

@@ -1,0 +1,636 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 14, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 37, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 99, 'lstmDropout': 0.12, 'denseActivation': 'relu', 'wordDim': 40, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:34:43.283379
+==================================================================================================
+	Identification : 0.482
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 27, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 15, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 17, 'lstmDropout': 0.17, 'denseActivation': 'tanh', 'wordDim': 114, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:31:10.624429
+==================================================================================================
+	Identification : 0.123
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 89, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 28, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 29, 'lstmDropout': 0.19, 'denseActivation': 'relu', 'wordDim': 26, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:37:14.337808
+==================================================================================================
+	Identification : 0.176
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 68, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 5, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 16, 'lstmDropout': 0.17, 'denseActivation': 'tanh', 'wordDim': 24, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:39.896222
+==================================================================================================
+	Identification : 0.35
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 10, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 57, 'lstmDropout': 0.15, 'denseActivation': 'tanh', 'wordDim': 68, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:12.429108
+==================================================================================================
+	Identification : 0.4
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 35, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 17, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 31, 'lstmDropout': 0.13, 'denseActivation': 'tanh', 'wordDim': 105, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:03.526579
+==================================================================================================
+	Identification : 0.474
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 32, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 33, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 17, 'lstmDropout': 0.3, 'denseActivation': 'tanh', 'wordDim': 31, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:37:22.662642
+==================================================================================================
+	Identification : 0.523
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 62, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 28, 'lstmDropout': 0.5, 'denseActivation': 'relu', 'wordDim': 75, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:51.807438
+==================================================================================================
+	Identification : 0.292
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 50, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 17, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 64, 'lstmDropout': 0.16, 'denseActivation': 'tanh', 'wordDim': 128, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:37:35.964128
+==================================================================================================
+	Identification : 0.147
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 65, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 27, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 89, 'lstmDropout': 0.25, 'denseActivation': 'tanh', 'wordDim': 38, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:32:17.160754
+==================================================================================================
+	Identification : 0.376
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 13, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 66, 'lstmDropout': 0.4, 'denseActivation': 'relu', 'wordDim': 25, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:31:01.852405
+==================================================================================================
+	Identification : 0.297
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 13, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 11, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 57, 'lstmDropout': 0.18, 'denseActivation': 'relu', 'wordDim': 34, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:40.922385
+==================================================================================================
+	Identification : 0.36
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 27, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 7, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 34, 'lstmDropout': 0.26, 'denseActivation': 'tanh', 'wordDim': 59, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:37:54.042673
+==================================================================================================
+	Identification : 0.138
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 74, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 31, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 15, 'lstmDropout': 0.45, 'denseActivation': 'tanh', 'wordDim': 33, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:37:01.156072
+==================================================================================================
+	Identification : 0.199
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 22, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 5, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 74, 'lstmDropout': 0.15, 'denseActivation': 'tanh', 'wordDim': 34, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:37:29.523217
+==================================================================================================
+	Identification : 0.074
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 10, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 17, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 66, 'lstmDropout': 0.15, 'denseActivation': 'tanh', 'wordDim': 26, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:35:54.446719
+==================================================================================================
+	Identification : 0.18
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 40, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 11, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 17, 'lstmDropout': 0.21, 'denseActivation': 'tanh', 'wordDim': 118, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:45.569672
+==================================================================================================
+	Identification : 0.46
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 39, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 19, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 37, 'lstmDropout': 0.19, 'denseActivation': 'tanh', 'wordDim': 67, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:30.014112
+==================================================================================================
+	Identification : 0.468
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 11, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 9, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 26, 'lstmDropout': 0.11, 'denseActivation': 'relu', 'wordDim': 25, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:31:27.699880
+==================================================================================================
+	Identification : 0.347
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 21, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 15, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 84, 'lstmDropout': 0.44, 'denseActivation': 'tanh', 'wordDim': 130, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:37:59.648365
+==================================================================================================
+	Identification : 0.461
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 28, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 28, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 40, 'lstmDropout': 0.46, 'denseActivation': 'relu', 'wordDim': 112, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:31:05.514778
+==================================================================================================
+	Identification : 0.43
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 28, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 39, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 26, 'lstmDropout': 0.17, 'denseActivation': 'tanh', 'wordDim': 25, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:53.771708
+==================================================================================================
+	Identification : 0.514
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 34, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': False, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 25, 'lstmDropout': 0.11, 'denseActivation': 'relu', 'wordDim': 32, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:38:18.706575
+==================================================================================================
+	Identification : 0.304
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 57, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 30, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 61, 'lstmDropout': 0.21, 'denseActivation': 'tanh', 'wordDim': 29, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:31:12.825807
+==================================================================================================
+	Identification : 0.287
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 20, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 60, 'lstmDropout': 0.12, 'denseActivation': 'relu', 'wordDim': 24, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:39:23.833506
+==================================================================================================
+	Identification : 0.453
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 41, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 11, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 10, 'lstmDropout': 0.29, 'denseActivation': 'tanh', 'wordDim': 25, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:58.765737
+==================================================================================================
+	Identification : 0.474
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 72, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 28, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 61, 'lstmDropout': 0.22, 'denseActivation': 'relu', 'wordDim': 101, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:39:03.269478
+==================================================================================================
+	Identification : 0.409
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 32, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 11, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 32, 'lstmDropout': 0.11, 'denseActivation': 'relu', 'wordDim': 26, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:49.380949
+==================================================================================================
+	Identification : 0.28
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 81, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 40, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 12, 'lstmDropout': 0.33, 'denseActivation': 'tanh', 'wordDim': 130, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:30:41.688752
+==================================================================================================
+	Identification : 0.288
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 12, 'file': 'kiperwasser.p', 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 46, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 32, 'lstmDropout': 0.16, 'denseActivation': 'relu', 'wordDim': 130, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+# Network optimizer = Adagrad, learning rate = 0.07
+
+==================================================================================================
+	Training time : 1:38:20.329258
+==================================================================================================
+	Identification : 0.458
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|

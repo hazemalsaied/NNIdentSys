@@ -1,0 +1,642 @@
+/bin/bash: NNIdenSys/Scripts/kiperComp.sh: Permission denied
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 37, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 10, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 39, 'lstmDropout': 0.26, 'denseActivation': 'relu', 'wordDim': 52, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:37:01.272592
+==================================================================================================
+	Identification : 0.186
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 63, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 19, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 10, 'lstmDropout': 0.33, 'denseActivation': 'tanh', 'wordDim': 27, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:45:00.918548
+==================================================================================================
+	Identification : 0.02
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 10, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 27, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 67, 'lstmDropout': 0.27, 'denseActivation': 'relu', 'wordDim': 52, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:45:35.371622
+==================================================================================================
+	Identification : 0.008
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 19, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 19, 'lstmDropout': 0.14, 'denseActivation': 'tanh', 'wordDim': 35, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:36:32.286716
+==================================================================================================
+	Identification : 0.171
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 32, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 14, 'lstmDropout': 0.1, 'denseActivation': 'relu', 'wordDim': 92, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:43:42.457718
+==================================================================================================
+	Identification : 0.096
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 10, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 8, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 11, 'lstmDropout': 0.28, 'denseActivation': 'tanh', 'wordDim': 35, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:44:09.635532
+==================================================================================================
+	Identification : 0.041
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 89, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 28, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 29, 'lstmDropout': 0.19, 'denseActivation': 'relu', 'wordDim': 26, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:42:42.805483
+==================================================================================================
+	Identification : 0.013
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 29, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 9, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 54, 'lstmDropout': 0.39, 'denseActivation': 'relu', 'wordDim': 67, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:45:01.115552
+==================================================================================================
+	Identification : 0.037
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 42, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 42, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 42, 'lstmDropout': 0.34, 'denseActivation': 'tanh', 'wordDim': 55, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:46:13.352187
+==================================================================================================
+	Identification : 0.07
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 78, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 7, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 28, 'lstmDropout': 0.2, 'denseActivation': 'tanh', 'wordDim': 38, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:44:20.857288
+==================================================================================================
+	Identification : 0.014
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 58, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 5, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 44, 'lstmDropout': 0.14, 'denseActivation': 'tanh', 'wordDim': 67, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:45:24.514954
+==================================================================================================
+	Identification : 0.044
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 28, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 42, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 28, 'lstmDropout': 0.33, 'denseActivation': 'tanh', 'wordDim': 134, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:43:53.876161
+==================================================================================================
+	Identification : 0.021
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 10, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 13, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 13, 'lstmDropout': 0.17, 'denseActivation': 'tanh', 'wordDim': 24, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:37:42.897105
+==================================================================================================
+	Identification : 0.187
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 60, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 44, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 15, 'lstmDropout': 0.33, 'denseActivation': 'relu', 'wordDim': 52, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:43:07.177513
+==================================================================================================
+	Identification : 0.102
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 44, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 32, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 17, 'lstmDropout': 0.21, 'denseActivation': 'tanh', 'wordDim': 92, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:38:03.707568
+==================================================================================================
+	Identification : 0.235
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 92, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 32, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 89, 'lstmDropout': 0.22, 'denseActivation': 'tanh', 'wordDim': 112, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:38:54.289035
+==================================================================================================
+	Identification : 0.305
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 56, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 43, 'lstmDropout': 0.22, 'denseActivation': 'tanh', 'wordDim': 39, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:39:09.990641
+==================================================================================================
+	Identification : 0.072
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 78, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 45, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 90, 'lstmDropout': 0.42, 'denseActivation': 'relu', 'wordDim': 22, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:46:59.785657
+==================================================================================================
+	Identification : 0.014
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 23, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 18, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 30, 'lstmDropout': 0.12, 'denseActivation': 'relu', 'wordDim': 26, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:36:52.576292
+==================================================================================================
+	Identification : 0.166
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 60, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 24, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 30, 'lstmDropout': 0.39, 'denseActivation': 'tanh', 'wordDim': 48, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:44:36.546610
+==================================================================================================
+	Identification : 0.01
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 36, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 53, 'lstmDropout': 0.26, 'denseActivation': 'tanh', 'wordDim': 31, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:45:34.136568
+==================================================================================================
+	Identification : 0.077
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 53, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 22, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 28, 'lstmDropout': 0.48, 'denseActivation': 'tanh', 'wordDim': 50, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:37:20.577917
+==================================================================================================
+	Identification : 0.151
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 88, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 49, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 92, 'lstmDropout': 0.23, 'denseActivation': 'tanh', 'wordDim': 117, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:46:39.969975
+==================================================================================================
+	Identification : 0.042
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 78, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 7, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 28, 'lstmDropout': 0.2, 'denseActivation': 'tanh', 'wordDim': 38, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:44:27.571376
+==================================================================================================
+	Identification : 0.02
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 29, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 9, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 54, 'lstmDropout': 0.39, 'denseActivation': 'relu', 'wordDim': 67, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:44:04.732839
+==================================================================================================
+	Identification : 0.006
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 50, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 39, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 42, 'lstmDropout': 0.34, 'denseActivation': 'relu', 'wordDim': 105, 'batch': 1}False,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:44:57.553781
+==================================================================================================
+	Identification : 0.046
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 18, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 6, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 29, 'lstmDropout': 0.22, 'denseActivation': 'tanh', 'wordDim': 20, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:45:53.855588
+==================================================================================================
+	Identification : 0.033
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 10, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 10, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 46, 'lstmDropout': 0.2, 'denseActivation': 'relu', 'wordDim': 52, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:47:55.659372
+==================================================================================================
+	Identification : 0.018
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 14, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 17, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 42, 'lstmDropout': 0.1, 'denseActivation': 'relu', 'wordDim': 41, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:37:22.444734
+==================================================================================================
+	Identification : 0.172
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 32, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 29, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 13, 'lstmDropout': 0.45, 'denseActivation': 'relu', 'wordDim': 35, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:38:29.828354
+==================================================================================================
+	Identification : 0.224
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 88, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 42, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 80, 'lstmDropout': 0.17, 'denseActivation': 'relu', 'wordDim': 21, 'batch': 1}True,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:47:17.212980
+==================================================================================================
+	Identification : 0.031
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 21, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 7, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 72, 'lstmDropout': 0.31, 'denseActivation': 'tanh', 'wordDim': 135, 'batch': 1}True,True
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:39:17.998373
+==================================================================================================
+	Identification : 0.162
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 2, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 20, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 10, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 57, 'lstmDropout': 0.13, 'denseActivation': 'relu', 'wordDim': 32, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:46:34.217512
+==================================================================================================
+	Identification : 0.037
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+# Kiper conf: {'verbose': False, 'lstmLayerNum': 1, 'focusedElemNum': 8, 'epochs': 30, 'dense1': 85, 'dense2': 0, 'earlyStop': False, 'moreTrans': True, 'lr': 0.07, 'posDim': 8, 'optimizer': 'adagrad', 'denseDropout': False, 'lstmUnitNum': 51, 'lstmDropout': 0.4, 'denseActivation': 'relu', 'wordDim': 78, 'batch': 1}False,False
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1881, occurrences : 3583
+	Impotant words in tain : 1880
+	MWE length mean : 2.13
+	Seen MWEs : 279 (41 %)
+	New MWEs : 391 (58 %)
+==================================================================================================

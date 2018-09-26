@@ -39,7 +39,7 @@ scp -r  src halsaied@access.grid5000.fr:/home/halsaied/nancy/NNIdenSys
 ```
 ### Download a report
 ```
-scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/mlpTotalErr' Reports
+scp -r  halsaied@access.grid5000.fr:'/home/halsaied/nancy/Reports' Reports
 ```
 ### Update the scripts
 ```

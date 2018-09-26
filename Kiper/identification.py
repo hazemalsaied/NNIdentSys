@@ -34,16 +34,16 @@ def xp(langs, xpNum=3, title='', compact=False):
 
 def generateConf():
     kiperConf = configuration['kiperwasser']
-    kiperConf['wordDim'] = int(generateValue([20, 150], True))
-    kiperConf['posDim'] = int(generateValue([5, 50], True))
-    kiperConf['denseActivation'] = str(generateValue(['tanh', 'relu'], False))
+    kiperConf['wordDim'] = int(generateValue([50, 250], True))
+    kiperConf['posDim'] = int(generateValue([15, 75], True))
+    kiperConf['denseActivation'] = 'tanh'  # str(generateValue(['tanh', 'relu'], False))
     kiperConf['optimizer'] = 'adagrad'  # str(generateValue(['adam', 'adagrad'], False))
     kiperConf['lr'] = 0.07  # round(generateValue([.01, .09], True), 3)
     # round(generateValue([.08, .3], True), 3) if kiperConf['optimizer'] == 'adam' else \
     #    round(generateValue([.001, .009], True), 3)
-    kiperConf['dense1'] = int(generateValue([10, 100], True))
-    kiperConf['lstmDropout'] = round(generateValue([.1, .5], True), 2)
-    kiperConf['lstmUnitNum'] = int(generateValue([10, 100], True))
+    kiperConf['dense1'] = int(generateValue([10, 150], True))
+    kiperConf['lstmDropout'] = round(generateValue([.1, .4], True), 2)
+    kiperConf['lstmUnitNum'] = int(generateValue([20, 150], True))
     kiperConf['lstmLayerNum'] = generateValue([1, 2], False)
 
     configuration['model']['embedding']['compactVocab'] = generateValue([True, False], False)
@@ -145,7 +145,7 @@ if __name__ == '__main__':
         'denseDropout': False,
         'optimizer': 'adagrad',
         'lr': 0.07,
-        'epochs': 30,
+        'epochs': 15,
         'batch': 1,
         'lstmDropout': .2,
         'lstmLayerNum': 1,
@@ -164,7 +164,7 @@ if __name__ == '__main__':
     #     configuration['kiperwasser']['epochs'] = e
     #     xp(['FR'], xpNum=1, compact=False)
     # exploreLR(['BG'], True)
-    # createGrid()
+    createRSGGrid()
     # getActiveConfs()
     configuration['kiperwasser']['epochs'] = 20
-    runRSGThread(['BG'])
+    runRSGThread(['BG', 'PT', 'TR'])
