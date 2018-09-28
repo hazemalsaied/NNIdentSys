@@ -2,8 +2,8 @@ import modelKiperwasser
 from transitions import *
 
 
-def parse(corpus, clf):
-    for sent in corpus.testingSents:
+def parse(sents, clf):
+    for sent in sents:
         sent.identifiedVMWEs = []
         sent.initialTransition = None
         tokenIdxs, posIdxs = modelKiperwasser.getIdxs(sent, clf)

@@ -1,0 +1,1377 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.19 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+KIPER CONF: word = 109 - pos 28 - lstmLayers 1 - lstmUnits 60 - lstmDrop 0.19 - denseUnits 32 - dnenseActiv tanh - optim adagrad lr 0.018 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.018
+
+==================================================================================================
+	Training time : 1:51:01.299011
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.3 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.544
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 161
+	25 : 2
+	50 : 3
+	5 : 25
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 295
+	25 : 1
+	50 : 3
+	5 : 12
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 37 - pos 6 - lstmLayers 1 - lstmUnits 56 - lstmDrop 0.3 - denseUnits 16 - dnenseActiv tanh - optim adagrad lr 0.014 compactVocab False Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.014
+
+==================================================================================================
+	Training time : 1:51:27.489670
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.223
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 85
+	25 : 2
+	50 : 3
+	5 : 10
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 370
+	25 : 2
+	50 : 3
+	5 : 24
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 114 - pos 37 - lstmLayers 2 - lstmUnits 62 - lstmDrop 0.23 - denseUnits 18 - dnenseActiv tanh - optim adagrad lr 0.03 compactVocab True Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.03
+
+==================================================================================================
+	Training time : 2:01:42.492629
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.221
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 44
+	50 : 3
+	100 : 1
+	5 : 19
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 284
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 63
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 24 - pos 27 - lstmLayers 2 - lstmUnits 20 - lstmDrop 0.29 - denseUnits 10 - dnenseActiv relu - optim adagrad lr 0.055 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.055
+
+==================================================================================================
+	Training time : 2:00:18.569181
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.441
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 154
+	25 : 1
+	50 : 3
+	5 : 23
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 305
+	25 : 2
+	50 : 3
+	5 : 17
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 81 - pos 6 - lstmLayers 2 - lstmUnits 16 - lstmDrop 0.3 - denseUnits 16 - dnenseActiv relu - optim adagrad lr 0.014 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.014
+
+==================================================================================================
+	Training time : 1:57:48.673075
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.373
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 90
+	25 : 1
+	50 : 5
+	100 : 1
+	5 : 47
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 240
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 45
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 141 - pos 9 - lstmLayers 2 - lstmUnits 59 - lstmDrop 0.37 - denseUnits 18 - dnenseActiv tanh - optim adagrad lr 0.022 compactVocab False Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.022
+
+==================================================================================================
+	Training time : 2:00:41.853161
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.13 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.224
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 59
+	25 : 2
+	50 : 2
+	5 : 8
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 396
+	25 : 2
+	50 : 3
+	5 : 25
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 132 - pos 15 - lstmLayers 1 - lstmUnits 64 - lstmDrop 0.13 - denseUnits 97 - dnenseActiv relu - optim adagrad lr 0.028 compactVocab False Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.028
+
+==================================================================================================
+	Training time : 1:51:56.293354
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.418
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 135
+	25 : 2
+	50 : 3
+	5 : 13
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 320
+	25 : 2
+	50 : 3
+	5 : 24
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 46 - pos 33 - lstmLayers 2 - lstmUnits 22 - lstmDrop 0.24 - denseUnits 16 - dnenseActiv tanh - optim adagrad lr 0.04 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.04
+
+==================================================================================================
+	Training time : 1:59:36.157066
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.12 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.441
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 117
+	25 : 2
+	50 : 3
+	5 : 15
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 335
+	25 : 2
+	50 : 3
+	5 : 18
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 33 - pos 18 - lstmLayers 1 - lstmUnits 14 - lstmDrop 0.12 - denseUnits 45 - dnenseActiv relu - optim adagrad lr 0.027 compactVocab True Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.027
+
+==================================================================================================
+	Training time : 1:52:16.928025
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.402
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 77
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 46
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 250
+	25 : 1
+	50 : 5
+	100 : 1
+	5 : 43
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 25 - pos 20 - lstmLayers 2 - lstmUnits 41 - lstmDrop 0.42 - denseUnits 18 - dnenseActiv tanh - optim adagrad lr 0.08 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.08
+
+==================================================================================================
+	Training time : 2:00:53.816612
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.543
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 163
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 58
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 164
+	25 : 2
+	50 : 3
+	100 : 1
+	5 : 20
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 34 - pos 15 - lstmLayers 1 - lstmUnits 10 - lstmDrop 0.12 - denseUnits 22 - dnenseActiv relu - optim adagrad lr 0.034 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.034
+
+==================================================================================================
+	Training time : 1:49:33.844983
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.46 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.304
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 82
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 31
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 249
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 53
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 89 - pos 5 - lstmLayers 1 - lstmUnits 65 - lstmDrop 0.46 - denseUnits 49 - dnenseActiv tanh - optim adagrad lr 0.027 compactVocab False Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.027
+
+==================================================================================================
+	Training time : 1:51:45.831056
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.22 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.307
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 100
+	25 : 2
+	50 : 3
+	5 : 11
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 357
+	25 : 2
+	50 : 3
+	5 : 23
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 53 - pos 31 - lstmLayers 1 - lstmUnits 60 - lstmDrop 0.22 - denseUnits 11 - dnenseActiv tanh - optim adagrad lr 0.013 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.013
+
+==================================================================================================
+	Training time : 1:51:30.362528
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.337
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 87
+	50 : 4
+	100 : 1
+	5 : 37
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 244
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 51
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 116 - pos 22 - lstmLayers 2 - lstmUnits 38 - lstmDrop 0.27 - denseUnits 80 - dnenseActiv tanh - optim adagrad lr 0.015 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.015
+
+==================================================================================================
+	Training time : 2:00:50.811817
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.468
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 130
+	25 : 2
+	50 : 3
+	5 : 21
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 331
+	25 : 2
+	50 : 3
+	5 : 16
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 25 - pos 6 - lstmLayers 2 - lstmUnits 74 - lstmDrop 0.14 - denseUnits 17 - dnenseActiv relu - optim adagrad lr 0.049 compactVocab True Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.049
+
+==================================================================================================
+	Training time : 2:01:11.421746
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.492
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 102
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 52
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 229
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 41
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 69 - pos 26 - lstmLayers 2 - lstmUnits 19 - lstmDrop 0.1 - denseUnits 97 - dnenseActiv relu - optim adagrad lr 0.011 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.011
+
+==================================================================================================
+	Training time : 1:58:44.565024
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.24 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.411
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 114
+	25 : 2
+	50 : 3
+	5 : 18
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 345
+	25 : 2
+	50 : 3
+	5 : 18
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 46 - pos 12 - lstmLayers 1 - lstmUnits 18 - lstmDrop 0.24 - denseUnits 33 - dnenseActiv relu - optim adagrad lr 0.01 compactVocab True Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.01
+
+==================================================================================================
+	Training time : 1:52:32.614402
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.406
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 77
+	25 : 1
+	50 : 5
+	100 : 1
+	5 : 40
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 251
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 46
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 65 - pos 22 - lstmLayers 2 - lstmUnits 31 - lstmDrop 0.14 - denseUnits 10 - dnenseActiv tanh - optim adagrad lr 0.032 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.032
+
+==================================================================================================
+	Training time : 1:57:00.247490
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.239
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 42
+	50 : 3
+	100 : 1
+	5 : 22
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 284
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 57
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 126 - pos 10 - lstmLayers 2 - lstmUnits 21 - lstmDrop 0.12 - denseUnits 11 - dnenseActiv tanh - optim adagrad lr 0.063 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.063
+
+==================================================================================================
+	Training time : 1:56:52.682041
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.292
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 81
+	25 : 2
+	50 : 3
+	5 : 12
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 378
+	25 : 2
+	50 : 3
+	5 : 23
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 137 - pos 10 - lstmLayers 2 - lstmUnits 10 - lstmDrop 0.19 - denseUnits 28 - dnenseActiv tanh - optim adagrad lr 0.015 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.015
+
+==================================================================================================
+	Training time : 1:57:41.703463
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.406
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 104
+	25 : 2
+	50 : 3
+	5 : 15
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 354
+	25 : 2
+	50 : 3
+	5 : 24
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 21 - pos 6 - lstmLayers 2 - lstmUnits 15 - lstmDrop 0.15 - denseUnits 21 - dnenseActiv relu - optim adagrad lr 0.055 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.055
+
+==================================================================================================
+	Training time : 1:59:39.287898
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.432
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 141
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 50
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 190
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 34
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 122 - pos 9 - lstmLayers 2 - lstmUnits 58 - lstmDrop 0.16 - denseUnits 54 - dnenseActiv relu - optim adagrad lr 0.059 compactVocab False Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.059
+
+==================================================================================================
+	Training time : 2:00:48.288003
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.38
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 172
+	25 : 2
+	50 : 3
+	5 : 18
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 286
+	25 : 2
+	50 : 3
+	5 : 17
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 21 - pos 10 - lstmLayers 2 - lstmUnits 16 - lstmDrop 0.2 - denseUnits 28 - dnenseActiv relu - optim adagrad lr 0.087 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.087
+
+==================================================================================================
+	Training time : 1:58:30.134943
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.244
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 56
+	50 : 4
+	100 : 1
+	5 : 24
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 274
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 58
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 59 - pos 5 - lstmLayers 1 - lstmUnits 23 - lstmDrop 0.19 - denseUnits 51 - dnenseActiv relu - optim adagrad lr 0.021 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.021
+
+==================================================================================================
+	Training time : 1:52:54.138104
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.1 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.456
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 132
+	25 : 2
+	50 : 3
+	5 : 21
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 327
+	25 : 2
+	50 : 3
+	5 : 17
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 135 - pos 20 - lstmLayers 1 - lstmUnits 32 - lstmDrop 0.1 - denseUnits 87 - dnenseActiv relu - optim adagrad lr 0.059 compactVocab False Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.059
+
+==================================================================================================
+	Training time : 1:52:01.037606
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.34 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.417
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 155
+	25 : 2
+	50 : 3
+	5 : 19
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 303
+	25 : 1
+	50 : 3
+	5 : 17
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 78 - pos 10 - lstmLayers 1 - lstmUnits 44 - lstmDrop 0.34 - denseUnits 17 - dnenseActiv tanh - optim adagrad lr 0.061 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.061
+
+==================================================================================================
+	Training time : 1:52:44.929612
+==================================================================================================
+/home/halsaied/miniconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.35 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
+	Randomly Selected Transitions: 0
+	Identification : 0.124
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 29
+	25 : 1
+	50 : 2
+	5 : 5
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 420
+	25 : 2
+	50 : 3
+	5 : 26
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 68 - pos 10 - lstmLayers 1 - lstmUnits 10 - lstmDrop 0.35 - denseUnits 11 - dnenseActiv tanh - optim adagrad lr 0.06 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.06
+
+==================================================================================================
+	Training time : 1:50:52.220789
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.227
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 52
+	25 : 2
+	50 : 3
+	100 : 1
+	5 : 22
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 276
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 54
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 22 - pos 6 - lstmLayers 2 - lstmUnits 16 - lstmDrop 0.19 - denseUnits 13 - dnenseActiv relu - optim adagrad lr 0.052 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.052
+
+==================================================================================================
+	Training time : 1:56:48.440125
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.116
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 29
+	25 : 1
+	50 : 3
+	5 : 1
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 421
+	25 : 2
+	50 : 3
+	5 : 28
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 64 - pos 15 - lstmLayers 2 - lstmUnits 27 - lstmDrop 0.45 - denseUnits 38 - dnenseActiv relu - optim adagrad lr 0.064 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.064
+
+==================================================================================================
+	Training time : 1:59:46.723240
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.358
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 100
+	25 : 2
+	50 : 3
+	5 : 16
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 358
+	25 : 2
+	50 : 3
+	5 : 20
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 107 - pos 5 - lstmLayers 2 - lstmUnits 10 - lstmDrop 0.18 - denseUnits 16 - dnenseActiv relu - optim adagrad lr 0.011 compactVocab True Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.011
+
+==================================================================================================
+	Training time : 1:57:45.938189
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.395
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 82
+	25 : 2
+	50 : 4
+	100 : 1
+	5 : 43
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 254
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 48
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 24 - pos 11 - lstmLayers 1 - lstmUnits 95 - lstmDrop 0.19 - denseUnits 34 - dnenseActiv tanh - optim adagrad lr 0.019 compactVocab False Lemma True 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1195, occurrences : 2876
+	Impotant words in tain : 1000
+	MWE length mean : 2.29
+	Seen MWEs : 444 (70 %)
+	New MWEs : 185 (29 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.019
+
+==================================================================================================
+	Training time : 1:53:49.695165
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.359
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 59
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 33
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 267
+	25 : 2
+	50 : 5
+	100 : 1
+	5 : 48
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 148 - pos 30 - lstmLayers 1 - lstmUnits 20 - lstmDrop 0.12 - denseUnits 65 - dnenseActiv relu - optim adagrad lr 0.054 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.054
+
+==================================================================================================
+	Training time : 1:52:39.878837
+==================================================================================================
+	Randomly Selected Transitions: 0
+	Identification : 0.374
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 92
+	25 : 2
+	50 : 3
+	5 : 17
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 368
+	25 : 2
+	50 : 3
+	5 : 17
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+KIPER CONF: word = 31 - pos 18 - lstmLayers 2 - lstmUnits 10 - lstmDrop 0.18 - denseUnits 22 - dnenseActiv tanh - optim adagrad lr 0.084 compactVocab True Lemma False 
+
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2495, Test : 2236
+	MWEs in tain : 1876, occurrences : 2876
+	Impotant words in tain : 1677
+	MWE length mean : 2.29
+	Seen MWEs : 312 (49 %)
+	New MWEs : 317 (50 %)
+==================================================================================================
+# Network optimizer = adagrad, learning rate = 0.084
+## OAR [2018-09-10 07:25:27] Job 1676947 KILLED ##

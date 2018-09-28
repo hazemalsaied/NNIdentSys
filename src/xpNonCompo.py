@@ -1,17 +1,6 @@
-import sys
 
-from config import *
-from identification import xp
-
-langs = ['FR']
-
-allSharedtask1Lang = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT',
-                      'LT', 'MT', 'PL', 'PT', 'RO', 'SV', 'SL', 'TR']
-
-allSharedtask2Lang = ['BG', 'DE', 'EL', 'EN', 'ES', 'EU', 'FA', 'FR', 'HE', 'HI',
-                      'HR', 'HU', 'IT', 'LT', 'PL', 'PT', 'RO', 'SL', 'TR']
-
-pilotLangs = ['BG', 'PT', 'TR']
+from config import configuration
+from xpTools import *
 
 
 def setOptimalRandomGridParameters():
@@ -42,14 +31,14 @@ def setOptimalRandomGridParameters():
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
-    from identification import setDataSet, setTrainAndTest
 
-    setDataSet(Dataset.sharedtask2)
     setOptimalRandomGridParameters()
+
+    setDataSet(Dataset.dimsum)
 
     setTrainAndTest(Evaluation.corpus)
     xp(allSharedtask2Lang, xpNum=1)
-    setTrainAndTest(Evaluation.trainVsTest)
-    xp(allSharedtask2Lang, xpNum=1)
-    setTrainAndTest(Evaluation.trainVsDev)
-    xp(allSharedtask2Lang, xpNum=1)
+    # setTrainAndTest(Evaluation.trainVsTest)
+    # xp(allSharedtask2Lang, xpNum=1)
+    # setTrainAndTest(Evaluation.trainVsDev)
+    # xp(allSharedtask2Lang, xpNum=1)

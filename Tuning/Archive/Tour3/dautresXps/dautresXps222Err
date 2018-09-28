@@ -1,0 +1,11 @@
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_sJ0ywZ.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10869/11441 Mb (0.950000) on cuda
+Mapped name None to device cuda: Tesla K40m (0000:03:00.0)

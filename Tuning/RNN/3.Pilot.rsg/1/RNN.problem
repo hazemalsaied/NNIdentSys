@@ -1,0 +1,561 @@
+
+# RNN Conf :{'epochs': 20, 'denseUnitNum': 8, 'useDense': True, 'earlyStop': True, 's0TokenNum': 4, 'gru': True, 'batchSize': 16, 'lr': 0.05, 'compactVocab': True, 'rnnDropout': 0.2, 'posDim': 14, 'optimizer': 'adagrad', 'denseDropout': 0.2, 'bTokenNum': 1, 's1TokenNum': 2, 'wordDim': 474, 'focusedElements': 7, 'wordRnnUnitNum': 49, 'posRnnUnitNum': 45}, Lemma: True
+	GPU Enabled
+==================================================================================================
+	Fixed Size Mode
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_103 (InputLayer)          (None, 7)            0
+__________________________________________________________________________________________________
+input_104 (InputLayer)          (None, 7)            0
+__________________________________________________________________________________________________
+embedding_103 (Embedding)       (None, 7, 474)       558372      input_103[0][0]
+__________________________________________________________________________________________________
+embedding_104 (Embedding)       (None, 7, 14)        266         input_104[0][0]
+__________________________________________________________________________________________________
+gru_103 (GRU)                   (None, 49)           77028       embedding_103[0][0]
+__________________________________________________________________________________________________
+gru_104 (GRU)                   (None, 45)           8100        embedding_104[0][0]
+__________________________________________________________________________________________________
+dropout_154 (Dropout)           (None, 49)           0           gru_103[0][0]
+__________________________________________________________________________________________________
+dropout_155 (Dropout)           (None, 45)           0           gru_104[0][0]
+__________________________________________________________________________________________________
+concatenate_52 (Concatenate)    (None, 94)           0           dropout_154[0][0]
+                                                                 dropout_155[0][0]
+__________________________________________________________________________________________________
+dense_103 (Dense)               (None, 8)            760         concatenate_52[0][0]
+__________________________________________________________________________________________________
+dropout_156 (Dropout)           (None, 8)            0           dense_103[0][0]
+__________________________________________________________________________________________________
+dense_104 (Dense)               (None, 4)            36          dropout_156[0][0]
+==================================================================================================
+Total params: 644,562
+Trainable params: 644,562
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 320835 samples, validate on 35649 samples
+Epoch 1/20
+ - 336s - loss: 0.1207 - acc: 0.9647 - val_loss: 0.0844 - val_acc: 0.9992
+Epoch 2/20
+ - 332s - loss: 0.0926 - acc: 0.9747 - val_loss: 0.0816 - val_acc: 0.9996
+Epoch 3/20
+ - 313s - loss: 0.0834 - acc: 0.9760 - val_loss: 0.0834 - val_acc: 0.9999
+Epoch 4/20
+ - 328s - loss: 0.0790 - acc: 0.9765 - val_loss: 0.0791 - val_acc: 1.0000
+Epoch 5/20
+ - 332s - loss: 0.0739 - acc: 0.9784 - val_loss: 0.0660 - val_acc: 1.0000
+Epoch 6/20
+ - 322s - loss: 0.0720 - acc: 0.9786 - val_loss: 0.0745 - val_acc: 0.9993
+Epoch 7/20
+ - 332s - loss: 0.0711 - acc: 0.9790 - val_loss: 0.0703 - val_acc: 1.0000
+
+==================================================================================================
+	Training time : 0:52:55.404188
+==================================================================================================
+	Randomly Selected Transitions: 0
+1- :: Димареску : Членството в ЕС ще 1 **предизвика** търговско-икономически 1 **промени** в Румъния
+MWEs:
+1- lvc: предизвика промени (+)
+
+: L
+S=[]                        B=[ Димареску,:, ..]
+SHIFT: L
+S=[Димареску]      B=[ :,Членството, ..]
+REDUCE: C
+S=[]                        B=[ :,Членството, ..]
+SHIFT: L
+S=[:]                       B=[ Членството,в, ..]
+REDUCE: C
+S=[]                        B=[ Членството,в, ..]
+SHIFT: L
+S=[Членството]    B=[ в,ЕС, ..]
+REDUCE: C
+S=[]                        B=[ в,ЕС, ..]
+SHIFT: L
+S=[в]                      B=[ ЕС,ще, ..]
+REDUCE: C
+S=[]                        B=[ ЕС,ще, ..]
+SHIFT: L
+S=[ЕС]                    B=[ ще,предизвика, ..]
+REDUCE: C
+S=[]                        B=[ ще,предизвика, ..]
+SHIFT: L
+S=[ще]                    B=[ предизвика,търговско-икономически, ..]
+REDUCE: C
+S=[]                        B=[ предизвика,търговско-икономически, ..]
+SHIFT: L
+S=[предизвика]    B=[ търговско-икономически,промени, ..]
+REDUCE: C
+S=[]                        B=[ търговско-икономически,промени, ..]
+SHIFT: L
+S=[търговско-икономически] B=[ промени,в, ..]
+REDUCE: C
+S=[]                        B=[ промени,в, ..]
+SHIFT: L
+S=[промени]          B=[ в,Румъния,]
+REDUCE: C
+S=[]                        B=[ в,Румъния,]
+SHIFT: L
+S=[в]                      B=[ Румъния,]
+REDUCE: C
+S=[]                        B=[ Румъния,]
+SHIFT: L
+S=[Румъния]          B=[ ]
+REDUCE: C
+S=[]                        B=[ ]
+	Identification : 0.556
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 116
+	200 : 1
+	100 : 1
+	5 : 63
+	25 : 16
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 259
+	25 : 1
+	5 : 4
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_105 (InputLayer)          (None, 7)            0
+__________________________________________________________________________________________________
+input_106 (InputLayer)          (None, 7)            0
+__________________________________________________________________________________________________
+embedding_105 (Embedding)       (None, 7, 474)       537516      input_105[0][0]
+__________________________________________________________________________________________________
+embedding_106 (Embedding)       (None, 7, 14)        266         input_106[0][0]
+__________________________________________________________________________________________________
+gru_105 (GRU)                   (None, 49)           77028       embedding_105[0][0]
+__________________________________________________________________________________________________
+gru_106 (GRU)                   (None, 45)           8100        embedding_106[0][0]
+__________________________________________________________________________________________________
+dropout_157 (Dropout)           (None, 49)           0           gru_105[0][0]
+__________________________________________________________________________________________________
+dropout_158 (Dropout)           (None, 45)           0           gru_106[0][0]
+__________________________________________________________________________________________________
+concatenate_53 (Concatenate)    (None, 94)           0           dropout_157[0][0]
+                                                                 dropout_158[0][0]
+__________________________________________________________________________________________________
+dense_105 (Dense)               (None, 8)            760         concatenate_53[0][0]
+__________________________________________________________________________________________________
+dropout_159 (Dropout)           (None, 8)            0           dense_105[0][0]
+__________________________________________________________________________________________________
+dense_106 (Dense)               (None, 4)            36          dropout_159[0][0]
+==================================================================================================
+Total params: 623,706
+Trainable params: 623,706
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 217231 samples, validate on 24137 samples
+Epoch 1/20
+ - 228s - loss: 0.1306 - acc: 0.9601 - val_loss: 0.0856 - val_acc: 0.9994
+Epoch 2/20
+ - 224s - loss: 0.0900 - acc: 0.9730 - val_loss: 0.0950 - val_acc: 0.9991
+Epoch 3/20
+ - 222s - loss: 0.0828 - acc: 0.9741 - val_loss: 0.0844 - val_acc: 0.9997
+Epoch 4/20
+ - 221s - loss: 0.0804 - acc: 0.9736 - val_loss: 0.0757 - val_acc: 0.9990
+Epoch 5/20
+ - 221s - loss: 0.0785 - acc: 0.9744 - val_loss: 0.0722 - val_acc: 1.0000
+Epoch 6/20
+ - 222s - loss: 0.0779 - acc: 0.9743 - val_loss: 0.0792 - val_acc: 0.9994
+Epoch 7/20
+ - 222s - loss: 0.0754 - acc: 0.9754 - val_loss: 0.0770 - val_acc: 0.9997
+
+==================================================================================================
+	Training time : 0:32:40.448663
+==================================================================================================
+	Randomly Selected Transitions: 0
+40- :: acontece uma reviravolta e ninguém mais 1 **toca** 1 **em** 1 **o** 1 **assunto** .
+MWEs:
+1- id: toca em o assunto (+)
+
+: L
+S=[]                        B=[ acontece,uma, ..]
+SHIFT: L
+S=[acontece]                B=[ uma,reviravolta, ..]
+REDUCE: C
+S=[]                        B=[ uma,reviravolta, ..]
+SHIFT: L
+S=[uma]                     B=[ reviravolta,e, ..]
+REDUCE: C
+S=[]                        B=[ reviravolta,e, ..]
+SHIFT: L
+S=[reviravolta]             B=[ e,ninguém, ..]
+REDUCE: C
+S=[]                        B=[ e,ninguém, ..]
+SHIFT: L
+S=[e]                       B=[ ninguém,mais, ..]
+REDUCE: C
+S=[]                        B=[ ninguém,mais, ..]
+SHIFT: L
+S=[ninguém]                B=[ mais,toca, ..]
+REDUCE: C
+S=[]                        B=[ mais,toca, ..]
+SHIFT: L
+S=[mais]                    B=[ toca,em, ..]
+REDUCE: C
+S=[]                        B=[ toca,em, ..]
+SHIFT: L
+S=[toca]                    B=[ em,o, ..]
+REDUCE: C
+S=[]                        B=[ em,o, ..]
+SHIFT: L
+S=[em]                      B=[ o,assunto, ..]
+REDUCE: C
+S=[]                        B=[ o,assunto, ..]
+SHIFT: L
+S=[o]                       B=[ assunto,.,]
+REDUCE: C
+S=[]                        B=[ assunto,.,]
+SHIFT: L
+S=[assunto]                 B=[ .,]
+REDUCE: C
+S=[]                        B=[ .,]
+SHIFT: L
+S=[.]                       B=[ ]
+REDUCE: C
+S=[]                        B=[ ]
+	Identification : 0.479
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 193
+	25 : 1
+	5 : 45
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 194
+	5 : 7
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Dataset : Sharedtask 1.1
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_107 (InputLayer)          (None, 7)            0
+__________________________________________________________________________________________________
+input_108 (InputLayer)          (None, 7)            0
+__________________________________________________________________________________________________
+embedding_107 (Embedding)       (None, 7, 474)       570222      input_107[0][0]
+__________________________________________________________________________________________________
+embedding_108 (Embedding)       (None, 7, 14)        196         input_108[0][0]
+__________________________________________________________________________________________________
+gru_107 (GRU)                   (None, 49)           77028       embedding_107[0][0]
+__________________________________________________________________________________________________
+gru_108 (GRU)                   (None, 45)           8100        embedding_108[0][0]
+__________________________________________________________________________________________________
+dropout_160 (Dropout)           (None, 49)           0           gru_107[0][0]
+__________________________________________________________________________________________________
+dropout_161 (Dropout)           (None, 45)           0           gru_108[0][0]
+__________________________________________________________________________________________________
+concatenate_54 (Concatenate)    (None, 94)           0           dropout_160[0][0]
+                                                                 dropout_161[0][0]
+__________________________________________________________________________________________________
+dense_107 (Dense)               (None, 8)            760         concatenate_54[0][0]
+__________________________________________________________________________________________________
+dropout_162 (Dropout)           (None, 8)            0           dense_107[0][0]
+__________________________________________________________________________________________________
+dense_108 (Dense)               (None, 4)            36          dropout_162[0][0]
+==================================================================================================
+Total params: 656,342
+Trainable params: 656,342
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 432446 samples, validate on 48050 samples
+Epoch 1/20
+ - 447s - loss: 1.3663 - acc: 0.2779 - val_loss: 1.7870 - val_acc: 0.0000e+00
+Epoch 2/20
+ - 438s - loss: 1.3661 - acc: 0.2766 - val_loss: 1.7828 - val_acc: 0.0000e+00
+Epoch 3/20
+ - 474s - loss: 1.3661 - acc: 0.2770 - val_loss: 1.7924 - val_acc: 0.0000e+00
+Epoch 4/20
+ - 433s - loss: 1.3661 - acc: 0.2782 - val_loss: 1.7864 - val_acc: 0.0000e+00
+
+==================================================================================================
+	Training time : 0:55:03.730658
+==================================================================================================
+Traceback (most recent call last):
+  File "src/xpRnn.py", line 154, in <module>
+    runRSG(30, fileName='rnnCloserRsgGrid.p')
+  File "src/xpRnn.py", line 94, in runRSG
+    xp(langs, xpNum=1)
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 40, in xp
+    parse(corpus, network, normalizer)
+  File "/home/halsaied/NNIdenSys/src/parser.py", line 21, in parse
+    newT = nextTrans(t, sent, clf, normalizer, sentEmbs)
+  File "/home/halsaied/NNIdenSys/src/parser.py", line 37, in nextTrans
+    probVector = clf.predict(t)
+  File "/home/halsaied/NNIdenSys/src/modelRnn.py", line 56, in predict
+    tokenIdxs, posIdxs = getIdxs(trans.configuration)
+  File "/home/halsaied/NNIdenSys/src/modelRnn.py", line 145, in getIdxs
+    for t in getTokens(config.stack[-1])[:rnnConf['s0TokenNum']]:
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1254, in getTokens
+    result.extend(getTokens(elem))
+  File "

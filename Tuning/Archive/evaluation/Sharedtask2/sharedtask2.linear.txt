@@ -1,0 +1,768 @@
+/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /Users/halsaied/PycharmProjects/NNIdenSys/src/linearExpirements.py
+Using Theano backend.
+********************
+# XP =  Title: uni + bi: lemma pos
+********************
+********************
+Linear model
+{'trigram': True, 'unigram': {'b1': True, 'lemma': True, 'token': False, 'pos': True, 'suffix': False}, 'dictionary': {'active': True, 's0TokensAreMWE': False, 's0TokenIsMWEToken': True, 'mwt': False}, 'stackLength': True, 'active': True, 'bigram': {'active': True, 's0b2': True}, 'history': {'1': False, '3': False, '2': False}, 'distance': {'s0s1': True, 's0b0': True}, 'syntax': {'active': True, 'abstract': True, 'lexicalised': False, 'bufferElements': 5}}
+# Language = BG
+trainDataSet
+Sent num = 17813
+Tokens: 399173
+Total VMWEs: 5364
+Ireflv: 2729
+lvc: 1556
+id: 1005
+vpc: 74
+
+devDataSet
+Sent num = 1954
+Tokens: 42020
+Total VMWEs: 670
+Ireflv: 240
+lvc: 249
+id: 173
+vpc: 8
+
+testDataSet
+Sent num = 1832
+Tokens: 39220
+Total VMWEs: 670
+Ireflv: 254
+lvc: 326
+id: 82
+vpc: 8
+
+# Train = 19767
+# Test = 1832
+# Feature number = 945951
+# model = LinearSVC
+# Training time = -47 minutes!
+# F-Score(Ordinary) = 0.663, Recall: 0.812, Precision: 0.56
+# F-Score(Categorization) = 0.652, Recall: 0.799, Precision: 0.551
+# F-Score(lvc) = 0.518, Recall: 0.796, Precision: 0.383
+# F-Score(ireflv) = 0.854, Recall: 0.869, Precision: 0.839
+# F-Score(id) = 0.443, Recall: 0.534, Precision: 0.378
+********************
+# Language = DE
+trainDataSet
+Sent num = 6734
+Tokens: 130213
+Total VMWEs: 2820
+Ireflv: 220
+lvc: 246
+id: 977
+vpc: 1377
+
+devDataSet
+Sent num = 1184
+Tokens: 22092
+Total VMWEs: 503
+Ireflv: 48
+lvc: 36
+id: 181
+vpc: 238
+
+testDataSet
+Sent num = 1078
+Tokens: 20524
+Total VMWEs: 500
+Ireflv: 40
+lvc: 44
+id: 183
+vpc: 233
+
+# Train = 7918
+# Test = 1078
+# Feature number = 788656
+# model = LinearSVC
+# Training time = 6 minutes!
+# F-Score(Ordinary) = 0.314, Recall: 0.494, Precision: 0.23
+# F-Score(Categorization) = 0.363, Recall: 0.455, Precision: 0.302
+# F-Score(lvc) = 0.125, Recall: 0.75, Precision: 0.068
+# F-Score(ireflv) = 0.431, Recall: 0.56, Precision: 0.35
+# F-Score(vpc) = 0.201, Recall: 0.344, Precision: 0.142
+# F-Score(id) = 0.385, Recall: 0.519, Precision: 0.306
+********************
+# Language = EL
+trainDataSet
+Sent num = 4427
+Tokens: 122458
+Total VMWEs: 1404
+Ireflv: 0
+lvc: 990
+id: 395
+vpc: 19
+
+devDataSet
+Sent num = 2562
+Tokens: 64776
+Total VMWEs: 500
+Ireflv: 0
+lvc: 411
+id: 81
+vpc: 8
+
+testDataSet
+Sent num = 1261
+Tokens: 35860
+Total VMWEs: 501
+Ireflv: 0
+lvc: 321
+id: 169
+vpc: 11
+
+# Train = 6989
+# Test = 1261
+# Feature number = 647100
+# model = LinearSVC
+# Training time = 3 minutes!
+# F-Score(Ordinary) = 0.591, Recall: 0.698, Precision: 0.513
+# F-Score(Categorization) = 0.575, Recall: 0.679, Precision: 0.499
+# F-Score(lvc) = 0.594, Recall: 0.635, Precision: 0.558
+# F-Score(vpc) = 0.125, Recall: 0.2, Precision: 0.091
+# F-Score(id) = 0.56, Recall: 0.864, Precision: 0.414
+********************
+********************
+# XP =  Title: uni + bi: lemma pos
+********************
+********************
+Linear model
+{'trigram': True, 'unigram': {'b1': True, 'lemma': True, 'token': False, 'pos': True, 'suffix': False}, 'dictionary': {'active': True, 's0TokensAreMWE': False, 's0TokenIsMWEToken': True, 'mwt': False}, 'stackLength': True, 'active': True, 'bigram': {'active': True, 's0b2': True}, 'history': {'1': False, '3': False, '2': False}, 'distance': {'s0s1': True, 's0b0': True}, 'syntax': {'active': True, 'abstract': True, 'lexicalised': False, 'bufferElements': 5}}
+# Language = EN
+trainDataSet
+Sent num = 3471
+Tokens: 53200
+Total VMWEs: 331
+Ireflv: 0
+lvc: 85
+id: 60
+vpc: 186
+
+devDataSet
+Sent num = 0
+Tokens: 0
+Total VMWEs: 0
+Ireflv: 0
+lvc: 0
+id: 0
+vpc: 0
+
+testDataSet
+Sent num = 3965
+Tokens: 70998
+Total VMWEs: 501
+Ireflv: 0
+lvc: 206
+id: 79
+vpc: 216
+
+# Train = 3471
+# Test = 3965
+# Feature number = 212350
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.283, Recall: 0.497, Precision: 0.198
+# F-Score(Categorization) = 0.267, Recall: 0.467, Precision: 0.187
+# F-Score(lvc) = 0.052, Recall: 0.222, Precision: 0.029
+# F-Score(vpc) = 0.428, Recall: 0.506, Precision: 0.37
+# F-Score(id) = 0.151, Recall: 0.5, Precision: 0.089
+********************
+# Language = ES
+trainDataSet
+Sent num = 2771
+Tokens: 96521
+Total VMWEs: 1739
+Ireflv: 479
+lvc: 733
+id: 167
+vpc: 360
+
+devDataSet
+Sent num = 698
+Tokens: 26220
+Total VMWEs: 500
+Ireflv: 114
+lvc: 234
+id: 65
+vpc: 87
+
+testDataSet
+Sent num = 2046
+Tokens: 58861
+Total VMWEs: 500
+Ireflv: 121
+lvc: 219
+id: 95
+vpc: 65
+
+# Train = 3469
+# Test = 2046
+# Feature number = 453528
+# model = LinearSVC
+# Training time = 3 minutes!
+# F-Score(Ordinary) = 0.395, Recall: 0.346, Precision: 0.46
+# F-Score(Categorization) = 0.364, Recall: 0.319, Precision: 0.424
+# F-Score(lvc) = 0.315, Recall: 0.28, Precision: 0.361
+# F-Score(ireflv) = 0.431, Recall: 0.338, Precision: 0.595
+# F-Score(vpc) = 0.447, Recall: 0.333, Precision: 0.677
+# F-Score(id) = 0.258, Recall: 0.459, Precision: 0.179
+********************
+# Language = EU
+trainDataSet
+Sent num = 8254
+Tokens: 117165
+Total VMWEs: 2823
+Ireflv: 0
+lvc: 2226
+id: 597
+vpc: 0
+
+devDataSet
+Sent num = 1500
+Tokens: 21604
+Total VMWEs: 500
+Ireflv: 0
+lvc: 396
+id: 104
+vpc: 0
+
+testDataSet
+Sent num = 1404
+Tokens: 19038
+Total VMWEs: 500
+Ireflv: 0
+lvc: 427
+id: 73
+vpc: 0
+
+# Train = 9754
+# Test = 1404
+# Feature number = 487474
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.809, Recall: 0.876, Precision: 0.752
+# F-Score(Categorization) = 0.799, Recall: 0.865, Precision: 0.742
+# F-Score(lvc) = 0.817, Recall: 0.894, Precision: 0.752
+# F-Score(id) = 0.699, Recall: 0.714, Precision: 0.685
+********************
+# Language = FA
+trainDataSet
+Sent num = 2784
+Tokens: 45153
+Total VMWEs: 2451
+Ireflv: 1
+lvc: 2433
+id: 17
+vpc: 0
+
+devDataSet
+Sent num = 474
+Tokens: 8923
+Total VMWEs: 501
+Ireflv: 0
+lvc: 501
+id: 0
+vpc: 0
+
+testDataSet
+Sent num = 359
+Tokens: 7492
+Total VMWEs: 501
+Ireflv: 0
+lvc: 501
+id: 0
+vpc: 0
+
+# Train = 3258
+# Test = 359
+# Feature number = 219819
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.761, Recall: 0.88, Precision: 0.671
+# F-Score(Categorization) = 0.761, Recall: 0.88, Precision: 0.671
+# F-Score(lvc) = 0.761, Recall: 0.88, Precision: 0.671
+********************
+# Language = FR
+trainDataSet
+Sent num = 17225
+Tokens: 420762
+Total VMWEs: 4550
+Ireflv: 1247
+lvc: 1557
+id: 1746
+vpc: 0
+
+devDataSet
+Sent num = 2236
+Tokens: 54685
+Total VMWEs: 629
+Ireflv: 154
+lvc: 268
+id: 207
+vpc: 0
+
+testDataSet
+Sent num = 1606
+Tokens: 38402
+Total VMWEs: 498
+Ireflv: 108
+lvc: 178
+id: 212
+vpc: 0
+
+# Train = 19461
+# Test = 1606
+# Feature number = 1314057
+# model = LinearSVC
+# Training time = 8 minutes!
+# F-Score(Ordinary) = 0.619, Recall: 0.811, Precision: 0.5
+# F-Score(Categorization) = 0.606, Recall: 0.795, Precision: 0.49
+# F-Score(lvc) = 0.557, Recall: 0.734, Precision: 0.449
+# F-Score(ireflv) = 0.711, Recall: 0.889, Precision: 0.593
+# F-Score(id) = 0.592, Recall: 0.794, Precision: 0.472
+********************
+# Language = HE
+trainDataSet
+Sent num = 12106
+Tokens: 237472
+Total VMWEs: 1236
+Ireflv: 0
+lvc: 658
+id: 519
+vpc: 59
+
+devDataSet
+Sent num = 3385
+Tokens: 65843
+Total VMWEs: 501
+Ireflv: 0
+lvc: 209
+id: 258
+vpc: 34
+
+testDataSet
+Sent num = 3209
+Tokens: 65698
+Total VMWEs: 502
+Ireflv: 0
+lvc: 260
+id: 182
+vpc: 60
+
+# Train = 15491
+# Test = 3209
+# Feature number = 1306298
+# model = LinearSVC
+# Training time = 6 minutes!
+# F-Score(Ordinary) = 0.368, Recall: 0.645, Precision: 0.257
+# F-Score(Categorization) = 0.339, Recall: 0.595, Precision: 0.237
+# F-Score(lvc) = 0.321, Recall: 0.508, Precision: 0.235
+# F-Score(id) = 0.443, Recall: 0.725, Precision: 0.319
+********************
+# Language = HI
+trainDataSet
+Sent num = 856
+Tokens: 17850
+Total VMWEs: 534
+Ireflv: 0
+lvc: 511
+id: 23
+vpc: 0
+
+devDataSet
+Sent num = 0
+Tokens: 0
+Total VMWEs: 0
+Ireflv: 0
+lvc: 0
+id: 0
+vpc: 0
+
+testDataSet
+Sent num = 828
+Tokens: 17580
+Total VMWEs: 500
+Ireflv: 0
+lvc: 462
+id: 38
+vpc: 0
+
+# Train = 856
+# Test = 828
+# Feature number = 86370
+# model = LinearSVC
+# Training time = 0 minutes!
+# F-Score(Ordinary) = 0.635, Recall: 0.901, Precision: 0.49
+# F-Score(Categorization) = 0.627, Recall: 0.89, Precision: 0.484
+# F-Score(lvc) = 0.658, Recall: 0.896, Precision: 0.519
+# F-Score(id) = 0.095, Recall: 0.5, Precision: 0.053
+********************
+# Language = HR
+trainDataSet
+Sent num = 2295
+Tokens: 53486
+Total VMWEs: 1450
+Ireflv: 468
+lvc: 348
+id: 113
+vpc: 521
+
+devDataSet
+Sent num = 834
+Tokens: 19621
+Total VMWEs: 500
+Ireflv: 139
+lvc: 169
+id: 34
+vpc: 158
+
+testDataSet
+Sent num = 708
+Tokens: 16429
+Total VMWEs: 501
+Ireflv: 118
+lvc: 162
+id: 33
+vpc: 188
+
+# Train = 3129
+# Test = 708
+# Feature number = 368475
+# model = LinearSVC
+# Training time = 1 minutes!
+# F-Score(Ordinary) = 0.6, Recall: 0.798, Precision: 0.481
+# F-Score(Categorization) = 0.588, Recall: 0.781, Precision: 0.471
+# F-Score(lvc) = 0.328, Recall: 0.543, Precision: 0.235
+# F-Score(ireflv) = 0.776, Recall: 0.865, Precision: 0.703
+# F-Score(vpc) = 0.696, Recall: 0.847, Precision: 0.59
+# F-Score(id) = 0.211, Recall: 0.8, Precision: 0.121
+********************
+# F-Score(Ordinary) = 0 HU
+trainDataSet
+Sent num = 4803
+Tokens: 120013
+Total VMWEs: 6205
+Ireflv: 0
+lvc: 1255
+id: 84
+vpc: 4866
+
+devDataSet
+Sent num = 601
+Tokens: 15564
+Total VMWEs: 779
+Ireflv: 0
+lvc: 95
+id: 10
+vpc: 674
+
+testDataSet
+Sent num = 755
+Tokens: 20759
+Total VMWEs: 776
+Ireflv: 0
+lvc: 194
+id: 10
+vpc: 572
+
+# Train = 5404
+# Test = 755
+# Feature number = 358558
+# model = LinearSVC
+# Training time = -55 minutes!
+# F-Score(Ordinary) = 0.286, Recall: 0.354, Precision: 0.24
+# F-Score(Categorization) = 0.478, Recall: 0.354, Precision: 0.735
+# F-Score(lvc) = 0.365, Recall: 0.262, Precision: 0.598
+# F-Score(vpc) = 0.197, Recall: 0.821, Precision: 0.112
+# F-Score(id) = 0.75, Recall: 1.0, Precision: 0.6
+********************
+# XP =  Title: uni + bi: lemma pos
+********************
+********************
+Linear model
+{'trigram': True, 'unigram': {'b1': True, 'lemma': True, 'token': False, 'pos': True, 'suffix': False}, 'dictionary': {'active': True, 's0TokensAreMWE': False, 's0TokenIsMWEToken': True, 'mwt': False}, 'stackLength': True, 'active': True, 'bigram': {'active': True, 's0b2': True}, 'history': {'1': False, '3': False, '2': False}, 'distance': {'s0s1': True, 's0b0': True}, 'syntax': {'active': True, 'abstract': True, 'lexicalised': False, 'bufferElements': 5}}
+# Language = IT
+trainDataSet
+Sent num = 13555
+Tokens: 342279
+Total VMWEs: 3254
+Ireflv: 962
+lvc: 714
+id: 1098
+vpc: 480
+
+devDataSet
+Sent num = 917
+Tokens: 31220
+Total VMWEs: 500
+Ireflv: 115
+lvc: 125
+id: 197
+vpc: 63
+
+testDataSet
+Sent num = 1256
+Tokens: 35558
+Total VMWEs: 503
+Ireflv: 104
+lvc: 134
+id: 201
+vpc: 64
+
+# Train = 14472
+# Test = 1256
+# Feature number = 1009433
+# model = LinearSVC
+# Training time = 11 minutes!
+# F-Score(Ordinary) = 0.567, Recall: 0.715, Precision: 0.469
+# F-Score(Categorization) = 0.538, Recall: 0.679, Precision: 0.445
+# F-Score(lvc) = 0.608, Recall: 0.795, Precision: 0.493
+# F-Score(ireflv) = 0.641, Recall: 0.753, Precision: 0.558
+# F-Score(vpc) = 0.672, Recall: 0.75, Precision: 0.609
+# F-Score(id) = 0.389, Recall: 0.525, Precision: 0.308
+********************
+# Language = LT
+trainDataSet
+Sent num = 4895
+Tokens: 90110
+Total VMWEs: 312
+Ireflv: 0
+lvc: 206
+id: 106
+vpc: 0
+
+devDataSet
+Sent num = 0
+Tokens: 0
+Total VMWEs: 0
+Ireflv: 0
+lvc: 0
+id: 0
+vpc: 0
+
+testDataSet
+Sent num = 6209
+Tokens: 118402
+Total VMWEs: 500
+Ireflv: 0
+lvc: 298
+id: 202
+vpc: 0
+
+# Train = 4895
+# Test = 6209
+# Feature number = 270805
+# model = LinearSVC
+# Training time = 0 minutes!
+# F-Score(Ordinary) = 0.407, Recall: 0.692, Precision: 0.288
+# F-Score(Categorization) = 0.401, Recall: 0.683, Precision: 0.284
+# F-Score(lvc) = 0.525, Recall: 0.674, Precision: 0.43
+# F-Score(id) = 0.127, Recall: 0.778, Precision: 0.069
+********************
+# Language = PL
+trainDataSet
+Sent num = 13058
+Tokens: 220352
+Total VMWEs: 4122
+Ireflv: 1785
+lvc: 1711
+id: 373
+vpc: 253
+
+devDataSet
+Sent num = 1763
+Tokens: 26014
+Total VMWEs: 515
+Ireflv: 245
+lvc: 186
+id: 57
+vpc: 27
+
+testDataSet
+Sent num = 1300
+Tokens: 27661
+Total VMWEs: 515
+Ireflv: 249
+lvc: 164
+id: 73
+vpc: 29
+
+# Train = 14821
+# Test = 1300
+# Feature number = 931237
+# model = LinearSVC
+# Training time = 6 minutes!
+# F-Score(Ordinary) = 0.7, Recall: 0.804, Precision: 0.619
+# F-Score(Categorization) = 0.686, Recall: 0.788, Precision: 0.608
+# F-Score(lvc) = 0.49, Recall: 0.545, Precision: 0.445
+# F-Score(ireflv) = 0.852, Recall: 0.917, Precision: 0.795
+# F-Score(vpc) = 0.792, Recall: 1.0, Precision: 0.655
+# F-Score(id) = 0.455, Recall: 0.821, Precision: 0.315
+********************
+# Language = PT
+trainDataSet
+Sent num = 22017
+Tokens: 473446
+Total VMWEs: 4430
+Ireflv: 689
+lvc: 2859
+id: 882
+vpc: 0
+
+devDataSet
+Sent num = 3117
+Tokens: 64078
+Total VMWEs: 553
+Ireflv: 83
+lvc: 340
+id: 130
+vpc: 0
+
+testDataSet
+Sent num = 2770
+Tokens: 58604
+Total VMWEs: 553
+Ireflv: 91
+lvc: 344
+id: 118
+vpc: 0
+
+# Train = 25134
+# Test = 2770
+# Feature number = 1258965
+# model = LinearSVC
+# Training time = -51 minutes!
+# F-Score(Ordinary) = 0.685, Recall: 0.801, Precision: 0.599
+# F-Score(Categorization) = 0.671, Recall: 0.785, Precision: 0.586
+# F-Score(lvc) = 0.645, Recall: 0.729, Precision: 0.578
+# F-Score(ireflv) = 0.711, Recall: 0.885, Precision: 0.593
+# F-Score(id) = 0.721, Recall: 0.899, Precision: 0.602
+********************
+# Language = RO
+trainDataSet
+Sent num = 42704
+Tokens: 781968
+Total VMWEs: 4713
+Ireflv: 3048
+lvc: 396
+id: 1269
+vpc: 0
+
+devDataSet
+Sent num = 7065
+Tokens: 118658
+Total VMWEs: 589
+Ireflv: 373
+lvc: 47
+id: 169
+vpc: 0
+
+testDataSet
+Sent num = 6934
+Tokens: 114997
+Total VMWEs: 589
+Ireflv: 363
+lvc: 53
+id: 173
+vpc: 0
+
+# Train = 49769
+# Test = 6934
+# Feature number = 1422561
+# model = LinearSVC
+# Training time = 15 minutes!
+# F-Score(Ordinary) = 0.893, Recall: 0.89, Precision: 0.896
+# F-Score(Categorization) = 0.89, Recall: 0.887, Precision: 0.893
+# F-Score(lvc) = 0.849, Recall: 0.849, Precision: 0.849
+# F-Score(ireflv) = 0.888, Recall: 0.87, Precision: 0.906
+# F-Score(id) = 0.907, Recall: 0.938, Precision: 0.879
+/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /Users/halsaied/PycharmProjects/NNIdenSys/src/linearExpirements.py
+Using Theano backend.
+********************
+# XP =  Title: uni + bi: lemma pos
+********************
+********************
+Linear model
+{'trigram': True, 'unigram': {'b1': True, 'lemma': True, 'token': False, 'pos': True, 'suffix': False}, 'dictionary': {'active': True, 's0TokensAreMWE': False, 's0TokenIsMWEToken': True, 'mwt': False}, 'stackLength': True, 'active': True, 'bigram': {'active': True, 's0b2': True}, 'history': {'1': False, '3': False, '2': False}, 'distance': {'s0s1': True, 's0b0': True}, 'syntax': {'active': True, 'abstract': True, 'lexicalised': False, 'bufferElements': 5}}
+# Language = SL
+trainDataSet
+Sent num = 9567
+Tokens: 201853
+Total VMWEs: 2378
+Ireflv: 1162
+lvc: 216
+id: 500
+vpc: 500
+
+devDataSet
+Sent num = 1950
+Tokens: 38146
+Total VMWEs: 500
+Ireflv: 224
+lvc: 42
+id: 121
+vpc: 113
+
+testDataSet
+Sent num = 1994
+Tokens: 40523
+Total VMWEs: 500
+Ireflv: 245
+lvc: 48
+id: 106
+vpc: 101
+
+# Train = 11517
+# Test = 1994
+# Feature number = 812554
+# model = LinearSVC
+# Training time = 6 minutes!
+# F-Score(Ordinary) = 0.621, Recall: 0.72, Precision: 0.546
+# F-Score(Categorization) = 0.613, Recall: 0.71, Precision: 0.539
+# F-Score(lvc) = 0.366, Recall: 0.565, Precision: 0.271
+# F-Score(ireflv) = 0.728, Recall: 0.78, Precision: 0.682
+# F-Score(vpc) = 0.656, Recall: 0.705, Precision: 0.614
+# F-Score(id) = 0.337, Recall: 0.5, Precision: 0.255
+********************
+# Language = TR
+trainDataSet
+Sent num = 16715
+Tokens: 334880
+Total VMWEs: 6125
+Ireflv: 0
+lvc: 2953
+id: 3172
+vpc: 0
+
+devDataSet
+Sent num = 1320
+Tokens: 27196
+Total VMWEs: 510
+Ireflv: 0
+lvc: 225
+id: 285
+vpc: 0
+
+testDataSet
+Sent num = 589
+Tokens: 14388
+Total VMWEs: 506
+Ireflv: 0
+lvc: 273
+id: 233
+vpc: 0
+
+# Train = 18035
+# Test = 589
+# Feature number = 935969
+# model = LinearSVC
+# Training time = 4 minutes!
+# F-Score(Ordinary) = 0.586, Recall: 0.875, Precision: 0.441
+# F-Score(Categorization) = 0.531, Recall: 0.788, Precision: 0.4
+# F-Score(lvc) = 0.563, Recall: 0.896, Precision: 0.41
+# F-Score(id) = 0.49, Recall: 0.685, Precision: 0.382
+********************
+
+Process finished with exit code 0

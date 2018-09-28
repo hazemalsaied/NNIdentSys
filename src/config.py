@@ -1,6 +1,8 @@
 import os
 
-from enum import Enum
+
+
+
 
 configuration = {
     'xp': {
@@ -56,7 +58,8 @@ configuration = {
     },
     'dataset': {
         'sharedtask2': False,
-        'FTB': False
+        'FTB': False,
+        'dimsum': False
     },
     'sampling': {
         'overSampling': False,
@@ -247,28 +250,6 @@ configuration = {
 
 }
 
-
-class Dataset(Enum):
-    sharedtask2 = 0
-    FTB = 1
-
-
-class Evaluation(Enum):
-    cv = 0
-    corpus = 1
-    fixedSize = 2
-    dev = 3
-    trainVsDev = 4
-    trainVsTest = 5
-
-
-class XpMode(Enum):
-    linear = 0
-    compo = 1
-    pytorch = 2
-    kiperwasser = 3
-    rnn = 4
-    rnnNonCompo = 5
 
 
 def desactivateMainConf():

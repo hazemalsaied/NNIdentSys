@@ -1,9 +1,6 @@
 import logging
 
-from config import *
-from corpus import *
-from identification import xp, setXPMode, setTrainAndTest, setDataSet
-from xpNonCompo import allSharedtask2Lang
+from xpTools import *
 
 if __name__ == '__main__':
     reload(sys)
@@ -13,4 +10,5 @@ if __name__ == '__main__':
     setDataSet(Dataset.sharedtask2)
 
     setTrainAndTest(Evaluation.fixedSize)
-    xp(allSharedtask2Lang, xpNum=1)
+    xp(['EN'], xpNum=1)
+    # xp(allSharedtask2Lang, xpNum=1)

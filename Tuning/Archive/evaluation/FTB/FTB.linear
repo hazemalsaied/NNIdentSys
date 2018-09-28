@@ -1,0 +1,39 @@
+********************
+# Language = FR
+train.cupt 23658
+Sent num = 14759
+Tokens: 443113
+Total VMWEs: 23658
+Total MWTs: 102
+Ireflv: 0
+lvc: 0
+id: 0
+vpc: 0
+dev.cupt 2120
+Sent num = 1235
+Tokens: 38820
+Total VMWEs: 2120
+Total MWTs: 1
+Ireflv: 0
+lvc: 0
+id: 0
+vpc: 0
+test.cupt 4049
+Sent num = 2541
+Tokens: 75216
+Total VMWEs: 4049
+Total MWTs: 6
+Ireflv: 0
+lvc: 0
+id: 0
+vpc: 0
+# Train = 15994, Test = 2541
+Training started
+Linear model 
+# Feature number = 2144674
+# model = LinearSVC
+# Training time = 12 minutes!
+# F-Score(Ordinary) = 0.892, Recall: 0.926, Precision: 0.861
+# F-Score(Categorization) = 0.893, Recall: 0.926, Precision: 0.862
+# F-Score(oth) = 0.895, Recall: 0.932, Precision: 0.86
+********************

@@ -1,5 +1,4 @@
 # import modelKiperwasser
-from extractionLinear import getFeatures
 from transitions import *
 
 
@@ -30,23 +29,23 @@ def nextTrans(t, sent, clf, normalizer, sentEmbs=None):
     elif configuration["xp"]["rnn"] or configuration["xp"]["rnnNonCompo"]:
         probVector = clf.predict(t)
         predictedTrans = sorted(range(len(probVector)), key=lambda k: probVector[k], reverse=True)
-    elif configuration["xp"]["linear"]:
-        featDic = getFeatures(t, sent)
-        if configuration['linear']['svm']:
-            predTransValue = clf.predict(normalizer.transform(featDic).toarray())[0]
-            predTrans = getType(predTransValue)
-            if predTrans in legalTansDic:
-                trans = legalTansDic[predTrans]
-                trans.isClassified = True
-                return trans
-            for t in [TransitionType.SHIFT, TransitionType.MERGE, TransitionType.REDUCE, TransitionType.MARK_AS_OTH]:
-                if t in legalTansDic:
-                    trans = legalTansDic[t]
-                    trans.isClassified = False
-                    return trans
-        else:
-            probVector = clf.decision_function(normalizer.transform(featDic))[0]
-            predictedTrans = sorted(range(len(probVector)), key=lambda k: probVector[k], reverse=True)
+    # elif configuration["xp"]["linear"]:
+    #     featDic = getFeatures(t, sent)
+    #     if configuration['linear']['svm']:
+    #         predTransValue = clf.predict(normalizer.transform(featDic).toarray())[0]
+    #         predTrans = getType(predTransValue)
+    #         if predTrans in legalTansDic:
+    #             trans = legalTansDic[predTrans]
+    #             trans.isClassified = True
+    #             return trans
+    #         for t in [TransitionType.SHIFT, TransitionType.MERGE, TransitionType.REDUCE, TransitionType.MARK_AS_OTH]:
+    #             if t in legalTansDic:
+    #                 trans = legalTansDic[t]
+    #                 trans.isClassified = False
+    #                 return trans
+    #     else:
+    #         probVector = clf.decision_function(normalizer.transform(featDic))[0]
+    #         predictedTrans = sorted(range(len(probVector)), key=lambda k: probVector[k], reverse=True)
     else:
         probVector = clf.predict(t, normalizer)
         predictedTrans = sorted(range(len(probVector)), key=lambda k: probVector[k], reverse=True)

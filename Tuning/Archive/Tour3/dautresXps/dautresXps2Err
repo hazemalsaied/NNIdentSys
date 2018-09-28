@@ -1,0 +1,29 @@
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_tJQcEI.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10619/11178 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 1080 Ti (0000:03:00.0)
+/home/halsaied/NNIdenSys/src/vocabulary.py:328: UnicodeWarning: Unicode equal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  if item in corpusTokens:
+Traceback (most recent call last):
+  File "src/xpNonCompo1.py", line 11, in <module>
+    dautresXps2()
+  File "/home/halsaied/NNIdenSys/src/xpNonCompo.py", line 388, in dautresXps2
+    xp(langs=langs, train=train, cv=cv, xpNum=xpNum, title='Init selvio')
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 47, in xp
+    identify(lang)
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 83, in identify
+    network, normalizer = parseAndTrain(corpus, loadFolderPath)
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 105, in parseAndTrain
+    normalizer = Normalizer(corpus)
+  File "/home/halsaied/NNIdenSys/src/normalisation.py", line 30, in __init__
+    self.weightMatrix = initMatrix(self.vocabulary)
+  File "/home/halsaied/NNIdenSys/src/normalisation.py", line 235, in initMatrix
+    indices = vocabulary.indices
+AttributeError: Vocabulary instance has no attribute 'indices'

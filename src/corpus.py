@@ -35,6 +35,10 @@ class Corpus:
             self.trainDataSet = readFTB(os.path.join(path, 'train.cupt'))
             self.devDataSet = readFTB(os.path.join(path, 'dev.cupt'))
             self.testDataSet = readFTB(os.path.join(path, 'test.cupt'))
+        elif configuration['dataset']['dimsum']:
+            path = os.path.join(configuration['path']['projectPath'], 'ressources/dimsum')
+            self.trainDataSet = readDiMSUM(os.path.join(path, 'dimsum16.train'))
+            self.testDataSet = readDiMSUM(os.path.join(path, 'dimsum16.test'))
         else:
             mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
             conlluFile, testConllu = getTrainAndTestConlluPath(path)
@@ -872,7 +876,7 @@ class VMWE:
 
     def isAttachedWith(self, mwe2):
         if self.tokens[-1].position + 1 == mwe2.tokens[0].position or \
-                                self.tokens[-1].position + 2 == mwe2.tokens[0].position:
+                self.tokens[-1].position + 2 == mwe2.tokens[0].position:
             return True
         return False
 
@@ -1182,7 +1186,7 @@ def integrateMweFile(mweFile, sentences):
         sentIdx = 0
         for line in lines:
             if line == '\n' or line.startswith('# sentence-text:') or (
-                        line.startswith('# sentid:') and noSentToAssign):
+                    line.startswith('# sentid:') and noSentToAssign):
                 continue
             if len(line) > 0 and line.endswith('\n'):
                 line = line[:-1]
@@ -1539,6 +1543,72 @@ def getPosTag(token, lineParts3, lineParts4):
             token.posTag = lineParts4
         else:
             token.posTag = lineParts3
+
+
+def readDiMSUM(dimsumFile, reportBugs=False):
+    # bugNum, mweNum = 0, 0
+    sentences = []
+    BMWEs, bMWEs = [], []
+    if reportBugs:
+        print dimsumFile
+    with open(dimsumFile, 'r') as corpusFile:
+        sent, senIdx, mweIdx, lineNum = None, 0, 1, 0
+        for line in corpusFile:
+            lineNum += 1
+            if line and line.endswith('\n'):
+                line = line[:-1]
+            if line.startswith('#'):
+                continue
+            if line.startswith('1\t'):
+                if sent:
+                    sent.text = sent.text.strip()
+                    sent.recognizeEmbedded()
+                    sent.recognizeInterleaving()
+                    BMWEs, bMWEs = [], []
+                sent = Sentence(senIdx)
+                mweIdx = 1
+                sentences.append(sent)
+                senIdx += 1
+
+            lineParts = line.split('\t')
+            if len(lineParts) != 9:
+                continue
+            token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2].lower(),
+                          abstractPosTag=lineParts[3], posTag=lineParts[3])
+            sent.tokens.append(token)
+            sent.text += token.text + ' '
+            if lineParts[4].lower() == 'b':
+                if lineParts[4] == 'b':
+                    pass
+                vMWE = VMWE(mweIdx, [token], 'oth')
+                sent.vMWEs.append(vMWE)
+                token.setParent(vMWE)
+                if lineParts[4] == 'B':
+                    BMWEs.append(vMWE)
+                else:
+                    bMWEs.append(vMWE)
+            elif lineParts[4].lower() == 'i':
+                if lineParts[4] == 'i':
+                    pass
+                parentMWE = BMWEs[-1] if BMWEs and lineParts[4] == 'I' else (bMWEs[-1] if bMWEs else None)
+                if parentMWE:
+                    parentMWE.tokens.append(token)
+                    token.setParent(parentMWE)
+                else:
+                    if reportBugs:
+                        sys.stdout.write('Annotation bug dep_cpd without dep parent: line: {0}, word:'
+                                         ' {1} DependencyParent: {2}, head Position: {3} \n'.
+                                         format(lineNum, lineParts[1], token.dependencyParent,
+                                                sent.vMWEs[-1].tokens[0].position))
+    mweNum, tokenNum = 0, 0
+    for sent in sentences:
+        if sent.vMWEs:
+            mweNum += len(sent.vMWEs)
+            for v in sent.vMWEs:
+                tokenNum += len(v.tokens)
+    print mweNum, tokenNum
+
+    return sentences
 
 
 if __name__ == '__main__':

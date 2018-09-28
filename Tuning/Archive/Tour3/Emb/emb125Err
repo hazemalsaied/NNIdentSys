@@ -1,0 +1,19 @@
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_136qGz.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10619/11178 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 1080 Ti (0000:03:00.0)
+/home/halsaied/NNIdenSys/src/vocabulary.py:328: UnicodeWarning: Unicode equal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  if item in corpusTokens:
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmp4u6wUE and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmp4yeDBW). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmp4u6wUE and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmpsyJLRu). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmp4u6wUE and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmpsyJLRu). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmp4u6wUE and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmpsyJLRu). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmp4u6wUE and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmpsyJLRu). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmp4u6wUE and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmpsyJLRu). This is not supposed to happen! You may need to manually delete your cache directory to fix this.

@@ -1,0 +1,93 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+********************
+# XP = FR: 
+********************
+********************
+Deep model(No padding)
+# Language = FR
+# Train file = train.conllu.autoPOS.autoDep
+# Test file = test.conllu.autoPOS.autoDep
+FRidxDic
+# Train = 16091
+# Test = 1788
+# Tokens vocabulary = 14693
+# POSs vocabulary = 235
+# embedding: frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin
+# token vocabulary = 14693
+# POS vocabulary = 235
+# Padding = False
+# Embedding = True
+# Initialisation = False
+# Concatenation = False
+# Lemma  = True
+# Token/Lemma emb = 48
+# POS = True
+# POS emb = 24
+# Features = False
+# Parameters = 718040
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 4, 48)        705264      input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 4, 24)        5640        input_2[0][0]                    
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 192)          0           embedding_1[0][0]                
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 96)           0           embedding_2[0][0]                
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 288)          0           flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 24)           6936        concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 24)           0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 8)            200         dropout_1[0][0]                  
+==================================================================================================
+Total params: 718,040
+Trainable params: 718,040
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+[(0.0, 393870), (1.0, 388780), (2.0, 5090), (4.0, 1191), (5.0, 1593), (6.0, 1196), (7.0, 1)]
+[(0.0, 393870), (1.0, 388780), (2.0, 5090), (4.0, 1191), (5.0, 1593), (6.0, 1196)]

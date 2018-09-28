@@ -109,8 +109,8 @@ class TransitionClassifier(nn.Module):
         lstmHiddenSeq, self.hiddenLstm = self.lstm(sentEmbed.view(len(tokenIdxs), 1, -1), self.hiddenLstm)
         return lstmHiddenSeq.view(len(tokenIdxs), -1)
 
-
-def train(corpus, trainedModel=None, trainValidation=False):
+from random import randint
+def train(corpus, trainedModel=None, trainValidation=False, fileNum=0):
     """
     version avec bi-LSTM sur toute la phrase, et mise à jour des paramètres à chaque phrase
     (calcul de la perte pour une phrase complete)
@@ -122,8 +122,12 @@ def train(corpus, trainedModel=None, trainValidation=False):
     model = TransitionClassifier(corpus).to(device) if not trainValidation else trainedModel
     optimizer = getOptimizer(model.parameters())
     lossFunction = nn.NLLLoss()
+    if not trainValidation:
+        fileNum = randint(0, 500)
+    filePath = os.path.join(configuration['path']['projectPath'], 'Reports', str(fileNum) + '.' + kiperConf['file'])
+    sys.stdout.write('\n' + filePath + '\n')
     # losses of validation set for each epoch
-    epochLosses, validLosses = [], []
+    epochLosses, validLosses, validAccuracies = [], [], []
     # if kiperConf['verbose']:
     sys.stderr.write(reports.tabs + str(model) + reports.doubleSep if kiperConf['verbose'] else '')
     sys.stderr.write(reports.tabs + str(optimizer) + reports.doubleSep if kiperConf['verbose'] else '')
@@ -153,31 +157,46 @@ def train(corpus, trainedModel=None, trainValidation=False):
         sys.stderr.write("Number of used sentences in train = %d\n" % usedSents if kiperConf['verbose'] else '')
         sys.stderr.write("Total loss for epoch %d: %f\n" % (epoch, epochLoss) if kiperConf['verbose'] else '')
         if not trainValidation:
-            filePath = os.path.join(configuration['path']['projectPath'], 'Reports', kiperConf['file'])
             valLoss = getCorpusLoss(validSents, model, lossFunction)
+            validAcc = evaluate(validSents, model)
+            sys.stdout.write('validAcc: ' + str(validAcc) + '\n')
             # if kiperConf['verbose']:
             sys.stderr.write("validation loss after epoch %d : %f\n" % (epoch, valLoss) if kiperConf['verbose'] else '')
             # save model if validation loss has decreased
-            if validLosses and valLoss <= validLosses[-1]:
+            # if validLosses and valLoss <= validLosses[-1]:
+            if validAccuracies and validAcc and validAcc > max(validAccuracies):
                 torch.save(model, filePath)
             # early stopping
-            elif kiperConf['earlyStop'] and validLosses and (valLoss >= validLosses[-1]):
-                sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
-                sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
+            elif validAccuracies and validAcc and kiperConf['earlyStop'] and validAcc <= max(validAccuracies):
+                model = torch.load(filePath)
+                # validLosses and (valLoss >= validLosses[-1]):
+                # sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
+                # sys.stderr.write("validation loss has increased (), stop and retrain using %d epochs\n" % epoch)
+                sys.stderr.write("identification accuracy has decreased (), stop and retrain using %d epochs\n" % (epoch - 1))
                 if validSeuil:
-                    kiperConf['epochs'] = epoch + 1  # (cf. epoch est décalé de 1)
-                    return train(corpus, model, trainValidation=True)
+                    kiperConf['epochs'] = epoch - 1  # (cf. epoch est décalé de 1)
+                    # return train(corpus, model, trainValidation=True,fileNum=fileNum)
             # if no validation set: save iff loss on training set decreases
-            else:
-                if len(epochLosses) > 1 and epochLoss < epochLosses[-2]:
-                    torch.save(model, filePath)
+            # else:
+            #     if len(epochLosses) > 1 and epochLoss < epochLosses[-2]:
+            #         torch.save(model, filePath)
             validLosses.append(valLoss)
+            validAccuracies.append(validAcc)
         sys.stdout.write("Epoch has taken {0}\n".format(datetime.datetime.now() - start)
                          if kiperConf['verbose'] else '')
     if not trainValidation:
         return train(corpus, model, trainValidation=True)
 
     return model
+
+
+from parser import parse
+import evaluation
+
+
+def evaluate(sents, model):
+    parse(sents, model)
+    return evaluation.evaluate(sents, loggingg=False)[1]
 
 
 def initHiddenLstm():

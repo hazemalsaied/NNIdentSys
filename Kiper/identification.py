@@ -28,7 +28,7 @@ def xp(langs, xpNum=3, title='', compact=False):
             if compact:
                 parserCompact.parse(corpus, network)
             else:
-                parse(corpus, network)
+                parse(corpus.testingSents, network)
             evaluate(corpus)
 
 
@@ -154,17 +154,19 @@ if __name__ == '__main__':
         'file': 'kiperwasser.p'
     })
     configuration["sampling"]["importantSentences"] = True
+
     configuration["evaluation"]["fixedSize"] = True
     configuration['dataset']['sharedtask2'] = True
     configuration['xp']['kiperwasser'] = True
     # configuration['model']['embedding']['compactVocab'] = True
     # configuration['model']['embedding']['lemma'] = True
-    configuration['kiperwasser']['earlyStop'] = False
+    configuration['kiperwasser']['earlyStop'] = True
     # for e in [5, 10, 15, 25, 35]:
     #     configuration['kiperwasser']['epochs'] = e
     #     xp(['FR'], xpNum=1, compact=False)
     # exploreLR(['BG'], True)
-    createRSGGrid()
+    # createRSGGrid()
     # getActiveConfs()
     configuration['kiperwasser']['epochs'] = 20
-    runRSGThread(['BG', 'PT', 'TR'])
+    xp(['BG'], xpNum=1, compact=False)
+    # runRSGThread(['BG', 'PT', 'TR'])

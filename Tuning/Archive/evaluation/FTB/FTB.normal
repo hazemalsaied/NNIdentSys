@@ -1,0 +1,229 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_MtaBjT.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10619/11178 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 1080 Ti (0000:03:00.0)
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmpb7eScr and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.4--2.7.14-64/tmplz92BL). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+
+==================================================================================================
+	Corpus Mode
+==================================================================================================
+
+==================================================================================================
+	Numerical expressions:
+	Train: 0.11 Test: 0.15
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Dataset : FTB
+	Training (Important) : 11514, Test : 2541
+	MWEs in tain : 5868, occurrences : 22772
+	Impotant words in tain : 4155
+	MWE length mean : 2.65
+	Seen MWEs : 2836 (83 %)
+	New MWEs : 580 (16 %)
+==================================================================================================
+
+__________________________________________________________________________________________________
+	Vocabulary
+==================================================================================================
+	Tokens := 19174 * POS : 969
+__________________________________________________________________________________________________
+	Embedding
+==================================================================================================
+	Initialisation = None
+	Concatenation = False
+	Lemma : 200
+	POS = 15 
+Deep model(Non compositional)
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 4, 200)       3834800     input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 4, 15)        14535       input_2[0][0]                    
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 800)          0           embedding_1[0][0]                
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 60)           0           embedding_2[0][0]                
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 860)          0           flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 25)           21525       concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 25)           0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 8)            208         dropout_1[0][0]                  
+==================================================================================================
+Total params: 3,871,068
+Trainable params: 3,871,068
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	11098 importatnt sents of 11514
+	data size before sampling = 802565
+	data size after sampling = 1559676
+{0.0: 389919, 1.0: 389919, 2.0: 389919, 7.0: 389919}
+	Class weights : {0: 1, 1: 1, 2: 10, 7: 10}
+__________________________________________________________________________________________________
+	Optimizer : adagrad,  learning rate = 0.02
+__________________________________________________________________________________________________
+Train on 1403708 samples, validate on 155968 samples
+Epoch 1/40
+ - 38s - loss: 0.1667 - acc: 0.9649 - val_loss: 0.1134 - val_acc: 1.0000
+Epoch 2/40
+ - 38s - loss: 0.1381 - acc: 0.9703 - val_loss: 0.1070 - val_acc: 1.0000
+Epoch 3/40
+ - 38s - loss: 0.1308 - acc: 0.9726 - val_loss: 0.1145 - val_acc: 1.0000
+Epoch 4/40
+ - 38s - loss: 0.1269 - acc: 0.9738 - val_loss: 0.1223 - val_acc: 1.0000
+Epoch 5/40
+ - 38s - loss: 0.1252 - acc: 0.9741 - val_loss: 0.0995 - val_acc: 1.0000
+Epoch 6/40
+ - 38s - loss: 0.1238 - acc: 0.9744 - val_loss: 0.1042 - val_acc: 1.0000
+Epoch 7/40
+ - 38s - loss: 0.1228 - acc: 0.9745 - val_loss: 0.1042 - val_acc: 1.0000
+Epoch 8/40
+ - 38s - loss: 0.1221 - acc: 0.9747 - val_loss: 0.1214 - val_acc: 1.0000
+Epoch 9/40
+ - 38s - loss: 0.1213 - acc: 0.9748 - val_loss: 0.1117 - val_acc: 1.0000
+Epoch 10/40
+ - 38s - loss: 0.1206 - acc: 0.9750 - val_loss: 0.1025 - val_acc: 1.0000
+Epoch 11/40
+ - 38s - loss: 0.1201 - acc: 0.9751 - val_loss: 0.1042 - val_acc: 1.0000
+Epoch 12/40
+ - 38s - loss: 0.1197 - acc: 0.9752 - val_loss: 0.1179 - val_acc: 1.0000
+Epoch 13/40
+ - 38s - loss: 0.1193 - acc: 0.9752 - val_loss: 0.1101 - val_acc: 1.0000
+Epoch 14/40
+ - 38s - loss: 0.1188 - acc: 0.9754 - val_loss: 0.1081 - val_acc: 1.0000
+Epoch 15/40
+ - 38s - loss: 0.1184 - acc: 0.9756 - val_loss: 0.1094 - val_acc: 1.0000
+Epoch 16/40
+ - 38s - loss: 0.1182 - acc: 0.9756 - val_loss: 0.1192 - val_acc: 1.0000
+Epoch 17/40
+ - 38s - loss: 0.1179 - acc: 0.9757 - val_loss: 0.1179 - val_acc: 1.0000
+Epoch 18/40
+ - 38s - loss: 0.1176 - acc: 0.9758 - val_loss: 0.1100 - val_acc: 1.0000
+Epoch 19/40
+ - 38s - loss: 0.1175 - acc: 0.9758 - val_loss: 0.1136 - val_acc: 1.0000
+Epoch 20/40
+ - 38s - loss: 0.1172 - acc: 0.9758 - val_loss: 0.1147 - val_acc: 1.0000
+Epoch 21/40
+ - 38s - loss: 0.1171 - acc: 0.9758 - val_loss: 0.1146 - val_acc: 1.0000
+Epoch 22/40
+ - 38s - loss: 0.1169 - acc: 0.9759 - val_loss: 0.1081 - val_acc: 1.0000
+Epoch 23/40
+ - 38s - loss: 0.1165 - acc: 0.9760 - val_loss: 0.1129 - val_acc: 1.0000
+Epoch 24/40
+ - 38s - loss: 0.1165 - acc: 0.9760 - val_loss: 0.1133 - val_acc: 1.0000
+Epoch 25/40
+ - 38s - loss: 0.1162 - acc: 0.9761 - val_loss: 0.1148 - val_acc: 1.0000
+Epoch 26/40
+ - 38s - loss: 0.1163 - acc: 0.9760 - val_loss: 0.1114 - val_acc: 1.0000
+Epoch 27/40
+ - 38s - loss: 0.1159 - acc: 0.9761 - val_loss: 0.1146 - val_acc: 1.0000
+Epoch 28/40
+ - 38s - loss: 0.1160 - acc: 0.9761 - val_loss: 0.1167 - val_acc: 1.0000
+Epoch 29/40
+ - 38s - loss: 0.1159 - acc: 0.9762 - val_loss: 0.1100 - val_acc: 1.0000
+Epoch 30/40
+ - 38s - loss: 0.1155 - acc: 0.9762 - val_loss: 0.1113 - val_acc: 1.0000
+Epoch 31/40
+ - 38s - loss: 0.1157 - acc: 0.9762 - val_loss: 0.1158 - val_acc: 1.0000
+Epoch 32/40
+ - 38s - loss: 0.1155 - acc: 0.9762 - val_loss: 0.1178 - val_acc: 1.0000
+Epoch 33/40
+ - 38s - loss: 0.1154 - acc: 0.9763 - val_loss: 0.1117 - val_acc: 1.0000
+Epoch 34/40
+ - 38s - loss: 0.1153 - acc: 0.9763 - val_loss: 0.1138 - val_acc: 1.0000
+Epoch 35/40
+ - 38s - loss: 0.1152 - acc: 0.9764 - val_loss: 0.1087 - val_acc: 1.0000
+Epoch 36/40
+ - 38s - loss: 0.1151 - acc: 0.9764 - val_loss: 0.1084 - val_acc: 1.0000
+Epoch 37/40
+ - 38s - loss: 0.1151 - acc: 0.9764 - val_loss: 0.1151 - val_acc: 1.0000
+Epoch 38/40
+ - 38s - loss: 0.1149 - acc: 0.9764 - val_loss: 0.1125 - val_acc: 1.0000
+Epoch 39/40
+ - 38s - loss: 0.1149 - acc: 0.9764 - val_loss: 0.1199 - val_acc: 1.0000
+Epoch 40/40
+ - 38s - loss: 0.1149 - acc: 0.9764 - val_loss: 0.1117 - val_acc: 1.0000
+
+==================================================================================================
+	Training time : 0:29:02.158965
+==================================================================================================
+	Identification : 0.498
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 181
+	100 : 11
+	5 : 162
+	200 : 3
+	50 : 23
+	25 : 49
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 757
+	100 : 13
+	5 : 274
+	200 : 2
+	50 : 18
+	25 : 56
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|

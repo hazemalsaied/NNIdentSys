@@ -187,17 +187,15 @@ def exploreExtraSampling(langs):
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
-    import config
-    from identification import setTrainAndTest, setXPMode, setDataSet
-    from xpNonCompo import allSharedtask2Lang
+    import xpTools
 
-    setXPMode(config.XpMode.rnn)
-    setDataSet(config.Dataset.sharedtask2)
-
+    xpTools.setXPMode(xpTools.XpMode.rnn)
+    # setDataSet(config.Dataset.sharedtask2)
+    xpTools.setDataSet(xpTools.Dataset.FTB)
     setOptimalRSG()
-    setTrainAndTest(config.Evaluation.corpus)
-    xp(allSharedtask2Lang, xpNum=1)
-    setTrainAndTest(config.Evaluation.trainVsTest)
-    xp(allSharedtask2Lang, xpNum=1)
-    setTrainAndTest(config.Evaluation.trainVsDev)
-    xp(allSharedtask2Lang, xpNum=1)
+    xpTools.setTrainAndTest(xpTools.Evaluation.corpus)
+    xpTools.xp(xpTools.allSharedtask2Lang, xpNum=1)
+    # setTrainAndTest(config.Evaluation.trainVsTest)
+    # xp(allSharedtask2Lang, xpNum=1)
+    # setTrainAndTest(config.Evaluation.trainVsDev)
+    # xp(allSharedtask2Lang, xpNum=1)
