@@ -34,11 +34,22 @@ if __name__ == '__main__':
 
     setOptimalRandomGridParameters()
 
-    setDataSet(Dataset.dimsum)
+    setDataSet(Dataset.FTB)
+    langs = ['FR']  # ['EN']
 
     setTrainAndTest(Evaluation.corpus)
-    xp(allSharedtask2Lang, xpNum=1)
-    # setTrainAndTest(Evaluation.trainVsTest)
-    # xp(allSharedtask2Lang, xpNum=1)
-    # setTrainAndTest(Evaluation.trainVsDev)
-    # xp(allSharedtask2Lang, xpNum=1)
+    xp(langs, xpNum=1)
+    setTrainAndTest(Evaluation.trainVsTest)
+    xp(langs, xpNum=1)
+    setTrainAndTest(Evaluation.trainVsDev)
+    xp(langs, xpNum=1)
+
+    setDataSet(Dataset.dimsum)
+    langs = ['EN']
+
+    setTrainAndTest(Evaluation.corpus)
+    xp(langs, xpNum=1)
+    setTrainAndTest(Evaluation.trainVsTest)
+    xp(langs, xpNum=1)
+    setTrainAndTest(Evaluation.trainVsDev)
+    xp(langs, xpNum=1)

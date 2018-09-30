@@ -125,7 +125,7 @@ class Corpus:
             for v in nonIdentifiedOccurrenceDic[k]:
                 res += '\t' + str(idx) + '. ' + v + '\n'
                 idx += 1
-        # with open(os.path.join(configuration['path']['projectPath'], 'Reports/testAnalysis.md'), 'w') as f:
+        # with open(os.path.join(configuration['path']['projectPath'], 'tmp/testAnalysis.md'), 'w') as f:
         #    f.write(res)
         res = tabs + 'Test analysis' + doubleSep
         res += tabs + 'Correctly identified MWEs' + doubleSep
@@ -180,7 +180,7 @@ class Corpus:
         res = ''
         for k in self.mweDictionary:
             res += k + ' :' + str(self.mweDictionary[k]) + '\n'
-        with open(os.path.join(configuration['path']['projectPath'], 'Reports/dict.txt'), 'w') as f:
+        with open(os.path.join(configuration['path']['projectPath'], 'tmp/dict.txt'), 'w') as f:
             f.write(res)
 
     def extractDictionaries(self):

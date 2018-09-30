@@ -3,6 +3,7 @@
 import copy
 import itertools
 import pickle
+import random
 
 from reports import *
 
@@ -35,6 +36,10 @@ class Corpus:
             self.trainDataSet = readFTB(os.path.join(path, 'train.cupt'))
             self.devDataSet = readFTB(os.path.join(path, 'dev.cupt'))
             self.testDataSet = readFTB(os.path.join(path, 'test.cupt'))
+        elif configuration['dataset']['dimsum']:
+            path = os.path.join(configuration['path']['projectPath'], 'ressources/dimsum')
+            self.trainDataSet = readDiMSUM(os.path.join(path, 'dimsum16.train'))
+            self.testDataSet = readDiMSUM(os.path.join(path, 'dimsum16.test'))
         else:
             mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
             conlluFile, testConllu = getTrainAndTestConlluPath(path)
@@ -121,7 +126,7 @@ class Corpus:
             for v in nonIdentifiedOccurrenceDic[k]:
                 res += '\t' + str(idx) + '. ' + v + '\n'
                 idx += 1
-        # with open(os.path.join(configuration['path']['projectPath'], 'Reports/testAnalysis.md'), 'w') as f:
+        # with open(os.path.join(configuration['path']['projectPath'], 'tmp/testAnalysis.md'), 'w') as f:
         #    f.write(res)
         res = tabs + 'Test analysis' + doubleSep
         res += tabs + 'Correctly identified MWEs' + doubleSep
@@ -156,13 +161,6 @@ class Corpus:
 
     def printConlusion(self):
         res = tabs + 'Language : {0}'.format(self.langName) + doubleSep
-        res += tabs + 'Dataset : '
-        if configuration['dataset']['sharedtask2']:
-            res += 'Sharedtask 1.1\n'
-        elif configuration['dataset']['FTB']:
-            res += 'FTB\n'
-        else:
-            res += 'Sharedtask 1.0\n'
         res += tabs + 'Training {0} : {1}, Test : {2}\n'. \
             format('(Important)' if configuration['sampling']['importantSentences'] else '', len(self.trainingSents),
                    len(self.testingSents))
@@ -183,7 +181,7 @@ class Corpus:
         res = ''
         for k in self.mweDictionary:
             res += k + ' :' + str(self.mweDictionary[k]) + '\n'
-        with open(os.path.join(configuration['path']['projectPath'], 'Reports/dict.txt'), 'w') as f:
+        with open(os.path.join(configuration['path']['projectPath'], 'tmp/dict.txt'), 'w') as f:
             f.write(res)
 
     def extractDictionaries(self):
@@ -221,8 +219,8 @@ class Corpus:
                     for t in v.tokens:
                         t.parentMWEs.remove(v)
             sent.vMWEs = newVmwes
-        # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
-        #                str(self.getNumericalExpressionPercentage()) + doubleSep)
+            # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
+            #                str(self.getNumericalExpressionPercentage()) + doubleSep)
 
     def getNumericalExpressionPercentage(self):
         trainDigitalExps, allTrainExpOcc, testDigiralExps, allTestExpOcc = 0, 0, 0, 0
@@ -259,7 +257,7 @@ class Corpus:
                 if mwtOnly:
                     if len(mwe.tokens) != 1:
                         continue
-                lemmaString = mwe.getTokenOrLemmaString()
+                lemmaString = ' '.join(t.lemma if t.lemma else t.text for t in mwe.tokens).lower()
                 if lemmaString in mweDictionary:
                     mweDictionary[lemmaString] += 1
                 else:
@@ -270,8 +268,8 @@ class Corpus:
         mweTokenDictionary = {}
         for sent in self:
             for mwe in sent.vMWEs:
-                for token in mwe.tokens:
-                    mweTokenDictionary[token.getTokenOrLemma()] = True
+                for t in mwe.tokens:
+                    mweTokenDictionary[t.lemma.lower() if t.lemma else t.text.lower()] = True
         return mweTokenDictionary
 
     def divideCorpus(self, foldIdx, foldNum=5):
@@ -879,7 +877,7 @@ class VMWE:
 
     def isAttachedWith(self, mwe2):
         if self.tokens[-1].position + 1 == mwe2.tokens[0].position or \
-                self.tokens[-1].position + 2 == mwe2.tokens[0].position:
+                                self.tokens[-1].position + 2 == mwe2.tokens[0].position:
             return True
         return False
 
@@ -1189,7 +1187,7 @@ def integrateMweFile(mweFile, sentences):
         sentIdx = 0
         for line in lines:
             if line == '\n' or line.startswith('# sentence-text:') or (
-                    line.startswith('# sentid:') and noSentToAssign):
+                        line.startswith('# sentid:') and noSentToAssign):
                 continue
             if len(line) > 0 and line.endswith('\n'):
                 line = line[:-1]
@@ -1496,13 +1494,13 @@ def readFTB(ftbFile, reportBugs=False):
                                                 sent.vMWEs[-1].tokens[0].position))
                     if sent.vMWEs:
                         sent.vMWEs = sent.vMWEs[:-1]
-            # else:
-            #    if lineParts[7] == 'dep_cpd' and 'mwehead' in morpho:
-            #        bugNum += 1
-            # print line, sent
-            # else:
-            #   sys.stdout.write(' Annotation error {0} : {1}'.format(lineNum, sent))
-            # assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
+                        # else:
+                        #    if lineParts[7] == 'dep_cpd' and 'mwehead' in morpho:
+                        #        bugNum += 1
+                        # print line, sent
+                        # else:
+                        #   sys.stdout.write(' Annotation error {0} : {1}'.format(lineNum, sent))
+                        # assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
     # print 'Number of error {0}, number of MWE {1}'.format(bugNum,mweNum)
     # print universalPosTags
     # print xposTags
@@ -1546,6 +1544,72 @@ def getPosTag(token, lineParts3, lineParts4):
             token.posTag = lineParts4
         else:
             token.posTag = lineParts3
+
+
+def readDiMSUM(dimsumFile, reportBugs=False):
+    # bugNum, mweNum = 0, 0
+    sentences = []
+    BMWEs, bMWEs = [], []
+    if reportBugs:
+        print dimsumFile
+    with open(dimsumFile, 'r') as corpusFile:
+        sent, senIdx, mweIdx, lineNum = None, 0, 1, 0
+        for line in corpusFile:
+            lineNum += 1
+            if line and line.endswith('\n'):
+                line = line[:-1]
+            if line.startswith('#'):
+                continue
+            if line.startswith('1\t'):
+                if sent:
+                    sent.text = sent.text.strip()
+                    sent.recognizeEmbedded()
+                    sent.recognizeInterleaving()
+                    BMWEs, bMWEs = [], []
+                sent = Sentence(senIdx)
+                mweIdx = 1
+                sentences.append(sent)
+                senIdx += 1
+
+            lineParts = line.split('\t')
+            if len(lineParts) != 9:
+                continue
+            token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2].lower(),
+                          abstractPosTag=lineParts[3], posTag=lineParts[3])
+            sent.tokens.append(token)
+            sent.text += token.text + ' '
+            if lineParts[4].lower() == 'b':
+                if lineParts[4] == 'b':
+                    pass
+                vMWE = VMWE(mweIdx, [token], 'oth')
+                sent.vMWEs.append(vMWE)
+                token.setParent(vMWE)
+                if lineParts[4] == 'B':
+                    BMWEs.append(vMWE)
+                else:
+                    bMWEs.append(vMWE)
+            elif lineParts[4].lower() == 'i':
+                if lineParts[4] == 'i':
+                    pass
+                parentMWE = BMWEs[-1] if BMWEs and lineParts[4] == 'I' else (bMWEs[-1] if bMWEs else None)
+                if parentMWE:
+                    parentMWE.tokens.append(token)
+                    token.setParent(parentMWE)
+                else:
+                    if reportBugs:
+                        sys.stdout.write('Annotation bug dep_cpd without dep parent: line: {0}, word:'
+                                         ' {1} DependencyParent: {2}, head Position: {3} \n'.
+                                         format(lineNum, lineParts[1], token.dependencyParent,
+                                                sent.vMWEs[-1].tokens[0].position))
+    mweNum, tokenNum = 0, 0
+    for sent in sentences:
+        if sent.vMWEs:
+            mweNum += len(sent.vMWEs)
+            for v in sent.vMWEs:
+                tokenNum += len(v.tokens)
+    print mweNum, tokenNum
+
+    return sentences
 
 
 if __name__ == '__main__':

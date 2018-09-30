@@ -124,7 +124,7 @@ def train(corpus, trainedModel=None, trainValidation=False, fileNum=0):
     lossFunction = nn.NLLLoss()
     if not trainValidation:
         fileNum = randint(0, 500)
-    filePath = os.path.join(configuration['path']['projectPath'], 'Reports', str(fileNum) + '.' + kiperConf['file'])
+    filePath = os.path.join(configuration['path']['projectPath'], 'tmp', str(fileNum) + '.' + kiperConf['file'])
     sys.stdout.write('\n' + filePath + '\n')
     # losses of validation set for each epoch
     epochLosses, validLosses, validAccuracies = [], [], []

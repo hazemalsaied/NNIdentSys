@@ -1,10 +1,5 @@
-import os
-import pickle
-import random
 import sys
 
-from config import configuration
-from identification import xp
 from randomSearchGrid import generateValue
 
 
@@ -187,15 +182,27 @@ def exploreExtraSampling(langs):
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
-    import xpTools
+    from xpTools import *
 
-    xpTools.setXPMode(xpTools.XpMode.rnn)
-    # setDataSet(config.Dataset.sharedtask2)
-    xpTools.setDataSet(xpTools.Dataset.FTB)
+    setXPMode(XpMode.rnn)
     setOptimalRSG()
-    xpTools.setTrainAndTest(xpTools.Evaluation.corpus)
-    xpTools.xp(xpTools.allSharedtask2Lang, xpNum=1)
-    # setTrainAndTest(config.Evaluation.trainVsTest)
-    # xp(allSharedtask2Lang, xpNum=1)
-    # setTrainAndTest(config.Evaluation.trainVsDev)
-    # xp(allSharedtask2Lang, xpNum=1)
+
+    setDataSet(Dataset.FTB)
+    langs = ['FR']  # ['EN']
+
+    setTrainAndTest(Evaluation.corpus)
+    xp(langs, xpNum=1)
+    setTrainAndTest(Evaluation.trainVsTest)
+    xp(langs, xpNum=1)
+    setTrainAndTest(Evaluation.trainVsDev)
+    xp(langs, xpNum=1)
+
+    setDataSet(Dataset.dimsum)
+    langs = ['EN']
+
+    setTrainAndTest(Evaluation.corpus)
+    xp(langs, xpNum=1)
+    setTrainAndTest(Evaluation.trainVsTest)
+    xp(langs, xpNum=1)
+    # setTrainAndTest(Evaluation.trainVsDev)
+    # xp(langs, xpNum=1)

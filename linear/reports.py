@@ -11,7 +11,7 @@ from keras.utils import plot_model
 from config import configuration
 
 tabs, seperator, doubleSep, finalLine = '\t', '\n' + '_' * 98 + '\n', '\n' + '=' * 98 + '\n', '\n' + '*|' * 49 + '\n'
-PATH_ROOT_REPORTS_DIR = os.path.join(configuration["path"]["projectPath"], 'Reports')
+PATH_ROOT_REPORTS_DIR = os.path.join(configuration["path"]["projectPath"], 'tmp')
 
 try:
     reportPath = os.path.join(configuration["path"]["projectPath"], PATH_ROOT_REPORTS_DIR)
@@ -160,7 +160,7 @@ def loadNormalizer(loadFolderPath):
 def saveNetwork(model):
     if not mustSave():
         rI = random.randint(100, 500)
-        shemaFile = os.path.join(configuration["path"]["projectPath"], 'Reports/schemas/shema{0}.png'.format(rI))
+        shemaFile = os.path.join(configuration["path"]["projectPath"], 'tmp/schemas/shema{0}.png'.format(rI))
         sys.stdout.write("# Schema file: {0}\n".format(rI))
         plot_model(model, to_file=shemaFile)
         return
@@ -289,7 +289,7 @@ titleLine = '# XP = '
 
 
 def mineLinearFile(newFile):
-    path = '../Reports/Reports/{0}'.format(newFile)
+    path = '../tmp/tmp/{0}'.format(newFile)
     titles, params, scores = [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
@@ -310,7 +310,7 @@ def mineLinearFile(newFile):
 
 
 def mineFile(newFile):
-    path = '../Reports/Reports/{0}'.format(newFile)
+    path = '../tmp/tmp/{0}'.format(newFile)
     titles, params, scores = [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
@@ -371,7 +371,7 @@ def getDetailedScores(newFile, scores, titles, params):
         paramsText = '\t\t&\t\t{0}\t'.format(params[i] if i < len(params) else '')
         paramsText = paramsText if paramsText != '\t\t&\t\t' else ''
         text += '{0}\t\t&\t\t{1}{2}\\\\\\hline\n'.format(titleText, scores[i], paramsText)
-    with open('../Reports/{0}.detailed.csv'.format(newFile), 'w') as res:
+    with open('../tmp/{0}.detailed.csv'.format(newFile), 'w') as res:
         res.write(text)
 
 
@@ -402,7 +402,7 @@ def getBrefScores(newFile, scores, titles, params, xpNum, showTitle=True):
         text += '{0}{1}\t\t&\t\t{2}\t\t&\t\t{3}{4}\t\t\\\\\n'.format(
             titleText, meanValue, maxValue, mad, paramsText)
         print meanValue
-    with open('../Reports/Reports/{0}.tex'.format(newFile), 'w') as res:
+    with open('../tmp/tmp/{0}.tex'.format(newFile), 'w') as res:
         res.write(text)
 
 
@@ -440,7 +440,7 @@ def attaachTwoFiles(f1, f2):
 
 
 def getStats(newFile):
-    path = '../Reports/Reports/{0}'.format(newFile)
+    path = '../tmp/tmp/{0}'.format(newFile)
     langs, mweLEngth, oldMWEs, newMWEs, params, dataSize, scores, correctlyIdentifiedList, nonIdentifiedList \
         = [], [], [], [], [], [], [], [], []
     langLine = tabs + 'Language : '
@@ -570,7 +570,7 @@ def getNewScores(files):
 
 
 def mineNewFile(newFile):
-    path = '../Reports/Reports/{0}'.format(newFile)
+    path = '../tmp/tmp/{0}'.format(newFile)
     titles, params, scores, langs, titles2 = [], [], [], [], []
     with open(path, 'r') as log:
         for line in log.readlines():
@@ -595,7 +595,7 @@ def mineNewFile(newFile):
 
 
 if __name__ == '__main__':
-    # attaachTwoFiles('../Reports/Reports/1.txt' ,'../Reports/Reports/2.txt')
+    # attaachTwoFiles('../tmp/tmp/1.txt' ,'../tmp/tmp/2.txt')
     # mineLinearFile('sharedtask2.min.txt')
     getNewScores([
         'k.epochs'
@@ -614,7 +614,7 @@ if __name__ == '__main__':
     ])
     # getStats('earlyStopping.st2.corpus')
     # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
-    # for f in os.listdir('../Reports/Reports'):
+    # for f in os.listdir('../tmp/tmp'):
     #     print f
     #     if not f.endswith('.tex') and not f.lower().endswith('err'):
     #         getScores(f, shouldClean=False, showTitle=True, xpNum=5)

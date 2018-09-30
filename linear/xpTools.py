@@ -111,12 +111,10 @@ def setDataSet(v):
             'FTB': True if v == Dataset.FTB else False,
             'dimsum': True if v == Dataset.dimsum else False
         })
-    assert configuration['dataset']['sharedtask2'] != configuration['dataset']['FTB'], 'Ambigious data set definition!'
-    ds = 'Sharedtask 1.0'
-    if configuration['dataset']['sharedtask2']:
-        ds = 'Sharedtask 1.1'
-    elif configuration['dataset']['FTB']:
-        ds = 'FTB'
-    elif configuration['dataset']['dimsum']:
-        ds = 'DiMSUM'
+    trues, mode = 0, ''
+    for k in configuration['dataset'].keys():
+        if configuration['dataset'][k] and type(True) == type(configuration['dataset'][k]):
+            ds = k.upper()
+            trues += 1
+    assert trues <= 1, 'Ambigious data set definition!'
     sys.stdout.write(tabs + 'Dataset: {0}'.format(ds) + doubleSep)

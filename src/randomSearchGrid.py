@@ -5,8 +5,7 @@ import random
 import sys
 
 from config import configuration
-from identification import xp
-
+from xpTools import xp
 
 def runRandomSearchGridXps(langs, xpNum1=25, sharedtask2=True):
     randomSearchGridPath = os.path.join(configuration["path"]["projectPath"], 'ressources', "randomSearchGrid.p")

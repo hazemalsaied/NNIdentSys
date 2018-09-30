@@ -128,45 +128,73 @@ def exploreLR(langs, compact=False):
             break
 
 
-if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding('utf8')
-    logging.basicConfig(level=logging.WARNING)
-    random.seed(0)
-    torch.manual_seed(0)
-
+def setOptimalKiperConf():
+    configuration["sampling"]["importantSentences"] = True
     configuration['kiperwasser'].update({
-        'focusedElemNum': 8,
-        'wordDim': 100,
-        'posDim': 30,
+        'wordDim': 240,
+        'posDim': 40,
         'denseActivation': 'tanh',
-        'dense1': 30,
+        'dense1': 11,
         'dense2': 0,
         'denseDropout': False,
         'optimizer': 'adagrad',
         'lr': 0.07,
         'epochs': 15,
         'batch': 1,
-        'lstmDropout': .2,
+        'lstmDropout': .1,
         'lstmLayerNum': 1,
-        'lstmUnitNum': 60,
+        'lstmUnitNum': 90,
         'verbose': True,
         'file': 'kiperwasser.p'
     })
-    configuration["sampling"]["importantSentences"] = True
+    configuration['model']['embedding']['compactVocab'] = True
+    configuration['model']['embedding']['lemma'] = True
+    configuration['kiperwasser']['earlyStop'] = False
 
-    configuration["evaluation"]["fixedSize"] = True
-    configuration['dataset']['sharedtask2'] = True
+
+if __name__ == '__main__':
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+    logging.basicConfig(level=logging.WARNING)
+    random.seed(0)
+    torch.manual_seed(0)
     configuration['xp']['kiperwasser'] = True
-    # configuration['model']['embedding']['compactVocab'] = True
-    # configuration['model']['embedding']['lemma'] = True
-    configuration['kiperwasser']['earlyStop'] = True
-    # for e in [5, 10, 15, 25, 35]:
-    #     configuration['kiperwasser']['epochs'] = e
-    #     xp(['FR'], xpNum=1, compact=False)
-    # exploreLR(['BG'], True)
-    # createRSGGrid()
-    # getActiveConfs()
-    configuration['kiperwasser']['epochs'] = 20
-    xp(['BG'], xpNum=1, compact=False)
-    # runRSGThread(['BG', 'PT', 'TR'])
+
+    setOptimalKiperConf()
+    # configuration['dataset']['sharedtask2'] = True
+    # configuration['evaluation']['fixedSize'] = True
+
+
+
+    # allSharedtask2Lang = ['BG', 'DE', 'EL', 'EN', 'ES', 'EU', 'FA', 'FR', 'HE', 'HI',
+    #                       'HR', 'HU', 'IT', 'LT', 'PL', 'PT', 'RO', 'SL', 'TR']
+    # configuration['dataset']['sharedtask2'] = True
+    # configuration['evaluation']['corpus'] = True
+    #
+    # xp(allSharedtask2Lang, xpNum=1)
+
+    configuration['dataset']['dimsum'] = True
+    langs = ['EN']
+    configuration["evaluation"]["corpus"] = True
+    xp(langs, xpNum=1)
+    configuration["evaluation"]["corpus"] = False
+    configuration["evaluation"]["trainVsTest"] = True
+    xp(langs, xpNum=1)
+    configuration["evaluation"]["trainVsTest"] = False
+
+    configuration['dataset']['FTB'] = True
+    langs = ['FR']
+    configuration["evaluation"]["corpus"] = True
+    xp(langs, xpNum=1)
+    configuration["evaluation"]["corpus"] = False
+    configuration["evaluation"]["trainVsTest"] = True
+    xp(langs, xpNum=1)
+    configuration["evaluation"]["trainVsTest"] = False
+    configuration["evaluation"]["trainVsDev"] = True
+    xp(langs, xpNum=1)
+    configuration['dataset']['FTB'] = False
+
+
+    # # configuration["evaluation"]["trainVsTest"] = False
+    # # configuration["evaluation"]["trainVsDev"] = True
+    # # xp(langs, xpNum=1)

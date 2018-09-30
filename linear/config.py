@@ -56,7 +56,8 @@ configuration = {
     },
     'dataset': {
         'sharedtask2': False,
-        'FTB': False
+        'FTB': False,
+        'dimsum': False
     },
     'sampling': {
         'overSampling': False,

@@ -1,0 +1,923 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+ERROR (theano.gpuarray): Could not initialize pygpu, support disabled
+Traceback (most recent call last):
+  File "/home/halsaied/miniconda2/lib/python2.7/site-packages/theano/gpuarray/__init__.py", line 227, in <module>
+    use(config.device)
+  File "/home/halsaied/miniconda2/lib/python2.7/site-packages/theano/gpuarray/__init__.py", line 214, in use
+    init_dev(device, preallocate=preallocate)
+  File "/home/halsaied/miniconda2/lib/python2.7/site-packages/theano/gpuarray/__init__.py", line 99, in init_dev
+    **args)
+  File "pygpu/gpuarray.pyx", line 651, in pygpu.gpuarray.init
+  File "pygpu/gpuarray.pyx", line 587, in pygpu.gpuarray.pygpu_init
+GpuArrayException: cuInit: CUDA_ERROR_UNKNOWN: unknown error
+	Mode: LINEAR
+==================================================================================================
+	Dataset: Sharedtask 1.1
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 19767, Test : 1832
+	MWEs in tain : 2021, occurrences : 6034
+	Impotant words in tain : 1589
+	MWE length mean : 2.12
+	Seen MWEs : 439 (65 %)
+	New MWEs : 231 (34 %)
+==================================================================================================
+	Feature number = 557549
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 3:47:10.440365
+==================================================================================================
+8- :: Албанският външен министър 1 **подаде** 1 **оставка** 
+MWEs:
+1- lvc: подаде оставка (+)
+ Identified MWEs: 
+1- lvc: подаде оставка (+)
+
+: L                
+S=[]                        B=[ Албанският,външен, ..]
+SHIFT: L           
+S=[Албанският]    B=[ външен,министър, ..]
+REDUCE: C          
+S=[]                        B=[ външен,министър, ..]
+SHIFT: L           
+S=[външен]            B=[ министър,подаде, ..]
+REDUCE: C          
+S=[]                        B=[ министър,подаде, ..]
+SHIFT: L           
+S=[министър]        B=[ подаде,оставка,]
+REDUCE: C          
+S=[]                        B=[ подаде,оставка,]
+SHIFT: L           
+S=[подаде]            B=[ оставка,]
+SHIFT: C           
+S=[подаде, оставка] B=[ ]
+MERGE: C           
+S=[[подаде, оставка]] B=[ ]
+MARK_AS_LVC: C     
+S=[[подаде, оставка]] B=[ ]
+REDUCE: L          
+S=[]                        B=[ ]
+	Identification : 0.667
+	Categorization : 0.653
+	lvc : 0.531
+	ireflv : 0.875
+	id : 0.308
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 108
+	100 : 1
+	5 : 62
+	300 : 1
+	50 : 7
+	25 : 20
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 227
+	25 : 2
+	5 : 19
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : DE
+==================================================================================================
+	Training  : 7918, Test : 1078
+	MWEs in tain : 1914, occurrences : 3233
+	Impotant words in tain : 1661
+	MWE length mean : 1.96
+	Seen MWEs : 242 (48 %)
+	New MWEs : 258 (51 %)
+==================================================================================================
+	Feature number = 524892
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 0:50:37.582738
+==================================================================================================
+5- :: die frist dafür 1 **läuft** an dem wochenende 1 **aus** . 
+MWEs:
+1- vpc: läuft aus (+)
+ Identified MWEs: 
+1- vpc: läuft aus (+)
+
+: L                
+S=[]                        B=[ die,frist, ..]
+SHIFT: L           
+S=[die]                     B=[ frist,dafür, ..]
+REDUCE: C          
+S=[]                        B=[ frist,dafür, ..]
+SHIFT: L           
+S=[frist]                   B=[ dafür,läuft, ..]
+REDUCE: C          
+S=[]                        B=[ dafür,läuft, ..]
+SHIFT: L           
+S=[dafür]                  B=[ läuft,an, ..]
+REDUCE: C          
+S=[]                        B=[ läuft,an, ..]
+SHIFT: L           
+S=[läuft]                  B=[ an,dem, ..]
+SHIFT: C           
+S=[läuft, an]              B=[ dem,wochenende, ..]
+REDUCE: C          
+S=[läuft]                  B=[ dem,wochenende, ..]
+SHIFT: C           
+S=[läuft, dem]             B=[ wochenende,aus, ..]
+REDUCE: C          
+S=[läuft]                  B=[ wochenende,aus, ..]
+SHIFT: C           
+S=[läuft, wochenende]      B=[ aus,.,]
+REDUCE: C          
+S=[läuft]                  B=[ aus,.,]
+SHIFT: C           
+S=[läuft, aus]             B=[ .,]
+MERGE: C           
+S=[[läuft, aus]]           B=[ .,]
+MARK_AS_VPC: C     
+S=[[läuft, aus]]           B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.49
+	Categorization : 0.354
+	lvc : 0.118
+	ireflv : 0.421
+	vpc : 0.645
+	id : 0.314
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 102
+	25 : 1
+	50 : 2
+	5 : 35
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 278
+	50 : 1
+	5 : 12
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : EL
+==================================================================================================
+	Training  : 6989, Test : 1261
+	MWEs in tain : 1109, occurrences : 1831
+	Impotant words in tain : 961
+	MWE length mean : 2.37
+	Seen MWEs : 284 (56 %)
+	New MWEs : 217 (43 %)
+==================================================================================================
+	Feature number = 408158
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 0:30:00.322324
+==================================================================================================
+31- :: Δεν 1 **έκανε** 1 **αναφορά** σε γεωγραφικό προσδιορισμό . 
+MWEs:
+1- lvc: έκανε αναφορά (+)
+ Identified MWEs: 
+1- lvc: έκανε αναφορά (+)
+
+: L                
+S=[]                        B=[ Δεν,έκανε, ..]
+SHIFT: L           
+S=[Δεν]                  B=[ έκανε,αναφορά, ..]
+REDUCE: C          
+S=[]                        B=[ έκανε,αναφορά, ..]
+SHIFT: L           
+S=[έκανε]              B=[ αναφορά,σε, ..]
+SHIFT: C           
+S=[έκανε, αναφορά] B=[ σε,γεωγραφικό, ..]
+MERGE: C           
+S=[[έκανε, αναφορά]] B=[ σε,γεωγραφικό, ..]
+MARK_AS_LVC: C     
+S=[[έκανε, αναφορά]] B=[ σε,γεωγραφικό, ..]
+REDUCE: C          
+S=[]                        B=[ σε,γεωγραφικό, ..]
+SHIFT: L           
+S=[σε]                    B=[ γεωγραφικό,προσδιορισμό, ..]
+REDUCE: C          
+S=[]                        B=[ γεωγραφικό,προσδιορισμό, ..]
+SHIFT: L           
+S=[γεωγραφικό]    B=[ προσδιορισμό,.,]
+REDUCE: C          
+S=[]                        B=[ προσδιορισμό,.,]
+SHIFT: L           
+S=[προσδιορισμό] B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.586
+	Categorization : 0.557
+	lvc : 0.589
+	vpc : 0.286
+	id : 0.498
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 110
+	25 : 2
+	5 : 29
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 202
+	25 : 1
+	5 : 16
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : EN
+==================================================================================================
+	Training  : 3471, Test : 3965
+	MWEs in tain : 233, occurrences : 331
+	Impotant words in tain : 241
+	MWE length mean : 2.16
+	Seen MWEs : 139 (27 %)
+	New MWEs : 362 (72 %)
+==================================================================================================
+	Feature number = 138348
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 0:01:13.435780
+==================================================================================================
+178- :: 1 **paying** special 1 **attention** to the eyes . 
+MWEs:
+1- lvc: paying attention (+)
+ Identified MWEs: 
+1- lvc: paying attention (+)
+
+: L                
+S=[]                        B=[ paying,special, ..]
+SHIFT: L           
+S=[paying]                  B=[ special,attention, ..]
+SHIFT: C           
+S=[paying, special]         B=[ attention,to, ..]
+REDUCE: C          
+S=[paying]                  B=[ attention,to, ..]
+SHIFT: C           
+S=[paying, attention]       B=[ to,the, ..]
+MERGE: C           
+S=[[paying, attention]]     B=[ to,the, ..]
+MARK_AS_LVC: C     
+S=[[paying, attention]]     B=[ to,the, ..]
+REDUCE: C          
+S=[]                        B=[ to,the, ..]
+SHIFT: L           
+S=[to]                      B=[ the,eyes, ..]
+REDUCE: C          
+S=[]                        B=[ the,eyes, ..]
+SHIFT: L           
+S=[the]                     B=[ eyes,.,]
+REDUCE: C          
+S=[]                        B=[ eyes,.,]
+SHIFT: L           
+S=[eyes]                    B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.296
+	Categorization : 0.282
+	lvc : 0.107
+	vpc : 0.432
+	id : 0.165
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 52
+	5 : 4
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 312
+	5 : 1
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : ES
+==================================================================================================
+	Training  : 3469, Test : 2046
+	MWEs in tain : 1098, occurrences : 2029
+	Impotant words in tain : 827
+	MWE length mean : 2.27
+	Seen MWEs : 273 (54 %)
+	New MWEs : 227 (45 %)
+==================================================================================================
+	Feature number = 280805
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 0:17:52.864528
+==================================================================================================
+57- :: los últimos técnicos en comercio 1 **se** 1 **graduaron** el año 1963 . 
+MWEs:
+1- ireflv: se graduaron (+)
+
+: L                
+S=[]                        B=[ los,últimos, ..]
+SHIFT: L           
+S=[los]                     B=[ últimos,técnicos, ..]
+REDUCE: C          
+S=[]                        B=[ últimos,técnicos, ..]
+SHIFT: L           
+S=[últimos]                B=[ técnicos,en, ..]
+REDUCE: C          
+S=[]                        B=[ técnicos,en, ..]
+SHIFT: L           
+S=[técnicos]               B=[ en,comercio, ..]
+REDUCE: C          
+S=[]                        B=[ en,comercio, ..]
+SHIFT: L           
+S=[en]                      B=[ comercio,se, ..]
+REDUCE: C          
+S=[]                        B=[ comercio,se, ..]
+SHIFT: L           
+S=[comercio]                B=[ se,graduaron, ..]
+REDUCE: C          
+S=[]                        B=[ se,graduaron, ..]
+SHIFT: L           
+S=[se]                      B=[ graduaron,el, ..]
+REDUCE: C          
+S=[]                        B=[ graduaron,el, ..]
+SHIFT: L           
+S=[graduaron]               B=[ el,año, ..]
+REDUCE: C          
+S=[]                        B=[ el,año, ..]
+SHIFT: L           
+S=[el]                      B=[ año,1963, ..]
+REDUCE: C          
+S=[]                        B=[ año,1963, ..]
+SHIFT: L           
+S=[año]                    B=[ 1963,.,]
+REDUCE: C          
+S=[]                        B=[ 1963,.,]
+SHIFT: L           
+S=[1963]                    B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.374
+	Categorization : 0.338
+	lvc : 0.302
+	ireflv : 0.426
+	vpc : 0.382
+	id : 0.222
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 128
+	25 : 3
+	5 : 25
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 218
+	25 : 1
+	5 : 18
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : EU
+==================================================================================================
+	Training  : 9754, Test : 1404
+	MWEs in tain : 932, occurrences : 3270
+	Impotant words in tain : 628
+	MWE length mean : 2.02
+	Seen MWEs : 433 (86 %)
+	New MWEs : 67 (13 %)
+==================================================================================================
+	Feature number = 341961
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 0:28:49.943383
+==================================================================================================
+31- :: arrainaren tenperatura egiaztatzeko termometro bat , 1 **beharra** 1 **dagoen** lekuetarako . 
+MWEs:
+1- lvc: beharra dagoen (+)
+ Identified MWEs: 
+1- lvc: beharra dagoen (+)
+
+: L                
+S=[]                        B=[ arrainaren,tenperatura, ..]
+SHIFT: L           
+S=[arrainaren]              B=[ tenperatura,egiaztatzeko, ..]
+REDUCE: C          
+S=[]                        B=[ tenperatura,egiaztatzeko, ..]
+SHIFT: L           
+S=[tenperatura]             B=[ egiaztatzeko,termometro, ..]
+REDUCE: C          
+S=[]                        B=[ egiaztatzeko,termometro, ..]
+SHIFT: L           
+S=[egiaztatzeko]            B=[ termometro,bat, ..]
+REDUCE: C          
+S=[]                        B=[ termometro,bat, ..]
+SHIFT: L           
+S=[termometro]              B=[ bat,,, ..]
+REDUCE: C          
+S=[]                        B=[ bat,,, ..]
+SHIFT: L           
+S=[bat]                     B=[ ,,beharra, ..]
+REDUCE: C          
+S=[]                        B=[ ,,beharra, ..]
+SHIFT: L           
+S=[,]                       B=[ beharra,dagoen, ..]
+REDUCE: C          
+S=[]                        B=[ beharra,dagoen, ..]
+SHIFT: L           
+S=[beharra]                 B=[ dagoen,lekuetarako, ..]
+SHIFT: C           
+S=[beharra, dagoen]         B=[ lekuetarako,.,]
+MERGE: C           
+S=[[beharra, dagoen]]       B=[ lekuetarako,.,]
+MARK_AS_LVC: C     
+S=[[beharra, dagoen]]       B=[ lekuetarako,.,]
+REDUCE: C          
+S=[]                        B=[ lekuetarako,.,]
+SHIFT: L           
+S=[lekuetarako]             B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.802
+	Categorization : 0.784
+	lvc : 0.802
+	id : 0.677
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 61
+	25 : 3
+	50 : 7
+	100 : 3
+	5 : 31
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 95
+	50 : 1
+	100 : 1
+	5 : 10
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : FA
+==================================================================================================
+	Training  : 3258, Test : 359
+	MWEs in tain : 1293, occurrences : 2944
+	Impotant words in tain : 814
+	MWE length mean : 2.14
+	Seen MWEs : 330 (65 %)
+	New MWEs : 171 (34 %)
+==================================================================================================
+	Feature number = 155567
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 0:03:09.529836
+==================================================================================================
+0- :: یکی از روزهای بسیار سرد ماه آوریل بود و ساعت‌ها سیزده 1 **ضربه** 1 **می‌نواختند** . 
+MWEs:
+1- lvc: ضربه می‌نواختند (+)
+
+: L                
+S=[]                        B=[ یکی,از, ..]
+SHIFT: L           
+S=[یکی]                  B=[ از,روزهای, ..]
+REDUCE: C          
+S=[]                        B=[ از,روزهای, ..]
+SHIFT: L           
+S=[از]                    B=[ روزهای,بسیار, ..]
+REDUCE: C          
+S=[]                        B=[ روزهای,بسیار, ..]
+SHIFT: L           
+S=[روزهای]            B=[ بسیار,سرد, ..]
+REDUCE: C          
+S=[]                        B=[ بسیار,سرد, ..]
+SHIFT: L           
+S=[بسیار]              B=[ سرد,ماه, ..]
+REDUCE: C          
+S=[]                        B=[ سرد,ماه, ..]
+SHIFT: L           
+S=[سرد]                  B=[ ماه,آوریل, ..]
+REDUCE: C          
+S=[]                        B=[ ماه,آوریل, ..]
+SHIFT: L           
+S=[ماه]                  B=[ آوریل,بود, ..]
+REDUCE: C          
+S=[]                        B=[ آوریل,بود, ..]
+SHIFT: L           
+S=[آوریل]              B=[ بود,و, ..]
+REDUCE: C          
+S=[]                        B=[ بود,و, ..]
+SHIFT: L           
+S=[بود]                  B=[ و,ساعت‌ها, ..]
+REDUCE: C          
+S=[]                        B=[ و,ساعت‌ها, ..]
+SHIFT: L           
+S=[و]                      B=[ ساعت‌ها,سیزده, ..]
+REDUCE: C          
+S=[]                        B=[ ساعت‌ها,سیزده, ..]
+SHIFT: L           
+S=[ساعت‌ها]         B=[ سیزده,ضربه, ..]
+REDUCE: C          
+S=[]                        B=[ سیزده,ضربه, ..]
+SHIFT: L           
+S=[سیزده]              B=[ ضربه,می‌نواختند, ..]
+REDUCE: C          
+S=[]                        B=[ ضربه,می‌نواختند, ..]
+SHIFT: L           
+S=[ضربه]                B=[ می‌نواختند,.,]
+REDUCE: C          
+S=[]                        B=[ می‌نواختند,.,]
+SHIFT: L           
+S=[می‌نواختند]   B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.802
+	Categorization : 0.802
+	lvc : 0.802
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 192
+	25 : 6
+	50 : 1
+	5 : 67
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 116
+	25 : 2
+	5 : 4
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : FR
+==================================================================================================
+	Training  : 19461, Test : 1606
+	MWEs in tain : 1733, occurrences : 5116
+	Impotant words in tain : 1295
+	MWE length mean : 2.29
+	Seen MWEs : 250 (50 %)
+	New MWEs : 248 (49 %)
+==================================================================================================
+	Feature number = 782753
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 2:01:05.007192
+==================================================================================================
+134- :: - si vous avez ou avez 1 **eu** une 1 **infection** de le tissu cardiaque . 
+MWEs:
+1- lvc: eu infection (+)
+ Identified MWEs: 
+1- lvc: eu infection (+)
+
+: L                
+S=[]                        B=[ -,si, ..]
+SHIFT: L           
+S=[-]                       B=[ si,vous, ..]
+REDUCE: C          
+S=[]                        B=[ si,vous, ..]
+SHIFT: L           
+S=[si]                      B=[ vous,avez, ..]
+REDUCE: C          
+S=[]                        B=[ vous,avez, ..]
+SHIFT: L           
+S=[vous]                    B=[ avez,ou, ..]
+REDUCE: C          
+S=[]                        B=[ avez,ou, ..]
+SHIFT: L           
+S=[avez]                    B=[ ou,avez, ..]
+REDUCE: C          
+S=[]                        B=[ ou,avez, ..]
+SHIFT: L           
+S=[ou]                      B=[ avez,eu, ..]
+REDUCE: C          
+S=[]                        B=[ avez,eu, ..]
+SHIFT: L           
+S=[avez]                    B=[ eu,une, ..]
+REDUCE: C          
+S=[]                        B=[ eu,une, ..]
+SHIFT: L           
+S=[eu]                      B=[ une,infection, ..]
+SHIFT: C           
+S=[eu, une]                 B=[ infection,de, ..]
+REDUCE: C          
+S=[eu]                      B=[ infection,de, ..]
+SHIFT: C           
+S=[eu, infection]           B=[ de,le, ..]
+MERGE: C           
+S=[[eu, infection]]         B=[ de,le, ..]
+MARK_AS_LVC: C     
+S=[[eu, infection]]         B=[ de,le, ..]
+REDUCE: C          
+S=[]                        B=[ de,le, ..]
+SHIFT: L           
+S=[de]                      B=[ le,tissu, ..]
+REDUCE: C          
+S=[]                        B=[ le,tissu, ..]
+SHIFT: L           
+S=[le]                      B=[ tissu,cardiaque, ..]
+REDUCE: C          
+S=[]                        B=[ tissu,cardiaque, ..]
+SHIFT: L           
+S=[tissu]                   B=[ cardiaque,.,]
+REDUCE: C          
+S=[]                        B=[ cardiaque,.,]
+SHIFT: L           
+S=[cardiaque]               B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.592
+	Categorization : 0.569
+	lvc : 0.512
+	ireflv : 0.678
+	id : 0.558
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 86
+	25 : 9
+	50 : 3
+	100 : 3
+	5 : 55
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 120
+	100 : 1
+	5 : 7
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : HE
+==================================================================================================
+	Training  : 15491, Test : 3209
+	MWEs in tain : 1226, occurrences : 1716
+	Impotant words in tain : 1666
+	MWE length mean : 2.39
+	Seen MWEs : 199 (39 %)
+	New MWEs : 303 (60 %)
+==================================================================================================
+	Feature number = 843492
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 1:26:05.598722
+==================================================================================================
+26- :: בתגובה לפסק הדין אמרה חברת הכנסת דליה רבין פילוסוף כי הוא 1 **רצוי** 1 **בעיניה** 
+MWEs:
+1- vpc: רצוי בעיניה (+)
+
+: L                
+S=[]                        B=[ בתגובה,לפסק, ..]
+SHIFT: L           
+S=[בתגובה]            B=[ לפסק,הדין, ..]
+REDUCE: C          
+S=[]                        B=[ לפסק,הדין, ..]
+SHIFT: L           
+S=[לפסק]                B=[ הדין,אמרה, ..]
+REDUCE: C          
+S=[]                        B=[ הדין,אמרה, ..]
+SHIFT: L           
+S=[הדין]                B=[ אמרה,חברת, ..]
+REDUCE: C          
+S=[]                        B=[ אמרה,חברת, ..]
+SHIFT: L           
+S=[אמרה]                B=[ חברת,הכנסת, ..]
+REDUCE: C          
+S=[]                        B=[ חברת,הכנסת, ..]
+SHIFT: L           
+S=[חברת]                B=[ הכנסת,דליה, ..]
+REDUCE: C          
+S=[]                        B=[ הכנסת,דליה, ..]
+SHIFT: L           
+S=[הכנסת]              B=[ דליה,רבין, ..]
+REDUCE: C          
+S=[]                        B=[ דליה,רבין, ..]
+SHIFT: L           
+S=[דליה]                B=[ רבין,פילוסוף, ..]
+REDUCE: C          
+S=[]                        B=[ רבין,פילוסוף, ..]
+SHIFT: L           
+S=[רבין]                B=[ פילוסוף,כי, ..]
+REDUCE: C          
+S=[]                        B=[ פילוסוף,כי, ..]
+SHIFT: L           
+S=[פילוסוף]          B=[ כי,הוא, ..]
+REDUCE: C          
+S=[]                        B=[ כי,הוא, ..]
+SHIFT: L           
+S=[כי]                    B=[ הוא,רצוי, ..]
+REDUCE: C          
+S=[]                        B=[ הוא,רצוי, ..]
+SHIFT: L           
+S=[הוא]                  B=[ רצוי,בעיניה,]
+REDUCE: C          
+S=[]                        B=[ רצוי,בעיניה,]
+SHIFT: L           
+S=[רצוי]                B=[ בעיניה,]
+REDUCE: C          
+S=[]                        B=[ בעיניה,]
+SHIFT: L           
+S=[בעיניה]            B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.37
+	Categorization : 0.32
+	lvc : 0.366
+	id : 0.323
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 53
+	5 : 24
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 320
+	5 : 12
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : HI
+==================================================================================================
+	Training  : 856, Test : 828
+	MWEs in tain : 245, occurrences : 466
+	Impotant words in tain : 247
+	MWE length mean : 2.14
+	Seen MWEs : 273 (54 %)
+	New MWEs : 227 (45 %)
+==================================================================================================
+	Feature number = 56721
+
+__________________________________________________________________________________________________
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+==================================================================================================
+	Training time : 0:00:11.666822
+==================================================================================================
+17- :: भारतीय सेना 1 **करती** है 1 **व्यवस्था** । 
+MWEs:
+1- lvc: करती व्यवस्था (+)
+ Identified MWEs: 
+1- lvc: सेना करती (+)
+
+: L                
+S=[]                        B=[ भारतीय,सेना, ..]
+SHIFT: L           
+S=[भारतीय]      B=[ सेना,करती, ..]
+REDUCE: C          
+S=[]                        B=[ सेना,करती, ..]
+SHIFT: L           
+S=[सेना]            B=[ करती,है, ..]
+SHIFT: C           
+S=[सेना, करती] B=[ है,व्यवस्था, ..]
+MERGE: C           
+S=[[सेना, करती]] B=[ है,व्यवस्था, ..]
+MARK_AS_LVC: C     
+S=[[सेना, करती]] B=[ है,व्यवस्था, ..]
+REDUCE: C          
+S=[]                        B=[ है,व्यवस्था, ..]
+SHIFT: L           
+S=[है]                  B=[ व्यवस्था,।,]
+REDUCE: C          
+S=[]                        B=[ व्यवस्था,।,]
+SHIFT: L           
+S=[व्यवस्था] B=[ ।,]
+REDUCE: C          
+S=[]                        B=[ ।,]
+SHIFT: L           
+S=[।]                     B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.728
+	Categor## OAR [2018-09-29 16:37:32] Job 1693255 KILLED ##

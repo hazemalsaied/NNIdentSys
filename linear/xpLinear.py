@@ -284,23 +284,31 @@ if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
     logging.basicConfig(level=logging.WARNING)
-    setXPMode(XpMode.linear)
-
-    langs = ['FR']
-
-    setDataSet(Dataset.sharedtask2)
-
-    allSharedtask2Lang = ['BG', 'DE', 'EL', 'EN', 'ES', 'EU', 'FA', 'FR', 'HE', 'HI',
-                          'HR', 'HU', 'IT', 'LT', 'PL', 'PT', 'RO', 'SL', 'TR']
+    from xpTools import *
 
     setOptimalRSGFeatures()
 
-    # configuration['linear']['svm'] = True
+    setXPMode(XpMode.linear)
+    configuration['linear']['svm'] = True
 
+    setDataSet(Dataset.sharedtask2)
+    langs = ['HR', 'HU', 'IT', 'LT', 'PL', 'PT', 'RO', 'SL', 'TR']
+    setTrainAndTest(Evaluation.corpus)
+    xp(langs, xpNum=1)
+
+
+    # setDataSet(Dataset.FTB)
+    # langs = ['FR']
     # setTrainAndTest(Evaluation.corpus)
-    # xp(allSharedtask2Lang, xpNum=1)
+    # xp(langs, xpNum=1)
     # setTrainAndTest(Evaluation.trainVsTest)
-    # xp(allSharedtask2Lang, xpNum=1)
-
-    setTrainAndTest(Evaluation.trainVsDev)
-    xp(allSharedtask2Lang, xpNum=1)
+    # xp(langs, xpNum=1)
+    # setTrainAndTest(Evaluation.trainVsDev)
+    # xp(langs, xpNum=1)
+    #
+    # setDataSet(Dataset.dimsum)
+    # langs = ['EN']
+    # setTrainAndTest(Evaluation.corpus)
+    # xp(langs, xpNum=1)
+    # setTrainAndTest(Evaluation.trainVsTest)
+    # xp(langs, xpNum=1)

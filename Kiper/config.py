@@ -13,9 +13,11 @@ configuration = {
     'kiperwasser': {
         'wordDim': 25,
         'posDim': 5,
-        'denseActivation': 'relu',
+        'layerNum': 2,
+        'activation': 'tanh',
         'optimizer': 'adam',
         'lr': 0.1,
+        'dropout': .3,
         'epochs': 15,
         'batch': 1,
         'dense1': 25,
@@ -24,13 +26,36 @@ configuration = {
         'lstmDropout': 0.3,
         'lstmLayerNum': 2,
         'focusedElemNum': 8,
-        'lstmUnitNum': 8,
-        'earlyStop': False,
-        'moreTrans': False
+        'lstmUnitNum': 8
+    },
+    'rnn': {
+        'focusedElements': 7,
+        'wordDim': 50,
+        'posDim': 15,
+        'gru': True,
+        'wordRnnUnitNum': 16,
+        'posRnnUnitNum': 5,
+        'rnnDropout': .3,
+        'useDense': True,
+        'denseDropout': .3,
+        'denseUnitNum': 25,
+        'optimizer': 'adagrad',
+        'lr': .05,
+        'epochs': 20,
+        'batchSize': 64,
+        'earlyStop': True,
+        'compactVocab': True,
+        's0TokenNum': 4,
+        's1TokenNum': 2,
+        'bTokenNum': 1,
+        'shuffle': False,
+        'rnnSequence': False
+
     },
     'dataset': {
-        'sharedtask2': True,
-        'FTB': False
+        'sharedtask2': False,
+        'FTB': False,
+        'dimsum': False
     },
     'sampling': {
         'overSampling': False,
@@ -70,7 +95,8 @@ configuration = {
         }
     },
     'linear': {
-        'svm': False,  # Logistic regression otherwise
+        'svm': False,
+        # Logistic regression otherwise
     },
     'model': {
         'inputItems': 4,
@@ -86,7 +112,7 @@ configuration = {
             'posEmb': 25,
             'tokenEmb': 200,
             'usePos': True,
-            'lemma': False,
+            'lemma': True,
             'initialisation': {
                 'active': False,
                 'modifiable': True,
@@ -94,7 +120,8 @@ configuration = {
                 'pos': True,
                 'token': True,
                 'Word2VecWindow': 3,
-                'type': 'frWac200'  # 'dataFR.profiles.min.250'  # 'frWac200'
+                'type': 'frWac200'
+                # 'dataFR.profiles.min.250'  # 'frWac200'
             },
             'frequentTokens': True,
             'compactVocab': False
@@ -117,11 +144,13 @@ configuration = {
             'active': False,
             'gru': False,
             'stacked': False,
-            'rnn1': {'unitNumber': 128, 'posUnitNumber': 32},
+            'rnn1': {'unitNumber': 128,
+                     'posUnitNumber': 32},
             'rnn2': {'unitNumber': 128}
         },
         'train': {
-            'visualisation': {'batchStep': 50},
+            'visualisation': {
+                'batchStep': 50},
             'manipulateClassWeights': True,
             'optimizer': 'adagrad',
             'loss': 'categorical_crossentropy',
@@ -169,7 +198,8 @@ configuration = {
             '1': False,
             '2': False,
             '3': False
-        }, 'stackLength': True,
+        },
+        'stackLength': True,
         'distance': {
             's0s1': True,
             's0b0': True
@@ -186,7 +216,8 @@ configuration = {
             'conllu': 'train.conllu',
             'posAuto': 'train.conllu.autoPOS',
             'depAuto': 'train.conllu.autoPOS.autoDep'
-        }, 'test': {
+        },
+        'test': {
             'conllu': 'test.conllu',
             'posAuto': 'test.conllu.autoPOS',
             'depAuto': 'test.conllu.autoPOS.autoDep'
@@ -195,7 +226,8 @@ configuration = {
             'frWac200': 'ressources/WordEmb/frWac/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin',
             'dataFR.profiles.min.250': 'ressources/WordEmb/dataFR.profiles.min',
             'frWiki50': 'ressources/WordEmb/vecs50-linear-frwiki'
-        }, 'reports': {
+        },
+        'reports': {
             'summary': 'summary.json',
             'normaliser': 'normaliser.pkl',
             'config': 'setting.txt',
@@ -213,6 +245,7 @@ configuration = {
     }
 
 }
+
 
 
 def desactivateMainConf():
@@ -246,6 +279,46 @@ def resetFRStandardFeatures():
     featConf['history']['1'] = False
     featConf['history']['2'] = False
     featConf['history']['3'] = False
+
+
+def resetStandardFeatures(v=False):
+    configuration['features'].update({
+        'active': True,
+        'unigram': {
+            'lemma': v,
+            'token': v,
+            'pos': v,
+            'suffix': v,
+            'b1': v
+        },
+        'bigram': {
+            'active': v,
+            's0b2': v
+        },
+        'trigram': v,
+        'syntax': {
+            'active': v,
+            'abstract': v,
+            'lexicalised': v,
+            'bufferElements': 5
+        },
+        'dictionary': {
+            'active': v,
+            'mwt': True,
+            's0TokenIsMWEToken': v,
+            's0TokensAreMWE': v
+        },
+        'history': {
+            '1': v,
+            '2': v,
+            '3': v
+        },
+        'stackLength': v,
+        'distance': {
+            's0s1': v,
+            's0b0': v
+        }
+    })
 
 
 def setFeatureConf(active=True):
