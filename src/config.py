@@ -1,36 +1,67 @@
 import os
 
-
-
-
-
 configuration = {
+    'others': {
+        'cvFolds': 5,
+        'currentIter': -1,
+        'shuffleTrain': False,
+        'debugTrainNum': 25,
+        'test': 0.1,
+        'tokenAvg': 270000,
+        'testTokenAvg': 43000,
+        'mweRepeition': 35,
+        'universalPOS': True,
+        'svm': True,
+        'svmScikit': True,
+        'bufferElements': 5,
+        'verbose': True,
+        'deleteNumericalExpressions': False,
+        'replaceNumbers': True,
+        'removeFtbMWT': False
+    },
     'xp': {
         'linear': False,
         'compo': False,
-        'pytorch': False,
         'kiperwasser': False,
+        'kiperComp': False,
         'rnn': False,
         'rnnNonCompo': False,
-        'verbose': 1
+    },
+    'dataset': {
+        'sharedtask2': False,
+        'ftb': False,
+        'dimsum': False
+    },
+    'evaluation': {
+        'cv': False,
+        'corpus': False,
+        'fixedSize': False,
+        'dev': False,
+        'trainVsDev': False,
+        'trainVsTest': False
     },
     'kiperwasser': {
         'wordDim': 25,
         'posDim': 5,
         'layerNum': 2,
-        'activation': 'tanh',
-        'optimizer': 'adam',
-        'lr': 0.1,
+        'optimizer': 'adagrad',
+        'lr': 0.07,
         'dropout': .3,
         'epochs': 15,
         'batch': 1,
         'dense1': 25,
-        'dense2': 0,
-        'denseDropout': False,
-        'lstmDropout': 0.3,
-        'lstmLayerNum': 2,
+        'denseActivation': 'tanh',
+        'denseDropout': 0,
+        'rnnUnitNum': 8,
+        'rnnDropout': 0.3,
+        'rnnLayerNum': 2,
         'focusedElemNum': 8,
-        'lstmUnitNum': 8
+        'file': 'kiper.p',
+        'earlyStop': False,
+        'verbose': False,
+        'eager': True,
+        'gru': True,
+        '': False
     },
     'rnn': {
         'focusedElements': 7,
@@ -48,18 +79,52 @@ configuration = {
         'epochs': 20,
         'batchSize': 64,
         'earlyStop': True,
-        'compactVocab': True,
         's0TokenNum': 4,
         's1TokenNum': 2,
         'bTokenNum': 1,
         'shuffle': False,
         'rnnSequence': False
-
     },
-    'dataset': {
-        'sharedtask2': False,
-        'FTB': False,
-        'dimsum': False
+    'mlp': {
+        'inputItems': 4,
+        'posEmb': 42,
+        'tokenEmb': 480,
+        'lemma': True,
+        'frequentTokens': True,
+        'compactVocab': False,
+        'optimizer': 'adagrad',
+        'loss': 'categorical_crossentropy',
+        'verbose': 0,
+        'batchSize': 64,
+        'epochs': 40,
+        'earlyStop': True,
+        'chickPoint': False,
+        'validationSplit': .1,
+        'minDelta': .2,
+        'lr': 0.059,
+        'dense1': True,
+        'dense1UnitNumber': 60,
+        'dense1Activation': 'relu',
+        'dense1Dropout': 0.43,
+        'dense2': False,
+        'dense2UnitNumber': 0,
+        'dense2Activation': 'relu',
+        'dense2Dropout': 0,
+        'predictVerbose': False,
+        's0Padding': 5,
+        's1Padding': 5,
+        'bPadding': 2,
+        'features': False
+    },
+    'initialisation': {
+        'active': False,
+        'modifiable': True,
+        'oneHotPos': False,
+        'pos': True,
+        'token': True,
+        'Word2VecWindow': 3,
+        'type': 'frWac200'
+        # 'dataFR.profiles.min.250'  # 'frWac200'
     },
     'sampling': {
         'overSampling': False,
@@ -67,147 +132,29 @@ configuration = {
         'importantTransitions': False,
         'sampleWeight': False,
         'favorisationCoeff': 1,
-        'mweRepeition': 35,
         'focused': False
     },
-    'evaluation': {
-        'cv': {'active': False,
-               'currentIter': -1,
-               'cvFolds': 5,
-               },
-        'corpus': False,
-        'fixedSize': False,
-        'dev': False,
-        'trainVsDev': False,
-        'trainVsTest': False,
-        'tokenAvg': 270000,
-        'testTokenAvg': 43000,
-        'dataset': 'train',
-        'debugTrainNum': 25,
-        'test': 0.1,
-        'load': False,
-        'save': False,
-        'shuffleTrain': False,
-    },
-    'preprocessing': {
-        'data': {
-            'shuffle': False,
-            'universalPOS': True
-        },
-        'oracle': {
-            'merge': 'right'
-        }
-    },
-    'linear': {
-        'svm': False,
-        # Logistic regression otherwise
-    },
-    'model': {
-        'inputItems': 4,
-        'padding': {
-            'active': False,
-            's0Padding': 5,
-            's1Padding': 5,
-            'bPadding': 2,
-        },
-        'embedding': {
-            'active': True,
-            'concatenation': False,
-            'posEmb': 25,
-            'tokenEmb': 200,
-            'usePos': True,
-            'lemma': True,
-            'initialisation': {
-                'active': False,
-                'modifiable': True,
-                'oneHotPos': False,
-                'pos': True,
-                'token': True,
-                'Word2VecWindow': 3,
-                'type': 'frWac200'
-                # 'dataFR.profiles.min.250'  # 'frWac200'
-            },
-            'frequentTokens': True,
-            'compactVocab': False
-        },
-        'mlp': {
-            'dense1': {
-                'active': False,
-                'unitNumber': 1024,
-                'activation': 'relu',
-                'dropout': 0.2
-            },
-            'dense2': {
-                'active': False,
-                'unitNumber': 512,
-                'activation': 'relu',
-                'dropout': 0.2
-            }
-        },
-        'rnn': {
-            'active': False,
-            'gru': False,
-            'stacked': False,
-            'rnn1': {'unitNumber': 128,
-                     'posUnitNumber': 32},
-            'rnn2': {'unitNumber': 128}
-        },
-        'train': {
-            'visualisation': {
-                'batchStep': 50},
-            'manipulateClassWeights': True,
-            'optimizer': 'adagrad',
-            'loss': 'categorical_crossentropy',
-            'verbose': 0,
-            'batchSize': 64,
-            'epochs': 40,
-            'earlyStop': True,
-            'chickPoint': False,
-            'validationSplit': .1,
-            'monitor': 'val_loss',
-            'minDelta': .2,
-            'lr': 0.02
-        },
-        'predict': {
-            'verbose': 0
-        },
-    },
     'features': {
-        'active': False,
-        'unigram': {
-            'lemma': True,
-            'token': True,
-            'pos': True,
-            'suffix': False,
-            'b1': True
-        },
-        'bigram': {
-            'active': True,
-            's0b2': True
-        },
-        'trigram': True,
-        'syntax': {
-            'active': True,
-            'abstract': True,
-            'lexicalised': False,
-            'bufferElements': 5
-        },
-        'dictionary': {
-            'active': True,
-            'mwt': True,
-            's0TokenIsMWEToken': False,
-            's0TokensAreMWE': False
-        },
-        'history': {
-            '1': False,
-            '2': False,
-            '3': False
-        },
-        'stackLength': True,
-        'distance': {
-            's0s1': True,
-            's0b0': True
-        }
+        'lemma': True,
+        'token': False,
+        'pos': True,
+        'suffix': False,
+        'b1': False,
+        's0b2': False,
+        'bigram': True,
+        'trigram': False,
+        'syntax': False,
+        'syntaxAbstract': False,
+        'dictionary': False,
+        's0TokenIsMWEToken': False,
+        's0TokensAreMWE': False,
+        'history1': False,
+        'history2': False,
+        'history3': False,
+        'stackLength': False,
+        'distanceS0s1': False,
+        'distanceS0b0': False,
+        'numeric': False
     },
     'path': {
         'results': 'Results',
@@ -249,100 +196,5 @@ configuration = {
     }
 
 }
-
-
-
-def desactivateMainConf():
-    configuration['features']['active'] = False
-
-    configuration['model']['mlp']['dense1']['active'] = False
-    configuration['model']['rnn']['active'] = False
-
-    configuration['model']['embedding']['active'] = False
-    configuration['model']['embedding']['initialisation']['active'] = False
-    configuration['model']['embedding']['concatenation'] = False
-    configuration['model']['embedding']['usePos'] = False
-
-
-def resetFRStandardFeatures():
-    featConf = configuration['features']
-
-    featConf['unigram']['token'] = True
-    featConf['unigram']['pos'] = True
-    featConf['unigram']['lemma'] = True
-    featConf['syntax']['active'] = True
-    featConf['syntax']['abstract'] = True
-    featConf['bigram']['s0b2'] = True
-    featConf['bigram']['active'] = True
-    featConf['trigram'] = False
-    featConf['distance']['s0b0'] = True
-    featConf['distance']['s0s1'] = True
-    featConf['stackLength'] = False
-    featConf['unigram']['b1'] = True
-    featConf['dictionary']['active'] = True
-    featConf['history']['1'] = False
-    featConf['history']['2'] = False
-    featConf['history']['3'] = False
-
-
-def resetStandardFeatures(v=False):
-    configuration['features'].update({
-        'active': True,
-        'unigram': {
-            'lemma': v,
-            'token': v,
-            'pos': v,
-            'suffix': v,
-            'b1': v
-        },
-        'bigram': {
-            'active': v,
-            's0b2': v
-        },
-        'trigram': v,
-        'syntax': {
-            'active': v,
-            'abstract': v,
-            'lexicalised': v,
-            'bufferElements': 5
-        },
-        'dictionary': {
-            'active': v,
-            'mwt': True,
-            's0TokenIsMWEToken': v,
-            's0TokensAreMWE': v
-        },
-        'history': {
-            '1': v,
-            '2': v,
-            '3': v
-        },
-        'stackLength': v,
-        'distance': {
-            's0s1': v,
-            's0b0': v
-        }
-    })
-
-
-def setFeatureConf(active=True):
-    resetFRStandardFeatures()
-    configuration['features']['active'] = active
-
-
-def setDense1Conf(active=True, unitNumber=128):
-    configuration['model']['mlp']['dense1']['active'] = active
-    configuration['model']['mlp']['dense1']['unitNumber'] = unitNumber
-
-
-def setEmbConf(active=True, useToken=True, usePos=True, tokenEmb=200, posEmb=25, init=False):
-    embConf = configuration['model']['embedding']
-    embConf['active'] = active
-    embConf['useToken'] = useToken
-    embConf['tokenEmb'] = tokenEmb
-    embConf['usePos'] = usePos
-    embConf['posEmb'] = posEmb
-    embConf['initialisation']['active'] = init
-
 
 configuration['path']['projectPath'] = os.path.dirname(__file__)[:-len(os.path.basename(os.path.dirname(__file__)))]

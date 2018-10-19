@@ -1,19 +1,16 @@
 import datetime
 import logging
 
-# import torch
-from theano import function, config, shared, tensor
-
-import modelCompo
+import modelCompactKiper
+import modelKiperwasser
+import modelLinear
 import modelNonCompo
-# import modelPytorch
 import modelRnn
 import modelRnnNonCompo
 import oracle
 import reports
 from corpus import *
 from evaluation import evaluate
-from normalisation import Normalizer
 from parser import parse
 
 
@@ -21,14 +18,143 @@ def identify(lang):
     corpus = Corpus(lang)
     oracle.parse(corpus)
     startTime = datetime.datetime.now()
-    network, normalizer = parseAndTrain(corpus)
-    sys.stdout.write(reports.doubleSep + reports.tabs + 'Training time : {0}'.
-                     format(datetime.datetime.now() - startTime) + reports.doubleSep)
-    parse(corpus, network, normalizer)
-    reports.printParsedSents(corpus, 1)
-    evaluate(corpus)
+    network, vectorizer = parseAndTrain(corpus)
+    sys.stdout.write('{0}{1}Training time : {2}{3}'.
+                     format(reports.doubleSep, reports.tabs,
+                            datetime.datetime.now() - startTime, reports.doubleSep))
+    startTime = datetime.datetime.now()
+    parse(corpus.testingSents, network, vectorizer)
+    sys.stdout.write('{0}{1}Parsing time : {2}{3}'.
+                     format(reports.doubleSep, reports.tabs,
+                            datetime.datetime.now() - startTime, reports.doubleSep))
+    evaluate(corpus.testingSents)
+    corpus.createMWEFiles()
+    sys.stdout.flush()
+
+
+def identifyWithLinearInMlp(lang):
+    configuration['others']['verbose'] = False
+    linearModels, linearVecs = jackknifing(lang, True)
+    configuration['others']['verbose'] = True
+    configuration['xp']['linear'] = False
+    configuration['sampling'].update({
+        'overSampling': True,
+        'importantSentences': True,
+        'importantTransitions': False,
+        'sampleWeight': True,
+        'favorisationCoeff': 6,
+        'focused': True
+    })
+    corpus = Corpus(lang)
+    oracle.parse(corpus)
+    startTime = datetime.datetime.now()
+    model = modelNonCompo.Network(corpus, linearInMLP=True)
+    model.train(corpus, linearModels=linearModels, linearNormalizers=linearVecs)
+    sys.stdout.write('{0}MLP training time : {1}{2}'.
+                     format(reports.tabs, datetime.datetime.now() - startTime, reports.doubleSep))
+    startTime = datetime.datetime.now()
+    parse(corpus.testingSents, model, linearModels=linearModels, linearVecs=linearVecs)
+    sys.stdout.write('{0}{1}Parsing time : {2}{3}'.
+                     format(reports.doubleSep, reports.tabs, datetime.datetime.now() - startTime, reports.doubleSep))
+    evaluate(corpus.testingSents)
+    configuration['xp']['linear'] = False
+    sys.stdout.flush()
+
+
+def identifyWithMlpInLinear(lang):
+    configuration['others']['verbose'] = False
+    mlpModels, mlpNormalizers = jackknifing(lang, False)
+    configuration['others']['verbose'] = True
+    configuration['sampling'].update({
+        'overSampling': False,
+        'importantSentences': False,
+        'importantTransitions': False,
+        'sampleWeight': False,
+        'favorisationCoeff': 1,
+        'focused': False
+    })
+    corpus = Corpus(lang)
+    oracle.parse(corpus)
+    startTime = datetime.datetime.now()
+    linearModel, linearVec = modelLinear.train(corpus, mlpModels=mlpModels, mlpNormalizers=mlpNormalizers)
+    sys.stdout.write('{0}Linear training time : {1}{2}'.
+                     format(reports.tabs, datetime.datetime.now() - startTime, reports.doubleSep))
+    configuration['xp']['linear'] = True
+    startTime = datetime.datetime.now()
+    parse(corpus.testingSents, linearModel, linearVec, mlpModels=mlpModels, mlpNormalizers=mlpNormalizers)
+    sys.stdout.write('{0}{1}Parsing time : {2}{3}'.
+                     format(reports.doubleSep, reports.tabs, datetime.datetime.now() - startTime, reports.doubleSep))
+    evaluate(corpus.testingSents)
+    configuration['xp']['linear'] = False
+    sys.stdout.flush()
+
+
+def jackknifing(lang, linear=True):
+    if linear:
+        configuration['xp']['linear'] = True
+        configuration['sampling'].update({
+            'overSampling': False,
+            'importantSentences': False,
+            'importantTransitions': False,
+            'sampleWeight': False,
+            'favorisationCoeff': 1,
+            'focused': False
+        })
+    else:
+        configuration['xp']['linear'] = False
+        configuration['sampling'].update({
+            'overSampling': True,
+            'importantSentences': False,
+            'importantTransitions': False,
+            'sampleWeight': True,
+            'favorisationCoeff': 6,
+            'focused': True
+        })
+    models, normalizers = dict(), dict()
+    for i in range(5):
+        model, normalizer = jackknifingAFold(lang, i, linear=linear)
+        sys.stdout.write('Finished training the fold {0}\n'.format(i))
+        models[i] = model
+        normalizers[i] = normalizer
+    model, normalizer = jackknifingAFold(lang, -1, linear=linear, all=True)
+    models[5] = model
+    normalizers[5] = normalizer
+    sys.stdout.write('Finished training the whole corpus \n')
+    return models, normalizers
+
+
+def jackknifingAFold(lang, foldIdx, linear=True, all=False):
+    corpus = Corpus(lang)
+    if not all:
+        foldLength = int(len(corpus.trainingSents) / 5)
+        foldStart = foldIdx * foldLength
+        foldEnd = foldStart + foldLength
+        corpus.testingSents = corpus.trainingSents[foldStart:foldEnd]
+        corpus.trainingSents = corpus.trainingSents[:foldStart] + corpus.trainingSents[foldEnd:]
+    if not linear:
+        configuration['sampling']['importantSentences'] = True
+        corpus.filterImportatntSents()
+    oracle.parse(corpus)
+    vectorizer = None
+    if linear:
+        network, vectorizer = modelLinear.train(corpus)
+    else:
+        network = modelNonCompo.Network(corpus)
+        network.train(corpus)
+
+    parse(corpus.testingSents, network, vectorizer)
+    evaluate(corpus.testingSents)
+
+    corpus.testingSents = corpus.trainingSents
+    parse(corpus.testingSents, network, vectorizer)
+    evaluate(corpus.testingSents)
+
+    return network, vectorizer
+
 
 def parseAndTrain(corpus):
+    if configuration['xp']['linear']:
+        return modelLinear.train(corpus)
     if configuration['xp']['rnn']:
         network = modelRnn.Network(corpus)
         modelRnn.train(network, corpus)
@@ -37,32 +163,25 @@ def parseAndTrain(corpus):
         network = modelRnnNonCompo.Network(corpus)
         modelRnnNonCompo.train(network, corpus)
         return network, None
-    # if configuration['xp']['kiperwasser']:
-    #     network = modelKiperwasser.train(corpus)
-    #     normalizer = Normalizer(corpus)
-    #     return network, normalizer
-    normalizer = Normalizer(corpus)
-    # if configuration['xp']['pytorch']:
-    #     network = modelPytorch.PytorchModel(normalizer)
-    #     modelPytorch.main(network, corpus, normalizer)
-    if configuration['xp']['compo']:
-        network = modelCompo.Network(normalizer)
-        modelCompo.train(network.model, normalizer, corpus)
-    else:
-        network = modelNonCompo.Network(normalizer)
-        modelNonCompo.train(network.model, normalizer, corpus)
-    return network, normalizer
+    if configuration['xp']['kiperwasser']:
+        network = modelKiperwasser.train(corpus, configuration)
+        return network, None
+    if configuration['xp']['kiperComp']:
+        network = modelCompactKiper.train(corpus, configuration)
+        return network, None
+    network = modelNonCompo.Network(corpus)
+    network.train(corpus)
+    return network, None
 
 
 def crossValidation(langs, debug=False):
-    configuration['evaluation']['cv']['active'], scores, iterations = True, [0.] * 28, 5
+    configuration['evaluation']['cv'], scores, iterations = True, [0.] * 28, 5
     for lang in langs:
-        reports.createReportFolder(lang)
-        for cvIdx in range(configuration['evaluation']['cv']['currentIter']):
+        for cvIdx in range(configuration['others']['cvFolds']):
             reports.createHeader('Iteration no.{0}'.format(cvIdx))
-            configuration['evaluation']['cv']['currentIter'] = cvIdx
+            configuration['others']['currentIter'] = cvIdx
             cvCurrentIterFolder = os.path.join(reports.XP_CURRENT_DIR_PATH,
-                                               str(configuration['evaluation']['currentIter']))
+                                               str(configuration['others']['currentIter']))
             if not os.path.isdir(cvCurrentIterFolder):
                 os.makedirs(cvCurrentIterFolder)
             corpus = Corpus(lang)
@@ -83,7 +202,7 @@ def crossValidation(langs, debug=False):
                     scores[i] += float(tmpScores[i])
                 elif tmpScores[i]:
                     scores[i] = tmpScores[i]
-        reports.saveCVScores(scores)
+        # reports.saveCVScores(scores)
 
 
 def getTrainAndTestSents(corpus, testRange, trainRange):
@@ -91,16 +210,6 @@ def getTrainAndTestSents(corpus, testRange, trainRange):
     corpus.testingSents = sent[testRange[0]:testRange[1]]
     corpus.trainingSents = sent[trainRange[0]:trainRange[1]] if len(trainRange) == 2 else \
         sent[trainRange[0]:trainRange[1]] + sent[trainRange[2]:trainRange[3]]
-
-
-def getAllLangStats(langs):
-    res = ''
-    for lang in langs:
-        corpus = Corpus(lang)
-        res += corpus.langName + ',' + getStats(corpus.trainDataSet, asCSV=True) + ',' + \
-               getStats(corpus.devDataSet, asCSV=True) + ',' + \
-               getStats(corpus.testDataSet, asCSV=True) + '\n'
-    return res
 
 
 def analyzeCorporaAndOracle(langs):
@@ -114,11 +223,6 @@ def analyzeCorporaAndOracle(langs):
         oracle.validate(corpus)
     with open('../Results/VMWE.Analysis.csv', 'w') as f:
         f.write(analysisReport)
-
-
-
-
-
 
 
 if __name__ == '__main__':

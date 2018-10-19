@@ -1,0 +1,1076 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/423.kiperwasser.p
+Number of used sentences in train = 2811
+Total loss for epoch 0: 12156.476794
+validation loss after epoch 0 : 1058.017071
+	Epoch 1....
+validAcc: 0.804
+Epoch has taken 0:03:05.289505
+Number of used sentences in train = 2811
+Total loss for epoch 1: 8501.295781
+validation loss after epoch 1 : 813.090292
+validAcc: 0.816
+	Epoch 2....
+Epoch has taken 0:02:47.398076
+Number of used sentences in train = 2811
+Total loss for epoch 2: 7446.065280
+validation loss after epoch 2 : 767.665083
+validAcc: 0.824
+	Epoch 3....
+Epoch has taken 0:02:56.580839
+Number of used sentences in train = 2811
+Total loss for epoch 3: 6874.296168
+validation loss after epoch 3 : 688.247755
+validAcc: 0.827
+	Epoch 4....
+Epoch has taken 0:03:02.448037
+Number of used sentences in train = 2811
+Total loss for epoch 4: 6416.813108
+validation loss after epoch 4 : 697.860404
+	Epoch 5....
+validAcc: 0.82
+Epoch has taken 0:02:57.435600
+Number of used sentences in train = 2811
+Total loss for epoch 5: 6088.450225
+validation loss after epoch 5 : 768.559701
+validAcc: 0.835
+	Epoch 6....
+Epoch has taken 0:02:44.760143
+Number of used sentences in train = 2811
+Total loss for epoch 6: 5810.400195
+validation loss after epoch 6 : 592.760902
+	Epoch 7....
+validAcc: 0.063
+Epoch has taken 0:02:43.315668
+Number of used sentences in train = 2811
+Total loss for epoch 7: 5598.776387
+validation loss after epoch 7 : 350.254142
+	Epoch 8....
+validAcc: 0.828
+Epoch has taken 0:02:43.205591
+Number of used sentences in train = 2811
+Total loss for epoch 8: 5432.760751
+validation loss after epoch 8 : 577.996729
+	Epoch 9....
+validAcc: 0.827
+Epoch has taken 0:02:45.898110
+Number of used sentences in train = 2811
+Total loss for epoch 9: 5322.124394
+validation loss after epoch 9 : 568.478647
+	Epoch 10....
+validAcc: 0.819
+Epoch has taken 0:02:43.002729
+Number of used sentences in train = 2811
+Total loss for epoch 10: 5242.594113
+validation loss after epoch 10 : 561.778573
+	Epoch 11....
+validAcc: 0.053
+Epoch has taken 0:02:41.865242
+Number of used sentences in train = 2811
+Total loss for epoch 11: 5166.348877
+validation loss after epoch 11 : 323.224474
+	Epoch 12....
+validAcc: 0.799
+Epoch has taken 0:02:42.011724
+Number of used sentences in train = 2811
+Total loss for epoch 12: 5143.682701
+validation loss after epoch 12 : 550.175625
+	Epoch 13....
+validAcc: 0.027
+Epoch has taken 0:02:44.035712
+Number of used sentences in train = 2811
+Total loss for epoch 13: 5105.170521
+validation loss after epoch 13 : 308.069210
+	Epoch 14....
+validAcc: 0.111
+Epoch has taken 0:02:43.607562
+Number of used sentences in train = 2811
+Total loss for epoch 14: 5073.965101
+validation loss after epoch 14 : 327.612670
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+validAcc: 0.819
+Epoch has taken 0:02:41.598606
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/0.kiperwasser.p
+Number of used sentences in train = 313
+Total loss for epoch 0: 1182.382578
+	Epoch 1....
+Epoch has taken 0:00:16.291141
+Number of used sentences in train = 313
+Total loss for epoch 1: 729.521353
+	Epoch 2....
+Epoch has taken 0:00:16.280670
+Number of used sentences in train = 313
+Total loss for epoch 2: 597.179125
+	Epoch 3....
+Epoch has taken 0:00:16.284390
+Number of used sentences in train = 313
+Total loss for epoch 3: 555.661164
+	Epoch 4....
+Epoch has taken 0:00:16.279084
+Number of used sentences in train = 313
+Total loss for epoch 4: 538.227837
+	Epoch 5....
+Epoch has taken 0:00:16.283327
+Number of used sentences in train = 313
+Total loss for epoch 5: 521.329337
+	Epoch 6....
+Epoch has taken 0:00:16.284353
+Number of used sentences in train = 313
+Total loss for epoch 6: 516.468541
+	Epoch 7....
+Epoch has taken 0:00:16.275659
+Number of used sentences in train = 313
+Total loss for epoch 7: 513.560089
+	Epoch 8....
+Epoch has taken 0:00:16.275599
+Number of used sentences in train = 313
+Total loss for epoch 8: 510.646516
+	Epoch 9....
+Epoch has taken 0:00:16.277725
+Number of used sentences in train = 313
+Total loss for epoch 9: 509.509326
+	Epoch 10....
+Epoch has taken 0:00:16.280372
+Number of used sentences in train = 313
+Total loss for epoch 10: 508.648613
+	Epoch 11....
+Epoch has taken 0:00:16.282222
+Number of used sentences in train = 313
+Total loss for epoch 11: 508.379928
+	Epoch 12....
+Epoch has taken 0:00:16.270108
+Number of used sentences in train = 313
+Total loss for epoch 12: 507.421843
+	Epoch 13....
+Epoch has taken 0:00:16.276417
+Number of used sentences in train = 313
+Total loss for epoch 13: 507.022967
+	Epoch 14....
+Epoch has taken 0:00:16.273820
+Number of used sentences in train = 313
+Total loss for epoch 14: 506.599729
+Epoch has taken 0:00:16.273795
+
+==================================================================================================
+	Training time : 0:46:22.863118
+==================================================================================================
+	Identification : 0.148
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/137.kiperwasser.p
+Number of used sentences in train = 2811
+Total loss for epoch 0: 12428.844674
+validation loss after epoch 0 : 1019.143800
+	Epoch 1....
+validAcc: 0.838
+Epoch has taken 0:02:45.189588
+Number of used sentences in train = 2811
+Total loss for epoch 1: 8739.715469
+validation loss after epoch 1 : 755.562495
+	Epoch 2....
+validAcc: 0.811
+Epoch has taken 0:02:42.530924
+Number of used sentences in train = 2811
+Total loss for epoch 2: 7752.177290
+validation loss after epoch 2 : 682.002602
+	Epoch 3....
+validAcc: 0.816
+Epoch has taken 0:02:42.537012
+Number of used sentences in train = 2811
+Total loss for epoch 3: 7079.043945
+validation loss after epoch 3 : 801.534482
+	Epoch 4....
+validAcc: 0.011
+Epoch has taken 0:02:42.097044
+Number of used sentences in train = 2811
+Total loss for epoch 4: 6588.439509
+validation loss after epoch 4 : 430.237248
+	Epoch 5....
+validAcc: 0.027
+Epoch has taken 0:02:43.928770
+Number of used sentences in train = 2811
+Total loss for epoch 5: 6196.257862
+validation loss after epoch 5 : 406.083659
+	Epoch 6....
+validAcc: 0.763
+Epoch has taken 0:02:43.212941
+Number of used sentences in train = 2811
+Total loss for epoch 6: 6001.903694
+validation loss after epoch 6 : 711.278818
+	Epoch 7....
+validAcc: 0.058
+Epoch has taken 0:02:42.645804
+Number of used sentences in train = 2811
+Total loss for epoch 7: 5746.098288
+validation loss after epoch 7 : 364.635234
+	Epoch 8....
+validAcc: 0.022
+Epoch has taken 0:02:44.447762
+Number of used sentences in train = 2811
+Total loss for epoch 8: 5626.819241
+validation loss after epoch 8 : 338.159078
+	Epoch 9....
+validAcc: 0.131
+Epoch has taken 0:02:43.385099
+Number of used sentences in train = 2811
+Total loss for epoch 9: 5509.383226
+validation loss after epoch 9 : 367.721111
+	Epoch 10....
+validAcc: 0.814
+Epoch has taken 0:02:42.631370
+Number of used sentences in train = 2811
+Total loss for epoch 10: 5417.533812
+validation loss after epoch 10 : 593.988118
+	Epoch 11....
+validAcc: 0.817
+Epoch has taken 0:02:44.845394
+Number of used sentences in train = 2811
+Total loss for epoch 11: 5339.816057
+validation loss after epoch 11 : 601.745571
+	Epoch 12....
+validAcc: 0.043
+Epoch has taken 0:02:43.427719
+Number of used sentences in train = 2811
+Total loss for epoch 12: 5280.121313
+validation loss after epoch 12 : 331.521473
+	Epoch 13....
+validAcc: 0.184
+Epoch has taken 0:02:42.405753
+Number of used sentences in train = 2811
+Total loss for epoch 13: 5215.682704
+validation loss after epoch 13 : 358.949275
+	Epoch 14....
+validAcc: 0.068
+Epoch has taken 0:02:44.219434
+Number of used sentences in train = 2811
+Total loss for epoch 14: 5157.544557
+validation loss after epoch 14 : 334.663776
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+validAcc: 0.108
+Epoch has taken 0:02:43.297554
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/0.kiperwasser.p
+Number of used sentences in train = 313
+Total loss for epoch 0: 774.904829
+	Epoch 1....
+Epoch has taken 0:00:16.070574
+Number of used sentences in train = 313
+Total loss for epoch 1: 348.292906
+	Epoch 2....
+Epoch has taken 0:00:16.074385
+Number of used sentences in train = 313
+Total loss for epoch 2: 225.551850
+	Epoch 3....
+Epoch has taken 0:00:16.066969
+Number of used sentences in train = 313
+Total loss for epoch 3: 211.914210
+	Epoch 4....
+Epoch has taken 0:00:16.074674
+Number of used sentences in train = 313
+Total loss for epoch 4: 145.168601
+	Epoch 5....
+Epoch has taken 0:00:16.086670
+Number of used sentences in train = 313
+Total loss for epoch 5: 127.328433
+	Epoch 6....
+Epoch has taken 0:00:16.330570
+Number of used sentences in train = 313
+Total loss for epoch 6: 119.399466
+	Epoch 7....
+Epoch has taken 0:00:16.159000
+Number of used sentences in train = 313
+Total loss for epoch 7: 115.190159
+	Epoch 8....
+Epoch has taken 0:00:16.076433
+Number of used sentences in train = 313
+Total loss for epoch 8: 103.980152
+	Epoch 9....
+Epoch has taken 0:00:16.089406
+Number of used sentences in train = 313
+Total loss for epoch 9: 95.460414
+	Epoch 10....
+Epoch has taken 0:00:16.070568
+Number of used sentences in train = 313
+Total loss for epoch 10: 84.781415
+	Epoch 11....
+Epoch has taken 0:00:16.200756
+Number of used sentences in train = 313
+Total loss for epoch 11: 79.383669
+	Epoch 12....
+Epoch has taken 0:00:16.081340
+Number of used sentences in train = 313
+Total loss for epoch 12: 78.860584
+	Epoch 13....
+Epoch has taken 0:00:16.203420
+Number of used sentences in train = 313
+Total loss for epoch 13: 74.567556
+	Epoch 14....
+Epoch has taken 0:00:16.151151
+Number of used sentences in train = 313
+Total loss for epoch 14: 70.233012
+Epoch has taken 0:00:16.125276
+
+==================================================================================================
+	Training time : 0:44:53.153834
+==================================================================================================
+	Identification : 0.012
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/146.kiperwasser.p
+Number of used sentences in train = 2811
+Total loss for epoch 0: 14061.250160
+validation loss after epoch 0 : 1118.589245
+	Epoch 1....
+validAcc: 0.798
+Epoch has taken 0:02:43.962648
+Number of used sentences in train = 2811
+Total loss for epoch 1: 9401.967258
+validation loss after epoch 1 : 782.827266
+validAcc: 0.823
+	Epoch 2....
+Epoch has taken 0:02:43.781456
+Number of used sentences in train = 2811
+Total loss for epoch 2: 8421.439370
+validation loss after epoch 2 : 705.745718
+	Epoch 3....
+validAcc: 0.011
+Epoch has taken 0:02:48.689391
+Number of used sentences in train = 2811
+Total loss for epoch 3: 7628.467465
+validation loss after epoch 3 : 468.709624
+	Epoch 4....
+validAcc: 0.817
+Epoch has taken 0:02:44.227812
+Number of used sentences in train = 2811
+Total loss for epoch 4: 7110.607381
+validation loss after epoch 4 : 653.736284
+	Epoch 5....
+validAcc: 0.82
+Epoch has taken 0:02:44.805310
+Number of used sentences in train = 2811
+Total loss for epoch 5: 6668.002078
+validation loss after epoch 5 : 653.477880
+	Epoch 6....
+validAcc: 0.817
+Epoch has taken 0:02:45.389513
+Number of used sentences in train = 2811
+Total loss for epoch 6: 6396.834944
+validation loss after epoch 6 : 624.957460
+	Epoch 7....
+validAcc: 0.821
+Epoch has taken 0:02:44.505911
+Number of used sentences in train = 2811
+Total loss for epoch 7: 6226.548719
+validation loss after epoch 7 : 630.389145
+	Epoch 8....
+validAcc: 0.794
+Epoch has taken 0:02:44.808655
+Number of used sentences in train = 2811
+Total loss for epoch 8: 6077.745286
+validation loss after epoch 8 : 601.677142
+	Epoch 9....
+validAcc: 0.821
+Epoch has taken 0:02:46.016392
+Number of used sentences in train = 2811
+Total loss for epoch 9: 5989.920227
+validation loss after epoch 9 : 581.303830
+	Epoch 10....
+validAcc: 0.818
+Epoch has taken 0:02:44.892484
+Number of used sentences in train = 2811
+Total loss for epoch 10: 5793.060527
+validation loss after epoch 10 : 615.163054
+	Epoch 11....
+validAcc: 0.192
+Epoch has taken 0:02:44.432577
+Number of used sentences in train = 2811
+Total loss for epoch 11: 5607.986906
+validation loss after epoch 11 : 379.419855
+	Epoch 12....
+validAcc: 0.793
+Epoch has taken 0:02:45.559603
+Number of used sentences in train = 2811
+Total loss for epoch 12: 5522.662061
+validation loss after epoch 12 : 546.387905
+	Epoch 13....
+validAcc: 0.799
+Epoch has taken 0:02:44.793183
+Number of used sentences in train = 2811
+Total loss for epoch 13: 5384.321551
+validation loss after epoch 13 : 549.005430
+	Epoch 14....
+validAcc: 0.805
+Epoch has taken 0:02:44.427571
+Number of used sentences in train = 2811
+Total loss for epoch 14: 5275.699070
+validation loss after epoch 14 : 558.707845
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+validAcc: 0.8
+Epoch has taken 0:02:43.715223
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/0.kiperwasser.p
+Number of used sentences in train = 313
+Total loss for epoch 0: 1562.895522
+	Epoch 1....
+Epoch has taken 0:00:16.321370
+Number of used sentences in train = 313
+Total loss for epoch 1: 749.557173
+	Epoch 2....
+Epoch has taken 0:00:16.334326
+Number of used sentences in train = 313
+Total loss for epoch 2: 648.959491
+	Epoch 3....
+Epoch has taken 0:00:16.327003
+Number of used sentences in train = 313
+Total loss for epoch 3: 570.699150
+	Epoch 4....
+Epoch has taken 0:00:16.338893
+Number of used sentences in train = 313
+Total loss for epoch 4: 541.096291
+	Epoch 5....
+Epoch has taken 0:00:16.326222
+Number of used sentences in train = 313
+Total loss for epoch 5: 526.918746
+	Epoch 6....
+Epoch has taken 0:00:16.322546
+Number of used sentences in train = 313
+Total loss for epoch 6: 518.440580
+	Epoch 7....
+Epoch has taken 0:00:16.329990
+Number of used sentences in train = 313
+Total loss for epoch 7: 510.312157
+	Epoch 8....
+Epoch has taken 0:00:16.574627
+Number of used sentences in train = 313
+Total loss for epoch 8: 504.704838
+	Epoch 9....
+Epoch has taken 0:00:16.330559
+Number of used sentences in train = 313
+Total loss for epoch 9: 501.231878
+	Epoch 10....
+Epoch has taken 0:00:16.335273
+Number of used sentences in train = 313
+Total loss for epoch 10: 499.110983
+	Epoch 11....
+Epoch has taken 0:00:16.323542
+Number of used sentences in train = 313
+Total loss for epoch 11: 498.599837
+	Epoch 12....
+Epoch has taken 0:00:16.340637
+Number of used sentences in train = 313
+Total loss for epoch 12: 497.767660
+	Epoch 13....
+Epoch has taken 0:00:16.326567
+Number of used sentences in train = 313
+Total loss for epoch 13: 497.381160
+	Epoch 14....
+Epoch has taken 0:00:16.318951
+Number of used sentences in train = 313
+Total loss for epoch 14: 496.873583
+Epoch has taken 0:00:16.317792
+
+==================================================================================================
+	Training time : 0:45:19.662857
+==================================================================================================
+	Identification : 0.139
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/164.kiperwasser.p
+Number of used sentences in train = 2811
+Total loss for epoch 0: 13097.677463
+validation loss after epoch 0 : 1050.065685
+	Epoch 1....
+validAcc: 0.81
+Epoch has taken 0:02:45.199067
+Number of used sentences in train = 2811
+Total loss for epoch 1: 8936.660353
+validation loss after epoch 1 : 890.719517
+	Epoch 2....
+validAcc: 0.022
+Epoch has taken 0:02:42.357837
+Number of used sentences in train = 2811
+Total loss for epoch 2: 7919.387192
+validation loss after epoch 2 : 509.107941
+validAcc: 0.824
+	Epoch 3....
+Epoch has taken 0:02:42.514686
+Number of used sentences in train = 2811
+Total loss for epoch 3: 7162.920632
+validation loss after epoch 3 : 743.683214
+validAcc: 0.827
+	Epoch 4....
+Epoch has taken 0:02:44.389314
+Number of used sentences in train = 2811
+Total loss for epoch 4: 6589.482633
+validation loss after epoch 4 : 714.868170
+	Epoch 5....
+validAcc: 0.032
+Epoch has taken 0:02:42.762237
+Number of used sentences in train = 2811
+Total loss for epoch 5: 6226.140576
+validation loss after epoch 5 : 383.497508
+	Epoch 6....
+validAcc: 0.011
+Epoch has taken 0:02:42.445379
+Number of used sentences in train = 2811
+Total loss for epoch 6: 5961.705330
+validation loss after epoch 6 : 334.301089
+	Epoch 7....
+validAcc: 0.083
+Epoch has taken 0:02:46.782771
+Number of used sentences in train = 2811
+Total loss for epoch 7: 5785.082624
+validation loss after epoch 7 : 350.708086
+	Epoch 8....
+validAcc: 0.812
+Epoch has taken 0:02:45.460927
+Number of used sentences in train = 2811
+Total loss for epoch 8: 5647.999532
+validation loss after epoch 8 : 552.575730
+	Epoch 9....
+validAcc: 0.811
+Epoch has taken 0:02:43.376329
+Number of used sentences in train = 2811
+Total loss for epoch 9: 5516.303375
+validation loss after epoch 9 : 550.217927
+	Epoch 10....
+validAcc: 0.824
+Epoch has taken 0:02:44.849720
+Number of used sentences in train = 2811
+Total loss for epoch 10: 5433.251018
+validation loss after epoch 10 : 533.140455
+	Epoch 11....
+validAcc: 0.818
+Epoch has taken 0:02:43.738636
+Number of used sentences in train = 2811
+Total loss for epoch 11: 5341.754342
+validation loss after epoch 11 : 531.067098
+	Epoch 12....
+validAcc: 0.814
+Epoch has taken 0:02:43.687033
+Number of used sentences in train = 2811
+Total loss for epoch 12: 5265.682416
+validation loss after epoch 12 : 536.238158
+	Epoch 13....
+validAcc: 0.103
+Epoch has taken 0:02:44.890156
+Number of used sentences in train = 2811
+Total loss for epoch 13: 5210.174886
+validation loss after epoch 13 : 321.246448
+	Epoch 14....
+validAcc: 0.821
+Epoch has taken 0:02:43.984068
+Number of used sentences in train = 2811
+Total loss for epoch 14: 5179.900141
+validation loss after epoch 14 : 530.480551
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+validAcc: 0.822
+Epoch has taken 0:02:43.091109
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/0.kiperwasser.p
+Number of used sentences in train = 313
+Total loss for epoch 0: 1482.816379
+	Epoch 1....
+Epoch has taken 0:00:16.359555
+Number of used sentences in train = 313
+Total loss for epoch 1: 729.668204
+	Epoch 2....
+Epoch has taken 0:00:16.359111
+Number of used sentences in train = 313
+Total loss for epoch 2: 590.907724
+	Epoch 3....
+Epoch has taken 0:00:16.361736
+Number of used sentences in train = 313
+Total loss for epoch 3: 527.945838
+	Epoch 4....
+Epoch has taken 0:00:16.350454
+Number of used sentences in train = 313
+Total loss for epoch 4: 511.494124
+	Epoch 5....
+Epoch has taken 0:00:16.362532
+Number of used sentences in train = 313
+Total loss for epoch 5: 507.014049
+	Epoch 6....
+Epoch has taken 0:00:16.362441
+Number of used sentences in train = 313
+Total loss for epoch 6: 500.264432
+	Epoch 7....
+Epoch has taken 0:00:16.362337
+Number of used sentences in train = 313
+Total loss for epoch 7: 498.822912
+	Epoch 8....
+Epoch has taken 0:00:16.363834
+Number of used sentences in train = 313
+Total loss for epoch 8: 497.838926
+	Epoch 9....
+Epoch has taken 0:00:16.370326
+Number of used sentences in train = 313
+Total loss for epoch 9: 497.306857
+	Epoch 10....
+Epoch has taken 0:00:16.364929
+Number of used sentences in train = 313
+Total loss for epoch 10: 496.621081
+	Epoch 11....
+Epoch has taken 0:00:16.366754
+Number of used sentences in train = 313
+Total loss for epoch 11: 496.226706
+	Epoch 12....
+Epoch has taken 0:00:16.366765
+Number of used sentences in train = 313
+Total loss for epoch 12: 496.042897
+	Epoch 13....
+Epoch has taken 0:00:16.348916
+Number of used sentences in train = 313
+Total loss for epoch 13: 495.873801
+	Epoch 14....
+Epoch has taken 0:00:16.349626
+Number of used sentences in train = 313
+Total loss for epoch 14: 495.702767
+Epoch has taken 0:00:16.357940
+
+==================================================================================================
+	Training time : 0:45:05.422094
+==================================================================================================
+	Identification : 0.148
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/323.kiperwasser.p
+Number of used sentences in train = 2811
+Total loss for epoch 0: 11985.089100
+validation loss after epoch 0 : 1046.199434
+	Epoch 1....
+validAcc: 0.832
+Epoch has taken 0:02:45.769532
+Number of used sentences in train = 2811
+Total loss for epoch 1: 8491.434672
+validation loss after epoch 1 : 806.651872
+	Epoch 2....
+validAcc: 0.798
+Epoch has taken 0:02:43.650441
+Number of used sentences in train = 2811
+Total loss for epoch 2: 7460.031270
+validation loss after epoch 2 : 696.351364
+	Epoch 3....
+validAcc: 0.108
+Epoch has taken 0:02:43.284400
+Number of used sentences in train = 2811
+Total loss for epoch 3: 6812.677104
+validation loss after epoch 3 : 443.051984
+	Epoch 4....
+validAcc: 0.032
+Epoch has taken 0:02:44.422425
+Number of used sentences in train = 2811
+Total loss for epoch 4: 6386.664028
+validation loss after epoch 4 : 389.543163
+	Epoch 5....
+validAcc: 0.057
+Epoch has taken 0:02:43.806221
+Number of used sentences in train = 2811
+Total loss for epoch 5: 6038.890170
+validation loss after epoch 5 : 387.386510
+	Epoch 6....
+validAcc: 0.108
+Epoch has taken 0:02:43.698842
+Number of used sentences in train = 2811
+Total loss for epoch 6: 5778.663135
+validation loss after epoch 6 : 444.884193
+	Epoch 7....
+validAcc: 0.81
+Epoch has taken 0:02:45.241891
+Number of used sentences in train = 2811
+Total loss for epoch 7: 5612.251072
+validation loss after epoch 7 : 657.806788
+	Epoch 8....
+validAcc: 0.097
+Epoch has taken 0:02:43.748429
+Number of used sentences in train = 2811
+Total loss for epoch 8: 5463.705534
+validation loss after epoch 8 : 414.612236
+	Epoch 9....
+validAcc: 0.114
+Epoch has taken 0:02:42.848614
+Number of used sentences in train = 2811
+Total loss for epoch 9: 5315.972004
+validation loss after epoch 9 : 390.541322
+	Epoch 10....
+validAcc: 0.091
+Epoch has taken 0:02:44.692007
+Number of used sentences in train = 2811
+Total loss for epoch 10: 5232.797709
+validation loss after epoch 10 : 364.405036
+	Epoch 11....
+validAcc: 0.073
+Epoch has taken 0:02:43.739587
+Number of used sentences in train = 2811
+Total loss for epoch 11: 5176.768299
+validation loss after epoch 11 : 355.987584
+	Epoch 12....
+validAcc: 0.082
+Epoch has taken 0:02:43.488392
+Number of used sentences in train = 2811
+Total loss for epoch 12: 5132.219640
+validation loss after epoch 12 : 353.837604
+	Epoch 13....
+validAcc: 0.086
+Epoch has taken 0:02:45.252520
+Number of used sentences in train = 2811
+Total loss for epoch 13: 5054.548680
+validation loss after epoch 13 : 350.413958
+	Epoch 14....
+validAcc: 0.81
+Epoch has taken 0:02:43.514389
+Number of used sentences in train = 2811
+Total loss for epoch 14: 5021.457856
+validation loss after epoch 14 : 556.121416
+	TransitionClassifier(
+  (p_embeddings): Embedding(18, 41)
+  (w_embeddings): Embedding(1177, 239)
+  (lstm): LSTM(280, 90, bidirectional=True)
+  (linear1): Linear(in_features=1440, out_features=11, bias=True)
+  (linear2): Linear(in_features=11, out_features=4, bias=True)
+)
+==================================================================================================
+	Adagrad (
+Parameter Group 0
+    initial_accumulator_value: 0
+    lr: 0.07
+    lr_decay: 0
+    weight_decay: 0
+)
+==================================================================================================
+	NLLLoss()
+==================================================================================================
+	Epoch 0....
+validAcc: 0.112
+Epoch has taken 0:02:43.902334
+# Network optimizer = Adagrad, learning rate = 0.07
+
+/home/halsaied/NNIdenSys/tmp/0.kiperwasser.p
+Number of used sentences in train = 313
+Total loss for epoch 0: 755.299209
+	Epoch 1....
+Epoch has taken 0:00:16.105052
+Number of used sentences in train = 313
+Total loss for epoch 1: 388.258498
+	Epoch 2....
+Epoch has taken 0:00:16.100015
+Number of used sentences in train = 313
+Total loss for epoch 2: 228.029173
+	Epoch 3....
+Epoch has taken 0:00:16.102924
+Number of used sentences in train = 313
+Total loss for epoch 3: 141.933576
+	Epoch 4....
+Epoch has taken 0:00:16.107431
+Number of used sentences in train = 313
+Total loss for epoch 4: 122.872211
+	Epoch 5....
+Epoch has taken 0:00:16.109002
+Number of used sentences in train = 313
+Total loss for epoch 5: 104.374024
+	Epoch 6....
+Epoch has taken 0:00:16.109178
+Number of used sentences in train = 313
+Total loss for epoch 6: 91.555247
+	Epoch 7....
+Epoch has taken 0:00:16.103094
+Number of used sentences in train = 313
+Total loss for epoch 7: 83.726658
+	Epoch 8....
+Epoch has taken 0:00:16.096407
+Number of used sentences in train = 313
+Total loss for epoch 8: 80.159829
+	Epoch 9....
+Epoch has taken 0:00:16.100765
+Number of used sentences in train = 313
+Total loss for epoch 9: 73.858216
+	Epoch 10....
+Epoch has taken 0:00:16.101909
+Number of used sentences in train = 313
+Total loss for epoch 10: 71.927165
+	Epoch 11....
+Epoch has taken 0:00:16.103649
+Number of used sentences in train = 313
+Total loss for epoch 11: 69.765906
+	Epoch 12....
+Epoch has taken 0:00:16.103241
+Number of used sentences in train = 313
+Total loss for epoch 12: 68.316496
+	Epoch 13....
+Epoch has taken 0:00:16.097346
+Number of used sentences in train = 313
+Total loss for epoch 13: 67.349596
+	Epoch 14....
+Epoch has taken 0:00:16.153640
+Number of used sentences in train = 313
+Total loss for epoch 14: 67.862012
+Epoch has taken 0:00:16.102508
+
+==================================================================================================
+	Training time : 0:45:03.148078
+==================================================================================================
+	Identification : 0.012
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|

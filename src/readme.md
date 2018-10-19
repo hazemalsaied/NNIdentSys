@@ -9,6 +9,7 @@
     conda install pytorch torchvision -c pytorch
     conda install -c anaconda word2vec
     conda install -c anaconda gensim
+    conda install -c anaconda statsmodels
 
 ## Ressources:
 
@@ -24,3 +25,6 @@
 
     http://ftb.linguist.univ-paris-diderot.fr/telecharger.php
 
+### DiMSUM:
+
+    https://github.com/dimsum16/dimsum-data

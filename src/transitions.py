@@ -49,8 +49,7 @@ class Transition(object):
         transitions = {}
         if config.stack:
             if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2 or \
-                    (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token' and
-                         configuration["features"]["dictionary"]["mwt"]):
+                    (len(config.stack) == 1 and str(config.stack[-1].__class__).endswith('corpus.Token')):
                 transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,
                                                                 sent=self.sent)
                 transitions[TransitionType.MARK_AS_VPC] = MarkAs(type=TransitionType.MARK_AS_VPC,
@@ -68,8 +67,7 @@ class Transition(object):
 
         # if config.stack:
         #     transitions[TransitionType.REDUCE] = Reduce(sent=self.sent)
-        #     if (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token' and
-        #           configuration["features"]["dictionary"]["mwt"]) or \
+        #     if (len(config.stack) == 1 and str(config.stack[-1].__class__) == 'corpus.Token') or \
         #     len(config.stack)> 1:
         #         #if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2:
         #         transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,
@@ -308,7 +306,7 @@ def printStack(elemlist):
 def getStackElems(elemlist):
     elemlistStrs = ['[']
     for elem in elemlist:
-        if str(elem.__class__) == 'corpus.Token':
+        if str(elem.__class__).endswith('corpus.Token'):
             elemlistStrs.append(elem.text)
         elif isinstance(elem, list) and len(elem) == 1 and isinstance(elem[0], list):
             elemlistStrs.extend(getStackElems(elem[0]))

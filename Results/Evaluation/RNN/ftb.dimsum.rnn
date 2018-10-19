@@ -1,0 +1,803 @@
+## OAR [2018-09-30 14:33:44] Job 1694782 KILLED ##
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_hQPJ5X.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 3841/4043 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 980 (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+	Mode: RNN
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+	GPU Enabled	Language : FR
+==================================================================================================
+	Training (Important) : 11506, Test : 2541
+	MWEs in tain : 7100, occurrences : 25744
+	Impotant words in tain : 4638
+	MWE length mean : 2.66
+	Seen MWEs : 3130 (77 %)
+	New MWEs : 909 (22 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 7, 410)       1902810     input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 7, 54)        1188        input_2[0][0]                    
+__________________________________________________________________________________________________
+gru_1 (GRU)                     (None, 25)           32700       embedding_1[0][0]                
+__________________________________________________________________________________________________
+gru_2 (GRU)                     (None, 15)           3150        embedding_2[0][0]                
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 25)           0           gru_1[0][0]                      
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 15)           0           gru_2[0][0]                      
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 40)           0           dropout_1[0][0]                  
+                                                                 dropout_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 51)           2091        concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 51)           0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 4)            208         dropout_3[0][0]                  
+==================================================================================================
+Total params: 1,942,147
+Trainable params: 1,942,147
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 1446285 samples, validate on 160699 samples
+Epoch 1/20
+ - 1404s - loss: 0.1005 - acc: 0.9675 - val_loss: 0.1295 - val_acc: 0.9960
+Epoch 2/20
+ - 1385s - loss: 0.0881 - acc: 0.9713 - val_loss: 0.1108 - val_acc: 0.9969
+Epoch 3/20
+ - 1378s - loss: 0.0853 - acc: 0.9721 - val_loss: 0.1143 - val_acc: 0.9978
+Epoch 4/20
+ - 1386s - loss: 0.0839 - acc: 0.9725 - val_loss: 0.1369 - val_acc: 0.9978
+
+==================================================================================================
+	Training time : 6:25:12.745850
+==================================================================================================
+13- :: la 1 **loi** 1 **de** 1 **finances** pour 1992 apporte plusieurs modifications au régime du res . 
+MWEs:
+1- oth: loi de finances (+)
+ Identified MWEs: 
+1- oth: loi (+)
+2- oth: de finances (+)
+3- oth: 1992 (+)
+4- oth: apporte (+)
+5- oth: plusieurs (+)
+6- oth: au (+)
+7- oth: régime (+)
+8- oth: du (+)
+9- oth: res (+)
+
+: L                
+S=[]                        B=[ la,loi, ..]
+SHIFT: L           
+S=[la]                      B=[ loi,de, ..]
+REDUCE: C          
+S=[]                        B=[ loi,de, ..]
+SHIFT: L           
+S=[loi]                     B=[ de,finances, ..]
+MARK_AS_OTH: C     
+S=[[loi]]                   B=[ de,finances, ..]
+REDUCE: C          
+S=[]                        B=[ de,finances, ..]
+SHIFT: L           
+S=[de]                      B=[ finances,pour, ..]
+SHIFT: C           
+S=[de, finances]            B=[ pour,1992, ..]
+MERGE: C           
+S=[[de, finances]]          B=[ pour,1992, ..]
+MARK_AS_OTH: C     
+S=[[de, finances]]          B=[ pour,1992, ..]
+REDUCE: C          
+S=[]                        B=[ pour,1992, ..]
+SHIFT: L           
+S=[pour]                    B=[ 1992,apporte, ..]
+REDUCE: C          
+S=[]                        B=[ 1992,apporte, ..]
+SHIFT: L           
+S=[1992]                    B=[ apporte,plusieurs, ..]
+MARK_AS_OTH: C     
+S=[[1992]]                  B=[ apporte,plusieurs, ..]
+REDUCE: C          
+S=[]                        B=[ apporte,plusieurs, ..]
+SHIFT: L           
+S=[apporte]                 B=[ plusieurs,modifications, ..]
+MARK_AS_OTH: C     
+S=[[apporte]]               B=[ plusieurs,modifications, ..]
+REDUCE: C          
+S=[]                        B=[ plusieurs,modifications, ..]
+SHIFT: L           
+S=[plusieurs]               B=[ modifications,au, ..]
+MARK_AS_OTH: C     
+S=[[plusieurs]]             B=[ modifications,au, ..]
+REDUCE: C          
+S=[]                        B=[ modifications,au, ..]
+SHIFT: L           
+S=[modifications]           B=[ au,régime, ..]
+REDUCE: C          
+S=[]                        B=[ au,régime, ..]
+SHIFT: L           
+S=[au]                      B=[ régime,du, ..]
+MARK_AS_OTH: C     
+S=[[au]]                    B=[ régime,du, ..]
+REDUCE: C          
+S=[]                        B=[ régime,du, ..]
+SHIFT: L           
+S=[régime]                 B=[ du,res, ..]
+MARK_AS_OTH: C     
+S=[[régime]]               B=[ du,res, ..]
+REDUCE: C          
+S=[]                        B=[ du,res, ..]
+SHIFT: L           
+S=[du]                      B=[ res,.,]
+MARK_AS_OTH: C     
+S=[[du]]                    B=[ res,.,]
+REDUCE: C          
+S=[]                        B=[ res,.,]
+SHIFT: L           
+S=[res]                     B=[ .,]
+MARK_AS_OTH: C     
+S=[[res]]                   B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.119
+	Categorization : 0.625
+	oth : 0.119
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 661
+	100 : 12
+	5 : 286
+	200 : 3
+	50 : 26
+	25 : 53
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 663
+	25 : 44
+	50 : 6
+	100 : 5
+	5 : 212
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Division: TRAINVSTEST
+==================================================================================================
+	GPU Enabled	Language : FR
+==================================================================================================
+	Training (Important) : 10585, Test : 2541
+	MWEs in tain : 6789, occurrences : 23628
+	Impotant words in tain : 4468
+	MWE length mean : 2.66
+	Seen MWEs : 3102 (76 %)
+	New MWEs : 937 (23 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_4 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_3 (Embedding)         (None, 7, 410)       1833110     input_3[0][0]                    
+__________________________________________________________________________________________________
+embedding_4 (Embedding)         (None, 7, 54)        1188        input_4[0][0]                    
+__________________________________________________________________________________________________
+gru_3 (GRU)                     (None, 25)           32700       embedding_3[0][0]                
+__________________________________________________________________________________________________
+gru_4 (GRU)                     (None, 15)           3150        embedding_4[0][0]                
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 25)           0           gru_3[0][0]                      
+__________________________________________________________________________________________________
+dropout_5 (Dropout)             (None, 15)           0           gru_4[0][0]                      
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 40)           0           dropout_4[0][0]                  
+                                                                 dropout_5[0][0]                  
+__________________________________________________________________________________________________
+dense_3 (Dense)                 (None, 51)           2091        concatenate_2[0][0]              
+__________________________________________________________________________________________________
+dropout_6 (Dropout)             (None, 51)           0           dense_3[0][0]                    
+__________________________________________________________________________________________________
+dense_4 (Dense)                 (None, 4)            208         dropout_6[0][0]                  
+==================================================================================================
+Total params: 1,872,447
+Trainable params: 1,872,447
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 1327690 samples, validate on 147522 samples
+Epoch 1/20
+ - 1259s - loss: 0.1023 - acc: 0.9670 - val_loss: 0.1221 - val_acc: 0.9974
+Epoch 2/20
+ - 1446s - loss: 0.0890 - acc: 0.9710 - val_loss: 0.1496 - val_acc: 0.9966
+Epoch 3/20
+ - 1475s - loss: 0.0860 - acc: 0.9719 - val_loss: 0.1323 - val_acc: 0.9966
+
+==================================================================================================
+	Training time : 5:11:24.356667
+==================================================================================================
+13- :: la 1 **loi** 1 **de** 1 **finances** pour 1992 apporte plusieurs modifications au régime du res . 
+MWEs:
+1- oth: loi de finances (+)
+ Identified MWEs: 
+1- oth: loi de finances (+)
+2- oth: pour (+)
+3- oth: 1992 (+)
+4- oth: plusieurs (+)
+5- oth: modifications (+)
+6- oth: au (+)
+7- oth: régime (+)
+8- oth: du (+)
+9- oth: res (+)
+
+: L                
+S=[]                        B=[ la,loi, ..]
+SHIFT: L           
+S=[la]                      B=[ loi,de, ..]
+REDUCE: C          
+S=[]                        B=[ loi,de, ..]
+SHIFT: L           
+S=[loi]                     B=[ de,finances, ..]
+SHIFT: C           
+S=[loi, de]                 B=[ finances,pour, ..]
+MERGE: C           
+S=[[loi, de]]               B=[ finances,pour, ..]
+SHIFT: C           
+S=[[loi, de]finances]       B=[ pour,1992, ..]
+MERGE: C           
+S=[[[loi, de]finances]]     B=[ pour,1992, ..]
+MARK_AS_OTH: C     
+S=[[[loi, de]finances]]     B=[ pour,1992, ..]
+REDUCE: C          
+S=[]                        B=[ pour,1992, ..]
+SHIFT: L           
+S=[pour]                    B=[ 1992,apporte, ..]
+MARK_AS_OTH: C     
+S=[[pour]]                  B=[ 1992,apporte, ..]
+REDUCE: C          
+S=[]                        B=[ 1992,apporte, ..]
+SHIFT: L           
+S=[1992]                    B=[ apporte,plusieurs, ..]
+MARK_AS_OTH: C     
+S=[[1992]]                  B=[ apporte,plusieurs, ..]
+REDUCE: C          
+S=[]                        B=[ apporte,plusieurs, ..]
+SHIFT: L           
+S=[apporte]                 B=[ plusieurs,modifications, ..]
+REDUCE: C          
+S=[]                        B=[ plusieurs,modifications, ..]
+SHIFT: L           
+S=[plusieurs]               B=[ modifications,au, ..]
+MARK_AS_OTH: C     
+S=[[plusieurs]]             B=[ modifications,au, ..]
+REDUCE: C          
+S=[]                        B=[ modifications,au, ..]
+SHIFT: L           
+S=[modifications]           B=[ au,régime, ..]
+MARK_AS_OTH: C     
+S=[[modifications]]         B=[ au,régime, ..]
+REDUCE: C          
+S=[]                        B=[ au,régime, ..]
+SHIFT: L           
+S=[au]                      B=[ régime,du, ..]
+MARK_AS_OTH: C     
+S=[[au]]                    B=[ régime,du, ..]
+REDUCE: C          
+S=[]                        B=[ régime,du, ..]
+SHIFT: L           
+S=[régime]                 B=[ du,res, ..]
+MARK_AS_OTH: C     
+S=[[régime]]               B=[ du,res, ..]
+REDUCE: C          
+S=[]                        B=[ du,res, ..]
+SHIFT: L           
+S=[du]                      B=[ res,.,]
+MARK_AS_OTH: C     
+S=[[du]]                    B=[ res,.,]
+REDUCE: C          
+S=[]                        B=[ res,.,]
+SHIFT: L           
+S=[res]                     B=[ .,]
+MARK_AS_OTH: C     
+S=[[res]]                   B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.094
+	Categorization : 0.511
+	oth : 0.094
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 732
+	100 : 7
+	5 : 304
+	200 : 2
+	50 : 23
+	25 : 54
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 631
+	25 : 25
+	50 : 13
+	100 : 7
+	5 : 186
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Division: TRAINVSDEV
+==================================================================================================
+	GPU Enabled	Language : FR
+==================================================================================================
+	Training (Important) : 10585, Test : 1235
+	MWEs in tain : 6789, occurrences : 23628
+	Impotant words in tain : 4468
+	MWE length mean : 2.66
+	Seen MWEs : 1753 (82 %)
+	New MWEs : 363 (17 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_5 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_6 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_5 (Embedding)         (None, 7, 410)       1833110     input_5[0][0]                    
+__________________________________________________________________________________________________
+embedding_6 (Embedding)         (None, 7, 54)        1188        input_6[0][0]                    
+__________________________________________________________________________________________________
+gru_5 (GRU)                     (None, 25)           32700       embedding_5[0][0]                
+__________________________________________________________________________________________________
+gru_6 (GRU)                     (None, 15)           3150        embedding_6[0][0]                
+__________________________________________________________________________________________________
+dropout_7 (Dropout)             (None, 25)           0           gru_5[0][0]                      
+__________________________________________________________________________________________________
+dropout_8 (Dropout)             (None, 15)           0           gru_6[0][0]                      
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 40)           0           dropout_7[0][0]                  
+                                                                 dropout_8[0][0]                  
+__________________________________________________________________________________________________
+dense_5 (Dense)                 (None, 51)           2091        concatenate_3[0][0]              
+__________________________________________________________________________________________________
+dropout_9 (Dropout)             (None, 51)           0           dense_5[0][0]                    
+__________________________________________________________________________________________________
+dense_6 (Dense)                 (None, 4)            208         dropout_9[0][0]                  
+==================================================================================================
+Total params: 1,872,447
+Trainable params: 1,872,447
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 1327690 samples, validate on 147522 samples
+Epoch 1/20
+ - 1450s - loss: 0.1023 - acc: 0.9670 - val_loss: 0.1218 - val_acc: 0.9970
+Epoch 2/20
+ - 1265s - loss: 0.0888 - acc: 0.9711 - val_loss: 0.1502 - val_acc: 0.9965
+Epoch 3/20
+ - 1261s - loss: 0.0859 - acc: 0.9719 - val_loss: 0.1316 - val_acc: 0.9967
+
+==================================================================================================
+	Training time : 5:07:09.479930
+==================================================================================================
+148- :: bouter l' attaquant 1 **hors** 1 **de** france ou le faire payer . 
+MWEs:
+1- oth: hors de (+)
+ Identified MWEs: 
+1- oth: bouter (+)
+2- oth: l' (+)
+3- oth: attaquant (+)
+4- oth: hors (+)
+5- oth: de (+)
+6- oth: de france (+)
+7- oth: ou (+)
+8- oth: faire (+)
+9- oth: payer (+)
+
+: L                
+S=[]                        B=[ bouter,l', ..]
+SHIFT: L           
+S=[bouter]                  B=[ l',attaquant, ..]
+MARK_AS_OTH: C     
+S=[[bouter]]                B=[ l',attaquant, ..]
+REDUCE: C          
+S=[]                        B=[ l',attaquant, ..]
+SHIFT: L           
+S=[l']                      B=[ attaquant,hors, ..]
+MARK_AS_OTH: C     
+S=[[l']]                    B=[ attaquant,hors, ..]
+REDUCE: C          
+S=[]                        B=[ attaquant,hors, ..]
+SHIFT: L           
+S=[attaquant]               B=[ hors,de, ..]
+MARK_AS_OTH: C     
+S=[[attaquant]]             B=[ hors,de, ..]
+REDUCE: C          
+S=[]                        B=[ hors,de, ..]
+SHIFT: L           
+S=[hors]                    B=[ de,france, ..]
+MARK_AS_OTH: C     
+S=[[hors]]                  B=[ de,france, ..]
+REDUCE: C          
+S=[]                        B=[ de,france, ..]
+SHIFT: L           
+S=[de]                      B=[ france,ou, ..]
+MARK_AS_OTH: C     
+S=[[de]]                    B=[ france,ou, ..]
+SHIFT: C           
+S=[[de]france]              B=[ ou,le, ..]
+MERGE: C           
+S=[[[de]france]]            B=[ ou,le, ..]
+MARK_AS_OTH: C     
+S=[[[de]france]]            B=[ ou,le, ..]
+REDUCE: C          
+S=[]                        B=[ ou,le, ..]
+SHIFT: L           
+S=[ou]                      B=[ le,faire, ..]
+MARK_AS_OTH: C     
+S=[[ou]]                    B=[ le,faire, ..]
+REDUCE: C          
+S=[]                        B=[ le,faire, ..]
+SHIFT: L           
+S=[le]                      B=[ faire,payer, ..]
+REDUCE: C          
+S=[]                        B=[ faire,payer, ..]
+SHIFT: L           
+S=[faire]                   B=[ payer,.,]
+MARK_AS_OTH: C     
+S=[[faire]]                 B=[ payer,.,]
+REDUCE: C          
+S=[]                        B=[ payer,.,]
+SHIFT: L           
+S=[payer]                   B=[ .,]
+MARK_AS_OTH: C     
+S=[[payer]]                 B=[ .,]
+REDUCE: C          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.095
+	Categorization : 0.51
+	oth : 0.095
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 347
+	100 : 9
+	5 : 227
+	200 : 2
+	50 : 22
+	25 : 45
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 328
+	25 : 27
+	50 : 14
+	100 : 5
+	5 : 126
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Dataset: DIMSUM
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+	GPU Enabled4232 9887
+837 1952
+	Language : EN
+==================================================================================================
+	Training (Important) : 2643, Test : 1000
+	MWEs in tain : 2869, occurrences : 4232
+	Impotant words in tain : 2942
+	MWE length mean : 2.34
+	Seen MWEs : 187 (22 %)
+	New MWEs : 650 (77 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_7 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_8 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_7 (Embedding)         (None, 7, 410)       1207450     input_7[0][0]                    
+__________________________________________________________________________________________________
+embedding_8 (Embedding)         (None, 7, 54)        1026        input_8[0][0]                    
+__________________________________________________________________________________________________
+gru_7 (GRU)                     (None, 25)           32700       embedding_7[0][0]                
+__________________________________________________________________________________________________
+gru_8 (GRU)                     (None, 15)           3150        embedding_8[0][0]                
+__________________________________________________________________________________________________
+dropout_10 (Dropout)            (None, 25)           0           gru_7[0][0]                      
+__________________________________________________________________________________________________
+dropout_11 (Dropout)            (None, 15)           0           gru_8[0][0]                      
+__________________________________________________________________________________________________
+concatenate_4 (Concatenate)     (None, 40)           0           dropout_10[0][0]                 
+                                                                 dropout_11[0][0]                 
+__________________________________________________________________________________________________
+dense_7 (Dense)                 (None, 51)           2091        concatenate_4[0][0]              
+__________________________________________________________________________________________________
+dropout_12 (Dropout)            (None, 51)           0           dense_7[0][0]                    
+__________________________________________________________________________________________________
+dense_8 (Dense)                 (None, 4)            208         dropout_12[0][0]                 
+==================================================================================================
+Total params: 1,246,625
+Trainable params: 1,246,625
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 179863 samples, validate on 19985 samples
+Epoch 1/20
+ - 166s - loss: 0.1658 - acc: 0.9435 - val_loss: 0.1624 - val_acc: 0.9978
+Epoch 2/20
+ - 171s - loss: 0.1279 - acc: 0.9566 - val_loss: 0.1422 - val_acc: 0.9994
+Epoch 3/20
+ - 168s - loss: 0.1187 - acc: 0.9594 - val_loss: 0.1577 - val_acc: 1.0000
+Epoch 4/20
+ - 167s - loss: 0.1138 - acc: 0.9609 - val_loss: 0.1584 - val_acc: 0.9996
+
+==================================================================================================
+	Training time : 0:17:06.455821
+==================================================================================================
+6- :: 1-4-3 1 **happy** 1 **valentine** 1 **s** 1 **day** ! :) <3 http://zipz.it/songcardmb 
+MWEs:
+1- oth: happy valentine s day (+)
+ Identified MWEs: 
+1- oth: happy (+)
+2- oth: valentine s (+)
+
+: L                
+S=[]                        B=[ 1-4-3,happy, ..]
+SHIFT: L           
+S=[1-4-3]                   B=[ happy,valentine, ..]
+REDUCE: C          
+S=[]                        B=[ happy,valentine, ..]
+SHIFT: L           
+S=[happy]                   B=[ valentine,s, ..]
+MARK_AS_OTH: C     
+S=[[happy]]                 B=[ valentine,s, ..]
+REDUCE: C          
+S=[]                        B=[ valentine,s, ..]
+SHIFT: L           
+S=[valentine]               B=[ s,day, ..]
+SHIFT: C           
+S=[valentine, s]            B=[ day,!, ..]
+MERGE: C           
+S=[[valentine, s]]          B=[ day,!, ..]
+MARK_AS_OTH: C     
+S=[[valentine, s]]          B=[ day,!, ..]
+REDUCE: C          
+S=[]                        B=[ day,!, ..]
+SHIFT: L           
+S=[day]                     B=[ !,:), ..]
+REDUCE: C          
+S=[]                        B=[ !,:), ..]
+SHIFT: L           
+S=[!]                       B=[ :),<3, ..]
+REDUCE: C          
+S=[]                        B=[ :),<3, ..]
+SHIFT: L           
+S=[:)]                      B=[ <3,http://zipz.it/songcardmb,]
+REDUCE: C          
+S=[]                        B=[ <3,http://zipz.it/songcardmb,]
+SHIFT: L           
+S=[<3]                      B=[ http://zipz.it/songcardmb,]
+REDUCE: C          
+S=[]                        B=[ http://zipz.it/songcardmb,]
+SHIFT: L           
+S=[http://zipz.it/songcardmb] B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.218
+	Categorization : 0.254
+	oth : 0.218
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 96
+	25 : 2
+	50 : 1
+	5 : 22
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 599
+	25 : 1
+	5 : 6
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Division: TRAINVSTEST
+==================================================================================================
+	GPU Enabled4232 9887
+837 1952
+	Language : EN
+==================================================================================================
+	Training (Important) : 2643, Test : 1000
+	MWEs in tain : 2869, occurrences : 4232
+	Impotant words in tain : 2942
+	MWE length mean : 2.34
+	Seen MWEs : 187 (22 %)
+	New MWEs : 650 (77 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_9 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_10 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_9 (Embedding)         (None, 7, 410)       1207450     input_9[0][0]                    
+__________________________________________________________________________________________________
+embedding_10 (Embedding)        (None, 7, 54)        1026        input_10[0][0]                   
+__________________________________________________________________________________________________
+gru_9 (GRU)                     (None, 25)           32700       embedding_9[0][0]                
+__________________________________________________________________________________________________
+gru_10 (GRU)                    (None, 15)           3150        embedding_10[0][0]               
+__________________________________________________________________________________________________
+dropout_13 (Dropout)            (None, 25)           0           gru_9[0][0]                      
+__________________________________________________________________________________________________
+dropout_14 (Dropout)            (None, 15)           0           gru_10[0][0]                     
+__________________________________________________________________________________________________
+concatenate_5 (Concatenate)     (None, 40)           0           dropout_13[0][0]                 
+                                                                 dropout_14[0][0]                 
+__________________________________________________________________________________________________
+dense_9 (Dense)                 (None, 51)           2091        concatenate_5[0][0]              
+__________________________________________________________________________________________________
+dropout_15 (Dropout)            (None, 51)           0           dense_9[0][0]                    
+__________________________________________________________________________________________________
+dense_10 (Dense)                (None, 4)            208         dropout_15[0][0]                 
+==================================================================================================
+Total params: 1,246,625
+Trainable params: 1,246,625
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+Train on 179863 samples, validate on 19985 samples
+Epoch 1/20
+ - 167s - loss: 0.1636 - acc: 0.9444 - val_loss: 0.1244 - val_acc: 0.9998
+Epoch 2/20
+ - 171s - loss: 0.1281 - acc: 0.9568 - val_loss: 0.1213 - val_acc: 0.9984
+Epoch 3/20
+ - 171s - loss: 0.1189 - acc: 0.9596 - val_loss: 0.1519 - val_acc: 0.9996
+Epoch 4/20
+ - 167s - loss: 0.1137 - acc: 0.9611 - val_loss: 0.1218 - val_acc: 0.9998
+
+==================================================================================================
+	Training time : 0:17:12.679466
+==================================================================================================
+6- :: 1-4-3 1 **happy** 1 **valentine** 1 **s** 1 **day** ! :) <3 http://zipz.it/songcardmb 
+MWEs:
+1- oth: happy valentine s day (+)
+ Identified MWEs: 
+1- oth: valentine s (+)
+
+: L                
+S=[]                        B=[ 1-4-3,happy, ..]
+SHIFT: L           
+S=[1-4-3]                   B=[ happy,valentine, ..]
+REDUCE: C          
+S=[]                        B=[ happy,valentine, ..]
+SHIFT: L           
+S=[happy]                   B=[ valentine,s, ..]
+REDUCE: C          
+S=[]                        B=[ valentine,s, ..]
+SHIFT: L           
+S=[valentine]               B=[ s,day, ..]
+SHIFT: C           
+S=[valentine, s]            B=[ day,!, ..]
+MERGE: C           
+S=[[valentine, s]]          B=[ day,!, ..]
+MARK_AS_OTH: C     
+S=[[valentine, s]]          B=[ day,!, ..]
+REDUCE: C          
+S=[]                        B=[ day,!, ..]
+SHIFT: L           
+S=[day]                     B=[ !,:), ..]
+REDUCE: C          
+S=[]                        B=[ !,:), ..]
+SHIFT: L           
+S=[!]                       B=[ :),<3, ..]
+REDUCE: C          
+S=[]                        B=[ :),<3, ..]
+SHIFT: L           
+S=[:)]                      B=[ <3,http://zipz.it/songcardmb,]
+REDUCE: C          
+S=[]                        B=[ <3,http://zipz.it/songcardmb,]
+SHIFT: L           
+S=[<3]                      B=[ http://zipz.it/songcardmb,]
+REDUCE: C          
+S=[]                        B=[ http://zipz.it/songcardmb,]
+SHIFT: L           
+S=[http://zipz.it/songcardmb] B=[ ]
+REDUCE: C          
+S=[]                        B=[ ]
+	Identification : 0.254
+	Categorization : 0.264
+	oth : 0.254
+	Test analysis
+==================================================================================================
+	Correctly identified MWEs
+==================================================================================================
+	0 : 102
+	25 : 3
+	50 : 1
+	5 : 23
+
+__________________________________________________________________________________________________
+	Non Identified MWEs
+==================================================================================================
+	0 : 595
+	5 : 6
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|

@@ -1,9 +1,7 @@
-
-from config import configuration
 from xpTools import *
 
 
-def setOptimalRandomGridParameters():
+def setOptimalRSG():
     samling = configuration['sampling']
     samling['importantSentences'] = True
     samling['overSampling'] = True
@@ -11,45 +9,30 @@ def setOptimalRandomGridParameters():
     samling['favorisationCoeff'] = 6
     samling['focused'] = True
 
-    configuration['model']['train']['optimizer'] = 'adagrad'
-    configuration['model']['train']['lr'] = 0.059
+    configuration['mlp']['optimizer'] = 'adagrad'
+    configuration['mlp']['lr'] = 0.059
 
-    embConf = configuration['model']['embedding']
-    embConf['active'] = True
-    embConf['usePos'] = True
-    embConf['lemma'] = True
-    embConf['posEmb'] = 42
-    embConf['tokenEmb'] = 480
-    embConf['compactVocab'] = False
+    configuration['mlp']['lemma'] = True
+    configuration['mlp']['posEmb'] = 42
+    configuration['mlp']['tokenEmb'] = 480
+    configuration['mlp']['compactVocab'] = False
 
-    dense1Conf = configuration['model']['mlp']['dense1']
-    dense1Conf['active'] = True
-    dense1Conf['unitNumber'] = 58
-    dense1Conf['dropout'] = 0.429
+    configuration['mlp']['dense1'] = True
+    configuration['mlp']['dense1UnitNumber'] = 58
+    configuration['mlp']['dense1Dropout'] = 0.429
 
 
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
-
-    setOptimalRandomGridParameters()
-
-    setDataSet(Dataset.FTB)
-    langs = ['FR']  # ['EN']
-
-    setTrainAndTest(Evaluation.corpus)
-    xp(langs, xpNum=1)
-    setTrainAndTest(Evaluation.trainVsTest)
-    xp(langs, xpNum=1)
-    setTrainAndTest(Evaluation.trainVsDev)
-    xp(langs, xpNum=1)
-
-    setDataSet(Dataset.dimsum)
-    langs = ['EN']
-
-    setTrainAndTest(Evaluation.corpus)
-    xp(langs, xpNum=1)
-    setTrainAndTest(Evaluation.trainVsTest)
-    xp(langs, xpNum=1)
-    setTrainAndTest(Evaluation.trainVsDev)
-    xp(langs, xpNum=1)
+    setOptimalRSG()
+    langs = ['FR']
+    # xp(langs, Dataset.sharedtask2, None, None)#, mlpInLinear=True)  # linearInMlp=True)
+    xp(['FR'], Dataset.ftb, None, Evaluation.corpus)  # , linearInMlp=True)  # linearInMlp=True)
+    configuration['mlp']['compactVocab'] = True
+    xp(['FR'], Dataset.ftb, None, Evaluation.corpus)  # , linearInMlp=True)  # linearInMlp=True)
+    configuration['mlp']['compactVocab'] = False
+    configuration['others']['removeFtbMWT'] = True
+    xp(['FR'], Dataset.ftb, None, Evaluation.corpus)  # , linearInMlp=True)  # linearInMlp=True)
+    configuration['mlp']['compactVocab'] = True
+    xp(['FR'], Dataset.ftb, None, Evaluation.corpus)  # , linearInMlp=True)  # linearInMlp=True)

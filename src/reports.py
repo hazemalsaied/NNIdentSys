@@ -1,20 +1,17 @@
 import cPickle as pickle
 import errno
 import os
-import random
 import sys
 
 import numpy
-from keras.models import load_model
-from keras.utils import plot_model
 
 from config import configuration
 
 tabs, seperator, doubleSep, finalLine = '\t', '\n' + '_' * 98 + '\n', '\n' + '=' * 98 + '\n', '\n' + '*|' * 49 + '\n'
-PATH_ROOT_REPORTS_DIR = os.path.join(configuration["path"]["projectPath"], 'tmp')
+PATH_ROOT_REPORTS_DIR = os.path.join(configuration['path']['projectPath'], 'Reports')
 
 try:
-    reportPath = os.path.join(configuration["path"]["projectPath"], PATH_ROOT_REPORTS_DIR)
+    reportPath = os.path.join(configuration['path']['projectPath'], PATH_ROOT_REPORTS_DIR)
     if not os.path.isdir(reportPath):
         os.makedirs(reportPath)
         # schemaFolder = os.path.join(reportPath, 'schemas')
@@ -25,22 +22,22 @@ except OSError as e:
         raise
 
 XP_CURRENT_DIR_PATH = ''
-evalConf = configuration["evaluation"]
-repFiles = configuration["files"]["reports"]
+configuration['evaluation'] = configuration['evaluation']
+repFiles = configuration['files']['reports']
 
 
 # def getXPDirectory(langName, xpNum):
 #
-#     if evalConf["load"]:
+#     if configuration['evaluation']['load']:
 #         return
-#     cvTxt = '-CV' if evalConf["cv"]["active"] else ''
+#     cvTxt = '-CV' if configuration['evaluation']['cv'] else ''
 #     prefix = langName + cvTxt + '-' + str(xpNum)
 #     global XP_CURRENT_DIR_PATH
 #     XP_CURRENT_DIR_PATH = os.path.join(reportPath, prefix)
 
 
 # def createXPDirectory():
-#     if evalConf["load"] :
+#     if configuration['evaluation']['load'] :
 #         return
 #     try:
 #         if not os.path.isdir(XP_CURRENT_DIR_PATH):
@@ -59,21 +56,19 @@ def printParsedSents(corpus, sentNum):
 
 
 def createReportFolder(lang):
-    if not mustSave():
-        return
     xpNum = getXPNum()
-    cvTxt = '-CV' if evalConf["cv"]["active"] else ''
+    cvTxt = '-CV' if configuration['evaluation']['cv'] else ''
     prefix = lang + cvTxt + '-' + str(xpNum)
     global XP_CURRENT_DIR_PATH
     XP_CURRENT_DIR_PATH = os.path.join(reportPath, prefix)
-    if not evalConf["load"]:
+    if not configuration['evaluation']['load']:
         sys.stdout.write('Result folder: {0}\n'.format(XP_CURRENT_DIR_PATH.split('/')[-1]))
         if not os.path.isdir(XP_CURRENT_DIR_PATH):
             os.makedirs(XP_CURRENT_DIR_PATH)
 
 
 def getXPNum():
-    configPath = os.path.join(configuration["path"]["projectPath"], 'config.txt')
+    configPath = os.path.join(configuration['path']['projectPath'], 'config.txt')
     with open(configPath, 'r+') as f:
         content = f.read()
         xpNum = int(content)
@@ -91,33 +86,34 @@ def getXPNum():
     return xpNum
 
 
-def saveModelSummary(model):
-    if not mustSave():
-        return
-    json_string = model.to_json()
-    summaryFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["summary"])
-    if evalConf["cv"]["active"]:
-        summaryFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
-                                   repFiles["summary"])
-    with open(summaryFile, 'a') as f:
-        f.write(json_string)
+# def saveModelSummary(model):
+#     if not mustSave():
+#         return
+#     json_string = model.to_json()
+#     summaryFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles['summary'])
+#     if configuration['evaluation']['cv']:
+#         summaryFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration['others']['currentIter']),
+#                                    repFiles['summary'])
+#     with open(summaryFile, 'a') as f:
+#         f.write(json_string)
 
 
-def saveNormalizer(normalizer):
-    if not mustSave():
-        return
-    vectFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["normaliser"])
-    if evalConf["cv"]["active"]:
-        vectFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]), repFiles["normaliser"])
-    filehandler = open(vectFile, 'w')
-    pickle.dump(normalizer, filehandler, pickle.HIGHEST_PROTOCOL)
+# def saveNormalizer(normalizer):
+#     if not mustSave():
+#         return
+#     vectFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles['normaliser'])
+#     if configuration['evaluation']['cv']:
+#         vectFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration['others']['currentIter']),
+#                                 repFiles['normaliser'])
+#     filehandler = open(vectFile, 'w')
+#     pickle.dump(normalizer, filehandler, pickle.HIGHEST_PROTOCOL)
 
 
 # def saveSettings():
-#     if evalConf["load"]:
+#     if configuration['evaluation']['load']:
 #         return
-#     if evalConf["cv"]["active"]:
-#         settFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]), SETTINGS_FILE)
+#     if configuration['evaluation']['cv']:
+#         settFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration['others']['currentIter']), SETTINGS_FILE)
 #     else:
 #         settFile = os.path.join(XP_CURRENT_DIR_PATH, SETTINGS_FILE)
 #     settStr = settings.toString()
@@ -125,20 +121,20 @@ def saveNormalizer(normalizer):
 #         f.write(settStr)
 
 
-def saveScores(scores):
-    if not mustSave():
-        return
-    results, line = '', ''
-    for i in range(1, len(scores) + 1):
-        line += str(scores[i - 1]) + ','
-        if i % 4 == 0:
-            results += line[:-1] + '\n'
-            line = ''
-    scoresFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["scores"])
-    if evalConf["cv"]["active"]:
-        scoresFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]), repFiles["scores"])
-    with open(scoresFile, 'w') as f:
-        f.write(results)
+# def saveScores(scores):
+#     if not mustSave():
+#         return
+#     results, line = '', ''
+#     for i in range(1, len(scores) + 1):
+#         line += str(scores[i - 1]) + ','
+#         if i % 4 == 0:
+#             results += line[:-1] + '\n'
+#             line = ''
+#     scoresFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles['scores'])
+#     if configuration['evaluation']['cv']:
+#         scoresFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration['others']['currentIter']), repFiles['scores'])
+#     with open(scoresFile, 'w') as f:
+#         f.write(results)
 
 
 LOADED_MODEL_PATH = ''
@@ -148,76 +144,76 @@ LOADED_MODEL_PATH = ''
 #     prefix = lang + '-MLP-' if settings.MLP else '-LSTM-'
 #     loadedFolder = prefix + (
 #         ('0' + str(num)) if num < 10 else str(num))
-#     rPath = os.path.join(configuration["path"]["projectPath"], PATH_ROOT_REPORTS_DIR)
+#     rPath = os.path.join(configuration['path']['projectPath'], PATH_ROOT_REPORTS_DIR)
 #     return os.path.join(rPath, loadedFolder)
 
 
 def loadNormalizer(loadFolderPath):
-    normalizerPath = os.path.join(loadFolderPath, repFiles["normaliser"])
-    return pickle.load(open(normalizerPath, "rb"))
+    normalizerPath = os.path.join(loadFolderPath, repFiles['normaliser'])
+    return pickle.load(open(normalizerPath, 'rb'))
 
 
-def saveNetwork(model):
-    if not mustSave():
-        rI = random.randint(100, 500)
-        shemaFile = os.path.join(configuration["path"]["projectPath"], 'tmp/schemas/shema{0}.png'.format(rI))
-        sys.stdout.write("# Schema file: {0}\n".format(rI))
-        plot_model(model, to_file=shemaFile)
-        return
-    schemaPath = os.path.join(XP_CURRENT_DIR_PATH, repFiles["schema"])
-    if evalConf["cv"]["active"]:
-        schemaPath = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
-                                  repFiles["schema"])
-    plot_model(model, to_file=schemaPath)
-    # sys.stdout.write('# Parameters = {0}\n'.format(model.count_params()))
-    saveModelSummary(model)
-    # saveModel(model)
+# def saveNetwork(model):
+# if not mustSave():
+# rI = random.randint(100, 500)
+# shemaFile = os.path.join(configuration['path']['projectPath'], 'tmp/schemas/shema{0}.png'.format(rI))
+# sys.stdout.write('# Schema file: {0}\n'.format(rI))
+# plot_model(model, to_file=shemaFile)
+# return
+# schemaPath = os.path.join(XP_CURRENT_DIR_PATH, repFiles['schema'])
+# if configuration['evaluation']['cv']:
+#     schemaPath = os.path.join(XP_CURRENT_DIR_PATH, str(configuration['others']['currentIter']),
+#                               repFiles['schema'])
+# plot_model(model, to_file=schemaPath)
+# sys.stdout.write('# Parameters = {0}\n'.format(model.count_params()))
+# saveModelSummary(model)
+# saveModel(model)
 
 
-def saveModel(model):
-    if not mustSave():
-        return
-    if evalConf["cv"]["active"]:
-        modelFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
-                                 repFiles["model"])
-    else:
-        modelFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["model"])
-    if not os.path.isfile(modelFile) and evalConf["save"]:
-        model.save(modelFile)
+# def saveModel(model):
+#     if not mustSave():
+#         return
+#     if configuration['evaluation']['cv']:
+#         modelFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration['others']['currentIter']),
+#                                  repFiles['model'])
+#     else:
+#         modelFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles['model'])
+#     if not os.path.isfile(modelFile) and configuration['evaluation']['save']:
+#         model.save(modelFile)
 
 
-def loadModel(loadFolderPath):
-    modelPath = os.path.join(loadFolderPath, repFiles["model"])
-    loaded_model = load_model(modelPath)
-    sys.stdout.write('# Load path = {0}\n'.format(modelPath))
+# def loadModel(loadFolderPath):
+#     modelPath = os.path.join(loadFolderPath, repFiles['model'])
+#     loaded_model = load_model(modelPath)
+#     sys.stdout.write('# Load path = {0}\n'.format(modelPath))
+#
+#     loaded_model.load_weights(os.path.join(loadFolderPath, 'weigth.hdf5'))
+#     # weightFie = os.path.join(LOADED_MODEL_PATH, MODEL_WEIGHT_FILE)
+#     # loaded_model.load_weights(weightFie)
+#     # loaded_model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+#     return loaded_model
 
-    loaded_model.load_weights(os.path.join(loadFolderPath, 'weigth.hdf5'))
-    # weightFie = os.path.join(LOADED_MODEL_PATH, MODEL_WEIGHT_FILE)
-    # loaded_model.load_weights(weightFie)
-    # loaded_model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
-    return loaded_model
 
-
-def saveCVScores(scores):
-    if not mustSave() or not evalConf["cv"]["active"]:
-        return
-    results = ''
-    for i in range(len(scores)):
-        if i == 0 or i % 4 == 0:
-            tmpScores = '{0} : F-score: {1}, Rappel: {2}, Precsion: {3}\n'.format(
-                scores[i], scores[i + 1] / evalConf["cv"]["currentIter"],
-                           scores[i + 2] / evalConf["cv"]["currentIter"],
-                           scores[i + 3] / evalConf["cv"]["currentIter"])
-            if not tmpScores.startswith('0.0'):
-                sys.stdout.write(tmpScores)
-                results += tmpScores + '\n'
-    scoresFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["scores"])
-    with open(scoresFile, 'w') as f:
-        f.write(results)
+# def saveCVScores(scores):
+#     if not mustSave() or not configuration['evaluation']['cv']:
+#         return
+#     results = ''
+#     for i in range(len(scores)):
+#         if i == 0 or i % 4 == 0:
+#             tmpScores = '{0} : F-score: {1}, Rappel: {2}, Precsion: {3}\n'.format(
+#                 scores[i], scores[i + 1] / configuration['others']['currentIter'],
+#                            scores[i + 2] / configuration['others']['currentIter'],
+#                            scores[i + 3] / configuration['others']['currentIter'])
+#             if not tmpScores.startswith('0.0'):
+#                 sys.stdout.write(tmpScores)
+#                 results += tmpScores + '\n'
+#     scoresFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles['scores'])
+#     with open(scoresFile, 'w') as f:
+#         f.write(results)
 
 
 def settingsToDic():
-    settFile = os.path.join(LOADED_MODEL_PATH, repFiles["config"])
+    settFile = os.path.join(LOADED_MODEL_PATH, repFiles['config'])
     results = {}
     with open(settFile, 'r') as f:
         for line in f:
@@ -228,56 +224,31 @@ def settingsToDic():
     return results
 
 
-def saveHistory(history):
-    if not mustSave():
-        return
-    historyFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles["history"])
-    if evalConf["cv"]["active"]:
-        historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(evalConf["cv"]["currentIter"]),
-                                   repFiles["history"])
-    with open(historyFile, 'wb') as f:
-        pickle.dump(history, f, pickle.HIGHEST_PROTOCOL)
+# def saveHistory(history):
+#     if not mustSave():
+#         return
+#     historyFile = os.path.join(XP_CURRENT_DIR_PATH, repFiles['history'])
+#     if configuration['evaluation']['cv']:
+#         historyFile = os.path.join(XP_CURRENT_DIR_PATH, str(configuration['others']['currentIter']),
+#                                    repFiles['history'])
+#     with open(historyFile, 'wb') as f:
+#         pickle.dump(history, f, pickle.HIGHEST_PROTOCOL)
 
 
 def createHeader(value):
     if value:
-        sys.stdout.write(doubleSep + doubleSep + tabs + "{0}\n".format(value) + doubleSep)
+        sys.stdout.write(doubleSep + doubleSep + tabs + '{0}\n'.format(value) + doubleSep)
 
 
 def getBestWeightFilePath():
-    if not configuration["model"]["train"]["chickPoint"]:
+    if not configuration['mlp']['chickPoint']:
         return None
-    bestWeightPath = os.path.join(XP_CURRENT_DIR_PATH, configuration["files"]["bestWeights"])
-    if evalConf["cv"]["active"]:
+    bestWeightPath = os.path.join(XP_CURRENT_DIR_PATH, configuration['files']['bestWeights'])
+    if configuration['evaluation']['cv']:
         bestWeightPath = os.path.join(XP_CURRENT_DIR_PATH,
-                                      str(evalConf["cv"]["currentIter"]),
-                                      configuration["files"]["bestWeights"])
+                                      str(configuration['others']['currentIter']),
+                                      configuration['files']['bestWeights'])
     return bestWeightPath
-
-
-def mustSave():
-    global evalConf
-    evalConf = configuration["evaluation"]
-    if evalConf["load"]:
-        return False
-    if evalConf["save"]:
-        return True
-    return False
-
-
-def printMode():
-    evalConf = configuration['evaluation']
-    res = 'Debug'
-    if evalConf['dev']:
-        res = 'Train vs Dev'
-    elif evalConf['corpus']:
-        res = 'Train + Dev vs Test'
-    elif evalConf['fixedSize']:
-        res = 'Fixed Size'
-    elif evalConf['trainVsTest']:
-        res = 'Train vs Test'
-    if res:
-        sys.stdout.write(doubleSep + tabs + '{0} Mode'.format(res) + doubleSep)
 
 
 featureNumLine = 'Trainable params: '
@@ -523,6 +494,7 @@ def getStats(newFile):
 langLine1 = '	Language : '
 langLine = '	GPU Enabled	Language : '
 
+
 def getAvgScores(scores, langNum=3, trialNum=3):
     result, xpScores, langSum = [], [], 0
     for i, v in enumerate(scores):
@@ -538,44 +510,37 @@ def getAvgScores(scores, langNum=3, trialNum=3):
     return result
 
 
-def getNewScores(files):
+def getNewScores(files, pilot=False, withTitles=True, withTitle2=False):
     for f in files:
         f = str(f)
         titles, scores, params, langs, titles2 = mineNewFile(f)
-        # results = getAvgScores(scores, 6)
-        # orderedScores = sorted(range(len(scores)), key=lambda k: scores[k], reverse=True)
-        for i, v in enumerate(scores):
-            print v
-            #     # print v, titles[i][:-1], '\n'  # ',', , ',', v
-        # for i in range(len(titles)):
-        #     print \
-        #         scores[i * 3] if i * 3 < len(scores) else '', ',', \
-        #         scores[i * 3 + 1] if i * 3 + 1 < len(scores) else '', ',', \
-        #         scores[i * 3 + 2] if i * 3 + 2 < len(scores) else '', ',', \
-        #         titles[i][:-1]
-            # for i, t in enumerate(scores):
-
-            #   print scores[i], titles[i]
-            # t = t.replace(',', '.').replace('_', ',')
-            # print f, ',', \
-            #    t, str(results[i]).replace('[', ',').replace(']', ','), round(sum(results[i]) / 6, 1)
-            # ii = i * 9 * 2
-            # str(scores[ii:ii + 3]).replace('[', ',').replace(']', ','), \
-            # results[i][0], \
-            # str(scores[ii + 3:ii + 6]).replace('[', ',').replace(']', ','), \
-            # results[i][1], \
-            # str(scores[ii + 6:ii + 9]).replace('[', ',').replace(']', ','), \
-            # results[i][2], ',', \
-            # round((results[i][0] + results[i][1] + results[i][2]) / 3, 2)
+        if pilot:
+            for i in range(len(titles)):
+                if withTitle2:
+                    print 'BG, PT, TR, ' + titles2[i][:-1]
+                print '{0},{1},{2},{3}'.format(
+                    scores[i * 3] if i * 3 < len(scores) else '',
+                    scores[i * 3 + 1] if i * 3 + 1 < len(scores) else '',
+                    scores[i * 3 + 2] if i * 3 + 2 < len(scores) else '',
+                    titles[i][:-1] if withTitles else '')
+        else:
+            for i, v in enumerate(scores):
+                print v, titles[i][:-1] if withTitles else ''
 
 
 def mineNewFile(newFile):
-    path = '../tmp/tmp/{0}'.format(newFile)
+    path = '../Reports/Reports/{0}'.format(newFile)
     titles, params, scores, langs, titles2 = [], [], [], [], []
+    previousLine = ''
     with open(path, 'r') as log:
         for line in log.readlines():
-            if line.startswith('# Kiper conf: '):
+            if line.startswith('Total loss for epoch '):
+                print line[len('Total loss for epoch ') + 2:]
+                continue
+            if line.startswith('# Configs:'):
                 titles.append(line)
+            if line.startswith('# CTitles:'):
+                titles2.append(line)
             if line.startswith(langLine) or line.startswith(langLine1):
                 if line.startswith(langLine):
                     langs.append(line[len(langLine):len(langLine) + 2])
@@ -584,39 +549,49 @@ def mineNewFile(newFile):
             if line.startswith(paramLine):
                 paramsValue = toNum(line[len(paramLine):len(paramLine) + 8].strip())
                 params.append(round(int(paramsValue) / 1000000., 2))
-            if line.startswith(scoreLine):
+            if line.startswith(scoreLine) and previousLine.startswith('='):
                 fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
                 while len(fScore) < 4:
                     fScore = fScore + '0'
                 scores.append(round(int(fScore) / 10000., 4) * 100)
             if line.startswith(titleLine) and not line.startswith('WARNING:root:Title: Language : FR'):
                 titles.append(line[len(titleLine):].strip())
+            previousLine = line
     return titles, scores, params, langs, titles2
 
 
+def orderResults(titles, values):
+    results = dict()
+    for i in range(len(titles)):
+        xpTitles = titles[i].split(',')
+        xpValues = values[i].split(',')
+        if len(xpTitles) != len(xpValues):
+            pass
+        results[i] = dict()
+        for j in range(len(xpTitles)):
+            results[i][xpTitles[j]] = xpValues[j]
+    for i in range(len(titles)):
+        print sorted(results[i].items())
+
+def readAndOrderResults():
+    titles, values, idx = [], [], 0
+
+    with open( 'tmp - tmp.csv.csv', 'r') as f:
+        for line in f:
+            if idx % 2 == 0:
+                titles.append(line[:-1])
+            else:
+                values.append(line[:-1])
+            idx += 1
+    orderResults(titles, values)
+
 if __name__ == '__main__':
-    # attaachTwoFiles('../tmp/tmp/1.txt' ,'../tmp/tmp/2.txt')
-    # mineLinearFile('sharedtask2.min.txt')
     getNewScores([
-        'ftb.dimsum.rnn'
+        'mlpInLinear'
+        #'svm.1', 'svm.2', 'svm.3', 'svm.4', 'svm.5', 'svm.6', 'svm.7'
         # 'k.rsg1', 'k.rsg2', 'k.rsg3','k.rsg4', 'k.rsg5', 'k.rsg6','k.rsg7', 'k.rsg8', 'k.rsg9','k.rsg10'
-        # 'k.epochs'
         # 'kc.bg.rsg.5', 'kc.bg.rsg.6', 'kc.bg.rsg.7', 'kc.bg.rsg.8' , 'kc.bg.rsg.9', 'kc.bg.rsg.10'
-        # 'bg.rsg.1', 'bg.rsg.2', 'bg.rsg.3', 'bg.rsg.4', 'bg.rsg.5','bg.rsg.6', 'bg.rsg.7', 'bg.rsg.8', 'bg.rsg.9',
-        # 'bg.rsg.10', 'bg.rsg.11','bg.rsg.12', 'bg.rsg.13', 'bg.rsg.14', 'bg.rsg.15', 'bg.rsg.16', 'bg.rsg.17',
-        # 'bg.rsg.18'
-        # 'RNN.EVAL'
-        # 'rnn.pilot.1', 'rnn.pilot.2', 'rnn.pilot.3', 'rnn.pilot.4', 'rnn.pilot.5', 'rnn.pilot.6',
         # 'rnn.pilot.7', 'rnn.pilot.8', 'rnn.pilot.9', 'rnn.pilot.10', 'rnn.pilot.11', 'rnn.pilot.12'
-        # 'rnn.extra.sam'
-        # 'linear1', 'linear1', 'linear13', 'linear14', 'linear15',
-        # 'linear16', 'linear17', 'linear18', 'linear19', 'linear20',
-        # 'linear11', 'linear12', 'linear13', 'linear14', 'linear15',
         # 'linear16', 'linear17', 'linear18', 'linear19', 'linear20'
-    ])
-    # getStats('earlyStopping.st2.corpus')
-    # getScores('sharedtask2.new', xpNum=1, showTitle=True, shouldClean=False)
-    # for f in os.listdir('../tmp/tmp'):
-    #     print f
-    #     if not f.endswith('.tex') and not f.lower().endswith('err'):
-    #         getScores(f, shouldClean=False, showTitle=True, xpNum=5)
+    ], pilot=False, withTitles=False, withTitle2=False)
+

@@ -3,6 +3,7 @@
 import copy
 import itertools
 import pickle
+import random
 
 from reports import *
 
@@ -30,7 +31,7 @@ class Corpus:
             self.trainDataSet = readCuptFile(os.path.join(path, 'train.cupt'))
             self.devDataSet = readCuptFile(os.path.join(path, 'dev.cupt'))
             self.testDataSet = readCuptFile(os.path.join(path, 'test.cupt'))
-        elif configuration['dataset']['FTB']:
+        elif configuration['dataset']['ftb']:
             path = os.path.join(configuration['path']['projectPath'], 'ressources/FTB')
             self.trainDataSet = readFTB(os.path.join(path, 'train.cupt'))
             self.devDataSet = readFTB(os.path.join(path, 'dev.cupt'))
@@ -43,7 +44,6 @@ class Corpus:
             mweFile, testMweFile = os.path.join(path, 'train.parsemetsv'), os.path.join(path, 'test.parsemetsv')
             conlluFile, testConllu = getTrainAndTestConlluPath(path)
             if conlluFile and testConllu:
-                # if not configuration['evaluation']['load']:
                 self.trainDataSet = readConlluFile(conlluFile)
                 integrateMweFile(mweFile, self.trainDataSet)
                 self.testDataSet = readConlluFile(testConllu)
@@ -52,13 +52,14 @@ class Corpus:
 
                 self.trainDataSet = readMWEFile(mweFile)
                 self.testDataSet = readMWEFile(testMweFile)
-        # if not configuration['evaluation']['load']:
         self.analyzeSents()
         # Sorting parents to get the direct parent on the top of parentVMWEs list
-        self.text = self.toText()
+        # self.text = self.toText()
+        self.deleteNumericalExpressions()
+        self.deleteFtbMWT()
         self.orderParentVMWEs()
-        if not configuration['evaluation']['cv']['active']:
-            if not configuration['evaluation']['corpus'] and not configuration['dataset']['FTB']:
+        if not configuration['evaluation']['cv']:
+            if not configuration['evaluation']['corpus'] and not configuration['dataset']['ftb']:
                 self.shuffleSent(langName)
                 self.distributeSent(langName)
             self.getTrainAndTest()
@@ -68,18 +69,90 @@ class Corpus:
         self.getNewMWEPercentage()
         self.depLblMgr = DepenecyLabelManager(self)
 
+    def deleteFtbMWT(self):
+        if not configuration['dataset']['ftb']:
+            return
+        if configuration['others']['removeFtbMWT']:
+            for sent in self.trainDataSet + self.testDataSet + self.devDataSet:
+                for v in sent.vMWEs:
+                    v.shouldBeDeleted = False
+                    if len(v.tokens) == 1:
+                        v.shouldBeDeleted = True
+                newVmwes = []
+                for v in sent.vMWEs:
+                    if not v.shouldBeDeleted:
+                        newVmwes.append(v)
+                    else:
+                        for t in v.tokens:
+                            t.parentMWEs.remove(v)
+                sent.vMWEs = newVmwes
+            sys.stdout.write('FTB MWTs are cleaned!\n')
+
+    def deleteNumericalExpressions(self):
+        if not configuration['dataset']['ftb'] or not configuration['others']['deleteNumericalExpressions']:
+            return
+        # percentage = self.getNumericalExpressionPercentage()
+        # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
+        #  'Train: {0} Test: {1}'.format(percentage[0], percentage[1]) + doubleSep)
+        if configuration['others']['verbose']:
+            sys.stdout.write('\tDeleting numeric expressions!\n')
+        for sent in self.trainDataSet + self.testDataSet + self.devDataSet:
+            for v in sent.vMWEs:
+                v.shouldBeDeleted = False
+                for c in v.getLemmaString():
+                    if c.isdigit():
+                        v.shouldBeDeleted = True
+                        break
+            newVmwes = []
+            for v in sent.vMWEs:
+                if not v.shouldBeDeleted:
+                    newVmwes.append(v)
+                else:
+                    for t in v.tokens:
+                        t.parentMWEs.remove(v)
+            sent.vMWEs = newVmwes
+
+    def getNumericalExpressionPercentage(self):
+        trainDigitalExps, allTrainExpOcc, testDigiralExps, allTestExpOcc = 0, 0, 0, 0
+        mweDictionary = self.getMWEDictionary()
+        for mwe in mweDictionary.keys():
+            allTrainExpOcc += mweDictionary[mwe]
+            for c in mwe:
+                if c.isdigit():
+                    trainDigitalExps += mweDictionary[mwe]
+                    break
+        mweDictionary = self.getMWEDictionary(onTest=True)
+        for mwe in mweDictionary.keys():
+            allTestExpOcc += mweDictionary[mwe]
+            for c in mwe:
+                if c.isdigit():
+                    testDigiralExps += mweDictionary[mwe]
+                    break
+        t = round(float(trainDigitalExps) / allTrainExpOcc, 2) if trainDigitalExps else 0
+        tst = round(float(testDigiralExps) / allTestExpOcc, 2) if testDigiralExps else 0
+        return t, tst
+
     def getNewMWEPercentage(self):
         newMWE, oldMWE = 0, 0
         for s in self.testingSents:
             for v in s.vMWEs:
-                if v.getTokenOrLemmaString() not in self.mweDictionary:
+                if v.getLemmaString() not in self.mweDictionary:
                     newMWE += 1
                 else:
                     oldMWE += 1
-        sys.stdout.write(
-            tabs + 'Seen MWEs : {0} ({1} %)\n'.format(oldMWE, str(int(100 * float(oldMWE) / (oldMWE + newMWE)))))
-        sys.stdout.write(tabs + 'New MWEs : {0} ({1} %)'.format(newMWE, str(
-            int(100 * float(newMWE) / (oldMWE + newMWE)))) + doubleSep)
+        if configuration['others']['verbose']:
+            sys.stdout.write(
+                tabs + 'Seen MWEs : {0} ({1} %)\n'.format(oldMWE, str(int(100 * float(oldMWE) / (oldMWE + newMWE)))))
+            if newMWE:
+                sys.stdout.write(tabs + 'New MWEs : {0} ({1} %)'.format(newMWE, str(
+                    int(100 * float(newMWE) / (oldMWE + newMWE)))) + doubleSep)
+
+    def filterImportatntSents(self):
+        imporTrainSents = []
+        for s in self.trainingSents:
+            if s.vMWEs:
+                imporTrainSents.append(s)
+        self.trainingSents = imporTrainSents
 
     def analyzeTestSet(self):
         occurrenceDic, nonIdentifiedOccurrenceDic = dict(), dict()
@@ -158,7 +231,33 @@ class Corpus:
         sys.stdout.write(tabs + 'Important sentences after : {0}'.format(self.trainingSents) + doubleSep)
         self.mweDictionary = self.getMWEDictionary()
 
+    def createMWEFiles(self):
+        if not configuration['evaluation']['corpus']:
+            return
+        datasetConf, modelConf = configuration['dataset'], configuration['xp']
+        dataset = 'ST2' if datasetConf['sharedtask2'] else \
+            ('FTB' if datasetConf['sharedtask2'] else 'ST1')
+        model = 'Linear' if modelConf['linear'] else (
+            'Kiperwasser' if modelConf['kiperwasser'] else (
+                'RNN' if modelConf['rnn'] else 'MLP'))
+        folder = os.path.join(configuration['path']['projectPath'], configuration['path']['results'], dataset, model)
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        predicted = self.toConllU()  # if dataset == 'ST2' else str(corpus)
+        gold = self.toConllU(gold=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
+        train = self.toConllU(gold=True, train=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
+        import datetime
+        today = datetime.date.today().strftime('%d.%m')
+        with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
+            f.write(predicted)
+        with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
+            f.write(gold)
+        with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
+            f.write(train)
+
     def printConlusion(self):
+        if not configuration['others']['verbose']:
+            return ''
         res = tabs + 'Language : {0}'.format(self.langName) + doubleSep
         res += tabs + 'Training {0} : {1}, Test : {2}\n'. \
             format('(Important)' if configuration['sampling']['importantSentences'] else '', len(self.trainingSents),
@@ -174,7 +273,8 @@ class Corpus:
             mweNum += len(sent.vMWEs)
             for v in sent.vMWEs:
                 tokenNum += len(v.tokens)
-        sys.stdout.write(tabs + 'MWE length mean : {0}\n'.format(round(float(tokenNum) / mweNum, 2)))
+        if configuration['others']['verbose']:
+            sys.stdout.write(tabs + 'MWE length mean : {0}\n'.format(round(float(tokenNum) / mweNum, 2)))
 
     def createMWEDict(self):
         res = ''
@@ -195,51 +295,51 @@ class Corpus:
                 depLbls.add(t.dependencyLabel)
         return sorted(depLbls)
 
-    def deleteNumericalExpressions(self):
-        if not configuration['dataset']['FTB']:
-            return
-        percentage = self.getNumericalExpressionPercentage()
-        sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
-                         'Train: {0} Test: {1}'.format(percentage[0], percentage[1]) + doubleSep)
-        for sent in self.trainingSents + self.testingSents:
-            for v in sent.vMWEs:
-                v.shouldBeDeleted = False
-                if len(v.tokens) == 1:
-                    v.shouldBeDeleted = True
-                for c in v.getTokenOrLemmaString():
-                    if c.isdigit():
-                        v.shouldBeDeleted = True
-                        break
-            newVmwes = []
-            for v in sent.vMWEs:
-                if not v.shouldBeDeleted:
-                    newVmwes.append(v)
-                else:
-                    for t in v.tokens:
-                        t.parentMWEs.remove(v)
-            sent.vMWEs = newVmwes
-            # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
-            #                str(self.getNumericalExpressionPercentage()) + doubleSep)
-
-    def getNumericalExpressionPercentage(self):
-        trainDigitalExps, allTrainExpOcc, testDigiralExps, allTestExpOcc = 0, 0, 0, 0
-        mweDictionary = self.getMWEDictionary()
-        for mwe in mweDictionary.keys():
-            allTrainExpOcc += mweDictionary[mwe]
-            for c in mwe:
-                if c.isdigit():
-                    trainDigitalExps += mweDictionary[mwe]
-                    break
-        mweDictionary = self.getMWEDictionary(onTest=True)
-        for mwe in mweDictionary.keys():
-            allTestExpOcc += mweDictionary[mwe]
-            for c in mwe:
-                if c.isdigit():
-                    testDigiralExps += mweDictionary[mwe]
-                    break
-        t = round(float(trainDigitalExps) / allTrainExpOcc, 2) if trainDigitalExps else 0
-        tst = round(float(testDigiralExps) / allTestExpOcc, 2) if testDigiralExps else 0
-        return t, tst
+    # def deleteNumericalExpressions(self):
+    #     if not configuration['dataset']['ftb']:
+    #         return
+    #     percentage = self.getNumericalExpressionPercentage()
+    #     sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
+    #                      'Train: {0} Test: {1}'.format(percentage[0], percentage[1]) + doubleSep)
+    #     for sent in self.trainingSents + self.testingSents:
+    #         for v in sent.vMWEs:
+    #             v.shouldBeDeleted = False
+    #             if len(v.tokens) == 1:
+    #                 v.shouldBeDeleted = True
+    #             for c in v.getTokenOrLemmaString():
+    #                 if c.isdigit():
+    #                     v.shouldBeDeleted = True
+    #                     break
+    #         newVmwes = []
+    #         for v in sent.vMWEs:
+    #             if not v.shouldBeDeleted:
+    #                 newVmwes.append(v)
+    #             else:
+    #                 for t in v.tokens:
+    #                     t.parentMWEs.remove(v)
+    #         sent.vMWEs = newVmwes
+    #         # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
+    #         #                str(self.getNumericalExpressionPercentage()) + doubleSep)
+    #
+    # def getNumericalExpressionPercentage(self):
+    #     trainDigitalExps, allTrainExpOcc, testDigiralExps, allTestExpOcc = 0, 0, 0, 0
+    #     mweDictionary = self.getMWEDictionary()
+    #     for mwe in mweDictionary.keys():
+    #         allTrainExpOcc += mweDictionary[mwe]
+    #         for c in mwe:
+    #             if c.isdigit():
+    #                 trainDigitalExps += mweDictionary[mwe]
+    #                 break
+    #     mweDictionary = self.getMWEDictionary(onTest=True)
+    #     for mwe in mweDictionary.keys():
+    #         allTestExpOcc += mweDictionary[mwe]
+    #         for c in mwe:
+    #             if c.isdigit():
+    #                 testDigiralExps += mweDictionary[mwe]
+    #                 break
+    #     t = round(float(trainDigitalExps) / allTrainExpOcc, 2) if trainDigitalExps else 0
+    #     tst = round(float(testDigiralExps) / allTestExpOcc, 2) if testDigiralExps else 0
+    #     return t, tst
 
     def toText(self):
         res = ''
@@ -339,7 +439,7 @@ class Corpus:
             for sent in self.trainDataSet:
                 self.trainingSents.append(sent)
                 tokenNum += len(sent.tokens)
-                if tokenNum >= evalConfig['tokenAvg']:
+                if tokenNum >= configuration['others']['tokenAvg']:
                     break
             if self.devDataSet:
                 self.testingSents = self.devDataSet
@@ -348,14 +448,14 @@ class Corpus:
                 for sent in reversed(self.trainDataSet):
                     self.testingSents.append(sent)
                     tokenNum += len(sent.tokens)
-                    if tokenNum >= evalConfig['testTokenAvg']:
+                    if tokenNum >= configuration['others']['testTokenAvg']:
                         break
         elif evalConfig['dev']:
-            if (configuration['dataset']['sharedtask2'] or configuration['dataset']['FTB']) and self.devDataSet:
+            if (configuration['dataset']['sharedtask2'] or configuration['dataset']['ftb']) and self.devDataSet:
                 self.trainingSents = self.trainDataSet
                 self.testingSents = self.devDataSet
             else:
-                pointer = int(len(self.trainDataSet) * (1 - evalConfig['test']))
+                pointer = int(len(self.trainDataSet) * (1 - configuration['others']['test']))
                 self.trainingSents = self.trainDataSet[:pointer]
                 self.testingSents = self.trainDataSet[pointer:]
         elif evalConfig['corpus']:
@@ -368,7 +468,7 @@ class Corpus:
             self.trainingSents = self.trainDataSet
             self.testingSents = self.devDataSet if self.devDataSet else self.testDataSet
         else:
-            debugTrainNum, idx, self.trainingSents = evalConfig['debugTrainNum'], 0, []
+            debugTrainNum, idx, self.trainingSents = configuration['others']['debugTrainNum'], 0, []
             for s in self.trainDataSet:
                 if s.vMWEs and idx < debugTrainNum:
                     self.trainingSents.append(s)
@@ -377,14 +477,10 @@ class Corpus:
                     break
             self.testingSents = self.trainingSents
         if configuration['sampling']['importantSentences'] or configuration['sampling']['importantTransitions']:
-            imporTrainSents = []
-            for s in self.trainingSents:
-                if s.vMWEs:
-                    imporTrainSents.append(s)
-            self.trainingSents = imporTrainSents
+            self.filterImportatntSents()
 
     def distributeSent(self, lang):
-        if configuration['evaluation']['shuffleTrain']:
+        if configuration['others']['shuffleTrain']:
             return
         idxDic = loadObj(lang + 'idxDic')
         newTrainingSentSet = []
@@ -394,11 +490,11 @@ class Corpus:
 
     def shuffleSent(self, lang):
         datasetFolder = 'sharedtask.2' if configuration['dataset']['sharedtask2'] else 'sharedtask'
-        if configuration['dataset']['FTB']:
+        if configuration['dataset']['ftb']:
             datasetFolder = 'FTB'
         idxPath = os.path.join(configuration['path']['projectPath'], 'ressources/LangDist/' + datasetFolder,
                                lang + 'idxDic.pkl')
-        if configuration['evaluation']['shuffleTrain'] or not os.path.lexists(idxPath):
+        if configuration['others']['shuffleTrain'] or not os.path.lexists(idxPath):
             sys.stdout.write(tabs + 'train data set has been shuffled\n' + doubleSep)
             idxDic = dict()
             idxList = range(len(self.trainDataSet))
@@ -412,7 +508,7 @@ class Corpus:
             saveObj(idxDic, lang + 'idxDic')
 
     def analyzeSents(self):
-        for sent in self.trainDataSet:
+        for sent in self.trainDataSet + self.devDataSet + self.testDataSet:
             sent.recognizeEmbedded()
             sent.recognizeInterleaving()
             sent.recognizeAlternating()
@@ -811,10 +907,10 @@ class VMWE:
         return result[:-1].lower()
 
     def getLemmaString(self):
-        return ' '.join(t.text.lower() for t in self.tokens)
+        return ' '.join(t.lemma.lower() if t.lemma.lower() else t.text for t in self.tokens).lower()
 
     def getTokenOrLemmaString(self):
-        useLemma = configuration['model']['embedding']['lemma']
+        useLemma = configuration['mlp']['lemma']
         if not useLemma:
             return ' '.join(t.text.lower() for t in self.tokens)
             # for token in self.tokens:
@@ -982,7 +1078,7 @@ class Token:
         return False
 
     def getTokenOrLemma(self):
-        useLemma = configuration['model']['embedding']['lemma']
+        useLemma = configuration['mlp']['lemma']
         if not useLemma:
             return self.text.lower()
         if self.lemma:
@@ -1039,7 +1135,7 @@ class DepenecyLabelManager():
 
 def saveObj(obj, name):
     datasetFolder = 'sharedtask.2' if configuration['dataset']['sharedtask2'] else 'sharedtask'
-    if configuration['dataset']['FTB']:
+    if configuration['dataset']['ftb']:
         datasetFolder = 'FTB'
     with open(os.path.join(configuration['path']['projectPath'],
                            'ressources/LangDist/' + datasetFolder, name + '.pkl'), 'wb') as f:
@@ -1048,7 +1144,7 @@ def saveObj(obj, name):
 
 def loadObj(name):
     datasetFolder = 'sharedtask.2' if configuration['dataset']['sharedtask2'] else 'sharedtask'
-    if configuration['dataset']['FTB']:
+    if configuration['dataset']['ftb']:
         datasetFolder = 'FTB'
     with open(os.path.join(configuration['path']['projectPath'],
                            'ressources/LangDist/' + datasetFolder, name + '.pkl'), 'rb') as f:
@@ -1239,12 +1335,12 @@ def getVMWESents(ss, num):
 
 
 def getTokens(elemlist):
-    if str(elemlist.__class__) == 'corpus.Token':  # isinstance(elemlist, Token):
+    if str(elemlist.__class__).endswith('corpus.Token'):  # isinstance(elemlist, Token):
         return [elemlist]
     if isinstance(elemlist, list):
         result = []
         for elem in elemlist:
-            if str(elem.__class__) == 'corpus.Token':
+            if str(elem.__class__).endswith('corpus.Token'):
                 result.append(elem)
             elif isinstance(elem, list) and len(elem) == 1 and isinstance(elem[0], list):
                 result.extend(getTokens(elem[0]))
@@ -1436,11 +1532,8 @@ def getStats(sentences, asCSV=False):
     return res
 
 
-def readFTB(ftbFile, reportBugs=False):
-    # bugNum, mweNum = 0, 0
-    sentences = []
-    if reportBugs:
-        print ftbFile
+def readFTB(ftbFile, reportBugs=True, stats=False):
+    sentences, nonValidLines = [], 0
     with open(ftbFile, 'r') as corpusFile:
         sent, senIdx, mweIdx, lineNum = None, 0, 1, 0
         for line in corpusFile:
@@ -1461,8 +1554,14 @@ def readFTB(ftbFile, reportBugs=False):
 
             lineParts = line.split('\t')
             if len(lineParts) != 10 or '-' in lineParts[0] or '.' in lineParts[0]:
+                nonValidLines += 1
                 continue
-            token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2].lower(),
+            text, lemma = lineParts[1].lower(), lineParts[2]
+            if configuration['others']['replaceNumbers']:
+                for c in lineParts[1]:
+                    if c.isdigit():
+                        text, lemma = 'number', 'number'
+            token = Token(lineParts[0], text, lemma=lemma,
                           abstractPosTag=lineParts[3] if lineParts[3] != '_' else lineParts[4],
                           dependencyParent=int(lineParts[6]) if (lineParts[6] != '_' and lineParts[6] != '-') else -1,
                           dependencyLabel=lineParts[7] if lineParts[7] != '_' else '')
@@ -1471,18 +1570,13 @@ def readFTB(ftbFile, reportBugs=False):
             sent.text += token.text + ' '
             morpho = getMorphological(lineParts[5].lower())
             if 'mwehead' in morpho:
-                # if lineParts[7] == 'dep_cpd':
-                #   if reportBugs:
-                #        sys.stdout.write('Annotation bug: line: {0}, word: {1}\n'.format(lineNum, lineParts[1]))
-                # else:
                 vMWE = VMWE(mweIdx, [token], 'oth')
                 vMWE.type2 = morpho['mwehead']
                 sent.vMWEs.append(vMWE)
                 token.setParent(vMWE)
-                # mweNum += 1
-            elif lineParts[7] == 'dep_cpd':  # and 'mwehead' not in morpho:
-                # if sent.vMWEs:
-                if sent.vMWEs and token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
+                mweIdx += 1
+            elif lineParts[7] == 'dep_cpd':
+                if sent.vMWEs:  # and token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
                     sent.vMWEs[-1].tokens.append(token)
                     token.setParent(sent.vMWEs[-1])
                 else:
@@ -1490,7 +1584,7 @@ def readFTB(ftbFile, reportBugs=False):
                         sys.stdout.write('Annotation bug dep_cpd without dep parent: line: {0}, word:'
                                          ' {1} DependencyParent: {2}, head Position: {3} \n'.
                                          format(lineNum, lineParts[1], token.dependencyParent,
-                                                sent.vMWEs[-1].tokens[0].position))
+                                                sent.vMWEs[-1].tokens[0].position if sent.vMWEs else ''))
                     if sent.vMWEs:
                         sent.vMWEs = sent.vMWEs[:-1]
                         # else:
@@ -1500,10 +1594,25 @@ def readFTB(ftbFile, reportBugs=False):
                         # else:
                         #   sys.stdout.write(' Annotation error {0} : {1}'.format(lineNum, sent))
                         # assert not sent.vMWEs, ' Annotation error {0} : {1}'.format(lineNum, sent)
-    # print 'Number of error {0}, number of MWE {1}'.format(bugNum,mweNum)
-    # print universalPosTags
-    # print xposTags
-    # print len(universalPosTags), len(xposTags)
+    tNum, mNum, mwtNum, biNum, triNum, otherNum = 0, 0, 0, 0, 0, 0
+    for s in sentences:
+        tNum += len(s.tokens)
+        mNum += len(s.vMWEs)
+        for v in s.vMWEs:
+            if len(v.tokens) == 1:
+                mwtNum += 1
+            elif len(v.tokens) == 2:
+                biNum += 1
+            elif len(v.tokens) == 3:
+                triNum += 1
+            else:
+                otherNum += 1
+    if stats:
+        print ftbFile.split('/')[-1]
+        print len(sentences)
+        print 'Token number = ', tNum
+        print 'Expression number = ', mNum
+        print 'MWT = {0}, BiE = {1}, TriE = {2}, Other = {3}'.format(mwtNum, biNum, triNum, otherNum)
     return sentences
 
 
@@ -1535,7 +1644,7 @@ def getOccurrenceRang(occ):
 def getPosTag(token, lineParts3, lineParts4):
     # universalPosTags.add(lineParts3.lower())
     # xposTags.add(lineParts4.lower())
-    useUniversalPOS = configuration['preprocessing']['data']['universalPOS']
+    useUniversalPOS = configuration['others']['universalPOS']
     if useUniversalPOS:
         token.posTag = lineParts3
     else:
@@ -1546,7 +1655,6 @@ def getPosTag(token, lineParts3, lineParts4):
 
 
 def readDiMSUM(dimsumFile, reportBugs=False):
-    # bugNum, mweNum = 0, 0
     sentences = []
     BMWEs, bMWEs = [], []
     if reportBugs:
@@ -1587,6 +1695,7 @@ def readDiMSUM(dimsumFile, reportBugs=False):
                     BMWEs.append(vMWE)
                 else:
                     bMWEs.append(vMWE)
+                mweIdx += 1
             elif lineParts[4].lower() == 'i':
                 if lineParts[4] == 'i':
                     pass
@@ -1609,6 +1718,23 @@ def readDiMSUM(dimsumFile, reportBugs=False):
     print mweNum, tokenNum
 
     return sentences
+
+
+def getAllLangStats(langs):
+    res = ''
+    for lang in langs:
+        corpus = Corpus(lang)
+        res += corpus.langName + ',' + getStats(corpus.trainDataSet, asCSV=True) + ',' + \
+               getStats(corpus.devDataSet, asCSV=True) + ',' + \
+               getStats(corpus.testDataSet, asCSV=True) + '\n'
+    return res
+
+
+def getRelevantModelAndNormalizer(sent, trainingSent, models, normalizers, test=False):
+    if test:
+        return models[5], normalizers[5]
+    foldNum = int(str(float(trainingSent.index(sent) / (len(trainingSent) / 5)))[0])
+    return models[foldNum], normalizers[foldNum]
 
 
 if __name__ == '__main__':

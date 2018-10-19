@@ -1,0 +1,2694 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_eGFWn3.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 3841/4043 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 980 (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, True, False, True, False, False, True, False, True, True, True, True, False, True, False, False, True, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 730463
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:37.725015
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:23.986489
+==================================================================================================
+	Identification : 0.587
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 820065
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:28.987083
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:34.138262
+==================================================================================================
+	Identification : 0.644
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 952605
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:48.161263
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:13.956184
+==================================================================================================
+	Identification : 0.552
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, False, False, False, True, False, True, True, False, True, False, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 574528
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:10.390825
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:18.350360
+==================================================================================================
+	Identification : 0.593
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655448
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:56.755041
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:26.399611
+==================================================================================================
+	Identification : 0.669
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 631888
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:56.332152
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:09.776660
+==================================================================================================
+	Identification : 0.533
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, True, False, True, False, True, True, False, True, True, False, False, False, True, True, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 409780
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:01.688733
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:19.119222
+==================================================================================================
+	Identification : 0.604
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 480865
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:51.295195
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:26.142461
+==================================================================================================
+	Identification : 0.655
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 466780
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:00.639297
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:11.032610
+==================================================================================================
+	Identification : 0.544
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, True, True, True, False, False, False, True, False, True, False, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 396238
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:00.607011
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.540790
+==================================================================================================
+	Identification : 0.608
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 461624
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:52.011794
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.348903
+==================================================================================================
+	Identification : 0.654
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 452932
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:56.569516
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:09.376792
+==================================================================================================
+	Identification : 0.551
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, False, False, True, False, False, False, False, False, True, True, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 574543
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:06.461349
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:18.607451
+==================================================================================================
+	Identification : 0.593
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655475
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:51.950893
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:30.897075
+==================================================================================================
+	Identification : 0.674
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 631906
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:03.545592
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:10.105538
+==================================================================================================
+	Identification : 0.536
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, False, True, False, False, True, True, True, False, True, False, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 392245
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:30.642334
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:23.863054
+==================================================================================================
+	Identification : 0.603
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 461888
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:21.355358
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:33.174022
+==================================================================================================
+	Identification : 0.648
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 443670
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:36.281192
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:13.455733
+==================================================================================================
+	Identification : 0.531
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, True, False, False, False, False, True, False, False, True, True, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 396247
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:06.443406
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:19.443219
+==================================================================================================
+	Identification : 0.613
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 461663
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:40.585765
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.616805
+==================================================================================================
+	Identification : 0.656
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 452958
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:52.350432
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:13.026870
+==================================================================================================
+	Identification : 0.536
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, True, False, True, True, False, False, True, False, True, True, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 592116
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:50.278202
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:24.228208
+==================================================================================================
+	Identification : 0.585
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 674478
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:25.873273
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.930238
+==================================================================================================
+	Identification : 0.654
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655047
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:43.150631
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:13.598578
+==================================================================================================
+	Identification : 0.535
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, False, False, False, False, False, True, False, False, True, False, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 574527
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:10.607687
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:16.736011
+==================================================================================================
+	Identification : 0.593
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655447
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:55.155818
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:24.429194
+==================================================================================================
+	Identification : 0.669
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 631887
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:57.336286
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:09.387757
+==================================================================================================
+	Identification : 0.533
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, True, False, True, False, True, True, False, True, True, False, False, False, True, True, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 605644
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:08.846005
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.483716
+==================================================================================================
+	Identification : 0.591
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 693685
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:57.611458
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:25.647155
+==================================================================================================
+	Identification : 0.664
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 668869
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:01.412100
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:10.684911
+==================================================================================================
+	Identification : 0.541
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, True, False, True, False, False, False, True, False, False, True, False, False, True, True, False, True, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 673153
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:11.835491
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:16.713547
+==================================================================================================
+	Identification : 0.597
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 752525
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:51.993750
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:24.452530
+==================================================================================================
+	Identification : 0.657
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 864705
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:00.650280
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:09.592991
+==================================================================================================
+	Identification : 0.545
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, True, False, True, False, False, True, False, True, False, True, False, False, True, True, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 592109
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:05.501825
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.349532
+==================================================================================================
+	Identification : 0.593
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 674483
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:56.768861
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:25.435095
+==================================================================================================
+	Identification : 0.671
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655041
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:55.994516
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:12.246219
+==================================================================================================
+	Identification : 0.537
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, True, True, True, True, True, False, True, False, True, True, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 392268
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:34.977853
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:22.329484
+==================================================================================================
+	Identification : 0.602
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 461922
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:18.878197
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.581569
+==================================================================================================
+	Identification : 0.637
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 443694
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:44.879929
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:13.451476
+==================================================================================================
+	Identification : 0.54
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, False, False, False, False, False, False, False, False, True, False, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 378659
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:28.434139
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:21.238230
+==================================================================================================
+	Identification : 0.618
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 442608
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:09.218762
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:32.568293
+==================================================================================================
+	Identification : 0.65
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 429795
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:28.139614
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:12.410774
+==================================================================================================
+	Identification : 0.541
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, False, False, True, False, True, False, False, False, True, True, False, True, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 709115
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:13.233185
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.142026
+==================================================================================================
+	Identification : 0.598
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 796861
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:55.287199
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:25.138258
+==================================================================================================
+	Identification : 0.651
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 922781
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:10.054424
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:09.845680
+==================================================================================================
+	Identification : 0.546
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, True, False, True, False, True, True, True, False, False, False, False, False, True, True, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 396256
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:06.039306
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:16.173898
+==================================================================================================
+	Identification : 0.611
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 461663
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:52.389943
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:23.738896
+==================================================================================================
+	Identification : 0.658
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 452956
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:00.600348
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:11.481761
+==================================================================================================
+	Identification : 0.546
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, True, False, True, False, True, True, False, False, True, True, True, True, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 1062363
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:26.468753
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:18.467330
+==================================================================================================
+	Identification : 0.592
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 1166049
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:04.686981
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.788023
+==================================================================================================
+	Identification : 0.677
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 1319541
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:19.836039
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:12.982796
+==================================================================================================
+	Identification : 0.548
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, False, True, True, False, False, True, False, False, True, True, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 378715
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:54.778845
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:16.653648
+==================================================================================================
+	Identification : 0.608
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 442704
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:45.446883
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:24.164962
+==================================================================================================
+	Identification : 0.663
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 429848
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:48.938116
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:11.605626
+==================================================================================================
+	Identification : 0.544
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, True, False, True, False, False, True, False, False, False, True, True, False, True, True, False, True, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 694485
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:44.758209
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:22.232671
+==================================================================================================
+	Identification : 0.595
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 775723
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:23.831629
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:34.011709
+==================================================================================================
+	Identification : 0.652
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 894524
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:42.537660
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:15.595982
+==================================================================================================
+	Identification : 0.549
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, True, False, False, True, False, False, False, False, True, True, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 574525
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:06.971277
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.170006
+==================================================================================================
+	Identification : 0.59
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655453
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:59.829271
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:24.897671
+==================================================================================================
+	Identification : 0.675
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 631892
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:56.606534
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:12.048252
+==================================================================================================
+	Identification : 0.54
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, True, False, True, False, False, True, False, True, False, True, False, False, True, True, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 574578
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:43.577279
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:22.800840
+==================================================================================================
+	Identification : 0.588
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655517
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:22.683072
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:35.036631
+==================================================================================================
+	Identification : 0.671
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 631940
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:39.452732
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:13.718410
+==================================================================================================
+	Identification : 0.533
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, False, False, True, False, True, True, False, False, True, False, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 588118
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:35.241622
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:23.049669
+==================================================================================================
+	Identification : 0.588
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 674720
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:22.567665
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:37.896154
+==================================================================================================
+	Identification : 0.657
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 645766
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:35.634850
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:16.012368
+==================================================================================================
+	Identification : 0.533
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, True, False, False, False, False, True, True, False, True, False, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 396236
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:54.556746
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:21.582364
+==================================================================================================
+	Identification : 0.612
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 461630
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:28.696826
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.898715
+==================================================================================================
+	Identification : 0.652
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 452939
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:44.461505
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:14.862590
+==================================================================================================
+	Identification : 0.536
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, True, False, True, False, True, True, False, False, False, True, False, False, True, True, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 396269
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:41.809968
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:19.552419
+==================================================================================================
+	Identification : 0.612
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 461684
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:20.150993
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:30.729242
+==================================================================================================
+	Identification : 0.654
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 452974
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:31.823721
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:13.069415
+==================================================================================================
+	Identification : 0.532
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, True, False, True, False, False, True, False, False, False, True, True, False, True, True, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 592110
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:03.743660
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.016604
+==================================================================================================
+	Identification : 0.591
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 674484
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:54.263998
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:27.698287
+==================================================================================================
+	Identification : 0.671
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655042
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:57.096186
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:09.751428
+==================================================================================================
+	Identification : 0.537
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, True, False, True, False, True, True, True, False, True, True, True, False, True, False, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 605679
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:10.560296
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.715094
+==================================================================================================
+	Identification : 0.588
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 693714
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:57.644062
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.084296
+==================================================================================================
+	Identification : 0.669
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 668889
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:04.186554
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:12.452409
+==================================================================================================
+	Identification : 0.54
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, True, False, False, True, False, True, True, False, True, False, True, True, False, True, False, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 378703
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:32.075384
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:22.044359
+==================================================================================================
+	Identification : 0.604
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 442664
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:17.865037
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:30.736034
+==================================================================================================
+	Identification : 0.648
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 429832
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:31.739777
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:15.380908
+==================================================================================================
+	Identification : 0.531
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, history1, s0TokensAreMWE, pos, syntax, trigram, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, True, False, True, False, True, True, False, False, True, True, False, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 409804
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:56.958237
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:16.610722
+==================================================================================================
+	Identification : 0.603
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 480906
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:48.202183
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:24.418478
+==================================================================================================
+	Identification : 0.655
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 466803
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:51.486371
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:11.712542
+==================================================================================================
+	Identification : 0.545
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, dictionary, trigram, s0TokensAreMWE, pos, syntax, history1, history2, history3, s0TokenIsMWEToken, b1, distanceS0b0, stackLength, active, lemma, distanceS0s1, s0b2, token, syntaxAbstract
+==================================================================================================
+# Configs: linear, sharedtask2, fixedSize, True, False, False, False, False, 1, False, False, False, False, False, 1, False, False, True, False, False, False, False, True, False, True, True, True, False, False, False, True, False, True, False, True, False, False
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training  : 11990, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 574554
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:09.800150
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:17.311730
+==================================================================================================
+	Identification : 0.591
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training  : 12631, Test : 3117
+	MWEs in tain : 1396, occurrences : 2518
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 340 (61 %)
+	New MWEs : 213 (38 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 655463
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:58.658176
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:25.582793
+==================================================================================================
+	Identification : 0.669
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training  : 13501, Test : 1320
+	MWEs in tain : 1790, occurrences : 4856
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)	Feature number = 631903
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:03.515789
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:22.581101
+==================================================================================================
+	Identification : 0.52
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Traceback (most recent call last):
+  File "src/xpLinear.py", line 214, in <module>
+    'history3': True,
+  File "/home/halsaied/NNIdenSys/src/rsg.py", line 9, in runRSG
+    exps = getGrid(fileName)
+  File "/home/halsaied/NNIdenSys/src/rsg.py", line 33, in getGrid
+    return pickle.load(open(randomSearchGridPath, 'rb'))
+EOFError

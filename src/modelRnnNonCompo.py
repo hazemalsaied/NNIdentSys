@@ -8,10 +8,10 @@ from keras.models import Model
 from keras.utils import to_categorical
 
 from corpus import getTokens
-from nonCompoVocabulary import attachTokens
+from modelNonCompo import attachTokens
 from reports import seperator, doubleSep, tabs
 from wordEmbLoader import unk, number, empty
-
+from config import configuration
 enableCategorization = False
 
 
@@ -35,8 +35,6 @@ class Network:
         conc = keras.layers.concatenate(concLayers)
         dense1Layer = Dense(32, activation='relu')(conc)
         lastLayer = Dropout(0.3)(dense1Layer)
-        # dense2Layer = Dense(16, activation='relu')(lastLayer)
-        # lastLayer = Dropout(0.2)(dense2Layer)
         softmax = Dense(8 if enableCategorization else 4, activation='softmax')(lastLayer)
         self.model = Model(inputs=inputLayers, outputs=softmax)
         print self.model.summary()
@@ -55,7 +53,7 @@ def getLearningData(corpus):
             idxs = getIdxs(t.configuration)
             tokenIdxs.append(idxs[0])
             posIdxs.append(idxs[1])
-            np.append(lbls, t.next.type.value)
+            # np.append(lbls, t.next.type.value)
             lbl = 3 if t.next.type.value > 2 and not enableCategorization else t.next.type.value
             lbls.append(lbl)
             t = t.next
@@ -65,12 +63,12 @@ def getLearningData(corpus):
 
 def train(cls, corpus):
     labels, data = getLearningData(corpus)
-    optimizer = keras.optimizers.Adagrad(lr=0.02, epsilon=None, decay=0.0)
+    optimizer = keras.optimizers.Adagrad(lr=configuration['rnn']['lr'], epsilon=None, decay=0.0)
     cls.model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
     cls.model.fit(data, labels,
                   validation_split=.1,
-                  epochs=100,
-                  batch_size=64,
+                  epochs=configuration['rnn']['epochs'],
+                  batch_size=configuration['rnn']['batchSize'],
                   verbose=2)
 
 

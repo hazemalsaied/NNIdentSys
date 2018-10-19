@@ -1,0 +1,551 @@
+7751- :: 1 **par** 1 **ailleurs** , et 2 **parce** 2 **qu'** il " faut profiter de la crise pour écarter les 3 **brebis** 3 **galeuses** " , fernand corradetti , 4 **secrétaire** 4 **général** du 5 **syndicat** 5 **national** 5 **de** 5 **l'** 5 **équipement** 5 **de** 5 **cuisine** ( snec ) , après avoir attaqué la société 6 **cuisine** 6 **plus** en justice pour publicité mensongère , a 7 **mis** 7 **au** 7 **point** un 8 **devis** 8 **-** 8 **type** et signé en mai un contrat avec neuf associations nationales de consommateurs , sous l' oeil bienveillant de l' etat : une charte professionnelle " pour l' amélioration de la qualité des services " qui prévoit que les cuisinistes signataires utiliseront systématiquement le 9 **devis** 9 **-** 9 **type** , assureront à leurs vendeurs une 10 **formation** 10 **professionnelle** , répondront 11 **par** 11 **écrit** aux réclamations et tenteront de régler 12 **à** 12 **l'** 12 **amiable** leurs litiges . 
+MWEs:
+1- oth: par ailleurs (+)
+2- oth: parce que (+)
+3- oth: brebis galeux (+)
+4- oth: secrétaire général (-)Dist Embedded
+5- oth: syndicat national de le équipement de cuisine (+)
+6- oth: cuisine plus (+)
+7- oth: mettre à point (+)
+8- oth: devis - type (+)
+9- oth: devis - type (+)
+10- oth: formation professionnel (+)
+11- oth: par écrit (+)
+12- oth: à le amiable (+):Embedder
+
+: L                
+S=[]                        B=[ par,ailleurs, ..]
+SHIFT: L           
+S=[par]                     B=[ ailleurs,,, ..]
+SHIFT: L           
+S=[par, ailleurs]           B=[ ,,et, ..]
+MERGE: L           
+S=[[par, ailleurs]]         B=[ ,,et, ..]
+MARK_AS_OTH: L     
+S=[[par, ailleurs]]         B=[ ,,et, ..]
+REDUCE: L          
+S=[]                        B=[ ,,et, ..]
+SHIFT: L           
+S=[,]                       B=[ et,parce, ..]
+REDUCE: L          
+S=[]                        B=[ et,parce, ..]
+SHIFT: L           
+S=[et]                      B=[ parce,qu', ..]
+REDUCE: L          
+S=[]                        B=[ parce,qu', ..]
+SHIFT: L           
+S=[parce]                   B=[ qu',il, ..]
+SHIFT: L           
+S=[parce, qu']              B=[ il,", ..]
+MERGE: L           
+S=[[parce, qu']]            B=[ il,", ..]
+MARK_AS_OTH: L     
+S=[[parce, qu']]            B=[ il,", ..]
+REDUCE: L          
+S=[]                        B=[ il,", ..]
+SHIFT: L           
+S=[il]                      B=[ ",faut, ..]
+REDUCE: L          
+S=[]                        B=[ ",faut, ..]
+SHIFT: L           
+S=["]                       B=[ faut,profiter, ..]
+REDUCE: L          
+S=[]                        B=[ faut,profiter, ..]
+SHIFT: L           
+S=[faut]                    B=[ profiter,de, ..]
+REDUCE: L          
+S=[]                        B=[ profiter,de, ..]
+SHIFT: L           
+S=[profiter]                B=[ de,la, ..]
+REDUCE: L          
+S=[]                        B=[ de,la, ..]
+SHIFT: L           
+S=[de]                      B=[ la,crise, ..]
+REDUCE: L          
+S=[]                        B=[ la,crise, ..]
+SHIFT: L           
+S=[la]                      B=[ crise,pour, ..]
+REDUCE: L          
+S=[]                        B=[ crise,pour, ..]
+SHIFT: L           
+S=[crise]                   B=[ pour,écarter, ..]
+REDUCE: L          
+S=[]                        B=[ pour,écarter, ..]
+SHIFT: L           
+S=[pour]                    B=[ écarter,les, ..]
+REDUCE: L          
+S=[]                        B=[ écarter,les, ..]
+SHIFT: L           
+S=[écarter]                B=[ les,brebis, ..]
+REDUCE: L          
+S=[]                        B=[ les,brebis, ..]
+SHIFT: L           
+S=[les]                     B=[ brebis,galeuses, ..]
+REDUCE: L          
+S=[]                        B=[ brebis,galeuses, ..]
+SHIFT: L           
+S=[brebis]                  B=[ galeuses,", ..]
+SHIFT: L           
+S=[brebis, galeuses]        B=[ ",,, ..]
+MERGE: L           
+S=[[brebis, galeuses]]      B=[ ",,, ..]
+MARK_AS_OTH: L     
+S=[[brebis, galeuses]]      B=[ ",,, ..]
+REDUCE: L          
+S=[]                        B=[ ",,, ..]
+SHIFT: L           
+S=["]                       B=[ ,,fernand, ..]
+REDUCE: L          
+S=[]                        B=[ ,,fernand, ..]
+SHIFT: L           
+S=[,]                       B=[ fernand,corradetti, ..]
+REDUCE: L          
+S=[]                        B=[ fernand,corradetti, ..]
+SHIFT: L           
+S=[fernand]                 B=[ corradetti,,, ..]
+REDUCE: L          
+S=[]                        B=[ corradetti,,, ..]
+SHIFT: L           
+S=[corradetti]              B=[ ,,secrétaire, ..]
+REDUCE: L          
+S=[]                        B=[ ,,secrétaire, ..]
+SHIFT: L           
+S=[,]                       B=[ secrétaire,général, ..]
+REDUCE: L          
+S=[]                        B=[ secrétaire,général, ..]
+SHIFT: L           
+S=[secrétaire]             B=[ général,du, ..]
+REDUCE: L          
+S=[]                        B=[ général,du, ..]
+SHIFT: L           
+S=[général]               B=[ du,syndicat, ..]
+REDUCE: L          
+S=[]                        B=[ du,syndicat, ..]
+SHIFT: L           
+S=[du]                      B=[ syndicat,national, ..]
+REDUCE: L          
+S=[]                        B=[ syndicat,national, ..]
+SHIFT: L           
+S=[syndicat]                B=[ national,de, ..]
+SHIFT: L           
+S=[syndicat, national]      B=[ de,l', ..]
+MERGE: L           
+S=[[syndicat, national]]    B=[ de,l', ..]
+SHIFT: L           
+S=[[syndicat, national]de]  B=[ l',équipement, ..]
+MERGE: L           
+S=[[[syndicat, national]de]] B=[ l',équipement, ..]
+SHIFT: L           
+S=[[[syndicat, national]de]l'] B=[ équipement,de, ..]
+MERGE: L           
+S=[[[[syndicat, national]de]l']] B=[ équipement,de, ..]
+SHIFT: L           
+S=[[[[syndicat, national]de]l']équipement] B=[ de,cuisine, ..]
+MERGE: L           
+S=[[[[[syndicat, national]de]l']équipement]] B=[ de,cuisine, ..]
+SHIFT: L           
+S=[[[[[syndicat, national]de]l']équipement]de] B=[ cuisine,(, ..]
+MERGE: L           
+S=[[[[[[syndicat, national]de]l']équipement]de]] B=[ cuisine,(, ..]
+SHIFT: L           
+S=[[[[[[syndicat, national]de]l']équipement]de]cuisine] B=[ (,snec, ..]
+MERGE: L           
+S=[[[[[[[syndicat, national]de]l']équipement]de]cuisine]] B=[ (,snec, ..]
+MARK_AS_OTH: L     
+S=[[[[[[[syndicat, national]de]l']équipement]de]cuisine]] B=[ (,snec, ..]
+REDUCE: L          
+S=[]                        B=[ (,snec, ..]
+SHIFT: L           
+S=[(]                       B=[ snec,), ..]
+REDUCE: L          
+S=[]                        B=[ snec,), ..]
+SHIFT: L           
+S=[snec]                    B=[ ),,, ..]
+REDUCE: L          
+S=[]                        B=[ ),,, ..]
+SHIFT: L           
+S=[)]                       B=[ ,,après, ..]
+REDUCE: L          
+S=[]                        B=[ ,,après, ..]
+SHIFT: L           
+S=[,]                       B=[ après,avoir, ..]
+REDUCE: L          
+S=[]                        B=[ après,avoir, ..]
+SHIFT: L           
+S=[après]                  B=[ avoir,attaqué, ..]
+REDUCE: L          
+S=[]                        B=[ avoir,attaqué, ..]
+SHIFT: L           
+S=[avoir]                   B=[ attaqué,la, ..]
+REDUCE: L          
+S=[]                        B=[ attaqué,la, ..]
+SHIFT: L           
+S=[attaqué]                B=[ la,société, ..]
+REDUCE: L          
+S=[]                        B=[ la,société, ..]
+SHIFT: L           
+S=[la]                      B=[ société,cuisine, ..]
+REDUCE: L          
+S=[]                        B=[ société,cuisine, ..]
+SHIFT: L           
+S=[société]               B=[ cuisine,plus, ..]
+REDUCE: L          
+S=[]                        B=[ cuisine,plus, ..]
+SHIFT: L           
+S=[cuisine]                 B=[ plus,en, ..]
+SHIFT: L           
+S=[cuisine, plus]           B=[ en,justice, ..]
+MERGE: L           
+S=[[cuisine, plus]]         B=[ en,justice, ..]
+MARK_AS_OTH: L     
+S=[[cuisine, plus]]         B=[ en,justice, ..]
+REDUCE: L          
+S=[]                        B=[ en,justice, ..]
+SHIFT: L           
+S=[en]                      B=[ justice,pour, ..]
+REDUCE: L          
+S=[]                        B=[ justice,pour, ..]
+SHIFT: L           
+S=[justice]                 B=[ pour,publicité, ..]
+REDUCE: L          
+S=[]                        B=[ pour,publicité, ..]
+SHIFT: L           
+S=[pour]                    B=[ publicité,mensongère, ..]
+REDUCE: L          
+S=[]                        B=[ publicité,mensongère, ..]
+SHIFT: L           
+S=[publicité]              B=[ mensongère,,, ..]
+REDUCE: L          
+S=[]                        B=[ mensongère,,, ..]
+SHIFT: L           
+S=[mensongère]             B=[ ,,a, ..]
+REDUCE: L          
+S=[]                        B=[ ,,a, ..]
+SHIFT: L           
+S=[,]                       B=[ a,mis, ..]
+REDUCE: L          
+S=[]                        B=[ a,mis, ..]
+SHIFT: L           
+S=[a]                       B=[ mis,au, ..]
+REDUCE: L          
+S=[]                        B=[ mis,au, ..]
+SHIFT: L           
+S=[mis]                     B=[ au,point, ..]
+SHIFT: L           
+S=[mis, au]                 B=[ point,un, ..]
+MERGE: L           
+S=[[mis, au]]               B=[ point,un, ..]
+SHIFT: L           
+S=[[mis, au]point]          B=[ un,devis, ..]
+MERGE: L           
+S=[[[mis, au]point]]        B=[ un,devis, ..]
+MARK_AS_OTH: L     
+S=[[[mis, au]point]]        B=[ un,devis, ..]
+REDUCE: L          
+S=[]                        B=[ un,devis, ..]
+SHIFT: L           
+S=[un]                      B=[ devis,-, ..]
+REDUCE: L          
+S=[]                        B=[ devis,-, ..]
+SHIFT: L           
+S=[devis]                   B=[ -,type, ..]
+SHIFT: L           
+S=[devis, -]                B=[ type,et, ..]
+MERGE: L           
+S=[[devis, -]]              B=[ type,et, ..]
+SHIFT: L           
+S=[[devis, -]type]          B=[ et,signé, ..]
+MERGE: L           
+S=[[[devis, -]type]]        B=[ et,signé, ..]
+MARK_AS_OTH: L     
+S=[[[devis, -]type]]        B=[ et,signé, ..]
+REDUCE: L          
+S=[]                        B=[ et,signé, ..]
+SHIFT: L           
+S=[et]                      B=[ signé,en, ..]
+REDUCE: L          
+S=[]                        B=[ signé,en, ..]
+SHIFT: L           
+S=[signé]                  B=[ en,mai, ..]
+REDUCE: L          
+S=[]                        B=[ en,mai, ..]
+SHIFT: L           
+S=[en]                      B=[ mai,un, ..]
+REDUCE: L          
+S=[]                        B=[ mai,un, ..]
+SHIFT: L           
+S=[mai]                     B=[ un,contrat, ..]
+REDUCE: L          
+S=[]                        B=[ un,contrat, ..]
+SHIFT: L           
+S=[un]                      B=[ contrat,avec, ..]
+REDUCE: L          
+S=[]                        B=[ contrat,avec, ..]
+SHIFT: L           
+S=[contrat]                 B=[ avec,neuf, ..]
+REDUCE: L          
+S=[]                        B=[ avec,neuf, ..]
+SHIFT: L           
+S=[avec]                    B=[ neuf,associations, ..]
+REDUCE: L          
+S=[]                        B=[ neuf,associations, ..]
+SHIFT: L           
+S=[neuf]                    B=[ associations,nationales, ..]
+REDUCE: L          
+S=[]                        B=[ associations,nationales, ..]
+SHIFT: L           
+S=[associations]            B=[ nationales,de, ..]
+REDUCE: L          
+S=[]                        B=[ nationales,de, ..]
+SHIFT: L           
+S=[nationales]              B=[ de,consommateurs, ..]
+REDUCE: L          
+S=[]                        B=[ de,consommateurs, ..]
+SHIFT: L           
+S=[de]                      B=[ consommateurs,,, ..]
+REDUCE: L          
+S=[]                        B=[ consommateurs,,, ..]
+SHIFT: L           
+S=[consommateurs]           B=[ ,,sous, ..]
+REDUCE: L          
+S=[]                        B=[ ,,sous, ..]
+SHIFT: L           
+S=[,]                       B=[ sous,l', ..]
+REDUCE: L          
+S=[]                        B=[ sous,l', ..]
+SHIFT: L           
+S=[sous]                    B=[ l',oeil, ..]
+REDUCE: L          
+S=[]                        B=[ l',oeil, ..]
+SHIFT: L           
+S=[l']                      B=[ oeil,bienveillant, ..]
+REDUCE: L          
+S=[]                        B=[ oeil,bienveillant, ..]
+SHIFT: L           
+S=[oeil]                    B=[ bienveillant,de, ..]
+REDUCE: L          
+S=[]                        B=[ bienveillant,de, ..]
+SHIFT: L           
+S=[bienveillant]            B=[ de,l', ..]
+REDUCE: L          
+S=[]                        B=[ de,l', ..]
+SHIFT: L           
+S=[de]                      B=[ l',etat, ..]
+REDUCE: L          
+S=[]                        B=[ l',etat, ..]
+SHIFT: L           
+S=[l']                      B=[ etat,:, ..]
+REDUCE: L          
+S=[]                        B=[ etat,:, ..]
+SHIFT: L           
+S=[etat]                    B=[ :,une, ..]
+REDUCE: L          
+S=[]                        B=[ :,une, ..]
+SHIFT: L           
+S=[:]                       B=[ une,charte, ..]
+REDUCE: L          
+S=[]                        B=[ une,charte, ..]
+SHIFT: L           
+S=[une]                     B=[ charte,professionnelle, ..]
+REDUCE: L          
+S=[]                        B=[ charte,professionnelle, ..]
+SHIFT: L           
+S=[charte]                  B=[ professionnelle,", ..]
+REDUCE: L          
+S=[]                        B=[ professionnelle,", ..]
+SHIFT: L           
+S=[professionnelle]         B=[ ",pour, ..]
+REDUCE: L          
+S=[]                        B=[ ",pour, ..]
+SHIFT: L           
+S=["]                       B=[ pour,l', ..]
+REDUCE: L          
+S=[]                        B=[ pour,l', ..]
+SHIFT: L           
+S=[pour]                    B=[ l',amélioration, ..]
+REDUCE: L          
+S=[]                        B=[ l',amélioration, ..]
+SHIFT: L           
+S=[l']                      B=[ amélioration,de, ..]
+REDUCE: L          
+S=[]                        B=[ amélioration,de, ..]
+SHIFT: L           
+S=[amélioration]           B=[ de,la, ..]
+REDUCE: L          
+S=[]                        B=[ de,la, ..]
+SHIFT: L           
+S=[de]                      B=[ la,qualité, ..]
+REDUCE: L          
+S=[]                        B=[ la,qualité, ..]
+SHIFT: L           
+S=[la]                      B=[ qualité,des, ..]
+REDUCE: L          
+S=[]                        B=[ qualité,des, ..]
+SHIFT: L           
+S=[qualité]                B=[ des,services, ..]
+REDUCE: L          
+S=[]                        B=[ des,services, ..]
+SHIFT: L           
+S=[des]                     B=[ services,", ..]
+REDUCE: L          
+S=[]                        B=[ services,", ..]
+SHIFT: L           
+S=[services]                B=[ ",qui, ..]
+REDUCE: L          
+S=[]                        B=[ ",qui, ..]
+SHIFT: L           
+S=["]                       B=[ qui,prévoit, ..]
+REDUCE: L          
+S=[]                        B=[ qui,prévoit, ..]
+SHIFT: L           
+S=[qui]                     B=[ prévoit,que, ..]
+REDUCE: L          
+S=[]                        B=[ prévoit,que, ..]
+SHIFT: L           
+S=[prévoit]                B=[ que,les, ..]
+REDUCE: L          
+S=[]                        B=[ que,les, ..]
+SHIFT: L           
+S=[que]                     B=[ les,cuisinistes, ..]
+REDUCE: L          
+S=[]                        B=[ les,cuisinistes, ..]
+SHIFT: L           
+S=[les]                     B=[ cuisinistes,signataires, ..]
+REDUCE: L          
+S=[]                        B=[ cuisinistes,signataires, ..]
+SHIFT: L           
+S=[cuisinistes]             B=[ signataires,utiliseront, ..]
+REDUCE: L          
+S=[]                        B=[ signataires,utiliseront, ..]
+SHIFT: L           
+S=[signataires]             B=[ utiliseront,systématiquement, ..]
+REDUCE: L          
+S=[]                        B=[ utiliseront,systématiquement, ..]
+SHIFT: L           
+S=[utiliseront]             B=[ systématiquement,le, ..]
+REDUCE: L          
+S=[]                        B=[ systématiquement,le, ..]
+SHIFT: L           
+S=[systématiquement]       B=[ le,devis, ..]
+REDUCE: L          
+S=[]                        B=[ le,devis, ..]
+SHIFT: L           
+S=[le]                      B=[ devis,-, ..]
+REDUCE: L          
+S=[]                        B=[ devis,-, ..]
+SHIFT: L           
+S=[devis]                   B=[ -,type, ..]
+SHIFT: L           
+S=[devis, -]                B=[ type,,, ..]
+MERGE: L           
+S=[[devis, -]]              B=[ type,,, ..]
+SHIFT: L           
+S=[[devis, -]type]          B=[ ,,assureront, ..]
+MERGE: L           
+S=[[[devis, -]type]]        B=[ ,,assureront, ..]
+MARK_AS_OTH: L     
+S=[[[devis, -]type]]        B=[ ,,assureront, ..]
+REDUCE: L          
+S=[]                        B=[ ,,assureront, ..]
+SHIFT: L           
+S=[,]                       B=[ assureront,à, ..]
+REDUCE: L          
+S=[]                        B=[ assureront,à, ..]
+SHIFT: L           
+S=[assureront]              B=[ à,leurs, ..]
+REDUCE: L          
+S=[]                        B=[ à,leurs, ..]
+SHIFT: L           
+S=[à]                      B=[ leurs,vendeurs, ..]
+REDUCE: L          
+S=[]                        B=[ leurs,vendeurs, ..]
+SHIFT: L           
+S=[leurs]                   B=[ vendeurs,une, ..]
+REDUCE: L          
+S=[]                        B=[ vendeurs,une, ..]
+SHIFT: L           
+S=[vendeurs]                B=[ une,formation, ..]
+REDUCE: L          
+S=[]                        B=[ une,formation, ..]
+SHIFT: L           
+S=[une]                     B=[ formation,professionnelle, ..]
+REDUCE: L          
+S=[]                        B=[ formation,professionnelle, ..]
+SHIFT: L           
+S=[formation]               B=[ professionnelle,,, ..]
+SHIFT: L           
+S=[formation, professionnelle] B=[ ,,répondront, ..]
+MERGE: L           
+S=[[formation, professionnelle]] B=[ ,,répondront, ..]
+MARK_AS_OTH: L     
+S=[[formation, professionnelle]] B=[ ,,répondront, ..]
+REDUCE: L          
+S=[]                        B=[ ,,répondront, ..]
+SHIFT: L           
+S=[,]                       B=[ répondront,par, ..]
+REDUCE: L          
+S=[]                        B=[ répondront,par, ..]
+SHIFT: L           
+S=[répondront]             B=[ par,écrit, ..]
+REDUCE: L          
+S=[]                        B=[ par,écrit, ..]
+SHIFT: L           
+S=[par]                     B=[ écrit,aux, ..]
+SHIFT: L           
+S=[par, écrit]             B=[ aux,réclamations, ..]
+MERGE: L           
+S=[[par, écrit]]           B=[ aux,réclamations, ..]
+MARK_AS_OTH: L     
+S=[[par, écrit]]           B=[ aux,réclamations, ..]
+REDUCE: L          
+S=[]                        B=[ aux,réclamations, ..]
+SHIFT: L           
+S=[aux]                     B=[ réclamations,et, ..]
+REDUCE: L          
+S=[]                        B=[ réclamations,et, ..]
+SHIFT: L           
+S=[réclamations]           B=[ et,tenteront, ..]
+REDUCE: L          
+S=[]                        B=[ et,tenteront, ..]
+SHIFT: L           
+S=[et]                      B=[ tenteront,de, ..]
+REDUCE: L          
+S=[]                        B=[ tenteront,de, ..]
+SHIFT: L           
+S=[tenteront]               B=[ de,régler, ..]
+REDUCE: L          
+S=[]                        B=[ de,régler, ..]
+SHIFT: L           
+S=[de]                      B=[ régler,à, ..]
+REDUCE: L          
+S=[]                        B=[ régler,à, ..]
+SHIFT: L           
+S=[régler]                 B=[ à,l', ..]
+REDUCE: L          
+S=[]                        B=[ à,l', ..]
+SHIFT: L           
+S=[à]                      B=[ l',amiable, ..]
+SHIFT: L           
+S=[à, l']                  B=[ amiable,leurs, ..]
+MERGE: L           
+S=[[à, l']]                B=[ amiable,leurs, ..]
+SHIFT: L           
+S=[[à, l']amiable]         B=[ leurs,litiges, ..]
+MERGE: L           
+S=[[[à, l']amiable]]       B=[ leurs,litiges, ..]
+MARK_AS_OTH: L     
+S=[[[à, l']amiable]]       B=[ leurs,litiges, ..]
+REDUCE: L          
+S=[]                        B=[ leurs,litiges, ..]
+SHIFT: L           
+S=[leurs]                   B=[ litiges,.,]
+REDUCE: L          
+S=[]                        B=[ litiges,.,]
+SHIFT: L           
+S=[litiges]                 B=[ .,]
+REDUCE: L          
+S=[]                        B=[ .,]
+SHIFT: L           
+S=[.]                       B=[ ]
+REDUCE: L          
+S=[]                        B=[ ]

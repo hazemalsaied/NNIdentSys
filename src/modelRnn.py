@@ -81,7 +81,7 @@ def train(cls, corpus):
     optimizer = keras.optimizers.Adagrad(lr=rnnConf['lr'], epsilon=None, decay=0.0) \
         if rnnConf['optimizer'] == 'adagrad' else keras.optimizers.Adam(lr=rnnConf['lr'])
     cls.model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
-    callbacks = [EarlyStopping(patience=2)] if rnnConf["earlyStop"] else []
+    callbacks = [EarlyStopping(patience=2)] if rnnConf['earlyStop'] else []
     history = cls.model.fit([np.asarray(tokenIdxs), np.asarray(posIdxs)], lbls,
                             validation_split=.1,
                             epochs=rnnConf['epochs'],
@@ -101,9 +101,9 @@ def getLearningData(corpus):
             idxs = getIdxs(t.configuration)
             tokenIdxs.append(idxs[0])
             posIdxs.append(idxs[1])
-            np.append(lbls, t.next.type.value)
-            lbl = 3 if t.next.type.value > 2 and not enableCategorization else t.next.type.value
-            lbls.append(lbl)
+            # np.append(lbls, t.next.type.value)
+            # lbl = 3 if t.next.type.value > 2 and not enableCategorization else t.next.type.value
+            lbls.append(3 if t.next.type.value > 2 and not enableCategorization else t.next.type.value)
             t = t.next
     return lbls, tokenIdxs, posIdxs
     # return lbls, [np.asarray(tokenIdxs), np.asarray(posIdxs)]
@@ -111,6 +111,8 @@ def getLearningData(corpus):
 
 def overSample(lbls, tokenIdxs, posIdxs, ):
     data, focusedElements = [], rnnConf['s0TokenNum'] + rnnConf['s1TokenNum'] + rnnConf['bTokenNum']
+    if configuration['others']['verbose']:
+        sys.stdout.write(reports.tabs + 'data size before sampling = {0}\n'.format(len(lbls)))
     for i in range(len(tokenIdxs)):
         data.append(np.asarray(np.concatenate((tokenIdxs[i], posIdxs[i]))))
     ros = RandomOverSampler(random_state=0)
@@ -119,6 +121,8 @@ def overSample(lbls, tokenIdxs, posIdxs, ):
     for i in range(len(data)):
         tokenIdxs.append(data[i][:focusedElements])
         posIdxs.append(data[i][focusedElements:])
+    if configuration['others']['verbose']:
+        sys.stdout.write(reports.tabs + 'data size after sampling = {0}\n'.format(len(lbls)))
     return lbls, tokenIdxs, posIdxs
 
 
@@ -126,7 +130,7 @@ def focusedSample(labels, tokenData, posData, corpus):
     if not configuration['sampling']['focused']:
         return labels, tokenData, posData
     newLabels, newTokens, newPOS, traitedMWEs = [], [], [], set()
-    oversamplingTaux = configuration["sampling"]["mweRepeition"]
+    oversamplingTaux = configuration['others']['mweRepeition']
     mWEDicAsIdxs = getMWEDicAsIdxs(corpus)
     for i in range(len(labels)):
         if labels[i] > 2:
@@ -167,8 +171,8 @@ def trainValidationData(model, tokenData, posData, labels, classWeightDic, histo
 
 def getValidationData(labels, tokenData, posData):
     valLabels, valTokenData, valPosData = [], [], []
-    trainConf = configuration["model"]["train"]
-    for i in range(int(len(labels) * (1 - trainConf["validationSplit"])), len(labels)):
+    trainConf = configuration['mlp']
+    for i in range(int(len(labels) * (1 - trainConf['validationSplit'])), len(labels)):
         valTokenData.append(tokenData[i])
         valPosData.append(posData[i])
         valLabels.append(labels[i])
@@ -193,13 +197,12 @@ def getMWEDicAsIdxs(corpus):
 
 
 def getVocab(corpus):
-    compact = rnnConf['compactVocab']
     tokenCounter, posCounter = Counter(), Counter()
     for s in corpus.trainingSents:
         for t in s.tokens:
             tokenCounter.update({t.getTokenOrLemma(): 1})
             posCounter.update({t.posTag.lower(): 1})
-    if compact:
+    if configuration['mlp']['compactVocab']:
         for t in tokenCounter.keys():
             if t not in corpus.mweTokenDictionary:
                 del tokenCounter[t]

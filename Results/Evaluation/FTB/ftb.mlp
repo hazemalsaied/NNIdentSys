@@ -1,0 +1,2289 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_ccH5Ya.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 3841/4043 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 980 (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '18739')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+	Mode: NON.COMPO
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, verbose, epochs, dense1, dense2, earlyStop, optimizer, features, dense2UnitNumber, batchSize, lemma, lr, compactVocab, dense2Activation, frequentTokens, dense1UnitNumber, inputItems, posEmb, dense1Activation, tokenEmb, dense1Dropout, chickPoint, dense2Dropout, bPadding, loss, s1Padding, minDelta, predictVerbose, validationSplit, s0Padding
+==================================================================================================
+# Configs: NonCompo, ftb, corpus, True, False, True, True, False, 6, True, True, 0, 40, True, False, True, adagrad, False, 0, 64, True, 0.059, False, relu, True, 58, 4, 42, relu, 480, 0.429, False, 0, 2, categorical_crossentropy, 5, 0.2, False, 0.1, 5
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training (Important) : 11514, Test : 2541
+	MWEs in tain : 5985, occurrences : 25776
+	Impotant words in tain : 4196
+	MWE length mean : 2.65
+	Seen MWEs : 3464 (85 %)
+	New MWEs : 585 (14 %)
+==================================================================================================
+	Non frequent word cleaning:
+==================================================================================================
+	Before : 24210
+	After : 21601
+# Parameters = 10531080
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 4, 480)       10368480    input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 4, 42)        41202       input_2[0][0]                    
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 1920)         0           embedding_1[0][0]                
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 168)          0           embedding_2[0][0]                
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 2088)         0           flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 58)           121162      concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 58)           0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 4)            236         dropout_1[0][0]                  
+==================================================================================================
+Total params: 10,531,080
+Trainable params: 10,531,080
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	data size before focused sampling = 1714757
+	data size after focused sampling = 1714757
+	data size before sampling = 1714757
+	data size after sampling = 2998300
+	4 Labels in train : Counter({0: 749575, 1: 749575, 2: 749575, 3: 749575})
+	4 Labels in valid : Counter({3: 75050, 2: 74977, 1: 74915, 0: 74888})
+	Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 2698470 samples, validate on 299830 samples
+Epoch 1/40
+ - 146s - loss: 0.1490 - acc: 0.9623 - val_loss: 0.1125 - val_acc: 0.9717
+Epoch 2/40
+ - 146s - loss: 0.1139 - acc: 0.9716 - val_loss: 0.1065 - val_acc: 0.9740
+Epoch 3/40
+ - 146s - loss: 0.1076 - acc: 0.9735 - val_loss: 0.1042 - val_acc: 0.9753
+
+==================================================================================================
+	Training time : 0:09:24.457230
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:48.477783
+==================================================================================================
+	Identification : 0.73
+	P, R  : 0.789, 0.679
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: NON.COMPO
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, verbose, epochs, dense1, dense2, earlyStop, optimizer, features, dense2UnitNumber, batchSize, lemma, lr, compactVocab, dense2Activation, frequentTokens, dense1UnitNumber, inputItems, posEmb, dense1Activation, tokenEmb, dense1Dropout, chickPoint, dense2Dropout, bPadding, loss, s1Padding, minDelta, predictVerbose, validationSplit, s0Padding
+==================================================================================================
+# Configs: NonCompo, ftb, corpus, True, True, True, True, False, 6, True, True, 0, 40, True, False, True, adagrad, False, 0, 64, True, 0.059, True, relu, True, 58, 4, 42, relu, 480, 0.429, False, 0, 2, categorical_crossentropy, 5, 0.2, False, 0.1, 5
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training (Important) : 11514, Test : 2541
+	MWEs in tain : 5985, occurrences : 25776
+	Impotant words in tain : 4196
+	MWE length mean : 2.65
+	Seen MWEs : 3464 (85 %)
+	New MWEs : 585 (14 %)
+==================================================================================================
+	Compact Vocabulary cleaning:
+==================================================================================================
+	Before : 24210
+	After : 13335
+# Parameters = 6563400
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_4 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_3 (Embedding)         (None, 4, 480)       6400800     input_3[0][0]                    
+__________________________________________________________________________________________________
+embedding_4 (Embedding)         (None, 4, 42)        41202       input_4[0][0]                    
+__________________________________________________________________________________________________
+flatten_3 (Flatten)             (None, 1920)         0           embedding_3[0][0]                
+__________________________________________________________________________________________________
+flatten_4 (Flatten)             (None, 168)          0           embedding_4[0][0]                
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 2088)         0           flatten_3[0][0]                  
+                                                                 flatten_4[0][0]                  
+__________________________________________________________________________________________________
+dense_3 (Dense)                 (None, 58)           121162      concatenate_2[0][0]              
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 58)           0           dense_3[0][0]                    
+__________________________________________________________________________________________________
+dense_4 (Dense)                 (None, 4)            236         dropout_2[0][0]                  
+==================================================================================================
+Total params: 6,563,400
+Trainable params: 6,563,400
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	data size before focused sampling = 1714757
+	data size after focused sampling = 1714757
+	data size before sampling = 1714757
+	data size after sampling = 2998300
+	4 Labels in train : Counter({0: 749575, 1: 749575, 2: 749575, 3: 749575})
+	4 Labels in valid : Counter({1: 75130, 2: 75012, 3: 74904, 0: 74784})
+	Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 2698470 samples, validate on 299830 samples
+Epoch 1/40
+ - 112s - loss: 0.1470 - acc: 0.9631 - val_loss: 0.1132 - val_acc: 0.9717
+Epoch 2/40
+ - 112s - loss: 0.1145 - acc: 0.9719 - val_loss: 0.1059 - val_acc: 0.9747
+Epoch 3/40
+ - 112s - loss: 0.1081 - acc: 0.9740 - val_loss: 0.1028 - val_acc: 0.9759
+
+==================================================================================================
+	Training time : 0:07:02.379467
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:47.869458
+==================================================================================================
+	Identification : 0.758
+	P, R  : 0.788, 0.729
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: NON.COMPO
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, verbose, epochs, dense1, dense2, earlyStop, optimizer, features, dense2UnitNumber, batchSize, lemma, lr, compactVocab, dense2Activation, frequentTokens, dense1UnitNumber, inputItems, posEmb, dense1Activation, tokenEmb, dense1Dropout, chickPoint, dense2Dropout, bPadding, loss, s1Padding, minDelta, predictVerbose, validationSplit, s0Padding
+==================================================================================================
+# Configs: NonCompo, ftb, corpus, True, False, True, True, False, 6, True, True, 0, 40, True, False, True, adagrad, False, 0, 64, True, 0.059, False, relu, True, 58, 4, 42, relu, 480, 0.429, False, 0, 2, categorical_crossentropy, 5, 0.2, False, 0.1, 5
+==================================================================================================
+303- :: ces derniers temps , m. bush a certainement démontré une étonnante 1 **force** 1 **de** 1 **caractère** , en continuant à s' adonner régulièrement au golf au 2 **plus** fort de la crise irakienne . 
+MWEs:
+1- oth: force de caractère (+)
+2- oth: plus (+)
+
+541- :: 1 **a** 1 **l'** 1 **inverse** , ceux des syndicats qui accepteraient d' entrer 2 **dans** 2 **la** 2 **logique** 2 **du** cnpf , la cfdt , la cgc et dans une moindre mesure la cftc , posent en préalable qu' une augmentation de la contribution , à parité entre les employeurs et les salariés , intervienne 3 **au** 3 **plus** 3 **vite** pour parer au 4 **plus** pressé . 
+MWEs:
+1- oth: à le inverse (+)
+2- oth: dans le logique de (+)
+3- oth: à plus vite (+)
+4- oth: plus (+)
+
+601- :: elle ajoute qu' il n' 1 **a** jamais 2 **été** 2 **question** 2 **d'** attribuer à la chaîne culturelle européenne des fréquences " réservées au secteur privé " et présente 3 **au** 3 **total** douze 4 **points** 4 **de** 4 **désaccord** avec cette décision du csa . 
+MWEs:
+1- oth: avoir (+)
+2- oth: être question de (+)
+3- oth: à total (+)
+4- oth: point de désaccord (+)
+
+713- :: après les 1 **points** 1 **de** 1 **vue** de m. jürgen mllemann , ministre allemand de l' économie , de m. dominique 2 **strauss** 2 **-** 2 **kahn** , 3 **ministre** français 4 **de** 4 **l'** 4 **industrie** 4 **et** 4 **du** 4 **commerce** 4 **extérieur** ( 5 **le** 5 **monde** du number juin ) , et de m. kozo watanabe , 6 **ministre** japonais 7 **du** 7 **commerce** 7 **international** 7 **et** 7 **de** 7 **l'** 7 **industrie** ( 8 **le** 8 **monde** du number juillet ) , nous publions l' opinion de m. michael heseltine , 9 **ministre** britannique 10 **du** 10 **commerce** 10 **et** 10 **de** 10 **l'** 10 **industrie** . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: strauss - kahn (+)
+3- oth: ministre (+)
+4- oth: de le industrie et du commerce extérieur (+)
+5- oth: le monde (+)
+6- oth: ministre (+)
+7- oth: de commerce international et de le industrie (+)
+8- oth: le monde (+)
+9- oth: ministre (+)
+10- oth: du commerce et de l' industrie (+)
+
+713- :: après les 1 **points** 1 **de** 1 **vue** de m. jürgen mllemann , ministre allemand de l' économie , de m. dominique 2 **strauss** 2 **-** 2 **kahn** , ministre français 4 **de** 4 **l'** 4 **industrie** 4 **et** 4 **du** 4 **commerce** 4 **extérieur** ( 5 **le** 5 **monde** du number juin ) , et de m. kozo watanabe , 6 **ministre** japonais 7 **du** 7 **commerce** 7 **international** 7 **et** 7 **de** 7 **l'** 7 **industrie** ( 8 **le** 8 **monde** du number juillet ) , nous publions l' opinion de m. michael heseltine , 9 **ministre** britannique 10 **du** 10 **commerce** 10 **et** 10 **de** 10 **l'** 10 **industrie** . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: strauss - kahn (+)
+3- oth: ministre (+)
+4- oth: de le industrie et du commerce extérieur (+)
+5- oth: le monde (+)
+6- oth: ministre (+)
+7- oth: de commerce international et de le industrie (+)
+8- oth: le monde (+)
+9- oth: ministre (+)
+10- oth: du commerce et de l' industrie (+)
+
+713- :: après les 1 **points** 1 **de** 1 **vue** de m. jürgen mllemann , ministre allemand de l' économie , de m. dominique 2 **strauss** 2 **-** 2 **kahn** , ministre français 4 **de** 4 **l'** 4 **industrie** 4 **et** 4 **du** 4 **commerce** 4 **extérieur** ( 5 **le** 5 **monde** du number juin ) , et de m. kozo watanabe , ministre japonais 7 **du** 7 **commerce** 7 **international** 7 **et** 7 **de** 7 **l'** 7 **industrie** ( 8 **le** 8 **monde** du number juillet ) , nous publions l' opinion de m. michael heseltine , 9 **ministre** britannique 10 **du** 10 **commerce** 10 **et** 10 **de** 10 **l'** 10 **industrie** . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: strauss - kahn (+)
+3- oth: ministre (+)
+4- oth: de le industrie et du commerce extérieur (+)
+5- oth: le monde (+)
+6- oth: ministre (+)
+7- oth: de commerce international et de le industrie (+)
+8- oth: le monde (+)
+9- oth: ministre (+)
+10- oth: du commerce et de l' industrie (+)
+
+841- :: les premiers résultats de l' 1 **offre** géante 2 **d'** 2 **échange** sur fonds d' etat , lancée le number juin sur number emprunts d' un montant de number milliards de francs , sont tombés : au number juillet , number milliards de francs de titres , en nominal , ont été apportés par les 3 **investisseurs** 3 **institutionnels** , sur number milliards de francs qui leur étaient offerts , soit un 4 **taux** 4 **d'** 4 **échange** de number % , assez inespéré pour les services du trésor , qui tablaient sur number % à number % . 
+MWEs:
+1- oth: offre (+)
+2- oth: de échange (+)
+3- oth: investisseur institutionnel (+)
+4- oth: taux de échange (+)
+
+1303- :: une telle perspective ne peut que contribuer à renforcer le mark à l' horizon de l' an number , et les marchés des changes le 1 **prennent** déjà 2 **en** 2 **compte** . 
+MWEs:
+1- oth: prendre (+)
+2- oth: en compte (+)
+
+1682- :: 1 **la** 1 **poste** y voit 2 **du** même 3 **coup** le moyen de se recentrer sur ses activités essentielles . 
+MWEs:
+1- oth: le poste (+)
+2- oth: du (+)
+3- oth: coup (+)
+
+1682- :: 1 **la** 1 **poste** y voit du même 3 **coup** le moyen de se recentrer sur ses activités essentielles . 
+MWEs:
+1- oth: le poste (+)
+2- oth: du (+)
+3- oth: coup (+)
+
+1714- :: on sera très 1 **loin** cependant 2 **d'** un retour à l' équilibre puisque les 3 **frais** 3 **financiers** sont évalués à number millions de francs par an . 
+MWEs:
+1- oth: loin (+)
+2- oth: de (+)
+3- oth: frais financier (+)
+
+1714- :: on sera très loin cependant 2 **d'** un retour à l' équilibre puisque les 3 **frais** 3 **financiers** sont évalués à number millions de francs par an . 
+MWEs:
+1- oth: loin (+)
+2- oth: de (+)
+3- oth: frais financier (+)
+
+1926- :: elle renaît en number 1 **sous** 1 **le** 1 **nom** 1 **de** 2 **verrerie** 2 **royale** 2 **de** 2 **saint** 2 **-** 2 **louis** et découvre , quatorze ans plus tard , le secret du " 3 **flint** glass " , 4 **c'** 4 **est** 4 **-** 4 **à** 4 **-** 4 **dire** du cristal anglais . 
+MWEs:
+1- oth: sous le nom de (+)
+2- oth: verrerie royal de saint - louis (+)
+3- oth: flint (+)
+4- oth: ce être - à - dire (+)
+
+2102- :: michel camdessus qui dirige le fmi 1 **est** 1 **bien** 1 **placé** pour savoir que la solidarité à l' échelle mondiale ne 2 **va** jamais 3 **de** 3 **soi** . 
+MWEs:
+1- oth: être bien placer (+)
+2- oth: aller (+)
+3- oth: de soi (+)
+
+2555- :: le 1 **département** américain 2 **du** 2 **trésor** a indiqué , lundi number juillet , que 3 **thomson** 3 **-** 3 **csf** avait renoncé à la reprise de la firme ltv . 
+MWEs:
+1- oth: département (+)
+2- oth: de trésor (+)
+3- oth: thomson - csf (+)
+
+2565- :: il expliquait alors que le 1 **département** américain 2 **de** 2 **la** 2 **défense** ne pourrait pas faire respecter les conditions préventives mises à l' éventuelle cession de ltv , 3 **à** 3 **savoir** l' instauration de 4 **droits** 4 **de** 4 **vote** spéciaux qui garantiraient l' accès aux seuls américains des 5 **secrets** 5 **technologiques** détenus par l' entreprise texane . 
+MWEs:
+1- oth: département (+)
+2- oth: de le défense (+)
+3- oth: à savoir (+)
+4- oth: droit de vote (+)
+5- oth: secret technologique (+)
+
+2652- :: le salaire est calculé , dans presque un cas sur deux , selon la méthode du 1 **gross** up , qui permet de fixer le 2 **salaire** 2 **brut** local 3 **à** 3 **partir** 3 **du** 4 **revenu** 4 **net** à préserver . 
+MWEs:
+1- oth: gross (+)
+2- oth: salaire brut (+)
+3- oth: à partir de (+)
+4- oth: revenu net (+)
+
+2710- :: ce toilettage 1 **va** 2 **d'** 2 **ailleurs** 3 **bon** 3 **train** depuis une dizaine d' années . 
+MWEs:
+1- oth: aller (+)
+2- oth: de ailleurs (+)
+3- oth: bon train (+)
+
+3181- :: or , dans l' entretien qu' il a accordé au 1 **figaro** , mercredi number juillet , m. ghosn annonce 2 **d'** 2 **emblée** l' inégalité de traitement des lecteurs des deux quotidiens : " nous voulons [ ... ] surtout 3 **ne** 3 **pas** casser le 4 **fonds** 4 **de** 4 **commerce** de 5 **la** 5 **cote** qui a de très nombreux lecteurs en province " , explique -t-il . 
+MWEs:
+1- oth: figaro (+)
+2- oth: de emblée (+)
+3- oth: ne pas (+)
+4- oth: fonds de commerce (+)
+5- oth: le cote (+)
+
+3675- :: " 1 **mille** sabords ! 
+MWEs:
+1- oth: mille (+)
+
+3740- :: une vraie 1 **success** story comme on les aime à eugene , oregon ( 2 **etats** 2 **-** 2 **unis** ) , où la société a son siège . 
+MWEs:
+1- oth: success (+)
+2- oth: etats - uni (+)
+
+3790- :: qui n' est plus celui des blousons américains des débuts , mais celui des tenues du voyage , " 1 **french** travel 2 **way** 2 **of** life " selon l' expression de serge bensimon , lequel reconnaît ne plus guigner les sorties de lycée . 
+MWEs:
+1- oth: french (+)
+2- oth: way of (+)
+
+3957- :: la suite est pourtant une " 1 **success** story " . 
+MWEs:
+1- oth: success (+)
+
+4087- :: on a vu aussi garçons et filles s' agiter 1 **en** 1 **cadence** au centre d' un léger cerceau de plastique - le 2 **hula** 2 **-** 2 **hoop** - qui s' imposait jusque dans les rédactions ( je me souviens de concours ... au 3 **monde** , dans les années number ) . 
+MWEs:
+1- oth: en cadence (+)
+2- oth: hula - hoop (+)
+3- oth: monde (+)
+
+4105- :: ... et nous demeurerons 1 **dans** 1 **le** 1 **domaine** 1 **du** pétrole avec une des acceptions de l' anglicisme 2 **off** shore , ou 3 **off** 3 **-** shore , très fréquemment usité pour désigner ou qualifier la prospection , le forage et l' exploitation de 4 **gisements** 4 **de** 4 **pétrole** situés " au large des côtes " , 5 **en** 5 **dehors** 5 **de** la terre ferme . 
+MWEs:
+1- oth: dans le domaine de (+)
+2- oth: off (+)
+3- oth: off - (+)
+4- oth: gisement de pétrole (+)
+5- oth: en dehors de (+)
+
+4261- :: 1 **aujourd'** 1 **hui** , c' est pour faire baisser les taux d' intérêt qu' on réclame une réévaluation du mark , qui ne serait autre qu' une dévaluation du franc 2 **par** 2 **rapport** 3 **non** 3 **seulement** 4 **au** mark , mais , inévitablement , 5 **vis** 5 **-** 5 **à** 5 **-** 5 **vis** 5 **de** toutes les autres monnaies . 
+MWEs:
+1- oth: aujourd' hui (+)
+2- oth: par rapport (+)
+3- oth: non seulement (+)
+4- oth: à (+)
+5- oth: vis - à - vis de (+)
+
+4271- :: ainsi la seule attente d' éventuelles dévaluations nouvelles , impliquées par les thèses que je combats , suffirait à augmenter de plusieurs points la 1 **prime** 1 **de** 1 **risque** qui actuellement majore encore d' environ un point nos 2 **taux** 2 **d'** 2 **intérêt** 3 **à** 3 **moyen** 3 **et** 3 **long** 3 **terme** 4 **par** 4 **rapport** 4 **aux** taux allemands , 5 **à** 5 **cause** précisément 6 **du** souvenir des dépréciations passées de notre monnaie . 
+MWEs:
+1- oth: prime de risque (+)
+2- oth: taux de intérêt (+)
+3- oth: à moyen et long terme (+)
+4- oth: par rapport à (+)
+5- oth: à cause (+)
+6- oth: de (+)
+
+4316- :: les ressources de la 1 **sécurité** 1 **sociale** seraient , à effectifs constants de salariés 2 **donnant** actuellement 3 **lieu** à 4 **cotisation** 4 **patronale** , réduites 5 **par** 5 **là** annuellement de number milliards environ . 
+MWEs:
+1- oth: sécurité social (+)
+2- oth: donner (+)
+3- oth: lieu (+)
+4- oth: cotisation patronal (+)
+5- oth: par là (+)
+
+4316- :: les ressources de la 1 **sécurité** 1 **sociale** seraient , à effectifs constants de salariés donnant actuellement 3 **lieu** à 4 **cotisation** 4 **patronale** , réduites 5 **par** 5 **là** annuellement de number milliards environ . 
+MWEs:
+1- oth: sécurité social (+)
+2- oth: donner (+)
+3- oth: lieu (+)
+4- oth: cotisation patronal (+)
+5- oth: par là (+)
+
+4433- :: en number , le théoricien américain irving fisher l' a décrit 1 **sous** 1 **le** 1 **nom** 1 **de** 2 **debt** deflation : pour 3 **faire** 3 **face** 3 **à** leurs obligations , les producteurs cherchent 4 **à** 4 **tout** 4 **prix** à liquider leurs stocks mais les acheteurs potentiels attendent de nouvelles baisses . 
+MWEs:
+1- oth: sous le nom de (+)
+2- oth: debt (+)
+3- oth: faire face à (+)
+4- oth: à tout prix (+)
+
+4447- :: 1 **aujourd'** 1 **hui** , banques et 2 **compagnies** 2 **d'** 2 **assurances** demandent l' aide de l' etat pour leurs créances immobilières irrécouvrables dont le pourcentage , entre number % et number % au 3 **moins** du total des crédits au secteur , atteint un niveau " japonais " . 
+MWEs:
+1- oth: aujourd' hui (+)
+2- oth: compagnie de assurance (+)
+3- oth: moins (+)
+
+4465- :: 1 **À** 1 **partir** 1 **du** moment où un nombre grandissant d' entreprises sont amenées à vendre à des prix procurant un 2 **cash** flow insuffisant , tout se passe 3 **comme** 3 **si** l' 4 **économie** 4 **de** 4 **marché** cessait d' avoir la maîtrise de ses propres affaires . 
+MWEs:
+1- oth: à partir de (+)
+2- oth: cash (+)
+3- oth: comme si (+)
+4- oth: économie de marché (+)
+
+4503- :: au 1 **printemps** , les motifs sont 2 **un** 2 **peu** différents : le patron , m. 3 **jean** 3 **-** 3 **jacques** delort , et le nouveau propriétaire , m. françois pinault , ne sont pas 4 **d'** 4 **accord** sur l' art et la manière de réduire l' endettement du groupe . 
+MWEs:
+1- oth: printemps (+)
+2- oth: un peu (+)
+3- oth: jean - jacques (+)
+4- oth: de accord (+)
+
+4573- :: le limogeage de m. delort , 1 **cinquante** 1 **-** 1 **sept** ans , au 2 **printemps** depuis number et qui fut le principal artisan de son redressement , résulte , selon un communiqué laconique du groupe pinault - printemps , " de divergences d' ordre stratégique portant sur le mode de gestion et sur l' analyse des différentes activités du groupe et de leurs perspectives " . 
+MWEs:
+1- oth: cinquante - sept (+)
+2- oth: printemps (+)
+
+4584- :: l' éviction de m. delort s' accompagne du départ du directoire de deux cadres issus eux aussi du 1 **printemps** : m. daniel arnaud ( finances ) et mme catherine barbaroux ( 2 **relations** 2 **humaines** ) . 
+MWEs:
+1- oth: printemps (+)
+2- oth: relation humain (+)
+
+4989- :: l' enterrement devrait 1 **avoir** 1 **lieu** samedi number décembre , jour du début du déménagement dans les locaux du 2 **figaro** du quotidien 3 **france** 3 **-** 3 **soir** , dont il fut le pdg de number à number . 
+MWEs:
+1- oth: avoir lieu (+)
+2- oth: figaro (+)
+3- oth: france - soir (+)
+
+4991- :: comme michel et philippe , les deux autres fils du patron du 1 **figaro** , il était entré dans son groupe de communication après des études à l' 2 **école** 2 **des** 2 **roches** . 
+MWEs:
+1- oth: figaro (+)
+2- oth: école de roches (+)
+
+5000- :: a la rédaction du 1 **figaro** , qui n' avait 2 **toujours** 2 **pas** annoncé ce décès le number décembre , on estime qu' il pourrait 3 **donner** 3 **lieu** à des décisions de m. robert hersant . 
+MWEs:
+1- oth: figaro (+)
+2- oth: toujours pas (+)
+3- oth: donner lieu (+)
+
+5017- :: mais cette vente s' inscrit aussi dans un plan d' économies nécessité par la baisse des 1 **ressources** 1 **publicitaires** et du 2 **chiffre** 2 **d'** 2 **affaires** ( 3 **le** 3 **monde** du number octobre ) , à quelques jours de la 4 **mise** 4 **en** 4 **place** opérationnelle du groupement d' intérêt économique ( gie ) qui coiffera en janvier la fabrication , la distribution et la commercialisation de 5 **l'** 5 **express** et du 6 **point** , sous l' autorité du pdg de ce dernier , m. bernard wouts . 
+MWEs:
+1- oth: ressource publicitaire (+)
+2- oth: chiffre de affaire (+)
+3- oth: le monde (+)
+4- oth: mise en place (+)
+5- oth: le express (+)
+6- oth: point (+)
+
+5269- :: le chancelier kohl ne téléphonera pas ce 1 **week** 1 **-** 1 **end** au 2 **premier** 2 **ministre** , john major , le 3 **ministre** allemand 4 **des** 4 **finances** , theo waigel , ne contactera pas son homologue , norman lamont . 
+MWEs:
+1- oth: week - end (+)
+2- oth: premier ministre (+)
+3- oth: ministre (+)
+4- oth: de finance (+)
+
+5475- :: dans les derniers jours de number , un accord 1 **à** plus 2 **long** 2 **terme** devait être signé entre la russie - devenue en novembre la seule héritière de la dette de l' ex- urss - et le 3 **club** 3 **de** 3 **paris** . 
+MWEs:
+1- oth: à (+)
+2- oth: long terme (+)
+3- oth: club de paris (+)
+
+5540- :: 1 **pour** 1 **leur** 1 **part** , les prix des produits manufacturés du 2 **secteur** 2 **privé** ont augmenté faiblement , au rythme annuel de 3 **number** 3 **,** 3 **number** % ou 4 **number** 4 **,** 4 **number** % , ce qui traduit un fort ralentissement 5 **par** 5 **rapport** 5 **à** number ( + 6 **number** 6 **,** 6 **number** % ) , 7 **du** 7 **fait** notamment 8 **des** prix de l' habillement et du textile , qui ont baissé en novembre ( 9 **vente** 9 **par** 9 **correspondance** et nombreux rabais ) . 
+MWEs:
+1- oth: pour leur part (+)
+2- oth: secteur privé (+)
+3- oth: number , number (+)
+4- oth: number , number (+)
+5- oth: par rapport à (+)
+6- oth: number , number (+)
+7- oth: de fait (+)
+8- oth: de (+)
+9- oth: vente par correspondance (+)
+
+5555- :: le 1 **ministre** français 2 **de** 2 **l'** 2 **agriculture** , 3 **jean** 3 **-** 3 **pierre** soisson , a estimé que ce compromis ( baisse de number % des exportations européennes subventionnées , réduction importante des surfaces européennes de colza , ouverture des marchés aux productions extérieures en franchise ) n' était pas compatible avec la réforme de la pac . 
+MWEs:
+1- oth: ministre (+)
+2- oth: de le agriculture (+)
+3- oth: jean - pierre (+)
+
+5591- :: en février , au 1 **creusot** , number 2 **hauts** 2 **fonctionnaires** , dont tous les préfets de france et de navarre , étaient rassemblés 3 **en** 3 **vue** 3 **de** leur mobilisation sur le terrain . 
+MWEs:
+1- oth: creusot (+)
+2- oth: haut fonctionnaire (+)
+3- oth: en vue de (+)
+
+5618- :: l' italie a d' une certaine façon donné l' exemple de la rigueur en supprimant la " 1 **scala** mobile " 2 **c'** 2 **est** 2 **-** 2 **à** 2 **-** 2 **dire** l' indexation des salaires sur les prix . 
+MWEs:
+1- oth: scala (+)
+2- oth: ce être - à - dire (+)
+
+5621- :: 1 **a** 1 **l'** 1 **inverse** , aucun progrès évident n' a été enregistré en espagne où les salaires ( + number % ) continuent d' évoluer comme les prix ou même plus vite , leur hausse ayant été de 2 **number** 2 **,** 2 **number** % , 3 **sous** 3 **l'** 3 **effet** notamment 4 **des** " services " , insuffisamment productifs 5 **parce** 5 **que** peu exposés à la concurrence . 
+MWEs:
+1- oth: à le inverse (+)
+2- oth: number , number (+)
+3- oth: sous le effet (+)
+4- oth: de (+)
+5- oth: parce que (+)
+
+5627- :: la bundesbank justifie cette politique par les tensions inflationnistes qui restent fortes 1 **en** 1 **raison** notamment 2 **des** services , des loyers 3 **en** 3 **particulier** , les nombreux immigrés arrivant à l' ouest ne trouvant pas de logement . 
+MWEs:
+1- oth: en raison (+)
+2- oth: de (+)
+3- oth: en particulier (+)
+
+5702- :: et les effets de ces difficultés se sont fait sentir bien 1 **au** 1 **-** 1 **delà** 1 **des** 2 **douze** : l' ensemble des pays européens de l' ocde ont vu eux aussi leur croissance se ralentir et revenir 3 **en** 3 **moyenne** à + number % après + 4 **number** 4 **,** 4 **number** % en number . 
+MWEs:
+1- oth: à - delà de (+)
+2- oth: douze (+)
+3- oth: en moyenne (+)
+4- oth: number , number (+)
+
+5715- :: d' un 1 **point** 1 **de** 1 **vue** mondial , le tableau de l' année est très certainement plus noir qu' il n' a été dans la réalité , les statistiques ne 2 **prenant** pas 3 **en** 3 **compte** les pays d' asie et de la zone pacifique qui connaissent une croissance économique forte . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: prendre (+)
+3- oth: en compte (+)
+
+5743- :: 1 **a** plus 2 **longue** 2 **échéance** , le pari de la désinflation compétitive est que l' 3 **appareil** 3 **industriel** français bénéficiera de l' évolution modeste de ses coûts et d' une certaine " montée en gamme " , à la façon allemande . 
+MWEs:
+1- oth: à (+)
+2- oth: long échéance (+)
+3- oth: appareil industriel (+)
+
+5800- :: 1 **en** 1 **revanche** , l' année aura été décevante pour la 2 **confédération** 2 **européenne** 2 **des** 2 **syndicats** ( ces ) , toujours incapable de faire 3 **prendre** 3 **en** 3 **compte** la dimension sociale de la 4 **construction** 4 **européenne** 5 **auprès** 5 **des** gouvernements des 6 **douze** . 
+MWEs:
+1- oth: en revanche (+)
+2- oth: confédération européen de syndicat (+)
+3- oth: prendre en compte (+)
+4- oth: construction européen (+)
+5- oth: auprès de (+)
+6- oth: douze (+)
+
+6015- :: 1 **au** 1 **sein** même 2 **du** 3 **parti** 3 **libéral** ( fdp ) auquel appartient m. mllemann , des voix se sont élevées pour demander la démission du ministre . 
+MWEs:
+1- oth: à sein (+)
+2- oth: de (+)
+3- oth: parti libéral (+)
+
+6022- :: - la hausse des 1 **prix** 1 **de** 1 **détail** a été limitée à 2 **number** 2 **,** 2 **number** % en number , a annoncé , lundi number décembre , le 3 **ministère** belge 4 **des** 4 **affaires** 4 **économiques** . 
+MWEs:
+1- oth: prix de détail (+)
+2- oth: number , number (+)
+3- oth: ministère (+)
+4- oth: de affaire économique (+)
+
+6120- :: 1 **dans** 1 **la** 1 **foulée** , une réunion impromptue des 2 **ministres** 2 **des** 2 **finances** des 3 **douze** - un " 4 **éco** 4 **-** 4 **fin** " - permet à chacun d' exprimer son soulagement . 
+MWEs:
+1- oth: dans le foulée (+)
+2- oth: ministre de finance (+)
+3- oth: douze (+)
+4- oth: éco - fin (+)
+
+6532- :: comme on le redoutait depuis plusieurs semaines ( 1 **le** 1 **monde** du number novembre ) , un consortium japonais mené par 2 **mitsubishi** 2 **corp.** et comprenant 3 **kinki** 3 **sharyo** 3 **co.** 3 **ltd.** et 4 **toshiba** 4 **corp.** va fournir le matériel roulant de la deuxième 5 **ligne** 5 **de** 5 **métro** du 6 **caire** , dont la partie fixe a été confiée , début novembre , à un groupe d' entreprises françaises menées par 7 **alcatel** 7 **alsthom** , selon des informations venues de tokyo et non encore confirmées à paris . 
+MWEs:
+1- oth: le monde (+)
+2- oth: mitsubishi corp. (+)
+3- oth: kinki sharyo co. ltd. (+)
+4- oth: toshiba corp. (+)
+5- oth: ligne de métro (+)
+6- oth: caire (+)
+7- oth: alcatel alsthom (+)
+
+6533- :: le consortium japonais a annoncé , mardi number décembre , qu' il allait fournir number voitures pour la 1 **société** 1 **nationale** 1 **des** 1 **tunnels** , qui gère le métro du 2 **caire** , et number autres pour le département des transports d' alexandrie . 
+MWEs:
+1- oth: société national de tunnel (+)
+2- oth: caire (+)
+
+6535- :: il ne s' agit pas du premier contrat remporté par des sociétés japonaises pour le métro du 1 **caire** . 
+MWEs:
+1- oth: caire (+)
+
+6650- :: des lieux , ensuite : londres est le premier 1 **marché** mondial 2 **des** 2 **changes** , avec 3 **près** 3 **de** number % du total des transactions , suivi par 4 **new** 4 **-** 4 **york** et tokyo , number % seulement des transactions s' effectuant à paris . 
+MWEs:
+1- oth: marché (+)
+2- oth: de change (+)
+3- oth: près de (+)
+4- oth: new - york (+)
+
+6860- :: 1 **d'** 1 **autre** 1 **part** , la commission a dénoncé , mercredi number décembre , trois sociétés étrangères - une néerlandaise et deux allemandes - qui exercent en france 2 **du** démarchage sur des 3 **produits** 3 **financiers** . 
+MWEs:
+1- oth: de autre part (+)
+2- oth: du (+)
+3- oth: produit financier (+)
+
+6973- :: " prudente , la juridiction fédérale précise " qu' elle ne 1 **met** pas forcément 2 **en** 2 **cause** l' affirmation de l' 3 **us** 3 **air** 3 **force** selon laquelle l' offre de zds est la meilleure possible . 
+MWEs:
+1- oth: mettre (+)
+2- oth: en cause (+)
+3- oth: us air force (+)
+
+6984- :: peu après minuit , en ce number janvier number , les deux douaniers en faction sur la 1 **plate** 1 **-** 1 **forme** française du tunnel alpin du 2 **fréjus** ont échangé leurs voeux avec l' agent de la 3 **police** 3 **de** 3 **l'** 3 **air** 3 **et** 3 **des** 3 **frontières** et ses deux collègues italiens , sans trop s' attarder sur l' incertitude du lendemain . 
+MWEs:
+1- oth: plat - forme (+)
+2- oth: fréjus (+)
+3- oth: police de le air et de frontière (+)
+
+6998- :: " 1 **au** 1 **pied** 1 **du** 2 **sapin** 2 **de** 2 **noël** , dans l' entrée des vastes locaux de l' autoport du 3 **freney** , une jeune employée , les yeux rougis et le regard vague , rit nerveusement en tirant sur sa cigarette . 
+MWEs:
+1- oth: à pied de (+)
+2- oth: sapin de noël (+)
+3- oth: freney (+)
+
+7010- :: depuis l' ouverture du tunnel routier du 1 **fréjus** en number , plus de 2 **number** 2 **number** 3 **poids** 3 **lourds** transitent chaque jour , dont la plupart accomplissaient 4 **sur** 4 **place** leurs opérations 5 **auprès** 5 **des** deux agences françaises et italiennes . 
+MWEs:
+1- oth: fréjus (+)
+2- oth: number number (+)
+3- oth: poids lourd (+)
+4- oth: sur place (+)
+5- oth: auprès de (+)
+
+7187- :: la publication de plusieurs indicateurs , notamment celle de l' indice de confiance des consommateurs américains , calculé chaque mois par le 1 **conference** 1 **board** , a 2 **remis** 3 **un** 3 **peu** 4 **de** 4 **baume** 4 **au** 4 **coeur** des investisseurs . 
+MWEs:
+1- oth: conference board (+)
+2- oth: remettre (+)
+3- oth: un peu (+)
+4- oth: de baume à coeur (+)
+
+7290- :: " le robusta est , 1 **peu** 1 **ou** 1 **prou** , payé à sa valeur , mais il n' en 2 **va** pas 3 **de** 3 **même** de l' arabica , estime sam mesrahi , 4 **directeur** 4 **général** de 5 **tardivat** 5 **international** . 
+MWEs:
+1- oth: peu ou prou (+)
+2- oth: aller (+)
+3- oth: de même (+)
+4- oth: directeur général (+)
+5- oth: tardivat international (+)
+
+7368- :: pourtant , ce 1 **plan** 1 **de** 1 **bataille** - déjà esquissé 2 **au** 2 **cours** 2 **des** dernières semaines par plusieurs dirigeants socialistes qui reprennent le slogan " 3 **au** secours , la droite revient " - sera plus difficile à 4 **mettre** 4 **en** 4 **oeuvre** en number . 
+MWEs:
+1- oth: plan de bataille (+)
+2- oth: à cours de (+)
+3- oth: à (+)
+4- oth: mettre en oeuvre (+)
+
+7718- :: 1 **peut** 1 **être** , si l'on considère le succès du nom masculin design - prononcé 2 **le** 2 **plus** 2 **souvent** " dezaïgn " ou " 3 **dizaï'** 3 **n** " - et employé comme réduction d' 4 **industrial** design . 
+MWEs:
+1- oth: pouvoir être (+)
+2- oth: le plus souvent (+)
+3- oth: dizaï' n (+)
+4- oth: industrial (+)
+
+7952- :: selon ce dernier modèle fonctionne le système dit des 1 **deficiency** payments ( paiements compensatoires ) appliqué de façon 2 **plus** 2 **ou** 2 **moins** " pure " par la 3 **grande** 3 **-** 3 **bretagne** 4 **jusqu'** 4 **à** son adhésion à la cee et , 5 **aujourd'** 5 **hui** encore , par les 6 **etats** 6 **-** 6 **unis** . 
+MWEs:
+1- oth: deficiency (+)
+2- oth: plus ou moins (+)
+3- oth: grand - bretagne (+)
+4- oth: jusque à (+)
+5- oth: aujourd' hui (+)
+6- oth: etats - uni (+)
+
+8341- :: les actionnaires ne déchanteront qu' en septembre 1 **lors** 1 **de** la publication des résultats semestriels : un tassement demeurait prévisible 2 **en** 2 **raison** notamment 3 **du** marasme du raffinage , mais de là à imaginer une division par deux des profits ! 
+MWEs:
+1- oth: lors de (+)
+2- oth: en raison (+)
+3- oth: de (+)
+
+8469- :: la sécurité des approvisionnements des 1 **douze** , hormis quelques rares métaux des régions australes ( le platine ) ne passe guère par l' afrique , et la surproduction mondiale , aggravée par les ventes 2 **à** 2 **tout** 2 **va** de l' ex- 3 **union** 3 **soviétique** , affaiblit encore cette affirmation . 
+MWEs:
+1- oth: douze (+)
+2- oth: à tout aller (+)
+3- oth: union soviétique (+)
+
+8591- :: 1 **etant** 1 **donné** ce que nous savons des pressions que subissent les 2 **banques** 2 **centrales** et de leurs modes de fonctionnement réels , il sera prudent que 3 **d'** 3 **ici** 3 **à** number ou number l' indépendance de la future bce 4 **fasse** encore 5 **l'** 5 **objet** de quelques sérieuses réflexions . 
+MWEs:
+1- oth: être donner (+)
+2- oth: banque central (+)
+3- oth: de ici à (+)
+4- oth: fasse (+)
+5- oth: le objet (+)
+
+8714- :: en italie , la suppression de la 1 **scala** mobile ( l' 2 **échelle** 2 **mobile** ) et la maîtrise du 3 **déficit** 3 **budgétaire** modèrent l' inflation . 
+MWEs:
+1- oth: scala (+)
+2- oth: échelle mobile (+)
+3- oth: déficit budgétaire (+)
+
+8726- :: qualifiée d' " avancée modeste " par michel giraud , le 1 **ministre** français 2 **du** 2 **travail** , la directive , qui devra encore être approuvée par le 3 **parlement** 3 **européen** , est très 4 **en** 4 **retrait** 5 **par** 5 **rapport** 5 **au** droit français , lequel fixe la durée hebdomadaire maximale du travail à 6 **trente** 6 **-** 6 **neuf** heures ( 7 **quarante** 7 **-** 7 **cinq** heures avec les 8 **heures** 8 **supplémentaires** , qui ne peuvent excéder 9 **deux** 9 **cent** 9 **quatre** 9 **-** 9 **vingts** heures par an ) . 
+MWEs:
+1- oth: ministre (+)
+2- oth: du travail (+)
+3- oth: parlement européen (+)
+4- oth: en retrait (+)
+5- oth: par rapport à (+)
+6- oth: trente - neuf (+)
+7- oth: quarante - cinq (+)
+8- oth: heure supplémentaire (+)
+9- oth: deux cent quatre - vingts (+)
+
+8928- :: si le groupe 1 **albert** 1 **frère** , dont le " 2 **trésor** 2 **de** 2 **guerre** " est évalué à number milliards de francs , 3 **fait** 4 **plus** 4 **que** 4 **jamais** 5 **partie** des candidats potentiels à une place de choix dans le " 6 **noyau** 6 **dur** " , le groupe 7 **sud** 7 **-** 7 **africain** transatlantic , holding qui partage avec l' uap le contrôle de l' assureur britannique 8 **sun** 8 **life** , pourrait être également 9 **sur** 9 **les** 9 **rangs** . 
+MWEs:
+1- oth: albert frère (+)
+2- oth: trésor de guerre (+)
+3- oth: faire (+)
+4- oth: plus que jamais (+)
+5- oth: partie (+)
+6- oth: noyau dur (+)
+7- oth: sud - africain (+)
+8- oth: sun life (+)
+9- oth: sur le rang (+)
+
+8928- :: si le groupe 1 **albert** 1 **frère** , dont le " 2 **trésor** 2 **de** 2 **guerre** " est évalué à number milliards de francs , fait 4 **plus** 4 **que** 4 **jamais** 5 **partie** des candidats potentiels à une place de choix dans le " 6 **noyau** 6 **dur** " , le groupe 7 **sud** 7 **-** 7 **africain** transatlantic , holding qui partage avec l' uap le contrôle de l' assureur britannique 8 **sun** 8 **life** , pourrait être également 9 **sur** 9 **les** 9 **rangs** . 
+MWEs:
+1- oth: albert frère (+)
+2- oth: trésor de guerre (+)
+3- oth: faire (+)
+4- oth: plus que jamais (+)
+5- oth: partie (+)
+6- oth: noyau dur (+)
+7- oth: sud - africain (+)
+8- oth: sun life (+)
+9- oth: sur le rang (+)
+
+8983- :: dès son arrivée au 1 **ministère** français 2 **des** 2 **transports** , bernard bosson s' était déclaré " déçu " par l' état du dossier 3 **tgv** 3 **-** 3 **est** en france qui " n' était absolument pas financé " . 
+MWEs:
+1- oth: ministère (+)
+2- oth: de transport (+)
+3- oth: tgv - est (+)
+
+9024- :: mais pour sortir de la récession , " le monde ne peut compter sur la seule croissance aux 1 **etats** 1 **-** 1 **unis** " , a indiqué , mercredi number juin à paris , le 2 **secrétaire** américain 3 **au** 3 **trésor** , lloyd bentsen , 4 **lors** 4 **de** la première journée de la réunion ministérielle annuelle de l' ocde . 
+MWEs:
+1- oth: etats - uni (+)
+2- oth: secrétaire (+)
+3- oth: à trésor (+)
+4- oth: lors de (+)
+
+9028- :: si le 1 **ministre** allemand 2 **de** 2 **l'** 2 **économie** , günter rexrodt , présent à la réunion de l' ocde , n' a pas répliqué aux critiques américaines , la réponse est venue , 3 **à** 3 **distance** , du président de la 4 **banque** 4 **centrale** allemande , helmut schlesinger . 
+MWEs:
+1- oth: ministre (+)
+2- oth: de l' économie (+)
+3- oth: à distance (+)
+4- oth: banque central (+)
+
+9031- :: la décision a été prise par les ambassadeurs des 1 **douze** , mercredi number juin à bruxelles , et doit être entérinée mardi prochain à luxembourg par les 2 **ministres** 2 **des** 2 **affaires** 2 **étrangères** de la cee , a -t-on précisé de même source . 
+MWEs:
+1- oth: douze (+)
+2- oth: ministre de affaire étranger (+)
+
+9133- :: or de telles performances paraissent 1 **loin** 1 **de** portée des 2 **douze** dans un futur proche : selon les prévisions à 3 **moyen** 3 **terme** sur l' activité européenne , la croissance devrait se situer 4 **aux** 4 **alentours** 4 **de** 5 **number** 5 **,** 5 **number** % l' an 6 **en** 6 **moyenne** 7 **jusqu'** 7 **à** la fin de la décennie . 
+MWEs:
+1- oth: loin de (+)
+2- oth: douze (+)
+3- oth: moyen terme (+)
+4- oth: à alentours de (+)
+5- oth: number , number (+)
+6- oth: en moyenne (+)
+7- oth: jusque à (+)
+
+9137- :: ainsi , brutalement , les décalages conjoncturels - 1 **à** 1 **certains** 1 **égards** salutaires puisqu' ils permettaient aux pays du continent les plus affectés par le ralentissement de leur 2 **demande** 2 **intérieure** de trouver chez leurs partenaires 3 **de** quoi maintenir une certaine croissance - ont disparu . 
+MWEs:
+1- oth: à certain égard (+)
+2- oth: demande intérieur (+)
+3- oth: de (+)
+
+9149- :: la communauté des 1 **douze** réalise 2 **aujourd'** 2 **hui** number % de son 3 **produit** 3 **intérieur** 3 **brut** 4 **grâce** 4 **aux** échanges de marchandises entre 5 **pays** 5 **membres** , chacun trouvant dans ses voisins européens ses premiers 6 **partenaires** 6 **commerciaux** . 
+MWEs:
+1- oth: douze (+)
+2- oth: aujourd' hui (+)
+3- oth: produit intérieur brut (+)
+4- oth: grâce à (+)
+5- oth: pays membre (+)
+6- oth: partenaire commercial (+)
+
+9162- :: les premiers 1 **en** 1 **vue** vraisemblablement 2 **de** reconstituer la valeur de leurs actifs , amputée par les dépréciations boursières et immobilières ; 3 **alors** 3 **que** les secondes tentent d' assurer leur pérennité en réduisant drastiquement leurs effectifs et leurs investissements . 
+MWEs:
+1- oth: en vue (+)
+2- oth: de (+)
+3- oth: alors que (+)
+
+9265- :: la " semaine de quatre jours " , à 1 **pouvoir** 1 **d'** 1 **achat** des actifs maintenu légèrement croissant , s' étendrait progressivement 2 **à** 2 **raison** , pour chaque salarié , 3 **de** deux semaines de ce type 4 **en** 4 **plus** chaque année . 
+MWEs:
+1- oth: pouvoir de achat (+)
+2- oth: à raison (+)
+3- oth: de (+)
+4- oth: en plus (+)
+
+9301- :: 1 **errare** 1 **humanum** est , 2 **perseverare** diabolicum ... 
+MWEs:
+1- oth: errare humanum (+)
+2- oth: perseverare (+)
+
+9507- :: 1 **le** 1 **temps** pour ce canot à moteur 2 **de** passer sans provoquer de remous devant une petite jetée . 
+MWEs:
+1- oth: le temps (+)
+2- oth: de (+)
+
+9516- :: pas question 1 **pour** 1 **autant** d' abandonner 2 **dans** 2 **l'** 2 **immédiat** ce site qui emploie une soixantaine de personnes et 3 **autour** duquel s' est aggloméré tout un village . 
+MWEs:
+1- oth: pour autant (+)
+2- oth: dans le immédiat (+)
+3- oth: autour (+)
+
+9668- :: - la relance de l' activité économique et la défense de l' emploi seront 1 **au** 1 **centre** 1 **des** conversations des 2 **chefs** 2 **d'** 2 **etat** et de gouvernement des 3 **douze** les number et number juin à copenhague . 
+MWEs:
+1- oth: à centre de (+)
+2- oth: chef de état (+)
+3- oth: douze (+)
+
+9724- :: a l' issue de la réunion des 1 **ministres** 1 **des** 1 **finances** des 2 **douze** , lundi number juin à luxembourg , theo waigel , 3 **ministre** allemand 4 **des** 4 **finances** , a déclaré que les discussions sur le sujet " avaient avancé dans notre direction " , 5 **c'** 5 **est** 5 **-** 5 **à** 5 **-** 5 **dire** 6 **en** 6 **faveur** 6 **de** francfort . 
+MWEs:
+1- oth: ministre de finance (+)
+2- oth: douze (+)
+3- oth: ministre (+)
+4- oth: de finances (+)
+5- oth: ce être - à - dire (+)
+6- oth: en faveur de (+)
+
+9724- :: a l' issue de la réunion des 1 **ministres** 1 **des** 1 **finances** des douze , lundi number juin à luxembourg , theo waigel , 3 **ministre** allemand 4 **des** 4 **finances** , a déclaré que les discussions sur le sujet " avaient avancé dans notre direction " , 5 **c'** 5 **est** 5 **-** 5 **à** 5 **-** 5 **dire** 6 **en** 6 **faveur** 6 **de** francfort . 
+MWEs:
+1- oth: ministre de finance (+)
+2- oth: douze (+)
+3- oth: ministre (+)
+4- oth: de finances (+)
+5- oth: ce être - à - dire (+)
+6- oth: en faveur de (+)
+
+9757- :: l' important est que la production effective des 1 **douze** n' excède pas la capacité d' absorption du marché . 
+MWEs:
+1- oth: douze (+)
+
+9895- :: le temps de l' utilisation 1 **à** grande échelle s' achève . 
+MWEs:
+1- oth: à (+)
+
+9967- :: 1 **peu** importe à quelle ligne on la trouve dans le 2 **bulletin** 2 **de** 2 **salaire** . 
+MWEs:
+1- oth: peu (+)
+2- oth: bulletin de salaire (+)
+
+10060- :: 1 **des** rivalités se nouent , notamment avec l' 2 **éducation** 2 **nationale** qui ne voit pas d' un oeil bienveillant l' apparition de ces 3 **nouveaux** 3 **venus** qui ont le 4 **ministère** 4 **du** 4 **travail** pour tutelle . 
+MWEs:
+1- oth: un (+)
+2- oth: éducation national (+)
+3- oth: nouveau venu (+)
+4- oth: ministère de travail (+)
+
+10067- :: dans les années number , la mode des " 1 **training** groups " importée des 2 **etats** 2 **-** 2 **unis** fait ses premiers pas 3 **sous** 3 **l'** 3 **égide** 3 **de** la sociopsychologie . 
+MWEs:
+1- oth: training (+)
+2- oth: etats - unis (+)
+3- oth: sous le égide de (+)
+
+10126- :: 1 **des** professeurs de harvard se voient , d' une certaine manière , impliqués dans les premiers cheminements des principales écoles européennes qui envoient même leurs professeurs suivre les programmes à harvard pour y apprendre les méthodes d' enseignement , y emprunter des idées surtout , mais aussi des matériaux , des schémas de cours 2 **jusqu'** 2 **au** design des 3 **salles** 3 **de** 3 **classe** ! 
+MWEs:
+1- oth: un (+)
+2- oth: jusque à (+)
+3- oth: salle de classe (+)
+
+10195- :: 1 **des** conférences et une table ronde permettront de faire le point sur l' évolution des pratiques et des recherches en ce domaine . 
+MWEs:
+1- oth: un (+)
+
+10368- :: 1 **là** encore , la réponse est la même que précédemment : " tout est dans notre comptabilité . 
+MWEs:
+1- oth: là (+)
+
+10522- :: 1 **au** final , personne n' est oublié ... ou presque ! 
+MWEs:
+1- oth: à (+)
+
+10608- :: les déclarations de mme nicole notat , 1 **secrétaire** 1 **générale** de la cfdt , au 2 **figaro** du number décembre , 3 **en** 3 **faveur** 3 **d'** une hausse de la 4 **contribution** 4 **sociale** généralisée ( csg ) et d' un allongement de la durée de cotisation 5 **au** 5 **-** 5 **delà** 5 **de** 6 **trente** 6 **-** 6 **sept** ans et demi pour les retraites de la " sécu " , montrent que les syndicats finiront 7 **peut** 7 **-** 7 **être** par se lasser de leur 8 **dédoublement** 8 **de** 8 **personnalité** . 
+MWEs:
+1- oth: secrétaire général (+)
+2- oth: figaro (+)
+3- oth: en faveur de (+)
+4- oth: contribution social (+)
+5- oth: à - delà de (+)
+6- oth: trente - sept (+)
+7- oth: pouvoir - être (+)
+8- oth: dédoublement de personnalité (+)
+
+10921- :: une question que se posent , au premier chef , le nouveau titulaire du portefeuille , m. françois loncle , et surtout le commissaire , m. 1 **jean** 1 **-** 1 **baptiste** 2 **de** 2 **foucauld** , l' un des 3 **hauts** 3 **fonctionnaires** les mieux placés dans la hiérarchie administrative , qui 4 **avait** , 5 **jusqu'** 5 **au** number décembre , 6 **les** 6 **coudées** 6 **franches** pour préparer le xi plan . 
+MWEs:
+1- oth: jean - baptiste (+)
+2- oth: de foucauld (+)
+3- oth: haut fonctionnaire (+)
+4- oth: avoir (+)
+5- oth: jusque à (+)
+6- oth: le coudée franc (+)
+
+11309- :: dans le capital d' icp , où le groupe centenaire blanzy est majoritaire , on trouve également les mutuelles du 1 **mans** , 2 **à** 2 **hauteur** 2 **de** number % . 
+MWEs:
+1- oth: mans (+)
+2- oth: à hauteur de (+)
+
+11317- :: 1 **quant** au danemark , son taux de chômage est passé de 2 **number** 2 **,** 2 **number** % à number % et de number % à 3 **number** 3 **,** 3 **number** % pour les 4 **moins** 4 **de** 5 **vingt** 5 **-** 5 **cinq** ans 6 **alors** 6 **que** , pour ces derniers , " la baisse a été importante " dans les autres 7 **etats** 7 **-** 7 **membres** . 
+MWEs:
+1- oth: quant (+)
+2- oth: number , number (+)
+3- oth: number , number (+)
+4- oth: moins de (+)
+5- oth: vingt - cinq (+)
+6- oth: alors que (+)
+7- oth: état - membre (+)
+
+11991- :: enfin , le 1 **ministre** tchécoslovaque 2 **de** 2 **l'** 2 **intérieur** , mr richard sacher , a confirmé la récente dissolution de la 3 **police** 3 **secrète** tchécoslovaque , la sécurité d' état ( stb ) , dans un communiqué publié mardi par ctk . 
+MWEs:
+1- oth: ministre (+)
+2- oth: de l' intérieur (+)
+3- oth: police secret (+)
+
+12246- :: les deux monarques lui procureront l' essentiel de ses contrats , au 1 **moins** tant que les caisses du royaume le permettront . 
+MWEs:
+1- oth: moins (+)
+
+12276- :: 1 **d'** 1 **abord** , la présence du 2 **plus** important abattoir des landes ; il est 3 **en** 3 **cours** 3 **de** rénovation et de modernisation , et sa capacité sera portée de 4 **number** 4 **number** à 5 **number** 5 **number** tonnes annuelles , le volume de ses déchets carnés augmentant 6 **en** 6 **conséquence** . 
+MWEs:
+1- oth: de abord (+)
+2- oth: plus (+)
+3- oth: en cours de (+)
+4- oth: number number (+)
+5- oth: number number (+)
+6- oth: en conséquence (+)
+
+12295- :: soit un délai supplémentaire d' au 1 **moins** six mois . 
+MWEs:
+1- oth: moins (+)
+
+12563- :: un autre article paru en juin dernier dans la même publication sur le thème : " the international gold standard and us monetary policy from world war to the 1 **new** deal " est venu opportunément élargir la perspective . 
+MWEs:
+1- oth: new (+)
+
+12597- :: 1 **au** 1 **sein** 1 **du** très influent comité fédéral de l' 2 **open** market ( fomc ) , les membres du board siègent avec cinq représentants des banques de réserve régionales . 
+MWEs:
+1- oth: à sein de (+)
+2- oth: open (+)
+
+12606- :: de cette dérive , la " cause la plus vraie " , pour reprendre l' admirable expression du 1 **plus** grand historien de l' antiquité , a été , 2 **sans** 2 **aucun** 2 **doute** , la 3 **guerre** 3 **de** 3 **number** 3 **-** 3 **number** . 
+MWEs:
+1- oth: plus (+)
+2- oth: sans aucun doute (+)
+3- oth: guerre de number - number (+)
+
+12963- :: la première bataille judiciaire a été gagnée par le patron du 1 **figaro** , mais mr seydoux poursuit son combat 2 **en** 2 **appel** . 
+MWEs:
+1- oth: figaro (+)
+2- oth: en appel (+)
+
+12995- :: 1 **ceux** 1 **-** 1 **ci** , des lycéens 2 **pour** 2 **la** 2 **plupart** , arboraient des drapeaux noirs frappés du sigle des anarchistes et scandaient notamment : " 3 **a** bas le capitalisme ! " , " nous ne voulons pas d' hausses des prix ! " , ou " la soupe ( populaire ) pour kuron " ( le ministre du travail ) , et encore " 4 **a** bas la nomenklatura ! " . 
+MWEs:
+1- oth: celui - ci (+)
+2- oth: pour le plupart (+)
+3- oth: à (+)
+4- oth: à (+)
+
+12995- :: 1 **ceux** 1 **-** 1 **ci** , des lycéens 2 **pour** 2 **la** 2 **plupart** , arboraient des drapeaux noirs frappés du sigle des anarchistes et scandaient notamment : " a bas le capitalisme ! " , " nous ne voulons pas d' hausses des prix ! " , ou " la soupe ( populaire ) pour kuron " ( le ministre du travail ) , et encore " 4 **a** bas la nomenklatura ! " . 
+MWEs:
+1- oth: celui - ci (+)
+2- oth: pour le plupart (+)
+3- oth: à (+)
+4- oth: à (+)
+
+13048- :: la fièvre indépendantiste s' y explique 1 **en** grande 2 **partie** par le fait que les lituaniens sont largement majoritaires ( number % ) dans leur république et qu' elle ne fait partie de l' urss , avec les deux autres républiques baltes , que 3 **depuis** 3 **peu** . 
+MWEs:
+1- oth: en (+)
+2- oth: partie (+)
+3- oth: depuis peu (+)
+
+13048- :: la fièvre indépendantiste s' y explique en grande 2 **partie** par le fait que les lituaniens sont largement majoritaires ( number % ) dans leur république et qu' elle ne fait partie de l' urss , avec les deux autres républiques baltes , que 3 **depuis** 3 **peu** . 
+MWEs:
+1- oth: en (+)
+2- oth: partie (+)
+3- oth: depuis peu (+)
+
+13138- :: cette opération , annoncée vendredi number janvier 1 **en** 1 **fin** 1 **d'** 2 **après** 2 **-** 2 **midi** , s' est déroulée au 3 **plus** haut niveau des deux sociétés , 4 **sous** 4 **la** 4 **houlette** 4 **du** gouvernement français , qui exprime sa satisfaction . 
+MWEs:
+1- oth: en fin de (+)
+2- oth: après - midi (+)
+3- oth: plus (+)
+4- oth: sous le houlette du (+)
+
+13163- :: mr pierre bérégovoy , ministre de l' économie , avait 1 **pris** 1 **au** 1 **mot** une déclaration de mr seydoux , président des chargeurs , au 2 **monde** , qui affirmait que , si on continuait à refuser des droits de trafic à uta , il ne lui resterait plus qu' à vendre cette compagnie sans avenir . 
+MWEs:
+1- oth: prendre à mot (+)
+2- oth: monde (+)
+
+13166- :: on ne saura que progressivement ce qui a amené le patron des 1 **chargeurs** à changer d' avis et à jeter l' éponge dans le 2 **transport** 2 **aérien** pour un prix qui ne semble pas mirobolant . 
+MWEs:
+1- oth: chargeurs (+)
+2- oth: transport aérien (+)
+
+13449- :: tout en démentant céder à la pression , le gouvernement a annoncé le number janvier 1 **au** beau 2 **milieu** 2 **des** 3 **arrêts** 3 **de** 3 **travail** , une augmentation générale des salaires de number % . 
+MWEs:
+1- oth: à (+)
+2- oth: milieu un (+)
+3- oth: arrêt de travail (+)
+
+13562- :: comment expliquer que le fantastique orchestre d' etat de l' urss vienne nous jouer salle pleyel deux symphonies et deux concertos du 1 **plus** célèbre 2 **fruit** 2 **sec** de l' école russe ? 
+MWEs:
+1- oth: plus (+)
+2- oth: fruit sec (+)
+
+13862- :: narcotique , la jument du champion olympique , appelée sans doute à succéder un jour à jappeloup , se trouve depuis la fin octobre au haras de la gisloterie , situé en plein coeur du 1 **calvados** , à 2 **sainte** 2 **-** 2 **marie** 2 **-** 2 **d'** 2 **elle** , pour y subir un transfert d' embryon . 
+MWEs:
+1- oth: calvados (+)
+2- oth: saint - marie - de elle (+)
+
+14205- :: et pas 1 **n'** 1 **importe** 1 **laquelle** , le bsl - la 2 **business** school de lausanne . 
+MWEs:
+1- oth: ne importer lequel (+)
+2- oth: business (+)
+
+14447- :: tout indique , d' un autre côté , que les risques de dérapage sont actuellement suffisamment graves en allemagne ( 1 **à** 1 **cause** , notamment , 2 **de** la démagogie du gouvernement kohl et des syndicats 3 **ouest** 3 **-** 3 **allemands** fraîchement installés à l' est ) 4 **pour** 4 **qu'** on laisse la bundesbank réagir 5 **pendant** 5 **qu'** il en est , 6 **peut** 6 **-** 6 **être** , encore temps . 
+MWEs:
+1- oth: à cause (+)
+2- oth: de (+)
+3- oth: ouest - allemand (+)
+4- oth: pour que (+)
+5- oth: pendant que (+)
+6- oth: pouvoir - être (+)
+
+14522- :: certes , le 1 **taux** 1 **de** 1 **chômage** est passé , en décembre , de 2 **number** 2 **,** 2 **number** % à 3 **number** 3 **,** 3 **number** % de la 4 **population** 4 **active** , au 5 **plus** haut depuis les 6 **number** 6 **,** 6 **number** % de janvier number . 
+MWEs:
+1- oth: taux de chômage (+)
+2- oth: number , number (+)
+3- oth: number , number (+)
+4- oth: population actif (+)
+5- oth: plus (+)
+6- oth: number , number (+)
+
+14526- :: 1 **en** 1 **tout** 1 **cas** , ils ne devraient pas inciter la réserve fédérale à abaisser 2 **à** 2 **nouveau** son 3 **taux** 3 **d'** 3 **escompte** , tout au 4 **moins** 5 **dans** 5 **l'** 5 **immédiat** , ce qui contribue à raffermir le 6 **billet** 6 **vert** , sans toutefois éliminer tous les facteurs négatifs qui le handicapent . 
+MWEs:
+1- oth: en tout cas (+)
+2- oth: à nouveau (+)
+3- oth: taux de escompte (+)
+4- oth: moins (+)
+5- oth: dans le immédiat (+)
+6- oth: billet vert (+)
+
+14527- :: parmi les facteurs figure , bien entendu , l' écart " historique " de 1 **number** 1 **,** 1 **number** % entre les taux courts américains ( 2 **number** 2 **,** 2 **number** % ) et allemands ( 3 **number** 3 **,** 3 **number** % ) qui , pourtant , n' est pas aussi ravageur que celui 4 **en** 4 **vigueur** en février number ( 5 **number** 5 **,** 5 **number** % ) , lorsque le dollar était tombé au 6 **plus** bas de 7 **number** 7 **,** 7 **number** deutschemark . 
+MWEs:
+1- oth: number , number (+)
+2- oth: number , number (+)
+3- oth: number , number (+)
+4- oth: en vigueur (+)
+5- oth: number , number (+)
+6- oth: plus (+)
+7- oth: number , number (+)
+
+14656- :: - les 1 **ministres** 1 **des** 1 **affaires** 1 **étrangères** des 2 **douze** ont décidé , vendredi number janvier à bruxelles , de lever leurs 3 **sanctions** 3 **économiques** contre le monténégro pour remercier cette république yougoslave de sa " contribution " aux efforts de paix de la cee . 
+MWEs:
+1- oth: ministre de affaire étranger (+)
+2- oth: douze (+)
+3- oth: sanction économique (+)
+
+14693- :: dans ce secteur qui consacre une grande part de son énergie à des activités militaires , l' etat est le chef d' orchestre , soit qu' il détienne tout ou partie du capital des groupes concernés , soit qu' il distribue la manne publique 1 **d'** où 2 **ceux** 2 **-** 2 **ci** tirent leurs forces sous son contrôle direct . 
+MWEs:
+1- oth: de (+)
+2- oth: celui - ci (+)
+
+14714- :: les allemands auraient préféré une déclaration des 1 **douze** plus allante , plus favorable au " papier - dunkel " . 
+MWEs:
+1- oth: douze (+)
+
+42- :: cette modification signifie que les 1 **avantages** 1 **fiscaux** accordés 2 **lors** 2 **d'** une donation ( l' abattement personnel de 3 **number** 3 **number** francs notamment ) pourront désormais jouer 4 **à** 4 **nouveau** pleinement pour une autre donation ou 5 **lors** 5 **d'** une succession si ces derniers actes sont conclus au 6 **moins** dix ans après les précédents . 
+MWEs:
+1- oth: avantage fiscal (+)
+2- oth: lors de (+)
+3- oth: number number (+)
+4- oth: à nouveau (+)
+5- oth: lors de (+)
+6- oth: moins (+)
+
+492- :: 1 **alors** 1 **que** , de number à number , le nombre d' inscrits a crû de 2 **number** 2 **number** 2 **number** - cet accroissement touchant les chômeurs et les salariés des petites entreprises , 3 **auprès** desquels les syndicats sont justement absents , - on a compté , en valeur absolue , 4 **number** 4 **number** suffrages exprimés de moins dans l' ensemble du collège salarié . 
+MWEs:
+1- oth: alors que (+)
+2- oth: number number number (+)
+3- oth: auprès (+)
+4- oth: number number (+)
+
+728- :: a 1 **printemps** , ils sont montés et testés dans les ateliers voisins du magasin et n' ont pratiquement qu' à traverser la rue . 
+MWEs:
+1- oth: printemps (+)
+
+758- :: 1 **dans** 1 **le** 1 **même** 1 **temps** , le gouvernement se tourne vers le 2 **fonds** 2 **monétaire** 2 **international** ( fmi ) , qui alloue un prêt de 3 **number** 3 **,** 3 **number** milliards de dollars sous forme de crédit 4 **stand** by . 
+MWEs:
+1- oth: dans le même temps (+)
+2- oth: fonds monétaire international (+)
+3- oth: number , number (+)
+4- oth: stand (+)
+
+1044- :: peu ou pas de mécanisation , des rendements faibles sauf pour le riz et les légumes , - une 1 **main** 1 **-** 1 **d'** 1 **oeuvre** âgée ( number % des agriculteurs ont 2 **plus** 2 **de** 3 **cinquante** 3 **-** 3 **quatre** ans ) et number % d' illettrés , des organisations professionnelles divisées , reflétant le clivage entre le nord du portugal , où domine la micropropriété , et le sud du pays avec les grands propriétaires de l' alentejo - où la superficie moyenne est de number hectares ) , enfin des conditions de sols et de climat peu favorables : tels sont les handicaps de l' agriculture portugaise au moment où elle doit affronter les premiers effets des réformes décidées par les 4 **ministres** 4 **de** 4 **l'** 4 **agriculture** des 5 **douze** . 
+MWEs:
+1- oth: main - de oeuvre (+)
+2- oth: plus de (+)
+3- oth: cinquante - quatre (+)
+4- oth: ministre de le agriculture (+)
+5- oth: douze (+)
+
+1238- :: - Édouard balladur : dans une déclaration au 1 **monde** , le 2 **premier** 2 **ministre** justifie les orientations de son programme d' austérité . 
+MWEs:
+1- oth: monde (+)
+2- oth: premier ministre (+)
+
+1820- :: l' expérience la plus récente a montré avec éclat que des 1 **investment** banks parmi les plus puissantes ont échoué en voulant faire le travail du négociant à sa place . 
+MWEs:
+1- oth: investment (+)
+
+1938- :: car le 1 **crédit** 1 **lyonnais** est le principal banquier français du groupe maxwell , en déconfiture , il fut celui de l' italien giancarlo parretti , maintenant en prison , et il reste actionnaire à number % d' une 2 **cinq** en 3 **dépôt** 3 **de** 3 **bilan** . 
+MWEs:
+1- oth: crédit lyonnais (+)
+2- oth: cinq (+)
+3- oth: dépôt de bilan (+)
+
+1021- :: les bonnes intentions de m. major , qui souhaite promouvoir une 1 **classless** society , une société qui offre l' 2 **égalité** 2 **des** 2 **chances** , se heurtent à la réalité d' un pays qui n' évolue que lentement , comme en témoignent les barrières entre " castes " sociales . 
+MWEs:
+1- oth: classless (+)
+2- oth: égalité de chance (+)
+
+1043- :: les chiffres sont éloquents : les 1 **trade** unions ont perdu 2 **number** 2 **,** 2 **number** millions d' adhérents depuis number , et , en number , le nombre de journées perdues 3 **à** 3 **la** 3 **suite** 3 **d'** 4 **arrêts** 4 **de** 4 **travail** a été le plus faible depuis un siècle . 
+MWEs:
+1- oth: trade (+)
+2- oth: number , number (+)
+3- oth: à le suite de (+)
+4- oth: arrêt de travail (+)
+
+1227- :: dans un entretien au 1 **monde** , m. rené teulade , ministre des 2 **affaires** 2 **sociales** , accuse l' opposition , qui s' apprêtait à déposer une 3 **motion** 3 **de** 3 **censure** , d' avoir fait " assaut de démagogie " . 
+MWEs:
+1- oth: monde (+)
+2- oth: affaire social (+)
+3- oth: motion de censure (+)
+
+FTB MWTs are cleaned!
+	Language : FR
+==================================================================================================
+	Training (Important) : 11502, Test : 2541
+	MWEs in tain : 5926, occurrences : 25644
+	Impotant words in tain : 4181
+	MWE length mean : 2.66
+	Seen MWEs : 3460 (85 %)
+	New MWEs : 581 (14 %)
+==================================================================================================
+	Non frequent word cleaning:
+==================================================================================================
+	Before : 24201
+	After : 21589
+# Parameters = 10525320
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_5 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_6 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_5 (Embedding)         (None, 4, 480)       10362720    input_5[0][0]                    
+__________________________________________________________________________________________________
+embedding_6 (Embedding)         (None, 4, 42)        41202       input_6[0][0]                    
+__________________________________________________________________________________________________
+flatten_5 (Flatten)             (None, 1920)         0           embedding_5[0][0]                
+__________________________________________________________________________________________________
+flatten_6 (Flatten)             (None, 168)          0           embedding_6[0][0]                
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 2088)         0           flatten_5[0][0]                  
+                                                                 flatten_6[0][0]                  
+__________________________________________________________________________________________________
+dense_5 (Dense)                 (None, 58)           121162      concatenate_3[0][0]              
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 58)           0           dense_5[0][0]                    
+__________________________________________________________________________________________________
+dense_6 (Dense)                 (None, 4)            236         dropout_3[0][0]                  
+==================================================================================================
+Total params: 10,525,320
+Trainable params: 10,525,320
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	data size before focused sampling = 1712280
+	data size after focused sampling = 1712280
+	data size before sampling = 1712280
+	data size after sampling = 2997476
+	4 Labels in train : Counter({0: 749369, 1: 749369, 2: 749369, 3: 749369})
+	4 Labels in valid : Counter({2: 74963, 0: 74943, 3: 74938, 1: 74904})
+	Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 2697728 samples, validate on 299748 samples
+Epoch 1/40
+ - 147s - loss: 0.1437 - acc: 0.9632 - val_loss: 0.1110 - val_acc: 0.9728
+Epoch 2/40
+ - 147s - loss: 0.1120 - acc: 0.9723 - val_loss: 0.1056 - val_acc: 0.9748
+Epoch 3/40
+ - 147s - loss: 0.1057 - acc: 0.9743 - val_loss: 0.1028 - val_acc: 0.9756
+
+==================================================================================================
+	Training time : 0:09:00.726642
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:48.567097
+==================================================================================================
+	Identification : 0.727
+	P, R  : 0.791, 0.672
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: NON.COMPO
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, verbose, epochs, dense1, dense2, earlyStop, optimizer, features, dense2UnitNumber, batchSize, lemma, lr, compactVocab, dense2Activation, frequentTokens, dense1UnitNumber, inputItems, posEmb, dense1Activation, tokenEmb, dense1Dropout, chickPoint, dense2Dropout, bPadding, loss, s1Padding, minDelta, predictVerbose, validationSplit, s0Padding
+==================================================================================================
+# Configs: NonCompo, ftb, corpus, True, True, True, True, False, 6, True, True, 0, 40, True, False, True, adagrad, False, 0, 64, True, 0.059, True, relu, True, 58, 4, 42, relu, 480, 0.429, False, 0, 2, categorical_crossentropy, 5, 0.2, False, 0.1, 5
+==================================================================================================
+303- :: ces derniers temps , m. bush a certainement démontré une étonnante 1 **force** 1 **de** 1 **caractère** , en continuant à s' adonner régulièrement au golf au 2 **plus** fort de la crise irakienne . 
+MWEs:
+1- oth: force de caractère (+)
+2- oth: plus (+)
+
+541- :: 1 **a** 1 **l'** 1 **inverse** , ceux des syndicats qui accepteraient d' entrer 2 **dans** 2 **la** 2 **logique** 2 **du** cnpf , la cfdt , la cgc et dans une moindre mesure la cftc , posent en préalable qu' une augmentation de la contribution , à parité entre les employeurs et les salariés , intervienne 3 **au** 3 **plus** 3 **vite** pour parer au 4 **plus** pressé . 
+MWEs:
+1- oth: à le inverse (+)
+2- oth: dans le logique de (+)
+3- oth: à plus vite (+)
+4- oth: plus (+)
+
+601- :: elle ajoute qu' il n' 1 **a** jamais 2 **été** 2 **question** 2 **d'** attribuer à la chaîne culturelle européenne des fréquences " réservées au secteur privé " et présente 3 **au** 3 **total** douze 4 **points** 4 **de** 4 **désaccord** avec cette décision du csa . 
+MWEs:
+1- oth: avoir (+)
+2- oth: être question de (+)
+3- oth: à total (+)
+4- oth: point de désaccord (+)
+
+713- :: après les 1 **points** 1 **de** 1 **vue** de m. jürgen mllemann , ministre allemand de l' économie , de m. dominique 2 **strauss** 2 **-** 2 **kahn** , 3 **ministre** français 4 **de** 4 **l'** 4 **industrie** 4 **et** 4 **du** 4 **commerce** 4 **extérieur** ( 5 **le** 5 **monde** du number juin ) , et de m. kozo watanabe , 6 **ministre** japonais 7 **du** 7 **commerce** 7 **international** 7 **et** 7 **de** 7 **l'** 7 **industrie** ( 8 **le** 8 **monde** du number juillet ) , nous publions l' opinion de m. michael heseltine , 9 **ministre** britannique 10 **du** 10 **commerce** 10 **et** 10 **de** 10 **l'** 10 **industrie** . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: strauss - kahn (+)
+3- oth: ministre (+)
+4- oth: de le industrie et du commerce extérieur (+)
+5- oth: le monde (+)
+6- oth: ministre (+)
+7- oth: de commerce international et de le industrie (+)
+8- oth: le monde (+)
+9- oth: ministre (+)
+10- oth: du commerce et de l' industrie (+)
+
+713- :: après les 1 **points** 1 **de** 1 **vue** de m. jürgen mllemann , ministre allemand de l' économie , de m. dominique 2 **strauss** 2 **-** 2 **kahn** , ministre français 4 **de** 4 **l'** 4 **industrie** 4 **et** 4 **du** 4 **commerce** 4 **extérieur** ( 5 **le** 5 **monde** du number juin ) , et de m. kozo watanabe , 6 **ministre** japonais 7 **du** 7 **commerce** 7 **international** 7 **et** 7 **de** 7 **l'** 7 **industrie** ( 8 **le** 8 **monde** du number juillet ) , nous publions l' opinion de m. michael heseltine , 9 **ministre** britannique 10 **du** 10 **commerce** 10 **et** 10 **de** 10 **l'** 10 **industrie** . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: strauss - kahn (+)
+3- oth: ministre (+)
+4- oth: de le industrie et du commerce extérieur (+)
+5- oth: le monde (+)
+6- oth: ministre (+)
+7- oth: de commerce international et de le industrie (+)
+8- oth: le monde (+)
+9- oth: ministre (+)
+10- oth: du commerce et de l' industrie (+)
+
+713- :: après les 1 **points** 1 **de** 1 **vue** de m. jürgen mllemann , ministre allemand de l' économie , de m. dominique 2 **strauss** 2 **-** 2 **kahn** , ministre français 4 **de** 4 **l'** 4 **industrie** 4 **et** 4 **du** 4 **commerce** 4 **extérieur** ( 5 **le** 5 **monde** du number juin ) , et de m. kozo watanabe , ministre japonais 7 **du** 7 **commerce** 7 **international** 7 **et** 7 **de** 7 **l'** 7 **industrie** ( 8 **le** 8 **monde** du number juillet ) , nous publions l' opinion de m. michael heseltine , 9 **ministre** britannique 10 **du** 10 **commerce** 10 **et** 10 **de** 10 **l'** 10 **industrie** . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: strauss - kahn (+)
+3- oth: ministre (+)
+4- oth: de le industrie et du commerce extérieur (+)
+5- oth: le monde (+)
+6- oth: ministre (+)
+7- oth: de commerce international et de le industrie (+)
+8- oth: le monde (+)
+9- oth: ministre (+)
+10- oth: du commerce et de l' industrie (+)
+
+841- :: les premiers résultats de l' 1 **offre** géante 2 **d'** 2 **échange** sur fonds d' etat , lancée le number juin sur number emprunts d' un montant de number milliards de francs , sont tombés : au number juillet , number milliards de francs de titres , en nominal , ont été apportés par les 3 **investisseurs** 3 **institutionnels** , sur number milliards de francs qui leur étaient offerts , soit un 4 **taux** 4 **d'** 4 **échange** de number % , assez inespéré pour les services du trésor , qui tablaient sur number % à number % . 
+MWEs:
+1- oth: offre (+)
+2- oth: de échange (+)
+3- oth: investisseur institutionnel (+)
+4- oth: taux de échange (+)
+
+1303- :: une telle perspective ne peut que contribuer à renforcer le mark à l' horizon de l' an number , et les marchés des changes le 1 **prennent** déjà 2 **en** 2 **compte** . 
+MWEs:
+1- oth: prendre (+)
+2- oth: en compte (+)
+
+1682- :: 1 **la** 1 **poste** y voit 2 **du** même 3 **coup** le moyen de se recentrer sur ses activités essentielles . 
+MWEs:
+1- oth: le poste (+)
+2- oth: du (+)
+3- oth: coup (+)
+
+1682- :: 1 **la** 1 **poste** y voit du même 3 **coup** le moyen de se recentrer sur ses activités essentielles . 
+MWEs:
+1- oth: le poste (+)
+2- oth: du (+)
+3- oth: coup (+)
+
+1714- :: on sera très 1 **loin** cependant 2 **d'** un retour à l' équilibre puisque les 3 **frais** 3 **financiers** sont évalués à number millions de francs par an . 
+MWEs:
+1- oth: loin (+)
+2- oth: de (+)
+3- oth: frais financier (+)
+
+1714- :: on sera très loin cependant 2 **d'** un retour à l' équilibre puisque les 3 **frais** 3 **financiers** sont évalués à number millions de francs par an . 
+MWEs:
+1- oth: loin (+)
+2- oth: de (+)
+3- oth: frais financier (+)
+
+1926- :: elle renaît en number 1 **sous** 1 **le** 1 **nom** 1 **de** 2 **verrerie** 2 **royale** 2 **de** 2 **saint** 2 **-** 2 **louis** et découvre , quatorze ans plus tard , le secret du " 3 **flint** glass " , 4 **c'** 4 **est** 4 **-** 4 **à** 4 **-** 4 **dire** du cristal anglais . 
+MWEs:
+1- oth: sous le nom de (+)
+2- oth: verrerie royal de saint - louis (+)
+3- oth: flint (+)
+4- oth: ce être - à - dire (+)
+
+2102- :: michel camdessus qui dirige le fmi 1 **est** 1 **bien** 1 **placé** pour savoir que la solidarité à l' échelle mondiale ne 2 **va** jamais 3 **de** 3 **soi** . 
+MWEs:
+1- oth: être bien placer (+)
+2- oth: aller (+)
+3- oth: de soi (+)
+
+2555- :: le 1 **département** américain 2 **du** 2 **trésor** a indiqué , lundi number juillet , que 3 **thomson** 3 **-** 3 **csf** avait renoncé à la reprise de la firme ltv . 
+MWEs:
+1- oth: département (+)
+2- oth: de trésor (+)
+3- oth: thomson - csf (+)
+
+2565- :: il expliquait alors que le 1 **département** américain 2 **de** 2 **la** 2 **défense** ne pourrait pas faire respecter les conditions préventives mises à l' éventuelle cession de ltv , 3 **à** 3 **savoir** l' instauration de 4 **droits** 4 **de** 4 **vote** spéciaux qui garantiraient l' accès aux seuls américains des 5 **secrets** 5 **technologiques** détenus par l' entreprise texane . 
+MWEs:
+1- oth: département (+)
+2- oth: de le défense (+)
+3- oth: à savoir (+)
+4- oth: droit de vote (+)
+5- oth: secret technologique (+)
+
+2652- :: le salaire est calculé , dans presque un cas sur deux , selon la méthode du 1 **gross** up , qui permet de fixer le 2 **salaire** 2 **brut** local 3 **à** 3 **partir** 3 **du** 4 **revenu** 4 **net** à préserver . 
+MWEs:
+1- oth: gross (+)
+2- oth: salaire brut (+)
+3- oth: à partir de (+)
+4- oth: revenu net (+)
+
+2710- :: ce toilettage 1 **va** 2 **d'** 2 **ailleurs** 3 **bon** 3 **train** depuis une dizaine d' années . 
+MWEs:
+1- oth: aller (+)
+2- oth: de ailleurs (+)
+3- oth: bon train (+)
+
+3181- :: or , dans l' entretien qu' il a accordé au 1 **figaro** , mercredi number juillet , m. ghosn annonce 2 **d'** 2 **emblée** l' inégalité de traitement des lecteurs des deux quotidiens : " nous voulons [ ... ] surtout 3 **ne** 3 **pas** casser le 4 **fonds** 4 **de** 4 **commerce** de 5 **la** 5 **cote** qui a de très nombreux lecteurs en province " , explique -t-il . 
+MWEs:
+1- oth: figaro (+)
+2- oth: de emblée (+)
+3- oth: ne pas (+)
+4- oth: fonds de commerce (+)
+5- oth: le cote (+)
+
+3675- :: " 1 **mille** sabords ! 
+MWEs:
+1- oth: mille (+)
+
+3740- :: une vraie 1 **success** story comme on les aime à eugene , oregon ( 2 **etats** 2 **-** 2 **unis** ) , où la société a son siège . 
+MWEs:
+1- oth: success (+)
+2- oth: etats - uni (+)
+
+3790- :: qui n' est plus celui des blousons américains des débuts , mais celui des tenues du voyage , " 1 **french** travel 2 **way** 2 **of** life " selon l' expression de serge bensimon , lequel reconnaît ne plus guigner les sorties de lycée . 
+MWEs:
+1- oth: french (+)
+2- oth: way of (+)
+
+3957- :: la suite est pourtant une " 1 **success** story " . 
+MWEs:
+1- oth: success (+)
+
+4087- :: on a vu aussi garçons et filles s' agiter 1 **en** 1 **cadence** au centre d' un léger cerceau de plastique - le 2 **hula** 2 **-** 2 **hoop** - qui s' imposait jusque dans les rédactions ( je me souviens de concours ... au 3 **monde** , dans les années number ) . 
+MWEs:
+1- oth: en cadence (+)
+2- oth: hula - hoop (+)
+3- oth: monde (+)
+
+4105- :: ... et nous demeurerons 1 **dans** 1 **le** 1 **domaine** 1 **du** pétrole avec une des acceptions de l' anglicisme 2 **off** shore , ou 3 **off** 3 **-** shore , très fréquemment usité pour désigner ou qualifier la prospection , le forage et l' exploitation de 4 **gisements** 4 **de** 4 **pétrole** situés " au large des côtes " , 5 **en** 5 **dehors** 5 **de** la terre ferme . 
+MWEs:
+1- oth: dans le domaine de (+)
+2- oth: off (+)
+3- oth: off - (+)
+4- oth: gisement de pétrole (+)
+5- oth: en dehors de (+)
+
+4261- :: 1 **aujourd'** 1 **hui** , c' est pour faire baisser les taux d' intérêt qu' on réclame une réévaluation du mark , qui ne serait autre qu' une dévaluation du franc 2 **par** 2 **rapport** 3 **non** 3 **seulement** 4 **au** mark , mais , inévitablement , 5 **vis** 5 **-** 5 **à** 5 **-** 5 **vis** 5 **de** toutes les autres monnaies . 
+MWEs:
+1- oth: aujourd' hui (+)
+2- oth: par rapport (+)
+3- oth: non seulement (+)
+4- oth: à (+)
+5- oth: vis - à - vis de (+)
+
+4271- :: ainsi la seule attente d' éventuelles dévaluations nouvelles , impliquées par les thèses que je combats , suffirait à augmenter de plusieurs points la 1 **prime** 1 **de** 1 **risque** qui actuellement majore encore d' environ un point nos 2 **taux** 2 **d'** 2 **intérêt** 3 **à** 3 **moyen** 3 **et** 3 **long** 3 **terme** 4 **par** 4 **rapport** 4 **aux** taux allemands , 5 **à** 5 **cause** précisément 6 **du** souvenir des dépréciations passées de notre monnaie . 
+MWEs:
+1- oth: prime de risque (+)
+2- oth: taux de intérêt (+)
+3- oth: à moyen et long terme (+)
+4- oth: par rapport à (+)
+5- oth: à cause (+)
+6- oth: de (+)
+
+4316- :: les ressources de la 1 **sécurité** 1 **sociale** seraient , à effectifs constants de salariés 2 **donnant** actuellement 3 **lieu** à 4 **cotisation** 4 **patronale** , réduites 5 **par** 5 **là** annuellement de number milliards environ . 
+MWEs:
+1- oth: sécurité social (+)
+2- oth: donner (+)
+3- oth: lieu (+)
+4- oth: cotisation patronal (+)
+5- oth: par là (+)
+
+4316- :: les ressources de la 1 **sécurité** 1 **sociale** seraient , à effectifs constants de salariés donnant actuellement 3 **lieu** à 4 **cotisation** 4 **patronale** , réduites 5 **par** 5 **là** annuellement de number milliards environ . 
+MWEs:
+1- oth: sécurité social (+)
+2- oth: donner (+)
+3- oth: lieu (+)
+4- oth: cotisation patronal (+)
+5- oth: par là (+)
+
+4433- :: en number , le théoricien américain irving fisher l' a décrit 1 **sous** 1 **le** 1 **nom** 1 **de** 2 **debt** deflation : pour 3 **faire** 3 **face** 3 **à** leurs obligations , les producteurs cherchent 4 **à** 4 **tout** 4 **prix** à liquider leurs stocks mais les acheteurs potentiels attendent de nouvelles baisses . 
+MWEs:
+1- oth: sous le nom de (+)
+2- oth: debt (+)
+3- oth: faire face à (+)
+4- oth: à tout prix (+)
+
+4447- :: 1 **aujourd'** 1 **hui** , banques et 2 **compagnies** 2 **d'** 2 **assurances** demandent l' aide de l' etat pour leurs créances immobilières irrécouvrables dont le pourcentage , entre number % et number % au 3 **moins** du total des crédits au secteur , atteint un niveau " japonais " . 
+MWEs:
+1- oth: aujourd' hui (+)
+2- oth: compagnie de assurance (+)
+3- oth: moins (+)
+
+4465- :: 1 **À** 1 **partir** 1 **du** moment où un nombre grandissant d' entreprises sont amenées à vendre à des prix procurant un 2 **cash** flow insuffisant , tout se passe 3 **comme** 3 **si** l' 4 **économie** 4 **de** 4 **marché** cessait d' avoir la maîtrise de ses propres affaires . 
+MWEs:
+1- oth: à partir de (+)
+2- oth: cash (+)
+3- oth: comme si (+)
+4- oth: économie de marché (+)
+
+4503- :: au 1 **printemps** , les motifs sont 2 **un** 2 **peu** différents : le patron , m. 3 **jean** 3 **-** 3 **jacques** delort , et le nouveau propriétaire , m. françois pinault , ne sont pas 4 **d'** 4 **accord** sur l' art et la manière de réduire l' endettement du groupe . 
+MWEs:
+1- oth: printemps (+)
+2- oth: un peu (+)
+3- oth: jean - jacques (+)
+4- oth: de accord (+)
+
+4573- :: le limogeage de m. delort , 1 **cinquante** 1 **-** 1 **sept** ans , au 2 **printemps** depuis number et qui fut le principal artisan de son redressement , résulte , selon un communiqué laconique du groupe pinault - printemps , " de divergences d' ordre stratégique portant sur le mode de gestion et sur l' analyse des différentes activités du groupe et de leurs perspectives " . 
+MWEs:
+1- oth: cinquante - sept (+)
+2- oth: printemps (+)
+
+4584- :: l' éviction de m. delort s' accompagne du départ du directoire de deux cadres issus eux aussi du 1 **printemps** : m. daniel arnaud ( finances ) et mme catherine barbaroux ( 2 **relations** 2 **humaines** ) . 
+MWEs:
+1- oth: printemps (+)
+2- oth: relation humain (+)
+
+4989- :: l' enterrement devrait 1 **avoir** 1 **lieu** samedi number décembre , jour du début du déménagement dans les locaux du 2 **figaro** du quotidien 3 **france** 3 **-** 3 **soir** , dont il fut le pdg de number à number . 
+MWEs:
+1- oth: avoir lieu (+)
+2- oth: figaro (+)
+3- oth: france - soir (+)
+
+4991- :: comme michel et philippe , les deux autres fils du patron du 1 **figaro** , il était entré dans son groupe de communication après des études à l' 2 **école** 2 **des** 2 **roches** . 
+MWEs:
+1- oth: figaro (+)
+2- oth: école de roches (+)
+
+5000- :: a la rédaction du 1 **figaro** , qui n' avait 2 **toujours** 2 **pas** annoncé ce décès le number décembre , on estime qu' il pourrait 3 **donner** 3 **lieu** à des décisions de m. robert hersant . 
+MWEs:
+1- oth: figaro (+)
+2- oth: toujours pas (+)
+3- oth: donner lieu (+)
+
+5017- :: mais cette vente s' inscrit aussi dans un plan d' économies nécessité par la baisse des 1 **ressources** 1 **publicitaires** et du 2 **chiffre** 2 **d'** 2 **affaires** ( 3 **le** 3 **monde** du number octobre ) , à quelques jours de la 4 **mise** 4 **en** 4 **place** opérationnelle du groupement d' intérêt économique ( gie ) qui coiffera en janvier la fabrication , la distribution et la commercialisation de 5 **l'** 5 **express** et du 6 **point** , sous l' autorité du pdg de ce dernier , m. bernard wouts . 
+MWEs:
+1- oth: ressource publicitaire (+)
+2- oth: chiffre de affaire (+)
+3- oth: le monde (+)
+4- oth: mise en place (+)
+5- oth: le express (+)
+6- oth: point (+)
+
+5269- :: le chancelier kohl ne téléphonera pas ce 1 **week** 1 **-** 1 **end** au 2 **premier** 2 **ministre** , john major , le 3 **ministre** allemand 4 **des** 4 **finances** , theo waigel , ne contactera pas son homologue , norman lamont . 
+MWEs:
+1- oth: week - end (+)
+2- oth: premier ministre (+)
+3- oth: ministre (+)
+4- oth: de finance (+)
+
+5475- :: dans les derniers jours de number , un accord 1 **à** plus 2 **long** 2 **terme** devait être signé entre la russie - devenue en novembre la seule héritière de la dette de l' ex- urss - et le 3 **club** 3 **de** 3 **paris** . 
+MWEs:
+1- oth: à (+)
+2- oth: long terme (+)
+3- oth: club de paris (+)
+
+5540- :: 1 **pour** 1 **leur** 1 **part** , les prix des produits manufacturés du 2 **secteur** 2 **privé** ont augmenté faiblement , au rythme annuel de 3 **number** 3 **,** 3 **number** % ou 4 **number** 4 **,** 4 **number** % , ce qui traduit un fort ralentissement 5 **par** 5 **rapport** 5 **à** number ( + 6 **number** 6 **,** 6 **number** % ) , 7 **du** 7 **fait** notamment 8 **des** prix de l' habillement et du textile , qui ont baissé en novembre ( 9 **vente** 9 **par** 9 **correspondance** et nombreux rabais ) . 
+MWEs:
+1- oth: pour leur part (+)
+2- oth: secteur privé (+)
+3- oth: number , number (+)
+4- oth: number , number (+)
+5- oth: par rapport à (+)
+6- oth: number , number (+)
+7- oth: de fait (+)
+8- oth: de (+)
+9- oth: vente par correspondance (+)
+
+5555- :: le 1 **ministre** français 2 **de** 2 **l'** 2 **agriculture** , 3 **jean** 3 **-** 3 **pierre** soisson , a estimé que ce compromis ( baisse de number % des exportations européennes subventionnées , réduction importante des surfaces européennes de colza , ouverture des marchés aux productions extérieures en franchise ) n' était pas compatible avec la réforme de la pac . 
+MWEs:
+1- oth: ministre (+)
+2- oth: de le agriculture (+)
+3- oth: jean - pierre (+)
+
+5591- :: en février , au 1 **creusot** , number 2 **hauts** 2 **fonctionnaires** , dont tous les préfets de france et de navarre , étaient rassemblés 3 **en** 3 **vue** 3 **de** leur mobilisation sur le terrain . 
+MWEs:
+1- oth: creusot (+)
+2- oth: haut fonctionnaire (+)
+3- oth: en vue de (+)
+
+5618- :: l' italie a d' une certaine façon donné l' exemple de la rigueur en supprimant la " 1 **scala** mobile " 2 **c'** 2 **est** 2 **-** 2 **à** 2 **-** 2 **dire** l' indexation des salaires sur les prix . 
+MWEs:
+1- oth: scala (+)
+2- oth: ce être - à - dire (+)
+
+5621- :: 1 **a** 1 **l'** 1 **inverse** , aucun progrès évident n' a été enregistré en espagne où les salaires ( + number % ) continuent d' évoluer comme les prix ou même plus vite , leur hausse ayant été de 2 **number** 2 **,** 2 **number** % , 3 **sous** 3 **l'** 3 **effet** notamment 4 **des** " services " , insuffisamment productifs 5 **parce** 5 **que** peu exposés à la concurrence . 
+MWEs:
+1- oth: à le inverse (+)
+2- oth: number , number (+)
+3- oth: sous le effet (+)
+4- oth: de (+)
+5- oth: parce que (+)
+
+5627- :: la bundesbank justifie cette politique par les tensions inflationnistes qui restent fortes 1 **en** 1 **raison** notamment 2 **des** services , des loyers 3 **en** 3 **particulier** , les nombreux immigrés arrivant à l' ouest ne trouvant pas de logement . 
+MWEs:
+1- oth: en raison (+)
+2- oth: de (+)
+3- oth: en particulier (+)
+
+5702- :: et les effets de ces difficultés se sont fait sentir bien 1 **au** 1 **-** 1 **delà** 1 **des** 2 **douze** : l' ensemble des pays européens de l' ocde ont vu eux aussi leur croissance se ralentir et revenir 3 **en** 3 **moyenne** à + number % après + 4 **number** 4 **,** 4 **number** % en number . 
+MWEs:
+1- oth: à - delà de (+)
+2- oth: douze (+)
+3- oth: en moyenne (+)
+4- oth: number , number (+)
+
+5715- :: d' un 1 **point** 1 **de** 1 **vue** mondial , le tableau de l' année est très certainement plus noir qu' il n' a été dans la réalité , les statistiques ne 2 **prenant** pas 3 **en** 3 **compte** les pays d' asie et de la zone pacifique qui connaissent une croissance économique forte . 
+MWEs:
+1- oth: point de vue (+)
+2- oth: prendre (+)
+3- oth: en compte (+)
+
+5743- :: 1 **a** plus 2 **longue** 2 **échéance** , le pari de la désinflation compétitive est que l' 3 **appareil** 3 **industriel** français bénéficiera de l' évolution modeste de ses coûts et d' une certaine " montée en gamme " , à la façon allemande . 
+MWEs:
+1- oth: à (+)
+2- oth: long échéance (+)
+3- oth: appareil industriel (+)
+
+5800- :: 1 **en** 1 **revanche** , l' année aura été décevante pour la 2 **confédération** 2 **européenne** 2 **des** 2 **syndicats** ( ces ) , toujours incapable de faire 3 **prendre** 3 **en** 3 **compte** la dimension sociale de la 4 **construction** 4 **européenne** 5 **auprès** 5 **des** gouvernements des 6 **douze** . 
+MWEs:
+1- oth: en revanche (+)
+2- oth: confédération européen de syndicat (+)
+3- oth: prendre en compte (+)
+4- oth: construction européen (+)
+5- oth: auprès de (+)
+6- oth: douze (+)
+
+6015- :: 1 **au** 1 **sein** même 2 **du** 3 **parti** 3 **libéral** ( fdp ) auquel appartient m. mllemann , des voix se sont élevées pour demander la démission du ministre . 
+MWEs:
+1- oth: à sein (+)
+2- oth: de (+)
+3- oth: parti libéral (+)
+
+6022- :: - la hausse des 1 **prix** 1 **de** 1 **détail** a été limitée à 2 **number** 2 **,** 2 **number** % en number , a annoncé , lundi number décembre , le 3 **ministère** belge 4 **des** 4 **affaires** 4 **économiques** . 
+MWEs:
+1- oth: prix de détail (+)
+2- oth: number , number (+)
+3- oth: ministère (+)
+4- oth: de affaire économique (+)
+
+6120- :: 1 **dans** 1 **la** 1 **foulée** , une réunion impromptue des 2 **ministres** 2 **des** 2 **finances** des 3 **douze** - un " 4 **éco** 4 **-** 4 **fin** " - permet à chacun d' exprimer son soulagement . 
+MWEs:
+1- oth: dans le foulée (+)
+2- oth: ministre de finance (+)
+3- oth: douze (+)
+4- oth: éco - fin (+)
+
+6532- :: comme on le redoutait depuis plusieurs semaines ( 1 **le** 1 **monde** du number novembre ) , un consortium japonais mené par 2 **mitsubishi** 2 **corp.** et comprenant 3 **kinki** 3 **sharyo** 3 **co.** 3 **ltd.** et 4 **toshiba** 4 **corp.** va fournir le matériel roulant de la deuxième 5 **ligne** 5 **de** 5 **métro** du 6 **caire** , dont la partie fixe a été confiée , début novembre , à un groupe d' entreprises françaises menées par 7 **alcatel** 7 **alsthom** , selon des informations venues de tokyo et non encore confirmées à paris . 
+MWEs:
+1- oth: le monde (+)
+2- oth: mitsubishi corp. (+)
+3- oth: kinki sharyo co. ltd. (+)
+4- oth: toshiba corp. (+)
+5- oth: ligne de métro (+)
+6- oth: caire (+)
+7- oth: alcatel alsthom (+)
+
+6533- :: le consortium japonais a annoncé , mardi number décembre , qu' il allait fournir number voitures pour la 1 **société** 1 **nationale** 1 **des** 1 **tunnels** , qui gère le métro du 2 **caire** , et number autres pour le département des transports d' alexandrie . 
+MWEs:
+1- oth: société national de tunnel (+)
+2- oth: caire (+)
+
+6535- :: il ne s' agit pas du premier contrat remporté par des sociétés japonaises pour le métro du 1 **caire** . 
+MWEs:
+1- oth: caire (+)
+
+6650- :: des lieux , ensuite : londres est le premier 1 **marché** mondial 2 **des** 2 **changes** , avec 3 **près** 3 **de** number % du total des transactions , suivi par 4 **new** 4 **-** 4 **york** et tokyo , number % seulement des transactions s' effectuant à paris . 
+MWEs:
+1- oth: marché (+)
+2- oth: de change (+)
+3- oth: près de (+)
+4- oth: new - york (+)
+
+6860- :: 1 **d'** 1 **autre** 1 **part** , la commission a dénoncé , mercredi number décembre , trois sociétés étrangères - une néerlandaise et deux allemandes - qui exercent en france 2 **du** démarchage sur des 3 **produits** 3 **financiers** . 
+MWEs:
+1- oth: de autre part (+)
+2- oth: du (+)
+3- oth: produit financier (+)
+
+6973- :: " prudente , la juridiction fédérale précise " qu' elle ne 1 **met** pas forcément 2 **en** 2 **cause** l' affirmation de l' 3 **us** 3 **air** 3 **force** selon laquelle l' offre de zds est la meilleure possible . 
+MWEs:
+1- oth: mettre (+)
+2- oth: en cause (+)
+3- oth: us air force (+)
+
+6984- :: peu après minuit , en ce number janvier number , les deux douaniers en faction sur la 1 **plate** 1 **-** 1 **forme** française du tunnel alpin du 2 **fréjus** ont échangé leurs voeux avec l' agent de la 3 **police** 3 **de** 3 **l'** 3 **air** 3 **et** 3 **des** 3 **frontières** et ses deux collègues italiens , sans trop s' attarder sur l' incertitude du lendemain . 
+MWEs:
+1- oth: plat - forme (+)
+2- oth: fréjus (+)
+3- oth: police de le air et de frontière (+)
+
+6998- :: " 1 **au** 1 **pied** 1 **du** 2 **sapin** 2 **de** 2 **noël** , dans l' entrée des vastes locaux de l' autoport du 3 **freney** , une jeune employée , les yeux rougis et le regard vague , rit nerveusement en tirant sur sa cigarette . 
+MWEs:
+1- oth: à pied de (+)
+2- oth: sapin de noël (+)
+3- oth: freney (+)
+
+7010- :: depuis l' ouverture du tunnel routier du 1 **fréjus** en number , plus de 2 **number** 2 **number** 3 **poids** 3 **lourds** transitent chaque jour , dont la plupart accomplissaient 4 **sur** 4 **place** leurs opérations 5 **auprès** 5 **des** deux agences françaises et italiennes . 
+MWEs:
+1- oth: fréjus (+)
+2- oth: number number (+)
+3- oth: poids lourd (+)
+4- oth: sur place (+)
+5- oth: auprès de (+)
+
+7187- :: la publication de plusieurs indicateurs , notamment celle de l' indice de confiance des consommateurs américains , calculé chaque mois par le 1 **conference** 1 **board** , a 2 **remis** 3 **un** 3 **peu** 4 **de** 4 **baume** 4 **au** 4 **coeur** des investisseurs . 
+MWEs:
+1- oth: conference board (+)
+2- oth: remettre (+)
+3- oth: un peu (+)
+4- oth: de baume à coeur (+)
+
+7290- :: " le robusta est , 1 **peu** 1 **ou** 1 **prou** , payé à sa valeur , mais il n' en 2 **va** pas 3 **de** 3 **même** de l' arabica , estime sam mesrahi , 4 **directeur** 4 **général** de 5 **tardivat** 5 **international** . 
+MWEs:
+1- oth: peu ou prou (+)
+2- oth: aller (+)
+3- oth: de même (+)
+4- oth: directeur général (+)
+5- oth: tardivat international (+)
+
+7368- :: pourtant , ce 1 **plan** 1 **de** 1 **bataille** - déjà esquissé 2 **au** 2 **cours** 2 **des** dernières semaines par plusieurs dirigeants socialistes qui reprennent le slogan " 3 **au** secours , la droite revient " - sera plus difficile à 4 **mettre** 4 **en** 4 **oeuvre** en number . 
+MWEs:
+1- oth: plan de bataille (+)
+2- oth: à cours de (+)
+3- oth: à (+)
+4- oth: mettre en oeuvre (+)
+
+7718- :: 1 **peut** 1 **être** , si l'on considère le succès du nom masculin design - prononcé 2 **le** 2 **plus** 2 **souvent** " dezaïgn " ou " 3 **dizaï'** 3 **n** " - et employé comme réduction d' 4 **industrial** design . 
+MWEs:
+1- oth: pouvoir être (+)
+2- oth: le plus souvent (+)
+3- oth: dizaï' n (+)
+4- oth: industrial (+)
+
+7952- :: selon ce dernier modèle fonctionne le système dit des 1 **deficiency** payments ( paiements compensatoires ) appliqué de façon 2 **plus** 2 **ou** 2 **moins** " pure " par la 3 **grande** 3 **-** 3 **bretagne** 4 **jusqu'** 4 **à** son adhésion à la cee et , 5 **aujourd'** 5 **hui** encore , par les 6 **etats** 6 **-** 6 **unis** . 
+MWEs:
+1- oth: deficiency (+)
+2- oth: plus ou moins (+)
+3- oth: grand - bretagne (+)
+4- oth: jusque à (+)
+5- oth: aujourd' hui (+)
+6- oth: etats - uni (+)
+
+8341- :: les actionnaires ne déchanteront qu' en septembre 1 **lors** 1 **de** la publication des résultats semestriels : un tassement demeurait prévisible 2 **en** 2 **raison** notamment 3 **du** marasme du raffinage , mais de là à imaginer une division par deux des profits ! 
+MWEs:
+1- oth: lors de (+)
+2- oth: en raison (+)
+3- oth: de (+)
+
+8469- :: la sécurité des approvisionnements des 1 **douze** , hormis quelques rares métaux des régions australes ( le platine ) ne passe guère par l' afrique , et la surproduction mondiale , aggravée par les ventes 2 **à** 2 **tout** 2 **va** de l' ex- 3 **union** 3 **soviétique** , affaiblit encore cette affirmation . 
+MWEs:
+1- oth: douze (+)
+2- oth: à tout aller (+)
+3- oth: union soviétique (+)
+
+8591- :: 1 **etant** 1 **donné** ce que nous savons des pressions que subissent les 2 **banques** 2 **centrales** et de leurs modes de fonctionnement réels , il sera prudent que 3 **d'** 3 **ici** 3 **à** number ou number l' indépendance de la future bce 4 **fasse** encore 5 **l'** 5 **objet** de quelques sérieuses réflexions . 
+MWEs:
+1- oth: être donner (+)
+2- oth: banque central (+)
+3- oth: de ici à (+)
+4- oth: fasse (+)
+5- oth: le objet (+)
+
+8714- :: en italie , la suppression de la 1 **scala** mobile ( l' 2 **échelle** 2 **mobile** ) et la maîtrise du 3 **déficit** 3 **budgétaire** modèrent l' inflation . 
+MWEs:
+1- oth: scala (+)
+2- oth: échelle mobile (+)
+3- oth: déficit budgétaire (+)
+
+8726- :: qualifiée d' " avancée modeste " par michel giraud , le 1 **ministre** français 2 **du** 2 **travail** , la directive , qui devra encore être approuvée par le 3 **parlement** 3 **européen** , est très 4 **en** 4 **retrait** 5 **par** 5 **rapport** 5 **au** droit français , lequel fixe la durée hebdomadaire maximale du travail à 6 **trente** 6 **-** 6 **neuf** heures ( 7 **quarante** 7 **-** 7 **cinq** heures avec les 8 **heures** 8 **supplémentaires** , qui ne peuvent excéder 9 **deux** 9 **cent** 9 **quatre** 9 **-** 9 **vingts** heures par an ) . 
+MWEs:
+1- oth: ministre (+)
+2- oth: du travail (+)
+3- oth: parlement européen (+)
+4- oth: en retrait (+)
+5- oth: par rapport à (+)
+6- oth: trente - neuf (+)
+7- oth: quarante - cinq (+)
+8- oth: heure supplémentaire (+)
+9- oth: deux cent quatre - vingts (+)
+
+8928- :: si le groupe 1 **albert** 1 **frère** , dont le " 2 **trésor** 2 **de** 2 **guerre** " est évalué à number milliards de francs , 3 **fait** 4 **plus** 4 **que** 4 **jamais** 5 **partie** des candidats potentiels à une place de choix dans le " 6 **noyau** 6 **dur** " , le groupe 7 **sud** 7 **-** 7 **africain** transatlantic , holding qui partage avec l' uap le contrôle de l' assureur britannique 8 **sun** 8 **life** , pourrait être également 9 **sur** 9 **les** 9 **rangs** . 
+MWEs:
+1- oth: albert frère (+)
+2- oth: trésor de guerre (+)
+3- oth: faire (+)
+4- oth: plus que jamais (+)
+5- oth: partie (+)
+6- oth: noyau dur (+)
+7- oth: sud - africain (+)
+8- oth: sun life (+)
+9- oth: sur le rang (+)
+
+8928- :: si le groupe 1 **albert** 1 **frère** , dont le " 2 **trésor** 2 **de** 2 **guerre** " est évalué à number milliards de francs , fait 4 **plus** 4 **que** 4 **jamais** 5 **partie** des candidats potentiels à une place de choix dans le " 6 **noyau** 6 **dur** " , le groupe 7 **sud** 7 **-** 7 **africain** transatlantic , holding qui partage avec l' uap le contrôle de l' assureur britannique 8 **sun** 8 **life** , pourrait être également 9 **sur** 9 **les** 9 **rangs** . 
+MWEs:
+1- oth: albert frère (+)
+2- oth: trésor de guerre (+)
+3- oth: faire (+)
+4- oth: plus que jamais (+)
+5- oth: partie (+)
+6- oth: noyau dur (+)
+7- oth: sud - africain (+)
+8- oth: sun life (+)
+9- oth: sur le rang (+)
+
+8983- :: dès son arrivée au 1 **ministère** français 2 **des** 2 **transports** , bernard bosson s' était déclaré " déçu " par l' état du dossier 3 **tgv** 3 **-** 3 **est** en france qui " n' était absolument pas financé " . 
+MWEs:
+1- oth: ministère (+)
+2- oth: de transport (+)
+3- oth: tgv - est (+)
+
+9024- :: mais pour sortir de la récession , " le monde ne peut compter sur la seule croissance aux 1 **etats** 1 **-** 1 **unis** " , a indiqué , mercredi number juin à paris , le 2 **secrétaire** américain 3 **au** 3 **trésor** , lloyd bentsen , 4 **lors** 4 **de** la première journée de la réunion ministérielle annuelle de l' ocde . 
+MWEs:
+1- oth: etats - uni (+)
+2- oth: secrétaire (+)
+3- oth: à trésor (+)
+4- oth: lors de (+)
+
+9028- :: si le 1 **ministre** allemand 2 **de** 2 **l'** 2 **économie** , günter rexrodt , présent à la réunion de l' ocde , n' a pas répliqué aux critiques américaines , la réponse est venue , 3 **à** 3 **distance** , du président de la 4 **banque** 4 **centrale** allemande , helmut schlesinger . 
+MWEs:
+1- oth: ministre (+)
+2- oth: de l' économie (+)
+3- oth: à distance (+)
+4- oth: banque central (+)
+
+9031- :: la décision a été prise par les ambassadeurs des 1 **douze** , mercredi number juin à bruxelles , et doit être entérinée mardi prochain à luxembourg par les 2 **ministres** 2 **des** 2 **affaires** 2 **étrangères** de la cee , a -t-on précisé de même source . 
+MWEs:
+1- oth: douze (+)
+2- oth: ministre de affaire étranger (+)
+
+9133- :: or de telles performances paraissent 1 **loin** 1 **de** portée des 2 **douze** dans un futur proche : selon les prévisions à 3 **moyen** 3 **terme** sur l' activité européenne , la croissance devrait se situer 4 **aux** 4 **alentours** 4 **de** 5 **number** 5 **,** 5 **number** % l' an 6 **en** 6 **moyenne** 7 **jusqu'** 7 **à** la fin de la décennie . 
+MWEs:
+1- oth: loin de (+)
+2- oth: douze (+)
+3- oth: moyen terme (+)
+4- oth: à alentours de (+)
+5- oth: number , number (+)
+6- oth: en moyenne (+)
+7- oth: jusque à (+)
+
+9137- :: ainsi , brutalement , les décalages conjoncturels - 1 **à** 1 **certains** 1 **égards** salutaires puisqu' ils permettaient aux pays du continent les plus affectés par le ralentissement de leur 2 **demande** 2 **intérieure** de trouver chez leurs partenaires 3 **de** quoi maintenir une certaine croissance - ont disparu . 
+MWEs:
+1- oth: à certain égard (+)
+2- oth: demande intérieur (+)
+3- oth: de (+)
+
+9149- :: la communauté des 1 **douze** réalise 2 **aujourd'** 2 **hui** number % de son 3 **produit** 3 **intérieur** 3 **brut** 4 **grâce** 4 **aux** échanges de marchandises entre 5 **pays** 5 **membres** , chacun trouvant dans ses voisins européens ses premiers 6 **partenaires** 6 **commerciaux** . 
+MWEs:
+1- oth: douze (+)
+2- oth: aujourd' hui (+)
+3- oth: produit intérieur brut (+)
+4- oth: grâce à (+)
+5- oth: pays membre (+)
+6- oth: partenaire commercial (+)
+
+9162- :: les premiers 1 **en** 1 **vue** vraisemblablement 2 **de** reconstituer la valeur de leurs actifs , amputée par les dépréciations boursières et immobilières ; 3 **alors** 3 **que** les secondes tentent d' assurer leur pérennité en réduisant drastiquement leurs effectifs et leurs investissements . 
+MWEs:
+1- oth: en vue (+)
+2- oth: de (+)
+3- oth: alors que (+)
+
+9265- :: la " semaine de quatre jours " , à 1 **pouvoir** 1 **d'** 1 **achat** des actifs maintenu légèrement croissant , s' étendrait progressivement 2 **à** 2 **raison** , pour chaque salarié , 3 **de** deux semaines de ce type 4 **en** 4 **plus** chaque année . 
+MWEs:
+1- oth: pouvoir de achat (+)
+2- oth: à raison (+)
+3- oth: de (+)
+4- oth: en plus (+)
+
+9301- :: 1 **errare** 1 **humanum** est , 2 **perseverare** diabolicum ... 
+MWEs:
+1- oth: errare humanum (+)
+2- oth: perseverare (+)
+
+9507- :: 1 **le** 1 **temps** pour ce canot à moteur 2 **de** passer sans provoquer de remous devant une petite jetée . 
+MWEs:
+1- oth: le temps (+)
+2- oth: de (+)
+
+9516- :: pas question 1 **pour** 1 **autant** d' abandonner 2 **dans** 2 **l'** 2 **immédiat** ce site qui emploie une soixantaine de personnes et 3 **autour** duquel s' est aggloméré tout un village . 
+MWEs:
+1- oth: pour autant (+)
+2- oth: dans le immédiat (+)
+3- oth: autour (+)
+
+9668- :: - la relance de l' activité économique et la défense de l' emploi seront 1 **au** 1 **centre** 1 **des** conversations des 2 **chefs** 2 **d'** 2 **etat** et de gouvernement des 3 **douze** les number et number juin à copenhague . 
+MWEs:
+1- oth: à centre de (+)
+2- oth: chef de état (+)
+3- oth: douze (+)
+
+9724- :: a l' issue de la réunion des 1 **ministres** 1 **des** 1 **finances** des 2 **douze** , lundi number juin à luxembourg , theo waigel , 3 **ministre** allemand 4 **des** 4 **finances** , a déclaré que les discussions sur le sujet " avaient avancé dans notre direction " , 5 **c'** 5 **est** 5 **-** 5 **à** 5 **-** 5 **dire** 6 **en** 6 **faveur** 6 **de** francfort . 
+MWEs:
+1- oth: ministre de finance (+)
+2- oth: douze (+)
+3- oth: ministre (+)
+4- oth: de finances (+)
+5- oth: ce être - à - dire (+)
+6- oth: en faveur de (+)
+
+9724- :: a l' issue de la réunion des 1 **ministres** 1 **des** 1 **finances** des douze , lundi number juin à luxembourg , theo waigel , 3 **ministre** allemand 4 **des** 4 **finances** , a déclaré que les discussions sur le sujet " avaient avancé dans notre direction " , 5 **c'** 5 **est** 5 **-** 5 **à** 5 **-** 5 **dire** 6 **en** 6 **faveur** 6 **de** francfort . 
+MWEs:
+1- oth: ministre de finance (+)
+2- oth: douze (+)
+3- oth: ministre (+)
+4- oth: de finances (+)
+5- oth: ce être - à - dire (+)
+6- oth: en faveur de (+)
+
+9757- :: l' important est que la production effective des 1 **douze** n' excède pas la capacité d' absorption du marché . 
+MWEs:
+1- oth: douze (+)
+
+9895- :: le temps de l' utilisation 1 **à** grande échelle s' achève . 
+MWEs:
+1- oth: à (+)
+
+9967- :: 1 **peu** importe à quelle ligne on la trouve dans le 2 **bulletin** 2 **de** 2 **salaire** . 
+MWEs:
+1- oth: peu (+)
+2- oth: bulletin de salaire (+)
+
+10060- :: 1 **des** rivalités se nouent , notamment avec l' 2 **éducation** 2 **nationale** qui ne voit pas d' un oeil bienveillant l' apparition de ces 3 **nouveaux** 3 **venus** qui ont le 4 **ministère** 4 **du** 4 **travail** pour tutelle . 
+MWEs:
+1- oth: un (+)
+2- oth: éducation national (+)
+3- oth: nouveau venu (+)
+4- oth: ministère de travail (+)
+
+10067- :: dans les années number , la mode des " 1 **training** groups " importée des 2 **etats** 2 **-** 2 **unis** fait ses premiers pas 3 **sous** 3 **l'** 3 **égide** 3 **de** la sociopsychologie . 
+MWEs:
+1- oth: training (+)
+2- oth: etats - unis (+)
+3- oth: sous le égide de (+)
+
+10126- :: 1 **des** professeurs de harvard se voient , d' une certaine manière , impliqués dans les premiers cheminements des principales écoles européennes qui envoient même leurs professeurs suivre les programmes à harvard pour y apprendre les méthodes d' enseignement , y emprunter des idées surtout , mais aussi des matériaux , des schémas de cours 2 **jusqu'** 2 **au** design des 3 **salles** 3 **de** 3 **classe** ! 
+MWEs:
+1- oth: un (+)
+2- oth: jusque à (+)
+3- oth: salle de classe (+)
+
+10195- :: 1 **des** conférences et une table ronde permettront de faire le point sur l' évolution des pratiques et des recherches en ce domaine . 
+MWEs:
+1- oth: un (+)
+
+10368- :: 1 **là** encore , la réponse est la même que précédemment : " tout est dans notre comptabilité . 
+MWEs:
+1- oth: là (+)
+
+10522- :: 1 **au** final , personne n' est oublié ... ou presque ! 
+MWEs:
+1- oth: à (+)
+
+10608- :: les déclarations de mme nicole notat , 1 **secrétaire** 1 **générale** de la cfdt , au 2 **figaro** du number décembre , 3 **en** 3 **faveur** 3 **d'** une hausse de la 4 **contribution** 4 **sociale** généralisée ( csg ) et d' un allongement de la durée de cotisation 5 **au** 5 **-** 5 **delà** 5 **de** 6 **trente** 6 **-** 6 **sept** ans et demi pour les retraites de la " sécu " , montrent que les syndicats finiront 7 **peut** 7 **-** 7 **être** par se lasser de leur 8 **dédoublement** 8 **de** 8 **personnalité** . 
+MWEs:
+1- oth: secrétaire général (+)
+2- oth: figaro (+)
+3- oth: en faveur de (+)
+4- oth: contribution social (+)
+5- oth: à - delà de (+)
+6- oth: trente - sept (+)
+7- oth: pouvoir - être (+)
+8- oth: dédoublement de personnalité (+)
+
+10921- :: une question que se posent , au premier chef , le nouveau titulaire du portefeuille , m. françois loncle , et surtout le commissaire , m. 1 **jean** 1 **-** 1 **baptiste** 2 **de** 2 **foucauld** , l' un des 3 **hauts** 3 **fonctionnaires** les mieux placés dans la hiérarchie administrative , qui 4 **avait** , 5 **jusqu'** 5 **au** number décembre , 6 **les** 6 **coudées** 6 **franches** pour préparer le xi plan . 
+MWEs:
+1- oth: jean - baptiste (+)
+2- oth: de foucauld (+)
+3- oth: haut fonctionnaire (+)
+4- oth: avoir (+)
+5- oth: jusque à (+)
+6- oth: le coudée franc (+)
+
+11309- :: dans le capital d' icp , où le groupe centenaire blanzy est majoritaire , on trouve également les mutuelles du 1 **mans** , 2 **à** 2 **hauteur** 2 **de** number % . 
+MWEs:
+1- oth: mans (+)
+2- oth: à hauteur de (+)
+
+11317- :: 1 **quant** au danemark , son taux de chômage est passé de 2 **number** 2 **,** 2 **number** % à number % et de number % à 3 **number** 3 **,** 3 **number** % pour les 4 **moins** 4 **de** 5 **vingt** 5 **-** 5 **cinq** ans 6 **alors** 6 **que** , pour ces derniers , " la baisse a été importante " dans les autres 7 **etats** 7 **-** 7 **membres** . 
+MWEs:
+1- oth: quant (+)
+2- oth: number , number (+)
+3- oth: number , number (+)
+4- oth: moins de (+)
+5- oth: vingt - cinq (+)
+6- oth: alors que (+)
+7- oth: état - membre (+)
+
+11991- :: enfin , le 1 **ministre** tchécoslovaque 2 **de** 2 **l'** 2 **intérieur** , mr richard sacher , a confirmé la récente dissolution de la 3 **police** 3 **secrète** tchécoslovaque , la sécurité d' état ( stb ) , dans un communiqué publié mardi par ctk . 
+MWEs:
+1- oth: ministre (+)
+2- oth: de l' intérieur (+)
+3- oth: police secret (+)
+
+12246- :: les deux monarques lui procureront l' essentiel de ses contrats , au 1 **moins** tant que les caisses du royaume le permettront . 
+MWEs:
+1- oth: moins (+)
+
+12276- :: 1 **d'** 1 **abord** , la présence du 2 **plus** important abattoir des landes ; il est 3 **en** 3 **cours** 3 **de** rénovation et de modernisation , et sa capacité sera portée de 4 **number** 4 **number** à 5 **number** 5 **number** tonnes annuelles , le volume de ses déchets carnés augmentant 6 **en** 6 **conséquence** . 
+MWEs:
+1- oth: de abord (+)
+2- oth: plus (+)
+3- oth: en cours de (+)
+4- oth: number number (+)
+5- oth: number number (+)
+6- oth: en conséquence (+)
+
+12295- :: soit un délai supplémentaire d' au 1 **moins** six mois . 
+MWEs:
+1- oth: moins (+)
+
+12563- :: un autre article paru en juin dernier dans la même publication sur le thème : " the international gold standard and us monetary policy from world war to the 1 **new** deal " est venu opportunément élargir la perspective . 
+MWEs:
+1- oth: new (+)
+
+12597- :: 1 **au** 1 **sein** 1 **du** très influent comité fédéral de l' 2 **open** market ( fomc ) , les membres du board siègent avec cinq représentants des banques de réserve régionales . 
+MWEs:
+1- oth: à sein de (+)
+2- oth: open (+)
+
+12606- :: de cette dérive , la " cause la plus vraie " , pour reprendre l' admirable expression du 1 **plus** grand historien de l' antiquité , a été , 2 **sans** 2 **aucun** 2 **doute** , la 3 **guerre** 3 **de** 3 **number** 3 **-** 3 **number** . 
+MWEs:
+1- oth: plus (+)
+2- oth: sans aucun doute (+)
+3- oth: guerre de number - number (+)
+
+12963- :: la première bataille judiciaire a été gagnée par le patron du 1 **figaro** , mais mr seydoux poursuit son combat 2 **en** 2 **appel** . 
+MWEs:
+1- oth: figaro (+)
+2- oth: en appel (+)
+
+12995- :: 1 **ceux** 1 **-** 1 **ci** , des lycéens 2 **pour** 2 **la** 2 **plupart** , arboraient des drapeaux noirs frappés du sigle des anarchistes et scandaient notamment : " 3 **a** bas le capitalisme ! " , " nous ne voulons pas d' hausses des prix ! " , ou " la soupe ( populaire ) pour kuron " ( le ministre du travail ) , et encore " 4 **a** bas la nomenklatura ! " . 
+MWEs:
+1- oth: celui - ci (+)
+2- oth: pour le plupart (+)
+3- oth: à (+)
+4- oth: à (+)
+
+12995- :: 1 **ceux** 1 **-** 1 **ci** , des lycéens 2 **pour** 2 **la** 2 **plupart** , arboraient des drapeaux noirs frappés du sigle des anarchistes et scandaient notamment : " a bas le capitalisme ! " , " nous ne voulons pas d' hausses des prix ! " , ou " la soupe ( populaire ) pour kuron " ( le ministre du travail ) , et encore " 4 **a** bas la nomenklatura ! " . 
+MWEs:
+1- oth: celui - ci (+)
+2- oth: pour le plupart (+)
+3- oth: à (+)
+4- oth: à (+)
+
+13048- :: la fièvre indépendantiste s' y explique 1 **en** grande 2 **partie** par le fait que les lituaniens sont largement majoritaires ( number % ) dans leur république et qu' elle ne fait partie de l' urss , avec les deux autres républiques baltes , que 3 **depuis** 3 **peu** . 
+MWEs:
+1- oth: en (+)
+2- oth: partie (+)
+3- oth: depuis peu (+)
+
+13048- :: la fièvre indépendantiste s' y explique en grande 2 **partie** par le fait que les lituaniens sont largement majoritaires ( number % ) dans leur république et qu' elle ne fait partie de l' urss , avec les deux autres républiques baltes , que 3 **depuis** 3 **peu** . 
+MWEs:
+1- oth: en (+)
+2- oth: partie (+)
+3- oth: depuis peu (+)
+
+13138- :: cette opération , annoncée vendredi number janvier 1 **en** 1 **fin** 1 **d'** 2 **après** 2 **-** 2 **midi** , s' est déroulée au 3 **plus** haut niveau des deux sociétés , 4 **sous** 4 **la** 4 **houlette** 4 **du** gouvernement français , qui exprime sa satisfaction . 
+MWEs:
+1- oth: en fin de (+)
+2- oth: après - midi (+)
+3- oth: plus (+)
+4- oth: sous le houlette du (+)
+
+13163- :: mr pierre bérégovoy , ministre de l' économie , avait 1 **pris** 1 **au** 1 **mot** une déclaration de mr seydoux , président des chargeurs , au 2 **monde** , qui affirmait que , si on continuait à refuser des droits de trafic à uta , il ne lui resterait plus qu' à vendre cette compagnie sans avenir . 
+MWEs:
+1- oth: prendre à mot (+)
+2- oth: monde (+)
+
+13166- :: on ne saura que progressivement ce qui a amené le patron des 1 **chargeurs** à changer d' avis et à jeter l' éponge dans le 2 **transport** 2 **aérien** pour un prix qui ne semble pas mirobolant . 
+MWEs:
+1- oth: chargeurs (+)
+2- oth: transport aérien (+)
+
+13449- :: tout en démentant céder à la pression , le gouvernement a annoncé le number janvier 1 **au** beau 2 **milieu** 2 **des** 3 **arrêts** 3 **de** 3 **travail** , une augmentation générale des salaires de number % . 
+MWEs:
+1- oth: à (+)
+2- oth: milieu un (+)
+3- oth: arrêt de travail (+)
+
+13562- :: comment expliquer que le fantastique orchestre d' etat de l' urss vienne nous jouer salle pleyel deux symphonies et deux concertos du 1 **plus** célèbre 2 **fruit** 2 **sec** de l' école russe ? 
+MWEs:
+1- oth: plus (+)
+2- oth: fruit sec (+)
+
+13862- :: narcotique , la jument du champion olympique , appelée sans doute à succéder un jour à jappeloup , se trouve depuis la fin octobre au haras de la gisloterie , situé en plein coeur du 1 **calvados** , à 2 **sainte** 2 **-** 2 **marie** 2 **-** 2 **d'** 2 **elle** , pour y subir un transfert d' embryon . 
+MWEs:
+1- oth: calvados (+)
+2- oth: saint - marie - de elle (+)
+
+14205- :: et pas 1 **n'** 1 **importe** 1 **laquelle** , le bsl - la 2 **business** school de lausanne . 
+MWEs:
+1- oth: ne importer lequel (+)
+2- oth: business (+)
+
+14447- :: tout indique , d' un autre côté , que les risques de dérapage sont actuellement suffisamment graves en allemagne ( 1 **à** 1 **cause** , notamment , 2 **de** la démagogie du gouvernement kohl et des syndicats 3 **ouest** 3 **-** 3 **allemands** fraîchement installés à l' est ) 4 **pour** 4 **qu'** on laisse la bundesbank réagir 5 **pendant** 5 **qu'** il en est , 6 **peut** 6 **-** 6 **être** , encore temps . 
+MWEs:
+1- oth: à cause (+)
+2- oth: de (+)
+3- oth: ouest - allemand (+)
+4- oth: pour que (+)
+5- oth: pendant que (+)
+6- oth: pouvoir - être (+)
+
+14522- :: certes , le 1 **taux** 1 **de** 1 **chômage** est passé , en décembre , de 2 **number** 2 **,** 2 **number** % à 3 **number** 3 **,** 3 **number** % de la 4 **population** 4 **active** , au 5 **plus** haut depuis les 6 **number** 6 **,** 6 **number** % de janvier number . 
+MWEs:
+1- oth: taux de chômage (+)
+2- oth: number , number (+)
+3- oth: number , number (+)
+4- oth: population actif (+)
+5- oth: plus (+)
+6- oth: number , number (+)
+
+14526- :: 1 **en** 1 **tout** 1 **cas** , ils ne devraient pas inciter la réserve fédérale à abaisser 2 **à** 2 **nouveau** son 3 **taux** 3 **d'** 3 **escompte** , tout au 4 **moins** 5 **dans** 5 **l'** 5 **immédiat** , ce qui contribue à raffermir le 6 **billet** 6 **vert** , sans toutefois éliminer tous les facteurs négatifs qui le handicapent . 
+MWEs:
+1- oth: en tout cas (+)
+2- oth: à nouveau (+)
+3- oth: taux de escompte (+)
+4- oth: moins (+)
+5- oth: dans le immédiat (+)
+6- oth: billet vert (+)
+
+14527- :: parmi les facteurs figure , bien entendu , l' écart " historique " de 1 **number** 1 **,** 1 **number** % entre les taux courts américains ( 2 **number** 2 **,** 2 **number** % ) et allemands ( 3 **number** 3 **,** 3 **number** % ) qui , pourtant , n' est pas aussi ravageur que celui 4 **en** 4 **vigueur** en février number ( 5 **number** 5 **,** 5 **number** % ) , lorsque le dollar était tombé au 6 **plus** bas de 7 **number** 7 **,** 7 **number** deutschemark . 
+MWEs:
+1- oth: number , number (+)
+2- oth: number , number (+)
+3- oth: number , number (+)
+4- oth: en vigueur (+)
+5- oth: number , number (+)
+6- oth: plus (+)
+7- oth: number , number (+)
+
+14656- :: - les 1 **ministres** 1 **des** 1 **affaires** 1 **étrangères** des 2 **douze** ont décidé , vendredi number janvier à bruxelles , de lever leurs 3 **sanctions** 3 **économiques** contre le monténégro pour remercier cette république yougoslave de sa " contribution " aux efforts de paix de la cee . 
+MWEs:
+1- oth: ministre de affaire étranger (+)
+2- oth: douze (+)
+3- oth: sanction économique (+)
+
+14693- :: dans ce secteur qui consacre une grande part de son énergie à des activités militaires , l' etat est le chef d' orchestre , soit qu' il détienne tout ou partie du capital des groupes concernés , soit qu' il distribue la manne publique 1 **d'** où 2 **ceux** 2 **-** 2 **ci** tirent leurs forces sous son contrôle direct . 
+MWEs:
+1- oth: de (+)
+2- oth: celui - ci (+)
+
+14714- :: les allemands auraient préféré une déclaration des 1 **douze** plus allante , plus favorable au " papier - dunkel " . 
+MWEs:
+1- oth: douze (+)
+
+42- :: cette modification signifie que les 1 **avantages** 1 **fiscaux** accordés 2 **lors** 2 **d'** une donation ( l' abattement personnel de 3 **number** 3 **number** francs notamment ) pourront désormais jouer 4 **à** 4 **nouveau** pleinement pour une autre donation ou 5 **lors** 5 **d'** une succession si ces derniers actes sont conclus au 6 **moins** dix ans après les précédents . 
+MWEs:
+1- oth: avantage fiscal (+)
+2- oth: lors de (+)
+3- oth: number number (+)
+4- oth: à nouveau (+)
+5- oth: lors de (+)
+6- oth: moins (+)
+
+492- :: 1 **alors** 1 **que** , de number à number , le nombre d' inscrits a crû de 2 **number** 2 **number** 2 **number** - cet accroissement touchant les chômeurs et les salariés des petites entreprises , 3 **auprès** desquels les syndicats sont justement absents , - on a compté , en valeur absolue , 4 **number** 4 **number** suffrages exprimés de moins dans l' ensemble du collège salarié . 
+MWEs:
+1- oth: alors que (+)
+2- oth: number number number (+)
+3- oth: auprès (+)
+4- oth: number number (+)
+
+728- :: a 1 **printemps** , ils sont montés et testés dans les ateliers voisins du magasin et n' ont pratiquement qu' à traverser la rue . 
+MWEs:
+1- oth: printemps (+)
+
+758- :: 1 **dans** 1 **le** 1 **même** 1 **temps** , le gouvernement se tourne vers le 2 **fonds** 2 **monétaire** 2 **international** ( fmi ) , qui alloue un prêt de 3 **number** 3 **,** 3 **number** milliards de dollars sous forme de crédit 4 **stand** by . 
+MWEs:
+1- oth: dans le même temps (+)
+2- oth: fonds monétaire international (+)
+3- oth: number , number (+)
+4- oth: stand (+)
+
+1044- :: peu ou pas de mécanisation , des rendements faibles sauf pour le riz et les légumes , - une 1 **main** 1 **-** 1 **d'** 1 **oeuvre** âgée ( number % des agriculteurs ont 2 **plus** 2 **de** 3 **cinquante** 3 **-** 3 **quatre** ans ) et number % d' illettrés , des organisations professionnelles divisées , reflétant le clivage entre le nord du portugal , où domine la micropropriété , et le sud du pays avec les grands propriétaires de l' alentejo - où la superficie moyenne est de number hectares ) , enfin des conditions de sols et de climat peu favorables : tels sont les handicaps de l' agriculture portugaise au moment où elle doit affronter les premiers effets des réformes décidées par les 4 **ministres** 4 **de** 4 **l'** 4 **agriculture** des 5 **douze** . 
+MWEs:
+1- oth: main - de oeuvre (+)
+2- oth: plus de (+)
+3- oth: cinquante - quatre (+)
+4- oth: ministre de le agriculture (+)
+5- oth: douze (+)
+
+1238- :: - Édouard balladur : dans une déclaration au 1 **monde** , le 2 **premier** 2 **ministre** justifie les orientations de son programme d' austérité . 
+MWEs:
+1- oth: monde (+)
+2- oth: premier ministre (+)
+
+1820- :: l' expérience la plus récente a montré avec éclat que des 1 **investment** banks parmi les plus puissantes ont échoué en voulant faire le travail du négociant à sa place . 
+MWEs:
+1- oth: investment (+)
+
+1938- :: car le 1 **crédit** 1 **lyonnais** est le principal banquier français du groupe maxwell , en déconfiture , il fut celui de l' italien giancarlo parretti , maintenant en prison , et il reste actionnaire à number % d' une 2 **cinq** en 3 **dépôt** 3 **de** 3 **bilan** . 
+MWEs:
+1- oth: crédit lyonnais (+)
+2- oth: cinq (+)
+3- oth: dépôt de bilan (+)
+
+1021- :: les bonnes intentions de m. major , qui souhaite promouvoir une 1 **classless** society , une société qui offre l' 2 **égalité** 2 **des** 2 **chances** , se heurtent à la réalité d' un pays qui n' évolue que lentement , comme en témoignent les barrières entre " castes " sociales . 
+MWEs:
+1- oth: classless (+)
+2- oth: égalité de chance (+)
+
+1043- :: les chiffres sont éloquents : les 1 **trade** unions ont perdu 2 **number** 2 **,** 2 **number** millions d' adhérents depuis number , et , en number , le nombre de journées perdues 3 **à** 3 **la** 3 **suite** 3 **d'** 4 **arrêts** 4 **de** 4 **travail** a été le plus faible depuis un siècle . 
+MWEs:
+1- oth: trade (+)
+2- oth: number , number (+)
+3- oth: à le suite de (+)
+4- oth: arrêt de travail (+)
+
+1227- :: dans un entretien au 1 **monde** , m. rené teulade , ministre des 2 **affaires** 2 **sociales** , accuse l' opposition , qui s' apprêtait à déposer une 3 **motion** 3 **de** 3 **censure** , d' avoir fait " assaut de démagogie " . 
+MWEs:
+1- oth: monde (+)
+2- oth: affaire social (+)
+3- oth: motion de censure (+)
+
+FTB MWTs are cleaned!
+	Language : FR
+==================================================================================================
+	Training (Important) : 11502, Test : 2541
+	MWEs in tain : 5926, occurrences : 25644
+	Impotant words in tain : 4181
+	MWE length mean : 2.66
+	Seen MWEs : 3460 (85 %)
+	New MWEs : 581 (14 %)
+==================================================================================================
+	Compact Vocabulary cleaning:
+==================================================================================================
+	Before : 24201
+	After : 13320
+# Parameters = 6556200
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_7 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_8 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_7 (Embedding)         (None, 4, 480)       6393600     input_7[0][0]                    
+__________________________________________________________________________________________________
+embedding_8 (Embedding)         (None, 4, 42)        41202       input_8[0][0]                    
+__________________________________________________________________________________________________
+flatten_7 (Flatten)             (None, 1920)         0           embedding_7[0][0]                
+__________________________________________________________________________________________________
+flatten_8 (Flatten)             (None, 168)          0           embedding_8[0][0]                
+__________________________________________________________________________________________________
+concatenate_4 (Concatenate)     (None, 2088)         0           flatten_7[0][0]                  
+                                                                 flatten_8[0][0]                  
+__________________________________________________________________________________________________
+dense_7 (Dense)                 (None, 58)           121162      concatenate_4[0][0]              
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 58)           0           dense_7[0][0]                    
+__________________________________________________________________________________________________
+dense_8 (Dense)                 (None, 4)            236         dropout_4[0][0]                  
+==================================================================================================
+Total params: 6,556,200
+Trainable params: 6,556,200
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	data size before focused sampling = 1712280
+	data size after focused sampling = 1712280
+	data size before sampling = 1712280
+	data size after sampling = 2997476
+	4 Labels in train : Counter({0: 749369, 1: 749369, 2: 749369, 3: 749369})
+	4 Labels in valid : Counter({1: 75044, 3: 75001, 2: 74861, 0: 74842})
+	Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 2697728 samples, validate on 299748 samples
+Epoch 1/40
+ - 111s - loss: 0.1411 - acc: 0.9644 - val_loss: 0.1085 - val_acc: 0.9730
+Epoch 2/40
+ - 111s - loss: 0.1118 - acc: 0.9726 - val_loss: 0.1020 - val_acc: 0.9757
+Epoch 3/40
+ - 111s - loss: 0.1061 - acc: 0.9744 - val_loss: 0.1003 - val_acc: 0.9765
+
+==================================================================================================
+	Training time : 0:07:01.401425
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:48.290719
+==================================================================================================
+	Identification : 0.748
+	P, R  : 0.788, 0.712
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|

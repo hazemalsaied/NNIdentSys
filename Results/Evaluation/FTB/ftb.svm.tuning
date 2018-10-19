@@ -1,0 +1,39 @@
+Using Theano backend.
+        Mode: LINEAR
+==================================================================================================
+        Dataset: FTB
+==================================================================================================
+        Division: CORPUS
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, bigram, suffix, pos, numeric, syntax, trigram, distanceS0b0, b1, stackLength, s0TokensAreMWE, lemma, dictionary, s0TokenIsMWEToken, history1, history2, history3, token, syntaxAbstract, distanceS0s1, s0b2
+==================================================================================================
+# Configs: linear, ftb, corpus, False, False, False, 1, False, False, True, False, True, False, True, False, True, True, False, False, True, True, False, False, False, False, True, True, True, True
+==================================================================================================
+        Language : FR
+==================================================================================================
+        Training  : 15994, Test : 2541
+        MWEs in tain : 7053, occurrences : 25644
+        Impotant words in tain : 4629
+        MWE length mean : 2.66
+        Seen MWEs : 3131 (77 %)
+        New MWEs : 910 (22 %)
+==================================================================================================
+        Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0) Feature number = 2136327
+==================================================================================================
+
+==================================================================================================
+        Training time : 0:06:11.668829
+==================================================================================================
+
+==================================================================================================
+        Parsing time : 0:01:14.538218
+==================================================================================================
+        Identification : 0.858
+        P, R  : 0.761, 0.982
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
