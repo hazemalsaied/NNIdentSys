@@ -22,7 +22,7 @@ elle ajoute qu' il n' **a** jamais  **été**  **question**  **d'** attribuer à
 
 5	n'	ne	ADV	ADV	s=neg	8	mod	8	mod
 
-6	a	avoir	V	V	m=ind|mwehead=V|n=s|p=3|t=pst	8	dep	8	dep
+**6	a	avoir	V	V	m=ind|mwehead=V|n=s|p=3|t=pst	8	dep	8	dep**
 
 7	jamais	jamais	ADV	ADV	s=neg	8	mod	8	mod
 
@@ -43,46 +43,6 @@ elle ajoute qu' il n' **a** jamais  **été**  **question**  **d'** attribuer à
 3- oth: ou (+)
 
 ### Cupt
-
-1	Selon	selon	P	P	sentid=flmf7ag2ep-771	14	mod	14	mod
-
-2	le	le	D	DET	g=m|n=s|s=def	3	det	3	det
-
-3	projet	projet	N	NC	g=m|n=s|s=c	1	obj.p	1	obj.p
-
-4	,	,	PONCT	PONCT	s=w	14	ponct	14	ponct
-
-5	les	le	D	DET	g=m|n=p|s=def	6	det	6	det
-
-6	salariés	salarié	N	NC	g=m|n=p|s=c	14	suj	14	suj
-
-7	qui	qui	PRO	PROREL	g=m|n=p|p=3|s=rel	9	suj	9	suj
-
-8	sont	être	V	V	m=ind|n=p|p=3|t=pst	9	aux.pass	9	aux.pass
-
-9	mis	mettre	V	VPP	g=m|m=part|n=s|t=past	6	mod.rel	6	mod.rel
-
-10	en	en	P	P	_	9	mod	9	mod
-
-11	congé	congé	N	NC	g=m|mwehead=NC|n=s|s=c	10	obj.p	10	obj.p
-
-12	-	-	PONCT	PONCT	s=w|component=y	11	dep_cpd	11	dep_cpd
-
-13	maladie	maladie	N	NC	g=f|n=s|s=c|component=y	11	dep_cpd	11	dep_cpd
-
-14	seront	être	V	V	m=ind|n=p|p=3|t=fut	0	root	0	root
-
-15	ou	ou	C	CC	mwehead=CC|s=c	14	coord	14	coord
-
-16	bien	bien	ADV	ADV	component=y	15	dep_cpd	15	dep_cpd
-
-17	impayés	impayés	V	VPP	g=m|m=part|n=p|t=past	15	dep	15	dep
-
-18	le	le	D	DET	g=m|n=s|s=def	20	det	20	det
-
-19	premier	premier	A	ADJ	g=m|n=s|s=ord	20	mod	20	mod
-
-20	jour	jour	N	NC	g=m|n=s|s=c	17	mod	17	mod
 
 21	ou	ou	C	CC	mwehead=CC|s=c	14	coord	14	coord
 
