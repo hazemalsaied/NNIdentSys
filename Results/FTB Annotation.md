@@ -32,7 +32,7 @@ elle ajoute qu' il n' **a** jamais  **été**  **question**  **d'** attribuer à
 
 10	d'	de	P	P	component=y	8	dep_cpd	8	dep_cpd
 
-# Annotation bug dep_cpd without dep parent: line: 27260, word: bien DependencyParent: 24, head Position: 21
+# Token avec dep_cpd et un parent syntaxique deffirent de de la tête d'EP (46 cas)
 ## selon le projet , les salariés qui sont mis en **congé** **-** **maladie** seront **ou** **bien** impayés le premier jour **ou** bien ils devront le déduire de leurs vacances .
 ### MWEs
 
