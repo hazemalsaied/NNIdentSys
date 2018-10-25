@@ -1,5 +1,5 @@
 # MWT (160 cas)
-## elle ajoute qu' il n' 1 **a** jamais 2 **été** 2 **question** 2 **d'** attribuer à la chaîne culturelle européenne des fréquences " réservées au secteur privé " et présente 3 **au** 3 **total** douze 4 **points** 4 **de** 4 **désaccord** avec cette décision du csa .
+elle ajoute qu' il n' **a** jamais  **été**  **question**  **d'** attribuer à la chaîne culturelle européenne des fréquences " réservées au secteur privé " et présente 3 **au** **total** douze **points** **de** **désaccord** avec cette décision du csa .
 ### MWEs
 1- oth: avoir
 2- oth: être question de
@@ -19,7 +19,7 @@
 10	d'	de	P	P	component=y	8	dep_cpd	8	dep_cpd
 
 # Annotation bug dep_cpd without dep parent: line: 27260, word: bien DependencyParent: 24, head Position: 21
-## selon le projet , les salariés qui sont mis en 1 **congé** 1 **-** 1 **maladie** seront 2 **ou** 2 **bien** impayés le premier jour 3 **ou** bien ils devront le déduire de leurs vacances .
+## selon le projet , les salariés qui sont mis en **congé** **-** **maladie** seront **ou** **bien** impayés le premier jour **ou** bien ils devront le déduire de leurs vacances .
 ### MWEs
 1- oth: congé - maladie (+)
 2- oth: ou bien (+)
