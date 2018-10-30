@@ -1,0 +1,1695 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_IlBRwp.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10869/11441 Mb (0.950000) on cuda
+Mapped name None to device cuda: Tesla K40m (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, False, True, True, True, True, True, False, True, False, False, True, False, False, False, False, True, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1247810
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:19.551495
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:36.077030
+==================================================================================================
+	Identification : 0.781
+	P, R  : 0.746, 0.819
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, True, True, False, True, False, True, False, True, True, False, False, False, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 462142
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:55.253073
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.697227
+==================================================================================================
+	Identification : 0.777
+	P, R  : 0.747, 0.81
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, True, True, True, False, True, True, False, True, True, False, False, False, False, False, False, True, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 882432
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:29.347884
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.438498
+==================================================================================================
+	Identification : 0.783
+	P, R  : 0.749, 0.82
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, True, True, True, False, True, True, False, True, False, False, False, False, False, False, False, True, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 801750
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:27.193422
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:27.396586
+==================================================================================================
+	Identification : 0.779
+	P, R  : 0.748, 0.812
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, True, False, False, False, True, True, False, True, False, False, False, True, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 529244
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:05.686231
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.729109
+==================================================================================================
+	Identification : 0.778
+	P, R  : 0.749, 0.809
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, False, False, False, False, True, True, False, True, False, False, True, False, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 667544
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:20.405742
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:32.029229
+==================================================================================================
+	Identification : 0.779
+	P, R  : 0.744, 0.817
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, True, True, False, True, False, True, False, True, False, False, True, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 667543
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:18.737125
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.606132
+==================================================================================================
+	Identification : 0.771
+	P, R  : 0.74, 0.806
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, True, False, True, True, False, True, False, True, True, False, False, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 529241
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:08.735164
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:30.806010
+==================================================================================================
+	Identification : 0.779
+	P, R  : 0.748, 0.813
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, False, False, True, True, False, True, True, False, True, True, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 734659
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:20.921326
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:45.016928
+==================================================================================================
+	Identification : 0.778
+	P, R  : 0.75, 0.809
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, False, False, True, False, False, True, False, True, False, False, True, True, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 746924
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:22.458027
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:30.393046
+==================================================================================================
+	Identification : 0.761
+	P, R  : 0.697, 0.838
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, True, False, False, False, True, True, False, True, True, False, True, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 746950
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:21.753381
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:42.378715
+==================================================================================================
+	Identification : 0.776
+	P, R  : 0.745, 0.81
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, False, True, True, True, False, True, False, True, False, False, False, False, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 462159
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:08.249140
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:45.166015
+==================================================================================================
+	Identification : 0.785
+	P, R  : 0.755, 0.818
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, False, False, False, True, False, True, False, False, True, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 667548
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:05:18.998288
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:47.741414
+==================================================================================================
+	Identification : 0.773
+	P, R  : 0.717, 0.84
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, True, False, False, True, False, True, False, True, False, False, False, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 462156
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:56.275167
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:43.617710
+==================================================================================================
+	Identification : 0.783
+	P, R  : 0.753, 0.814
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, True, True, True, True, True, True, False, True, True, False, False, False, False, False, False, True, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 851842
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:51.245638
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:41.691494
+==================================================================================================
+	Identification : 0.781
+	P, R  : 0.75, 0.814
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, False, True, True, True, False, True, False, True, False, False, False, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 529256
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:12.240865
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:45.790428
+==================================================================================================
+	Identification : 0.784
+	P, R  : 0.753, 0.817
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, True, False, True, False, False, True, False, True, True, False, False, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 449845
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:45.971877
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.141819
+==================================================================================================
+	Identification : 0.776
+	P, R  : 0.746, 0.808
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, False, False, True, False, False, True, False, True, True, False, True, True, False, False, False, True, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1167120
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:54.485545
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:51.331264
+==================================================================================================
+	Identification : 0.768
+	P, R  : 0.699, 0.851
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, False, False, True, False, False, True, False, True, False, False, False, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 516939
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:05.085490
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:30.731683
+==================================================================================================
+	Identification : 0.783
+	P, R  : 0.743, 0.827
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, True, True, True, False, True, True, False, True, True, False, True, False, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 667567
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:46.215763
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:46.985285
+==================================================================================================
+	Identification : 0.78
+	P, R  : 0.75, 0.813
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, False, True, True, False, False, True, False, True, True, False, True, False, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 679843
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:49.582078
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:49.058105
+==================================================================================================
+	Identification : 0.781
+	P, R  : 0.734, 0.834
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, False, False, True, False, True, True, False, True, True, False, True, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 734645
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:38.555208
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:27.901731
+==================================================================================================
+	Identification : 0.779
+	P, R  : 0.745, 0.817
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, True, False, False, False, True, True, False, True, False, False, True, False, False, False, False, True, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1136503
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:02.158401
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.328822
+==================================================================================================
+	Identification : 0.777
+	P, R  : 0.744, 0.813
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, False, True, True, True, False, True, False, True, False, False, False, True, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 529257
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:21.160014
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:44.884236
+==================================================================================================
+	Identification : 0.783
+	P, R  : 0.755, 0.813
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, True, True, False, False, True, True, False, True, True, False, True, True, False, False, False, True, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1217203
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:56.764049
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:47.174386
+==================================================================================================
+	Identification : 0.78
+	P, R  : 0.75, 0.812
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, False, False, True, True, False, True, True, False, False, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 449870
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:25.280827
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:42.910739
+==================================================================================================
+	Identification : 0.784
+	P, R  : 0.756, 0.813
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, True, False, True, False, True, True, False, True, False, False, True, True, False, False, False, True, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1217190
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:07.593102
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.067739
+==================================================================================================
+	Identification : 0.774
+	P, R  : 0.744, 0.805
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, False, True, True, True, False, True, False, False, True, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 734666
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:37.738824
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:43.406838
+==================================================================================================
+	Identification : 0.778
+	P, R  : 0.748, 0.811
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, False, True, True, True, False, True, False, True, False, False, False, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 529241
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:13.432456
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:30.643808
+==================================================================================================
+	Identification : 0.781
+	P, R  : 0.749, 0.816
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, False, True, False, False, True, True, False, True, True, False, False, True, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 516952
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:47.916583
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:29.479271
+==================================================================================================
+	Identification : 0.775
+	P, R  : 0.747, 0.807
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, True, True, False, True, True, False, True, False, True, True, False, True, True, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 746949
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:23.646933
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:48.138851
+==================================================================================================
+	Identification : 0.777
+	P, R  : 0.747, 0.809
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, False, False, True, True, False, True, False, False, False, True, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 516967
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:24.287869
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:44.032488
+==================================================================================================
+	Identification : 0.784
+	P, R  : 0.756, 0.813
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, True, False, True, True, False, True, False, True, True, False, False, True, False, False, False, True, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 851812
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:34.919950
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:26.107769
+==================================================================================================
+	Identification : 0.776
+	P, R  : 0.745, 0.809
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, True, False, False, False, False, True, False, True, False, False, True, False, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 679824
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:39.377970
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:27.593628
+==================================================================================================
+	Identification : 0.782
+	P, R  : 0.74, 0.829
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, False, True, False, False, True, False, True, False, False, False, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 449858
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:14.980541
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:45.418705
+==================================================================================================
+	Identification : 0.784
+	P, R  : 0.729, 0.847
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, False, False, False, True, False, True, False, False, True, False, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 667547
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:06:08.593056
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:46.106615
+==================================================================================================
+	Identification : 0.785
+	P, R  : 0.743, 0.831
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, True, False, True, True, False, True, True, False, False, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 449874
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:30.120444
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:43.610151
+==================================================================================================
+	Identification : 0.783
+	P, R  : 0.756, 0.813
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, True, True, False, False, True, True, False, True, True, False, True, False, False, False, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 529247
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:22.191981
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.103067
+==================================================================================================
+	Identification : 0.782
+	P, R  : 0.75, 0.817
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, False, False, True, False, False, False, True, False, True, True, False, True, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 667533
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:40.678712
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:32.777869
+==================================================================================================
+	Identification : 0.767
+	P, R  : 0.707, 0.838
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, True, True, True, False, False, True, False, True, True, False, False, True, False, False, False, False, False
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 449862
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:14.728294
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:43.241047
+==================================================================================================
+	Identification : 0.787
+	P, R  : 0.758, 0.818
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, fixedSize, 1, False, False, False, False, False, False, True, True, False, True, True, False, True, True, False, True, False, False, False, False, False, False, False, False, True
+==================================================================================================
+	Language : FR
+==================================================================================================
+	Training  : 8979, Test : 1235
+	MWEs in tain : 4262, occurrences : 14976
+	Impotant words in tain : 3200
+	MWE length mean : 2.66
+	Seen MWEs : 1701 (80 %)
+	New MWEs : 415 (19 %)
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 516970
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:26.130874
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:41.954159
+==================================================================================================
+	Identification : 0.785
+	P, R  : 0.754, 0.818
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Traceback (most recent call last):
+  File "src/xpLinear.py", line 272, in <module>
+    
+  File "/home/halsaied/NNIdenSys/src/rsg.py", line 9, in runRSG
+    exps = getGrid(fileName)
+  File "/home/halsaied/NNIdenSys/src/rsg.py", line 33, in getGrid
+    return pickle.load(open(randomSearchGridPath, 'rb'))
+EOFError

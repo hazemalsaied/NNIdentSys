@@ -1,0 +1,2625 @@
+## OAR [2018-10-23 10:26:51] Job 1704837 KILLED ##
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_FJmLce.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10619/11178 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 1080 Ti (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp1wbq89 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpBCJQaR). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp2ImG5Y and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpEEav3_). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp2ImG5Y and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpEEav3_). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp3doMOA and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpHF9ncl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp3doMOA and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpHF9ncl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpCivAN6 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpLzhazU). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpCivAN6 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpMf_v4n). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpTkscOT and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpYveYsN). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp2ImG5Y and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpZR9370). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpIunj8Q and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpdxezSl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpIunj8Q and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpdxezSl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp4Zxnwn and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpibqG0b). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp9oNsf3 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpmiCAko). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpPJ2q6Q and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpq5aypJ). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp4Zxnwn and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpuv6CJZ). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpfZdhYO and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpvUZa76). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpfZdhYO and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpvUZa76). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpCivAN6 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpxnrP3C). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpQ_vj_O and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpySP0Y4). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+INFO (theano.gof.compilelock): Waiting for existing lock by process '5935' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '24784' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '13177' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '47080' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '24679' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '46801' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '24784' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '13177' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '33150' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '46801' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '33150' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '29395' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '47080' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by process '13177' (I am process '2084')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+	Mode: RNN
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, posDim, gru, optimizer, wordDim, denseDropout, focusedElements, batchSize, shuffle, s0TokenNum, epochs, earlyStopPatience, wordRnnUnitNum, denseUnitNum, lr, rnnSequence, useDense, rnnDropout, bTokenNum, posRnnUnitNum, earlyStop, s1TokenNum
+==================================================================================================
+# Configs: rnn, sharedtask2, fixedSize, True, True, True, True, False, 6, True, True, 94, True, adagrad, 446, 0, 7, 64, True, 4, 20, 7, 88, 147, 0.05, False, True, 0.2, 1, 195, True, 2
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 7, 446)       525388      input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 7, 94)        1786        input_2[0][0]                    
+__________________________________________________________________________________________________
+gru_1 (GRU)                     (None, 88)           141240      embedding_1[0][0]                
+__________________________________________________________________________________________________
+gru_2 (GRU)                     (None, 195)          169650      embedding_2[0][0]                
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 88)           0           gru_1[0][0]                      
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 195)          0           gru_2[0][0]                      
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 283)          0           dropout_1[0][0]                  
+                                                                 dropout_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 147)          41748       concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 147)          0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 4)            592         dropout_3[0][0]                  
+==================================================================================================
+Total params: 880,404
+Trainable params: 880,404
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 130s - loss: 32.2229 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+Epoch 2/20
+ - 120s - loss: 32.2314 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+Epoch 3/20
+ - 120s - loss: 32.2314 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+Epoch 4/20
+ - 120s - loss: 32.2314 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+Epoch 5/20
+ - 120s - loss: 32.2314 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+Epoch 6/20
+ - 120s - loss: 32.2314 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+Epoch 7/20
+ - 120s - loss: 32.2314 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+Epoch 8/20
+ - 120s - loss: 32.2314 - acc: 0.2796 - val_loss: 32.2797 - val_acc: 0.2779
+
+==================================================================================================
+	Training time : 0:21:21.376298
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:02:32.010950
+==================================================================================================
+	Identification : 0
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_4 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_3 (Embedding)         (None, 7, 446)       525388      input_3[0][0]                    
+__________________________________________________________________________________________________
+embedding_4 (Embedding)         (None, 7, 94)        1786        input_4[0][0]                    
+__________________________________________________________________________________________________
+gru_3 (GRU)                     (None, 88)           141240      embedding_3[0][0]                
+__________________________________________________________________________________________________
+gru_4 (GRU)                     (None, 195)          169650      embedding_4[0][0]                
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 88)           0           gru_3[0][0]                      
+__________________________________________________________________________________________________
+dropout_5 (Dropout)             (None, 195)          0           gru_4[0][0]                      
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 283)          0           dropout_4[0][0]                  
+                                                                 dropout_5[0][0]                  
+__________________________________________________________________________________________________
+dense_3 (Dense)                 (None, 147)          41748       concatenate_2[0][0]              
+__________________________________________________________________________________________________
+dropout_6 (Dropout)             (None, 147)          0           dense_3[0][0]                    
+__________________________________________________________________________________________________
+dense_4 (Dense)                 (None, 4)            592         dropout_6[0][0]                  
+==================================================================================================
+Total params: 880,404
+Trainable params: 880,404
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 120s - loss: 0.9200 - acc: 0.9619 - val_loss: 0.0887 - val_acc: 0.9865
+Epoch 2/20
+ - 120s - loss: 0.0844 - acc: 0.9874 - val_loss: 0.0856 - val_acc: 0.9875
+Epoch 3/20
+ - 120s - loss: 0.0807 - acc: 0.9880 - val_loss: 0.0840 - val_acc: 0.9875
+Epoch 4/20
+ - 121s - loss: 0.0790 - acc: 0.9883 - val_loss: 0.0848 - val_acc: 0.9876
+Epoch 5/20
+ - 121s - loss: 0.0779 - acc: 0.9885 - val_loss: 0.0833 - val_acc: 0.9879
+Epoch 6/20
+ - 121s - loss: 0.0768 - acc: 0.9887 - val_loss: 0.0833 - val_acc: 0.9881
+Epoch 7/20
+ - 121s - loss: 0.0763 - acc: 0.9888 - val_loss: 0.0832 - val_acc: 0.9881
+Epoch 8/20
+ - 125s - loss: 0.0758 - acc: 0.9889 - val_loss: 0.0890 - val_acc: 0.9873
+Epoch 9/20
+ - 112s - loss: 0.0755 - acc: 0.9890 - val_loss: 0.0835 - val_acc: 0.9881
+Epoch 10/20
+ - 112s - loss: 0.0751 - acc: 0.9891 - val_loss: 0.0842 - val_acc: 0.9881
+Epoch 11/20
+ - 112s - loss: 0.0748 - acc: 0.9891 - val_loss: 0.0838 - val_acc: 0.9881
+Epoch 12/20
+ - 112s - loss: 0.0745 - acc: 0.9892 - val_loss: 0.0846 - val_acc: 0.9881
+Epoch 13/20
+ - 112s - loss: 0.0743 - acc: 0.9892 - val_loss: 0.0851 - val_acc: 0.9874
+Epoch 14/20
+ - 117s - loss: 0.0742 - acc: 0.9893 - val_loss: 0.0837 - val_acc: 0.9881
+
+==================================================================================================
+	Training time : 0:30:35.005785
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:02:38.962188
+==================================================================================================
+	Identification : 0.503
+	P, R  : 0.581, 0.444
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_5 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_6 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_5 (Embedding)         (None, 7, 446)       505764      input_5[0][0]                    
+__________________________________________________________________________________________________
+embedding_6 (Embedding)         (None, 7, 94)        1786        input_6[0][0]                    
+__________________________________________________________________________________________________
+gru_5 (GRU)                     (None, 88)           141240      embedding_5[0][0]                
+__________________________________________________________________________________________________
+gru_6 (GRU)                     (None, 195)          169650      embedding_6[0][0]                
+__________________________________________________________________________________________________
+dropout_7 (Dropout)             (None, 88)           0           gru_5[0][0]                      
+__________________________________________________________________________________________________
+dropout_8 (Dropout)             (None, 195)          0           gru_6[0][0]                      
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 283)          0           dropout_7[0][0]                  
+                                                                 dropout_8[0][0]                  
+__________________________________________________________________________________________________
+dense_5 (Dense)                 (None, 147)          41748       concatenate_3[0][0]              
+__________________________________________________________________________________________________
+dropout_9 (Dropout)             (None, 147)          0           dense_5[0][0]                    
+__________________________________________________________________________________________________
+dense_6 (Dense)                 (None, 4)            592         dropout_9[0][0]                  
+==================================================================================================
+Total params: 860,780
+Trainable params: 860,780
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 87s - loss: 32.2376 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 2/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 3/20
+ - 90s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 4/20
+ - 88s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 5/20
+ - 88s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 6/20
+ - 94s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 7/20
+ - 94s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 8/20
+ - 94s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+
+==================================================================================================
+	Training time : 0:13:41.810048
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:07:32.007114
+==================================================================================================
+	Identification : 0
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_7 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_8 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_7 (Embedding)         (None, 7, 446)       505764      input_7[0][0]                    
+__________________________________________________________________________________________________
+embedding_8 (Embedding)         (None, 7, 94)        1786        input_8[0][0]                    
+__________________________________________________________________________________________________
+gru_7 (GRU)                     (None, 88)           141240      embedding_7[0][0]                
+__________________________________________________________________________________________________
+gru_8 (GRU)                     (None, 195)          169650      embedding_8[0][0]                
+__________________________________________________________________________________________________
+dropout_10 (Dropout)            (None, 88)           0           gru_7[0][0]                      
+__________________________________________________________________________________________________
+dropout_11 (Dropout)            (None, 195)          0           gru_8[0][0]                      
+__________________________________________________________________________________________________
+concatenate_4 (Concatenate)     (None, 283)          0           dropout_10[0][0]                 
+                                                                 dropout_11[0][0]                 
+__________________________________________________________________________________________________
+dense_7 (Dense)                 (None, 147)          41748       concatenate_4[0][0]              
+__________________________________________________________________________________________________
+dropout_12 (Dropout)            (None, 147)          0           dense_7[0][0]                    
+__________________________________________________________________________________________________
+dense_8 (Dense)                 (None, 4)            592         dropout_12[0][0]                 
+==================================================================================================
+Total params: 860,780
+Trainable params: 860,780
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 95s - loss: 32.2105 - acc: 0.2886 - val_loss: 32.3137 - val_acc: 0.2884
+Epoch 2/20
+ - 95s - loss: 32.2247 - acc: 0.2886 - val_loss: 32.3137 - val_acc: 0.2884
+Epoch 3/20
+ - 96s - loss: 32.2246 - acc: 0.2886 - val_loss: 32.3137 - val_acc: 0.2884
+Epoch 4/20
+ - 96s - loss: 32.2238 - acc: 0.2886 - val_loss: 32.3142 - val_acc: 0.2884
+Epoch 5/20
+ - 96s - loss: 32.2234 - acc: 0.2886 - val_loss: 32.3146 - val_acc: 0.2884
+Epoch 6/20
+ - 96s - loss: 32.2239 - acc: 0.2886 - val_loss: 32.3145 - val_acc: 0.2884
+Epoch 7/20
+ - 96s - loss: 32.2239 - acc: 0.2886 - val_loss: 32.3145 - val_acc: 0.2884
+Epoch 8/20
+ - 96s - loss: 8.4120 - acc: 0.7950 - val_loss: 0.1058 - val_acc: 0.9850
+Epoch 9/20
+ - 96s - loss: 0.0955 - acc: 0.9861 - val_loss: 0.0879 - val_acc: 0.9880
+Epoch 10/20
+ - 96s - loss: 0.0879 - acc: 0.9878 - val_loss: 0.0849 - val_acc: 0.9880
+Epoch 11/20
+ - 96s - loss: 0.0850 - acc: 0.9886 - val_loss: 0.0852 - val_acc: 0.9891
+Epoch 12/20
+ - 96s - loss: 0.0824 - acc: 0.9890 - val_loss: 0.0830 - val_acc: 0.9894
+Epoch 13/20
+ - 96s - loss: 0.0818 - acc: 0.9892 - val_loss: 0.0833 - val_acc: 0.9887
+Epoch 14/20
+ - 96s - loss: 0.0802 - acc: 0.9896 - val_loss: 0.0833 - val_acc: 0.9895
+Epoch 15/20
+ - 96s - loss: 0.0793 - acc: 0.9898 - val_loss: 0.0828 - val_acc: 0.9899
+Epoch 16/20
+ - 96s - loss: 0.0789 - acc: 0.9900 - val_loss: 0.0829 - val_acc: 0.9899
+Epoch 17/20
+ - 96s - loss: 0.0784 - acc: 0.9900 - val_loss: 0.0832 - val_acc: 0.9899
+Epoch 18/20
+ - 96s - loss: 0.0782 - acc: 0.9901 - val_loss: 0.0821 - val_acc: 0.9900
+Epoch 19/20
+ - 96s - loss: 0.0775 - acc: 0.9903 - val_loss: 0.0816 - val_acc: 0.9898
+Epoch 20/20
+ - 96s - loss: 0.0771 - acc: 0.9903 - val_loss: 0.0818 - val_acc: 0.9897
+
+==================================================================================================
+	Training time : 0:35:39.996288
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:04:09.498591
+==================================================================================================
+	Identification : 0.367
+	P, R  : 0.618, 0.261
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1798, occurrences : 4870
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_9 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_10 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_9 (Embedding)         (None, 7, 446)       536538      input_9[0][0]                    
+__________________________________________________________________________________________________
+embedding_10 (Embedding)        (None, 7, 94)        1316        input_10[0][0]                   
+__________________________________________________________________________________________________
+gru_9 (GRU)                     (None, 88)           141240      embedding_9[0][0]                
+__________________________________________________________________________________________________
+gru_10 (GRU)                    (None, 195)          169650      embedding_10[0][0]               
+__________________________________________________________________________________________________
+dropout_13 (Dropout)            (None, 88)           0           gru_9[0][0]                      
+__________________________________________________________________________________________________
+dropout_14 (Dropout)            (None, 195)          0           gru_10[0][0]                     
+__________________________________________________________________________________________________
+concatenate_5 (Concatenate)     (None, 283)          0           dropout_13[0][0]                 
+                                                                 dropout_14[0][0]                 
+__________________________________________________________________________________________________
+dense_9 (Dense)                 (None, 147)          41748       concatenate_5[0][0]              
+__________________________________________________________________________________________________
+dropout_15 (Dropout)            (None, 147)          0           dense_9[0][0]                    
+__________________________________________________________________________________________________
+dense_10 (Dense)                (None, 4)            592         dropout_15[0][0]                 
+==================================================================================================
+Total params: 891,084
+Trainable params: 891,084
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 245118
+	data size after sampling = 480496
+	data size before focused sampling = 480496
+	data size after focused sampling = 669474
+	Favorisation Coeff : 6
+Train on 602526 samples, validate on 66948 samples
+Epoch 1/20
+ - 157s - loss: 23.1159 - acc: 0.4693 - val_loss: 0.1073 - val_acc: 0.9803
+Epoch 2/20
+ - 159s - loss: 0.0950 - acc: 0.9836 - val_loss: 0.0920 - val_acc: 0.9852
+Epoch 3/20
+ - 159s - loss: 0.0865 - acc: 0.9859 - val_loss: 0.0894 - val_acc: 0.9853
+Epoch 4/20
+ - 159s - loss: 0.0835 - acc: 0.9867 - val_loss: 0.0878 - val_acc: 0.9863
+Epoch 5/20
+ - 167s - loss: 0.0818 - acc: 0.9871 - val_loss: 0.0887 - val_acc: 0.9861
+Epoch 6/20
+ - 173s - loss: 0.0806 - acc: 0.9873 - val_loss: 0.0862 - val_acc: 0.9868
+Epoch 7/20
+ - 174s - loss: 0.0799 - acc: 0.9875 - val_loss: 0.0857 - val_acc: 0.9868
+Epoch 8/20
+ - 174s - loss: 0.0791 - acc: 0.9877 - val_loss: 0.0852 - val_acc: 0.9867
+Epoch 9/20
+ - 174s - loss: 0.0786 - acc: 0.9878 - val_loss: 0.0854 - val_acc: 0.9871
+Epoch 10/20
+ - 174s - loss: 0.0781 - acc: 0.9880 - val_loss: 0.0852 - val_acc: 0.9870
+Epoch 11/20
+ - 174s - loss: 0.0777 - acc: 0.9880 - val_loss: 0.0853 - val_acc: 0.9869
+Epoch 12/20
+ - 160s - loss: 0.0773 - acc: 0.9881 - val_loss: 0.0853 - val_acc: 0.9872
+Epoch 13/20
+ - 159s - loss: 0.0770 - acc: 0.9882 - val_loss: 0.0844 - val_acc: 0.9872
+Epoch 14/20
+ - 159s - loss: 0.0767 - acc: 0.9883 - val_loss: 0.0852 - val_acc: 0.9872
+Epoch 15/20
+ - 159s - loss: 0.0765 - acc: 0.9883 - val_loss: 0.0849 - val_acc: 0.9873
+Epoch 16/20
+ - 159s - loss: 0.0762 - acc: 0.9884 - val_loss: 0.0853 - val_acc: 0.9873
+Epoch 17/20
+ - 160s - loss: 0.0760 - acc: 0.9884 - val_loss: 0.0853 - val_acc: 0.9873
+Epoch 18/20
+ - 160s - loss: 0.0758 - acc: 0.9885 - val_loss: 0.0853 - val_acc: 0.9873
+Epoch 19/20
+ - 159s - loss: 0.0757 - acc: 0.9885 - val_loss: 0.0851 - val_acc: 0.9872
+Epoch 20/20
+ - 160s - loss: 0.0757 - acc: 0.9885 - val_loss: 0.0849 - val_acc: 0.9874
+
+==================================================================================================
+	Training time : 1:00:45.790343
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:49.397799
+==================================================================================================
+	Identification : 0.473
+	P, R  : 0.594, 0.394
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1798, occurrences : 4870
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_11 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_12 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_11 (Embedding)        (None, 7, 446)       536538      input_11[0][0]                   
+__________________________________________________________________________________________________
+embedding_12 (Embedding)        (None, 7, 94)        1316        input_12[0][0]                   
+__________________________________________________________________________________________________
+gru_11 (GRU)                    (None, 88)           141240      embedding_11[0][0]               
+__________________________________________________________________________________________________
+gru_12 (GRU)                    (None, 195)          169650      embedding_12[0][0]               
+__________________________________________________________________________________________________
+dropout_16 (Dropout)            (None, 88)           0           gru_11[0][0]                     
+__________________________________________________________________________________________________
+dropout_17 (Dropout)            (None, 195)          0           gru_12[0][0]                     
+__________________________________________________________________________________________________
+concatenate_6 (Concatenate)     (None, 283)          0           dropout_16[0][0]                 
+                                                                 dropout_17[0][0]                 
+__________________________________________________________________________________________________
+dense_11 (Dense)                (None, 147)          41748       concatenate_6[0][0]              
+__________________________________________________________________________________________________
+dropout_18 (Dropout)            (None, 147)          0           dense_11[0][0]                   
+__________________________________________________________________________________________________
+dense_12 (Dense)                (None, 4)            592         dropout_18[0][0]                 
+==================================================================================================
+Total params: 891,084
+Trainable params: 891,084
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 245118
+	data size after sampling = 480496
+	data size before focused sampling = 480496
+	data size after focused sampling = 669474
+	Favorisation Coeff : 6
+Train on 602526 samples, validate on 66948 samples
+Epoch 1/20
+ - 158s - loss: 32.2551 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+Epoch 2/20
+ - 159s - loss: 32.2605 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+Epoch 3/20
+ - 159s - loss: 32.2605 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+Epoch 4/20
+ - 159s - loss: 32.2605 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+Epoch 5/20
+ - 159s - loss: 32.2605 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+Epoch 6/20
+ - 159s - loss: 32.2605 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+Epoch 7/20
+ - 160s - loss: 32.2605 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+Epoch 8/20
+ - 159s - loss: 32.2605 - acc: 0.2728 - val_loss: 32.0176 - val_acc: 0.2748
+
+==================================================================================================
+	Training time : 0:23:54.865785
+==================================================================================================
+Traceback (most recent call last):
+  File "src/xpRnn.py", line 88, in <module>
+    runRSG(pilotLangs, Dataset.sharedtask2, XpMode.rnn, Evaluation.fixedSize, 'rnn.p', xpNum=2, xpNumByThread=80)
+  File "/home/halsaied/NNIdenSys/src/rsg.py", line 18, in runRSG
+    xp(langs, dataset, xpMode, division, xpNum=xpNum)
+  File "/home/halsaied/NNIdenSys/src/xpTools.py", line 40, in xp
+    identify(lang)
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 26, in identify
+    parse(corpus.testingSents, network, vectorizer)
+  File "/home/halsaied/NNIdenSys/src/parser.py", line 20, in parse
+    linearVecs=linearVecs, mlpModels=mlpModels, mlpNormalizers=mlpNormalizers)
+  File "/home/halsaied/NNIdenSys/src/parser.py", line 37, in nextTrans
+    probVector = model.predict(t)
+  File "/home/halsaied/NNIdenSys/src/modelRnn.py", line 64, in predict
+    tokenIdxs, posIdxs = getIdxs(trans.configuration)
+  File "/home/halsaied/NNIdenSys/src/modelRnn.py", line 248, in getIdxs
+    for t in getTokens(config.stack[-1])[:rnnConf['s0TokenNum']]:
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    result.extend(getTokens(elem))
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1355, in getTokens
+    if str(elemlist.__class__).endswith('corpus.Token'):  # isinstance(elemlist, Token):
+RuntimeError: maximum recursion depth exceeded while getting the str of an object

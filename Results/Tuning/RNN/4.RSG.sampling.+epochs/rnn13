@@ -1,0 +1,3577 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_kja0tQ.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 3841/4043 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 980 (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp1wbq89 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpBCJQaR). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp2ImG5Y and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpEEav3_). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp2ImG5Y and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpEEav3_). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp65oLm2 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpGeVd_N). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp3doMOA and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpHF9ncl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp3doMOA and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpHF9ncl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpCivAN6 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpLzhazU). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpCivAN6 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpMf_v4n). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpTkscOT and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpYveYsN). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp2ImG5Y and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpZR9370). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpIunj8Q and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpdxezSl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpIunj8Q and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpdxezSl). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp4Zxnwn and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpibqG0b). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp9oNsf3 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpmiCAko). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpPJ2q6Q and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpq5aypJ). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmp4Zxnwn and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpuv6CJZ). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpfZdhYO and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpvUZa76). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpfZdhYO and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpvUZa76). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpCivAN6 and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpxnrP3C). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+WARNING (theano.gof.cmodule): The same cache key is associated to different modules (/home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpQ_vj_O and /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/tmpySP0Y4). This is not supposed to happen! You may need to manually delete your cache directory to fix this.
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '5935')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '5935')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/halsaied/.theano/compiledir_Linux-4.9--amd64-x86_64-with-debian-9.5--2.7.14-64/lock_dir
+	Mode: RNN
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, posDim, gru, optimizer, wordDim, denseDropout, focusedElements, batchSize, shuffle, s0TokenNum, epochs, earlyStopPatience, wordRnnUnitNum, denseUnitNum, lr, rnnSequence, useDense, rnnDropout, bTokenNum, posRnnUnitNum, earlyStop, s1TokenNum
+==================================================================================================
+# Configs: rnn, sharedtask2, fixedSize, True, True, True, True, False, 6, True, True, 49, True, adagrad, 252, 0, 7, 64, True, 4, 20, 7, 130, 111, 0.05, False, True, 0.2, 1, 131, True, 2
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 7, 252)       296856      input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 7, 49)        931         input_2[0][0]                    
+__________________________________________________________________________________________________
+gru_1 (GRU)                     (None, 130)          149370      embedding_1[0][0]                
+__________________________________________________________________________________________________
+gru_2 (GRU)                     (None, 131)          71133       embedding_2[0][0]                
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 130)          0           gru_1[0][0]                      
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 131)          0           gru_2[0][0]                      
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 261)          0           dropout_1[0][0]                  
+                                                                 dropout_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 111)          29082       concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 111)          0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 4)            448         dropout_3[0][0]                  
+==================================================================================================
+Total params: 547,820
+Trainable params: 547,820
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 111s - loss: 0.1828 - acc: 0.9724 - val_loss: 0.1051 - val_acc: 0.9806
+Epoch 2/20
+ - 111s - loss: 0.0902 - acc: 0.9857 - val_loss: 0.0952 - val_acc: 0.9874
+Epoch 3/20
+ - 111s - loss: 0.0850 - acc: 0.9871 - val_loss: 0.0819 - val_acc: 0.9882
+Epoch 4/20
+ - 111s - loss: 0.0822 - acc: 0.9877 - val_loss: 0.0808 - val_acc: 0.9882
+Epoch 5/20
+ - 111s - loss: 0.0803 - acc: 0.9881 - val_loss: 0.0806 - val_acc: 0.9884
+Epoch 6/20
+ - 111s - loss: 0.0792 - acc: 0.9882 - val_loss: 0.0794 - val_acc: 0.9885
+Epoch 7/20
+ - 111s - loss: 0.0784 - acc: 0.9885 - val_loss: 0.0797 - val_acc: 0.9887
+Epoch 8/20
+ - 111s - loss: 0.0780 - acc: 0.9886 - val_loss: 0.0793 - val_acc: 0.9887
+Epoch 9/20
+ - 111s - loss: 0.0772 - acc: 0.9887 - val_loss: 0.0807 - val_acc: 0.9877
+Epoch 10/20
+ - 111s - loss: 0.0768 - acc: 0.9887 - val_loss: 0.0785 - val_acc: 0.9888
+Epoch 11/20
+ - 111s - loss: 0.0764 - acc: 0.9888 - val_loss: 0.0797 - val_acc: 0.9888
+Epoch 12/20
+ - 111s - loss: 0.0763 - acc: 0.9889 - val_loss: 0.0788 - val_acc: 0.9888
+Epoch 13/20
+ - 111s - loss: 0.0761 - acc: 0.9889 - val_loss: 0.0793 - val_acc: 0.9887
+Epoch 14/20
+ - 111s - loss: 0.0758 - acc: 0.9890 - val_loss: 0.0783 - val_acc: 0.9887
+Epoch 15/20
+ - 112s - loss: 0.0755 - acc: 0.9890 - val_loss: 0.0790 - val_acc: 0.9891
+Epoch 16/20
+ - 112s - loss: 0.0752 - acc: 0.9890 - val_loss: 0.0796 - val_acc: 0.9890
+Epoch 17/20
+ - 112s - loss: 0.0752 - acc: 0.9891 - val_loss: 0.0793 - val_acc: 0.9887
+Epoch 18/20
+ - 112s - loss: 0.0750 - acc: 0.9891 - val_loss: 0.0792 - val_acc: 0.9890
+Epoch 19/20
+ - 112s - loss: 0.0750 - acc: 0.9891 - val_loss: 0.0798 - val_acc: 0.9889
+Epoch 20/20
+ - 112s - loss: 0.0748 - acc: 0.9891 - val_loss: 0.0794 - val_acc: 0.9888
+
+==================================================================================================
+	Training time : 0:41:58.270451
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:02:32.859055
+==================================================================================================
+	Identification : 0.495
+	P, R  : 0.575, 0.435
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_4 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_3 (Embedding)         (None, 7, 252)       296856      input_3[0][0]                    
+__________________________________________________________________________________________________
+embedding_4 (Embedding)         (None, 7, 49)        931         input_4[0][0]                    
+__________________________________________________________________________________________________
+gru_3 (GRU)                     (None, 130)          149370      embedding_3[0][0]                
+__________________________________________________________________________________________________
+gru_4 (GRU)                     (None, 131)          71133       embedding_4[0][0]                
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 130)          0           gru_3[0][0]                      
+__________________________________________________________________________________________________
+dropout_5 (Dropout)             (None, 131)          0           gru_4[0][0]                      
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 261)          0           dropout_4[0][0]                  
+                                                                 dropout_5[0][0]                  
+__________________________________________________________________________________________________
+dense_3 (Dense)                 (None, 111)          29082       concatenate_2[0][0]              
+__________________________________________________________________________________________________
+dropout_6 (Dropout)             (None, 111)          0           dense_3[0][0]                    
+__________________________________________________________________________________________________
+dense_4 (Dense)                 (None, 4)            448         dropout_6[0][0]                  
+==================================================================================================
+Total params: 547,820
+Trainable params: 547,820
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 111s - loss: 32.2270 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 2/20
+ - 112s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 3/20
+ - 112s - loss: 32.0573 - acc: 0.2822 - val_loss: 0.5180 - val_acc: 0.8676
+Epoch 4/20
+ - 112s - loss: 0.1138 - acc: 0.9804 - val_loss: 0.0887 - val_acc: 0.9860
+Epoch 5/20
+ - 112s - loss: 0.0857 - acc: 0.9868 - val_loss: 0.0850 - val_acc: 0.9872
+Epoch 6/20
+ - 112s - loss: 0.0817 - acc: 0.9877 - val_loss: 0.0852 - val_acc: 0.9873
+Epoch 7/20
+ - 112s - loss: 0.0797 - acc: 0.9881 - val_loss: 0.0855 - val_acc: 0.9863
+Epoch 8/20
+ - 112s - loss: 0.0784 - acc: 0.9884 - val_loss: 0.0846 - val_acc: 0.9874
+Epoch 9/20
+ - 112s - loss: 0.0777 - acc: 0.9885 - val_loss: 0.0839 - val_acc: 0.9874
+Epoch 10/20
+ - 112s - loss: 0.0772 - acc: 0.9886 - val_loss: 0.0839 - val_acc: 0.9877
+Epoch 11/20
+ - 112s - loss: 0.0764 - acc: 0.9887 - val_loss: 0.0838 - val_acc: 0.9874
+Epoch 12/20
+ - 112s - loss: 0.0760 - acc: 0.9887 - val_loss: 0.0839 - val_acc: 0.9877
+Epoch 13/20
+ - 112s - loss: 0.0756 - acc: 0.9888 - val_loss: 0.0846 - val_acc: 0.9876
+Epoch 14/20
+ - 112s - loss: 0.0755 - acc: 0.9889 - val_loss: 0.0841 - val_acc: 0.9877
+Epoch 15/20
+ - 112s - loss: 0.0753 - acc: 0.9889 - val_loss: 0.0846 - val_acc: 0.9878
+Epoch 16/20
+ - 112s - loss: 0.0751 - acc: 0.9889 - val_loss: 0.0848 - val_acc: 0.9877
+Epoch 17/20
+ - 112s - loss: 0.0748 - acc: 0.9889 - val_loss: 0.0841 - val_acc: 0.9872
+Epoch 18/20
+ - 112s - loss: 0.0746 - acc: 0.9890 - val_loss: 0.0841 - val_acc: 0.9876
+
+==================================================================================================
+	Training time : 0:37:29.401540
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:02:37.911446
+==================================================================================================
+	Identification : 0.49
+	P, R  : 0.584, 0.422
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_5 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_6 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_5 (Embedding)         (None, 7, 252)       285768      input_5[0][0]                    
+__________________________________________________________________________________________________
+embedding_6 (Embedding)         (None, 7, 49)        931         input_6[0][0]                    
+__________________________________________________________________________________________________
+gru_5 (GRU)                     (None, 130)          149370      embedding_5[0][0]                
+__________________________________________________________________________________________________
+gru_6 (GRU)                     (None, 131)          71133       embedding_6[0][0]                
+__________________________________________________________________________________________________
+dropout_7 (Dropout)             (None, 130)          0           gru_5[0][0]                      
+__________________________________________________________________________________________________
+dropout_8 (Dropout)             (None, 131)          0           gru_6[0][0]                      
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 261)          0           dropout_7[0][0]                  
+                                                                 dropout_8[0][0]                  
+__________________________________________________________________________________________________
+dense_5 (Dense)                 (None, 111)          29082       concatenate_3[0][0]              
+__________________________________________________________________________________________________
+dropout_9 (Dropout)             (None, 111)          0           dense_5[0][0]                    
+__________________________________________________________________________________________________
+dense_6 (Dense)                 (None, 4)            448         dropout_9[0][0]                  
+==================================================================================================
+Total params: 536,732
+Trainable params: 536,732
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 87s - loss: 32.2335 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 2/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 3/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 4/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 5/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 6/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 7/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+Epoch 8/20
+ - 87s - loss: 32.2492 - acc: 0.2676 - val_loss: 32.1191 - val_acc: 0.2699
+
+==================================================================================================
+	Training time : 0:13:14.007401
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:07:02.838005
+==================================================================================================
+	Identification : 0
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_7 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_8 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_7 (Embedding)         (None, 7, 252)       285768      input_7[0][0]                    
+__________________________________________________________________________________________________
+embedding_8 (Embedding)         (None, 7, 49)        931         input_8[0][0]                    
+__________________________________________________________________________________________________
+gru_7 (GRU)                     (None, 130)          149370      embedding_7[0][0]                
+__________________________________________________________________________________________________
+gru_8 (GRU)                     (None, 131)          71133       embedding_8[0][0]                
+__________________________________________________________________________________________________
+dropout_10 (Dropout)            (None, 130)          0           gru_7[0][0]                      
+__________________________________________________________________________________________________
+dropout_11 (Dropout)            (None, 131)          0           gru_8[0][0]                      
+__________________________________________________________________________________________________
+concatenate_4 (Concatenate)     (None, 261)          0           dropout_10[0][0]                 
+                                                                 dropout_11[0][0]                 
+__________________________________________________________________________________________________
+dense_7 (Dense)                 (None, 111)          29082       concatenate_4[0][0]              
+__________________________________________________________________________________________________
+dropout_12 (Dropout)            (None, 111)          0           dense_7[0][0]                    
+__________________________________________________________________________________________________
+dense_8 (Dense)                 (None, 4)            448         dropout_12[0][0]                 
+==================================================================================================
+Total params: 536,732
+Trainable params: 536,732
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 88s - loss: 32.2267 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+Epoch 2/20
+ - 88s - loss: 32.2422 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+Epoch 3/20
+ - 88s - loss: 32.2422 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+Epoch 4/20
+ - 88s - loss: 32.2422 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+Epoch 5/20
+ - 88s - loss: 32.2422 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+Epoch 6/20
+ - 88s - loss: 32.2422 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+Epoch 7/20
+ - 88s - loss: 32.2422 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+Epoch 8/20
+ - 88s - loss: 32.2422 - acc: 0.2677 - val_loss: 32.1824 - val_acc: 0.2692
+
+==================================================================================================
+	Training time : 0:13:22.178370
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:07:04.669587
+==================================================================================================
+	Identification : 0
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1798, occurrences : 4870
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_9 (InputLayer)            (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_10 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_9 (Embedding)         (None, 7, 252)       303156      input_9[0][0]                    
+__________________________________________________________________________________________________
+embedding_10 (Embedding)        (None, 7, 49)        686         input_10[0][0]                   
+__________________________________________________________________________________________________
+gru_9 (GRU)                     (None, 130)          149370      embedding_9[0][0]                
+__________________________________________________________________________________________________
+gru_10 (GRU)                    (None, 131)          71133       embedding_10[0][0]               
+__________________________________________________________________________________________________
+dropout_13 (Dropout)            (None, 130)          0           gru_9[0][0]                      
+__________________________________________________________________________________________________
+dropout_14 (Dropout)            (None, 131)          0           gru_10[0][0]                     
+__________________________________________________________________________________________________
+concatenate_5 (Concatenate)     (None, 261)          0           dropout_13[0][0]                 
+                                                                 dropout_14[0][0]                 
+__________________________________________________________________________________________________
+dense_9 (Dense)                 (None, 111)          29082       concatenate_5[0][0]              
+__________________________________________________________________________________________________
+dropout_15 (Dropout)            (None, 111)          0           dense_9[0][0]                    
+__________________________________________________________________________________________________
+dense_10 (Dense)                (None, 4)            448         dropout_15[0][0]                 
+==================================================================================================
+Total params: 553,875
+Trainable params: 553,875
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 245118
+	data size after sampling = 480496
+	data size before focused sampling = 480496
+	data size after focused sampling = 669474
+	Favorisation Coeff : 6
+Train on 602526 samples, validate on 66948 samples
+Epoch 1/20
+ - 146s - loss: 0.1236 - acc: 0.9773 - val_loss: 0.0922 - val_acc: 0.9851
+Epoch 2/20
+ - 146s - loss: 0.0887 - acc: 0.9852 - val_loss: 0.0897 - val_acc: 0.9847
+Epoch 3/20
+ - 147s - loss: 0.0854 - acc: 0.9860 - val_loss: 0.0878 - val_acc: 0.9858
+Epoch 4/20
+ - 147s - loss: 0.0836 - acc: 0.9866 - val_loss: 0.0875 - val_acc: 0.9860
+Epoch 5/20
+ - 147s - loss: 0.0822 - acc: 0.9869 - val_loss: 0.0866 - val_acc: 0.9862
+Epoch 6/20
+ - 147s - loss: 0.0813 - acc: 0.9871 - val_loss: 0.0857 - val_acc: 0.9867
+Epoch 7/20
+ - 147s - loss: 0.0803 - acc: 0.9874 - val_loss: 0.0855 - val_acc: 0.9868
+Epoch 8/20
+ - 147s - loss: 0.0797 - acc: 0.9876 - val_loss: 0.0858 - val_acc: 0.9869
+Epoch 9/20
+ - 147s - loss: 0.0790 - acc: 0.9877 - val_loss: 0.0850 - val_acc: 0.9869
+Epoch 10/20
+ - 147s - loss: 0.0785 - acc: 0.9878 - val_loss: 0.0852 - val_acc: 0.9871
+Epoch 11/20
+ - 147s - loss: 0.0781 - acc: 0.9880 - val_loss: 0.0840 - val_acc: 0.9875
+Epoch 12/20
+ - 147s - loss: 0.0776 - acc: 0.9881 - val_loss: 0.0855 - val_acc: 0.9872
+Epoch 13/20
+ - 147s - loss: 0.0774 - acc: 0.9881 - val_loss: 0.0845 - val_acc: 0.9874
+Epoch 14/20
+ - 147s - loss: 0.0770 - acc: 0.9882 - val_loss: 0.0843 - val_acc: 0.9873
+Epoch 15/20
+ - 147s - loss: 0.0768 - acc: 0.9882 - val_loss: 0.0844 - val_acc: 0.9872
+Epoch 16/20
+ - 147s - loss: 0.0765 - acc: 0.9883 - val_loss: 0.0840 - val_acc: 0.9875
+Epoch 17/20
+ - 147s - loss: 0.0764 - acc: 0.9884 - val_loss: 0.0844 - val_acc: 0.9875
+Epoch 18/20
+ - 147s - loss: 0.0763 - acc: 0.9884 - val_loss: 0.0843 - val_acc: 0.9876
+Epoch 19/20
+ - 147s - loss: 0.0760 - acc: 0.9884 - val_loss: 0.0842 - val_acc: 0.9876
+Epoch 20/20
+ - 147s - loss: 0.0759 - acc: 0.9885 - val_loss: 0.0844 - val_acc: 0.9875
+
+==================================================================================================
+	Training time : 0:54:32.510733
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:42.800367
+==================================================================================================
+	Identification : 0.481
+	P, R  : 0.625, 0.391
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1798, occurrences : 4870
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_11 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_12 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_11 (Embedding)        (None, 7, 252)       303156      input_11[0][0]                   
+__________________________________________________________________________________________________
+embedding_12 (Embedding)        (None, 7, 49)        686         input_12[0][0]                   
+__________________________________________________________________________________________________
+gru_11 (GRU)                    (None, 130)          149370      embedding_11[0][0]               
+__________________________________________________________________________________________________
+gru_12 (GRU)                    (None, 131)          71133       embedding_12[0][0]               
+__________________________________________________________________________________________________
+dropout_16 (Dropout)            (None, 130)          0           gru_11[0][0]                     
+__________________________________________________________________________________________________
+dropout_17 (Dropout)            (None, 131)          0           gru_12[0][0]                     
+__________________________________________________________________________________________________
+concatenate_6 (Concatenate)     (None, 261)          0           dropout_16[0][0]                 
+                                                                 dropout_17[0][0]                 
+__________________________________________________________________________________________________
+dense_11 (Dense)                (None, 111)          29082       concatenate_6[0][0]              
+__________________________________________________________________________________________________
+dropout_18 (Dropout)            (None, 111)          0           dense_11[0][0]                   
+__________________________________________________________________________________________________
+dense_12 (Dense)                (None, 4)            448         dropout_18[0][0]                 
+==================================================================================================
+Total params: 553,875
+Trainable params: 553,875
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 245118
+	data size after sampling = 480496
+	data size before focused sampling = 480496
+	data size after focused sampling = 669474
+	Favorisation Coeff : 6
+Train on 602526 samples, validate on 66948 samples
+Epoch 1/20
+ - 146s - loss: 0.1352 - acc: 0.9782 - val_loss: 0.0877 - val_acc: 0.9860
+Epoch 2/20
+ - 147s - loss: 0.0881 - acc: 0.9855 - val_loss: 0.0850 - val_acc: 0.9863
+Epoch 3/20
+ - 147s - loss: 0.0845 - acc: 0.9865 - val_loss: 0.0825 - val_acc: 0.9869
+Epoch 4/20
+ - 147s - loss: 0.0825 - acc: 0.9868 - val_loss: 0.0808 - val_acc: 0.9875
+Epoch 5/20
+ - 147s - loss: 0.0811 - acc: 0.9873 - val_loss: 0.0812 - val_acc: 0.9875
+Epoch 6/20
+ - 147s - loss: 0.0799 - acc: 0.9875 - val_loss: 0.0807 - val_acc: 0.9874
+Epoch 7/20
+ - 147s - loss: 0.0794 - acc: 0.9877 - val_loss: 0.0803 - val_acc: 0.9878
+Epoch 8/20
+ - 147s - loss: 0.0787 - acc: 0.9878 - val_loss: 0.0809 - val_acc: 0.9875
+Epoch 9/20
+ - 147s - loss: 0.0782 - acc: 0.9879 - val_loss: 0.0805 - val_acc: 0.9876
+Epoch 10/20
+ - 147s - loss: 0.0779 - acc: 0.9881 - val_loss: 0.0812 - val_acc: 0.9875
+Epoch 11/20
+ - 147s - loss: 0.0773 - acc: 0.9882 - val_loss: 0.0805 - val_acc: 0.9878
+Epoch 12/20
+ - 147s - loss: 0.0771 - acc: 0.9883 - val_loss: 0.0806 - val_acc: 0.9878
+Epoch 13/20
+ - 147s - loss: 0.0768 - acc: 0.9882 - val_loss: 0.0804 - val_acc: 0.9879
+Epoch 14/20
+ - 147s - loss: 0.0766 - acc: 0.9883 - val_loss: 0.0807 - val_acc: 0.9880
+
+==================================================================================================
+	Training time : 0:38:19.263969
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:43.105836
+==================================================================================================
+	Identification : 0.452
+	P, R  : 0.627, 0.353
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: RNN
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, posDim, gru, optimizer, wordDim, denseDropout, focusedElements, batchSize, shuffle, s0TokenNum, epochs, earlyStopPatience, wordRnnUnitNum, denseUnitNum, lr, rnnSequence, useDense, rnnDropout, bTokenNum, posRnnUnitNum, earlyStop, s1TokenNum
+==================================================================================================
+# Configs: rnn, sharedtask2, fixedSize, True, True, True, True, False, 6, True, True, 32, True, adagrad, 328, 0, 7, 64, True, 4, 20, 7, 86, 153, 0.05, False, True, 0.1, 1, 63, True, 2
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_13 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_14 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_13 (Embedding)        (None, 7, 328)       386384      input_13[0][0]                   
+__________________________________________________________________________________________________
+embedding_14 (Embedding)        (None, 7, 32)        608         input_14[0][0]                   
+__________________________________________________________________________________________________
+gru_13 (GRU)                    (None, 86)           107070      embedding_13[0][0]               
+__________________________________________________________________________________________________
+gru_14 (GRU)                    (None, 63)           18144       embedding_14[0][0]               
+__________________________________________________________________________________________________
+dropout_19 (Dropout)            (None, 86)           0           gru_13[0][0]                     
+__________________________________________________________________________________________________
+dropout_20 (Dropout)            (None, 63)           0           gru_14[0][0]                     
+__________________________________________________________________________________________________
+concatenate_7 (Concatenate)     (None, 149)          0           dropout_19[0][0]                 
+                                                                 dropout_20[0][0]                 
+__________________________________________________________________________________________________
+dense_13 (Dense)                (None, 153)          22950       concatenate_7[0][0]              
+__________________________________________________________________________________________________
+dropout_21 (Dropout)            (None, 153)          0           dense_13[0][0]                   
+__________________________________________________________________________________________________
+dense_14 (Dense)                (None, 4)            616         dropout_21[0][0]                 
+==================================================================================================
+Total params: 535,772
+Trainable params: 535,772
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 111s - loss: 0.1350 - acc: 0.9785 - val_loss: 0.0893 - val_acc: 0.9869
+Epoch 2/20
+ - 112s - loss: 0.0847 - acc: 0.9872 - val_loss: 0.0802 - val_acc: 0.9884
+Epoch 3/20
+ - 112s - loss: 0.0803 - acc: 0.9880 - val_loss: 0.0821 - val_acc: 0.9883
+Epoch 4/20
+ - 112s - loss: 0.0787 - acc: 0.9884 - val_loss: 0.0793 - val_acc: 0.9886
+Epoch 5/20
+ - 112s - loss: 0.0775 - acc: 0.9886 - val_loss: 0.0800 - val_acc: 0.9888
+Epoch 6/20
+ - 112s - loss: 0.0765 - acc: 0.9888 - val_loss: 0.0795 - val_acc: 0.9889
+Epoch 7/20
+ - 112s - loss: 0.0760 - acc: 0.9889 - val_loss: 0.0788 - val_acc: 0.9888
+Epoch 8/20
+ - 112s - loss: 0.0755 - acc: 0.9890 - val_loss: 0.0795 - val_acc: 0.9888
+Epoch 9/20
+ - 112s - loss: 0.0752 - acc: 0.9891 - val_loss: 0.0796 - val_acc: 0.9889
+Epoch 10/20
+ - 112s - loss: 0.0747 - acc: 0.9892 - val_loss: 0.0803 - val_acc: 0.9888
+Epoch 11/20
+ - 112s - loss: 0.0746 - acc: 0.9892 - val_loss: 0.0796 - val_acc: 0.9888
+Epoch 12/20
+ - 112s - loss: 0.0744 - acc: 0.9893 - val_loss: 0.0793 - val_acc: 0.9890
+Epoch 13/20
+ - 112s - loss: 0.0743 - acc: 0.9893 - val_loss: 0.0833 - val_acc: 0.9867
+Epoch 14/20
+ - 112s - loss: 0.0739 - acc: 0.9893 - val_loss: 0.0797 - val_acc: 0.9889
+
+==================================================================================================
+	Training time : 0:29:18.875788
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:02:31.978962
+==================================================================================================
+	Identification : 0.484
+	P, R  : 0.558, 0.427
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_15 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_16 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_15 (Embedding)        (None, 7, 328)       386384      input_15[0][0]                   
+__________________________________________________________________________________________________
+embedding_16 (Embedding)        (None, 7, 32)        608         input_16[0][0]                   
+__________________________________________________________________________________________________
+gru_15 (GRU)                    (None, 86)           107070      embedding_15[0][0]               
+__________________________________________________________________________________________________
+gru_16 (GRU)                    (None, 63)           18144       embedding_16[0][0]               
+__________________________________________________________________________________________________
+dropout_22 (Dropout)            (None, 86)           0           gru_15[0][0]                     
+__________________________________________________________________________________________________
+dropout_23 (Dropout)            (None, 63)           0           gru_16[0][0]                     
+__________________________________________________________________________________________________
+concatenate_8 (Concatenate)     (None, 149)          0           dropout_22[0][0]                 
+                                                                 dropout_23[0][0]                 
+__________________________________________________________________________________________________
+dense_15 (Dense)                (None, 153)          22950       concatenate_8[0][0]              
+__________________________________________________________________________________________________
+dropout_24 (Dropout)            (None, 153)          0           dense_15[0][0]                   
+__________________________________________________________________________________________________
+dense_16 (Dense)                (None, 4)            616         dropout_24[0][0]                 
+==================================================================================================
+Total params: 535,772
+Trainable params: 535,772
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 111s - loss: 0.1252 - acc: 0.9808 - val_loss: 0.0974 - val_acc: 0.9868
+Epoch 2/20
+ - 112s - loss: 0.0825 - acc: 0.9877 - val_loss: 0.0848 - val_acc: 0.9875
+Epoch 3/20
+ - 112s - loss: 0.0791 - acc: 0.9883 - val_loss: 0.0832 - val_acc: 0.9878
+Epoch 4/20
+ - 112s - loss: 0.0774 - acc: 0.9885 - val_loss: 0.0830 - val_acc: 0.9877
+Epoch 5/20
+ - 112s - loss: 0.0763 - acc: 0.9888 - val_loss: 0.0835 - val_acc: 0.9878
+Epoch 6/20
+ - 112s - loss: 0.0755 - acc: 0.9890 - val_loss: 0.0826 - val_acc: 0.9881
+Epoch 7/20
+ - 112s - loss: 0.0748 - acc: 0.9891 - val_loss: 0.0832 - val_acc: 0.9879
+Epoch 8/20
+ - 112s - loss: 0.0745 - acc: 0.9892 - val_loss: 0.0853 - val_acc: 0.9881
+Epoch 9/20
+ - 112s - loss: 0.0742 - acc: 0.9892 - val_loss: 0.0834 - val_acc: 0.9882
+Epoch 10/20
+ - 112s - loss: 0.0740 - acc: 0.9893 - val_loss: 0.0838 - val_acc: 0.9881
+Epoch 11/20
+ - 112s - loss: 0.0738 - acc: 0.9894 - val_loss: 0.0843 - val_acc: 0.9882
+Epoch 12/20
+ - 112s - loss: 0.0735 - acc: 0.9894 - val_loss: 0.0840 - val_acc: 0.9881
+Epoch 13/20
+ - 112s - loss: 0.0734 - acc: 0.9894 - val_loss: 0.0843 - val_acc: 0.9879
+
+==================================================================================================
+	Training time : 0:27:07.158484
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:02:36.162262
+==================================================================================================
+	Identification : 0.505
+	P, R  : 0.581, 0.447
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_17 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_18 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_17 (Embedding)        (None, 7, 328)       371952      input_17[0][0]                   
+__________________________________________________________________________________________________
+embedding_18 (Embedding)        (None, 7, 32)        608         input_18[0][0]                   
+__________________________________________________________________________________________________
+gru_17 (GRU)                    (None, 86)           107070      embedding_17[0][0]               
+__________________________________________________________________________________________________
+gru_18 (GRU)                    (None, 63)           18144       embedding_18[0][0]               
+__________________________________________________________________________________________________
+dropout_25 (Dropout)            (None, 86)           0           gru_17[0][0]                     
+__________________________________________________________________________________________________
+dropout_26 (Dropout)            (None, 63)           0           gru_18[0][0]                     
+__________________________________________________________________________________________________
+concatenate_9 (Concatenate)     (None, 149)          0           dropout_25[0][0]                 
+                                                                 dropout_26[0][0]                 
+__________________________________________________________________________________________________
+dense_17 (Dense)                (None, 153)          22950       concatenate_9[0][0]              
+__________________________________________________________________________________________________
+dropout_27 (Dropout)            (None, 153)          0           dense_17[0][0]                   
+__________________________________________________________________________________________________
+dense_18 (Dense)                (None, 4)            616         dropout_27[0][0]                 
+==================================================================================================
+Total params: 521,340
+Trainable params: 521,340
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 87s - loss: 0.1545 - acc: 0.9772 - val_loss: 0.0909 - val_acc: 0.9871
+Epoch 2/20
+ - 87s - loss: 0.0895 - acc: 0.9875 - val_loss: 0.0885 - val_acc: 0.9886
+Epoch 3/20
+ - 87s - loss: 0.0846 - acc: 0.9885 - val_loss: 0.0868 - val_acc: 0.9891
+Epoch 4/20
+ - 87s - loss: 0.0823 - acc: 0.9891 - val_loss: 0.0849 - val_acc: 0.9888
+Epoch 5/20
+ - 87s - loss: 0.0809 - acc: 0.9894 - val_loss: 0.0855 - val_acc: 0.9894
+Epoch 6/20
+ - 87s - loss: 0.0796 - acc: 0.9899 - val_loss: 0.0855 - val_acc: 0.9894
+Epoch 7/20
+ - 87s - loss: 0.0787 - acc: 0.9900 - val_loss: 0.0853 - val_acc: 0.9894
+Epoch 8/20
+ - 87s - loss: 0.0781 - acc: 0.9901 - val_loss: 0.0860 - val_acc: 0.9900
+Epoch 9/20
+ - 88s - loss: 0.0776 - acc: 0.9901 - val_loss: 0.0875 - val_acc: 0.9886
+Epoch 10/20
+ - 88s - loss: 0.0772 - acc: 0.9903 - val_loss: 0.0861 - val_acc: 0.9900
+Epoch 11/20
+ - 87s - loss: 0.0768 - acc: 0.9905 - val_loss: 0.0879 - val_acc: 0.9899
+
+==================================================================================================
+	Training time : 0:18:07.024635
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:03:57.397268
+==================================================================================================
+	Identification : 0.338
+	P, R  : 0.624, 0.231
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_19 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_20 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_19 (Embedding)        (None, 7, 328)       371952      input_19[0][0]                   
+__________________________________________________________________________________________________
+embedding_20 (Embedding)        (None, 7, 32)        608         input_20[0][0]                   
+__________________________________________________________________________________________________
+gru_19 (GRU)                    (None, 86)           107070      embedding_19[0][0]               
+__________________________________________________________________________________________________
+gru_20 (GRU)                    (None, 63)           18144       embedding_20[0][0]               
+__________________________________________________________________________________________________
+dropout_28 (Dropout)            (None, 86)           0           gru_19[0][0]                     
+__________________________________________________________________________________________________
+dropout_29 (Dropout)            (None, 63)           0           gru_20[0][0]                     
+__________________________________________________________________________________________________
+concatenate_10 (Concatenate)    (None, 149)          0           dropout_28[0][0]                 
+                                                                 dropout_29[0][0]                 
+__________________________________________________________________________________________________
+dense_19 (Dense)                (None, 153)          22950       concatenate_10[0][0]             
+__________________________________________________________________________________________________
+dropout_30 (Dropout)            (None, 153)          0           dense_19[0][0]                   
+__________________________________________________________________________________________________
+dense_20 (Dense)                (None, 4)            616         dropout_30[0][0]                 
+==================================================================================================
+Total params: 521,340
+Trainable params: 521,340
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 87s - loss: 0.1531 - acc: 0.9777 - val_loss: 0.0873 - val_acc: 0.9885
+Epoch 2/20
+ - 87s - loss: 0.0872 - acc: 0.9882 - val_loss: 0.0841 - val_acc: 0.9890
+Epoch 3/20
+ - 87s - loss: 0.0834 - acc: 0.9890 - val_loss: 0.0839 - val_acc: 0.9893
+Epoch 4/20
+ - 87s - loss: 0.0810 - acc: 0.9894 - val_loss: 0.0845 - val_acc: 0.9897
+Epoch 5/20
+ - 87s - loss: 0.0797 - acc: 0.9897 - val_loss: 0.0831 - val_acc: 0.9893
+Epoch 6/20
+ - 87s - loss: 0.0784 - acc: 0.9901 - val_loss: 0.0833 - val_acc: 0.9897
+Epoch 7/20
+ - 87s - loss: 0.0775 - acc: 0.9902 - val_loss: 0.0830 - val_acc: 0.9900
+Epoch 8/20
+ - 87s - loss: 0.0776 - acc: 0.9903 - val_loss: 0.0879 - val_acc: 0.9894
+Epoch 9/20
+ - 87s - loss: 0.0771 - acc: 0.9903 - val_loss: 0.0814 - val_acc: 0.9901
+Epoch 10/20
+ - 87s - loss: 0.0765 - acc: 0.9904 - val_loss: 0.0823 - val_acc: 0.9899
+Epoch 11/20
+ - 87s - loss: 0.0760 - acc: 0.9907 - val_loss: 0.0830 - val_acc: 0.9902
+Epoch 12/20
+ - 87s - loss: 0.0755 - acc: 0.9907 - val_loss: 0.0820 - val_acc: 0.9900
+Epoch 13/20
+ - 87s - loss: 0.0755 - acc: 0.9907 - val_loss: 0.0822 - val_acc: 0.9904
+Epoch 14/20
+ - 87s - loss: 0.0752 - acc: 0.9909 - val_loss: 0.0827 - val_acc: 0.9904
+Epoch 15/20
+ - 87s - loss: 0.0749 - acc: 0.9908 - val_loss: 0.0834 - val_acc: 0.9902
+Epoch 16/20
+ - 87s - loss: 0.0750 - acc: 0.9908 - val_loss: 0.0834 - val_acc: 0.9904
+
+==================================================================================================
+	Training time : 0:26:02.621208
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:04:03.125246
+==================================================================================================
+	Identification : 0.333
+	P, R  : 0.617, 0.228
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1798, occurrences : 4870
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_21 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_22 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_21 (Embedding)        (None, 7, 328)       394584      input_21[0][0]                   
+__________________________________________________________________________________________________
+embedding_22 (Embedding)        (None, 7, 32)        448         input_22[0][0]                   
+__________________________________________________________________________________________________
+gru_21 (GRU)                    (None, 86)           107070      embedding_21[0][0]               
+__________________________________________________________________________________________________
+gru_22 (GRU)                    (None, 63)           18144       embedding_22[0][0]               
+__________________________________________________________________________________________________
+dropout_31 (Dropout)            (None, 86)           0           gru_21[0][0]                     
+__________________________________________________________________________________________________
+dropout_32 (Dropout)            (None, 63)           0           gru_22[0][0]                     
+__________________________________________________________________________________________________
+concatenate_11 (Concatenate)    (None, 149)          0           dropout_31[0][0]                 
+                                                                 dropout_32[0][0]                 
+__________________________________________________________________________________________________
+dense_21 (Dense)                (None, 153)          22950       concatenate_11[0][0]             
+__________________________________________________________________________________________________
+dropout_33 (Dropout)            (None, 153)          0           dense_21[0][0]                   
+__________________________________________________________________________________________________
+dense_22 (Dense)                (None, 4)            616         dropout_33[0][0]                 
+==================================================================================================
+Total params: 543,812
+Trainable params: 543,812
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 245118
+	data size after sampling = 480496
+	data size before focused sampling = 480496
+	data size after focused sampling = 669474
+	Favorisation Coeff : 6
+Train on 602526 samples, validate on 66948 samples
+Epoch 1/20
+ - 148s - loss: 0.1203 - acc: 0.9794 - val_loss: 0.0910 - val_acc: 0.9848
+Epoch 2/20
+ - 146s - loss: 0.0862 - acc: 0.9859 - val_loss: 0.0879 - val_acc: 0.9863
+Epoch 3/20
+ - 147s - loss: 0.0831 - acc: 0.9867 - val_loss: 0.0861 - val_acc: 0.9864
+Epoch 4/20
+ - 147s - loss: 0.0809 - acc: 0.9873 - val_loss: 0.0855 - val_acc: 0.9867
+Epoch 5/20
+ - 147s - loss: 0.0797 - acc: 0.9876 - val_loss: 0.0847 - val_acc: 0.9868
+Epoch 6/20
+ - 147s - loss: 0.0786 - acc: 0.9878 - val_loss: 0.0871 - val_acc: 0.9867
+Epoch 7/20
+ - 147s - loss: 0.0781 - acc: 0.9880 - val_loss: 0.0844 - val_acc: 0.9873
+Epoch 8/20
+ - 147s - loss: 0.0774 - acc: 0.9880 - val_loss: 0.0849 - val_acc: 0.9873
+Epoch 9/20
+ - 147s - loss: 0.0771 - acc: 0.9881 - val_loss: 0.0842 - val_acc: 0.9873
+Epoch 10/20
+ - 147s - loss: 0.0767 - acc: 0.9883 - val_loss: 0.0842 - val_acc: 0.9873
+Epoch 11/20
+ - 147s - loss: 0.0763 - acc: 0.9883 - val_loss: 0.0841 - val_acc: 0.9874
+Epoch 12/20
+ - 147s - loss: 0.0760 - acc: 0.9884 - val_loss: 0.0843 - val_acc: 0.9875
+Epoch 13/20
+ - 147s - loss: 0.0758 - acc: 0.9884 - val_loss: 0.0846 - val_acc: 0.9871
+Epoch 14/20
+ - 147s - loss: 0.0756 - acc: 0.9884 - val_loss: 0.0847 - val_acc: 0.9875
+Epoch 15/20
+ - 147s - loss: 0.0755 - acc: 0.9885 - val_loss: 0.0849 - val_acc: 0.9875
+Epoch 16/20
+ - 147s - loss: 0.0753 - acc: 0.9885 - val_loss: 0.0847 - val_acc: 0.9874
+Epoch 17/20
+ - 147s - loss: 0.0751 - acc: 0.9886 - val_loss: 0.0849 - val_acc: 0.9876
+Epoch 18/20
+ - 147s - loss: 0.0750 - acc: 0.9886 - val_loss: 0.0849 - val_acc: 0.9877
+
+==================================================================================================
+	Training time : 0:49:13.419858
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:40.218158
+==================================================================================================
+	Identification : 0.499
+	P, R  : 0.657, 0.403
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1798, occurrences : 4870
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_23 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_24 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_23 (Embedding)        (None, 7, 328)       394584      input_23[0][0]                   
+__________________________________________________________________________________________________
+embedding_24 (Embedding)        (None, 7, 32)        448         input_24[0][0]                   
+__________________________________________________________________________________________________
+gru_23 (GRU)                    (None, 86)           107070      embedding_23[0][0]               
+__________________________________________________________________________________________________
+gru_24 (GRU)                    (None, 63)           18144       embedding_24[0][0]               
+__________________________________________________________________________________________________
+dropout_34 (Dropout)            (None, 86)           0           gru_23[0][0]                     
+__________________________________________________________________________________________________
+dropout_35 (Dropout)            (None, 63)           0           gru_24[0][0]                     
+__________________________________________________________________________________________________
+concatenate_12 (Concatenate)    (None, 149)          0           dropout_34[0][0]                 
+                                                                 dropout_35[0][0]                 
+__________________________________________________________________________________________________
+dense_23 (Dense)                (None, 153)          22950       concatenate_12[0][0]             
+__________________________________________________________________________________________________
+dropout_36 (Dropout)            (None, 153)          0           dense_23[0][0]                   
+__________________________________________________________________________________________________
+dense_24 (Dense)                (None, 4)            616         dropout_36[0][0]                 
+==================================================================================================
+Total params: 543,812
+Trainable params: 543,812
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 245118
+	data size after sampling = 480496
+	data size before focused sampling = 480496
+	data size after focused sampling = 669474
+	Favorisation Coeff : 6
+Train on 602526 samples, validate on 66948 samples
+Epoch 1/20
+ - 146s - loss: 0.1289 - acc: 0.9781 - val_loss: 0.0866 - val_acc: 0.9856
+Epoch 2/20
+ - 146s - loss: 0.0878 - acc: 0.9856 - val_loss: 0.0841 - val_acc: 0.9867
+Epoch 3/20
+ - 146s - loss: 0.0845 - acc: 0.9865 - val_loss: 0.0823 - val_acc: 0.9871
+Epoch 4/20
+ - 146s - loss: 0.0825 - acc: 0.9869 - val_loss: 0.0825 - val_acc: 0.9868
+Epoch 5/20
+ - 146s - loss: 0.0815 - acc: 0.9873 - val_loss: 0.0821 - val_acc: 0.9873
+Epoch 6/20
+ - 146s - loss: 0.0806 - acc: 0.9874 - val_loss: 0.0820 - val_acc: 0.9873
+Epoch 7/20
+ - 146s - loss: 0.0801 - acc: 0.9875 - val_loss: 0.0823 - val_acc: 0.9872
+Epoch 8/20
+ - 147s - loss: 0.0793 - acc: 0.9877 - val_loss: 0.0814 - val_acc: 0.9874
+Epoch 9/20
+ - 147s - loss: 0.0785 - acc: 0.9879 - val_loss: 0.0809 - val_acc: 0.9873
+Epoch 10/20
+ - 147s - loss: 0.0781 - acc: 0.9880 - val_loss: 0.0808 - val_acc: 0.9877
+Epoch 11/20
+ - 147s - loss: 0.0778 - acc: 0.9881 - val_loss: 0.0805 - val_acc: 0.9878
+Epoch 12/20
+ - 147s - loss: 0.0773 - acc: 0.9881 - val_loss: 0.0807 - val_acc: 0.9877
+Epoch 13/20
+ - 147s - loss: 0.0772 - acc: 0.9882 - val_loss: 0.0809 - val_acc: 0.9876
+Epoch 14/20
+ - 147s - loss: 0.0767 - acc: 0.9883 - val_loss: 0.0806 - val_acc: 0.9876
+Epoch 15/20
+ - 147s - loss: 0.0766 - acc: 0.9884 - val_loss: 0.0807 - val_acc: 0.9878
+Epoch 16/20
+ - 147s - loss: 0.0763 - acc: 0.9884 - val_loss: 0.0803 - val_acc: 0.9879
+Epoch 17/20
+ - 147s - loss: 0.0762 - acc: 0.9884 - val_loss: 0.0809 - val_acc: 0.9878
+Epoch 18/20
+ - 147s - loss: 0.0760 - acc: 0.9884 - val_loss: 0.0807 - val_acc: 0.9876
+Epoch 19/20
+ - 147s - loss: 0.0760 - acc: 0.9884 - val_loss: 0.0806 - val_acc: 0.9879
+Epoch 20/20
+ - 147s - loss: 0.0758 - acc: 0.9885 - val_loss: 0.0809 - val_acc: 0.9878
+
+==================================================================================================
+	Training time : 0:54:29.088364
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:42.304149
+==================================================================================================
+	Identification : 0.462
+	P, R  : 0.622, 0.368
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Mode: RNN
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, sampleWeight, importantSentences, importantTransitions, favorisationCoeff, focused, overSampling, posDim, gru, optimizer, wordDim, denseDropout, focusedElements, batchSize, shuffle, s0TokenNum, epochs, earlyStopPatience, wordRnnUnitNum, denseUnitNum, lr, rnnSequence, useDense, rnnDropout, bTokenNum, posRnnUnitNum, earlyStop, s1TokenNum
+==================================================================================================
+# Configs: rnn, sharedtask2, fixedSize, True, True, True, True, False, 6, True, True, 31, True, adagrad, 473, 0, 7, 64, True, 4, 20, 7, 140, 102, 0.05, False, True, 0.0, 1, 46, True, 2
+==================================================================================================
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_25 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_26 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_25 (Embedding)        (None, 7, 473)       557194      input_25[0][0]                   
+__________________________________________________________________________________________________
+embedding_26 (Embedding)        (None, 7, 31)        589         input_26[0][0]                   
+__________________________________________________________________________________________________
+gru_25 (GRU)                    (None, 140)          257880      embedding_25[0][0]               
+__________________________________________________________________________________________________
+gru_26 (GRU)                    (None, 46)           10764       embedding_26[0][0]               
+__________________________________________________________________________________________________
+dropout_37 (Dropout)            (None, 140)          0           gru_25[0][0]                     
+__________________________________________________________________________________________________
+dropout_38 (Dropout)            (None, 46)           0           gru_26[0][0]                     
+__________________________________________________________________________________________________
+concatenate_13 (Concatenate)    (None, 186)          0           dropout_37[0][0]                 
+                                                                 dropout_38[0][0]                 
+__________________________________________________________________________________________________
+dense_25 (Dense)                (None, 102)          19074       concatenate_13[0][0]             
+__________________________________________________________________________________________________
+dropout_39 (Dropout)            (None, 102)          0           dense_25[0][0]                   
+__________________________________________________________________________________________________
+dense_26 (Dense)                (None, 4)            412         dropout_39[0][0]                 
+==================================================================================================
+Total params: 845,913
+Trainable params: 845,913
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 110s - loss: 0.1418 - acc: 0.9800 - val_loss: 0.0865 - val_acc: 0.9862
+Epoch 2/20
+ - 110s - loss: 0.0829 - acc: 0.9876 - val_loss: 0.0857 - val_acc: 0.9875
+Epoch 3/20
+ - 110s - loss: 0.0792 - acc: 0.9883 - val_loss: 0.0795 - val_acc: 0.9885
+Epoch 4/20
+ - 110s - loss: 0.0774 - acc: 0.9886 - val_loss: 0.0824 - val_acc: 0.9883
+Epoch 5/20
+ - 110s - loss: 0.0762 - acc: 0.9889 - val_loss: 0.0815 - val_acc: 0.9884
+Epoch 6/20
+ - 111s - loss: 0.0756 - acc: 0.9890 - val_loss: 0.0856 - val_acc: 0.9888
+Epoch 7/20
+ - 111s - loss: 0.0750 - acc: 0.9891 - val_loss: 0.0803 - val_acc: 0.9884
+Epoch 8/20
+ - 111s - loss: 0.0746 - acc: 0.9892 - val_loss: 0.0798 - val_acc: 0.9889
+Epoch 9/20
+ - 110s - loss: 0.0742 - acc: 0.9893 - val_loss: 0.0807 - val_acc: 0.9887
+Epoch 10/20
+ - 111s - loss: 0.0741 - acc: 0.9893 - val_loss: 0.0811 - val_acc: 0.9884
+
+==================================================================================================
+	Training time : 0:20:50.384084
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:02:25.217015
+==================================================================================================
+	Identification : 0.475
+	P, R  : 0.557, 0.415
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : BG
+==================================================================================================
+	Training (Important) : 3124, Test : 1954
+	MWEs in tain : 1372, occurrences : 3583
+	Impotant words in tain : 1175
+	MWE length mean : 2.13
+	Seen MWEs : 386 (57 %)
+	New MWEs : 284 (42 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_27 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_28 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_27 (Embedding)        (None, 7, 473)       557194      input_27[0][0]                   
+__________________________________________________________________________________________________
+embedding_28 (Embedding)        (None, 7, 31)        589         input_28[0][0]                   
+__________________________________________________________________________________________________
+gru_27 (GRU)                    (None, 140)          257880      embedding_27[0][0]               
+__________________________________________________________________________________________________
+gru_28 (GRU)                    (None, 46)           10764       embedding_28[0][0]               
+__________________________________________________________________________________________________
+dropout_40 (Dropout)            (None, 140)          0           gru_27[0][0]                     
+__________________________________________________________________________________________________
+dropout_41 (Dropout)            (None, 46)           0           gru_28[0][0]                     
+__________________________________________________________________________________________________
+concatenate_14 (Concatenate)    (None, 186)          0           dropout_40[0][0]                 
+                                                                 dropout_41[0][0]                 
+__________________________________________________________________________________________________
+dense_27 (Dense)                (None, 102)          19074       concatenate_14[0][0]             
+__________________________________________________________________________________________________
+dropout_42 (Dropout)            (None, 102)          0           dense_27[0][0]                   
+__________________________________________________________________________________________________
+dense_28 (Dense)                (None, 4)            412         dropout_42[0][0]                 
+==================================================================================================
+Total params: 845,913
+Trainable params: 845,913
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 181825
+	data size after sampling = 356484
+	data size before focused sampling = 356484
+	data size after focused sampling = 510016
+	Favorisation Coeff : 6
+Train on 459014 samples, validate on 51002 samples
+Epoch 1/20
+ - 109s - loss: 32.2326 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 2/20
+ - 110s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 3/20
+ - 110s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 4/20
+ - 110s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 5/20
+ - 110s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 6/20
+ - 110s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 7/20
+ - 110s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+Epoch 8/20
+ - 110s - loss: 32.2404 - acc: 0.2796 - val_loss: 32.1987 - val_acc: 0.2783
+
+==================================================================================================
+	Training time : 0:16:32.968395
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:04:29.740223
+==================================================================================================
+	Identification : 0
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_29 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_30 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_29 (Embedding)        (None, 7, 473)       536382      input_29[0][0]                   
+__________________________________________________________________________________________________
+embedding_30 (Embedding)        (None, 7, 31)        589         input_30[0][0]                   
+__________________________________________________________________________________________________
+gru_29 (GRU)                    (None, 140)          257880      embedding_29[0][0]               
+__________________________________________________________________________________________________
+gru_30 (GRU)                    (None, 46)           10764       embedding_30[0][0]               
+__________________________________________________________________________________________________
+dropout_43 (Dropout)            (None, 140)          0           gru_29[0][0]                     
+__________________________________________________________________________________________________
+dropout_44 (Dropout)            (None, 46)           0           gru_30[0][0]                     
+__________________________________________________________________________________________________
+concatenate_15 (Concatenate)    (None, 186)          0           dropout_43[0][0]                 
+                                                                 dropout_44[0][0]                 
+__________________________________________________________________________________________________
+dense_29 (Dense)                (None, 102)          19074       concatenate_15[0][0]             
+__________________________________________________________________________________________________
+dropout_45 (Dropout)            (None, 102)          0           dense_29[0][0]                   
+__________________________________________________________________________________________________
+dense_30 (Dense)                (None, 4)            412         dropout_45[0][0]                 
+==================================================================================================
+Total params: 825,101
+Trainable params: 825,101
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 86s - loss: 0.1430 - acc: 0.9797 - val_loss: 0.0865 - val_acc: 0.9882
+Epoch 2/20
+ - 86s - loss: 0.0851 - acc: 0.9885 - val_loss: 0.0851 - val_acc: 0.9887
+Epoch 3/20
+ - 87s - loss: 0.0810 - acc: 0.9895 - val_loss: 0.0842 - val_acc: 0.9888
+Epoch 4/20
+ - 87s - loss: 0.0787 - acc: 0.9899 - val_loss: 0.0830 - val_acc: 0.9897
+Epoch 5/20
+ - 87s - loss: 0.0774 - acc: 0.9902 - val_loss: 0.0845 - val_acc: 0.9900
+Epoch 6/20
+ - 87s - loss: 0.0767 - acc: 0.9904 - val_loss: 0.0841 - val_acc: 0.9899
+Epoch 7/20
+ - 87s - loss: 0.0759 - acc: 0.9905 - val_loss: 0.0841 - val_acc: 0.9901
+Epoch 8/20
+ - 87s - loss: 0.0756 - acc: 0.9907 - val_loss: 0.0850 - val_acc: 0.9903
+Epoch 9/20
+ - 87s - loss: 0.0751 - acc: 0.9907 - val_loss: 0.0857 - val_acc: 0.9894
+Epoch 10/20
+ - 87s - loss: 0.0748 - acc: 0.9908 - val_loss: 0.0856 - val_acc: 0.9900
+Epoch 11/20
+ - 87s - loss: 0.0746 - acc: 0.9909 - val_loss: 0.0864 - val_acc: 0.9903
+
+==================================================================================================
+	Training time : 0:17:55.343637
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:03:46.641863
+==================================================================================================
+	Identification : 0.373
+	P, R  : 0.638, 0.264
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : PT
+==================================================================================================
+	Training (Important) : 2305, Test : 3117
+	MWEs in tain : 1412, occurrences : 2542
+	Impotant words in tain : 1131
+	MWE length mean : 2.22
+	Seen MWEs : 343 (62 %)
+	New MWEs : 210 (37 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_31 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_32 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_31 (Embedding)        (None, 7, 473)       536382      input_31[0][0]                   
+__________________________________________________________________________________________________
+embedding_32 (Embedding)        (None, 7, 31)        589         input_32[0][0]                   
+__________________________________________________________________________________________________
+gru_31 (GRU)                    (None, 140)          257880      embedding_31[0][0]               
+__________________________________________________________________________________________________
+gru_32 (GRU)                    (None, 46)           10764       embedding_32[0][0]               
+__________________________________________________________________________________________________
+dropout_46 (Dropout)            (None, 140)          0           gru_31[0][0]                     
+__________________________________________________________________________________________________
+dropout_47 (Dropout)            (None, 46)           0           gru_32[0][0]                     
+__________________________________________________________________________________________________
+concatenate_16 (Concatenate)    (None, 186)          0           dropout_46[0][0]                 
+                                                                 dropout_47[0][0]                 
+__________________________________________________________________________________________________
+dense_31 (Dense)                (None, 102)          19074       concatenate_16[0][0]             
+__________________________________________________________________________________________________
+dropout_48 (Dropout)            (None, 102)          0           dense_31[0][0]                   
+__________________________________________________________________________________________________
+dense_32 (Dense)                (None, 4)            412         dropout_48[0][0]                 
+==================================================================================================
+Total params: 825,101
+Trainable params: 825,101
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 123224
+	data size after sampling = 241368
+	data size before focused sampling = 241368
+	data size after focused sampling = 397783
+	Favorisation Coeff : 6
+Train on 358004 samples, validate on 39779 samples
+Epoch 1/20
+ - 86s - loss: 0.1347 - acc: 0.9808 - val_loss: 0.0886 - val_acc: 0.9870
+Epoch 2/20
+ - 87s - loss: 0.0852 - acc: 0.9887 - val_loss: 0.0834 - val_acc: 0.9892
+Epoch 3/20
+ - 87s - loss: 0.0810 - acc: 0.9894 - val_loss: 0.0840 - val_acc: 0.9897
+Epoch 4/20
+ - 87s - loss: 0.0790 - acc: 0.9899 - val_loss: 0.0824 - val_acc: 0.9891
+Epoch 5/20
+ - 87s - loss: 0.0776 - acc: 0.9902 - val_loss: 0.0819 - val_acc: 0.9899
+Epoch 6/20
+ - 87s - loss: 0.0767 - acc: 0.9904 - val_loss: 0.0832 - val_acc: 0.9888
+Epoch 7/20
+ - 87s - loss: 0.0762 - acc: 0.9905 - val_loss: 0.0821 - val_acc: 0.9902
+Epoch 8/20
+ - 87s - loss: 0.0755 - acc: 0.9906 - val_loss: 0.0838 - val_acc: 0.9898
+Epoch 9/20
+ - 87s - loss: 0.0753 - acc: 0.9906 - val_loss: 0.0830 - val_acc: 0.9900
+Epoch 10/20
+ - 87s - loss: 0.0750 - acc: 0.9907 - val_loss: 0.0832 - val_acc: 0.9899
+Epoch 11/20
+ - 87s - loss: 0.0747 - acc: 0.9909 - val_loss: 0.0836 - val_acc: 0.9901
+Epoch 12/20
+ - 87s - loss: 0.0745 - acc: 0.9908 - val_loss: 0.0838 - val_acc: 0.9898
+
+==================================================================================================
+	Training time : 0:19:34.853140
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:03:47.631147
+==================================================================================================
+	Identification : 0.386
+	P, R  : 0.624, 0.279
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Language : TR
+==================================================================================================
+	Training (Important) : 3585, Test : 1320
+	MWEs in tain : 1798, occurrences : 4870
+	Impotant words in tain : 1200
+	MWE length mean : 2.06
+	Seen MWEs : 345 (67 %)
+	New MWEs : 165 (32 %)
+==================================================================================================
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_33 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+input_34 (InputLayer)           (None, 7)            0                                            
+__________________________________________________________________________________________________
+embedding_33 (Embedding)        (None, 7, 473)       569019      input_33[0][0]                   
+__________________________________________________________________________________________________
+embedding_34 (Embedding)        (None, 7, 31)        434         input_34[0][0]                   
+__________________________________________________________________________________________________
+gru_33 (GRU)                    (None, 140)          257880      embedding_33[0][0]               
+__________________________________________________________________________________________________
+gru_34 (GRU)                    (None, 46)           10764       embedding_34[0][0]               
+__________________________________________________________________________________________________
+dropout_49 (Dropout)            (None, 140)          0           gru_33[0][0]                     
+__________________________________________________________________________________________________
+dropout_50 (Dropout)            (None, 46)           0           gru_34[0][0]                     
+__________________________________________________________________________________________________
+concatenate_17 (Concatenate)    (None, 186)          0           dropout_49[0][0]                 
+                                                                 dropout_50[0][0]                 
+__________________________________________________________________________________________________
+dense_33 (Dense)                (None, 102)          19074       concatenate_17[0][0]             
+__________________________________________________________________________________________________
+dropout_51 (Dropout)            (None, 102)          0           dense_33[0][0]                   
+__________________________________________________________________________________________________
+dense_34 (Dense)                (None, 4)            412         dropout_51[0][0]                 
+==================================================================================================
+Total params: 857,583
+Trainable params: 857,583
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+	data size before sampling = 245118
+	data size after sampling = 480496
+	data size before focused sampling = 480496
+	data size after focused sampling = 669474
+	Favorisation Coeff : 6
+Train on 602526 samples, validate on 66948 samples
+Epoch 1/20
+ - 145s - loss: 32.2158 - acc: 0.2728 - val_loss: 32.3424 - val_acc: 0.2742
+Epoch 2/20
+ - 145s - loss: 32.2244 - acc: 0.2729 - val_loss: 32.3424 - val_acc: 0.2742
+Epoch 3/20
+ - 145s - loss: 32.2244 - acc: 0.2729 - val_loss: 32.3424 - val_acc: 0.2742
+Epoch 4/20
+ - 145s - loss: 32.2244 - acc: 0.2729 - val_loss: 32.3424 - val_acc: 0.2742
+Epoch 5/20
+ - 145s - loss: 32.2244 - acc: 0.2729 - val_loss: 32.3424 - val_acc: 0.2742
+Epoch 6/20
+ - 145s - loss: 32.2244 - acc: 0.2729 - val_loss: 32.3424 - val_acc: 0.2742
+Epoch 7/20
+ - 145s - loss: 32.2244 - acc: 0.2729 - val_loss: 32.3424 - val_acc: 0.2742
+Epoch 8/20
+ - 145s - loss: 32.2244 - acc: 0.2729 - val_loss: 32.3424 - val_acc: 0.2742
+
+==================================================================================================
+	Training time : 0:21:51.984627
+==================================================================================================
+Traceback (most recent call last):
+  File "src/xpRnn.py", line 88, in <module>
+    runRSG(pilotLangs, Dataset.sharedtask2, XpMode.rnn, Evaluation.fixedSize, 'rnn.p', xpNum=2, xpNumByThread=80)
+  File "/home/halsaied/NNIdenSys/src/rsg.py", line 18, in runRSG
+    xp(langs, dataset, xpMode, division, xpNum=xpNum)
+  File "/home/halsaied/NNIdenSys/src/xpTools.py", line 40, in xp
+    identify(lang)
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 26, in identify
+    parse(corpus.testingSents, network, vectorizer)
+  File "/home/halsaied/NNIdenSys/src/parser.py", line 20, in parse
+    linearVecs=linearVecs, mlpModels=mlpModels)
+  File "/home/halsaied/NNIdenSys/src/parser.py", line 37, in nextTrans
+    probVector = model.predict(t)
+  File "/home/halsaied/NNIdenSys/src/modelRnn.py", line 64, in predict
+    tokenIdxs, posIdxs = getIdxs(trans.configuration)
+  File "/home/halsaied/NNIdenSys/src/modelRnn.py", line 248, in getIdxs
+    for t in getTokens(config.stack[-1])[:rnnConf['s0TokenNum']]:
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1365, in getTokens
+    
+  File "/home/halsaied/NNIdenSys/src/corpus.py", line 1355, in getTokens
+    if idx >= num:
+RuntimeError: maximum recursion depth exceeded while getting the str of an object
