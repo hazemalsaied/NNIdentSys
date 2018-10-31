@@ -1,1423 +1,2544 @@
-# Error analysis
-### Non identified MWEs : 100.0%, with 100.0% occurrences
-### Correctly identified MWEs : 0.0%, with 0.0% occurrences
-### Fake MWEs : 86.0%, with 110.0% occurrences
-### Correctly identified train-seen MWEs : 100.0%, with 100.0% occurrences
-### Correctly identified new MWEs : 0.0%, with 0.0% occurrences
-### Correctly identified MW tokens : 0.0%, with 0.0% occurrences
-### Correctly identified embedded MWEs : 100.0%, with 100.0% occurrences
-### Fake MWEs with important words: 0.0%, with 1.0% occurrences
-## Non identified MWEs (100.0)
-se imposer :1
+### TEST SET
 
-me remis :1
+INTERLEAVING: number 6, occurrences: 6
 
-violation exercer :1
+EMBEDDED: number 3, occurrences: 6
 
-mesure prendre :2
+MWE: number 377, occurrences: 498
 
-causer bouleversement :1
+MWT: number 0, occurrences: 0
 
-avoir droit :7
+### CORRECTLY IDENTIFIED MWES
 
-répondre présent :1
+EMBEDDED: number 0, occurrences: 0
 
-se met :1
+MWT: number 0, occurrences: 0
 
-avoir possibilité :1
+INTERLEAVING: number 0, occurrences: 0
 
-avoir recours :1
+MWE: number 135, occurrences: 210
 
-souffrir de syndrome :1
+NEW: number 0, occurrences: 0
 
-avoir effet :3
+SEEN: number 135, occurrences: 210
 
-être le fait :1
+### MISIDENTIFIED MWES
 
-faire le actualité :1
+PARTIALLY_SEEN: number 25, occurrences: 40
 
-avoir suite :1
+MWE: number 25, occurrences: 40
 
-causer perturbation :1
+### NON IDENTIFIED MWES
 
-se déplacer :2
+EMBEDDED: number 1, occurrences: 1
 
-faire foi :1
+MWT: number 0, occurrences: 0
 
-montrer le exemple :1
+INTERLEAVING: number 5, occurrences: 5
 
-ayant expérience :1
+MWE: number 258, occurrences: 288
 
-donner le parole :1
+NEW: number 210, occurrences: 235
 
-se adresser :1
+SEEN: number 48, occurrences: 672
 
-se moquer :1
+# TEST SET
 
-accorder acceptant :1
+## INTERLEAVING
 
-joue rôle :1
+susciter doute : 1
 
-connues succès :1
+commettre indélicatesse : 1
 
-avoir rendez-vous :1
+atteindre angor : 1
 
-discours prononcer :1
+subir traitement : 1
 
-se désolidariser :1
+subir angioplastie : 1
 
-prendre conscience :1
+présenter endocardite : 1
 
-il faudrait :1
+## EMBEDDED
 
-nous contenter :2
+être le objet : 1
 
-se engager :1
+faire le objet : 4
 
-se poser question :1
+se livrer : 1
 
-avoir besoin :3
+## MWE
 
-action prise :1
+se imposer : 1
 
-donner performance :1
+me remis : 1
 
-présenter voeu :1
+violation exercer : 1
 
-il y avoir lieu :1
+mesure prendre : 2
 
-faire savoir :1
+causer bouleversement : 1
 
-se dérouler :5
+avoir droit : 7
 
-se éteindre :1
+répondre présent : 1
 
-donner naissance :1
+se met : 1
 
-effectuer liaison :1
+avoir possibilité : 1
 
-mener problèmes :1
+avoir recours : 1
 
-il semble :2
+souffrir de syndrome : 1
 
-se saisir :1
+avoir effet : 3
 
-enquête mener :1
+être le fait : 1
 
-assurer défense :1
+faire le actualité : 1
 
-subir attaque :1
+avoir suite : 1
 
-savoir gré :2
+causer perturbation : 1
 
-venir en aide :1
+se déplacer : 2
 
-a tort :1
+faire foi : 1
 
-avoir à cœur :1
+montrer le exemple : 1
 
-en avoir dans le slip :1
+ayant expérience : 1
 
-se étonner :1
+donner le parole : 1
 
-il rester :1
+se adresser : 1
 
-commettre indélicatesse :1
+se moquer : 1
 
-hausse provoquée :1
+accorder acceptant : 1
 
-faisant acte :1
+joue rôle : 1
 
-donner le exemple :1
+connues succès : 1
 
-recevoir réponses :1
+avoir rendez-vous : 1
 
-a chance :1
+discours prononcer : 1
 
-atteindre insuffisance :1
+se désolidariser : 1
 
-faire un part :1
+prendre conscience : 1
 
-poser problème :1
+il faudrait : 1
 
-présenter hypertension :1
+nous contenter : 2
 
-réaliser travail :1
+se engager : 1
 
-faire acquisition :1
+se poser question : 1
 
-il falloir :9
+avoir besoin : 3
 
-test réaliser :1
+action prise : 1
 
-serait de le ressort :1
+donner performance : 1
 
-se ranger :1
+présenter voeu : 1
 
-y avoir t il :1
+il y avoir lieu : 1
 
-effectuer enquête :1
+faire savoir : 1
 
-mettre en œuvre :1
+se dérouler : 5
 
-y avoir il :1
+se éteindre : 1
 
-travail accomplir :1
+donner naissance : 1
 
-tourne à le catastrophe :1
+effectuer liaison : 1
 
-perdre pied :1
+mener problèmes : 1
 
-faire guerre :1
+il semble : 2
 
-passer à le action :1
+se saisir : 1
 
-se pencher :1
+enquête mener : 1
 
-se écouler :1
+assurer défense : 1
 
-entrer en vigueur :5
+subir attaque : 1
 
-provoquent dégâts :1
+savoir gré : 2
 
-faire pression :1
+venir en aide : 1
 
-nous résigner :1
+a tort : 1
 
-mettre en examen :3
+avoir à cœur : 1
 
-m' essayais :1
+en avoir dans le slip : 1
 
-marquer but :1
+se étonner : 1
 
-interjeter appel :1
+il rester : 1
 
-tenir compte :4
+commettre indélicatesse : 1
 
-il s' agit :1
+hausse provoquée : 1
 
-souffrir de ostéoporose :1
+faisant acte : 1
 
-créant réaction :1
+donner le exemple : 1
 
-aurait effet :1
+recevoir réponses : 1
 
-prendre son précaution :1
+a chance : 1
 
-eu effet :1
+atteindre insuffisance : 1
 
-a tendance :1
+faire un part : 1
 
-prendre possession :1
+poser problème : 1
 
-se servir :1
+présenter hypertension : 1
 
-être le objet :1
+réaliser travail : 1
 
-porter attention :1
+faire acquisition : 1
 
-jouer rôle :2
+il falloir : 9
 
-faire arbitrage :1
+test réaliser : 1
 
-avez accès :1
+serait de le ressort : 1
 
-diriger se :1
+se ranger : 1
 
-se trouvait :1
+y avoir t il : 1
 
-faire remarque :1
+effectuer enquête : 1
 
-il y eu :1
+mettre en œuvre : 1
 
-se consacrée :1
+y avoir il : 1
 
-s' élever :1
+travail accomplir : 1
 
-prendre à le sérieux :1
+tourne à le catastrophe : 1
 
-vous opposer :1
+perdre pied : 1
 
-se lever :2
+faire guerre : 1
 
-fait le tour de le monde :1
+passer à le action : 1
 
-se reflète :1
+se pencher : 1
 
-faire part :1
+se écouler : 1
 
-fait face :2
+entrer en vigueur : 5
 
-se réjouir :1
+provoquent dégâts : 1
 
-subi intervention :1
+faire pression : 1
 
-avoir relation :2
+nous résigner : 1
 
-transaction faire :1
+mettre en examen : 3
 
-questions posées :1
+m' essayais : 1
 
-aller chercher :1
+marquer but : 1
 
-se éclater :1
+interjeter appel : 1
 
-mener à bien :1
+tenir compte : 4
 
-fait part :1
+il s' agit : 1
 
-coiffer à le poteau :1
+souffrir de ostéoporose : 1
 
-connaître disgrâce :1
+créant réaction : 1
 
-porter secours :1
+aurait effet : 1
 
-se occuper :1
+prendre son précaution : 1
 
-proposition formulée :1
+eu effet : 1
 
-le ton donner :1
+a tendance : 1
 
-faire en sorte :1
+prendre possession : 1
 
-ne être pas à son coup de essai :1
+se servir : 1
 
-fournir aide :1
+être le objet : 1
 
-joué rôle :1
+porter attention : 1
 
-subir angioplastie :1
+jouer rôle : 2
 
-avoir mal :2
+faire arbitrage : 1
 
-présenter altération :1
+avez accès : 1
 
-se exprimer :3
+diriger se : 1
 
-se apprêter :2
+se trouvait : 1
 
-avoir à cure :1
+faire remarque : 1
 
-tenir parole :1
+il y eu : 1
 
-eu tendance :1
+se consacrée : 1
 
-faire valoir :2
+s' élever : 1
 
-se produire :4
+prendre à le sérieux : 1
 
-mettent en garde :1
+vous opposer : 1
 
-se tourner :1
+se lever : 2
 
-réponse apporter :1
+fait le tour de le monde : 1
 
-trouver preneur :1
+se reflète : 1
 
-se plongés :1
+faire part : 1
 
-faire attention :1
+fait face : 2
 
-se présenter :1
+se réjouir : 1
 
-est occasion :1
+subi intervention : 1
 
-sceller accord :1
+avoir relation : 2
 
-perdre connaissance :1
+transaction faire : 1
 
-connaître retard :1
+questions posées : 1
 
-fait les gros titres :1
+aller chercher : 1
 
-tirés d' affaire :1
+se éclater : 1
 
-investigation mener :1
+mener à bien : 1
 
-trouver refuge :1
+fait part : 1
 
-entendre parler :1
+coiffer à le poteau : 1
 
-jouant rôle :1
+connaître disgrâce : 1
 
-avoir malheur :1
+porter secours : 1
 
-se passer :1
+se occuper : 1
 
-se porter :1
+proposition formulée : 1
 
-se situe :2
+le ton donner : 1
 
-lancer appel :1
+faire en sorte : 1
 
-donner ordre :1
+ne être pas à son coup de essai : 1
 
-laissant de côté :1
+fournir aide : 1
 
-changements frappé :1
+joué rôle : 1
 
-entraîner irrégularité :1
+subir angioplastie : 1
 
-se baser :1
+avoir mal : 2
 
-s' passé :1
+présenter altération : 1
 
-faisant partie :1
+se exprimer : 3
 
-diriger attention :1
+se apprêter : 2
 
-avoir envie :1
+avoir à cure : 1
 
-avoir pouvoir :1
+tenir parole : 1
 
-avoir souvenir :1
+eu tendance : 1
 
-apporter aide :1
+faire valoir : 2
 
-font choix :1
+mettre de côté : 1
 
-en venir :1
+se produire : 4
 
-voir de œil :1
+mettent en garde : 1
 
-faire économie :1
+se tourner : 1
 
-laissé trace :1
+réponse apporter : 1
 
-on changer pas un équipe qui gagner :1
+trouver preneur : 1
 
-grossir le rang :1
+se plongés : 1
 
-engendré changement :1
+faire attention : 1
 
-donner éclaircissement :1
+se présenter : 1
 
-couronner le tout :1
+est occasion : 1
 
-se rendre :4
+sceller accord : 1
 
-se permettre :1
+perdre connaissance : 1
 
-prendre son place :1
+connaître retard : 1
 
-mettre à le voix :1
+fait les gros titres : 1
 
-appeler à secours :1
+tirés d' affaire : 1
 
-en rester là :1
+investigation mener : 1
 
-avoir lieu :5
+trouver refuge : 1
 
-crée conflits :1
+entendre parler : 1
 
-avait intérêt :1
+jouant rôle : 1
 
-atteindre maladie :1
+avoir malheur : 1
 
-faire exercice :1
+se passer : 1
 
-donner instruction :1
+se porter : 1
 
-faire preuve :1
+se situe : 2
 
-faire le objet polémique :1
+lancer appel : 1
 
-se lâcher :1
+donner ordre : 1
 
-se adapter :1
+laissant de côté : 1
 
-avoir doute :1
+changements frappé : 1
 
-faire rentrée :1
+entraîner irrégularité : 1
 
-nous réjouir :1
+se baser : 1
 
-accord conclure :1
+s' passé : 1
 
-vit le jour :1
+faisant partie : 1
 
-accorder attention :1
+diriger attention : 1
 
-faire appel :1
+avoir envie : 1
 
-il y aurait :1
+avoir pouvoir : 1
 
-porter nom :1
+avoir souvenir : 1
 
-avoir infection :1
+apporter aide : 1
 
-fournir explication :1
+font choix : 1
 
-se demander :3
+en venir : 1
 
-avoir lieu de être :1
+voir de œil : 1
 
-faire le objet inventaire :1
+faire économie : 1
 
-repasser à le offensive :1
+laissé trace : 1
 
-pointer le bout de son nez :1
+on changer pas un équipe qui gagner : 1
 
-se comportent :1
+grossir le rang : 1
 
-faire le objet :5
+engendré changement : 1
 
-il y avait :2
+donner éclaircissement : 1
 
-vote effectuer :1
+couronner le tout : 1
 
-photographie prendre :1
+se rendre : 4
 
-susciter certitude :1
+se permettre : 1
 
-avoir question :1
+prendre son place : 1
 
-subit pressions :1
+mettre à le voix : 1
 
-se assurer :1
+appeler à secours : 1
 
-conduite mener :1
+en rester là : 1
 
-tourner mal :1
+avoir lieu : 5
 
-apporter soutien :1
+crée conflits : 1
 
-se aventurer :1
+avait intérêt : 1
 
-avoir devoir :1
+atteindre maladie : 1
 
-perdre de le terrain :1
+faire exercice : 1
 
-présenter taux :1
+donner instruction : 1
 
-il y a :10
+faire preuve : 1
 
-se livrer :1
+faire le objet polémique : 1
 
-actions produites :1
+se lâcher : 1
 
-mis en œuvre :1
+se adapter : 1
 
-action mener :1
+avoir doute : 1
 
-serré les dents :1
+faire rentrée : 1
 
-il se faire :1
+nous réjouir : 1
 
-il valoir mieux :1
+accord conclure : 1
 
-attirer attention :3
+vit le jour : 1
 
-adresser demande :1
+accorder attention : 1
 
-il se agir :4
+faire appel : 1
 
-prendre part :1
+il y aurait : 1
 
-se conformer :1
+porter nom : 1
 
-s' effondrer :2
+avoir infection : 1
 
-fait apparition :1
+fournir explication : 1
 
-tourner court :1
+se demander : 3
 
-se comporter :1
+avoir lieu de être : 1
 
-causé extinction :1
+faire le objet inventaire : 1
 
-faire le objet publication :1
+repasser à le offensive : 1
 
-se livrer activité :1
+pointer le bout de son nez : 1
 
-se faire il :7
+se comportent : 1
 
-falloir il :1
+faire le objet : 5
 
-se en prendre :1
+il y avait : 2
 
-donner explication :1
+vote effectuer : 1
 
-se révéler :1
+photographie prendre : 1
 
-faire déplacement :1
+susciter certitude : 1
 
-susciter doute :1
+avoir question : 1
 
-il y avoir :18
+subit pressions : 1
 
-faire face :3
+se assurer : 1
 
-faire le objet traitement :1
+conduite mener : 1
 
-mettre un terme :3
+tourner mal : 1
 
-avoir fracture :2
+apporter soutien : 1
 
-se attendre :1
+se aventurer : 1
 
-se apercevoir :2
+avoir devoir : 1
 
-s' déclaré :1
+perdre de le terrain : 1
 
-ont occasion :1
+présenter taux : 1
 
-en valait la peine :1
+il y a : 10
 
-se rapporter :1
+se livrer : 1
 
-atteindre crise :1
+actions produites : 1
 
-avoir impression :1
+mis en œuvre : 1
 
-prendre initiative :1
+action mener : 1
 
-subissent violences :1
+serré les dents : 1
 
-se défaire :1
+il se faire : 1
 
-tenir discours :1
+il valoir mieux : 1
 
-s' apprête :1
+attirer attention : 3
 
-a l' air :1
+adresser demande : 1
 
-ne en revenir pas :1
+il se agir : 4
 
-avoir retard :1
+prendre part : 1
 
-se opposer :2
+se conformer : 1
 
-s' étend :1
+s' effondrer : 2
 
-se informer :1
+fait apparition : 1
 
-faire le nécessaire :1
+tourner court : 1
 
-s' élevait :2
+se comporter : 1
 
-se dirigèrent :1
+causé extinction : 1
 
-connaissaient progression :1
+faire le objet publication : 1
 
-contrat signer :1
+se livrer activité : 1
 
-apporter réponse :1
+se faire il : 7
 
-eu lieu :1
+falloir il : 1
 
-eu influence :1
+se en prendre : 1
 
-fait voyages :1
+donner explication : 1
 
-se rapprocher :1
+se révéler : 1
 
-se mariaient :1
+faire déplacement : 1
 
-détérioration causée :1
+susciter doute : 1
 
-mettre la pression :1
+il y avoir : 18
 
-le hasard faire bien le chose :1
+faire face : 3
 
-se rappeler :1
+faire le objet traitement : 1
 
-faire office :1
+mettre un terme : 3
 
-voir le jour :1
+avoir fracture : 2
 
-le emporter :1
+se attendre : 1
 
-destructions provoquées :1
+se apercevoir : 2
 
-faire référence :2
+s' déclaré : 1
 
-demander le parole :1
+ont occasion : 1
 
-se trouvant :1
+en valait la peine : 1
 
-avoir problème :1
+se rapporter : 1
 
-prendre en compte :1
+atteindre crise : 1
 
-s' assis :1
+avoir impression : 1
 
-vie sauver :1
+prendre initiative : 1
 
-passer inaperçue :1
+subissent violences : 1
 
-fait preuve :1
+se défaire : 1
 
-nous concentrerons :1
+tenir discours : 1
 
-étude réaliser :1
+s' apprête : 1
 
-avoir raison :1
+a l' air : 1
 
-se retourner :1
+ne en revenir pas : 1
 
-prendre suite :1
+avoir retard : 1
 
-présenter condoléances :1
+se opposer : 2
 
-se baigner :1
+s' étend : 1
 
-a besoin :2
+se informer : 1
 
-avoir tendance :1
+faire le nécessaire : 1
 
-transformation subir :1
+s' élevait : 2
 
-produire effet :1
+se dirigèrent : 1
 
-était temps :1
+connaissaient progression : 1
 
-décision prendre :3
+contrat signer : 1
 
-prendre le pas :1
+apporter réponse : 1
 
-subir pontage :1
+eu lieu : 1
 
-se produisent :1
+eu influence : 1
 
-prêter attention :1
+fait voyages : 1
 
-rôle jouer :1
+se rapprocher : 1
 
-mettre à profit :1
+se mariaient : 1
 
-se trouvent :1
+détérioration causée : 1
 
-se avérer :2
+mettre la pression : 1
 
-il sembler :2
+le hasard faire bien le chose : 1
 
-cela faire :1
+se rappeler : 1
 
-il être temps :2
+faire office : 1
 
-avoir conséquences :1
+voir le jour : 1
 
-se traduire :1
+le emporter : 1
 
-prendre connaissance :1
+destructions provoquées : 1
 
-se faire :1
+faire référence : 2
 
-prendre le parole :1
+demander le parole : 1
 
-engagement prendre :1
+se trouvant : 1
 
-prit part :1
+avoir problème : 1
 
-remis en question :1
+prendre en compte : 1
 
-économie faire :1
+s' assis : 1
 
-faire partie :4
+vie sauver : 1
 
-accomplir acte :1
+passer inaperçue : 1
 
-se évader :1
+fait preuve : 1
 
-causé suppression :1
+nous concentrerons : 1
 
-se jettent :1
+étude réaliser : 1
 
-eu effets :1
+avoir raison : 1
 
-aller à le bout :1
+se retourner : 1
 
-m' amuse :1
+prendre suite : 1
 
-se étaler :1
+présenter condoléances : 1
 
-faisant semblant :1
+se baigner : 1
 
-subir traitement :2
+a besoin : 2
 
-atteindre angor :1
+avoir tendance : 1
 
-être le objet atteinte :1
+transformation subir : 1
 
-présenter avantage :1
+produire effet : 1
 
-faire défaut :1
+était temps : 1
 
-il faut :2
+décision prendre : 3
 
-se approcher :1
+prendre le pas : 1
 
-bénéficier de pontage :1
+subir pontage : 1
 
-se ensuivre :1
+se produisent : 1
 
-mener campagne :1
+prêter attention : 1
 
-commettre grossièreté :1
+rôle jouer : 1
 
-faire figure :1
+mettre à profit : 1
 
-présenter endocardite :1
-## Correctly identified MWEs (0.0)
-faire le objet :1
-## Fake MWEs (110.0)
-prendre conscience :1
+se trouvent : 1
 
-mettre en pratique :1
+se avérer : 2
 
-laisser à penser :1
+il sembler : 2
 
-biopsie effectuer :1
+cela faire : 1
 
-se adonner :2
+il être temps : 2
 
-faire le objet discussion :1
+avoir conséquences : 1
 
-subir intervention :6
+se traduire : 1
 
-se engouffrer :1
+prendre connaissance : 1
 
-condamner à mort :2
+se faire : 1
 
-avoir lieu :7
+prendre le parole : 1
 
-répondre à le nom :1
+engagement prendre : 1
 
-il pleuvoir :1
+prit part : 1
 
-mesure prendre :1
+remis en question : 1
 
-se abstenir :1
+économie faire : 1
 
-présenter hypersensibilité :3
+faire partie : 4
 
-se rattraper :1
+accomplir acte : 1
 
-avoir ambition :1
+se évader : 1
 
-avoir droit :1
+causé suppression : 1
 
-se agir :2
+se jettent : 1
 
-présenter décoloration :1
+eu effets : 1
 
-atteindre maladie :6
+aller à le bout : 1
 
-se battre :1
+m' amuse : 1
 
-souffrir de problème :1
+se étaler : 1
 
-souffrir de hypertension :1
+faisant semblant : 1
 
-faire confiance :2
+subir traitement : 2
 
-avoir capacité :1
+atteindre angor : 1
 
-prendre résolution :1
+être le objet atteinte : 1
 
-donner un blanc-seing :1
+présenter avantage : 1
 
-se arrêter :1
+faire défaut : 1
 
-atteindre syndrome :1
+il faut : 2
 
-avoir expérience :1
+se approcher : 1
 
-recevoir traitement :4
+bénéficier de pontage : 1
 
-fouille effectuer :1
+se ensuivre : 1
 
-se promener :1
+mener campagne : 1
 
-jouer rôle :3
+commettre grossièreté : 1
 
-faire peur :1
+faire figure : 1
 
-mener politique :1
+présenter endocardite : 1
 
-travail réaliser :1
+## MWT
 
-subir angiographie :1
+# CORRECTLY IDENTIFIED MWES
 
-atteindre insuffisance :7
+## EMBEDDED
 
-finale jouer :1
+## MWT
 
-se répéter :1
+## INTERLEAVING
 
-question poser :2
+## MWE
 
-présenter infection :1
+se imposer : 1
 
-présenter diminution :1
+en rester là : 1
 
-tel être le cas :1
+avoir lieu : 5
 
-avoir répercussion :1
+mesure prendre : 1
 
-se porter :1
+faire pression : 1
 
-présenter atteinte rénal :1
+avoir droit : 6
 
-recevoir ordre :1
+se livrer : 1
 
-contre-indiquer :3
+avoir possibilité : 1
 
-présenter trouble :3
+avoir recours : 1
 
-entraîner production :1
+se servir : 1
 
-donner le jour :1
+apporter réponse : 1
 
-étude réaliser :1
+faire exercice : 1
 
-procéder à création :1
+jouer rôle : 1
 
-donner conseil :2
+faire arbitrage : 1
 
-perfusion effectuer :1
+faire preuve : 1
 
-suivi effectuer :1
+avoir effet : 2
 
-risque comporter :1
+se rapprocher : 1
 
-il en aller :1
+se adapter : 1
 
-faire commentaire :1
+avoir doute : 1
 
-en arriver :1
+faire rentrée : 1
 
-procéder à évaluation :1
+se déplacer : 1
 
-attiser le feu :1
+faire remarque : 1
 
-atteindre ostéoporose :2
+accord conclure : 1
 
-mettre en lumière :1
+se opposer : 2
 
-accusation porter :1
+se rappeler : 1
 
-donner signe de vie :1
+se adresser : 1
 
-présenter activité :1
+accorder attention : 1
 
-avoir conscience :2
+faire appel : 1
 
-voyage effectuer :1
+faire office : 1
 
-se renseigner :1
+se moquer : 1
 
-bilan dresser :1
+se lever : 2
 
-se rappeler :2
+faire part : 1
 
-se occuper :4
+le emporter : 1
 
-apporter témoignage :1
+se demander : 3
 
-se amuser :1
+se réjouir : 1
 
-se adresser :2
+prendre possession : 1
 
-faire preuve :1
+avoir problème : 1
 
-malheur ne survenir jamais seul :1
+faire valoir : 2
 
-poser question :2
+faire le objet : 5
 
-faire enquête :1
+prendre en compte : 1
 
-avoir doctrine :1
+étude réaliser : 1
 
-se voiler le face :1
+se engager : 1
 
-voir le jour :2
+porter secours : 1
 
-il ne empêcher :1
+se occuper : 1
 
-faire part :1
+avoir raison : 1
 
-se réfugier :1
+se retourner : 1
 
-le emporter :1
+avoir besoin : 3
 
-se montrer :3
+se assurer : 1
 
-avoir impact :1
+présenter voeu : 1
 
-prendre à partie :1
+tourner mal : 1
 
-faire offre :1
+apporter soutien : 1
 
-mettre en scène :2
+enquête mener : 1
 
-se faire attendre :1
+avoir devoir : 1
 
-avoir effet :2
+faire savoir : 1
 
-se devoir :1
+avoir tendance : 1
 
-action entreprendre :1
+produire effet : 1
 
-description faire :1
+se éteindre : 1
 
-il sembler :4
+faire en sorte : 1
 
-se efforcer :1
+se étonner : 1
 
-présenter évènement indésirable :1
+décision prendre : 3
 
-assurer suivi :1
+perdre de le terrain : 1
 
-se ranger :1
+il être temps : 2
 
-prendre en otage :1
+porter nom : 1
 
-prendre décision :2
+se exprimer : 2
 
-accomplir pas :1
+se apprêter : 2
 
-se trouver :6
+action mener : 1
 
-avoir problème :2
+tenir parole : 1
 
-visite effectuer :1
+venir en aide : 1
 
-faire usage :1
+mettre à profit : 1
 
-apporter contribution :1
+se produire : 4
 
-prendre en compte :1
+se avérer : 2
 
-se situer :1
+il valoir mieux : 1
 
-se prononcer :1
+cela faire : 1
 
-mener à bien :1
+avoir mal : 2
 
-avoir à voir :1
+attirer attention : 2
 
-mettre en application :1
+se traduire : 1
 
-mettre le main :1
+il se agir : 4
 
-avoir faim :1
+prendre connaissance : 1
 
-entraîner réduction :1
+se faire : 1
 
-remettre le main à le pâte :1
+prendre le parole : 1
 
-se engager :3
+faire attention : 1
 
-bénéficier de icp :2
+se présenter : 1
 
-effectuer ronde :2
+se porter : 1
 
-progrès accomplir :1
+se conformer : 1
 
-le musique adoucir le moeurs :1
+se comporter : 1
 
-il convenir :7
+donner le exemple : 1
 
-présenter saignement :1
+atteindre insuffisance : 1
 
-avoir le parole :1
+se dérouler : 3
 
-avoir besoin :5
+prendre part : 1
 
-se assurer :2
+poser problème : 1
 
-adresser remerciement :1
+falloir il : 1
 
-se référer :1
+se tourner : 1
 
-se placer :1
+se en prendre : 1
 
-produire résultat :1
+faire partie : 3
 
-étude conduire :1
+bénéficier de pontage : 1
 
-avoir chance :3
+entendre parler : 1
 
-jeter le éponge :1
+se passer : 1
 
-souffrir de sca :1
+se évader : 1
 
-il y avoir lieu :1
+faire acquisition : 1
 
-avoir émotion :1
+il falloir : 9
 
-faire savoir :1
+lancer appel : 1
 
-faire historique :1
+donner ordre : 1
 
-propos tenir :2
+se révéler : 1
 
-présenter facteur :2
+faire déplacement : 1
 
-se dérouler :6
+il y avoir : 15
 
-mettre accent :1
+se ranger : 1
 
-se éteindre :1
+faire face : 2
 
-combat mener :2
+mettre en œuvre : 1
 
-se enfuir :1
+tenir compte : 4
 
-voir de un oeil :1
+mettre un terme : 3
 
-revêtir caractère :1
+avoir fracture : 2
 
-apporter transparence :1
+se étaler : 1
 
-faire geste :1
+se attendre : 1
 
-mener enquête :1
+faire référence : 1
 
-menace peser :1
+avoir pouvoir : 1
 
-prêter à confusion :1
+subir traitement : 1
 
-entraîner déshydratation :1
+se apercevoir : 1
 
-il être question :6
+passer à le action : 1
 
-bénéficier de intervention :3
+se pencher : 1
 
-avoir position :2
+prendre suite : 1
 
-présenter taux :1
+entrer en vigueur : 3
 
-se rapporter :1
+se rapporter : 1
 
-se élever :1
+avoir impression : 1
 
-se poser :1
+présenter avantage : 1
 
-donner indication :1
+prendre initiative : 1
 
-se exprimer :3
+faire défaut : 1
 
-faire bloc :1
+mettre en examen : 3
 
-réaliser travail :1
+marquer but : 1
 
-souffrir de maladie :1
+couronner le tout : 1
 
-donner décharge :1
+se ensuivre : 1
 
-prendre en considération :1
+mener campagne : 1
 
-effectuer sortie de route :1
+se rendre : 3
 
-il en être :1
+avoir relation : 2
 
-laisser le soin :1
+ne en revenir pas : 1
 
-tirer le sonnette de alarme :1
+souffrir de ostéoporose : 1
 
-apporter commentaire :1
+## NEW
 
-remplir rôle :1
+## SEEN
 
-venir en aide :1
+se imposer : 1
 
-avoir douleur :2
+en rester là : 1
 
-mettre en évidence :3
+avoir lieu : 5
 
-recevoir appel :2
+mesure prendre : 1
 
-se prêter :1
+faire pression : 1
 
-se produire :11
+avoir droit : 6
 
-se avérer :3
+se livrer : 1
 
-assurer présidence :1
+avoir possibilité : 1
 
-avoir symptôme :1
+avoir recours : 1
 
-connaître problème :1
+se servir : 1
 
-cela faire :1
+apporter réponse : 1
 
-mener négociation :1
+faire exercice : 1
 
-recevoir perfusion :1
+jouer rôle : 1
 
-attirer attention :1
+faire arbitrage : 1
 
-se traduire :3
+faire preuve : 1
 
-avoir cours :1
+avoir effet : 2
 
-présenter corrélation :1
+se rapprocher : 1
 
-porter plainte :1
+se adapter : 1
 
-il se agir :11
+avoir doute : 1
 
-attenter à son jour :1
+faire rentrée : 1
 
-donner permission :1
+se déplacer : 1
 
-compte tenir :1
+faire remarque : 1
 
-porter jugement :1
+accord conclure : 1
 
-prendre part :1
+se opposer : 2
 
-assurer se :1
+se rappeler : 1
 
-se présenter :1
+se adresser : 1
 
-être le occasion :1
+accorder attention : 1
 
-rendre hommage :1
+faire appel : 1
 
-prendre connaissance :1
+faire office : 1
 
-rendre service :1
+se moquer : 1
 
-alerte donner :1
+se lever : 2
 
-signer accord :1
+faire part : 1
 
-prendre en charge :1
+le emporter : 1
 
-présenter ischémie :1
+se demander : 3
 
-couper le herbe sous le pied :2
+se réjouir : 1
 
-se jeter :1
+prendre possession : 1
 
-mettre en valeur :1
+avoir problème : 1
 
-se comporter :1
+faire valoir : 2
 
-succès rencontrer :1
+faire le objet : 5
 
-effort déployer :1
+prendre en compte : 1
 
-se faire remarquer :1
+étude réaliser : 1
 
-se suicider :1
+se engager : 1
 
-tomber nez à nez :1
+porter secours : 1
 
-présenter insuffisance :1
+se occuper : 1
 
-atteindre maldie :1
+avoir raison : 1
 
-tenir débat :1
+se retourner : 1
 
-poser problème :4
+avoir besoin : 3
 
-donner réponse :1
+se assurer : 1
 
-faire apparition :1
+présenter voeu : 1
 
-se demander :3
+tourner mal : 1
 
-réponse fournir :1
+apporter soutien : 1
 
-avoir signification :2
+enquête mener : 1
 
-falloir il :2
+avoir devoir : 1
 
-mettre fin :1
+faire savoir : 1
 
-se en prendre :1
+avoir tendance : 1
 
-faire le objet évaluation :1
+produire effet : 1
 
-faire partie :3
+se éteindre : 1
 
-se retrouver :1
+faire en sorte : 1
 
-avoir hypocalcémie :1
+se étonner : 1
 
-se passer :2
+décision prendre : 3
 
-souvenir simplement :1
+perdre de le terrain : 1
 
-avoir hypertension :1
+il être temps : 2
 
-avoir conséquence :2
+porter nom : 1
 
-atteindre sca :2
+se exprimer : 2
 
-avoir crédibilité :1
+se apprêter : 2
 
-précision apporter :1
+action mener : 1
 
-perdre de vue :1
+tenir parole : 1
 
-présenter réaction :1
+venir en aide : 1
 
-il falloir :24
+mettre à profit : 1
 
-prendre soin :1
+se produire : 4
 
-lancer appel :2
+se avérer : 2
 
-se exécuter :1
+il valoir mieux : 1
 
-se révéler :1
+cela faire : 1
 
-en finir :1
+avoir mal : 2
 
-délivrer autorisation :2
+attirer attention : 2
 
-atteindre cancer :3
+se traduire : 1
 
-faire en sorte :1
+il se agir : 4
 
-se inquiéter :1
+prendre connaissance : 1
 
-présenter symptôme :2
+se faire : 1
 
-entraîner interruption :1
+prendre le parole : 1
 
-il y avoir :14
+faire attention : 1
 
-que en être il :2
+se présenter : 1
 
-mettre à le point :1
+se porter : 1
 
-faire face :2
+se conformer : 1
 
-se baser :1
+se comporter : 1
 
-donner occasion :1
+donner le exemple : 1
 
-se flatter :1
+atteindre insuffisance : 1
 
-se voir :3
+se dérouler : 3
 
-présenter hypocalcémie :1
+prendre part : 1
 
-manoeuvre mener :1
+poser problème : 1
 
-faire connaissance :1
+falloir il : 1
 
-mettre un terme :1
+se tourner : 1
 
-avoir fracture :6
+se en prendre : 1
 
-procéder à le constat :1
+faire partie : 3
 
-initiative prendre :1
+bénéficier de pontage : 1
 
-se attendre :2
+entendre parler : 1
 
-faire le objet consensus :1
+se passer : 1
 
-avoir plaisir :2
+se évader : 1
 
-étude mener :5
+faire acquisition : 1
 
-tourner le dos :1
+il falloir : 9
 
-accomplir démarche :1
+lancer appel : 1
 
-reproche adresser :1
+donner ordre : 1
 
-entraîner mort :1
+se révéler : 1
 
-avoir traitement :1
+faire déplacement : 1
 
-se contenter :1
+il y avoir : 15
 
-enquête réaliser :1
+se ranger : 1
 
-souffrir douleur :1
+faire face : 2
 
-avoir hémorragie :1
+mettre en œuvre : 1
 
-plaider non coupable :1
+tenir compte : 4
 
-avoir air :1
+mettre un terme : 3
 
-travail accomplir :2
+avoir fracture : 2
 
-se pencher :2
+se étaler : 1
 
-présenter signe :3
+se attendre : 1
 
-signer contrat :2
+faire référence : 1
 
-avoir idée :3
+avoir pouvoir : 1
 
-revoir à le baisse :1
+subir traitement : 1
 
-présenter sca :1
+se apercevoir : 1
 
-trouver à redire :1
+passer à le action : 1
 
-prendre son responsabilité :1
+se pencher : 1
 
-fournir travail :1
+prendre suite : 1
 
-faire de son mieux :1
+entrer en vigueur : 3
 
-prendre le fuite :1
+se rapporter : 1
 
-collaboration avoir :1
+avoir impression : 1
 
-traiter par le mépris :1
+présenter avantage : 1
 
-faire allusion :1
+prendre initiative : 1
 
-se arroger :1
+faire défaut : 1
 
-présenter effet :1
+mettre en examen : 3
 
-revêtir aspect :1
+marquer but : 1
 
-subir icp :5
+couronner le tout : 1
 
-bénéficier de pontage :2
+se ensuivre : 1
 
-quel ne être pas :1
+mener campagne : 1
 
-mettre en oeuvre :3
+se rendre : 3
 
-se inspirer :1
+avoir relation : 2
 
-effectuer évaluation :1
+ne en revenir pas : 1
 
-présenter risque :4
+souffrir de ostéoporose : 1
 
-tenir compte :3
+# MISIDENTIFIED MWES
 
-mener campagne :1
+## PARTIALLY_SEEN
 
-entraîner hypocalcémie :1
+prendre précaution : 1
 
-se rendre :4
+se poser : 1
 
-tirer conséquence :1
+faire part : 1
 
-se souvenir :3
+il y avoir : 5
 
-souffrance subir :1
+action entreprendre : 1
 
-subir extraction :1
+se déguster : 1
 
-appel lancer :1
+il en être : 2
 
-faire le objet :3
+avoir lieu : 1
 
-mettre en bouche :1
-## Correctly identified new MWEs (0.0)
+y avoir il : 1
 
-## Correctly identified MWTs (0.0)
+disputer match : 1
 
-## Correctly identified embedded (100.0)
-faire le objet :1
-## Correctly identified embedded (1.0)
-contre-indiquer :3
+se tenir : 1
+
+il sembler : 1
+
+être à le rendez-vous : 1
+
+avoir droit : 1
+
+comment se faire il : 7
+
+redonner confiance : 1
+
+vous rappeler : 2
+
+conseil apporter : 1
+
+avoir rôle : 2
+
+se faire : 3
+
+se hisser : 1
+
+coûter vie : 1
+
+se retrouver : 1
+
+subir enseignement : 1
+
+se opposer : 1
+
+## MWE
+
+prendre précaution : 1
+
+se poser : 1
+
+faire part : 1
+
+il y avoir : 5
+
+action entreprendre : 1
+
+se déguster : 1
+
+il en être : 2
+
+avoir lieu : 1
+
+y avoir il : 1
+
+disputer match : 1
+
+se tenir : 1
+
+il sembler : 1
+
+être à le rendez-vous : 1
+
+avoir droit : 1
+
+comment se faire il : 7
+
+redonner confiance : 1
+
+vous rappeler : 2
+
+conseil apporter : 1
+
+avoir rôle : 2
+
+se faire : 3
+
+se hisser : 1
+
+coûter vie : 1
+
+se retrouver : 1
+
+subir enseignement : 1
+
+se opposer : 1
+
+# NON IDENTIFIED MWES
+
+## EMBEDDED
+
+être le objet : 1
+
+## MWT
+
+## INTERLEAVING
+
+commettre indélicatesse : 1
+
+subir angioplastie : 1
+
+atteindre angor : 1
+
+susciter doute : 1
+
+présenter endocardite : 1
+
+## MWE
+
+mettre à le voix : 1
+
+appeler à secours : 1
+
+me remis : 1
+
+créant réaction : 1
+
+aurait effet : 1
+
+questions posées : 1
+
+violation exercer : 1
+
+se trouvait : 1
+
+il y avait : 2
+
+s' étend : 1
+
+se informer : 1
+
+crée conflits : 1
+
+se livrer activité : 1
+
+aller chercher : 1
+
+faire le nécessaire : 1
+
+repasser à le offensive : 1
+
+avoir droit : 1
+
+répondre présent : 1
+
+se dirigèrent : 1
+
+fait apparition : 1
+
+passer inaperçue : 1
+
+connaissaient progression : 1
+
+atteindre maladie : 1
+
+être le objet : 1
+
+porter attention : 1
+
+contrat signer : 1
+
+souffrir de syndrome : 1
+
+eu lieu : 1
+
+jouer rôle : 1
+
+eu influence : 1
+
+donner instruction : 1
+
+fait voyages : 1
+
+faire le objet polémique : 1
+
+avoir effet : 1
+
+coiffer à le poteau : 1
+
+être le fait : 1
+
+fait face : 2
+
+s' assis : 1
+
+faire le actualité : 1
+
+se lâcher : 1
+
+se mariaient : 1
+
+détérioration causée : 1
+
+diriger se : 1
+
+apporter aide : 1
+
+mettre la pression : 1
+
+m' essayais : 1
+
+avoir suite : 1
+
+nous réjouir : 1
+
+se déplacer : 1
+
+a tendance : 1
+
+causer bouleversement : 1
+
+se consacrée : 1
+
+il y eu : 1
+
+le hasard faire bien le chose : 1
+
+faire foi : 1
+
+s' élever : 1
+
+montrer le exemple : 1
+
+ayant expérience : 1
+
+donner le parole : 1
+
+avait intérêt : 1
+
+vous opposer : 1
+
+il y aurait : 1
+
+eu effet : 1
+
+mesure prendre : 1
+
+voir le jour : 1
+
+fait le tour de le monde : 1
+
+a tort : 1
+
+se reflète : 1
+
+avoir infection : 1
+
+fournir explication : 1
+
+font choix : 1
+
+remis en question : 1
+
+accorder acceptant : 1
+
+joue rôle : 1
+
+connues succès : 1
+
+subi intervention : 1
+
+avoir rendez-vous : 1
+
+destructions provoquées : 1
+
+discours prononcer : 1
+
+faire référence : 1
+
+demander le parole : 1
+
+prendre à le sérieux : 1
+
+se trouvant : 1
+
+subit pressions : 1
+
+se comportent : 1
+
+s' élevait : 2
+
+transaction faire : 1
+
+se désolidariser : 1
+
+réaliser travail : 1
+
+vie sauver : 1
+
+il faudrait : 1
+
+se éclater : 1
+
+mener à bien : 1
+
+fait part : 1
+
+vote effectuer : 1
+
+photographie prendre : 1
+
+susciter certitude : 1
+
+nous concentrerons : 1
+
+action prise : 1
+
+nous contenter : 2
+
+connaître disgrâce : 1
+
+se poser question : 1
+
+avoir question : 1
+
+proposition formulée : 1
+
+mettre de côté : 1
+
+pointer le bout de son nez : 1
+
+aller à le bout : 1
+
+donner performance : 1
+
+conduite mener : 1
+
+le ton donner : 1
+
+faire guerre : 1
+
+présenter condoléances : 1
+
+se aventurer : 1
+
+il y avoir lieu : 1
+
+avoir à cœur : 1
+
+a besoin : 2
+
+adresser demande : 1
+
+se dérouler : 2
+
+transformation subir : 1
+
+se trouvent : 1
+
+était temps : 1
+
+effectuer liaison : 1
+
+fournir aide : 1
+
+joué rôle : 1
+
+être le objet atteinte : 1
+
+subir pontage : 1
+
+présenter taux : 1
+
+présenter altération : 1
+
+il semble : 2
+
+il y a : 10
+
+se saisir : 1
+
+se exprimer : 1
+
+se produisent : 1
+
+actions produites : 1
+
+mis en œuvre : 1
+
+assurer défense : 1
+
+subir attaque : 1
+
+avoir à cure : 1
+
+donner explication : 1
+
+savoir gré : 2
+
+serré les dents : 1
+
+prêter attention : 1
+
+rôle jouer : 1
+
+fait preuve : 1
+
+eu tendance : 1
+
+se baigner : 1
+
+a l' air : 1
+
+en avoir dans le slip : 1
+
+il se faire : 1
+
+il sembler : 2
+
+il rester : 1
+
+ne être pas à son coup de essai : 1
+
+mettent en garde : 1
+
+avoir conséquences : 1
+
+attirer attention : 1
+
+réponse apporter : 1
+
+trouver preneur : 1
+
+se plongés : 1
+
+est occasion : 1
+
+vit le jour : 1
+
+sceller accord : 1
+
+perdre connaissance : 1
+
+serait de le ressort : 1
+
+connaître retard : 1
+
+avez accès : 1
+
+s' effondrer : 2
+
+fait les gros titres : 1
+
+engagement prendre : 1
+
+subir angioplastie : 1
+
+causé extinction : 1
+
+recevoir réponses : 1
+
+tirés d' affaire : 1
+
+a chance : 1
+
+investigation mener : 1
+
+prit part : 1
+
+nous résigner : 1
+
+trouver refuge : 1
+
+faire un part : 1
+
+se approcher : 1
+
+se met : 1
+
+se faire il : 7
+
+économie faire : 1
+
+faire partie : 1
+
+jouant rôle : 1
+
+avoir malheur : 1
+
+présenter hypertension : 1
+
+accomplir acte : 1
+
+hausse provoquée : 1
+
+prendre conscience : 1
+
+causé suppression : 1
+
+se jettent : 1
+
+eu effets : 1
+
+se situe : 2
+
+donner naissance : 1
+
+test réaliser : 1
+
+laissant de côté : 1
+
+changements frappé : 1
+
+susciter doute : 1
+
+commettre indélicatesse : 1
+
+il y avoir : 3
+
+entraîner irrégularité : 1
+
+faire face : 1
+
+y avoir t il : 1
+
+effectuer enquête : 1
+
+avoir lieu de être : 1
+
+se baser : 1
+
+s' passé : 1
+
+y avoir il : 1
+
+faire le objet traitement : 1
+
+faisant partie : 1
+
+diriger attention : 1
+
+travail accomplir : 1
+
+tourne à le catastrophe : 1
+
+provoquent dégâts : 1
+
+avoir envie : 1
+
+m' amuse : 1
+
+faire le objet inventaire : 1
+
+prendre son précaution : 1
+
+faisant semblant : 1
+
+perdre pied : 1
+
+se rendre : 1
+
+avoir souvenir : 1
+
+tourner court : 1
+
+subir traitement : 1
+
+se permettre : 1
+
+se apercevoir : 1
+
+s' déclaré : 1
+
+prendre le pas : 1
+
+ont occasion : 1
+
+faisant acte : 1
+
+se écouler : 1
+
+en venir : 1
+
+en valait la peine : 1
+
+entrer en vigueur : 2
+
+atteindre angor : 1
+
+voir de œil : 1
+
+faire économie : 1
+
+atteindre crise : 1
+
+subissent violences : 1
+
+laissé trace : 1
+
+on changer pas un équipe qui gagner : 1
+
+se défaire : 1
+
+faire le objet publication : 1
+
+il faut : 2
+
+avoir retard : 1
+
+tenir discours : 1
+
+engendré changement : 1
+
+mener problèmes : 1
+
+s' apprête : 1
+
+donner éclaircissement : 1
+
+interjeter appel : 1
+
+causer perturbation : 1
+
+commettre grossièreté : 1
+
+faire figure : 1
+
+il s' agit : 1
+
+prendre son place : 1
+
+grossir le rang : 1
+
+présenter endocardite : 1
+
+## NEW
+
+mettre à le voix : 1
+
+causer bouleversement : 1
+
+me remis : 1
+
+créant réaction : 1
+
+aurait effet : 1
+
+questions posées : 1
+
+violation exercer : 1
+
+s' assis : 1
+
+s' étend : 1
+
+se informer : 1
+
+crée conflits : 1
+
+faire le nécessaire : 1
+
+repasser à le offensive : 1
+
+s' élevait : 2
+
+répondre présent : 1
+
+se dirigèrent : 1
+
+fait apparition : 1
+
+passer inaperçue : 1
+
+connaissaient progression : 1
+
+souffrir de syndrome : 1
+
+eu lieu : 1
+
+eu influence : 1
+
+donner instruction : 1
+
+fait voyages : 1
+
+faire le objet polémique : 1
+
+fait preuve : 1
+
+fait face : 2
+
+faire le actualité : 1
+
+se lâcher : 1
+
+se mariaient : 1
+
+détérioration causée : 1
+
+diriger se : 1
+
+mettre la pression : 1
+
+m' essayais : 1
+
+avoir suite : 1
+
+nous réjouir : 1
+
+se trouvait : 1
+
+a tendance : 1
+
+se consacrée : 1
+
+le hasard faire bien le chose : 1
+
+faire foi : 1
+
+s' élever : 1
+
+montrer le exemple : 1
+
+ayant expérience : 1
+
+donner le parole : 1
+
+vous opposer : 1
+
+il y aurait : 1
+
+eu effet : 1
+
+fait le tour de le monde : 1
+
+se reflète : 1
+
+avoir infection : 1
+
+fournir explication : 1
+
+font choix : 1
+
+remis en question : 1
+
+accorder acceptant : 1
+
+joue rôle : 1
+
+connues succès : 1
+
+subi intervention : 1
+
+avoir rendez-vous : 1
+
+destructions provoquées : 1
+
+faire le objet inventaire : 1
+
+avait intérêt : 1
+
+demander le parole : 1
+
+se trouvant : 1
+
+subit pressions : 1
+
+se comportent : 1
+
+a tort : 1
+
+transaction faire : 1
+
+se désolidariser : 1
+
+il y avait : 2
+
+vie sauver : 1
+
+il faudrait : 1
+
+se éclater : 1
+
+fait part : 1
+
+vote effectuer : 1
+
+coiffer à le poteau : 1
+
+susciter certitude : 1
+
+nous concentrerons : 1
+
+action prise : 1
+
+nous contenter : 2
+
+connaître disgrâce : 1
+
+avoir question : 1
+
+proposition formulée : 1
+
+mettre de côté : 1
+
+pointer le bout de son nez : 1
+
+conduite mener : 1
+
+donner performance : 1
+
+aller à le bout : 1
+
+le ton donner : 1
+
+présenter condoléances : 1
+
+se aventurer : 1
+
+avoir à cœur : 1
+
+a besoin : 2
+
+adresser demande : 1
+
+transformation subir : 1
+
+était temps : 1
+
+prendre le pas : 1
+
+fournir aide : 1
+
+joué rôle : 1
+
+subir angioplastie : 1
+
+subir pontage : 1
+
+présenter altération : 1
+
+il semble : 2
+
+il y a : 10
+
+se saisir : 1
+
+se produisent : 1
+
+actions produites : 1
+
+mis en œuvre : 1
+
+assurer défense : 1
+
+subir attaque : 1
+
+avoir à cure : 1
+
+savoir gré : 2
+
+serré les dents : 1
+
+prêter attention : 1
+
+eu tendance : 1
+
+se baigner : 1
+
+en avoir dans le slip : 1
+
+il se faire : 1
+
+il rester : 1
+
+ne être pas à son coup de essai : 1
+
+mettent en garde : 1
+
+avoir conséquences : 1
+
+réponse apporter : 1
+
+trouver preneur : 1
+
+se plongés : 1
+
+est occasion : 1
+
+vit le jour : 1
+
+sceller accord : 1
+
+perdre connaissance : 1
+
+serait de le ressort : 1
+
+avez accès : 1
+
+s' effondrer : 2
+
+fait les gros titres : 1
+
+tourner court : 1
+
+faisant acte : 1
+
+causé extinction : 1
+
+recevoir réponses : 1
+
+tirés d' affaire : 1
+
+a chance : 1
+
+investigation mener : 1
+
+prit part : 1
+
+nous résigner : 1
+
+trouver refuge : 1
+
+faire un part : 1
+
+se livrer activité : 1
+
+se met : 1
+
+se faire il : 7
+
+économie faire : 1
+
+jouant rôle : 1
+
+avoir malheur : 1
+
+présenter hypertension : 1
+
+accomplir acte : 1
+
+hausse provoquée : 1
+
+donner explication : 1
+
+causé suppression : 1
+
+se jettent : 1
+
+eu effets : 1
+
+se situe : 2
+
+test réaliser : 1
+
+laissant de côté : 1
+
+changements frappé : 1
+
+susciter doute : 1
+
+commettre indélicatesse : 1
+
+a l' air : 1
+
+entraîner irrégularité : 1
+
+y avoir t il : 1
+
+effectuer enquête : 1
+
+avoir lieu de être : 1
+
+s' passé : 1
+
+faire le objet traitement : 1
+
+faisant partie : 1
+
+diriger attention : 1
+
+tourne à le catastrophe : 1
+
+provoquent dégâts : 1
+
+m' amuse : 1
+
+prendre son précaution : 1
+
+faisant semblant : 1
+
+perdre pied : 1
+
+avoir souvenir : 1
+
+se permettre : 1
+
+il y eu : 1
+
+s' déclaré : 1
+
+effectuer liaison : 1
+
+ont occasion : 1
+
+en valait la peine : 1
+
+atteindre angor : 1
+
+être le objet atteinte : 1
+
+faire économie : 1
+
+atteindre crise : 1
+
+subissent violences : 1
+
+laissé trace : 1
+
+on changer pas un équipe qui gagner : 1
+
+se défaire : 1
+
+faire le objet publication : 1
+
+il faut : 2
+
+grossir le rang : 1
+
+tenir discours : 1
+
+engendré changement : 1
+
+mener problèmes : 1
+
+s' apprête : 1
+
+donner éclaircissement : 1
+
+interjeter appel : 1
+
+causer perturbation : 1
+
+commettre grossièreté : 1
+
+faire figure : 1
+
+il s' agit : 1
+
+prendre son place : 1
+
+avoir retard : 1
+
+voir de œil : 1
+
+présenter endocardite : 1
+
+## SEEN
+
+voir le jour : 11
+
+appeler à secours : 2
+
+se exprimer : 11
+
+il y avoir : 176
+
+faire face : 20
+
+se baser : 5
+
+y avoir il : 5
+
+rôle jouer : 6
+
+attirer attention : 13
+
+avoir droit : 43
+
+faire référence : 11
+
+travail accomplir : 5
+
+il sembler : 16
+
+atteindre maladie : 10
+
+avoir envie : 4
+
+discours prononcer : 1
+
+porter attention : 1
+
+contrat signer : 3
+
+réaliser travail : 1
+
+aller chercher : 1
+
+mener à bien : 6
+
+jouer rôle : 33
+
+photographie prendre : 1
+
+apporter aide : 1
+
+subir traitement : 1
+
+se apercevoir : 3
+
+être le fait : 3
+
+faire guerre : 2
+
+se trouvent : 1
+
+connaître retard : 1
+
+se écouler : 3
+
+engagement prendre : 1
+
+en venir : 2
+
+entrer en vigueur : 4
+
+avoir effet : 10
+
+se déplacer : 7
+
+il y avoir lieu : 7
+
+se dérouler : 61
+
+se approcher : 9
+
+se poser question : 3
+
+prendre à le sérieux : 2
+
+prendre conscience : 5
+
+se rendre : 46
+
+être le objet : 8
+
+faire partie : 92
+
+donner naissance : 10
+
+présenter taux : 1
+
+mesure prendre : 4
+
