@@ -6,7 +6,7 @@ configuration = {
         'currentIter': -1,
         'shuffleTrain': False,
         'debugTrainNum': 25,
-        'test': 0.1,
+        'test': 0.2,
         'tokenAvg': 270000,
         'testTokenAvg': 43000,
         'mweRepeition': 35,
@@ -17,7 +17,11 @@ configuration = {
         'verbose': True,
         'deleteNumericalExpressions': False,
         'replaceNumbers': True,
-        'removeFtbMWT': False
+        'removeFtbMWT': True,
+        'printTest': False,
+        'logReg':False,
+        'svc':False,
+        'traitDeformedLemma': True
     },
     'xp': {
         'linear': False,
@@ -58,10 +62,12 @@ configuration = {
         'focusedElemNum': 8,
         'file': 'kiper.p',
         'earlyStop': False,
-        'verbose': False,
+        'verbose': True,
         'eager': True,
         'gru': True,
-        '': False
+        'earlyStopPatience': 7,
+        'trainValidationSet': True
+
     },
     'rnn': {
         'focusedElements': 7,
@@ -83,14 +89,14 @@ configuration = {
         's1TokenNum': 2,
         'bTokenNum': 1,
         'shuffle': False,
-        'rnnSequence': False
+        'rnnSequence': False,
+        'earlyStopPatience': 7
     },
     'mlp': {
         'inputItems': 4,
         'posEmb': 42,
         'tokenEmb': 480,
         'lemma': True,
-        'frequentTokens': True,
         'compactVocab': False,
         'optimizer': 'adagrad',
         'loss': 'categorical_crossentropy',
@@ -159,7 +165,7 @@ configuration = {
     'path': {
         'results': 'Results',
         'projectPath': '',
-        'corpusRelativePath': 'ressources/sharedtask'
+        'corpusFolder': 'ressources/sharedtask'
     },
     'files': {
         'bestWeights': 'bestWeigths.hdf5',

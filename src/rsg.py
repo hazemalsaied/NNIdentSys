@@ -40,6 +40,37 @@ def generateConf(xpMode):
         generateLinearConf()
     elif xpMode == XpMode.kiperwasser:
         generateKiperwasserConf()
+    else:
+        generateMLPConf()
+
+
+def generateMLPConf():
+    configuration['mlp'].update({
+        'posEmb': int(generateValue([15, 150], continousPlage=True, uniform=True)),
+        'tokenEmb': int(generateValue([150, 500], continousPlage=True, uniform=True)),
+        'compactVocab': generateValue([True, False], continousPlage=False, uniform=True),
+        'dense1UnitNumber': int(generateValue([15, 200], continousPlage=True, uniform=True)),
+        'dense1Dropout': round(generateValue([.1, .4], continousPlage=True, uniform=True), 2),
+        'lemma': True,
+        'optimizer': 'adagrad',
+        'loss': 'categorical_crossentropy',
+        'verbose': 0,
+        'batchSize': 64,
+        'epochs': 40,
+        'earlyStop': True,
+        'validationSplit': .1,
+        'lr': 0.059,
+        'dense1': True,
+        'dense1Activation': 'relu'
+    })
+    configuration['sampling'].update({
+        'overSampling': True,
+        'importantSentences': True,
+        'importantTransitions': False,
+        'sampleWeight': True,
+        'favorisationCoeff': int(generateValue([1, 25], continousPlage=True, uniform=True)),
+        'focused': True
+    })
 
 
 def generateRNNConf():
@@ -51,20 +82,20 @@ def generateRNNConf():
     configuration['rnn']['posRnnUnitNum'] = int(generateValue([25, 200], True, True))
     configuration['rnn']['rnnDropout'] = round(generateValue([0, .3], True, True), 1)
 
-    configuration['rnn']['useDense'] = True # generateValue([True, False], False, False)
-    configuration['rnn']['denseDropout'] = 0 # round(generateValue([0, .5], True, True), 1)
+    configuration['rnn']['useDense'] = True  # generateValue([True, False], False, False)
+    configuration['rnn']['denseDropout'] = 0  # round(generateValue([0, .5], True, True), 1)
     configuration['rnn']['denseUnitNum'] = int(generateValue([5, 200], True, True))
-    configuration['rnn']['batchSize'] = 64 # generateValue([16, 32, 64, 128], False, True)
+    configuration['rnn']['batchSize'] = 64  # generateValue([16, 32, 64, 128], False, True)
     configuration['mlp']['compactVocab'] = generateValue([True, False], False, False)
 
 
 def generateLinearConf():
     configuration['features'].update({
         'lemma': True,
-        'token': generateValue([True, False], favorisationTaux=.2),
+        'token': generateValue([True, False], favorisationTaux=.3),
         'pos': True,
         'suffix': False,
-        'b1': generateValue([True, False], favorisationTaux=.4),
+        'b1': generateValue([True, False], favorisationTaux=.5),
         'bigram': True,
         's0b2': generateValue([True, False], favorisationTaux=.5),
         'trigram': generateValue([True, False], favorisationTaux=.5),
@@ -92,10 +123,10 @@ def generateKiperwasserConf():
     kiperConf['dense1'] = int(generateValue([10, 350], True))
     kiperConf['rnnDropout'] = round(generateValue([.1, .4], True), 2)
     kiperConf['rnnUnitNum'] = int(generateValue([20, 250], True))
-    kiperConf['rnnLayerNum'] = 1 #  generateValue([1, 2], False)
+    kiperConf['rnnLayerNum'] = 1  # generateValue([1, 2], False)
 
-    configuration['model']['embedding']['compactVocab'] = generateValue([True, False], False)
-    configuration['model']['embedding']['lemma'] = True #  generateValue([True, False], False)
+    configuration['mlp']['compactVocab'] = generateValue([True, False], False)
+    configuration['mlp']['lemma'] = True  # generateValue([True, False], False)
 
 
 def generateValue(plage, continousPlage=False, uniform=False, favorisationTaux=0.7):

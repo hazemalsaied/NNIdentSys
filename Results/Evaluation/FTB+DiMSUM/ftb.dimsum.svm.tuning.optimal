@@ -1,0 +1,207 @@
+Using Theano backend.
+	Mode: LINEAR
+==================================================================================================
+	Dataset: FTB
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, ftb, corpus, 1, False, False, False, False, False, False, True, True, True, True, False, False, False, True, False, True, False, False, False, True, False, False, False, True, True
+==================================================================================================
+
+==================================================================================================
+	FR Train (15994)
+==================================================================================================
+	Important sentence: 11506
+	Token occurrences: 481933
+	MWE number: 5973
+	MWE occurrences: 25744
+	Continuous occurrences: 99.0 %
+	Frequent MWE occurences: 67.0 %
+	MWE length: 2.66
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 132
+
+==================================================================================================
+	 Test (2541)
+==================================================================================================
+	Important sentence: 1802
+	Token occurrences: 75216
+	MWE number: 1498
+	MWE occurrences: 4039
+	Continuous occurrences: 100.0 %
+	MWE length: 2.65
+	Seen occurrences : 85%
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 8
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1305726
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:11:55.022185
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:38.026455
+==================================================================================================
+	Identification : 0.815
+	P, R  : 0.802, 0.828
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+### 1.MISIDENTIFIED MWES
+
+MWE: number 489, occurrences: 673
+
+PARTIALLY_SEEN: number 482, occurrences: 665
+
+### 2.CORRECTLY IDENTIFIED MWES
+
+EMBEDDED: number 1, occurrences: 1
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 981, occurrences: 3238
+
+MWT: number 2, occurrences: 2
+
+NEW: number 111, occurrences: 129
+
+SEEN: number 870, occurrences: 3109
+
+### 3.NON IDENTIFIED MWES
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 606, occurrences: 801
+
+MWT: number 6, occurrences: 6
+
+NEW: number 378, occurrences: 451
+
+SEEN: number 228, occurrences: 4936
+
+### 4.TEST SET
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 1498, occurrences: 4039
+
+MWT: number 8, occurrences: 8
+
+Dataset.ftb.FR.linear.md has been created in Results/ErrorAnalysis folder!	Mode: LINEAR
+==================================================================================================
+	Dataset: DIMSUM
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, dimsum, corpus, 1, False, False, False, False, False, True, True, True, True, False, True, False, True, True, False, True, False, False, False, False, False, False, False, False, True
+==================================================================================================
+
+==================================================================================================
+	EN Train (4799)
+==================================================================================================
+	Important sentence: 2643
+	Token occurrences: 73826
+	MWE number: 2861
+	MWE occurrences: 4232
+	Continuous occurrences: 89.0 %
+	Frequent MWE occurences: 18.0 %
+	MWE length: 2.34
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	 Test (1000)
+==================================================================================================
+	Important sentence: 523
+	Token occurrences: 16500
+	MWE number: 723
+	MWE occurrences: 837
+	Continuous occurrences: 96.0 %
+	MWE length: 2.33
+	Seen occurrences : 22%
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 259018
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:01.588707
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:14.922946
+==================================================================================================
+	Identification : 0.225
+	P, R  : 0.152, 0.436
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+### 1.MISIDENTIFIED MWES
+
+MWE: number 136, occurrences: 164
+
+PARTIALLY_SEEN: number 136, occurrences: 164
+
+### 2.CORRECTLY IDENTIFIED MWES
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 84, occurrences: 127
+
+MWT: number 0, occurrences: 0
+
+NEW: number 13, occurrences: 14
+
+SEEN: number 71, occurrences: 113
+
+### 3.NON IDENTIFIED MWES
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 652, occurrences: 710
+
+MWT: number 0, occurrences: 0
+
+NEW: number 599, occurrences: 636
+
+SEEN: number 53, occurrences: 258
+
+### 4.TEST SET
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 723, occurrences: 837
+
+MWT: number 0, occurrences: 0
+
+Dataset.dimsum.EN.linear.md has been created in Results/ErrorAnalysis folder!
+Process finished with exit code 0

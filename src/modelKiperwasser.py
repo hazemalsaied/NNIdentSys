@@ -15,12 +15,13 @@ import torch.nn as nn
 import torch.nn.functional as f
 import torch.optim as optim
 
+import config
 import evaluation
 # from config import configuration
 from corpus import getTokens
 from parser import parse
 from reports import seperator, doubleSep, tabs
-import config
+
 device = 'cpu'
 dtype = torch.float
 
@@ -48,23 +49,26 @@ class TransitionClassifier(nn.Module):
         self.p_embeddings = nn.Embedding(len(self.posVocab), configuration['kiperwasser']['posDim'])
         self.w_embeddings = nn.Embedding(len(self.tokenVocab), configuration['kiperwasser']['wordDim'])
         embeddingDim = configuration['kiperwasser']['wordDim'] + configuration['kiperwasser']['posDim']
-        # if configuration['kiperwasser']['gru']:
-        #     self.rnn = nn.GRU(embeddingDim,
-        #                        configuration['kiperwasser']['rnnUnitNum'],
-        #                        bidirectional=True,
-        #                        num_layers=configuration['kiperwasser']['rnnLayerNum'],
-        #                        dropout=configuration['kiperwasser']['rnnDropout'] if configuration['kiperwasser'][
-        #                                                                                   'rnnLayerNum'] > 1 else 0)
-        # else:
-        self.rnn = nn.LSTM(embeddingDim,
-                       configuration['kiperwasser']['rnnUnitNum'],
-                       bidirectional=True,
-                       num_layers=configuration['kiperwasser']['rnnLayerNum'],
-                       dropout=configuration['kiperwasser']['rnnDropout'] if configuration['kiperwasser']['rnnLayerNum'] > 1 else 0)
+        if configuration['kiperwasser']['gru']:
+            self.rnn = nn.GRU(embeddingDim,
+                              configuration['kiperwasser']['rnnUnitNum'],
+                              bidirectional=True,
+                              num_layers=configuration['kiperwasser']['rnnLayerNum'],
+                              dropout=configuration['kiperwasser']['rnnDropout'] if configuration['kiperwasser'][
+                                                                                        'rnnLayerNum'] > 1 else 0)
+        else:
+            self.rnn = nn.LSTM(embeddingDim,
+                               configuration['kiperwasser']['rnnUnitNum'],
+                               bidirectional=True,
+                               num_layers=configuration['kiperwasser']['rnnLayerNum'],
+                               dropout=configuration['kiperwasser']['rnnDropout'] if configuration['kiperwasser'][
+                                                                                         'rnnLayerNum'] > 1 else 0)
         # init hidden and cell states h0 c0
         self.hiddenRnn = initHiddenRnn()
         # * 2 because bidirectional
-        self.linear1 = nn.Linear(configuration['kiperwasser']['focusedElemNum'] * configuration['kiperwasser']['rnnUnitNum'] * 2, configuration['kiperwasser']['dense1'])
+        self.linear1 = nn.Linear(
+            configuration['kiperwasser']['focusedElemNum'] * configuration['kiperwasser']['rnnUnitNum'] * 2,
+            configuration['kiperwasser']['dense1'])
         # dropout here is very detrimental
         # self.dropout1 = nn.Dropout(p=0.3)
         self.linear2 = nn.Linear(configuration['kiperwasser']['dense1'], 8 if enableCategorization else 4)
@@ -78,7 +82,8 @@ class TransitionClassifier(nn.Module):
         """
         # select the contextualized embeddings for the focused_elements (given configuration)
         activeElems = selectRows(sentEmbs, activeElemIdxs).view((1, -1))
-        out = f.relu(self.linear1(activeElems)) if configuration['kiperwasser']['denseActivation'] == 'relu' else f.tanh(
+        out = f.relu(self.linear1(activeElems)) if configuration['kiperwasser'][
+                                                       'denseActivation'] == 'relu' else f.tanh(
             self.linear1(activeElems))
         if configuration['kiperwasser']['denseDropout']:
             out = self.dropout1(out)
@@ -115,8 +120,8 @@ class TransitionClassifier(nn.Module):
         posEmbed = self.p_embeddings(posIdxs).to(device)
         sentEmbed = torch.cat([tokenEmbed, posEmbed], 1).to(device)
         self.hiddenRnn = initHiddenRnn()
-        rnnHiddenSeq, self.hiddenRnn = self.rnn(sentEmbed.view(len(tokenIdxs), 1, -1), self.hiddenRnn)
-        return rnnHiddenSeq.view(len(tokenIdxs), -1)
+        rnnOutput, self.hiddenRnn = self.rnn(sentEmbed.view(len(tokenIdxs), 1, -1), self.hiddenRnn)
+        return rnnOutput.view(len(tokenIdxs), -1)
 
     def getIdxs(self, sent):
         tokenIdxs, POSIdxs = [], []
@@ -139,7 +144,7 @@ class TransitionClassifier(nn.Module):
         return torch.LongTensor(tokenIdxs).to(device), torch.LongTensor(POSIdxs).to(device)
 
 
-def train(corpus, conf, trainedModel=None, trainValidation=False, fileNum=0):
+def train(corpus, conf, trainedModel=None, trainValidation=False):
     """
     version avec bi-LSTM sur toute la phrase, et mise à jour des paramètres à chaque phrase
     (calcul de la perte pour une phrase complete)
@@ -148,27 +153,28 @@ def train(corpus, conf, trainedModel=None, trainValidation=False, fileNum=0):
     configuration = conf
     global device
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    if configuration['kiperwasser']['verbose'] and trainValidation:
+        sys.stdout.write(tabs + 'Training validation set!' + seperator)
     # nb of sentence positions taken to build input vector representing a parse configuration
     model = TransitionClassifier(corpus).to(device) if not trainValidation else trainedModel
     optimizer = getOptimizer(model.parameters())
     lossFunction = nn.NLLLoss()
     if not trainValidation:
         fileNum = randint(0, 500)
-    filePath = os.path.join(configuration['path']['projectPath'], 'Reports', str(fileNum) + '.' + configuration['kiperwasser']['file'])
-    sys.stdout.write('\n' + filePath + '\n')
+        filePath = os.path.join(configuration['path']['projectPath'], 'Reports',
+                                str(fileNum) + '.' + configuration['kiperwasser']['file'])
+        sys.stdout.write('\n' + tabs+ 'Best model path: ' + '/'.join(filePath.split('/')[-2:]) + seperator)
     # losses of validation set for each epoch
     epochLosses, validLosses, validAccuracies = [], [], []
-    # if configuration['kiperwasser']['verbose']:
-    sys.stderr.write(tabs + str(model) + doubleSep if configuration['kiperwasser']['verbose'] else '')
-    sys.stderr.write(tabs + str(optimizer) + doubleSep if configuration['kiperwasser']['verbose'] else '')
-    sys.stderr.write(tabs + str(lossFunction) + doubleSep if configuration['kiperwasser']['verbose'] else '')
+    if not trainValidation and configuration['kiperwasser']['verbose']:
+        sys.stderr.write(tabs + str(model) + doubleSep)
+        sys.stderr.write(tabs + str(optimizer) + doubleSep)
     # ------------ if validation asked -------------
     validSeuil = configuration['mlp']['validationSplit']
     pointer = int(len(corpus.trainingSents) * (1 - validSeuil))
     validSents = corpus.trainingSents[pointer:]
     trainSents = corpus.trainingSents[:pointer] if not trainValidation else validSents
     for epoch in range(configuration['kiperwasser']['epochs']):
-        sys.stderr.write(tabs + 'Epoch %d....\n' % epoch if configuration['kiperwasser']['verbose'] else '')
         start, epochLoss, usedSents = datetime.datetime.now(), 0, 0
         # shuffle sentences
         sentRanks = range(len(trainSents))
@@ -184,39 +190,31 @@ def train(corpus, conf, trainedModel=None, trainValidation=False, fileNum=0):
                     sentLoss.backward()
                     optimizer.step()
         epochLosses.append(epochLoss)
-        # if configuration['kiperwasser']['verbose']:
-        sys.stderr.write('Number of used sentences in train = %d\n' % usedSents if configuration['kiperwasser']['verbose'] else '')
-        sys.stderr.write('Total loss for epoch %d: %f\n' % (epoch, epochLoss) if configuration['kiperwasser']['verbose'] else '')
+        sys.stderr.write('Epoch %d:  Total loss = %f on %d\n' % (epoch, epochLoss, usedSents)
+                         if configuration['kiperwasser']['verbose'] and not trainValidation else '')
         if not trainValidation:
             valLoss = getCorpusLoss(validSents, model, lossFunction, optimizer)
             validAcc = evaluate(validSents, model)
-            sys.stdout.write('validAcc: ' + str(validAcc) + '\n')
-            # if configuration['kiperwasser']['verbose']:
-            sys.stderr.write('validation loss after epoch %d : %f\n' % (epoch, valLoss) if configuration['kiperwasser']['verbose'] else '')
+            sys.stderr.write('Validation loss: %f, Identification accuracy: %f\n' % (valLoss, validAcc)
+                             if configuration['kiperwasser']['verbose'] and not trainValidation else '')
             # save model if validation loss has decreased
             # if validLosses and valLoss <= validLosses[-1]:
-            if validAccuracies and validAcc and validAcc > max(validAccuracies):
+            if configuration['kiperwasser']['earlyStop'] and validAccuracies and validAcc > max(validAccuracies):
                 torch.save(model, filePath)
             # early stopping
-            elif validAccuracies and validAcc and configuration['kiperwasser']['earlyStop'] and validAcc <= max(validAccuracies):
+            elif configuration['kiperwasser']['earlyStop'] and \
+                    epoch > configuration['kiperwasser']['earlyStopPatience'] and \
+                    validAcc < max(validAccuracies):
                 model = torch.load(filePath)
-                # validLosses and (valLoss >= validLosses[-1]):
-                # sys.stderr.write('validation loss has increased (), stop and retrain using %d epochs\n' % epoch)
-                # sys.stderr.write('validation loss has increased (), stop and retrain using %d epochs\n' % epoch)
-                sys.stderr.write(
-                    'identification accuracy has decreased (), stop and retrain using %d epochs\n' % (epoch - 1))
-                if validSeuil:
+                sys.stderr.write(tabs + 'identification accuracy has decreased (), '
+                                 'stop and retrain using %d epochs\n' % (epoch - 1))
+                if configuration['kiperwasser']['trainValidationSet']:
                     configuration['kiperwasser']['epochs'] = epoch - 1  # (cf. epoch est décalé de 1)
-                    # return train(corpus, model, trainValidation=True,fileNum=fileNum)
-            # if no validation set: save iff loss on training set decreases
-            # else:
-            #     if len(epochLosses) > 1 and epochLoss < epochLosses[-2]:
-            #         torch.save(model, filePath)
+                    return train(corpus, configuration, model, trainValidation=True)
+                return model
             validLosses.append(valLoss)
             validAccuracies.append(validAcc)
-        sys.stdout.write('Epoch has taken {0}\n'.format(datetime.datetime.now() - start)
-                         if configuration['kiperwasser']['verbose'] else '')
-    if not trainValidation:
+    if not trainValidation and configuration['kiperwasser']['trainValidationSet']:
         return train(corpus, configuration, model, trainValidation=True)
 
     return model
@@ -237,10 +235,14 @@ def initHiddenRnn():
     here num_directions = 2 (bidirectional), batch = 1
     :return:
     """
-    return torch.zeros(configuration['kiperwasser']['rnnLayerNum'] * 2, configuration['kiperwasser']['batch'],
-                       configuration['kiperwasser']['rnnUnitNum']).to(device), \
-           torch.zeros(configuration['kiperwasser']['rnnLayerNum'] * 2, configuration['kiperwasser']['batch'],
-                       configuration['kiperwasser']['rnnUnitNum']).to(device)
+    if configuration['kiperwasser']['gru']:
+        return torch.zeros(configuration['kiperwasser']['rnnLayerNum'] * 2, configuration['kiperwasser']['batch'],
+                           configuration['kiperwasser']['rnnUnitNum']).to(device)
+    else:
+        return torch.zeros(configuration['kiperwasser']['rnnLayerNum'] * 2, configuration['kiperwasser']['batch'],
+                           configuration['kiperwasser']['rnnUnitNum']).to(device), \
+               torch.zeros(configuration['kiperwasser']['rnnLayerNum'] * 2, configuration['kiperwasser']['batch'],
+                           configuration['kiperwasser']['rnnUnitNum']).to(device)
 
 
 def selectRows(sentEmbeds, idxs):

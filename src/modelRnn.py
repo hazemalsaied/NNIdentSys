@@ -60,6 +60,7 @@ class Network:
         print self.model.summary()
 
     def predict(self, trans):
+        # print trans
         tokenIdxs, posIdxs = getIdxs(trans.configuration)
         oneHotRep = self.model.predict([np.asarray([tokenIdxs]), np.asarray([posIdxs])], batch_size=1)
         return oneHotRep[0]
@@ -81,7 +82,7 @@ def train(cls, corpus):
     optimizer = keras.optimizers.Adagrad(lr=rnnConf['lr'], epsilon=None, decay=0.0) \
         if rnnConf['optimizer'] == 'adagrad' else keras.optimizers.Adam(lr=rnnConf['lr'])
     cls.model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
-    callbacks = [EarlyStopping(patience=2)] if rnnConf['earlyStop'] else []
+    callbacks = [EarlyStopping(patience=configuration['rnn']['earlyStopPatience'])] if rnnConf['earlyStop'] else []
     history = cls.model.fit([np.asarray(tokenIdxs), np.asarray(posIdxs)], lbls,
                             validation_split=.1,
                             epochs=rnnConf['epochs'],
@@ -142,7 +143,13 @@ def focusedSample(labels, tokenData, posData, corpus):
                 traitedMWEs.add(mweIdx)
                 mwe = mWEDicAsIdxs[mweIdx]
                 mweLength = len(mwe.split(' '))
-                mweOccurrence = corpus.mweDictionary[mwe]
+                if mwe == 'estar com febre':
+                    pass
+                if mwe in corpus.mweDictionary:
+                    mweOccurrence = corpus.mweDictionary[mwe]
+                else:
+                    pass
+                    mweOccurrence = 0
                 if mweOccurrence < oversamplingTaux:
                     for underProcessingTransIdx in range(i - (2 * mweLength - 1) + 1, i + 1):
                         for j in range(oversamplingTaux - mweOccurrence):
@@ -184,15 +191,19 @@ def getMWEDicAsIdxs(corpus):
     result = dict()
     for s in corpus.trainingSents:
         for v in s.vMWEs:
-            vIdxs = ''
-            for t in v.tokens:
-                if t.getTokenOrLemma() in tokenVocab.keys():
-                    vIdxs += '.{0}.'.format(tokenVocab[t.getTokenOrLemma()])
-                elif t.isNumber():
-                    vIdxs += '.{0}.'.format(tokenVocab[number])
-                else:
-                    vIdxs += '.{0}.'.format(tokenVocab[unk])
-            result[vIdxs] = ' '.join(t.lemma.lower() for t in v.tokens)
+            if v.isRecognizable:
+                vIdxs = ''
+                for t in v.tokens:
+                    if t.getTokenOrLemma() in tokenVocab.keys():
+                        vIdxs += '.{0}.'.format(tokenVocab[t.getTokenOrLemma()])
+                    elif t.isNumber():
+                        vIdxs += '.{0}.'.format(tokenVocab[number])
+                    else:
+                        vIdxs += '.{0}.'.format(tokenVocab[unk])
+                value = ' '.join(t.lemma.lower() for t in v.tokens)
+                result[vIdxs] = value
+                if value == 'estar com febre':
+                    pass
     return result
 
 
@@ -233,6 +244,7 @@ def getIdxs(config):
         posIdxs = posIdxs + [posVocab[empty]]
 
     if config.stack:
+
         for t in getTokens(config.stack[-1])[:rnnConf['s0TokenNum']]:
             if t.isNumber():
                 idxs.append(tokenVocab[number])

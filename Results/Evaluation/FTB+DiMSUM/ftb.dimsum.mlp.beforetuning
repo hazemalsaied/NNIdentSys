@@ -1,0 +1,295 @@
+        GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, bPadding, batchSize, chickPoint, compactVocab, dense1, dense1Activation, dense1Dropout, dense1UnitNumber, dense2, dense2Activation, dense2Dropout, dense2UnitNumber, earlyStop, epochs, features, inputItems, lemma, loss, lr, minDelta, optimizer, posEmb, predictVerbose, s0Padding, s1Padding, tokenEmb, validationSplit, verbose
+==================================================================================================
+# Configs: NonCompo, ftb, corpus, True, False, 6, True, True, False, True, True, 2, 64, False, False, True, relu, 0.429, 58, False, relu, 0, 0, True, 40, False, 4, True, categorical_crossentropy, 0.059, 0.2, adagrad, 42, False, 5, 5, 480, 0.1, 0
+==================================================================================================
+
+==================================================================================================
+        FR Train (11506)
+==================================================================================================
+        Important sentence: 11506
+        Token occurrences: 401746
+        MWE number: 5973
+        MWE occurrences: 25744
+        Continuous occurrences: 99.0 %
+        Frequent MWE occurences: 67.0 %
+        MWE length: 2.66
+        Recognizable MWEs: 100.0 %
+        MWT occurrences: 132
+
+==================================================================================================
+         Test (2541)
+==================================================================================================
+        Important sentence: 1802
+        Token occurrences: 75216
+        MWE number: 1498
+        MWE occurrences: 4039
+        Continuous occurrences: 100.0 %
+        MWE length: 2.65
+        Seen occurrences : 85%
+        Recognizable MWEs: 100.0 %
+        MWT occurrences: 8
+
+==================================================================================================
+        Non frequent word cleaning:
+==================================================================================================
+        Before : 24193
+        After : 21585
+# Parameters = 10523400
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_1 (InputLayer)            (None, 4)            0
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 4)            0
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 4, 480)       10360800    input_1[0][0]
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 4, 42)        41202       input_2[0][0]
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 1920)         0           embedding_1[0][0]
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 168)          0           embedding_2[0][0]
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 2088)         0           flatten_1[0][0]
+                                                                 flatten_2[0][0]
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 58)           121162      concatenate_1[0][0]
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 58)           0           dense_1[0][0]
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 4)            236         dropout_1[0][0]
+==================================================================================================
+Total params: 10,523,400
+Trainable params: 10,523,400
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+        Sampling
+==================================================================================================
+        data size before focused sampling = 1712803
+        data size after focused sampling = 1712803
+        data size before sampling = 1712803
+        data size after sampling = 2995192
+        4 Labels in train : Counter({0: 748798, 1: 748798, 2: 748798, 3: 748798})
+        4 Labels in valid : Counter({3: 75056, 1: 74964, 2: 74757, 0: 74743})
+        Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+        Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 2695672 samples, validate on 299520 samples
+Epoch 1/40
+ - 104s - loss: 0.1518 - acc: 0.9615 - val_loss: 0.1134 - val_acc: 0.9715
+Epoch 2/40
+ - 104s - loss: 0.1146 - acc: 0.9718 - val_loss: 0.1077 - val_acc: 0.9741
+Epoch 3/40
+ - 104s - loss: 0.1079 - acc: 0.9738 - val_loss: 0.1050 - val_acc: 0.9753
+
+==================================================================================================
+        Training time : 0:06:56.636518
+==================================================================================================
+
+==================================================================================================
+        Parsing time : 0:00:53.010600
+==================================================================================================
+        Identification : 0.737
+        P, R  : 0.8, 0.683
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+### 1.MISIDENTIFIED MWES
+
+MWE: number 1030, occurrences: 1499
+
+PARTIALLY_SEEN: number 1019, occurrences: 1484
+
+### 2.CORRECTLY IDENTIFIED MWES
+
+EMBEDDED: number 14, occurrences: 21
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 1013, occurrences: 3231
+
+MWT: number 2, occurrences: 2
+
+NEW: number 94, occurrences: 107
+
+SEEN: number 919, occurrences: 3124
+
+### 3.NON IDENTIFIED MWES
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 590, occurrences: 808
+
+MWT: number 6, occurrences: 6
+
+NEW: number 393, occurrences: 473
+
+SEEN: number 197, occurrences: 5554
+
+### 4.TEST SET
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 1498, occurrences: 4039
+
+MWT: number 8, occurrences: 8
+
+MLP has been created in Results/ErrorAnalysis folder!   Mode: NON.COMPO
+==================================================================================================
+        Dataset: DIMSUM
+==================================================================================================
+        Division: CORPUS
+==================================================================================================
+        GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, bPadding, batchSize, chickPoint, compactVocab, dense1, dense1Activation, dense1Dropout, dense1UnitNumber, dense2, dense2Activation, dense2Dropout, dense2UnitNumber, earlyStop, epochs, features, inputItems, lemma, loss, lr, minDelta, optimizer, posEmb, predictVerbose, s0Padding, s1Padding, tokenEmb, validationSplit, verbose
+==================================================================================================
+# Configs: NonCompo, dimsum, corpus, True, False, 6, True, True, False, True, True, 2, 64, False, False, True, relu, 0.429, 58, False, relu, 0, 0, True, 40, False, 4, True, categorical_crossentropy, 0.059, 0.2, adagrad, 42, False, 5, 5, 480, 0.1, 0
+==================================================================================================
+
+==================================================================================================
+        EN Train (2643)
+==================================================================================================
+        Important sentence: 2643
+        Token occurrences: 49962
+        MWE number: 2861
+        MWE occurrences: 4232
+        Continuous occurrences: 89.0 %
+        Frequent MWE occurences: 18.0 %
+        MWE length: 2.34
+        Recognizable MWEs: 100.0 %
+
+==================================================================================================
+         Test (1000)
+==================================================================================================
+        Important sentence: 523
+        Token occurrences: 16500
+        MWE number: 723
+        MWE occurrences: 837
+        Continuous occurrences: 96.0 %
+        MWE length: 2.33
+        Seen occurrences : 22%
+        Recognizable MWEs: 100.0 %
+
+==================================================================================================
+        Non frequent word cleaning:
+==================================================================================================
+        Before : 10067
+        After : 8945
+# Parameters = 4439862
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_3 (InputLayer)            (None, 4)            0
+__________________________________________________________________________________________________
+input_4 (InputLayer)            (None, 4)            0
+__________________________________________________________________________________________________
+embedding_3 (Embedding)         (None, 4, 480)       4293600     input_3[0][0]
+__________________________________________________________________________________________________
+embedding_4 (Embedding)         (None, 4, 42)        24864       input_4[0][0]
+__________________________________________________________________________________________________
+flatten_3 (Flatten)             (None, 1920)         0           embedding_3[0][0]
+__________________________________________________________________________________________________
+flatten_4 (Flatten)             (None, 168)          0           embedding_4[0][0]
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 2088)         0           flatten_3[0][0]
+                                                                 flatten_4[0][0]
+__________________________________________________________________________________________________
+dense_3 (Dense)                 (None, 58)           121162      concatenate_2[0][0]
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 58)           0           dense_3[0][0]
+__________________________________________________________________________________________________
+dense_4 (Dense)                 (None, 4)            236         dropout_2[0][0]
+==================================================================================================
+Total params: 4,439,862
+Trainable params: 4,439,862
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+        Sampling
+==================================================================================================
+        data size before focused sampling = 476383
+        data size after focused sampling = 476383
+        data size before sampling = 476383
+        data size after sampling = 752264
+        4 Labels in train : Counter({0: 188066, 1: 188066, 2: 188066, 3: 188066})
+        4 Labels in valid : Counter({0: 18842, 1: 18815, 2: 18788, 3: 18782})
+        Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+        Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 677037 samples, validate on 75227 samples
+Epoch 1/40
+ - 18s - loss: 0.2082 - acc: 0.9509 - val_loss: 0.1452 - val_acc: 0.9673
+Epoch 2/40
+ - 18s - loss: 0.1435 - acc: 0.9682 - val_loss: 0.1353 - val_acc: 0.9713
+Epoch 3/40
+ - 18s - loss: 0.1328 - acc: 0.9709 - val_loss: 0.1325 - val_acc: 0.9716
+
+==================================================================================================
+        Training time : 0:01:12.317388
+==================================================================================================
+
+==================================================================================================
+        Parsing time : 0:00:09.530667
+==================================================================================================
+        Identification : 0.265
+        P, R  : 0.22, 0.335
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+### 1.MISIDENTIFIED MWES
+
+MWE: number 320, occurrences: 366
+
+PARTIALLY_SEEN: number 320, occurrences: 366
+
+### 2.CORRECTLY IDENTIFIED MWES
+
+EMBEDDED: number 1, occurrences: 1
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 140, occurrences: 184
+
+MWT: number 0, occurrences: 0
+
+NEW: number 60, occurrences: 63
+
+SEEN: number 80, occurrences: 121
+
+### 3.NON IDENTIFIED MWES
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 599, occurrences: 653
+
+MWT: number 0, occurrences: 0
+
+NEW: number 554, occurrences: 587
+
+SEEN: number 45, occurrences: 263
+
+### 4.TEST SET
+
+EMBEDDED: number 0, occurrences: 0
+
+INTERLEAVING: number 0, occurrences: 0
+
+MWE: number 723, occurrences: 837
+
+MWT: number 0, occurrences: 0

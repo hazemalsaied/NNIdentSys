@@ -147,7 +147,6 @@ def train(corpus, conf):
     validSents = corpus.trainingSents[pointer:]
     # ------------ training ------------------------
     for epoch in range(kiperConf['epochs']):
-        start = datetime.datetime.now()
         if kiperConf['verbose']:
             sys.stderr.write(tabs + 'Epoch %d....\n' % epoch)
         epochLoss = 0
@@ -156,7 +155,6 @@ def train(corpus, conf):
         usedSents = 0
         for i in sentRanks:
             sent = trainSents[i]
-            # print(sent)
             if configuration['kiperwasser']['moreTrans'] and len(sent.tokens) > 6:
                 tokens = []
                 startTokenIdx = random.randint(0, len(sent.tokens) - 6)
@@ -174,11 +172,8 @@ def train(corpus, conf):
                     for mwe in sent.vMWEs:
                         mweTokenPos = [t.position for t in mwe.tokens]
                         if firstTokenPosition > min(mweTokenPos) and lastTokenPosition < max(mweTokenPos):
-                            # print(' '.join(t.text for t in tokens))
-                            # print(sent)
                             orphalineTokens = False
                 if orphalineTokens:
-                    # print('orphalineTokens')
                     model.zero_grad()
                     sentLoss = getSentLoss(tokens, sent, model, lossFunction, orphalineTokens=True)
                     if sentLoss:
@@ -203,11 +198,8 @@ def train(corpus, conf):
 
         epochLosses.append(epochLoss)
         if kiperConf['verbose']:
-            sys.stderr.write('Number of used sentences in train = %d\n' % usedSents)
-            sys.stderr.write('Total loss for epoch %d: %f\n' % (epoch, epochLoss))
-
-        if kiperConf['verbose']:
-            sys.stdout.write('Epoch has taken {0}\n'.format(datetime.datetime.now() - start))
+            # sys.stderr.write('Number of used sentences in train = %d\n' % usedSents)
+            sys.stderr.write('Total loss for epoch %d: %f on %d sentences\n' % (epoch, epochLoss, usedSents))
     return model
 
 

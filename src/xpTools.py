@@ -5,7 +5,7 @@ from theano import function, config, shared, tensor
 import reports
 from corpus import *
 from identification import identify, identifyWithMlpInLinear, identifyWithLinearInMlp, crossValidation
-
+#from analysis import exportEnalysis, errorAnalysis
 allSharedtask1Lang = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT',
                       'LT', 'MT', 'PL', 'PT', 'RO', 'SV', 'SL', 'TR']
 
@@ -37,23 +37,25 @@ def xp(langs, dataset, xpMode, division, xpNum=1, title='', seed=0, mlpInLinear=
                 elif linearInMlp:
                     identifyWithLinearInMlp(lang)
                 else:
-                    identify(lang)
+                    corpus = identify(lang)
+                    #if configuration['evaluation']['corpus']:
+                        #exportEnalysis(errorAnalysis(corpus), lang, dataset, xpMode )
 
 
 def getParameters(xpMode, printTilte=True):
     titles, values = [], []
-    for k in configuration['xp']:
+    for k in sorted(configuration['xp'].keys()):
         if configuration['xp'][k] and type(True) == type(configuration['xp'][k]):
             titles.append('xp')
             values.append(k)
     if not titles:
         titles.append('xp')
         values.append('NonCompo')
-    for k in configuration['dataset']:
+    for k in sorted(configuration['dataset'].keys()):
         if configuration['dataset'][k] and type(True) == type(configuration['dataset'][k]):
             titles.append('Dataset')
             values.append(k)
-    for k in configuration['evaluation']:
+    for k in sorted(configuration['evaluation'].keys()):
         if configuration['evaluation'][k] and type(True) == type(configuration['evaluation'][k]):
             titles.append('Evaluation')
             values.append(k)
@@ -63,24 +65,24 @@ def getParameters(xpMode, printTilte=True):
     if xpMode != XpMode.linear:
         titles += ['lemma', 'compactVocab']
         values += [configuration['mlp']['lemma'], configuration['mlp']['compactVocab']]
-    for k in configuration['sampling']:
+    for k in sorted(configuration['sampling'].keys()):
         titles.append(k)
         values.append(configuration['sampling'][k])
 
     if xpMode == XpMode.kiperwasser or xpMode == XpMode.kiperComp:
-        for k in configuration['kiperwasser']:
+        for k in sorted(configuration['kiperwasser'].keys()):
             titles.append(k)
             values.append(configuration['kiperwasser'][k])
     elif xpMode == XpMode.rnn:
-        for k in configuration['rnn']:
+        for k in sorted(configuration['rnn'].keys()):
             titles.append(k)
             values.append(configuration['rnn'][k])
     elif xpMode == XpMode.linear:
-        for k in configuration['features']:
+        for k in sorted(configuration['features'].keys()):
             titles.append(k)
             values.append(configuration['features'][k])
     else:
-        for k in configuration['mlp']:
+        for k in sorted(configuration['mlp'].keys()):
             titles.append(k)
             values.append(configuration['mlp'][k])
     if printTilte:

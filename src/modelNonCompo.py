@@ -332,7 +332,7 @@ def getFrequencyDics(corpus, freqTaux=1):
                 del tokenVocab[k]
         sys.stdout.write(tabs + 'After : {0}\n'.format(len(tokenVocab)))
 
-    elif configuration['mlp']['frequentTokens']:
+    else:
         if configuration['others']['verbose']:
             sys.stdout.write(tabs + 'Non frequent word cleaning:' + doubleSep)
             sys.stdout.write(tabs + 'Before : {0}\n'.format(len(tokenVocab)))

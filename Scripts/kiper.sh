@@ -1,4 +1,4 @@
 #!/bin/bash
 source /home/halsaied/miniconda2/bin/activate
 cd /home/halsaied/NNIdenSys/
-env MKL_THREADING_LAYER=GNU  python kiper/identification.py
+env MKL_THREADING_LAYER=GNU  python src/xpKiperComp.py

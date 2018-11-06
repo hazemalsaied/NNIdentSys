@@ -512,18 +512,23 @@ def getAvgScores(scores, langNum=3, trialNum=3):
 
 def getNewScores(files, pilot=False, withTitles=True, withTitle2=False):
     for f in files:
-        f = str(f)
-        titles, scores, params, langs, titles2 = mineNewFile(f)
+        titles, scores, params, langs, titles2 = mineNewFile(str(f))
         if pilot:
             for i in range(len(titles)):
                 if withTitle2:
-                    print 'BG, PT, TR, ' + titles2[i][:-1]
-                print '{0},{1},{2},{3}'.format(
+                    # withTitle2 = False
+                    print 'BG, BG, PT, PT, TR, TR, ' + titles2[i][:-1]
+                print '{0},{1},{2},{3},{4},{5},{6}'.format(
                     scores[i * 3] if i * 3 < len(scores) else '',
                     scores[i * 3 + 1] if i * 3 + 1 < len(scores) else '',
                     scores[i * 3 + 2] if i * 3 + 2 < len(scores) else '',
+                    scores[i * 3 + 3] if i * 3 + 3 < len(scores) else '',
+                    scores[i * 3 + 4] if i * 3 + 4 < len(scores) else '',
+                    scores[i * 3 + 5] if i * 3 + 5 < len(scores) else '',
                     titles[i][:-1] if withTitles else '')
         else:
+            # for i in range(len(titles)):
+            #     print scores[i*2], ',',scores[i*2+1], titles[i][:-1] if withTitles else ''
             for i, v in enumerate(scores):
                 print v, titles[i][:-1] if withTitles else ''
 
@@ -534,9 +539,6 @@ def mineNewFile(newFile):
     previousLine = ''
     with open(path, 'r') as log:
         for line in log.readlines():
-            if line.startswith('Total loss for epoch '):
-                print line[len('Total loss for epoch ') + 2:]
-                continue
             if line.startswith('# Configs:'):
                 titles.append(line)
             if line.startswith('# CTitles:'):
@@ -573,10 +575,11 @@ def orderResults(titles, values):
     for i in range(len(titles)):
         print sorted(results[i].items())
 
+
 def readAndOrderResults():
     titles, values, idx = [], [], 0
 
-    with open( 'tmp - tmp.csv.csv', 'r') as f:
+    with open('tmp - tmp.csv.csv', 'r') as f:
         for line in f:
             if idx % 2 == 0:
                 titles.append(line[:-1])
@@ -585,13 +588,8 @@ def readAndOrderResults():
             idx += 1
     orderResults(titles, values)
 
-if __name__ == '__main__':
-    getNewScores([
-        'mlpInLinear'
-        #'svm.1', 'svm.2', 'svm.3', 'svm.4', 'svm.5', 'svm.6', 'svm.7'
-        # 'k.rsg1', 'k.rsg2', 'k.rsg3','k.rsg4', 'k.rsg5', 'k.rsg6','k.rsg7', 'k.rsg8', 'k.rsg9','k.rsg10'
-        # 'kc.bg.rsg.5', 'kc.bg.rsg.6', 'kc.bg.rsg.7', 'kc.bg.rsg.8' , 'kc.bg.rsg.9', 'kc.bg.rsg.10'
-        # 'rnn.pilot.7', 'rnn.pilot.8', 'rnn.pilot.9', 'rnn.pilot.10', 'rnn.pilot.11', 'rnn.pilot.12'
-        # 'linear16', 'linear17', 'linear18', 'linear19', 'linear20'
-    ], pilot=False, withTitles=False, withTitle2=False)
 
+if __name__ == '__main__':
+    getNewScores(
+        [f for f in os.listdir('../Reports/Reports') if f.startswith('st1.svm.eval.1')]
+                 , pilot=False, withTitles=False, withTitle2=False)

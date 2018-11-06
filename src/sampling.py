@@ -10,13 +10,13 @@ from config import configuration
 
 
 def overSample(labels, data, linearInMlp=False):
-    tokenData, posData, linearPred= [], [], []
+    tokenData, posData, linearPred = [], [], []
     if not configuration['sampling']['overSampling']:
         for item in data:
             tokenData.append(np.asarray(item[:configuration['mlp']['inputItems']]))
-            posData.append(np.asarray(item[configuration['mlp']['inputItems']:configuration['mlp']['inputItems'] *2]))
+            posData.append(np.asarray(item[configuration['mlp']['inputItems']:configuration['mlp']['inputItems'] * 2]))
             if linearInMlp:
-                linearPred.append(np.asarray(item[configuration['mlp']['inputItems']*2:]))
+                linearPred.append(np.asarray(item[configuration['mlp']['inputItems'] * 2:]))
         return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(linearPred)]
     if configuration['others']['verbose']:
         sys.stdout.write(reports.tabs + 'data size before sampling = {0}\n'.format(len(labels)))
@@ -24,13 +24,14 @@ def overSample(labels, data, linearInMlp=False):
     data, labels = ros.fit_sample(data, labels)
     for item in data:
         tokenData.append(np.asarray(item[:configuration['mlp']['inputItems']]))
-        posData.append(np.asarray(item[configuration['mlp']['inputItems']:configuration['mlp']['inputItems']*2]))
-        linearPred.append(np.asarray(item[configuration['mlp']['inputItems']*2:]))
+        posData.append(np.asarray(item[configuration['mlp']['inputItems']:configuration['mlp']['inputItems'] * 2]))
+        linearPred.append(np.asarray(item[configuration['mlp']['inputItems'] * 2:]))
     if configuration['others']['verbose']:
         sys.stdout.write(reports.tabs + 'data size after sampling = {0}\n'.format(len(labels)))
     if linearInMlp:
         return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData), np.asarray(linearPred)]
     return np.asarray(labels), [np.asarray(tokenData), np.asarray(posData)]
+
 
 def overSampleImporTrans(data, labels, corpus, vocabulary):
     newData, newLabels = [], []
@@ -69,7 +70,8 @@ def getClassWeights(labels):
         res[c] = float(class_weight[cIdx] * configuration['sampling']['favorisationCoeff']) if c > 1 else class_weight[
             cIdx]
     if configuration['others']['verbose']:
-        sys.stdout.write(reports.tabs + 'Favorisation Coeff : {0}\n'.format(configuration['sampling']['favorisationCoeff']))
+        sys.stdout.write(
+            reports.tabs + 'Favorisation Coeff : {0}\n'.format(configuration['sampling']['favorisationCoeff']))
 
     return res
 
@@ -110,6 +112,7 @@ def getIdxsStrForMWE(mwe, vocabulary):
         return None
     return vocabulary.tokenIndices[tokenLemmas]
 
+
 def shuffleArrayInParallel(arrays):
     rangee = range(len(arrays[0]))
     random.shuffle(rangee)
@@ -129,7 +132,9 @@ def shuffleArrayInParallel(arrays):
 def test():
     a = [1, 2, 3, 4, 5, 6]
     b = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
-    c = [np.asarray([1, 2, 3, 4, 5, 6]),np.asarray([1, 2, 3, 4, 5, 6]), np.asarray([1, 2, 3, 4, 5, 6])]
+    c = [np.asarray([1, 2, 3, 4, 5, 6]), np.asarray([1, 2, 3, 4, 5, 6]), np.asarray([1, 2, 3, 4, 5, 6])]
     print shuffleArrayInParallel(c)
+
+
 if __name__ == '__main__':
     test()

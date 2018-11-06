@@ -1,5 +1,3 @@
-from config import configuration
-from corpus import Token, getTokens, getTokenLemmas, getRelevantModelAndNormalizer
 import sys
 
 from imblearn.over_sampling import RandomOverSampler
@@ -7,20 +5,22 @@ from sklearn.feature_extraction import DictVectorizer
 from sklearn.svm import *
 
 from config import configuration
+from corpus import Token, getTokens, getTokenLemmas, getRelevantModelAndNormalizer
 from reports import tabs, doubleSep
+
 mwtDictionary = {}
 mweDictionary = {}
 
 
-def train(corpus, mlpModels=None, mlpNormalizers=None):
-    model = LinearSVC(random_state=0)
+def train(corpus, mlpModels=None):
+    model = getModel()
     if configuration['others']['verbose']:
         sys.stdout.write(tabs + 'Linear classifier:' + doubleSep + str(model))
-    labels, featureDicss = extract(corpus, mlpModels=mlpModels, mlpNormalizers=mlpNormalizers)
+    labels, featureDicss = extract(corpus, mlpModels=mlpModels)
     vec = DictVectorizer()
     features = vec.fit_transform(featureDicss)
     if configuration['others']['verbose']:
-        sys.stdout.write(tabs + 'Feature number = {0}'.format(len(vec.vocabulary_)) + doubleSep)
+        sys.stdout.write(doubleSep + tabs + 'Feature number = {0}'.format(len(vec.vocabulary_)) + doubleSep)
     if configuration['sampling']['overSampling']:
         if configuration['others']['verbose']:
             sys.stdout.write('Train data = {0}, '.format(features.shape[0]))
@@ -32,27 +32,36 @@ def train(corpus, mlpModels=None, mlpNormalizers=None):
     model.fit(features, labels)
     return model, vec
 
-def extract(corpus, mlpModels=None, mlpNormalizers=None):
+
+def getModel():
+    if configuration['others']['logReg']:
+        return SVC(gamma='auto')
+    elif configuration['others']['svc']:
+        return SVC(gamma='auto')
+    return LinearSVC(random_state=0)
+
+
+def extract(corpus, mlpModels=None):
     labels, featureDicss = [], []
     global mweDictionary, mwtDictionary
     mweDictionary, mwtDictionary = corpus.mweDictionary, corpus.mwtDictionary
     for sent in corpus.trainingSents:
-        l, f = extractSent(sent, corpus.trainingSents, mlpModels=mlpModels, mlpNormalizers=mlpNormalizers)
+        l, f = extractSent(sent, corpus.trainingSents, mlpModels=mlpModels)
         labels.extend(l)
         featureDicss.extend(f)
     return labels, featureDicss
 
 
-def extractSent(sent, trainingSent=None, mlpModels=None, mlpNormalizers=None):
+def extractSent(sent, trainingSent=None, mlpModels=None):
     transition = sent.initialTransition
     labels, features = [], []
     while transition.next:
         if transition.next and transition.next.type:
             labels.append(transition.next.type.value)
             featDic = getFeatures(transition, sent)
-            if mlpModels and mlpNormalizers:
-                mlpModel, mlpNormalizer = getRelevantModelAndNormalizer(sent, trainingSent, mlpModels, mlpNormalizers)
-                probVector = mlpModel.predict(transition, mlpNormalizer)
+            if mlpModels:
+                mlpModel, mlpNormalizer = getRelevantModelAndNormalizer(sent, trainingSent, mlpModels, None)
+                probVector = mlpModel.predict(transition)
                 predictedTrans = sorted(range(len(probVector)), key=lambda k: probVector[k], reverse=True)
                 featDic['MLP_Prediction'] = predictedTrans[0]
             features.append(featDic)
@@ -73,7 +82,8 @@ def getFeatures(transition, sent):
     if conf.stack and isinstance(conf.stack[-1], Token) and conf.stack[-1].getLemma() in mwtDictionary:
         featureDictionary['S0_isMWT'] = True
         featureDictionary[conf.stack[-1].getLemma() + '_isMWT'] = True
-        # return featureDictionary
+        # if configuration['features']['singleMWTFeature']:
+        return featureDictionary
 
     if configuration['features']['numeric']:
         if conf.buffer and isANumber(conf.buffer[0]):
@@ -159,6 +169,7 @@ def isANumber(t):
         if c.isdigit():
             return True
     return False
+
 
 def enhanceMerge(transition, transDic):
     if not configuration['features']['dictionary']:

@@ -1,0 +1,1577 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_rWdlIs.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 5779/6083 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX TITAN Black (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, sharedtask2, corpus, 1, False, False, False, False, False, True, True, True, True, True, True, False, True, True, False, True, True, False, True, False, False, False, False, True, True
+==================================================================================================
+Deformed Lemmas: 18096 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 1917 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 1555 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	BG Train (19767)
+==================================================================================================
+	Important sentence: 5248
+	Token occurrences: 441193
+	MWE number: 2021
+	MWE occurrences: 6034
+	Continuous occurrences: 80.0 %
+	Frequent MWE occurences: 56.0 %
+	MWE length: 2.13
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 11
+
+==================================================================================================
+	 Test (1832)
+==================================================================================================
+	Important sentence: 554
+	Token occurrences: 39220
+	MWE number: 432
+	MWE occurrences: 670
+	Continuous occurrences: 71.0 %
+	MWE length: 2.11
+	Seen occurrences : 65% 
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1482934
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:30.547144
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:27.873471
+==================================================================================================
+	Identification : 0.637
+	P, R  : 0.516, 0.83
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 2794 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 530 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 437 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	DE Train (7918)
+==================================================================================================
+	Important sentence: 2788
+	Token occurrences: 152305
+	MWE number: 1914
+	MWE occurrences: 3234
+	Continuous occurrences: 26.0 %
+	Frequent MWE occurences: 21.0 %
+	MWE length: 1.94
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1030
+	Embedded occurrences: 48
+
+==================================================================================================
+	 Test (1078)
+==================================================================================================
+	Important sentence: 410
+	Token occurrences: 20524
+	MWE number: 423
+	MWE occurrences: 500
+	Continuous occurrences: 24.0 %
+	MWE length: 1.96
+	Seen occurrences : 48% 
+	Recognizable MWEs: 97.0 %
+	MWT occurrences: 149
+	Embedded occurrences: 13
+	Interleaving occurrences: 2
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1140038
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:15.586405
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:11.936931
+==================================================================================================
+	Identification : 0.486
+	P, R  : 0.348, 0.806
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 1612 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 777 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 336 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	EL Train (6989)
+==================================================================================================
+	Important sentence: 1657
+	Token occurrences: 187234
+	MWE number: 1121
+	MWE occurrences: 1856
+	Continuous occurrences: 50.0 %
+	Frequent MWE occurences: 22.0 %
+	MWE length: 2.37
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 6
+
+==================================================================================================
+	 Test (1261)
+==================================================================================================
+	Important sentence: 436
+	Token occurrences: 35860
+	MWE number: 335
+	MWE occurrences: 501
+	Continuous occurrences: 55.0 %
+	MWE length: 2.39
+	Seen occurrences : 57% 
+	Recognizable MWEs: 99.0 %
+	Embedded occurrences: 7
+	Interleaving occurrences: 3
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1032867
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:08.315048
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:22.341299
+==================================================================================================
+	Identification : 0.59
+	P, R  : 0.449, 0.859
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 812 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 0 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 677 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	EN Train (3471)
+==================================================================================================
+	Important sentence: 300
+	Token occurrences: 53200
+	MWE number: 233
+	MWE occurrences: 331
+	Continuous occurrences: 68.0 %
+	Frequent MWE occurences: 6.0 %
+	MWE length: 2.14
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+
+==================================================================================================
+	 Test (3965)
+==================================================================================================
+	Important sentence: 447
+	Token occurrences: 70998
+	MWE number: 353
+	MWE occurrences: 501
+	Continuous occurrences: 58.0 %
+	MWE length: 2.17
+	Seen occurrences : 27% 
+	Recognizable MWEs: 99.0 %
+	MWT occurrences: 3
+	Embedded occurrences: 8
+	Interleaving occurrences: 5
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 318910
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:13.461677
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:32.090077
+==================================================================================================
+	Identification : 0.279
+	P, R  : 0.188, 0.547
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 1431 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 387 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 1153 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	ES Train (3469)
+==================================================================================================
+	Important sentence: 1450
+	Token occurrences: 122741
+	MWE number: 1130
+	MWE occurrences: 2110
+	Continuous occurrences: 75.0 %
+	Frequent MWE occurences: 28.0 %
+	MWE length: 2.27
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 2
+	Embedded occurrences: 150
+
+==================================================================================================
+	 Test (2046)
+==================================================================================================
+	Important sentence: 359
+	Token occurrences: 58861
+	MWE number: 380
+	MWE occurrences: 500
+	Continuous occurrences: 72.0 %
+	MWE length: 2.3
+	Seen occurrences : 55% 
+	Recognizable MWEs: 96.0 %
+	Embedded occurrences: 28
+	Interleaving occurrences: 18
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 675640
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:45.885002
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.078333
+==================================================================================================
+	Identification : 0.423
+	P, R  : 0.474, 0.382
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 2004 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 449 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 335 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	EU Train (9754)
+==================================================================================================
+	Important sentence: 2703
+	Token occurrences: 138769
+	MWE number: 938
+	MWE occurrences: 3295
+	Continuous occurrences: 81.0 %
+	Frequent MWE occurences: 57.0 %
+	MWE length: 2.02
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 7
+
+==================================================================================================
+	 Test (1404)
+==================================================================================================
+	Important sentence: 424
+	Token occurrences: 19038
+	MWE number: 200
+	MWE occurrences: 500
+	Continuous occurrences: 81.0 %
+	MWE length: 2.01
+	Seen occurrences : 86% 
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 2
+	Interleaving occurrences: 1
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 845694
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:46.499937
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:11.511917
+==================================================================================================
+	Identification : 0.814
+	P, R  : 0.726, 0.926
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 10 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 15 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 7 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	FA Train (3258)
+==================================================================================================
+	Important sentence: 1965
+	Token occurrences: 54076
+	MWE number: 1294
+	MWE occurrences: 2948
+	Continuous occurrences: 85.0 %
+	Frequent MWE occurences: 39.0 %
+	MWE length: 2.13
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+	Embedded occurrences: 6
+
+==================================================================================================
+	 Test (359)
+==================================================================================================
+	Important sentence: 291
+	Token occurrences: 7492
+	MWE number: 382
+	MWE occurrences: 501
+	Continuous occurrences: 79.0 %
+	MWE length: 2.22
+	Seen occurrences : 65% 
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 359472
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:20.646907
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:04.165600
+==================================================================================================
+	Identification : 0.754
+	P, R  : 0.653, 0.893
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 9484 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 1162 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 12263 
+Important Deformed Lemmas: 287 
+
+==================================================================================================
+	FR Train (19461)
+==================================================================================================
+	Important sentence: 4426
+	Token occurrences: 475447
+	MWE number: 1752
+	MWE occurrences: 5145
+	Continuous occurrences: 59.0 %
+	Frequent MWE occurences: 52.0 %
+	MWE length: 2.29
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 5
+	Embedded occurrences: 40
+
+==================================================================================================
+	 Test (1606)
+==================================================================================================
+	Important sentence: 400
+	Token occurrences: 38402
+	MWE number: 377
+	MWE occurrences: 498
+	Continuous occurrences: 56.0 %
+	MWE length: 2.35
+	Seen occurrences : 52% 
+	Recognizable MWEs: 99.0 %
+	Embedded occurrences: 6
+	Interleaving occurrences: 6
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1939217
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:08.173172
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:21.181137
+==================================================================================================
+	Identification : 0.642
+	P, R  : 0.518, 0.843
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 11537 
+Important Deformed Lemmas: 89 
+Deformed Lemmas: 2968 
+Important Deformed Lemmas: 46 
+Deformed Lemmas: 3263 
+Important Deformed Lemmas: 32 
+
+==================================================================================================
+	HE Train (15491)
+==================================================================================================
+	Important sentence: 1593
+	Token occurrences: 303315
+	MWE number: 1229
+	MWE occurrences: 1719
+	Continuous occurrences: 76.0 %
+	Frequent MWE occurences: 12.0 %
+	MWE length: 2.41
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 5
+
+==================================================================================================
+	 Test (3209)
+==================================================================================================
+	Important sentence: 450
+	Token occurrences: 65698
+	MWE number: 391
+	MWE occurrences: 502
+	Continuous occurrences: 76.0 %
+	MWE length: 2.3
+	Seen occurrences : 39% 
+	Recognizable MWEs: 99.0 %
+	Embedded occurrences: 7
+	Interleaving occurrences: 2
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 2068662
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:46.930826
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:37.091239
+==================================================================================================
+	Identification : 0.435
+	P, R  : 0.285, 0.917
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 166 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 0 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 50 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	HI Train (856)
+==================================================================================================
+	Important sentence: 418
+	Token occurrences: 17850
+	MWE number: 250
+	MWE occurrences: 499
+	Continuous occurrences: 92.0 %
+	Frequent MWE occurences: 30.0 %
+	MWE length: 2.09
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	 Test (828)
+==================================================================================================
+	Important sentence: 382
+	Token occurrences: 17580
+	MWE number: 285
+	MWE occurrences: 500
+	Continuous occurrences: 93.0 %
+	MWE length: 2.21
+	Seen occurrences : 55% 
+	Recognizable MWEs: 94.0 %
+	Embedded occurrences: 5
+	Interleaving occurrences: 28
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 132219
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:04.811395
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:07.720195
+==================================================================================================
+	Identification : 0.668
+	P, R  : 0.532, 0.896
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 847 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 282 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 242 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	HR Train (3129)
+==================================================================================================
+	Important sentence: 1362
+	Token occurrences: 73107
+	MWE number: 1095
+	MWE occurrences: 1861
+	Continuous occurrences: 58.0 %
+	Frequent MWE occurences: 22.0 %
+	MWE length: 2.21
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 211
+
+==================================================================================================
+	 Test (708)
+==================================================================================================
+	Important sentence: 350
+	Token occurrences: 16429
+	MWE number: 347
+	MWE occurrences: 501
+	Continuous occurrences: 58.0 %
+	MWE length: 2.2
+	Seen occurrences : 56% 
+	Recognizable MWEs: 96.0 %
+	Embedded occurrences: 59
+	Interleaving occurrences: 10
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 594956
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:26.357244
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:18.728286
+==================================================================================================
+	Identification : 0.547
+	P, R  : 0.441, 0.72
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 3819 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 493 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 561 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	HU Train (5404)
+==================================================================================================
+	Important sentence: 3595
+	Token occurrences: 135577
+	MWE number: 738
+	MWE occurrences: 6907
+	Continuous occurrences: 18.0 %
+	Frequent MWE occurences: 86.0 %
+	MWE length: 1.25
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 5164
+	Embedded occurrences: 175
+
+==================================================================================================
+	 Test (755)
+==================================================================================================
+	Important sentence: 431
+	Token occurrences: 20759
+	MWE number: 258
+	MWE occurrences: 776
+	Continuous occurrences: 24.0 %
+	MWE length: 1.33
+	Seen occurrences : 91% 
+	Recognizable MWEs: 99.0 %
+	MWT occurrences: 523
+	Embedded occurrences: 18
+	Interleaving occurrences: 4
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 596998
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:44.823851
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:11.556746
+==================================================================================================
+	Identification : 0.912
+	P, R  : 0.86, 0.971
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 8719 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 332 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 384 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	IT Train (14472)
+==================================================================================================
+	Important sentence: 2799
+	Token occurrences: 373499
+	MWE number: 1595
+	MWE occurrences: 3563
+	Continuous occurrences: 72.0 %
+	Frequent MWE occurences: 36.0 %
+	MWE length: 2.47
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 9
+	Embedded occurrences: 117
+
+==================================================================================================
+	 Test (1256)
+==================================================================================================
+	Important sentence: 380
+	Token occurrences: 35558
+	MWE number: 382
+	MWE occurrences: 503
+	Continuous occurrences: 67.0 %
+	MWE length: 2.6
+	Seen occurrences : 59% 
+	Recognizable MWEs: 95.0 %
+	Embedded occurrences: 25
+	Interleaving occurrences: 7
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1580845
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:30.706549
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:23.540945
+==================================================================================================
+	Identification : 0.558
+	P, R  : 0.423, 0.819
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 2463 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 0 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 2554 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	LT Train (4895)
+==================================================================================================
+	Important sentence: 297
+	Token occurrences: 90110
+	MWE number: 192
+	MWE occurrences: 312
+	Continuous occurrences: 58.0 %
+	Frequent MWE occurences: 14.0 %
+	MWE length: 2.16
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	 Test (6209)
+==================================================================================================
+	Important sentence: 474
+	Token occurrences: 118402
+	MWE number: 328
+	MWE occurrences: 500
+	Continuous occurrences: 60.0 %
+	MWE length: 2.25
+	Seen occurrences : 38% 
+	Recognizable MWEs: 99.0 %
+	Embedded occurrences: 1
+	Interleaving occurrences: 2
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 590991
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:22.932086
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:52.798047
+==================================================================================================
+	Identification : 0.382
+	P, R  : 0.256, 0.753
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 3961 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 356 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 287 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	PL Train (14821)
+==================================================================================================
+	Important sentence: 3918
+	Token occurrences: 246366
+	MWE number: 1791
+	MWE occurrences: 4567
+	Continuous occurrences: 71.0 %
+	Frequent MWE occurences: 48.0 %
+	MWE length: 2.13
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 100
+
+==================================================================================================
+	 Test (1300)
+==================================================================================================
+	Important sentence: 425
+	Token occurrences: 27661
+	MWE number: 356
+	MWE occurrences: 515
+	Continuous occurrences: 70.0 %
+	MWE length: 2.15
+	Seen occurrences : 68% 
+	Recognizable MWEs: 99.0 %
+	Embedded occurrences: 12
+	Interleaving occurrences: 4
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1525571
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:47.687845
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:15.616307
+==================================================================================================
+	Identification : 0.692
+	P, R  : 0.598, 0.821
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 9896 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 1391 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 1148 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	PT Train (25134)
+==================================================================================================
+	Important sentence: 4474
+	Token occurrences: 537524
+	MWE number: 2202
+	MWE occurrences: 4923
+	Continuous occurrences: 57.0 %
+	Frequent MWE occurences: 35.0 %
+	MWE length: 2.22
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+	Embedded occurrences: 8
+
+==================================================================================================
+	 Test (2770)
+==================================================================================================
+	Important sentence: 483
+	Token occurrences: 58604
+	MWE number: 448
+	MWE occurrences: 553
+	Continuous occurrences: 57.0 %
+	MWE length: 2.25
+	Seen occurrences : 69% 
+	Recognizable MWEs: 97.0 %
+	Embedded occurrences: 3
+	Interleaving occurrences: 13
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1851923
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:35.457430
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:38.074450
+==================================================================================================
+	Identification : 0.69
+	P, R  : 0.577, 0.86
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 50188 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 9264 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 8505 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	RO Train (49769)
+==================================================================================================
+	Important sentence: 4797
+	Token occurrences: 900626
+	MWE number: 591
+	MWE occurrences: 5301
+	Continuous occurrences: 69.0 %
+	Frequent MWE occurences: 84.0 %
+	MWE length: 2.13
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+	Embedded occurrences: 11
+
+==================================================================================================
+	 Test (6934)
+==================================================================================================
+	Important sentence: 533
+	Token occurrences: 114997
+	MWE number: 202
+	MWE occurrences: 589
+	Continuous occurrences: 67.0 %
+	MWE length: 2.15
+	Seen occurrences : 94% 
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 1
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 2068134
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:49.885898
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:00.854376
+==================================================================================================
+	Identification : 0.893
+	P, R  : 0.883, 0.903
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 2753 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 548 
+Important Deformed Lemmas: 0 
+Deformed Lemmas: 672 
+Important Deformed Lemmas: 0 
+
+==================================================================================================
+	SL Train (11517)
+==================================================================================================
+	Important sentence: 2516
+	Token occurrences: 239999
+	MWE number: 1101
+	MWE occurrences: 2864
+	Continuous occurrences: 45.0 %
+	Frequent MWE occurences: 49.0 %
+	MWE length: 2.23
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 3
+	Embedded occurrences: 6
+
+==================================================================================================
+	 Test (1994)
+==================================================================================================
+	Important sentence: 428
+	Token occurrences: 40523
+	MWE number: 313
+	MWE occurrences: 500
+	Continuous occurrences: 49.0 %
+	MWE length: 2.23
+	Seen occurrences : 72% 
+	Recognizable MWEs: 99.0 %
+	MWT occurrences: 1
+	Interleaving occurrences: 3
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1276860
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:29.480238
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:19.890574
+==================================================================================================
+	Identification : 0.555
+	P, R  : 0.448, 0.73
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 40379 
+Important Deformed Lemmas: 3223 
+Deformed Lemmas: 3446 
+Important Deformed Lemmas: 272 
+Deformed Lemmas: 2052 
+Important Deformed Lemmas: 321 
+
+==================================================================================================
+	TR Train (18035)
+==================================================================================================
+	Important sentence: 4843
+	Token occurrences: 362076
+	MWE number: 3813
+	MWE occurrences: 6618
+	Continuous occurrences: 50.0 %
+	Frequent MWE occurences: 27.0 %
+	MWE length: 2.06
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 3
+
+==================================================================================================
+	 Test (589)
+==================================================================================================
+	Important sentence: 297
+	Token occurrences: 14388
+	MWE number: 439
+	MWE occurrences: 506
+	Continuous occurrences: 40.0 %
+	MWE length: 2.07
+	Seen occurrences : 39% 
+	Recognizable MWEs: 99.0 %
+	MWT occurrences: 4
+	Interleaving occurrences: 3
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1878509
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:26.692913
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:09.630636
+==================================================================================================
+	Identification : 0.45
+	P, R  : 0.314, 0.791
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_bxJGsM.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10619/11178 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX 1080 Ti (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+	Mode: LINEAR
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: CORPUS
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, b1, bigram, dictionary, distanceS0b0, distanceS0s1, history1, history2, history3, lemma, numeric, pos, s0TokenIsMWEToken, s0TokensAreMWE, s0b2, stackLength, suffix, syntax, syntaxAbstract, token, trigram
+==================================================================================================
+# Configs: linear, sharedtask2, corpus, 1, False, False, False, False, False, True, True, True, True, True, True, False, True, True, False, True, True, False, True, False, False, False, False, True, True
+==================================================================================================
+Deformed Lemmas: 8719
+Important Deformed Lemmas: 0
+Deformed Lemmas: 332
+Important Deformed Lemmas: 0
+Deformed Lemmas: 384
+Important Deformed Lemmas: 0
+
+==================================================================================================
+	IT Train (14472)
+==================================================================================================
+	Important sentence: 2799
+	Token occurrences: 373499
+	MWE number: 1595
+	MWE occurrences: 3563
+	Continuous occurrences: 72.0 %
+	Frequent MWE occurences: 36.0 %
+	MWE length: 2.47
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 9
+	Embedded occurrences: 117
+
+==================================================================================================
+	 Test (1256)
+==================================================================================================
+	Important sentence: 380
+	Token occurrences: 35558
+	MWE number: 382
+	MWE occurrences: 503
+	Continuous occurrences: 67.0 %
+	MWE length: 2.6
+	Seen occurrences : 59%
+	Recognizable MWEs: 95.0 %
+	Embedded occurrences: 25
+	Interleaving occurrences: 7
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1580845
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:02:31.865002
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:24.929900
+==================================================================================================
+	Identification : 0.558
+	P, R  : 0.423, 0.819
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 2463
+Important Deformed Lemmas: 0
+Deformed Lemmas: 0
+Important Deformed Lemmas: 0
+Deformed Lemmas: 2554
+Important Deformed Lemmas: 0
+
+==================================================================================================
+	LT Train (4895)
+==================================================================================================
+	Important sentence: 297
+	Token occurrences: 90110
+	MWE number: 192
+	MWE occurrences: 312
+	Continuous occurrences: 58.0 %
+	Frequent MWE occurences: 14.0 %
+	MWE length: 2.16
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	 Test (6209)
+==================================================================================================
+	Important sentence: 474
+	Token occurrences: 118402
+	MWE number: 328
+	MWE occurrences: 500
+	Continuous occurrences: 60.0 %
+	MWE length: 2.25
+	Seen occurrences : 38%
+	Recognizable MWEs: 99.0 %
+	Embedded occurrences: 1
+	Interleaving occurrences: 2
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 590991
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:00:22.202015
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:54.607925
+==================================================================================================
+	Identification : 0.382
+	P, R  : 0.256, 0.753
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 3961
+Important Deformed Lemmas: 0
+Deformed Lemmas: 356
+Important Deformed Lemmas: 0
+Deformed Lemmas: 287
+Important Deformed Lemmas: 0
+
+==================================================================================================
+	PL Train (14821)
+==================================================================================================
+	Important sentence: 3918
+	Token occurrences: 246366
+	MWE number: 1791
+	MWE occurrences: 4567
+	Continuous occurrences: 71.0 %
+	Frequent MWE occurences: 48.0 %
+	MWE length: 2.13
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 100
+
+==================================================================================================
+	 Test (1300)
+==================================================================================================
+	Important sentence: 425
+	Token occurrences: 27661
+	MWE number: 356
+	MWE occurrences: 515
+	Continuous occurrences: 70.0 %
+	MWE length: 2.15
+	Seen occurrences : 68%
+	Recognizable MWEs: 99.0 %
+	Embedded occurrences: 12
+	Interleaving occurrences: 4
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1525571
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:51.169663
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:16.254725
+==================================================================================================
+	Identification : 0.692
+	P, R  : 0.598, 0.821
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 9896
+Important Deformed Lemmas: 0
+Deformed Lemmas: 1391
+Important Deformed Lemmas: 0
+Deformed Lemmas: 1148
+Important Deformed Lemmas: 0
+
+==================================================================================================
+	PT Train (25134)
+==================================================================================================
+	Important sentence: 4474
+	Token occurrences: 537524
+	MWE number: 2202
+	MWE occurrences: 4923
+	Continuous occurrences: 57.0 %
+	Frequent MWE occurences: 35.0 %
+	MWE length: 2.22
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+	Embedded occurrences: 8
+
+==================================================================================================
+	 Test (2770)
+==================================================================================================
+	Important sentence: 483
+	Token occurrences: 58604
+	MWE number: 448
+	MWE occurrences: 553
+	Continuous occurrences: 57.0 %
+	MWE length: 2.25
+	Seen occurrences : 69%
+	Recognizable MWEs: 97.0 %
+	Embedded occurrences: 3
+	Interleaving occurrences: 13
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1851923
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:30.509409
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:31.704915
+==================================================================================================
+	Identification : 0.69
+	P, R  : 0.577, 0.86
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 50188
+Important Deformed Lemmas: 0
+Deformed Lemmas: 9264
+Important Deformed Lemmas: 0
+Deformed Lemmas: 8505
+Important Deformed Lemmas: 0
+
+==================================================================================================
+	RO Train (49769)
+==================================================================================================
+	Important sentence: 4797
+	Token occurrences: 900626
+	MWE number: 591
+	MWE occurrences: 5301
+	Continuous occurrences: 69.0 %
+	Frequent MWE occurences: 84.0 %
+	MWE length: 2.13
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+	Embedded occurrences: 11
+
+==================================================================================================
+	 Test (6934)
+==================================================================================================
+	Important sentence: 533
+	Token occurrences: 114997
+	MWE number: 202
+	MWE occurrences: 589
+	Continuous occurrences: 67.0 %
+	MWE length: 2.15
+	Seen occurrences : 94%
+	Recognizable MWEs: 100.0 %
+	Embedded occurrences: 1
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 2068134
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:04:43.970011
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:51.646723
+==================================================================================================
+	Identification : 0.893
+	P, R  : 0.883, 0.903
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 2753
+Important Deformed Lemmas: 0
+Deformed Lemmas: 548
+Important Deformed Lemmas: 0
+Deformed Lemmas: 672
+Important Deformed Lemmas: 0
+
+==================================================================================================
+	SL Train (11517)
+==================================================================================================
+	Important sentence: 2516
+	Token occurrences: 239999
+	MWE number: 1101
+	MWE occurrences: 2864
+	Continuous occurrences: 45.0 %
+	Frequent MWE occurences: 49.0 %
+	MWE length: 2.23
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 3
+	Embedded occurrences: 6
+
+==================================================================================================
+	 Test (1994)
+==================================================================================================
+	Important sentence: 428
+	Token occurrences: 40523
+	MWE number: 313
+	MWE occurrences: 500
+	Continuous occurrences: 49.0 %
+	MWE length: 2.23
+	Seen occurrences : 72%
+	Recognizable MWEs: 99.0 %
+	MWT occurrences: 1
+	Interleaving occurrences: 3
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1276860
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:25.214583
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:20.290327
+==================================================================================================
+	Identification : 0.555
+	P, R  : 0.448, 0.73
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Deformed Lemmas: 40379
+Important Deformed Lemmas: 3223
+Deformed Lemmas: 3446
+Important Deformed Lemmas: 272
+Deformed Lemmas: 2052
+Important Deformed Lemmas: 321
+
+==================================================================================================
+	TR Train (18035)
+==================================================================================================
+	Important sentence: 4843
+	Token occurrences: 362076
+	MWE number: 3813
+	MWE occurrences: 6618
+	Continuous occurrences: 50.0 %
+	Frequent MWE occurences: 27.0 %
+	MWE length: 2.06
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 3
+
+==================================================================================================
+	 Test (589)
+==================================================================================================
+	Important sentence: 297
+	Token occurrences: 14388
+	MWE number: 439
+	MWE occurrences: 506
+	Continuous occurrences: 40.0 %
+	MWE length: 2.07
+	Seen occurrences : 39%
+	Recognizable MWEs: 99.0 %
+	MWT occurrences: 4
+	Interleaving occurrences: 3
+
+==================================================================================================
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1878509
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:03:27.686280
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:10.121259
+==================================================================================================
+	Identification : 0.45
+	P, R  : 0.314, 0.791
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|

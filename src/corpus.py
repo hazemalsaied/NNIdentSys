@@ -20,24 +20,33 @@ class Corpus:
 
             This function iterate over the lines of corpus document to create the precedent ontology
         """
-        # sys.stdout.write('# Language = {0}\n'.format(langName))
         self.langName = langName
-        self.trainingSents, self.testingSents, self.devDataSet = [], [], []
-        self.mweDictionary, self.mwtDictionary, self.mweTokenDictionary = dict(), dict(), dict()
-        sharedtaskVersion = '.2' if configuration['dataset']['sharedtask2'] else ''
-        path = os.path.join(configuration['path']['projectPath'],
-                            configuration['path']['corpusRelativePath'] + sharedtaskVersion, langName)
+        self.readDataSets(langName)
+        self.analyzeSents()
+        self.orderParentVMWEs()
+        self.getTrainAndTest()
+        self.extractDictionaries()
+        self.deleteNonRecognizableMWE()
+        printStats(self.trainingSents, 'Train', mweDic=self.mweDictionary, langName=langName, test=False)
+        printStats(self.testingSents, 'Test', mweDic=self.mweDictionary, test=True)
+
+    def readDataSets(self, langName):
+        datasetConf, pathConf, self.devDataSet = configuration['dataset'], configuration['path'], []
+        sharedtaskVersion = '.2' if datasetConf['sharedtask2'] else ''
+        path = os.path.join(pathConf['projectPath'], pathConf['corpusFolder'] + sharedtaskVersion, langName)
         if sharedtaskVersion:
             self.trainDataSet = readCuptFile(os.path.join(path, 'train.cupt'))
             self.devDataSet = readCuptFile(os.path.join(path, 'dev.cupt'))
             self.testDataSet = readCuptFile(os.path.join(path, 'test.cupt'))
-        elif configuration['dataset']['ftb']:
-            path = os.path.join(configuration['path']['projectPath'], 'ressources/FTB')
+        elif datasetConf['ftb']:
+            path = os.path.join(pathConf['projectPath'], 'ressources/FTB')
             self.trainDataSet = readFTB(os.path.join(path, 'train.cupt'))
             self.devDataSet = readFTB(os.path.join(path, 'dev.cupt'))
             self.testDataSet = readFTB(os.path.join(path, 'test.cupt'))
-        elif configuration['dataset']['dimsum']:
-            path = os.path.join(configuration['path']['projectPath'], 'ressources/dimsum')
+            self.deleteNumericalExpressions()
+            self.deleteFtbMWT()
+        elif datasetConf['dimsum']:
+            path = os.path.join(pathConf['projectPath'], 'ressources/dimsum')
             self.trainDataSet = readDiMSUM(os.path.join(path, 'dimsum16.train'))
             self.testDataSet = readDiMSUM(os.path.join(path, 'dimsum16.test'))
         else:
@@ -49,44 +58,57 @@ class Corpus:
                 self.testDataSet = readConlluFile(testConllu)
                 integrateMweFile(testMweFile, self.testDataSet)
             else:
-
                 self.trainDataSet = readMWEFile(mweFile)
                 self.testDataSet = readMWEFile(testMweFile)
-        self.analyzeSents()
-        # Sorting parents to get the direct parent on the top of parentVMWEs list
-        # self.text = self.toText()
-        self.deleteNumericalExpressions()
-        self.deleteFtbMWT()
-        self.orderParentVMWEs()
+
         if not configuration['evaluation']['cv']:
-            if not configuration['evaluation']['corpus'] and not configuration['dataset']['ftb']:
+            if not configuration['evaluation']['corpus'] and not configuration['dataset']['ftb'] and not \
+                    configuration['dataset']['dimsum']:
                 self.shuffleSent(langName)
                 self.distributeSent(langName)
-            self.getTrainAndTest()
-            self.extractDictionaries()
-        sys.stdout.write(self.printConlusion())
-        self.getMWEMeanLength()
-        self.getNewMWEPercentage()
-        self.depLblMgr = DepenecyLabelManager(self)
+
+    def printMWTstats(self):
+        res = dict()
+        for s in self.trainingSents:
+            for v in s.vMWEs:
+                if len(v.tokens) == 1:
+                    if v.tokens[0].text in res:
+                        res[v.tokens[0].text] += 1
+                    else:
+                        res[v.tokens[0].text] = 1
+        for key in sorted(res.iterkeys()):
+            print "%s: %s" % (key, res[key])
+
+    def deleteNonRecognizableMWE(self):
+        for s in self.trainingSents:
+            newVmwes = [v for v in s.vMWEs if v.isRecognizable]
+            if s.vMWEs != newVmwes:
+                s.vMWEs = newVmwes
+                for t in s.tokens:
+                    newParentMWEs = []
+                    for v in t.parentMWEs:
+                        if v in s.vMWEs:
+                            newParentMWEs.append(v)
+                    if t.parentMWEs != newParentMWEs:
+                        t.parentMWEs = newParentMWEs
 
     def deleteFtbMWT(self):
-        if not configuration['dataset']['ftb']:
+        if not configuration['dataset']['ftb'] or configuration['others']['removeFtbMWT']:
             return
-        if configuration['others']['removeFtbMWT']:
-            for sent in self.trainDataSet + self.testDataSet + self.devDataSet:
-                for v in sent.vMWEs:
-                    v.shouldBeDeleted = False
-                    if len(v.tokens) == 1:
-                        v.shouldBeDeleted = True
-                newVmwes = []
-                for v in sent.vMWEs:
-                    if not v.shouldBeDeleted:
-                        newVmwes.append(v)
-                    else:
-                        for t in v.tokens:
-                            t.parentMWEs.remove(v)
-                sent.vMWEs = newVmwes
-            sys.stdout.write('FTB MWTs are cleaned!\n')
+        for sent in self.trainDataSet + self.testDataSet + self.devDataSet:
+            for v in sent.vMWEs:
+                v.shouldBeDeleted = False
+                if len(v.tokens) == 1:
+                    v.shouldBeDeleted = True
+            newVmwes = []
+            for v in sent.vMWEs:
+                if not v.shouldBeDeleted:
+                    newVmwes.append(v)
+                else:
+                    for t in v.tokens:
+                        t.parentMWEs.remove(v)
+            sent.vMWEs = newVmwes
+        sys.stdout.write('FTB MWTs are cleaned!\n')
 
     def deleteNumericalExpressions(self):
         if not configuration['dataset']['ftb'] or not configuration['others']['deleteNumericalExpressions']:
@@ -133,7 +155,7 @@ class Corpus:
         return t, tst
 
     def getNewMWEPercentage(self):
-        newMWE, oldMWE = 0, 0
+        newMWE, oldMWE, res = 0, 0, 0
         for s in self.testingSents:
             for v in s.vMWEs:
                 if v.getLemmaString() not in self.mweDictionary:
@@ -141,18 +163,14 @@ class Corpus:
                 else:
                     oldMWE += 1
         if configuration['others']['verbose']:
-            sys.stdout.write(
-                tabs + 'Seen MWEs : {0} ({1} %)\n'.format(oldMWE, str(int(100 * float(oldMWE) / (oldMWE + newMWE)))))
+            res = tabs + 'Seen MWEs : {0} ({1} %)\n'.format(oldMWE, str(int(100 * float(oldMWE) / (oldMWE + newMWE))))
             if newMWE:
-                sys.stdout.write(tabs + 'New MWEs : {0} ({1} %)'.format(newMWE, str(
-                    int(100 * float(newMWE) / (oldMWE + newMWE)))) + doubleSep)
+                res += tabs + 'New MWEs : {0} ({1} %)'.format(newMWE, str(
+                    int(100 * float(newMWE) / (oldMWE + newMWE)))) + doubleSep
+        return res
 
     def filterImportatntSents(self):
-        imporTrainSents = []
-        for s in self.trainingSents:
-            if s.vMWEs:
-                imporTrainSents.append(s)
-        self.trainingSents = imporTrainSents
+        return [s for s in self.trainingSents if s.vMWEs]
 
     def analyzeTestSet(self):
         occurrenceDic, nonIdentifiedOccurrenceDic = dict(), dict()
@@ -236,45 +254,29 @@ class Corpus:
             return
         datasetConf, modelConf = configuration['dataset'], configuration['xp']
         dataset = 'ST2' if datasetConf['sharedtask2'] else \
-            ('FTB' if datasetConf['sharedtask2'] else 'ST1')
+            ('FTB' if datasetConf['ftb'] else ('DiMSUM' if datasetConf['dimsum'] else 'ST1'))
         model = 'Linear' if modelConf['linear'] else (
             'Kiperwasser' if modelConf['kiperwasser'] else (
                 'RNN' if modelConf['rnn'] else 'MLP'))
         folder = os.path.join(configuration['path']['projectPath'], configuration['path']['results'], dataset, model)
         if not os.path.exists(folder):
             os.makedirs(folder)
-        predicted = self.toConllU()  # if dataset == 'ST2' else str(corpus)
-        gold = self.toConllU(gold=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
-        train = self.toConllU(gold=True, train=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
         import datetime
         today = datetime.date.today().strftime('%d.%m')
-        with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
-            f.write(predicted)
-        with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
-            f.write(gold)
-        with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
-            f.write(train)
-
-    def printConlusion(self):
-        if not configuration['others']['verbose']:
-            return ''
-        res = tabs + 'Language : {0}'.format(self.langName) + doubleSep
-        res += tabs + 'Training {0} : {1}, Test : {2}\n'. \
-            format('(Important)' if configuration['sampling']['importantSentences'] else '', len(self.trainingSents),
-                   len(self.testingSents))
-        res += tabs + 'MWEs in tain : {0}, occurrences : {1}\n'.format(len(self.mweDictionary),
-                                                                       sum(self.mweDictionary.values()))
-        res += tabs + 'Impotant words in tain : {0}\n'.format(len(self.mweTokenDictionary))
-        return res
-
-    def getMWEMeanLength(self):
-        mweNum, tokenNum = 0, 0
-        for sent in self.trainingSents + self.testingSents:
-            mweNum += len(sent.vMWEs)
-            for v in sent.vMWEs:
-                tokenNum += len(v.tokens)
-        if configuration['others']['verbose']:
-            sys.stdout.write(tabs + 'MWE length mean : {0}\n'.format(round(float(tokenNum) / mweNum, 2)))
+        if configuration['dataset']['dimsum']:
+            predicted = self.toDiMSUM()
+            with open(os.path.join(folder, '{0}.{1}.pred'.format(today, self.langName)), 'w') as f:
+                f.write(predicted)
+        else:
+            predicted = self.toConllU()  # if dataset == 'ST2' else str(corpus)
+            gold = self.toConllU(gold=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
+            train = self.toConllU(gold=True, train=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
+            with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
+                f.write(predicted)
+            with open(os.path.join(folder, '{0}.{1}.gold.cupt'.format(today, self.langName)), 'w') as f:
+                f.write(gold)
+            with open(os.path.join(folder, '{0}.{1}.train.cupt'.format(today, self.langName)), 'w') as f:
+                f.write(train)
 
     def createMWEDict(self):
         res = ''
@@ -294,52 +296,6 @@ class Corpus:
             for t in s.tokens:
                 depLbls.add(t.dependencyLabel)
         return sorted(depLbls)
-
-    # def deleteNumericalExpressions(self):
-    #     if not configuration['dataset']['ftb']:
-    #         return
-    #     percentage = self.getNumericalExpressionPercentage()
-    #     sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
-    #                      'Train: {0} Test: {1}'.format(percentage[0], percentage[1]) + doubleSep)
-    #     for sent in self.trainingSents + self.testingSents:
-    #         for v in sent.vMWEs:
-    #             v.shouldBeDeleted = False
-    #             if len(v.tokens) == 1:
-    #                 v.shouldBeDeleted = True
-    #             for c in v.getTokenOrLemmaString():
-    #                 if c.isdigit():
-    #                     v.shouldBeDeleted = True
-    #                     break
-    #         newVmwes = []
-    #         for v in sent.vMWEs:
-    #             if not v.shouldBeDeleted:
-    #                 newVmwes.append(v)
-    #             else:
-    #                 for t in v.tokens:
-    #                     t.parentMWEs.remove(v)
-    #         sent.vMWEs = newVmwes
-    #         # sys.stdout.write(doubleSep + tabs + 'Numerical expressions:\n' + tabs +
-    #         #                str(self.getNumericalExpressionPercentage()) + doubleSep)
-    #
-    # def getNumericalExpressionPercentage(self):
-    #     trainDigitalExps, allTrainExpOcc, testDigiralExps, allTestExpOcc = 0, 0, 0, 0
-    #     mweDictionary = self.getMWEDictionary()
-    #     for mwe in mweDictionary.keys():
-    #         allTrainExpOcc += mweDictionary[mwe]
-    #         for c in mwe:
-    #             if c.isdigit():
-    #                 trainDigitalExps += mweDictionary[mwe]
-    #                 break
-    #     mweDictionary = self.getMWEDictionary(onTest=True)
-    #     for mwe in mweDictionary.keys():
-    #         allTestExpOcc += mweDictionary[mwe]
-    #         for c in mwe:
-    #             if c.isdigit():
-    #                 testDigiralExps += mweDictionary[mwe]
-    #                 break
-    #     t = round(float(trainDigitalExps) / allTrainExpOcc, 2) if trainDigitalExps else 0
-    #     tst = round(float(testDigiralExps) / allTestExpOcc, 2) if testDigiralExps else 0
-    #     return t, tst
 
     def toText(self):
         res = ''
@@ -433,6 +389,9 @@ class Corpus:
         return mweDictionary
 
     def getTrainAndTest(self):
+        if configuration['evaluation']['cv']:
+            return [], []
+        self.trainingSents, self.testingSents = [], []
         evalConfig = configuration['evaluation']
         if evalConfig['fixedSize']:
             tokenNum = 0
@@ -477,7 +436,7 @@ class Corpus:
                     break
             self.testingSents = self.trainingSents
         if configuration['sampling']['importantSentences'] or configuration['sampling']['importantTransitions']:
-            self.filterImportatntSents()
+            self.trainingSents = self.filterImportatntSents()
 
     def distributeSent(self, lang):
         if configuration['others']['shuffleTrain']:
@@ -515,8 +474,12 @@ class Corpus:
             sent.setTokenParent()
             sent.recognizeAttached()
             sent.recognizeNested()
+            sent.recognizeContinuous()
 
     def orderParentVMWEs(self):
+        """
+            Sorting parents to get the direct parent on the top of parentVMWEs list
+        """
         for sent in self.trainDataSet:
             if sent.vMWEs and sent.containsEmbedding:
                 for token in sent.tokens:
@@ -586,6 +549,10 @@ class Corpus:
         header = '# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC PARSEME:MWE\n'
         return header + ''.join(
             s.toConllU(useCupt=useCupt, gold=gold) for s in (self.trainingSents if train else self.testingSents))
+
+    def toDiMSUM(self, train=False):
+        return ''.join(
+            s.toDiMSUM() for s in (self.trainingSents if train else self.testingSents))
 
     def getTransDistribution(self):
         transNum = {}
@@ -657,11 +624,16 @@ class Sentence:
                 if vMwe1 is not vMwe2 and vMwe1.isAttachedWith(vMwe2):
                     vMwe1.isAttached = True
 
-    def recognizeEmbedded(self):
-        for vMwe1 in self.vMWEs:
+    def recognizeContinuous(self):
+        for mwe in self.vMWEs:
+            mwe.isContinuousMWE()
+
+    def recognizeEmbedded(self, annotated=True):
+        mwes = self.vMWEs if annotated else self.identifiedVMWEs
+        for vMwe1 in mwes:
             if vMwe1.isEmbedded:
                 continue
-            for vMwe2 in self.vMWEs:
+            for vMwe2 in mwes:
                 if vMwe1 is not vMwe2 and vMwe1.getTokenPositionString() == vMwe2.getTokenPositionString():
                     vMwe1.isRecognizable = False
                     vMwe1.isBadAnnotated = True
@@ -712,7 +684,7 @@ class Sentence:
                                 secondCondition = True
                         if firstCondition and secondCondition:
                             self.containsInterleaving = True
-                            processedVMWEs.extend([slave])  # master,
+                            processedVMWEs.extend([slave, master])  # master,
                             master.isInterleaver = True
                             slave.isInterleaving = True
                             slave.isRecognizable = False
@@ -814,6 +786,25 @@ class Sentence:
                     labels[token.position - 1] += ':VID'  # + mwe.type
         return ''.join(t.toConllU(labels[i], useCupt=useCupt) for i, t in enumerate(self.tokens)) + '\n'
 
+    def toDiMSUM(self):
+        labels = ['O'] * len(self.tokens)
+        parents = [0] * len(self.tokens)
+        for mwe in self.identifiedVMWEs:
+            if not mwe.isContinuousMWE():
+                idxs = []
+                for token in mwe.tokens:
+                    idxs.append(token.position)
+                for i in xrange(min(idxs) - 1, max(idxs)):
+                    if self.tokens[i] not in mwe.tokens:
+                        labels[i] = 'o'
+            for token in mwe.tokens:
+                if labels[token.position - 1] == 'O' and token == mwe.tokens[0]:
+                    labels[token.position - 1] = 'B'
+                else:
+                    labels[token.position - 1] = 'I'
+                    parents[token.position - 1] = int(mwe.tokens[0].position)
+        return ''.join(t.toDiMSUM(labels[i], parents[i]) for i, t in enumerate(self.tokens)) + '\n'
+
     def __str__(self):
 
         vMWEText, identifiedMWE = '', ''
@@ -885,17 +876,17 @@ class VMWE:
     def getId(self):
         return self.id
 
-    def isAttachedVMWE(self):
+    def isContinuousMWE(self):
         if len(self.tokens) == 1:
             return True
         idxs = []
         for token in self.tokens:
             idxs.append(token.position)
-        isContinous = True
+        self.isContinous = True
         for i in xrange(min(idxs), max(idxs) + 1):
             if i not in idxs:
-                isContinous = False
-        return isContinous
+                self.isContinous = False
+        return self.isContinous
 
     def __str__(self):
         return '{0}- {1}: {2} {3}'.format(self.id, self.type, self.getLemmaString(), self.getCaracter())
@@ -907,7 +898,8 @@ class VMWE:
         return result[:-1].lower()
 
     def getLemmaString(self):
-        return ' '.join(t.lemma.lower() if t.lemma.lower() else t.text for t in self.tokens).lower()
+        return ' '.join(
+            t.lemma.lower() if t.lemma.lower() and t.lemma.lower() != '_' else t.text for t in self.tokens).lower()
 
     def getTokenOrLemmaString(self):
         useLemma = configuration['mlp']['lemma']
@@ -917,7 +909,7 @@ class VMWE:
             #    result += token.text.lower() + ' '
             # return result[:-1].lower()
         else:
-            return ' '.join(t.lemma if t.lemma else t.text for t in self.tokens).lower()
+            return ' '.join(t.lemma if t.lemma and t.lemma != '_' else t.text for t in self.tokens).lower()
             # result = ''
             # for token in self.tokens:
             #     if token.lemma.lower():
@@ -933,11 +925,9 @@ class VMWE:
         return result
 
     def In(self, vmwes):
-
         for vmwe in vmwes:
             if vmwe.getString() == self.getString():
                 return True
-
         return False
 
     def getCaracter(self):
@@ -1011,12 +1001,13 @@ class Token:
 
     def __init__(self, position, txt, lemma='', posTag='', abstractPosTag='', morphologicalInfo=None,
                  dependencyParent=-1,
-                 dependencyLabel=''):
+                 dependencyLabel='', line=''):
         self.position = int(position)
         self.text = txt
         self.lemma = lemma
         self.abstractPosTag = abstractPosTag
         self.posTag = posTag
+        self.line = line
         if not morphologicalInfo:
             self.morphologicalInfo = []
         else:
@@ -1106,6 +1097,19 @@ class Token:
             '\t' + mweInfo if useCupt else ''
         )
 
+    def toDiMSUM(self, mweInfo, tokenParent):
+        return '{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\n'.format(
+            self.line.split('\t')[0],
+            self.line.split('\t')[1],
+            self.line.split('\t')[2],
+            self.line.split('\t')[3],
+            mweInfo,
+            tokenParent,
+            '',  # self.line.split('\t')[6],
+            '',  # self.line.split('\t')[7],
+            self.line.split('\t')[8]
+        )
+
     def __str__(self):
         parentTxt = ' '
         if self.parentMWEs:
@@ -1131,6 +1135,70 @@ class DepenecyLabelManager():
                 return self.depLbls.index(lbl)
             return len(self.depLbls) + self.depLbls.index(lbl)
         return None
+
+
+def printStats(sents, title, mweDic=None, langName='', test=False):
+    impSents, mweNum, tokenNum, emNum, interleavingNum, mwtNum, recognizableNum, continousMweNum = 0, 0, 0, 0, 0, 0, 0, 0
+    frequentMwes = sum([int(v) for v in mweDic.values() if v > 5])
+    mwes = set()
+    for sent in sents:
+        if sent.vMWEs:
+            impSents += 1
+        mweNum += len(sent.vMWEs)
+        tokenNum += len(sent.tokens)
+        for v in sent.vMWEs:
+            mwes.add(v.getLemmaString())
+            emNum += 1 if v.isEmbedded else 0
+            interleavingNum += 1 if v.isInterleaving else 0
+            mwtNum += 1 if len(v.tokens) == 1 else 0
+            recognizableNum += 1 if v.isRecognizable else 0
+            continousMweNum += 1 if v.isContinous else 0
+
+    sys.stdout.write(doubleSep)
+    sys.stdout.write(tabs + langName + ' ' + title + ' ({0})'.format(len(sents)))
+    sys.stdout.write(doubleSep)
+    sys.stdout.write(tabs + 'Important sentence: {0}\n'.format(impSents))
+    sys.stdout.write(tabs + 'Token occurrences: {0}\n'.format(tokenNum))
+    sys.stdout.write(tabs + 'MWE number: {0}\n'.format(len(mwes)))
+    sys.stdout.write(tabs + 'MWE occurrences: {0}\n'.format(mweNum))
+    sys.stdout.write(tabs + 'Continuous occurrences: {0} %\n'.format(round(float(continousMweNum) / mweNum * 100, 0)))
+    sys.stdout.write(tabs + 'Frequent MWE occurences: {0} %\n'.format(
+        round(float(frequentMwes) / mweNum * 100, 0)) if not test else '')
+    sys.stdout.write(tabs + 'MWE length: {0}\n'.format(getMWEMeanLength(sents)))
+    sys.stdout.write(tabs + 'Seen occurrences : {0}% \n'.format(getNewMWEPercentage(sents, mweDic)) if test else '')
+    sys.stdout.write(tabs + 'Recognizable MWEs: {0} %\n'.format(round(float(recognizableNum) / mweNum * 100, 0)))
+    sys.stdout.write(tabs + 'MWT occurrences: {0}\n'.format(mwtNum) if mwtNum else '')
+    sys.stdout.write(tabs + 'Embedded occurrences: {0}\n'.format(emNum) if emNum else '')
+    sys.stdout.write(tabs + 'Interleaving occurrences: {0}\n'.format(interleavingNum) if interleavingNum else '')
+    sys.stdout.write(doubleSep if test else '')
+
+
+def getNewMWEPercentage(sents, mweDic):
+    newMWE, oldMWE, res = 0, 0, 0
+    for s in sents:
+        for v in s.vMWEs:
+            if v.getLemmaString() not in mweDic:
+                newMWE += 1
+            else:
+                oldMWE += 1
+    if configuration['others']['verbose']:
+        res = tabs + 'Seen MWEs : {0} ({1} %)\n'.format(oldMWE, str(int(100 * float(oldMWE) / (oldMWE + newMWE))))
+        if newMWE:
+            res += tabs + 'New MWEs : {0} ({1} %)'.format(newMWE, str(
+                int(100 * float(newMWE) / (oldMWE + newMWE)))) + doubleSep
+    return int(100 * float(oldMWE) / (oldMWE + newMWE))
+
+
+def getMWEMeanLength(sents):
+    mweNum, tokenNum, res = 0, 0, ''
+    for sent in sents:
+        mweNum += len(sent.vMWEs)
+        for v in sent.vMWEs:
+            tokenNum += len(v.tokens)
+    return round(float(tokenNum) / mweNum, 2)
+    # if configuration['others']['verbose']:
+    #     res = tabs + 'MWE length mean : {0}\n'.format(round(float(tokenNum) / mweNum, 2))
+    # return res
 
 
 def saveObj(obj, name):
@@ -1191,11 +1259,11 @@ def readConlluFile(conlluFile):
                     token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2],
                                   abstractPosTag=lineParts[3], morphologicalInfo=morpho,
                                   dependencyParent=int(lineParts[6]),
-                                  dependencyLabel=lineParts[7])
+                                  dependencyLabel=lineParts[7], line=line)
                 else:
                     token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2],
                                   abstractPosTag=lineParts[3], morphologicalInfo=morpho,
-                                  dependencyLabel=lineParts[7])
+                                  dependencyLabel=lineParts[7], line=line)
                 getPosTag(token, lineParts[3], lineParts[4])
                 # Associate the token with the sentence
                 sent.tokens.append(token)
@@ -1335,6 +1403,8 @@ def getVMWESents(ss, num):
 
 
 def getTokens(elemlist):
+    if not elemlist:
+        return []
     if str(elemlist.__class__).endswith('corpus.Token'):  # isinstance(elemlist, Token):
         return [elemlist]
     if isinstance(elemlist, list):
@@ -1442,6 +1512,7 @@ def getVMWEByTokens(tokens):
 
 def readCuptFile(cuptFile):
     sentences = []
+    deformedLemma, importantDeformedLemma, numericTokens = 0, 0, 0
     with open(cuptFile, 'r') as corpusFile:
         sent, senIdx = None, 0
         for line in corpusFile:
@@ -1457,14 +1528,26 @@ def readCuptFile(cuptFile):
                 sent = Sentence(senIdx)
                 sentences.append(sent)
                 senIdx += 1
-
             lineParts = line.split('\t')
             if len(lineParts) != 11 or '-' in lineParts[0] or '.' in lineParts[0]:
                 continue
-            token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2].lower(),
+            text = lineParts[1].lower()
+            importantDeformedLemma += 1 if (lineParts[2].strip() == '' or lineParts[2].lower()== '_') and  lineParts[10] != '*'  else 0
+            deformedLemma += 1 if (lineParts[2].strip() == '' or lineParts[2].lower() == '_') and lineParts[10] == '*' else 0
+            if configuration['others']['traitDeformedLemma'] and (lineParts[2].strip() == '' or lineParts[2].lower() == '_'):
+                lemma = text
+            else:
+                lemma = lineParts[2].lower()
+            if configuration['others']['replaceNumbers']:
+                for c in lineParts[1]:
+                    if c.isdigit():
+                        text, lemma = 'number', 'number'
+                        numericTokens += 1
+                        break
+            token = Token(lineParts[0], text, lemma=lemma,
                           abstractPosTag=lineParts[3] if lineParts[3] != '_' else lineParts[4],
                           dependencyParent=int(lineParts[6]) if (lineParts[6] != '_' and lineParts[6] != '-') else -1,
-                          dependencyLabel=lineParts[7] if lineParts[7] != '_' else '')
+                          dependencyLabel=lineParts[7] if lineParts[7] != '_' else '', line=line)
             getPosTag(token, lineParts[3], lineParts[4])
             sent.tokens.append(token)
             sent.text += token.text + ' '
@@ -1481,6 +1564,11 @@ def readCuptFile(cuptFile):
                         if vMWE:
                             vMWE.tokens.append(token)
                     token.setParent(vMWE)
+    if cuptFile.endswith('train.cupt'):
+        sys.stdout.write('Deformed Lemmas: %d \n' % (deformedLemma))
+        sys.stdout.write('numeric tokens: %d \n' % (numericTokens))
+        sys.stdout.write('Important Deformed Lemmas: %d \n' % (importantDeformedLemma))
+        sys.stdout.write('%d %d %d\n' % (deformedLemma, importantDeformedLemma, numericTokens))
     return sentences
 
 
@@ -1532,29 +1620,40 @@ def getStats(sentences, asCSV=False):
     return res
 
 
-def readFTB(ftbFile, reportBugs=True, stats=False):
-    sentences, nonValidLines = [], 0
+def readFTB(ftbFile, verbose=False, stats=False):
+    sentences, nonValidLines, shouldPrint = [], 0, False
     with open(ftbFile, 'r') as corpusFile:
         sent, senIdx, mweIdx, lineNum = None, 0, 1, 0
         for line in corpusFile:
             lineNum += 1
             if line and line.endswith('\n'):
                 line = line[:-1]
-            if line.startswith('#'):
+            if not line or line.startswith('#'):
                 continue
             if line.startswith('1\t'):
                 if sent:
                     sent.text = sent.text.strip()
-                    sent.recognizeEmbedded()
-                    sent.recognizeInterleaving()
+                    if verbose:
+                        if shouldPrint:
+                            print sent
+                            for t in sent.tokens:
+                                print t.line
+                        for v in sent.vMWEs:
+                            if len(v.tokens) == 1:
+                                sys.stdout.write('FTB MWT {0}\n'.format(lineNum))
+                                sys.stdout.write(str(sent))
+                                for t in sent.tokens:
+                                    print t.line
+                                break
                 sent = Sentence(senIdx)
-                mweIdx = 1
                 sentences.append(sent)
+                mweIdx = 1
                 senIdx += 1
-
+                shouldPrint = False
             lineParts = line.split('\t')
             if len(lineParts) != 10 or '-' in lineParts[0] or '.' in lineParts[0]:
                 nonValidLines += 1
+                print('FTB annotation error:%d %s' % (lineNum, line))
                 continue
             text, lemma = lineParts[1].lower(), lineParts[2]
             if configuration['others']['replaceNumbers']:
@@ -1564,7 +1663,8 @@ def readFTB(ftbFile, reportBugs=True, stats=False):
             token = Token(lineParts[0], text, lemma=lemma,
                           abstractPosTag=lineParts[3] if lineParts[3] != '_' else lineParts[4],
                           dependencyParent=int(lineParts[6]) if (lineParts[6] != '_' and lineParts[6] != '-') else -1,
-                          dependencyLabel=lineParts[7] if lineParts[7] != '_' else '')
+                          dependencyLabel=lineParts[7] if lineParts[7] != '_' else '',
+                          line=line)
             getPosTag(token, lineParts[3], lineParts[4])
             sent.tokens.append(token)
             sent.text += token.text + ' '
@@ -1576,15 +1676,18 @@ def readFTB(ftbFile, reportBugs=True, stats=False):
                 token.setParent(vMWE)
                 mweIdx += 1
             elif lineParts[7] == 'dep_cpd':
-                if sent.vMWEs:  # and token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
+                if sent.vMWEs and token.dependencyParent == sent.vMWEs[-1].tokens[0].position:
                     sent.vMWEs[-1].tokens.append(token)
                     token.setParent(sent.vMWEs[-1])
                 else:
-                    if reportBugs:
+                    if verbose:
                         sys.stdout.write('Annotation bug dep_cpd without dep parent: line: {0}, word:'
                                          ' {1} DependencyParent: {2}, head Position: {3} \n'.
                                          format(lineNum, lineParts[1], token.dependencyParent,
                                                 sent.vMWEs[-1].tokens[0].position if sent.vMWEs else ''))
+                        shouldPrint = True  # sent
+                        # for t in sent.tokens:
+                        #    print t.line
                     if sent.vMWEs:
                         sent.vMWEs = sent.vMWEs[:-1]
                         # else:
@@ -1654,40 +1757,37 @@ def getPosTag(token, lineParts3, lineParts4):
             token.posTag = lineParts3
 
 
-def readDiMSUM(dimsumFile, reportBugs=False):
+def readDiMSUM(dimsumFile, verbose=True):
     sentences = []
     BMWEs, bMWEs = [], []
-    if reportBugs:
-        print dimsumFile
     with open(dimsumFile, 'r') as corpusFile:
         sent, senIdx, mweIdx, lineNum = None, 0, 1, 0
         for line in corpusFile:
             lineNum += 1
             if line and line.endswith('\n'):
                 line = line[:-1]
-            if line.startswith('#'):
+            if not line or line.startswith('#'):
                 continue
             if line.startswith('1\t'):
                 if sent:
-                    sent.text = sent.text.strip()
-                    sent.recognizeEmbedded()
-                    sent.recognizeInterleaving()
+                    sent.text = ''.join([t.text.lower() for t in sent.tokens])
                     BMWEs, bMWEs = [], []
                 sent = Sentence(senIdx)
-                mweIdx = 1
                 sentences.append(sent)
+                mweIdx = 1
                 senIdx += 1
-
             lineParts = line.split('\t')
-            if len(lineParts) != 9:
+            if len(lineParts) != 9 and verbose:
+                print('DiMSUM annotation error:%d %s' % (lineNum, line))
                 continue
-            token = Token(lineParts[0], lineParts[1].lower(), lemma=lineParts[2].lower(),
-                          abstractPosTag=lineParts[3], posTag=lineParts[3])
+            text, lemma = lineParts[1], lineParts[2]
+            if configuration['others']['replaceNumbers']:
+                for c in lineParts[1]:
+                    if c.isdigit():
+                        text, lemma = 'number', 'number'
+            token = Token(lineParts[0], text, lemma=lemma, abstractPosTag=lineParts[3], posTag=lineParts[3], line=line)
             sent.tokens.append(token)
-            sent.text += token.text + ' '
             if lineParts[4].lower() == 'b':
-                if lineParts[4] == 'b':
-                    pass
                 vMWE = VMWE(mweIdx, [token], 'oth')
                 sent.vMWEs.append(vMWE)
                 token.setParent(vMWE)
@@ -1697,26 +1797,15 @@ def readDiMSUM(dimsumFile, reportBugs=False):
                     bMWEs.append(vMWE)
                 mweIdx += 1
             elif lineParts[4].lower() == 'i':
-                if lineParts[4] == 'i':
-                    pass
                 parentMWE = BMWEs[-1] if BMWEs and lineParts[4] == 'I' else (bMWEs[-1] if bMWEs else None)
                 if parentMWE:
                     parentMWE.tokens.append(token)
                     token.setParent(parentMWE)
-                else:
-                    if reportBugs:
-                        sys.stdout.write('Annotation bug dep_cpd without dep parent: line: {0}, word:'
-                                         ' {1} DependencyParent: {2}, head Position: {3} \n'.
-                                         format(lineNum, lineParts[1], token.dependencyParent,
-                                                sent.vMWEs[-1].tokens[0].position))
-    mweNum, tokenNum = 0, 0
-    for sent in sentences:
-        if sent.vMWEs:
-            mweNum += len(sent.vMWEs)
-            for v in sent.vMWEs:
-                tokenNum += len(v.tokens)
-    print mweNum, tokenNum
-
+                elif verbose:
+                    sys.stdout.write('Annotation bug : line: {0}, word:'
+                                     ' {1} DependencyParent: {2}, head Position: {3} \n'.
+                                     format(lineNum, lineParts[1], token.dependencyParent,
+                                            sent.vMWEs[-1].tokens[0].position))
     return sentences
 
 
@@ -1732,9 +1821,9 @@ def getAllLangStats(langs):
 
 def getRelevantModelAndNormalizer(sent, trainingSent, models, normalizers, test=False):
     if test:
-        return models[5], normalizers[5]
+        return models[5], normalizers[5] if normalizers else None
     foldNum = int(str(float(trainingSent.index(sent) / (len(trainingSent) / 5)))[0])
-    return models[foldNum], normalizers[foldNum]
+    return models[foldNum], normalizers[foldNum] if normalizers else None
 
 
 if __name__ == '__main__':

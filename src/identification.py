@@ -12,7 +12,7 @@ import reports
 from corpus import *
 from evaluation import evaluate
 from parser import parse
-
+from analysis import errorAnalysis, exportEnalysis
 
 def identify(lang):
     corpus = Corpus(lang)
@@ -29,8 +29,12 @@ def identify(lang):
                             datetime.datetime.now() - startTime, reports.doubleSep))
     evaluate(corpus.testingSents)
     corpus.createMWEFiles()
+    if configuration['others']['printTest']:
+        for s in corpus.testingSents:
+            s.initialTransition = None
+            print s
     sys.stdout.flush()
-
+    return corpus
 
 def identifyWithLinearInMlp(lang):
     configuration['others']['verbose'] = False
@@ -76,12 +80,15 @@ def identifyWithMlpInLinear(lang):
     corpus = Corpus(lang)
     oracle.parse(corpus)
     startTime = datetime.datetime.now()
-    linearModel, linearVec = modelLinear.train(corpus, mlpModels=mlpModels, mlpNormalizers=mlpNormalizers)
+    sys.stdout.flush()
+    linearModel, linearVec = modelLinear.train(corpus, mlpModels=mlpModels)
+    sys.stdout.flush()
     sys.stdout.write('{0}Linear training time : {1}{2}'.
                      format(reports.tabs, datetime.datetime.now() - startTime, reports.doubleSep))
     configuration['xp']['linear'] = True
     startTime = datetime.datetime.now()
-    parse(corpus.testingSents, linearModel, linearVec, mlpModels=mlpModels, mlpNormalizers=mlpNormalizers)
+    sys.stdout.flush()
+    parse(corpus.testingSents, linearModel, linearVec, mlpModels=mlpModels)
     sys.stdout.write('{0}{1}Parsing time : {2}{3}'.
                      format(reports.doubleSep, reports.tabs, datetime.datetime.now() - startTime, reports.doubleSep))
     evaluate(corpus.testingSents)
@@ -112,13 +119,9 @@ def jackknifing(lang, linear=True):
         })
     models, normalizers = dict(), dict()
     for i in range(5):
-        model, normalizer = jackknifingAFold(lang, i, linear=linear)
+        models[i], normalizers[i] = jackknifingAFold(lang, i, linear=linear)
         sys.stdout.write('Finished training the fold {0}\n'.format(i))
-        models[i] = model
-        normalizers[i] = normalizer
-    model, normalizer = jackknifingAFold(lang, -1, linear=linear, all=True)
-    models[5] = model
-    normalizers[5] = normalizer
+    models[5], normalizers[5] = jackknifingAFold(lang, -1, linear=linear, all=True)
     sys.stdout.write('Finished training the whole corpus \n')
     return models, normalizers
 
@@ -133,7 +136,7 @@ def jackknifingAFold(lang, foldIdx, linear=True, all=False):
         corpus.trainingSents = corpus.trainingSents[:foldStart] + corpus.trainingSents[foldEnd:]
     if not linear:
         configuration['sampling']['importantSentences'] = True
-        corpus.filterImportatntSents()
+        corpus.trainingSents = corpus.filterImportatntSents()
     oracle.parse(corpus)
     vectorizer = None
     if linear:
@@ -141,13 +144,11 @@ def jackknifingAFold(lang, foldIdx, linear=True, all=False):
     else:
         network = modelNonCompo.Network(corpus)
         network.train(corpus)
-
-    parse(corpus.testingSents, network, vectorizer)
-    evaluate(corpus.testingSents)
-
-    corpus.testingSents = corpus.trainingSents
-    parse(corpus.testingSents, network, vectorizer)
-    evaluate(corpus.testingSents)
+    # parse(corpus.testingSents, network, vectorizer)
+    # evaluate(corpus.testingSents)
+    # corpus.testingSents = corpus.trainingSents
+    # parse(corpus.testingSents, network, vectorizer)
+    # evaluate(corpus.testingSents)
 
     return network, vectorizer
 
