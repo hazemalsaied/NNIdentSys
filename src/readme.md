@@ -4,10 +4,8 @@ The system was developed and evaluated using the datasets of the PARSEME shared 
 
 ## Citation:
     Al Saied, Hazem, Matthieu Constant, and Marie Candito. 
-    
     "The atilf-llf system for parseme shared task: a transition-based verbal multiword expression tagger."
-     
-    Proceedings of the 13th Workshop on Multiword Expressions (MWE 2017). 2017.
+     Proceedings of the 13th Workshop on Multiword Expressions (MWE 2017). 2017.
 
 ## Libraries:
 
