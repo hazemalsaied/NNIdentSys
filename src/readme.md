@@ -1,3 +1,12 @@
+ATILF-LFF is a generic transition system for the identification of Verbal Multiword Expressions (VMWEs). This system is a data-driven system applicable to several languages. It produces a robust, efficient performance and very competitive scores, with respect to the shared task results.
+
+The system was developed and evaluated using the datasets of the PARSEME shared task on VMWE identification and accommodates the variety of linguistic resources provided for each language, in terms of accompanying morphological and syntactic information. 
+
+Al Saied, Hazem, Matthieu Constant, and Marie Candito. "The atilf-llf system for parseme shared task: a transition-based verbal multiword expression tagger." Proceedings of the 13th Workshop on Multiword Expressions (MWE 2017). 2017
+
+## Citation:
+    Al Saied, Hazem, Matthieu Constant, and Marie Candito. "The atilf-llf system for parseme shared task: a transition-based verbal multiword expression tagger." Proceedings of the 13th Workshop on Multiword Expressions (MWE 2017). 2017.
+
 ## Libraries:
 
     conda install numpy=1.13.1
