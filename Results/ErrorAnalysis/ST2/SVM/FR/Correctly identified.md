@@ -1,6 +1,6 @@
 ## 0.3 MWT
 
-1. contre-indiquer : 2  / 2 :
+0. contre-indiquer : 2  / 2 :
 
 		 aclasta est contre-indiqué chez les patients ayant
 
@@ -8,113 +8,113 @@
 
 ## 2.1 SEEN : PARTIALLY
 
-2. **apporter** **joie** : 1  / 0 :
+0. **apporter** **joie** : 1  / 0 :
 
 		 mal mais il apporte également la joie , le divertissement et
 
-3. **atteindre** syndrome : 1  / 0 :
+1. **atteindre** syndrome : 1  / 0 :
 
 		 de les patients atteints d' un syndrome coronarien aigu ( angor
 
-4. **avoir** **hypocalcémie** : 1  / 0 :
+2. **avoir** **hypocalcémie** : 1  / 0 :
 
 		 chez les patients ayant une hypocalcémie ( voir rubrique 4.4
 
-5. **donner** **entretien** : 1  / 0 :
+3. **donner** **entretien** : 1  / 0 :
 
 		 ) , il donne également des entretiens
 
-6. **donner** **promotion** : 1  / 0 :
+4. **donner** **promotion** : 1  / 0 :
 
 		 , robert lui donne une promotion , à le déplaisir
 
-7. **effectuer** vote : 1  / 0 :
+5. **effectuer** vote : 1  / 0 :
 
 		 électeurs , ont effectué un vote blanc ou nul et
 
-8. **entraîner** complication : 1  / 0 :
+6. **entraîner** complication : 1  / 0 :
 
 		 ) qui peuvent entraîner des complications sévères comme une crise
 
-9. **exercer** **activité** : 1  / 0 :
+7. **exercer** **activité** : 1  / 0 :
 
 		 rpr , qui exerçait une activité de consultant auprès de
 
-10. **faire** **marche** : 1  / 0 :
+8. **faire** **marche** : 1  / 0 :
 
 		 adjudant-général jean-daniel Œhlert fit alors marche sur les positions de
 
-11. **faire** **proposition** : 1  / 0 :
+9. **faire** **proposition** : 1  / 0 :
 
 		 commission pourrait utilement faire des propositions en simplifiant et en
 
-12. **faire** **son** **temps** : 1  / 0 :
+10. **faire** **son** **temps** : 1  / 0 :
 
 		 saturée qui a fait son temps
 
-13. **jouer** **le** montre : 1  / 0 :
+11. **jouer** **le** montre : 1  / 0 :
 
 		 chance était de jouer la montre , d' immobiliser les
 
-14. **mettre** **le** pâté : 1  / 0 :
+12. **mettre** **le** pâté : 1  / 0 :
 
 		 front afin de mettre la pâté à les allemands et
 
-15. **prendre** **son** distance : 2  / 0 :
+13. **prendre** **son** distance : 2  / 0 :
 
 		 , ces mouvements prennent leur distance avec les États arabes
 
 		alors qu' il prend ses distances avec la droite pour
 
-16. **présenter** **problème** : 1  / 0 :
+14. **présenter** **problème** : 1  / 0 :
 
 		 les patients qui présentent des problèmes rénaux aigus
 
-17. **présenter** réaction : 1  / 0 :
+15. **présenter** réaction : 1  / 0 :
 
 		 3 % ont présenté une réaction indésirable à le médicament
 
-18. **recevoir** **promotion** : 1  / 0 :
+16. **recevoir** **promotion** : 1  / 0 :
 
 		 en france qui reçoit cette promotion selon la toute nouvelle
 
-19. **se** débattre : 1  / 0 :
+17. **se** débattre : 1  / 0 :
 
 		 la chrysler doit se débattre avec ses 4 vitres
 
-20. **se** faufiler : 1  / 0 :
+18. **se** faufiler : 1  / 0 :
 
 		 le sahara occidental s' est faufilé par la porte de
 
-21. **se** imaginer : 1  / 0 :
+19. **se** imaginer : 1  / 0 :
 
 		 est difficile de s' imaginer , quand on est
 
-22. **se** préoccuper : 1  / 0 :
+20. **se** préoccuper : 1  / 0 :
 
 		 ce magasin ne se préoccupe pas de les délais
 
-23. **se** taire : 1  / 0 :
+21. **se** taire : 1  / 0 :
 
 		 le pouvoir européen se taisent , laissent faire et
 
 ## 2.2 SEEN : BARELY
 
-24. accomplir mission : 1  / 1 :
+0. accomplir mission : 1  / 1 :
 
 		 , un journaliste accomplit une mission d' information , qui
 
-25. atteindre insuffisance : 2  / 5 :
+1. atteindre insuffisance : 2  / 5 :
 
 		 chez les patients atteints d' insuffisance rénale , il n'
 
 		chez les patients atteints d' insuffisance rénale modérée inclus dans
 
-26. atteindre sca : 1  / 2 :
+2. atteindre sca : 1  / 2 :
 
 		 chez 13 819 patients atteints de sca
 
-27. avoir but : 3  / 3 :
+3. avoir but : 3  / 3 :
 
 		 des transformations qui auront comme but principal de la faire
 
@@ -122,11 +122,11 @@
 
 		proposition d' amendement a pour but que l' on tienne
 
-28. avoir devoir : 1  / 2 :
+4. avoir devoir : 1  / 2 :
 
 		 droit , et a même le devoir , de présenter ses
 
-29. avoir effet : 3  / 2 :
+5. avoir effet : 3  / 2 :
 
 		 ce qui a eu probablement pour effet d' inciter les gens
 
@@ -134,189 +134,189 @@
 
 		types de climat a pour effet de les niveler avec
 
-30. avoir envie : 1  / 2 :
+6. avoir envie : 1  / 2 :
 
 		 si vous avez envie de manger dans un
 
-31. avoir espoir : 1  / 1 :
+7. avoir espoir : 1  / 1 :
 
 		 " nous avions bon espoir d' obtenir d' elle
 
-32. avoir faim : 1  / 1 :
+8. avoir faim : 1  / 1 :
 
 		 de ceux qui ont faim
 
-33. avoir fracture : 2  / 3 :
+9. avoir fracture : 2  / 3 :
 
 		 les patients ayant eu une fracture de hanche récente secondaire
 
 		les patients ayant eu récemment une fracture de hanche à basse
 
-34. avoir idée : 1  / 5 :
+10. avoir idée : 1  / 5 :
 
 		 rodolphe salis eut l' idée d' installer un piano
 
-35. avoir impact : 1  / 5 :
+11. avoir impact : 1  / 5 :
 
 		 elles n' ont eu aucun impact manifeste sur les populations
 
-36. avoir intention : 1  / 3 :
+12. avoir intention : 1  / 3 :
 
 		 kenshin n' ayant que l' intention de faire une démonstration
 
-37. avoir occasion : 1  / 3 :
+13. avoir occasion : 1  / 3 :
 
 		 de le club auront l' occasion de s' entraîner cet
 
-38. avoir possibilité : 1  / 1 :
+14. avoir possibilité : 1  / 1 :
 
 		 si l' ue a la possibilité d' accélérer ces efforts
 
-39. avoir préjugé : 1  / 2 :
+15. avoir préjugé : 1  / 2 :
 
 		 obtenues , mais ont un préjugé défavorable , facilement compréhensible
 
-40. avoir recours : 2  / 4 :
+16. avoir recours : 2  / 4 :
 
 		 ne devrons pas avoir recours à le type de
 
 		élus qui auraient eu recours à ces pratiques irrégulières
 
-41. avoir résultat : 1  / 1 :
+17. avoir résultat : 1  / 1 :
 
 		 blancs , mais eu pour résultat de libérer des terres
 
-42. avoir signification : 1  / 4 :
+18. avoir signification : 1  / 4 :
 
 		 mais il peut avoir des significations différentes , comme le
 
-43. bénéficier de icp : 2  / 1 :
+19. bénéficier de icp : 2  / 1 :
 
 		 pour les patients bénéficiant d' une icp , est un bolus
 
 		les patients devant bénéficier d' une icp , un bolus additionnel
 
-44. bénéficier de intervention : 1  / 1 :
+20. bénéficier de intervention : 1  / 1 :
 
 		 ) ) devant bénéficier d' une intervention urgente ou précoce
 
-45. compte tenir : 2  / 5 :
+21. compte tenir : 2  / 5 :
 
 		 compte tenu également de le niveau
 
 		) , et compte tenu de le rapport d'
 
-46. condamner à mort : 1  / 5 :
+22. condamner à mort : 1  / 5 :
 
 		 la manche sont condamnés à mort le 16 mars 1915
 
-47. connaître augmentation : 1  / 1 :
+23. connaître augmentation : 1  / 1 :
 
 		 même année , connaît une forte augmentation , puisque la variation
 
-48. connaître succès : 1  / 1 :
+24. connaître succès : 1  / 1 :
 
 		 só " qui connut un grand succès et " onde ir
 
-49. contre-indiquer : 2  / 2 :
+25. contre-indiquer : 2  / 2 :
 
 		 aclasta est contre-indiqué chez les patients ayant
 
 		aclasta est contre-indiqué chez la femme enceinte
 
-50. couronner le tout : 1  / 1 :
+26. couronner le tout : 1  / 1 :
 
 		 de plus pour couronner le tout j' ai eu la
 
-51. donner cours : 1  / 2 :
+27. donner cours : 1  / 2 :
 
 		 , où il donna un cours de droit public ,
 
-52. décision prendre : 1  / 3 :
+28. décision prendre : 1  / 3 :
 
 		 quant à la décision prise aujourd'hui de refuser de
 
-53. effectuer modification : 1  / 1 :
+29. effectuer modification : 1  / 1 :
 
 		 le droit d' effectuer les modifications nécessaires techniquement à l'
 
-54. effectuer recherche : 1  / 1 :
+30. effectuer recherche : 1  / 1 :
 
 		 utilisés afin d' effectuer des recherches dans les faq postés
 
-55. entrer en vigueur : 1  / 1 :
+31. entrer en vigueur : 1  / 1 :
 
 		 , la directive entrée en vigueur à le 1er janvier
 
-56. exercer pouvoir : 1  / 2 :
+32. exercer pouvoir : 1  / 2 :
 
 		 ces seigneurs exercent un pouvoir séculier et religieux comme
 
-57. faire distinction : 1  / 1 :
+33. faire distinction : 1  / 1 :
 
 		 il ne sera fait aucune distinction fondée sur le statut
 
-58. faire en sorte : 2  / 3 :
+34. faire en sorte : 2  / 3 :
 
 		 si nous voulons faire en sorte que fonctionne réellement le
 
 		comment pouvons -nous faire en sorte que la politique de
 
-59. faire mieux : 1  / 1 :
+35. faire mieux : 1  / 1 :
 
 		 mais qu' il ferait mieux de s' abstenir de
 
-60. faire part : 2  / 4 :
+36. faire part : 2  / 4 :
 
 		 mais aucune ne fait part de son sentiment à
 
 		un journal et fait part de ses états d'
 
-61. faire plaisir : 1  / 1 :
+37. faire plaisir : 1  / 1 :
 
 		 , et qui fera plaisir
 
-62. faire référence : 1  / 5 :
+38. faire référence : 1  / 5 :
 
 		 et swoboda ont fait référence , et qui ,
 
-63. faire état : 2  / 3 :
+39. faire état : 2  / 3 :
 
 		 témoignages de réfugiés font état d' exactions , viols
 
 		dont nous pouvons faire état , comme nous le
 
-64. il valoir mieux : 1  / 3 :
+40. il valoir mieux : 1  / 3 :
 
 		 il vaut donc mieux éviter l' expression «
 
-65. il y avoir lieu : 1  / 4 :
+41. il y avoir lieu : 1  / 4 :
 
 		 complétée , s' il y a lieu , par tous autres
 
-66. il être temps : 1  / 3 :
+42. il être temps : 1  / 3 :
 
 		 corruption généralisée , il est temps que les nationalistes s'
 
-67. inscrire but : 1  / 1 :
+43. inscrire but : 1  / 1 :
 
 		 suédois marcus allbäck inscrit le but de l' histoire de
 
-68. laisser à désirer : 1  / 2 :
+44. laisser à désirer : 1  / 2 :
 
 		 où l' hygiène laisse à désirer , je vous conseille
 
-69. mesure prendre : 2  / 2 :
+45. mesure prendre : 2  / 2 :
 
 		 convient que ces mesures soient prises à le niveau international
 
 		les mesures disciplinaires prises pour faire cesser et
 
-70. mettre en cause : 1  / 4 :
+46. mettre en cause : 1  / 4 :
 
 		 la rivière mékong mettent en cause la chine et sa
 
-71. mettre en évidence : 6  / 3 :
+47. mettre en évidence : 6  / 3 :
 
 		 acide zolédronique ont mis en évidence une toxicité sur la
 
@@ -330,37 +330,37 @@
 
 		ne font que mettre en évidence l' urgence d' une
 
-72. mettre sur pied : 1  / 2 :
+48. mettre sur pied : 1  / 2 :
 
 		 1902 a été mis sur pied à perpignan
 
-73. perdre le vie : 1  / 1 :
+49. perdre le vie : 1  / 1 :
 
 		 jour et goshou perd la vie
 
-74. porter plainte : 1  / 5 :
+50. porter plainte : 1  / 5 :
 
 		 elf et a porté plainte pour tentative d' escroquerie
 
-75. prendre contact : 1  / 1 :
+51. prendre contact : 1  / 1 :
 
 		 médicament , veuillez prendre contact avec le représentant local
 
-76. prendre décision : 1  / 3 :
+52. prendre décision : 1  / 3 :
 
 		 le conseil doit prendre une décision soit fixé à un
 
-77. prendre en compte : 1  / 5 :
+53. prendre en compte : 1  / 5 :
 
 		 le fisc ne prend en compte que le rendement garanti
 
-78. prendre en considération : 2  / 5 :
+54. prendre en considération : 2  / 5 :
 
 		 que l' on prenne aussi en considération l' effet que peuvent
 
 		ma proposition sera prise en considération lors de le vote
 
-79. prendre mesure : 3  / 2 :
+55. prendre mesure : 3  / 2 :
 
 		 il faut donc prendre des mesures dans le cadre de
 
@@ -368,165 +368,165 @@
 
 		connu pour avoir pris des mesures de clémence à l'
 
-80. prendre nom : 1  / 5 :
+56. prendre nom : 1  / 5 :
 
 		 , le m10 prit le nom dachilles
 
-81. prendre plaisir : 1  / 1 :
+57. prendre plaisir : 1  / 1 :
 
 		 ville , et prenait alors plaisir à faire un brin
 
-82. prendre position : 1  / 1 :
+58. prendre position : 1  / 1 :
 
 		 a pas consciemment pris position sur les copies temporaires
 
-83. prendre son source : 1  / 4 :
+59. prendre son source : 1  / 4 :
 
 		 l' euron qui prend sa source au-delà de passoncourt dans
 
-84. prendre succession : 1  / 1 :
+60. prendre succession : 1  / 1 :
 
 		 maud'huy , de prendre sa succession à la direction générale
 
-85. prendre à le piège : 1  / 1 :
+61. prendre à le piège : 1  / 1 :
 
 		 nasser est pris à le piège et il entre en
 
-86. présenter adaptation : 1  / 1 :
+62. présenter adaptation : 1  / 1 :
 
 		 les vertébrés connus présentant des adaptations pour une locomotion autre
 
-87. présenter risque : 1  / 5 :
+63. présenter risque : 1  / 5 :
 
 		 les hommes , présentant un risque accru de fracture ,
 
-88. présenter signe : 1  / 2 :
+64. présenter signe : 1  / 2 :
 
 		 le conducteur présente des signes d' ivresse et est
 
-89. prêter serment : 1  / 2 :
+65. prêter serment : 1  / 2 :
 
 		 son armée lui prête serment d' hommage
 
-90. question poser : 1  / 5 :
+66. question poser : 1  / 5 :
 
 		 tous deux la question que vous m' avez posée avec autant de vigueur
 
-91. recevoir ordre : 1  / 4 :
+67. recevoir ordre : 1  / 4 :
 
 		 , après avoir reçu l' ordre de monter la garde
 
-92. recevoir éducation : 1  / 1 :
+68. recevoir éducation : 1  / 1 :
 
 		 il reçut une éducation élémentaire à wansford et
 
-93. rendre visite : 2  / 5 :
+69. rendre visite : 2  / 5 :
 
 		 hjalmar schacht avait rendu visite à le prince pour
 
 		, qui avait rendu visite à le parlement européen
 
-94. risque comporter : 1  / 1 :
+70. risque comporter : 1  / 1 :
 
 		 supérieurs à les risques qu' il comporte dans le traitement de
 
-95. se abattre : 1  / 2 :
+71. se abattre : 1  / 2 :
 
 		 première attaque aérienne s' abattit sur la ville ,
 
-96. se abstenir : 1  / 2 :
+72. se abstenir : 1  / 2 :
 
 		 ferait mieux de s' abstenir de promettre l' impossible
 
-97. se acquitter : 1  / 1 :
+73. se acquitter : 1  / 1 :
 
 		 ressources additionnelles pour s' acquitter correctement de leur mission
 
-98. se adapter : 1  / 2 :
+74. se adapter : 1  / 2 :
 
 		 fois souple pour s' adapter à les différents lieux
 
-99. se agir : 1  / 2 :
+75. se agir : 1  / 2 :
 
 		 s' agissant de la provenance de
 
-100. se agir il : 1  / 3 :
+76. se agir il : 1  / 3 :
 
 		 -t -elle ou s' agit -il d' un accident domestique
 
-101. se apercevoir : 1  / 2 :
+77. se apercevoir : 1  / 2 :
 
 		 des zombis et s' aperçoit également que le ferry
 
-102. se articuler : 1  / 1 :
+78. se articuler : 1  / 1 :
 
 		 de l' union s' articule avec les politiques nationales
 
-103. se attaquer : 1  / 2 :
+79. se attaquer : 1  / 2 :
 
 		 elle , « s' attaquer à l' immigration clandestine
 
-104. se conformer : 1  / 2 :
+80. se conformer : 1  / 2 :
 
 		 les religions de se conformer à la vertu naturelle
 
-105. se consacrer : 1  / 5 :
+81. se consacrer : 1  / 5 :
 
 		 tout abandonné pour se consacrer à la libération de
 
-106. se disputer : 2  / 1 :
+82. se disputer : 2  / 1 :
 
 		 départ , emma se dispute avec son petit ami
 
 		catégorie tier iv s' est disputé à rabat de le
 
-107. se démarquer : 1  / 1 :
+83. se démarquer : 1  / 1 :
 
 		 il se démarque de les autres genres
 
-108. se effondrer : 1  / 2 :
+84. se effondrer : 1  / 2 :
 
 		 gouvernement d' union s' est effondré le 12 janvier avec
 
-109. se efforcer : 1  / 1 :
+85. se efforcer : 1  / 1 :
 
 		 nous nous efforçons depuis des années de
 
-110. se employer : 1  / 1 :
+86. se employer : 1  / 1 :
 
 		 2010 , leciejewski s' emploie à ne plus connaître
 
-111. se emporter : 1  / 1 :
+87. se emporter : 1  / 1 :
 
 		 le souverain s' emporte : « mais quelle
 
-112. se en prendre : 1  / 1 :
+88. se en prendre : 1  / 1 :
 
 		 saleh , qui s' en est pris à le président américain
 
-113. se entendre : 1  / 5 :
+89. se entendre : 1  / 5 :
 
 		 arrivent pas à s' entendre pour balayer devant leurs
 
-114. se illustrer : 2  / 2 :
+90. se illustrer : 2  / 2 :
 
 		 , dans lequel s' illustra le commandant massoud
 
 		régiment qu' il s' illustre à la bataille de
 
-115. se incliner : 1  / 2 :
+91. se incliner : 1  / 2 :
 
 		 l' ebm s' inclina devant joeuf par 70-61
 
-116. se joindre : 1  / 2 :
+92. se joindre : 1  / 2 :
 
 		 sont invités à se joindre à l' événement
 
-117. se montrer : 1  / 5 :
+93. se montrer : 1  / 5 :
 
 		 , nos sources se montrent inflexibles : " il
 
-118. se porter : 3  / 3 :
+94. se porter : 3  / 3 :
 
 		 ses troupes puis se porte sur josselin , puis
 
@@ -534,123 +534,123 @@
 
 		député jean-claude thomas se porte candidat avec le soutien
 
-119. se poser question : 1  / 1 :
+95. se poser question : 1  / 1 :
 
 		 toutefois , je me pose des questions quant à la pertinence
 
-120. se promener : 1  / 2 :
+96. se promener : 1  / 2 :
 
 		 elle aimait se promener avec ses amies et
 
-121. se prévaloir : 1  / 1 :
+97. se prévaloir : 1  / 1 :
 
 		 . chacun peut se prévaloir de tous les droits
 
-122. se rapprocher : 2  / 3 :
+98. se rapprocher : 2  / 3 :
 
 		 même les tactiques se rapprochent
 
 		et les combats se rapprochent donc énormément de secret
 
-123. se relever : 1  / 1 :
+99. se relever : 1  / 1 :
 
 		 autres économies européennes se relèvent
 
-124. se rendre compte : 1  / 4 :
+100. se rendre compte : 1  / 4 :
 
 		 elle se rend vite compte que le bateau est
 
-125. se reproduire : 1  / 3 :
+101. se reproduire : 1  / 3 :
 
 		 mère peut aller se reproduire , mais quel prix
 
-126. se réfugier : 1  / 4 :
+102. se réfugier : 1  / 4 :
 
 		 il se réfugia en suisse , où
 
-127. se répéter : 1  / 1 :
+103. se répéter : 1  / 1 :
 
 		 la crainte que se répète la guerre de tranchées
 
-128. se soucier : 1  / 3 :
+104. se soucier : 1  / 3 :
 
 		 tout dire sans se soucier de les intransigeances académiques
 
-129. se substituer : 1  / 1 :
+105. se substituer : 1  / 1 :
 
 		 la compagnie se substitue également à le pouvoir
 
-130. se suicider : 1  / 2 :
+106. se suicider : 1  / 2 :
 
 		 suspens : maria se suicide -t -elle ou s'
 
-131. se séparer : 1  / 3 :
+107. se séparer : 1  / 3 :
 
 		 bernard warburton-lee , s' était déjà séparé de le renown durant
 
-132. se tourner : 1  / 3 :
+108. se tourner : 1  / 3 :
 
 		 puis elle se tourne vers le théâtre en
 
-133. se y prendre : 1  / 1 :
+109. se y prendre : 1  / 1 :
 
 		 sait pas comment s' y prendre
 
-134. se échapper : 2  / 5 :
+110. se échapper : 2  / 5 :
 
 		 duras réussit à s' échapper
 
 		un parfum merveilleux s' échappe de le cercueil ,
 
-135. se écrouler : 1  / 4 :
+111. se écrouler : 1  / 4 :
 
 		 de le forum s' écroule à le ixe siècle
 
-136. souffrir de maladie : 2  / 1 :
+112. souffrir de maladie : 2  / 1 :
 
 		 , les patients souffrant de la maladie de paget doivent prendre
 
 		chez les patients souffrant de la maladie de paget , la
 
-137. subir icp : 2  / 4 :
+113. subir icp : 2  / 4 :
 
 		 patients qui vont subir une icp
 
 		de 6 000 patients subissant une icp ( replace-2 ) ,
 
-138. tirer le sonnette de alarme : 1  / 1 :
+114. tirer le sonnette de alarme : 1  / 1 :
 
 		 , ils avaient tiré la sonnette d' alarme
 
-139. travail réaliser : 1  / 3 :
+115. travail réaliser : 1  / 3 :
 
 		 que tous les travaux réalisés par les jeunes :
 
-140. étude effectuer : 1  / 1 :
+116. étude effectuer : 1  / 1 :
 
 		 des études effectuées chez l' animal avec
 
-141. étude mener : 1  / 5 :
+117. étude mener : 1  / 5 :
 
 		 basées sur une étude clinique menée avec la bivalirudine chez
 
-142. être le objet : 1  / 4 :
+118. être le objet : 1  / 4 :
 
 		 nul ne sera l' objet d' immixtions arbitraires dans
 
 ## 2.3 SEEN : FREQUENTLY
 
-143. atteindre maladie : 2  / 7 :
+0. atteindre maladie : 2  / 7 :
 
 		 chez les patients atteints de la maladie de paget , il
 
 		chez les patients atteints de maladie de paget , il
 
-144. attirer attention : 1  / 9 :
+1. attirer attention : 1  / 9 :
 
 		 elle attire l' attention de la justice sur
 
-145. avoir besoin : 4  / 22 :
+2. avoir besoin : 4  / 22 :
 
 		 malade compatible en a effectivement besoin et qu' il n'
 
@@ -660,7 +660,7 @@
 
 		les champignons n' ont pas besoin de lumière
 
-146. avoir droit : 29  / 7 :
+3. avoir droit : 29  / 7 :
 
 		 de la commission a parfaitement le droit , et a même
 
@@ -720,7 +720,7 @@
 
 		. quiconque travaille a droit à une rémunération équitable
 
-147. avoir lieu : 9  / 60 :
+4. avoir lieu : 9  / 60 :
 
 		 le procès a lieu à brazzaville en 2005
 
@@ -740,11 +740,11 @@
 
 		honnêtes qui doivent avoir lieu périodiquement , à le
 
-148. avoir tendance : 1  / 9 :
+5. avoir tendance : 1  / 9 :
 
 		 le monde financier a tendance à engendrer une euphorie
 
-149. donner lieu : 3  / 6 :
+6. donner lieu : 3  / 6 :
 
 		 individuel , qui donnera lieu à un compte rendu
 
@@ -752,13 +752,13 @@
 
 		actions pericles ont donné lieu à un certain nombre
 
-150. faire apparition : 2  / 8 :
+7. faire apparition : 2  / 8 :
 
 		 pichu fait sa première apparition dans un jeu vidéo
 
 		il fit par ailleurs une apparition dans la série brigade
 
-151. faire appel : 4  / 17 :
+8. faire appel : 4  / 17 :
 
 		 -- et a fait appel à l' aide communautaire
 
@@ -768,13 +768,13 @@
 
 		, apple a fait appel de manière récurrente à
 
-152. faire face : 2  / 12 :
+9. faire face : 2  / 12 :
 
 		 mais il doit faire face à les candidats «
 
 		laïc avaient dû faire face à les mêmes accusations
 
-153. faire le objet : 5  / 17 :
+10. faire le objet : 5  / 17 :
 
 		 l' hypocalcémie et faire l' objet d' une surveillance clinique
 
@@ -786,7 +786,7 @@
 
 		et y ayant fait l' objet d' un accord unanime
 
-154. faire partie : 9  / 54 :
+11. faire partie : 9  / 54 :
 
 		 il a fait partie de groupes musicaux comme
 
@@ -806,11 +806,11 @@
 
 		être obligé de faire partie d' une association
 
-155. faire preuve : 1  / 6 :
+12. faire preuve : 1  / 6 :
 
 		 les états membres font preuve d' irresponsabilité
 
-156. il convenir : 6  / 16 :
+13. il convenir : 6  / 16 :
 
 		 concurrence loyale , il convient que ces mesures soient
 
@@ -824,7 +824,7 @@
 
 		programme pericles , il convient de proroger le programme
 
-157. il falloir : 14  / 80 :
+14. il falloir : 14  / 80 :
 
 		 et déjà , il faut envisager la phase de
 
@@ -854,7 +854,7 @@
 
 		il faut tenir compte de le
 
-158. il se agir : 26  / 73 :
+15. il se agir : 26  / 73 :
 
 		 très brièvement , il s' agit de limiter les émissions
 
@@ -908,11 +908,11 @@
 
 		l' inconnu quand il s' agit de champignons
 
-159. il sembler : 1  / 10 :
+16. il sembler : 1  / 10 :
 
 		 il semble qu' un malaise de
 
-160. il y avoir : 14  / 96 :
+17. il y avoir : 14  / 96 :
 
 		 interventions dentaires , il n' y a pas de donnée disponible
 
@@ -942,7 +942,7 @@
 
 		de sol , il peut y avoir plus de huit miles
 
-161. jouer rôle : 4  / 16 :
+18. jouer rôle : 4  / 16 :
 
 		 parallèle , il joue un rôle important dans l' encadrement
 
@@ -952,25 +952,25 @@
 
 		fonds structurels ont joué un rôle fondamental dans le développement
 
-162. mettre en scène : 2  / 10 :
+19. mettre en scène : 2  / 10 :
 
 		 certains clichés " mis en scène " et des retouches
 
 		spectacle de marionnettes mettant en scène les animaux de la
 
-163. mettre en œuvre : 2  / 9 :
+20. mettre en œuvre : 2  / 9 :
 
 		 nouveau plan , mis en œuvre le 18 octobre 1996
 
 		la shoah roumaine mise en œuvre par le régime de
 
-164. mettre un terme : 2  / 6 :
+21. mettre un terme : 2  / 6 :
 
 		 constitution , doit mettre un terme à ces illusions et
 
 		réconciliation pacifique et mettre un terme à cette situation particulièrement
 
-165. porter nom : 4  / 12 :
+22. porter nom : 4  / 12 :
 
 		 profond de france porter son nom :
 
@@ -980,53 +980,53 @@
 
 		émission de lollipop portait le nom de waterloollipop
 
-166. prendre part : 2  / 11 :
+23. prendre part : 2  / 11 :
 
 		 mémoires pour avoir pris part à l' établissement d'
 
 		le droit de prendre part à la direction de
 
-167. se appuyer : 2  / 7 :
+24. se appuyer : 2  / 7 :
 
 		 le rendement qui s' appuie exclusivement sur l' activité
 
 		johnson s' appuyait sur une unique forme
 
-168. se arrêter : 1  / 6 :
+25. se arrêter : 1  / 6 :
 
 		 5 000 morts mais s' arrête juste devant une petite
 
-169. se assurer : 1  / 6 :
+26. se assurer : 1  / 6 :
 
 		 les parents veulent s' assurer de trouver des activités
 
-170. se attendre : 1  / 7 :
+27. se attendre : 1  / 7 :
 
 		 , il faut s' attendre à de très gros
 
-171. se avérer : 1  / 16 :
+28. se avérer : 1  / 16 :
 
 		 la bivalirudine ne s' est pas avérée mutagène ni clastogène dans
 
-172. se classer : 2  / 9 :
+29. se classer : 2  / 9 :
 
 		 d' athènes , se classant derrière le danois wilson
 
 		il se classe deuxième de les championnats
 
-173. se composer : 1  / 6 :
+30. se composer : 1  / 6 :
 
 		 il se compose de deux ensembles de
 
-174. se contenter : 1  / 6 :
+31. se contenter : 1  / 6 :
 
 		 , devra ainsi se contenter de la coupe intertoto
 
-175. se distinguer : 1  / 7 :
+32. se distinguer : 1  / 7 :
 
 		 les couleurs andalouses se distinguent par leur charge symbolique
 
-176. se dérouler : 10  / 26 :
+33. se dérouler : 10  / 26 :
 
 		 le zimbabwe ne se déroulaient pas correctement , pour
 
@@ -1048,7 +1048,7 @@
 
 		que ce vote se déroule en ce moment même
 
-177. se engager : 3  / 19 :
+34. se engager : 3  / 19 :
 
 		 gner s' est engagée à moderniser ses hst
 
@@ -1056,15 +1056,15 @@
 
 		les etats membres se sont engagés à assurer , en
 
-178. se exprimer : 1  / 6 :
+35. se exprimer : 1  / 6 :
 
 		 la manière dont s' expriment tous les États membres
 
-179. se faire : 1  / 12 :
+36. se faire : 1  / 12 :
 
 		 le mal à se faire à cette nouvelle vie
 
-180. se imposer : 3  / 9 :
+37. se imposer : 3  / 9 :
 
 		 il tente de s' imposer en 630 / 631
 
@@ -1072,25 +1072,25 @@
 
 		les schwarz-gelben s' imposent un à zéro grâce
 
-181. se inquiéter : 1  / 6 :
+38. se inquiéter : 1  / 6 :
 
 		 que le maroc s' inquiète de les répercussions qu'
 
-182. se jeter : 1  / 8 :
+39. se jeter : 1  / 8 :
 
 		 une fenêtre pour se jeter dans le vide
 
-183. se occuper : 2  / 8 :
+40. se occuper : 2  / 8 :
 
 		 le haut représentant s' occupe comme il le faut
 
 		autre pays ne s' occupe à ce point de
 
-184. se passer : 1  / 15 :
+41. se passer : 1  / 15 :
 
 		 pas ce qui se passe
 
-185. se produire : 5  / 25 :
+42. se produire : 5  / 25 :
 
 		 ces réactions se produisent rarement ( environ 1
 
@@ -1102,17 +1102,17 @@
 
 		1931 , elle se produisit en france et en
 
-186. se prononcer : 1  / 7 :
+43. se prononcer : 1  / 7 :
 
 		 le conseil constitutionnel s' est prononcé par décision ( dc
 
-187. se présenter : 2  / 16 :
+44. se présenter : 2  / 16 :
 
 		 jean-louis schneiter , se présente à les élections municipales
 
 		2008 , elle se présente pour l' un de
 
-188. se rendre : 4  / 23 :
+45. se rendre : 4  / 23 :
 
 		 de 20 ans se rend à bethoncourt ( 25
 
@@ -1122,7 +1122,7 @@
 
 		que ned flanders se rend à le congrès de
 
-189. se retirer : 5  / 10 :
+46. se retirer : 5  / 10 :
 
 		 le parti , se retirait rapidement de la course
 
@@ -1134,17 +1134,17 @@
 
 		que les eaux se retirent sont plus évolués
 
-190. se référer : 1  / 9 :
+47. se référer : 1  / 9 :
 
 		 sai ambrosini , se référant à l' origine d'
 
-191. se révéler : 2  / 7 :
+48. se révéler : 2  / 7 :
 
 		 dont la mission se révèle périlleuse
 
 		anne ) , se révèle d' un caractère obstiné
 
-192. se situer : 8  / 27 :
+49. se situer : 8  / 27 :
 
 		 cause européenne , se sont toujours situées bien à le -
 
@@ -1162,11 +1162,11 @@
 
 		dont l' œuvre se situe entre la fin de
 
-193. se traduire : 1  / 8 :
+50. se traduire : 1  / 8 :
 
 		 européenne , qui se traduit parfois en spécificités et
 
-194. se trouver : 10  / 67 :
+51. se trouver : 10  / 67 :
 
 		 de croissance osseuse se trouve modifié
 
@@ -1188,23 +1188,23 @@
 
 		onu , qui se trouve dans la capitale espagnole
 
-195. se voir : 2  / 12 :
+52. se voir : 2  / 12 :
 
 		 ca-14 ) et se vit confier le commandement de
 
 		il se voit obligé de se transformer
 
-196. se élever : 1  / 14 :
+53. se élever : 1  / 14 :
 
 		 que la cité s' élève aujourd'hui dans la zone
 
-197. se étendre : 2  / 10 :
+54. se étendre : 2  / 10 :
 
 		 " colonial " s' étend à les appellations à
 
 		les plaines s' étendent à le nord
 
-198. tenir compte : 5  / 10 :
+55. tenir compte : 5  / 10 :
 
 		 ostéoporose et a tenu compte de le nombre de
 
