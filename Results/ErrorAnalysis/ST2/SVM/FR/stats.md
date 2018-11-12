@@ -16,7 +16,9 @@ MWT: number 1, occurrences: 2
 
 NEW : ALL: number 0, occurrences: 0
 
-SEEN : PARTIALLY: number 62, occurrences: 75
+SEEN : ALL: number 20, occurrences: 31
+
+SEEN : PARTIALLY: number 42, occurrences: 44
 
 MWE: number 62, occurrences: 75
 

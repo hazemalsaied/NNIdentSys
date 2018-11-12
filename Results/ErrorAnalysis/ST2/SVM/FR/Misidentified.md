@@ -1,10 +1,48 @@
+## SEEN : ALL
+
+aller dans sens : 1  / 3 : cette évolution va dans le sens de la recommandation de
+
+avoir droit : 1  / 7 : ils ont des droits égaux à le regard
+
+avoir lieu : 1  / 60 : le vote aura lieu demain à 12 heures
+
+avoir rôle : 1  / 2 : , les historiens ont aussi leur rôle de citoyens à assumer
+
+cela faire : 1  / 3 : , sachant que cela fait déjà plusieurs années que
+
+en avoir : 1  / 1 : tous en avaient à raconter à les
+
+en revenir : 1  / 1 : la faute n' en revient certes pas à la
+
+faire le tour : 1  / 1 : les images avaient fait le tour de le monde ,
+
+faire remarquer : 1  / 1 : azaila s' est fait remarquer
+
+il falloir : 2  / 80 : élution ) , il faut déterminer la bonne température :: être anglo-saxons , il ne faut pas s' étonner que
+
+il y avoir : 9  / 96 : a osé , il y a quelque temps , proposer :: m' a contacté il y a quelques semaines et m' :: ai parlé encore il y a une heure , et :: ville date d' il y a plus de 3 ans :: le parlement européen il y a quelques mois à peine :: il y a quelques instants , m. :: on a fait il y a quelques années c' était :: sur la terre il y a 1,3 milliards d' années :: il y a 420 millions d' années
+
+prendre forme : 1  / 1 : , qui peut prendre d' ailleurs des formes diverses , pour l'
+
+prendre le parole : 1  / 1 : fois que je prends la parole en plénière , il
+
+se enfoncer : 1  / 1 : corps glisse et s' enfonce tout droit dans la
+
+se exprimer : 2  / 6 : un principe qui s' exprime de la manière dont :: cette volonté doit s' exprimer par des élections honnêtes
+
+se mettre : 1  / 5 : mandelamania " qui se met alors en place est
+
+se opposer : 1  / 13 : la chine ne s' étaient pas , de facto , opposées à l' opération militaire
+
+se retrouver : 2  / 19 : le même phénomène se retrouverait à les régionales si :: on s' y retrouve souvent le soir entre
+
+se tenir : 1  / 2 : le doubs qui se tenait le même jour ,
+
+être le fait : 1  / 3 : de la culture est le fait de pouvoir transmettre de
+
 ## SEEN : PARTIALLY
 
-**aller** **dans** **sens** : 1  / 0 : cette évolution va dans le sens de la recommandation de
-
 **avoir** **boutique** : 1  / 0 : virgin , qui aura ainsi une " boutique dans la boutique "
-
-**avoir** **droit** : 1  / 0 : ils ont des droits égaux à le regard
 
 **avoir** **fonction** : 1  / 0 : commutative , et a donc deux fonctions inverses , qui pourraient
 
@@ -12,11 +50,7 @@
 
 **avoir** **le** tort : 1  / 0 : a -t -elle eu le tort , la veille ,
 
-**avoir** **lieu** : 1  / 0 : le vote aura lieu demain à 12 heures
-
 **avoir** **objet** : 1  / 0 : est une controverse ayant pour objet certains clichés " mis
-
-**avoir** **rôle** : 1  / 0 : , les historiens ont aussi leur rôle de citoyens à assumer
 
 **avoir** compagnie : 1  / 0 : ce groupe a déjà deux compagnies aériennes en grande bretagne
 
@@ -26,15 +60,9 @@
 
 **avoir** pitjantjatjara : 1  / 0 : population d' amata a le pitjantjatjara comme langue maternelle et
 
-**cela** **faire** : 1  / 0 : , sachant que cela fait déjà plusieurs années que
-
 **donner** **un** **résultat** : 1  / 0 : la loi ont donné des résultats
 
 **dresser** **le** **opinion** : 1  / 0 : les comploteurs dressent l' opinion contre honor et les
-
-**en** **avoir** : 1  / 0 : tous en avaient à raconter à les
-
-**en** **revenir** : 1  / 0 : la faute n' en revient certes pas à la
 
 **entraîner** **le** **déclin** : 1  / 0 : y avaient aussi entraîné le déclin de l' espèce
 
@@ -44,11 +72,7 @@
 
 **faire** **ce** **guerre** : 1  / 0 : ce gouvernement qui fait cette guerre
 
-**faire** **le** **tour** : 1  / 0 : les images avaient fait le tour de le monde ,
-
 **faire** **le** urgence : 1  / 0 : , qui ne font que mettre en évidence l' urgence d' une réponse efficace
-
-**faire** **remarquer** : 1  / 0 : azaila s' est fait remarquer
 
 **faire** **son** **témoin** : 1  / 0 : , qui en fait son témoin
 
@@ -57,10 +81,6 @@
 **faire** **un** miracle : 1  / 0 : les foules et faisait des miracles
 
 **filer** **le** ballon **dans** **son** **but** : 1  / 0 : lui aussi laissé filer le ballon dans ses buts
-
-**il** **falloir** : 2  / 0 : élution ) , il faut déterminer la bonne température :: être anglo-saxons , il ne faut pas s' étonner que
-
-**il** **y** **avoir** : 9  / 0 : a osé , il y a quelque temps , proposer :: m' a contacté il y a quelques semaines et m' :: ai parlé encore il y a une heure , et :: ville date d' il y a plus de 3 ans :: le parlement européen il y a quelques mois à peine :: il y a quelques instants , m. :: on a fait il y a quelques années c' était :: sur la terre il y a 1,3 milliards d' années :: il y a 420 millions d' années
 
 **il** **y** construire : 1  / 0 : il y construit en 1887 l' actuel
 
@@ -71,10 +91,6 @@
 **porter** **secours** **à** **le** victime : 1  / 0 : voiture doublée ont porté secours à les victimes
 
 **poser** **son** **main** : 1  / 0 : tente alors de poser sa main sur le museau de
-
-**prendre** **forme** : 1  / 0 : , qui peut prendre d' ailleurs des formes diverses , pour l'
-
-**prendre** **le** **parole** : 1  / 0 : fois que je prends la parole en plénière , il
 
 **prendre** **à** **le** **heure** : 1  / 0 : médecin qui vous prend à l' heure ... trés compétente et
 
@@ -88,21 +104,9 @@
 
 **se** **en** inventer : 1  / 0 : son rôle et s' en inventer un éventuellement ... a
 
-**se** **enfoncer** : 1  / 0 : corps glisse et s' enfonce tout droit dans la
-
-**se** **exprimer** : 2  / 0 : un principe qui s' exprime de la manière dont :: cette volonté doit s' exprimer par des élections honnêtes
-
 **se** **lier** : 1  / 0 : la bivalirudine ne se lie pas à les protéines
 
-**se** **mettre** : 1  / 0 : mandelamania " qui se met alors en place est
-
-**se** **opposer** : 1  / 0 : la chine ne s' étaient pas , de facto , opposées à l' opération militaire
-
 **se** **rencontrer** : 1  / 0 : les deux équipes s' étaient cependant déjà rencontrées lors de matchs non
-
-**se** **retrouver** : 2  / 0 : le même phénomène se retrouverait à les régionales si :: on s' y retrouve souvent le soir entre
-
-**se** **tenir** : 1  / 0 : le doubs qui se tenait le même jour ,
 
 **se** associer : 1  / 0 : les organismes qui s' étaient associés avec des champignons ont
 
@@ -121,6 +125,4 @@
 **se** unir : 1  / 0 : que les nationalistes s' unissent pour lutter contre ce
 
 **se** équiper : 1  / 0 : les cff de s' équiper en 1991 de 12
-
-**être** **le** **fait** : 1  / 0 : de la culture est le fait de pouvoir transmettre de
 
