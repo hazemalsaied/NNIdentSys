@@ -58,3 +58,21 @@ MWE: number 178, occurrences: 191
 
 MWE: number 393, occurrences: 629
 
+### Categories : 
+
+IAV		 : 0 / 0 
+
+IRV		 : 126 / 154 
+
+LVC.cause		 : 7 / 15 
+
+LVC.full		 : 147 / 252 
+
+MVC		 : 0 / 1 
+
+VID		 : 158 / 207 
+
+VPC.full		 : 0 / 0 
+
+VPC.semi		 : 0 / 0 
+
