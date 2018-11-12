@@ -1,46 +1,4 @@
-## SEEN : ALL
-
-aller dans sens : 1  / 3 : cette évolution va dans le sens de la recommandation de
-
-avoir droit : 1  / 7 : ils ont des droits égaux à le regard
-
-avoir lieu : 1  / 60 : le vote aura lieu demain à 12 heures
-
-avoir rôle : 1  / 2 : , les historiens ont aussi leur rôle de citoyens à assumer
-
-cela faire : 1  / 3 : , sachant que cela fait déjà plusieurs années que
-
-en avoir : 1  / 1 : tous en avaient à raconter à les
-
-en revenir : 1  / 1 : la faute n' en revient certes pas à la
-
-faire le tour : 1  / 1 : les images avaient fait le tour de le monde ,
-
-faire remarquer : 1  / 1 : azaila s' est fait remarquer
-
-il falloir : 2  / 80 : élution ) , il faut déterminer la bonne température :: être anglo-saxons , il ne faut pas s' étonner que
-
-il y avoir : 9  / 96 : a osé , il y a quelque temps , proposer :: m' a contacté il y a quelques semaines et m' :: ai parlé encore il y a une heure , et :: ville date d' il y a plus de 3 ans :: le parlement européen il y a quelques mois à peine :: il y a quelques instants , m. :: on a fait il y a quelques années c' était :: sur la terre il y a 1,3 milliards d' années :: il y a 420 millions d' années
-
-prendre forme : 1  / 1 : , qui peut prendre d' ailleurs des formes diverses , pour l'
-
-prendre le parole : 1  / 1 : fois que je prends la parole en plénière , il
-
-se enfoncer : 1  / 1 : corps glisse et s' enfonce tout droit dans la
-
-se exprimer : 2  / 6 : un principe qui s' exprime de la manière dont :: cette volonté doit s' exprimer par des élections honnêtes
-
-se mettre : 1  / 5 : mandelamania " qui se met alors en place est
-
-se opposer : 1  / 13 : la chine ne s' étaient pas , de facto , opposées à l' opération militaire
-
-se retrouver : 2  / 19 : le même phénomène se retrouverait à les régionales si :: on s' y retrouve souvent le soir entre
-
-se tenir : 1  / 2 : le doubs qui se tenait le même jour ,
-
-être le fait : 1  / 3 : de la culture est le fait de pouvoir transmettre de
-
-## SEEN : PARTIALLY
+## 2.1 SEEN : PARTIALLY
 
 **avoir** **boutique** : 1  / 0 : virgin , qui aura ainsi une " boutique dans la boutique "
 
@@ -125,4 +83,48 @@ se tenir : 1  / 2 : le doubs qui se tenait le même jour ,
 **se** unir : 1  / 0 : que les nationalistes s' unissent pour lutter contre ce
 
 **se** équiper : 1  / 0 : les cff de s' équiper en 1991 de 12
+
+## 2.2 SEEN : BARELY
+
+aller dans sens : 1  / 3 : cette évolution va dans le sens de la recommandation de
+
+avoir rôle : 1  / 2 : , les historiens ont aussi leur rôle de citoyens à assumer
+
+cela faire : 1  / 3 : , sachant que cela fait déjà plusieurs années que
+
+en avoir : 1  / 1 : tous en avaient à raconter à les
+
+en revenir : 1  / 1 : la faute n' en revient certes pas à la
+
+faire le tour : 1  / 1 : les images avaient fait le tour de le monde ,
+
+faire remarquer : 1  / 1 : azaila s' est fait remarquer
+
+prendre forme : 1  / 1 : , qui peut prendre d' ailleurs des formes diverses , pour l'
+
+prendre le parole : 1  / 1 : fois que je prends la parole en plénière , il
+
+se enfoncer : 1  / 1 : corps glisse et s' enfonce tout droit dans la
+
+se mettre : 1  / 5 : mandelamania " qui se met alors en place est
+
+se tenir : 1  / 2 : le doubs qui se tenait le même jour ,
+
+être le fait : 1  / 3 : de la culture est le fait de pouvoir transmettre de
+
+## SEEN : FREQUENTLY
+
+avoir droit : 1  / 7 : ils ont des droits égaux à le regard
+
+avoir lieu : 1  / 60 : le vote aura lieu demain à 12 heures
+
+il falloir : 2  / 80 : élution ) , il faut déterminer la bonne température :: être anglo-saxons , il ne faut pas s' étonner que
+
+il y avoir : 9  / 96 : a osé , il y a quelque temps , proposer :: m' a contacté il y a quelques semaines et m' :: ai parlé encore il y a une heure , et :: ville date d' il y a plus de 3 ans :: le parlement européen il y a quelques mois à peine :: il y a quelques instants , m. :: on a fait il y a quelques années c' était :: sur la terre il y a 1,3 milliards d' années :: il y a 420 millions d' années
+
+se exprimer : 2  / 6 : un principe qui s' exprime de la manière dont :: cette volonté doit s' exprimer par des élections honnêtes
+
+se opposer : 1  / 13 : la chine ne s' étaient pas , de facto , opposées à l' opération militaire
+
+se retrouver : 2  / 19 : le même phénomène se retrouverait à les régionales si :: on s' y retrouve souvent le soir entre
 

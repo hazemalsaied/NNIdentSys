@@ -1,8 +1,4 @@
-## EMBEDDED
-
-il y avoir : 1  / 96 : complétée , s' il y a lieu , par tous
-
-## INTERLEAVING
+## 0.1 INTERLEAVING
 
 coordination réaliser : 1  / 0 : œuvre et la coordination de le programme sont réalisées en partenariat étroit entre
 
@@ -12,127 +8,17 @@ soumettre traitement : 1  / 0 : nul ne sera soumis à la torture , ni à des pei
 
 être le objet atteinte : 1  / 0 : nul ne sera l' objet d' immixtions arbitraires dans sa vie privée , sa famille , son domicile ou sa correspondance , ni d' atteintes à son honneur et
 
-## NEW : TOTALLY
+## 0.2 EMBEDDED
+
+il y avoir : 1  / 96 : complétée , s' il y a lieu , par tous
+
+## 1.1 NEW
 
 dispenser enseignement : 1  / 0 : on y dispense le même enseignement qu' à paris ,
 
 soumettre torture : 1  / 0 : nul ne sera soumis à la torture , ni à des
 
-## SEEN : BARELY
-
-action mener : 1  / 1 : petit nombre d' actions axées sur la protection contre la contrefaçon de la monnaie sont menées dans le cadre d'
-
-avoir mal : 1  / 3 : à la campagne ont de le mal à se faire à
-
-avoir possibilité : 1  / 1 : travaillent et n' ont pas de possibilité de garde pour leur
-
-avoir rendement : 1  / 1 : sur des opcvm ayant un rendement indexé sur euribor 3
-
-avoir à le esprit : 1  / 1 : la société , ayant cette déclaration constamment à l' esprit , s' efforcent ,
-
-compte tenir : 1  / 5 : le programme , compte tenu de la nécessité
-
-contrat signer : 1  / 2 : occultes que le contrat signé en 1991 interdisait formellement
-
-convention signer : 1  / 1 : les conventions signées entre l' ufe et
-
-donner accord : 1  / 1 : le conseil municipal donne son accord pour cette procédure
-
-donner conseil : 1  / 4 : là pour nous donner de précieux conseils
-
-effet avoir : 1  / 1 : en considération l' effet que peuvent avoir ces températures très basses
-
-exercer influence : 1  / 1 : le calvinisme exerça une certaine influence en france , en
-
-faire don : 1  / 2 : ottone i en fit don à les comtes de
-
-faire exercice : 1  / 1 : mission , doivent faire un exercice d' autocritique et rendre
-
-faire remarquer : 1  / 1 : » , en faisant remarquer : « et voilà
-
-faire écho : 1  / 2 : de presse défavorables font écho , les salariés de
-
-garder souvenir : 1  / 1 : en ai pas gardé un très bon souvenir
-
-il faire : 1  / 2 : le printemps , il fait beau
-
-inscrire but : 2  / 1 : milieu de terrain inscrit le 3 but de son club dix :: , où marjewski inscrit le cinquième et dernier but de la rencontre
-
-mener campagne : 1  / 2 : orgnac , y mènera par la suite plusieurs campagnes dans les années 1930
-
-mettre en évidence : 1  / 3 : le judoka se met en évidence dans les catégories juniors
-
-prendre décision : 1  / 3 : accusé de " prendre seul les décisions "
-
-prendre nom : 1  / 5 : cœur artificiel qui prit en conséquence le nom de jarvik 7
-
-présenter excuse : 1  / 1 : bent présente ses excuses peu de temps après
-
-présenter symptôme : 1  / 1 : dentiste si vous présentez de tels symptômes
-
-recevoir perfusion : 1  / 1 : entre eux ont reçu leur perfusion 2 semaines ou plus
-
-remporter succès : 2  / 1 : troc et qui remporte un vif succès :: il a remporté un certain succès auprès de le public
-
-rôle jouer : 1  / 1 : part , le rôle joué par l' algérie dans
-
-se abstenir : 1  / 2 : je me suis finalement abstenue en ce qui concerne
-
-se adresser : 1  / 5 : places d' accueil s' adressent en priorité à les
-
-se approprier : 1  / 1 : marty se l' approprie et décide de l'
-
-se attaquer : 1  / 2 : c' est aussi s' attaquer à la misère humaine
-
-se devoir : 1  / 2 : qu' une démocratie se doit d' être exemplaire et
-
-se faire remarquer : 1  / 3 : cerámica de azaila s' est fait remarquer
-
-se mettre : 1  / 5 : ce haricot se mit à germer et à
-
-se porter : 1  / 3 : homophobie , qui s' est portée partie civile : "
-
-se réjouir : 1  / 1 : je me réjouis de la concentration proposée
-
-se tenir : 1  / 2 : hybride où matthews se tient en position de defensive
-
-tel être le cas : 1  / 1 : tel est le cas de les actions lancées
-
-travail accomplir : 2  / 3 : remercions pour le travail qu' il a accompli , a signalé que :: koch de le travail qu' il a accompli pour cet autre rapport
-
-venir en aide : 1  / 3 : parce qu' ils viennent volontairement en aide à le kosovo
-
-étude réaliser : 2  / 1 : a évalué les études réalisées afin d' aboutir à :: des études d' interactions médicamenteuses ont été réalisées avec des inhibiteurs plaquettaires
-
-## SEEN : FREQUENTLY
-
-attirer attention : 1  / 9 : parlement , on attire régulièrement l' attention , à juste titre
-
-avoir besoin : 1  / 22 : mais le domaine a constamment besoin de se renouveler
-
-avoir droit : 1  / 7 : donc l' autriche a tout à fait le droit de former un gouvernement
-
-disputer match : 1  / 9 : 12 équipes engagées disputèrent un total de 42 matchs
-
-faire partie : 1  / 54 : autres n' en font indiscutablement pas partie , l' appartenance ou
-
-il falloir : 1  / 80 : il a fallu 33 jours de forage
-
-il y avoir : 1  / 96 : complétée , s' il y a lieu , par tous
-
-jouer match : 1  / 7 : pour qui il joua son premier match le 6 novembre 1960
-
-se arrêter : 1  / 6 : la ligne nara s' arrêtent à la gare d'
-
-se distinguer : 1  / 7 : élégante dont elle se distingue par un masque facial
-
-se faire : 1  / 12 : le quartier puis s' y fit construire une maison
-
-se occuper : 1  / 8 : il se serait notamment occupé pour le compte de
-
-voir le jour : 2  / 6 : chanson de cabaret vit véritablement le jour à le chat noir :: nouvel album devrait voir le jour en
-
-## SEEN : PARTIALLY
+## 2.1 SEEN : PARTIALLY
 
 **accorder** **attention** : 1  / 0 : - qu' on accorde une plus grande attention à la question de
 
@@ -449,4 +335,118 @@ soumettre **risque** : 1  / 0 : ceux qui sont soumis à ces risques doivent sati
 soumettre **traitement** : 1  / 0 : nul ne sera soumis à la torture , ni à des peines ou traitements cruels , inhumains ou
 
 troc **faire** : 1  / 0 : le troc commercial se fit à la fois par
+
+## 2.2 SEEN : BARELY
+
+action mener : 1  / 1 : petit nombre d' actions axées sur la protection contre la contrefaçon de la monnaie sont menées dans le cadre d'
+
+avoir mal : 1  / 3 : à la campagne ont de le mal à se faire à
+
+avoir possibilité : 1  / 1 : travaillent et n' ont pas de possibilité de garde pour leur
+
+avoir rendement : 1  / 1 : sur des opcvm ayant un rendement indexé sur euribor 3
+
+avoir à le esprit : 1  / 1 : la société , ayant cette déclaration constamment à l' esprit , s' efforcent ,
+
+compte tenir : 1  / 5 : le programme , compte tenu de la nécessité
+
+contrat signer : 1  / 2 : occultes que le contrat signé en 1991 interdisait formellement
+
+convention signer : 1  / 1 : les conventions signées entre l' ufe et
+
+donner accord : 1  / 1 : le conseil municipal donne son accord pour cette procédure
+
+donner conseil : 1  / 4 : là pour nous donner de précieux conseils
+
+effet avoir : 1  / 1 : en considération l' effet que peuvent avoir ces températures très basses
+
+exercer influence : 1  / 1 : le calvinisme exerça une certaine influence en france , en
+
+faire don : 1  / 2 : ottone i en fit don à les comtes de
+
+faire exercice : 1  / 1 : mission , doivent faire un exercice d' autocritique et rendre
+
+faire remarquer : 1  / 1 : » , en faisant remarquer : « et voilà
+
+faire écho : 1  / 2 : de presse défavorables font écho , les salariés de
+
+garder souvenir : 1  / 1 : en ai pas gardé un très bon souvenir
+
+il faire : 1  / 2 : le printemps , il fait beau
+
+inscrire but : 2  / 1 : milieu de terrain inscrit le 3 but de son club dix :: , où marjewski inscrit le cinquième et dernier but de la rencontre
+
+mener campagne : 1  / 2 : orgnac , y mènera par la suite plusieurs campagnes dans les années 1930
+
+mettre en évidence : 1  / 3 : le judoka se met en évidence dans les catégories juniors
+
+prendre décision : 1  / 3 : accusé de " prendre seul les décisions "
+
+prendre nom : 1  / 5 : cœur artificiel qui prit en conséquence le nom de jarvik 7
+
+présenter excuse : 1  / 1 : bent présente ses excuses peu de temps après
+
+présenter symptôme : 1  / 1 : dentiste si vous présentez de tels symptômes
+
+recevoir perfusion : 1  / 1 : entre eux ont reçu leur perfusion 2 semaines ou plus
+
+remporter succès : 2  / 1 : troc et qui remporte un vif succès :: il a remporté un certain succès auprès de le public
+
+rôle jouer : 1  / 1 : part , le rôle joué par l' algérie dans
+
+se abstenir : 1  / 2 : je me suis finalement abstenue en ce qui concerne
+
+se adresser : 1  / 5 : places d' accueil s' adressent en priorité à les
+
+se approprier : 1  / 1 : marty se l' approprie et décide de l'
+
+se attaquer : 1  / 2 : c' est aussi s' attaquer à la misère humaine
+
+se devoir : 1  / 2 : qu' une démocratie se doit d' être exemplaire et
+
+se faire remarquer : 1  / 3 : cerámica de azaila s' est fait remarquer
+
+se mettre : 1  / 5 : ce haricot se mit à germer et à
+
+se porter : 1  / 3 : homophobie , qui s' est portée partie civile : "
+
+se réjouir : 1  / 1 : je me réjouis de la concentration proposée
+
+se tenir : 1  / 2 : hybride où matthews se tient en position de defensive
+
+tel être le cas : 1  / 1 : tel est le cas de les actions lancées
+
+travail accomplir : 2  / 3 : remercions pour le travail qu' il a accompli , a signalé que :: koch de le travail qu' il a accompli pour cet autre rapport
+
+venir en aide : 1  / 3 : parce qu' ils viennent volontairement en aide à le kosovo
+
+étude réaliser : 2  / 1 : a évalué les études réalisées afin d' aboutir à :: des études d' interactions médicamenteuses ont été réalisées avec des inhibiteurs plaquettaires
+
+## SEEN : FREQUENTLY
+
+attirer attention : 1  / 9 : parlement , on attire régulièrement l' attention , à juste titre
+
+avoir besoin : 1  / 22 : mais le domaine a constamment besoin de se renouveler
+
+avoir droit : 1  / 7 : donc l' autriche a tout à fait le droit de former un gouvernement
+
+disputer match : 1  / 9 : 12 équipes engagées disputèrent un total de 42 matchs
+
+faire partie : 1  / 54 : autres n' en font indiscutablement pas partie , l' appartenance ou
+
+il falloir : 1  / 80 : il a fallu 33 jours de forage
+
+il y avoir : 1  / 96 : complétée , s' il y a lieu , par tous
+
+jouer match : 1  / 7 : pour qui il joua son premier match le 6 novembre 1960
+
+se arrêter : 1  / 6 : la ligne nara s' arrêtent à la gare d'
+
+se distinguer : 1  / 7 : élégante dont elle se distingue par un masque facial
+
+se faire : 1  / 12 : le quartier puis s' y fit construire une maison
+
+se occuper : 1  / 8 : il se serait notamment occupé pour le compte de
+
+voir le jour : 2  / 6 : chanson de cabaret vit véritablement le jour à le chat noir :: nouvel album devrait voir le jour en
 
