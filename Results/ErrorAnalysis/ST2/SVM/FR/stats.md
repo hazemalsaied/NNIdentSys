@@ -12,7 +12,7 @@
 
 2.2 SEEN : BARELY: number 119, occurrences: 150
 
-SEEN : FREQUENTLY: number 56, occurrences: 232
+2.3 SEEN : FREQUENTLY: number 56, occurrences: 232
 
 MWE: number 197, occurrences: 405
 
@@ -24,7 +24,7 @@ MWE: number 197, occurrences: 405
 
 2.2 SEEN : BARELY: number 13, occurrences: 13
 
-SEEN : FREQUENTLY: number 7, occurrences: 18
+2.3 SEEN : FREQUENTLY: number 7, occurrences: 18
 
 MWE: number 62, occurrences: 75
 
@@ -44,7 +44,7 @@ MWE: number 62, occurrences: 75
 
 2.3 SEEN : ALL: number 0, occurrences: 0
 
-SEEN : FREQUENTLY: number 13, occurrences: 14
+2.3 SEEN : FREQUENTLY: number 13, occurrences: 14
 
 MWE: number 215, occurrences: 224
 
