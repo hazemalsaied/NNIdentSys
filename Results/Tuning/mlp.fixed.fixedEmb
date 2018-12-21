@@ -1,0 +1,1380 @@
+INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_BFRyiK.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 10869/11441 Mb (0.950000) on cuda
+Mapped name None to device cuda: Tesla K40m (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+	Mode: NON.COMPO
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, bPadding, batchSize, chickPoint, compactVocab, dense1, dense1Activation, dense1Dropout, dense1UnitNumber, dense2, dense2Activation, dense2Dropout, dense2UnitNumber, earlyStop, epochs, features, inputItems, lemma, loss, lr, minDelta, optimizer, posEmb, predictVerbose, s0Padding, s1Padding, tokenEmb, trainable, validationSplit, verbose
+==================================================================================================
+# Configs: NonCompo, sharedtask2, fixedSize, True, False, 6, True, True, False, True, True, 2, 64, False, False, True, relu, 0.429, 58, False, relu, 0, 0, True, 40, False, 4, True, categorical_crossentropy, 0.059, 0.2, adagrad, 42, False, 5, 5, 480, False, 0.1, 0
+==================================================================================================
+	 Annotation issues
+==================================================================================================
+	Train deformed lemmas: 41 
+
+==================================================================================================
+	BG Train (3124)
+==================================================================================================
+	Important sentence: 3124
+	Token occurrences: 89121
+	MWE number: 1372
+	MWE occurrences: 3583
+	Continuous occurrences: 81.0 %
+	Frequent MWE occurences: 49.0 %
+	MWE length: 2.12
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 8
+
+==================================================================================================
+	 Test (1954)
+==================================================================================================
+	Important sentence: 574
+	Token occurrences: 42020
+	MWE number: 451
+	MWE occurrences: 670
+	Continuous occurrences: 75.0 %
+	MWE length: 2.14
+	Seen occurrences : 57% 
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+
+==================================================================================================
+	Non frequent word cleaning:
+==================================================================================================
+	Before : 9312
+	After : 7545
+# Parameters = 3749382
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 4, 480)       3621600     input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 4, 42)        6384        input_2[0][0]                    
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 1920)         0           embedding_1[0][0]                
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 168)          0           embedding_2[0][0]                
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 2088)         0           flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 58)           121162      concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 58)           0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 4)            236         dropout_1[0][0]                  
+==================================================================================================
+Total params: 3,749,382
+Trainable params: 121,398
+Non-trainable params: 3,627,984
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	data size before focused sampling = 338417
+	data size after focused sampling = 338417
+	data size before sampling = 338417
+	data size after sampling = 580172
+	4 Labels in train : Counter({0: 145043, 1: 145043, 2: 145043, 3: 145043})
+	4 Labels in valid : Counter({0: 14651, 2: 14578, 1: 14436, 3: 14353})
+	Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 522154 samples, validate on 58018 samples
+Epoch 1/40
+ - 17s - loss: 0.1952 - acc: 0.9552 - val_loss: 0.1049 - val_acc: 0.9768
+Epoch 2/40
+ - 18s - loss: 0.1139 - acc: 0.9760 - val_loss: 0.0881 - val_acc: 0.9829
+Epoch 3/40
+ - 18s - loss: 0.0976 - acc: 0.9799 - val_loss: 0.0808 - val_acc: 0.9840
+
+==================================================================================================
+	Training time : 0:03:11.077963
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:46.036812
+==================================================================================================
+	Identification : 0.467
+	P, R  : 0.591, 0.386
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Cupt files starting with : 26.11.fixedsize.BG were created!	 Annotation issues
+==================================================================================================
+	Train deformed lemmas: 23 
+
+==================================================================================================
+	PT Train (2305)
+==================================================================================================
+	Important sentence: 2305
+	Token occurrences: 60342
+	MWE number: 1412
+	MWE occurrences: 2542
+	Continuous occurrences: 58.0 %
+	Frequent MWE occurences: 21.0 %
+	MWE length: 2.22
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+	Embedded occurrences: 5
+
+==================================================================================================
+	 Test (3117)
+==================================================================================================
+	Important sentence: 494
+	Token occurrences: 64078
+	MWE number: 429
+	MWE occurrences: 553
+	Continuous occurrences: 59.0 %
+	MWE length: 2.25
+	Seen occurrences : 62% 
+	Recognizable MWEs: 98.0 %
+	Embedded occurrences: 4
+	Interleaving occurrences: 8
+
+==================================================================================================
+	Non frequent word cleaning:
+==================================================================================================
+	Before : 9194
+	After : 7218
+# Parameters = 3593136
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_4 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_3 (Embedding)         (None, 4, 480)       3464640     input_3[0][0]                    
+__________________________________________________________________________________________________
+embedding_4 (Embedding)         (None, 4, 42)        7098        input_4[0][0]                    
+__________________________________________________________________________________________________
+flatten_3 (Flatten)             (None, 1920)         0           embedding_3[0][0]                
+__________________________________________________________________________________________________
+flatten_4 (Flatten)             (None, 168)          0           embedding_4[0][0]                
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 2088)         0           flatten_3[0][0]                  
+                                                                 flatten_4[0][0]                  
+__________________________________________________________________________________________________
+dense_3 (Dense)                 (None, 58)           121162      concatenate_2[0][0]              
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 58)           0           dense_3[0][0]                    
+__________________________________________________________________________________________________
+dense_4 (Dense)                 (None, 4)            236         dropout_2[0][0]                  
+==================================================================================================
+Total params: 3,593,136
+Trainable params: 121,398
+Non-trainable params: 3,471,738
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	data size before focused sampling = 287218
+	data size after focused sampling = 287218
+	data size before sampling = 287218
+	data size after sampling = 475396
+	4 Labels in train : Counter({0: 118849, 1: 118849, 2: 118849, 3: 118849})
+	4 Labels in valid : Counter({3: 12069, 0: 11879, 1: 11804, 2: 11788})
+	Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 427856 samples, validate on 47540 samples
+Epoch 1/40
+ - 14s - loss: 0.2223 - acc: 0.9497 - val_loss: 0.1246 - val_acc: 0.9736
+Epoch 2/40
+ - 14s - loss: 0.1360 - acc: 0.9724 - val_loss: 0.1030 - val_acc: 0.9797
+Epoch 3/40
+ - 14s - loss: 0.1183 - acc: 0.9763 - val_loss: 0.0955 - val_acc: 0.9814
+
+==================================================================================================
+	Training time : 0:00:59.839927
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:01:05.774159
+==================================================================================================
+	Identification : 0.466
+	P, R  : 0.604, 0.379
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Cupt files starting with : 26.11.fixedsize.PT were created!	 Annotation issues
+==================================================================================================
+	Train deformed lemmas: 31277 
+	Train important deformed Lemmas: 3223 
+
+==================================================================================================
+	TR Train (3585)
+==================================================================================================
+	Important sentence: 3585
+	Token occurrences: 120124
+	MWE number: 2979
+	MWE occurrences: 4870
+	Continuous occurrences: 49.0 %
+	Frequent MWE occurences: 48.0 %
+	MWE length: 2.06
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 2
+
+==================================================================================================
+	 Test (1320)
+==================================================================================================
+	Important sentence: 385
+	Token occurrences: 27196
+	MWE number: 418
+	MWE occurrences: 510
+	Continuous occurrences: 50.0 %
+	MWE length: 2.07
+	Seen occurrences : 31% 
+	Recognizable MWEs: 100.0 %
+
+==================================================================================================
+	Non frequent word cleaning:
+==================================================================================================
+	Before : 10506
+	After : 8665
+# Parameters = 4285176
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_5 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_6 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_5 (Embedding)         (None, 4, 480)       4159200     input_5[0][0]                    
+__________________________________________________________________________________________________
+embedding_6 (Embedding)         (None, 4, 42)        4578        input_6[0][0]                    
+__________________________________________________________________________________________________
+flatten_5 (Flatten)             (None, 1920)         0           embedding_5[0][0]                
+__________________________________________________________________________________________________
+flatten_6 (Flatten)             (None, 168)          0           embedding_6[0][0]                
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 2088)         0           flatten_5[0][0]                  
+                                                                 flatten_6[0][0]                  
+__________________________________________________________________________________________________
+dense_5 (Dense)                 (None, 58)           121162      concatenate_3[0][0]              
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 58)           0           dense_5[0][0]                    
+__________________________________________________________________________________________________
+dense_6 (Dense)                 (None, 4)            236         dropout_3[0][0]                  
+==================================================================================================
+Total params: 4,285,176
+Trainable params: 121,398
+Non-trainable params: 4,163,778
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	data size before focused sampling = 434708
+	data size after focused sampling = 434708
+	data size before sampling = 434708
+	data size after sampling = 743072
+	4 Labels in train : Counter({0: 185768, 1: 185768, 2: 185768, 3: 185768})
+	4 Labels in valid : Counter({0: 18630, 2: 18613, 1: 18539, 3: 18526})
+	Favorisation Coeff : 6
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 668764 samples, validate on 74308 samples
+Epoch 1/40
+ - 21s - loss: 0.1774 - acc: 0.9556 - val_loss: 0.1079 - val_acc: 0.9741
+Epoch 2/40
+ - 21s - loss: 0.1183 - acc: 0.9720 - val_loss: 0.0945 - val_acc: 0.9793
+Epoch 3/40
+ - 21s - loss: 0.1056 - acc: 0.9759 - val_loss: 0.0892 - val_acc: 0.9808
+
+==================================================================================================
+	Training time : 0:01:33.517593
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:25.986256
+==================================================================================================
+	Identification : 0.409
+	P, R  : 0.59, 0.313
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+	Cupt files starting with : 26.11.fixedsize.TR were created!INFO: activate-binutils_linux-64.sh made the following environmental changes:
++ADDR2LINE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-addr2line
++AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ar
++AS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-as
++CXXFILT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++filt
++ELFEDIT=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-elfedit
++GPROF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gprof
++HOST=x86_64-conda_cos6-linux-gnu
++LD_GOLD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld.gold
++LD=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ld
++NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-nm
++OBJCOPY=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objcopy
++OBJDUMP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-objdump
++RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-ranlib
++READELF=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-readelf
++SIZE=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-size
++STRINGS=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strings
++STRIP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-strip
+INFO: activate-gcc_linux-64.sh made the following environmental changes:
++CC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cc
++CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++_CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_cos6_linux_gnu
++CPPFLAGS=-DNDEBUG -D_FORTIFY_SOURCE=2 -O2
++CPP=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-cpp
++DEBUG_CFLAGS=-march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++DEBUG_CPPFLAGS=-D_DEBUG -D_FORTIFY_SOURCE=2 -Og
++GCC_AR=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ar
++GCC=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc
++GCC_NM=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-nm
++GCC_RANLIB=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-gcc-ranlib
++LDFLAGS=-Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+INFO: activate-gxx_linux-64.sh made the following environmental changes:
++CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe
++CXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-c++
++DEBUG_CXXFLAGS=-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-all -fno-plt -Og -g -Wall -Wextra -fvar-tracking-assignments -pipe
++GXX=/home/halsaied/miniconda2/bin/x86_64-conda_cos6-linux-gnu-g++
+Can not use cuDNN on context None: cannot compile with cuDNN. We got this error:
+/tmp/try_flags_FnIGYM.c:4:10: fatal error: cudnn.h: No such file or directory
+ #include <cudnn.h>
+          ^~~~~~~~~
+compilation terminated.
+
+Preallocating 5779/6083 Mb (0.950000) on cuda
+Mapped name None to device cuda: GeForce GTX TITAN Black (0000:03:00.0)
+/home/halsaied/miniconda2/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using Theano backend.
+	Mode: NON.COMPO
+==================================================================================================
+	Dataset: SHAREDTASK2
+==================================================================================================
+	Division: FIXEDSIZE
+==================================================================================================
+	GPU Enabled
+==================================================================================================
+# CTitles: xp, Dataset, Evaluation, lemma, compactVocab, favorisationCoeff, focused, importantSentences, importantTransitions, overSampling, sampleWeight, bPadding, batchSize, chickPoint, compactVocab, dense1, dense1Activation, dense1Dropout, dense1UnitNumber, dense2, dense2Activation, dense2Dropout, dense2UnitNumber, earlyStop, epochs, features, inputItems, lemma, loss, lr, minDelta, optimizer, posEmb, predictVerbose, s0Padding, s1Padding, tokenEmb, trainable, validationSplit, verbose
+==================================================================================================
+# Configs: NonCompo, sharedtask2, fixedSize, True, False, 1, False, False, False, False, False, 2, 64, False, False, True, relu, 0.43, 60, False, relu, 0, 0, True, 40, False, 4, True, categorical_crossentropy, 0.059, 0.2, adagrad, 42, False, 5, 5, 480, True, 0.1, 0
+==================================================================================================
+	Mode: LINEAR
+==================================================================================================
+	 Annotation issues
+==================================================================================================
+	Train deformed lemmas: 41 
+
+==================================================================================================
+	BG Train (11990)
+==================================================================================================
+	Important sentence: 3124
+	Token occurrences: 270011
+	MWE number: 1372
+	MWE occurrences: 3583
+	Continuous occurrences: 81.0 %
+	Frequent MWE occurences: 49.0 %
+	MWE length: 2.12
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 8
+
+==================================================================================================
+	 Test (1954)
+==================================================================================================
+	Important sentence: 574
+	Token occurrences: 42020
+	MWE number: 451
+	MWE occurrences: 670
+	Continuous occurrences: 75.0 %
+	MWE length: 2.14
+	Seen occurrences : 57% 
+	Recognizable MWEs: 100.0 %
+	MWT occurrences: 1
+
+==================================================================================================
+7595- :: Двустранните 2 **разговори** се 2 **водят** от Денкташ и Клеридис , които 1 **се** 1 **очертават** като главните представители на двете страни . 
+MWEs:
+2- lvc: разговор водя (+)
+1- ireflv: се очертавам-(се) (+)
+
+: L                
+
+SHIFT: L           
+
+REDUCE: L          
+S=[]                        B=[ разговори,се, ..] Bx=двустранен
+SHIFT: L           
+S=[разговори]      B=[ се,водят, ..] Bx=двустранен
+SHIFT: L           
+S=[разговори, се] B=[ водят,от, ..] Bx=двустранен
+REDUCE: L          
+S=[разговори]      B=[ водят,от, ..] Bx=се
+SHIFT: L           
+S=[разговори, водят] B=[ от,Денкташ, ..] Bx=се
+MERGE: L           
+S=[[разговори, водят]] B=[ от,Денкташ, ..] Bx=се
+MARK_AS_LVC: L     
+S=[[разговори, водят]] B=[ от,Денкташ, ..] Bx=се
+REDUCE: L          
+S=[]                        B=[ от,Денкташ, ..] Bx=се
+SHIFT: L           
+S=[от]                    B=[ Денкташ,и, ..] Bx=се
+REDUCE: L          
+S=[]                        B=[ Денкташ,и, ..] Bx=от
+SHIFT: L           
+S=[Денкташ]          B=[ и,Клеридис, ..] Bx=от
+REDUCE: L          
+S=[]                        B=[ и,Клеридис, ..] Bx=Денкташ
+SHIFT: L           
+S=[и]                      B=[ Клеридис,,, ..] Bx=Денкташ
+REDUCE: L          
+S=[]                        B=[ Клеридис,,, ..] Bx=и
+SHIFT: L           
+S=[Клеридис]        B=[ ,,които, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ ,,които, ..] Bx=Клеридис
+SHIFT: L           
+S=[,]                       B=[ които,се, ..] Bx=Клеридис
+REDUCE: L          
+S=[]                        B=[ които,се, ..] Bx=,
+SHIFT: L           
+S=[които]              B=[ се,очертават, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ се,очертават, ..] Bx=който
+SHIFT: L           
+S=[се]                    B=[ очертават,като, ..] Bx=който
+SHIFT: L           
+S=[се, очертават] B=[ като,главните, ..] Bx=който
+MERGE: L           
+S=[[се, очертават]] B=[ като,главните, ..] Bx=който
+MARK_AS_IREFLV: L  
+S=[[се, очертават]] B=[ като,главните, ..] Bx=който
+REDUCE: L          
+S=[]                        B=[ като,главните, ..] Bx=който
+SHIFT: L           
+S=[като]                B=[ главните,представители, ..] Bx=който
+REDUCE: L          
+S=[]                        B=[ главните,представители, ..] Bx=като
+SHIFT: L           
+S=[главните]        B=[ представители,на, ..] Bx=като
+REDUCE: L          
+S=[]                        B=[ представители,на, ..] Bx=главен
+SHIFT: L           
+S=[представители] B=[ на,двете, ..] Bx=главен
+REDUCE: L          
+S=[]                        B=[ на,двете, ..] Bx=представител
+SHIFT: L           
+S=[на]                    B=[ двете,страни, ..] Bx=представител
+REDUCE: L          
+S=[]                        B=[ двете,страни, ..] Bx=на
+SHIFT: L           
+S=[двете]              B=[ страни,.,] Bx=на
+REDUCE: L          
+S=[]                        B=[ страни,.,] Bx=два
+SHIFT: L           
+S=[страни]            B=[ .,] Bx=два
+REDUCE: L          
+S=[]                        B=[ .,] Bx=страна
+SHIFT: L           
+S=[.]                       B=[ ] Bx=страна
+REDUCE: L          
+S=[]                        B=[ ] Bx=.
+10227- :: Лейла Ибрахимпасик , която е на 25 , и е 1 **попаднала** 1 **под** 1 **крилото** на &quot; Босненско землячество &quot; в Съединените Щати , чрез приятелите 2 **си** намерила 2 **работа** в сараевския офис на инвестиционната фирма за малък и среден бизнес &quot; Хоризонт Венчер Менаджмент &quot; , чиято централа 3 **се** 3 **намира** във Виена . 
+MWEs:
+1- id: попадна под крило (+)
+2- id: свой работа (+)
+3- ireflv: се намирам-(се) (+)
+
+: L                
+
+SHIFT: L           
+
+REDUCE: L          
+S=[]                        B=[ Ибрахимпасик,,, ..] Bx=Лейла
+SHIFT: L           
+S=[Ибрахимпасик] B=[ ,,която, ..] Bx=Лейла
+REDUCE: L          
+S=[]                        B=[ ,,която, ..] Bx=Ибрахимпасик
+SHIFT: L           
+S=[,]                       B=[ която,е, ..] Bx=Ибрахимпасик
+REDUCE: L          
+S=[]                        B=[ която,е, ..] Bx=,
+SHIFT: L           
+S=[която]              B=[ е,на, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ е,на, ..] Bx=който
+SHIFT: L           
+S=[е]                      B=[ на,25, ..] Bx=който
+REDUCE: L          
+S=[]                        B=[ на,25, ..] Bx=съм
+SHIFT: L           
+S=[на]                    B=[ 25,,, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ 25,,, ..] Bx=на
+SHIFT: L           
+S=[25]                      B=[ ,,и, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ ,,и, ..] Bx=25
+SHIFT: L           
+S=[,]                       B=[ и,е, ..] Bx=25
+REDUCE: L          
+S=[]                        B=[ и,е, ..] Bx=,
+SHIFT: L           
+S=[и]                      B=[ е,попаднала, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ е,попаднала, ..] Bx=и
+SHIFT: L           
+S=[е]                      B=[ попаднала,под, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ попаднала,под, ..] Bx=съм
+SHIFT: L           
+S=[попаднала]      B=[ под,крилото, ..] Bx=съм
+SHIFT: L           
+S=[попаднала, под] B=[ крилото,на, ..] Bx=съм
+MERGE: L           
+S=[[попаднала, под]] B=[ крилото,на, ..] Bx=съм
+SHIFT: L           
+S=[[попаднала, под]крилото] B=[ на,&quot;, ..] Bx=съм
+MERGE: L           
+S=[[[попаднала, под]крилото]] B=[ на,&quot;, ..] Bx=съм
+MARK_AS_ID: L      
+S=[[[попаднала, под]крилото]] B=[ на,&quot;, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ на,&quot;, ..] Bx=съм
+SHIFT: L           
+S=[на]                    B=[ &quot;,Босненско, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ &quot;,Босненско, ..] Bx=на
+SHIFT: L           
+S=[&quot;]                  B=[ Босненско,землячество, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ Босненско,землячество, ..] Bx=&quot;
+SHIFT: L           
+S=[Босненско]      B=[ землячество,&quot;, ..] Bx=&quot;
+REDUCE: L          
+S=[]                        B=[ землячество,&quot;, ..] Bx=Босненски
+SHIFT: L           
+S=[землячество]  B=[ &quot;,в, ..] Bx=Босненски
+REDUCE: L          
+S=[]                        B=[ &quot;,в, ..] Bx=землячество
+SHIFT: L           
+S=[&quot;]                  B=[ в,Съединените, ..] Bx=землячество
+REDUCE: L          
+S=[]                        B=[ в,Съединените, ..] Bx=&quot;
+SHIFT: L           
+S=[в]                      B=[ Съединените,Щати, ..] Bx=&quot;
+REDUCE: L          
+S=[]                        B=[ Съединените,Щати, ..] Bx=в
+SHIFT: L           
+S=[Съединените]  B=[ Щати,,, ..] Bx=в
+REDUCE: L          
+S=[]                        B=[ Щати,,, ..] Bx=съединя-(се)
+SHIFT: L           
+S=[Щати]                B=[ ,,чрез, ..] Bx=съединя-(се)
+REDUCE: L          
+S=[]                        B=[ ,,чрез, ..] Bx=щат
+SHIFT: L           
+S=[,]                       B=[ чрез,приятелите, ..] Bx=щат
+REDUCE: L          
+S=[]                        B=[ чрез,приятелите, ..] Bx=,
+SHIFT: L           
+S=[чрез]                B=[ приятелите,си, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ приятелите,си, ..] Bx=чрез
+SHIFT: L           
+S=[приятелите]    B=[ си,намерила, ..] Bx=чрез
+REDUCE: L          
+S=[]                        B=[ си,намерила, ..] Bx=приятел
+SHIFT: L           
+S=[си]                    B=[ намерила,работа, ..] Bx=приятел
+SHIFT: L           
+S=[си, намерила]  B=[ работа,в, ..] Bx=приятел
+REDUCE: L          
+S=[си]                    B=[ работа,в, ..] Bx=намеря-(се)
+SHIFT: L           
+S=[си, работа]      B=[ в,сараевския, ..] Bx=намеря-(се)
+MERGE: L           
+S=[[си, работа]]    B=[ в,сараевския, ..] Bx=намеря-(се)
+MARK_AS_ID: L      
+S=[[си, работа]]    B=[ в,сараевския, ..] Bx=намеря-(се)
+REDUCE: L          
+S=[]                        B=[ в,сараевския, ..] Bx=намеря-(се)
+SHIFT: L           
+S=[в]                      B=[ сараевския,офис, ..] Bx=намеря-(се)
+REDUCE: L          
+S=[]                        B=[ сараевския,офис, ..] Bx=в
+SHIFT: L           
+S=[сараевския]    B=[ офис,на, ..] Bx=в
+REDUCE: L          
+S=[]                        B=[ офис,на, ..] Bx=сараевски
+SHIFT: L           
+S=[офис]                B=[ на,инвестиционната, ..] Bx=сараевски
+REDUCE: L          
+S=[]                        B=[ на,инвестиционната, ..] Bx=офис
+SHIFT: L           
+S=[на]                    B=[ инвестиционната,фирма, ..] Bx=офис
+REDUCE: L          
+S=[]                        B=[ инвестиционната,фирма, ..] Bx=на
+SHIFT: L           
+S=[инвестиционната] B=[ фирма,за, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ фирма,за, ..] Bx=инвестиционен
+SHIFT: L           
+S=[фирма]              B=[ за,малък, ..] Bx=инвестиционен
+REDUCE: L          
+S=[]                        B=[ за,малък, ..] Bx=фирма
+SHIFT: L           
+S=[за]                    B=[ малък,и, ..] Bx=фирма
+REDUCE: L          
+S=[]                        B=[ малък,и, ..] Bx=за
+SHIFT: L           
+S=[малък]              B=[ и,среден, ..] Bx=за
+REDUCE: L          
+S=[]                        B=[ и,среден, ..] Bx=малък
+SHIFT: L           
+S=[и]                      B=[ среден,бизнес, ..] Bx=малък
+REDUCE: L          
+S=[]                        B=[ среден,бизнес, ..] Bx=и
+SHIFT: L           
+S=[среден]            B=[ бизнес,&quot;, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ бизнес,&quot;, ..] Bx=среден
+SHIFT: L           
+S=[бизнес]            B=[ &quot;,Хоризонт, ..] Bx=среден
+REDUCE: L          
+S=[]                        B=[ &quot;,Хоризонт, ..] Bx=бизнес
+SHIFT: L           
+S=[&quot;]                  B=[ Хоризонт,Венчер, ..] Bx=бизнес
+REDUCE: L          
+S=[]                        B=[ Хоризонт,Венчер, ..] Bx=&quot;
+SHIFT: L           
+S=[Хоризонт]        B=[ Венчер,Менаджмент, ..] Bx=&quot;
+REDUCE: L          
+S=[]                        B=[ Венчер,Менаджмент, ..] Bx=Хоризонт
+SHIFT: L           
+S=[Венчер]            B=[ Менаджмент,&quot;, ..] Bx=Хоризонт
+REDUCE: L          
+S=[]                        B=[ Менаджмент,&quot;, ..] Bx=Венчер
+SHIFT: L           
+S=[Менаджмент]    B=[ &quot;,,, ..] Bx=Венчер
+REDUCE: L          
+S=[]                        B=[ &quot;,,, ..] Bx=Менаджмент
+SHIFT: L           
+S=[&quot;]                  B=[ ,,чиято, ..] Bx=Менаджмент
+REDUCE: L          
+S=[]                        B=[ ,,чиято, ..] Bx=&quot;
+SHIFT: L           
+S=[,]                       B=[ чиято,централа, ..] Bx=&quot;
+REDUCE: L          
+S=[]                        B=[ чиято,централа, ..] Bx=,
+SHIFT: L           
+S=[чиято]              B=[ централа,се, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ централа,се, ..] Bx=чийто
+SHIFT: L           
+S=[централа]        B=[ се,намира, ..] Bx=чийто
+REDUCE: L          
+S=[]                        B=[ се,намира, ..] Bx=централа
+SHIFT: L           
+S=[се]                    B=[ намира,във, ..] Bx=централа
+SHIFT: L           
+S=[се, намира]      B=[ във,Виена, ..] Bx=централа
+MERGE: L           
+S=[[се, намира]]    B=[ във,Виена, ..] Bx=централа
+MARK_AS_IREFLV: L  
+S=[[се, намира]]    B=[ във,Виена, ..] Bx=централа
+REDUCE: L          
+S=[]                        B=[ във,Виена, ..] Bx=централа
+SHIFT: L           
+S=[във]                  B=[ Виена,.,] Bx=централа
+REDUCE: L          
+S=[]                        B=[ Виена,.,] Bx=във
+SHIFT: L           
+S=[Виена]              B=[ .,] Bx=във
+REDUCE: L          
+S=[]                        B=[ .,] Bx=виена
+SHIFT: L           
+S=[.]                       B=[ ] Bx=виена
+REDUCE: L          
+S=[]                        B=[ ] Bx=.
+2647- :: Разговорът между Трайковски и Робъртсън 2 **се** 2 **проведе** , когато и двамата 1 **се** 1 **готвеха** да заминат за срещата на НАТО в Прага , където се очаква Трайковски да представи доклад за постиженията на Македония в процеса на демократизация . 
+MWEs:
+2- ireflv: се проведа (+)
+1- ireflv: се готвя (+)
+
+: L                
+
+SHIFT: L           
+
+REDUCE: L          
+S=[]                        B=[ между,Трайковски, ..] Bx=разговор
+SHIFT: L           
+S=[между]              B=[ Трайковски,и, ..] Bx=разговор
+REDUCE: L          
+S=[]                        B=[ Трайковски,и, ..] Bx=между
+SHIFT: L           
+S=[Трайковски]    B=[ и,Робъртсън, ..] Bx=между
+REDUCE: L          
+S=[]                        B=[ и,Робъртсън, ..] Bx=трайковски
+SHIFT: L           
+S=[и]                      B=[ Робъртсън,се, ..] Bx=трайковски
+REDUCE: L          
+S=[]                        B=[ Робъртсън,се, ..] Bx=и
+SHIFT: L           
+S=[Робъртсън]      B=[ се,проведе, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ се,проведе, ..] Bx=Робъртсън
+SHIFT: L           
+S=[се]                    B=[ проведе,,, ..] Bx=Робъртсън
+SHIFT: L           
+S=[се, проведе]    B=[ ,,когато, ..] Bx=Робъртсън
+MERGE: L           
+S=[[се, проведе]]  B=[ ,,когато, ..] Bx=Робъртсън
+MARK_AS_IREFLV: L  
+S=[[се, проведе]]  B=[ ,,когато, ..] Bx=Робъртсън
+REDUCE: L          
+S=[]                        B=[ ,,когато, ..] Bx=Робъртсън
+SHIFT: L           
+S=[,]                       B=[ когато,и, ..] Bx=Робъртсън
+REDUCE: L          
+S=[]                        B=[ когато,и, ..] Bx=,
+SHIFT: L           
+S=[когато]            B=[ и,двамата, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ и,двамата, ..] Bx=когато
+SHIFT: L           
+S=[и]                      B=[ двамата,се, ..] Bx=когато
+REDUCE: L          
+S=[]                        B=[ двамата,се, ..] Bx=и
+SHIFT: L           
+S=[двамата]          B=[ се,готвеха, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ се,готвеха, ..] Bx=двама
+SHIFT: L           
+S=[се]                    B=[ готвеха,да, ..] Bx=двама
+SHIFT: L           
+S=[се, готвеха]    B=[ да,заминат, ..] Bx=двама
+MERGE: L           
+S=[[се, готвеха]]  B=[ да,заминат, ..] Bx=двама
+MARK_AS_IREFLV: L  
+S=[[се, готвеха]]  B=[ да,заминат, ..] Bx=двама
+REDUCE: L          
+S=[]                        B=[ да,заминат, ..] Bx=двама
+SHIFT: L           
+S=[да]                    B=[ заминат,за, ..] Bx=двама
+REDUCE: L          
+S=[]                        B=[ заминат,за, ..] Bx=да
+SHIFT: L           
+S=[заминат]          B=[ за,срещата, ..] Bx=да
+REDUCE: L          
+S=[]                        B=[ за,срещата, ..] Bx=замина
+SHIFT: L           
+S=[за]                    B=[ срещата,на, ..] Bx=замина
+REDUCE: L          
+S=[]                        B=[ срещата,на, ..] Bx=за
+SHIFT: L           
+S=[срещата]          B=[ на,НАТО, ..] Bx=за
+REDUCE: L          
+S=[]                        B=[ на,НАТО, ..] Bx=среща
+SHIFT: L           
+S=[на]                    B=[ НАТО,в, ..] Bx=среща
+REDUCE: L          
+S=[]                        B=[ НАТО,в, ..] Bx=на
+SHIFT: L           
+S=[НАТО]                B=[ в,Прага, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ в,Прага, ..] Bx=нато
+SHIFT: L           
+S=[в]                      B=[ Прага,,, ..] Bx=нато
+REDUCE: L          
+S=[]                        B=[ Прага,,, ..] Bx=в
+SHIFT: L           
+S=[Прага]              B=[ ,,където, ..] Bx=в
+REDUCE: L          
+S=[]                        B=[ ,,където, ..] Bx=праг
+SHIFT: L           
+S=[,]                       B=[ където,се, ..] Bx=праг
+REDUCE: L          
+S=[]                        B=[ където,се, ..] Bx=,
+SHIFT: L           
+S=[където]            B=[ се,очаква, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ се,очаква, ..] Bx=където
+SHIFT: L           
+S=[се]                    B=[ очаква,Трайковски, ..] Bx=където
+REDUCE: L          
+S=[]                        B=[ очаква,Трайковски, ..] Bx=се
+SHIFT: L           
+S=[очаква]            B=[ Трайковски,да, ..] Bx=се
+REDUCE: L          
+S=[]                        B=[ Трайковски,да, ..] Bx=очаквам
+SHIFT: L           
+S=[Трайковски]    B=[ да,представи, ..] Bx=очаквам
+REDUCE: L          
+S=[]                        B=[ да,представи, ..] Bx=трайковски
+SHIFT: L           
+S=[да]                    B=[ представи,доклад, ..] Bx=трайковски
+REDUCE: L          
+S=[]                        B=[ представи,доклад, ..] Bx=да
+SHIFT: L           
+S=[представи]      B=[ доклад,за, ..] Bx=да
+REDUCE: L          
+S=[]                        B=[ доклад,за, ..] Bx=представя-(се)
+SHIFT: L           
+S=[доклад]            B=[ за,постиженията, ..] Bx=представя-(се)
+REDUCE: L          
+S=[]                        B=[ за,постиженията, ..] Bx=доклад
+SHIFT: L           
+S=[за]                    B=[ постиженията,на, ..] Bx=доклад
+REDUCE: L          
+S=[]                        B=[ постиженията,на, ..] Bx=за
+SHIFT: L           
+S=[постиженията] B=[ на,Македония, ..] Bx=за
+REDUCE: L          
+S=[]                        B=[ на,Македония, ..] Bx=постижение
+SHIFT: L           
+S=[на]                    B=[ Македония,в, ..] Bx=постижение
+REDUCE: L          
+S=[]                        B=[ Македония,в, ..] Bx=на
+SHIFT: L           
+S=[Македония]      B=[ в,процеса, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ в,процеса, ..] Bx=македония
+SHIFT: L           
+S=[в]                      B=[ процеса,на, ..] Bx=македония
+REDUCE: L          
+S=[]                        B=[ процеса,на, ..] Bx=в
+SHIFT: L           
+S=[процеса]          B=[ на,демократизация, ..] Bx=в
+REDUCE: L          
+S=[]                        B=[ на,демократизация, ..] Bx=процес
+SHIFT: L           
+S=[на]                    B=[ демократизация,.,] Bx=процес
+REDUCE: L          
+S=[]                        B=[ демократизация,.,] Bx=на
+SHIFT: L           
+S=[демократизация] B=[ .,] Bx=на
+REDUCE: L          
+S=[]                        B=[ .,] Bx=демократизация
+SHIFT: L           
+S=[.]                       B=[ ] Bx=демократизация
+REDUCE: L          
+S=[]                        B=[ ] Bx=.
+5179- :: Той 1 **се** 1 **извини** на тези , които вероятно са били обидени от коментарите му в интервю за местен вестник и заяви , че думите му са били 2 **извадени** 2 **от** 2 **контекста** с цел да бъде дискредитиран . 
+MWEs:
+1- ireflv: се извиня-(се) (+)
+2- id: извадя от контекст (+)
+
+: L                
+
+SHIFT: L           
+
+REDUCE: L          
+S=[]                        B=[ се,извини, ..] Bx=аз
+SHIFT: L           
+S=[се]                    B=[ извини,на, ..] Bx=аз
+SHIFT: L           
+S=[се, извини]      B=[ на,тези, ..] Bx=аз
+MERGE: L           
+S=[[се, извини]]    B=[ на,тези, ..] Bx=аз
+MARK_AS_IREFLV: L  
+S=[[се, извини]]    B=[ на,тези, ..] Bx=аз
+REDUCE: L          
+S=[]                        B=[ на,тези, ..] Bx=аз
+SHIFT: L           
+S=[на]                    B=[ тези,,, ..] Bx=аз
+REDUCE: L          
+S=[]                        B=[ тези,,, ..] Bx=на
+SHIFT: L           
+S=[тези]                B=[ ,,които, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ ,,които, ..] Bx=този
+SHIFT: L           
+S=[,]                       B=[ които,вероятно, ..] Bx=този
+REDUCE: L          
+S=[]                        B=[ които,вероятно, ..] Bx=,
+SHIFT: L           
+S=[които]              B=[ вероятно,са, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ вероятно,са, ..] Bx=който
+SHIFT: L           
+S=[вероятно]        B=[ са,били, ..] Bx=който
+REDUCE: L          
+S=[]                        B=[ са,били, ..] Bx=вероятно
+SHIFT: L           
+S=[са]                    B=[ били,обидени, ..] Bx=вероятно
+REDUCE: L          
+S=[]                        B=[ били,обидени, ..] Bx=съм
+SHIFT: L           
+S=[били]                B=[ обидени,от, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ обидени,от, ..] Bx=съм
+SHIFT: L           
+S=[обидени]          B=[ от,коментарите, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ от,коментарите, ..] Bx=обидя
+SHIFT: L           
+S=[от]                    B=[ коментарите,му, ..] Bx=обидя
+REDUCE: L          
+S=[]                        B=[ коментарите,му, ..] Bx=от
+SHIFT: L           
+S=[коментарите]  B=[ му,в, ..] Bx=от
+REDUCE: L          
+S=[]                        B=[ му,в, ..] Bx=коментар
+SHIFT: L           
+S=[му]                    B=[ в,интервю, ..] Bx=коментар
+REDUCE: L          
+S=[]                        B=[ в,интервю, ..] Bx=мой
+SHIFT: L           
+S=[в]                      B=[ интервю,за, ..] Bx=мой
+REDUCE: L          
+S=[]                        B=[ интервю,за, ..] Bx=в
+SHIFT: L           
+S=[интервю]          B=[ за,местен, ..] Bx=в
+REDUCE: L          
+S=[]                        B=[ за,местен, ..] Bx=интервю
+SHIFT: L           
+S=[за]                    B=[ местен,вестник, ..] Bx=интервю
+REDUCE: L          
+S=[]                        B=[ местен,вестник, ..] Bx=за
+SHIFT: L           
+S=[местен]            B=[ вестник,и, ..] Bx=за
+REDUCE: L          
+S=[]                        B=[ вестник,и, ..] Bx=местен
+SHIFT: L           
+S=[вестник]          B=[ и,заяви, ..] Bx=местен
+REDUCE: L          
+S=[]                        B=[ и,заяви, ..] Bx=вестник
+SHIFT: L           
+S=[и]                      B=[ заяви,,, ..] Bx=вестник
+REDUCE: L          
+S=[]                        B=[ заяви,,, ..] Bx=и
+SHIFT: L           
+S=[заяви]              B=[ ,,че, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ ,,че, ..] Bx=заявя
+SHIFT: L           
+S=[,]                       B=[ че,думите, ..] Bx=заявя
+REDUCE: L          
+S=[]                        B=[ че,думите, ..] Bx=,
+SHIFT: L           
+S=[че]                    B=[ думите,му, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ думите,му, ..] Bx=че
+SHIFT: L           
+S=[думите]            B=[ му,са, ..] Bx=че
+REDUCE: L          
+S=[]                        B=[ му,са, ..] Bx=дума
+SHIFT: L           
+S=[му]                    B=[ са,били, ..] Bx=дума
+REDUCE: L          
+S=[]                        B=[ са,били, ..] Bx=мой
+SHIFT: L           
+S=[са]                    B=[ били,извадени, ..] Bx=мой
+REDUCE: L          
+S=[]                        B=[ били,извадени, ..] Bx=съм
+SHIFT: L           
+S=[били]                B=[ извадени,от, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ извадени,от, ..] Bx=съм
+SHIFT: L           
+S=[извадени]        B=[ от,контекста, ..] Bx=съм
+SHIFT: L           
+S=[извадени, от]  B=[ контекста,с, ..] Bx=съм
+MERGE: L           
+S=[[извадени, от]] B=[ контекста,с, ..] Bx=съм
+SHIFT: L           
+S=[[извадени, от]контекста] B=[ с,цел, ..] Bx=съм
+MERGE: L           
+S=[[[извадени, от]контекста]] B=[ с,цел, ..] Bx=съм
+MARK_AS_ID: L      
+S=[[[извадени, от]контекста]] B=[ с,цел, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ с,цел, ..] Bx=съм
+SHIFT: L           
+S=[с]                      B=[ цел,да, ..] Bx=съм
+REDUCE: L          
+S=[]                        B=[ цел,да, ..] Bx=с
+SHIFT: L           
+S=[цел]                  B=[ да,бъде, ..] Bx=с
+REDUCE: L          
+S=[]                        B=[ да,бъде, ..] Bx=цел
+SHIFT: L           
+S=[да]                    B=[ бъде,дискредитиран, ..] Bx=цел
+REDUCE: L          
+S=[]                        B=[ бъде,дискредитиран, ..] Bx=да
+SHIFT: L           
+S=[бъде]                B=[ дискредитиран,.,] Bx=да
+REDUCE: L          
+S=[]                        B=[ дискредитиран,.,] Bx=бъда
+SHIFT: L           
+S=[дискредитиран] B=[ .,] Bx=бъда
+REDUCE: L          
+S=[]                        B=[ .,] Bx=дискредитирам
+SHIFT: L           
+S=[.]                       B=[ ] Bx=дискредитирам
+REDUCE: L          
+S=[]                        B=[ ] Bx=.
+7284- :: СОФИЯ , България - - В петък ( 14 март ) британският принц Чарлз 1 **взе** 1 **участие** в конференция за предотвратяване употребата и разпространението на наркотици , като 2 **даде** висока 2 **оценка** на усилията на митническите служители и Националната служба за борба с организираната престъпност за пресичане пътя на дрогата към Европа . 
+MWEs:
+1- lvc: взема участие (+)
+2- lvc: дам-(се) оценка (+)
+
+: L                
+
+SHIFT: L           
+
+REDUCE: L          
+S=[]                        B=[ ,,България, ..] Bx=софия
+SHIFT: L           
+S=[,]                       B=[ България,-, ..] Bx=софия
+REDUCE: L          
+S=[]                        B=[ България,-, ..] Bx=,
+SHIFT: L           
+S=[България]        B=[ -,-, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ -,-, ..] Bx=българия
+SHIFT: L           
+S=[-]                       B=[ -,В, ..] Bx=българия
+REDUCE: L          
+S=[]                        B=[ -,В, ..] Bx=-
+SHIFT: L           
+S=[-]                       B=[ В,петък, ..] Bx=-
+REDUCE: L          
+S=[]                        B=[ В,петък, ..] Bx=-
+SHIFT: L           
+S=[В]                      B=[ петък,(, ..] Bx=-
+REDUCE: L          
+S=[]                        B=[ петък,(, ..] Bx=в
+SHIFT: L           
+S=[петък]              B=[ (,14, ..] Bx=в
+REDUCE: L          
+S=[]                        B=[ (,14, ..] Bx=петък
+SHIFT: L           
+S=[(]                       B=[ 14,март, ..] Bx=петък
+REDUCE: L          
+S=[]                        B=[ 14,март, ..] Bx=(
+SHIFT: L           
+S=[14]                      B=[ март,), ..] Bx=(
+REDUCE: L          
+S=[]                        B=[ март,), ..] Bx=14
+SHIFT: L           
+S=[март]                B=[ ),британският, ..] Bx=14
+REDUCE: L          
+S=[]                        B=[ ),британският, ..] Bx=март
+SHIFT: L           
+S=[)]                       B=[ британският,принц, ..] Bx=март
+REDUCE: L          
+S=[]                        B=[ британският,принц, ..] Bx=)
+SHIFT: L           
+S=[британският]  B=[ принц,Чарлз, ..] Bx=)
+REDUCE: L          
+S=[]                        B=[ принц,Чарлз, ..] Bx=британски
+SHIFT: L           
+S=[принц]              B=[ Чарлз,взе, ..] Bx=британски
+REDUCE: L          
+S=[]                        B=[ Чарлз,взе, ..] Bx=принц
+SHIFT: L           
+S=[Чарлз]              B=[ взе,участие, ..] Bx=принц
+REDUCE: L          
+S=[]                        B=[ взе,участие, ..] Bx=чарлз
+SHIFT: L           
+S=[взе]                  B=[ участие,в, ..] Bx=чарлз
+SHIFT: L           
+S=[взе, участие]  B=[ в,конференция, ..] Bx=чарлз
+MERGE: L           
+S=[[взе, участие]] B=[ в,конференция, ..] Bx=чарлз
+MARK_AS_LVC: L     
+S=[[взе, участие]] B=[ в,конференция, ..] Bx=чарлз
+REDUCE: L          
+S=[]                        B=[ в,конференция, ..] Bx=чарлз
+SHIFT: L           
+S=[в]                      B=[ конференция,за, ..] Bx=чарлз
+REDUCE: L          
+S=[]                        B=[ конференция,за, ..] Bx=в
+SHIFT: L           
+S=[конференция]  B=[ за,предотвратяване, ..] Bx=в
+REDUCE: L          
+S=[]                        B=[ за,предотвратяване, ..] Bx=конференция
+SHIFT: L           
+S=[за]                    B=[ предотвратяване,употребата, ..] Bx=конференция
+REDUCE: L          
+S=[]                        B=[ предотвратяване,употребата, ..] Bx=за
+SHIFT: L           
+S=[предотвратяване] B=[ употребата,и, ..] Bx=за
+REDUCE: L          
+S=[]                        B=[ употребата,и, ..] Bx=предотвратяване
+SHIFT: L           
+S=[употребата]    B=[ и,разпространението, ..] Bx=предотвратяване
+REDUCE: L          
+S=[]                        B=[ и,разпространението, ..] Bx=употреба
+SHIFT: L           
+S=[и]                      B=[ разпространението,на, ..] Bx=употреба
+REDUCE: L          
+S=[]                        B=[ разпространението,на, ..] Bx=и
+SHIFT: L           
+S=[разпространението] B=[ на,наркотици, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ на,наркотици, ..] Bx=разпространение
+SHIFT: L           
+S=[на]                    B=[ наркотици,,, ..] Bx=разпространение
+REDUCE: L          
+S=[]                        B=[ наркотици,,, ..] Bx=на
+SHIFT: L           
+S=[наркотици]      B=[ ,,като, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ ,,като, ..] Bx=наркотик
+SHIFT: L           
+S=[,]                       B=[ като,даде, ..] Bx=наркотик
+REDUCE: L          
+S=[]                        B=[ като,даде, ..] Bx=,
+SHIFT: L           
+S=[като]                B=[ даде,висока, ..] Bx=,
+REDUCE: L          
+S=[]                        B=[ даде,висока, ..] Bx=като
+SHIFT: L           
+S=[даде]                B=[ висока,оценка, ..] Bx=като
+SHIFT: L           
+S=[даде, висока]  B=[ оценка,на, ..] Bx=като
+REDUCE: L          
+S=[даде]                B=[ оценка,на, ..] Bx=висок
+SHIFT: L           
+S=[даде, оценка]  B=[ на,усилията, ..] Bx=висок
+MERGE: L           
+S=[[даде, оценка]] B=[ на,усилията, ..] Bx=висок
+MARK_AS_LVC: L     
+S=[[даде, оценка]] B=[ на,усилията, ..] Bx=висок
+REDUCE: L          
+S=[]                        B=[ на,усилията, ..] Bx=висок
+SHIFT: L           
+S=[на]                    B=[ усилията,на, ..] Bx=висок
+REDUCE: L          
+S=[]                        B=[ усилията,на, ..] Bx=на
+SHIFT: L           
+S=[усилията]        B=[ на,митническите, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ на,митническите, ..] Bx=усилие
+SHIFT: L           
+S=[на]                    B=[ митническите,служители, ..] Bx=усилие
+REDUCE: L          
+S=[]                        B=[ митническите,служители, ..] Bx=на
+SHIFT: L           
+S=[митническите] B=[ служители,и, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ служители,и, ..] Bx=митнически
+SHIFT: L           
+S=[служители]      B=[ и,Националната, ..] Bx=митнически
+REDUCE: L          
+S=[]                        B=[ и,Националната, ..] Bx=служител
+SHIFT: L           
+S=[и]                      B=[ Националната,служба, ..] Bx=служител
+REDUCE: L          
+S=[]                        B=[ Националната,служба, ..] Bx=и
+SHIFT: L           
+S=[Националната] B=[ служба,за, ..] Bx=и
+REDUCE: L          
+S=[]                        B=[ служба,за, ..] Bx=национален
+SHIFT: L           
+S=[служба]            B=[ за,борба, ..] Bx=национален
+REDUCE: L          
+S=[]                        B=[ за,борба, ..] Bx=служба
+SHIFT: L           
+S=[за]                    B=[ борба,с, ..] Bx=служба
+REDUCE: L          
+S=[]                        B=[ борба,с, ..] Bx=за
+SHIFT: L           
+S=[борба]              B=[ с,организираната, ..] Bx=за
+REDUCE: L          
+S=[]                        B=[ с,организираната, ..] Bx=борба
+SHIFT: L           
+S=[с]                      B=[ организираната,престъпност, ..] Bx=борба
+REDUCE: L          
+S=[]                        B=[ организираната,престъпност, ..] Bx=с
+SHIFT: L           
+S=[организираната] B=[ престъпност,за, ..] Bx=с
+REDUCE: L          
+S=[]                        B=[ престъпност,за, ..] Bx=организирам
+SHIFT: L           
+S=[престъпност]  B=[ за,пресичане, ..] Bx=организирам
+REDUCE: L          
+S=[]                        B=[ за,пресичане, ..] Bx=престъпност
+SHIFT: L           
+S=[за]                    B=[ пресичане,пътя, ..] Bx=престъпност
+REDUCE: L          
+S=[]                        B=[ пресичане,пътя, ..] Bx=за
+SHIFT: L           
+S=[пресичане]      B=[ пътя,на, ..] Bx=за
+REDUCE: L          
+S=[]                        B=[ пътя,на, ..] Bx=пресичане
+SHIFT: L           
+S=[пътя]                B=[ на,дрогата, ..] Bx=пресичане
+REDUCE: L          
+S=[]                        B=[ на,дрогата, ..] Bx=път
+SHIFT: L           
+S=[на]                    B=[ дрогата,към, ..] Bx=път
+REDUCE: L          
+S=[]                        B=[ дрогата,към, ..] Bx=на
+SHIFT: L           
+S=[дрогата]          B=[ към,Европа, ..] Bx=на
+REDUCE: L          
+S=[]                        B=[ към,Европа, ..] Bx=дрога
+SHIFT: L           
+S=[към]                  B=[ Европа,.,] Bx=дрога
+REDUCE: L          
+S=[]                        B=[ Европа,.,] Bx=към
+SHIFT: L           
+S=[Европа]            B=[ .,] Bx=към
+REDUCE: L          
+S=[]                        B=[ .,] Bx=европа
+SHIFT: L           
+S=[.]                       B=[ ] Bx=европа
+REDUCE: L          
+S=[]                        B=[ ] Bx=.
+	Linear classifier:
+==================================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=0, tol=0.0001,
+     verbose=0)
+==================================================================================================
+	Feature number = 1062392
+==================================================================================================
+
+==================================================================================================
+	Training time : 0:01:53.451480
+==================================================================================================
+	Mode: NON.COMPO
+==================================================================================================
+	Non frequent word cleaning:
+==================================================================================================
+	Before : 15258
+	After : 12174
+# Parameters = 5975488
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+input_2 (InputLayer)            (None, 4)            0                                            
+__________________________________________________________________________________________________
+embedding_1 (Embedding)         (None, 4, 480)       5843520     input_1[0][0]                    
+__________________________________________________________________________________________________
+embedding_2 (Embedding)         (None, 4, 42)        6384        input_2[0][0]                    
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 1920)         0           embedding_1[0][0]                
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 168)          0           embedding_2[0][0]                
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 2088)         0           flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 60)           125340      concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 60)           0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 4)            244         dropout_1[0][0]                  
+==================================================================================================
+Total params: 5,975,488
+Trainable params: 5,975,488
+Non-trainable params: 0
+__________________________________________________________________________________________________
+None
+
+__________________________________________________________________________________________________
+	Sampling
+==================================================================================================
+	4 Labels in train : Counter({0: 270011, 1: 265982, 2: 4029, 3: 3583})
+	4 Labels in valid : Counter({0: 27106, 1: 26494, 2: 407, 3: 354})
+
+__________________________________________________________________________________________________
+	Optimizer : Adagrad,  learning rate = 0.059
+__________________________________________________________________________________________________
+Train on 489244 samples, validate on 54361 samples
+Epoch 1/40
+ - 18s - loss: 0.0337 - acc: 0.9865 - val_loss: 0.0240 - val_acc: 0.9878
+Epoch 2/40
+ - 18s - loss: 0.0204 - acc: 0.9894 - val_loss: 0.0246 - val_acc: 0.9886
+Epoch 3/40
+ - 18s - loss: 0.0176 - acc: 0.9902 - val_loss: 0.0263 - val_acc: 0.9881
+
+==================================================================================================
+	Training time : 0:01:29.009359
+==================================================================================================
+	Mode: LINEAR
+==================================================================================================
+	Mode: NON.COMPO
+==================================================================================================
+
+==================================================================================================
+	Parsing time : 0:00:47.669913
+==================================================================================================
+	Identification : 0.596
+	P, R  : 0.736, 0.5
+
+*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|
+Traceback (most recent call last):
+  File "src/xpNonCompo.py", line 292, in <module>
+    xp(pilotLangs, Dataset.sharedtask2, None, Evaluation.fixedSize, complentary=True)
+  File "/home/halsaied/NNIdenSys/src/xpTools.py", line 41, in xp
+    identifyWithBoth(lang)
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 69, in identifyWithBoth
+    filterMWEs(corpus, mode='cross')
+  File "/home/halsaied/NNIdenSys/src/identification.py", line 90, in filterMWEs
+    nonCorrectMWEIdxs.append(s.vMWEs.index(v))
+ValueError: <corpus.VMWE instance at 0x7f0a97619200> is not in list

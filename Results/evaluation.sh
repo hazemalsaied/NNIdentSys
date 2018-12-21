@@ -1,8 +1,10 @@
 #!/bin/sh
 # NNIdenSys/Results $sh evaluation.sh ST2 RNN 2018.September.14.
-dataset=$1
-xp=$2
-date=$3
+dataset=ST2 #$1
+xp=MLP #$2
+date=12.11 #$3
+eval=FixedSize
+evalMini=fixedsize
 list="FR"
 if [  $dataset == "ST2" ] || [  $dataset == "ST1" ] ||[  $dataset == "FTB" ]; then
 if [  $xp == "RNN" ] || [  $xp == "MLP" ] || [  $xp == "Kiperwasser" ] || [  $xp == "Linear" ] ; then
@@ -17,8 +19,8 @@ if [  $xp == "RNN" ] || [  $xp == "MLP" ] || [  $xp == "Kiperwasser" ] || [  $xp
 	for i in $list
         do
             echo "Evaluating:  $i"
-            python3 bin/validate_cupt.py --input $dataset/$xp/$date$i.txt
-            python3 bin/evaluate.py --gold Gold/$i/test.cupt --pred $dataset/$xp/$date$i.txt --train Gold/$i/train.dev.cupt
+            python3 bin/validate_cupt.py --input Output/$dataset/$xp/$eval/$date.$evalMini.$i.cupt
+            python3 bin/evaluate.py --gold Output/$dataset/$xp/$eval/$date.$evalMini.$i.gold.cupt --pred Output/$dataset/$xp/$eval/$date.$evalMini.$i.cupt --train Output/$dataset/$xp/$eval/$date.$evalMini.$i.train.cupt
         done
 else
 	echo "You didn't choose correct xp mode!"
