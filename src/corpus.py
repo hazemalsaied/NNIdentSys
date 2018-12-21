@@ -182,26 +182,26 @@ class Corpus:
             for v in sent.identifiedVMWEs:
                 sentIdentifiedVMWEs.append(v.getTokenPositionString())
                 if v.getTokenPositionString() in sentVMWEs:
-                    if v.getTokenOrLemmaString() in self.mweDictionary:
-                        occurrence = getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
+                    if v.getLemmaString() in self.mweDictionary:
+                        occurrence = getOccurrenceRang(self.mweDictionary[v.getLemmaString()])
                         if occurrence not in occurrenceDic:
                             occurrenceDic[occurrence] = set()
-                        occurrenceDic[occurrence].add(v.getTokenOrLemmaString())
+                        occurrenceDic[occurrence].add(v.getLemmaString())
                     else:
                         if 0 not in occurrenceDic:
                             occurrenceDic[0] = set()
-                        occurrenceDic[0].add(v.getTokenOrLemmaString())
+                        occurrenceDic[0].add(v.getLemmaString())
             for v in sent.vMWEs:
                 if v.getTokenPositionString() not in sentIdentifiedVMWEs:
-                    if v.getTokenOrLemmaString() in self.mweDictionary:
-                        occurrence = getOccurrenceRang(self.mweDictionary[v.getTokenOrLemmaString()])
+                    if v.getLemmaString() in self.mweDictionary:
+                        occurrence = getOccurrenceRang(self.mweDictionary[v.getLemmaString()])
                         if occurrence not in nonIdentifiedOccurrenceDic:
                             nonIdentifiedOccurrenceDic[occurrence] = set()
-                        nonIdentifiedOccurrenceDic[occurrence].add(v.getTokenOrLemmaString())
+                        nonIdentifiedOccurrenceDic[occurrence].add(v.getLemmaString())
                     else:
                         if 0 not in nonIdentifiedOccurrenceDic:
                             nonIdentifiedOccurrenceDic[0] = set()
-                        nonIdentifiedOccurrenceDic[0].add(v.getTokenOrLemmaString())
+                        nonIdentifiedOccurrenceDic[0].add(v.getLemmaString())
         res = '## Correctly identified MWEs\n'
         for k in sorted(occurrenceDic.keys()):
             res += '### ' + str(k) + '\n'
@@ -237,11 +237,11 @@ class Corpus:
             if idx != 0 and idx % 1000 == 0:
                 self.mweDictionary = self.getMWEDictionary()
             for v in sent.vMWEs:
-                if v.getTokenOrLemmaString() in self.mweDictionary and v.getTokenOrLemmaString() not in traitedMWEs \
-                        and self.mweDictionary[v.getTokenOrLemmaString()] < taux:
+                if v.getLemmaString() in self.mweDictionary and v.getLemmaString() not in traitedMWEs \
+                        and self.mweDictionary[v.getLemmaString()] < taux:
                     for v1 in sent.vMWEs:
-                        traitedMWEs.add(v1.getTokenOrLemmaString())
-                    for i in range(0, taux - self.mweDictionary[v.getTokenOrLemmaString()]):
+                        traitedMWEs.add(v1.getLemmaString())
+                    for i in range(0, taux - self.mweDictionary[v.getLemmaString()]):
                         newSents.append(copy.deepcopy(sent))
                     break
             idx += 1
@@ -250,33 +250,38 @@ class Corpus:
         self.mweDictionary = self.getMWEDictionary()
 
     def createMWEFiles(self):
-        if not configuration['evaluation']['corpus']:
-            return
+        # if configuration['evaluation']['fixedSize'] or not configuration['evaluation']['dev']:
         datasetConf, modelConf = configuration['dataset'], configuration['xp']
         dataset = 'ST2' if datasetConf['sharedtask2'] else \
             ('FTB' if datasetConf['ftb'] else ('DiMSUM' if datasetConf['dimsum'] else 'ST1'))
         model = 'Linear' if modelConf['linear'] else (
             'Kiperwasser' if modelConf['kiperwasser'] else (
                 'RNN' if modelConf['rnn'] else 'MLP'))
-        folder = os.path.join(configuration['path']['projectPath'], configuration['path']['results'], dataset, model)
+        folder = os.path.join(configuration['path']['projectPath'], configuration['path']['output'], dataset, model)
         if not os.path.exists(folder):
             os.makedirs(folder)
         import datetime
         today = datetime.date.today().strftime('%d.%m')
-        if configuration['dataset']['dimsum']:
-            predicted = self.toDiMSUM()
-            with open(os.path.join(folder, '{0}.{1}.pred'.format(today, self.langName)), 'w') as f:
-                f.write(predicted)
-        else:
-            predicted = self.toConllU()  # if dataset == 'ST2' else str(corpus)
-            gold = self.toConllU(gold=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
-            train = self.toConllU(gold=True, train=True)  # if dataset == 'ST2' else corpus.getGoldenMWEFile()
-            with open(os.path.join(folder, '{0}.{1}.cupt'.format(today, self.langName)), 'w') as f:
-                f.write(predicted)
-            with open(os.path.join(folder, '{0}.{1}.gold.cupt'.format(today, self.langName)), 'w') as f:
-                f.write(gold)
-            with open(os.path.join(folder, '{0}.{1}.train.cupt'.format(today, self.langName)), 'w') as f:
-                f.write(train)
+        division = 'debug'
+        for k in configuration['evaluation']:
+            if configuration['evaluation'][k]:
+                division = k.lower()
+                break
+        # if configuration['dataset']['dimsum']:
+        #    with open(os.path.join(folder, '{0}.{1}.{2}.pred'.format(today, division, self.langName)), 'w') as f:
+        #        f.write(self.toDiMSUM())
+        # elif configuration['dataset']['ftb']:
+        #     with open(os.path.join(folder, '{0}.{1}.{2}.pred'.format(today, division, self.langName)), 'w') as f:
+        #         f.write(self.toConllU())
+        # if configuration['dataset']['sharedtask2'] or configuration['dataset']['ftb']:
+        with open(os.path.join(folder, '{0}.{1}.{2}.cupt'.format(today, division, self.langName)), 'w') as f:
+            f.write(self.toConllU())
+        with open(os.path.join(folder, '{0}.{1}.{2}.gold.cupt'.format(today, division, self.langName)), 'w') as f:
+            f.write(self.toConllU(gold=True))
+        with open(os.path.join(folder, '{0}.{1}.{2}.train.cupt'.format(today, division, self.langName)), 'w') as f:
+            f.write(self.toConllU(gold=True, train=True))
+        sys.stdout.write(
+            tabs + 'Cupt files starting with : {0}.{1}.{2} were created!'.format(today, division, self.langName))
 
     def createMWEDict(self):
         res = ''
@@ -371,7 +376,7 @@ class Corpus:
                             windows += ';' + distance
                         else:
                             windows = distance
-                lemmaString = mwe.getTokenOrLemmaString()
+                lemmaString = mwe.getLemmaString()
                 if lemmaString in mweDictionary and mweDictionary[lemmaString] != windows:
                     oldWindow = mweDictionary[lemmaString]
                     oldWindowDistances = oldWindow.split(';')
@@ -783,7 +788,7 @@ class Sentence:
                 else:
                     labels[token.position - 1] += ';' + str(mwe.id)
                 if mwe.tokens[0] == token and mwe.type:
-                    labels[token.position - 1] += ':VID'  # + mwe.type
+                    labels[token.position - 1] += ':' + (mwe.type2.upper() if gold and mwe.type2 else 'VID')
         return ''.join(t.toConllU(labels[i], useCupt=useCupt) for i, t in enumerate(self.tokens)) + '\n'
 
     def toDiMSUM(self):
@@ -849,10 +854,11 @@ class VMWE:
     def __init__(self, idx, tokens=None, type='', isEmbedded=False, isEmbedder=False, isLeftEmbedded=False,
                  isLeftEmbedder=False, isRightEmbedded=False, isRightEmbedder=False, isInterleaving=False,
                  isContinous=False, isRecognizable=True, isMiddleEmbedded=False, isMiddleEmbedder=False, isNested=False,
-                 isAttached=False, parent=None):
+                 isAttached=False, parent=None, type2=''):
         self.id = int(idx)
         self.tokens = tokens if tokens else []
         self.type = type
+        self.type2 = type2
         self.isNested = isNested
         self.isAttached = isAttached
         self.isEmbedded = isEmbedded
@@ -872,6 +878,7 @@ class VMWE:
         self.isBadAnnotated = False
         self.isAletrnating = False
         self.isRecognizable = isRecognizable
+        self.predictingModel = None
 
     def getId(self):
         return self.id
@@ -1008,6 +1015,7 @@ class Token:
         self.abstractPosTag = abstractPosTag
         self.posTag = posTag
         self.line = line
+        self.superSense = ''
         if not morphologicalInfo:
             self.morphologicalInfo = []
         else:
@@ -1069,10 +1077,7 @@ class Token:
         return False
 
     def getTokenOrLemma(self):
-        useLemma = configuration['mlp']['lemma']
-        if not useLemma:
-            return self.text.lower()
-        if self.lemma:
+        if configuration['mlp']['lemma']:
             return self.lemma.lower()
         return self.text.lower()
 
@@ -1408,6 +1413,8 @@ def getTokens(elemlist):
     if str(elemlist.__class__).endswith('corpus.Token'):  # isinstance(elemlist, Token):
         return [elemlist]
     if isinstance(elemlist, list):
+        # if len(elemlist) ==1 and isinstance(elemlist[0], list):
+        #     return getTokens(elemlist[0])
         result = []
         for elem in elemlist:
             if str(elem.__class__).endswith('corpus.Token'):
@@ -1532,9 +1539,12 @@ def readCuptFile(cuptFile):
             if len(lineParts) != 11 or '-' in lineParts[0] or '.' in lineParts[0]:
                 continue
             text = lineParts[1].lower()
-            importantDeformedLemma += 1 if (lineParts[2].strip() == '' or lineParts[2].lower()== '_') and  lineParts[10] != '*'  else 0
-            deformedLemma += 1 if (lineParts[2].strip() == '' or lineParts[2].lower() == '_') and lineParts[10] == '*' else 0
-            if configuration['others']['traitDeformedLemma'] and (lineParts[2].strip() == '' or lineParts[2].lower() == '_'):
+            importantDeformedLemma += 1 if (lineParts[2].strip() == '' or lineParts[2].lower() == '_') and lineParts[
+                10] != '*' else 0
+            deformedLemma += 1 if (lineParts[2].strip() == '' or lineParts[2].lower() == '_') and lineParts[
+                10] == '*' else 0
+            if configuration['others']['traitDeformedLemma'] and (
+                    lineParts[2].strip() == '' or lineParts[2].lower() == '_'):
                 lemma = text
             else:
                 lemma = lineParts[2].lower()
@@ -1544,7 +1554,8 @@ def readCuptFile(cuptFile):
                         text, lemma = 'number', 'number'
                         numericTokens += 1
                         break
-            token = Token(lineParts[0], text, lemma=lemma,
+
+            token = Token(lineParts[0], text, lemma=lemma, #lineParts[2].lower()if lineParts[2] else lineParts[1].lower(),
                           abstractPosTag=lineParts[3] if lineParts[3] != '_' else lineParts[4],
                           dependencyParent=int(lineParts[6]) if (lineParts[6] != '_' and lineParts[6] != '-') else -1,
                           dependencyLabel=lineParts[7] if lineParts[7] != '_' else '', line=line)
@@ -1558,6 +1569,7 @@ def readCuptFile(cuptFile):
                     if idx not in sent.getWMWEIds():
                         type = str(vMWEid.split(':')[1])
                         vMWE = VMWE(idx, [token], getType(type))
+                        vMWE.type2 = type
                         sent.vMWEs.append(vMWE)
                     else:
                         vMWE = sent.getVMWE(idx)
@@ -1565,10 +1577,11 @@ def readCuptFile(cuptFile):
                             vMWE.tokens.append(token)
                     token.setParent(vMWE)
     if cuptFile.endswith('train.cupt'):
-        sys.stdout.write('Deformed Lemmas: %d \n' % (deformedLemma))
-        sys.stdout.write('numeric tokens: %d \n' % (numericTokens))
-        sys.stdout.write('Important Deformed Lemmas: %d \n' % (importantDeformedLemma))
-        sys.stdout.write('%d %d %d\n' % (deformedLemma, importantDeformedLemma, numericTokens))
+        sys.stdout.write(tabs + ' Annotation issues' + doubleSep)
+        sys.stdout.write((tabs + 'Train deformed lemmas: %d \n' % (deformedLemma)) if deformedLemma else '')
+        sys.stdout.write((tabs + 'Train numeric tokens: %d \n' % (numericTokens)) if numericTokens else '')
+        sys.stdout.write((tabs + 'Train important deformed Lemmas: %d \n' % (
+            importantDeformedLemma)) if importantDeformedLemma else '')
     return sentences
 
 
@@ -1621,6 +1634,7 @@ def getStats(sentences, asCSV=False):
 
 
 def readFTB(ftbFile, verbose=False, stats=False):
+    configuration['others']['replaceNumbers'] = True
     sentences, nonValidLines, shouldPrint = [], 0, False
     with open(ftbFile, 'r') as corpusFile:
         sent, senIdx, mweIdx, lineNum = None, 0, 1, 0
@@ -1758,6 +1772,7 @@ def getPosTag(token, lineParts3, lineParts4):
 
 
 def readDiMSUM(dimsumFile, verbose=True):
+    configuration['others']['replaceNumbers'] = True
     sentences = []
     BMWEs, bMWEs = [], []
     with open(dimsumFile, 'r') as corpusFile:
@@ -1786,6 +1801,7 @@ def readDiMSUM(dimsumFile, verbose=True):
                     if c.isdigit():
                         text, lemma = 'number', 'number'
             token = Token(lineParts[0], text, lemma=lemma, abstractPosTag=lineParts[3], posTag=lineParts[3], line=line)
+            token.superSense = lineParts[7].lower()
             sent.tokens.append(token)
             if lineParts[4].lower() == 'b':
                 vMWE = VMWE(mweIdx, [token], 'oth')

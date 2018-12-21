@@ -16,12 +16,16 @@ configuration = {
         'bufferElements': 5,
         'verbose': True,
         'deleteNumericalExpressions': False,
-        'replaceNumbers': True,
+        'replaceNumbers': False,
         'removeFtbMWT': True,
         'printTest': False,
-        'logReg':False,
-        'svc':False,
-        'traitDeformedLemma': True
+        'logReg': False,
+        'svc': False,
+        'traitDeformedLemma': True,
+        'minimal':False,
+        'complInter': False,
+        'complFreq': False
+
     },
     'xp': {
         'linear': False,
@@ -93,9 +97,11 @@ configuration = {
         'earlyStopPatience': 7
     },
     'mlp': {
+        'initialize': False,
         'inputItems': 4,
         'posEmb': 42,
         'tokenEmb': 480,
+        'trainable':True,
         'lemma': True,
         'compactVocab': False,
         'optimizer': 'adagrad',
@@ -104,10 +110,11 @@ configuration = {
         'batchSize': 64,
         'epochs': 40,
         'earlyStop': True,
-        'chickPoint': False,
+        'checkPoint': True,
         'validationSplit': .1,
         'minDelta': .2,
         'lr': 0.059,
+        'lrPatience':4,
         'dense1': True,
         'dense1UnitNumber': 60,
         'dense1Activation': 'relu',
@@ -124,7 +131,6 @@ configuration = {
     },
     'initialisation': {
         'active': False,
-        'modifiable': True,
         'oneHotPos': False,
         'pos': True,
         'token': True,
@@ -141,6 +147,8 @@ configuration = {
         'focused': False
     },
     'features': {
+        'superSense': False,
+        'reduced': False,
         'lemma': True,
         'token': False,
         'pos': True,
@@ -164,8 +172,12 @@ configuration = {
     },
     'path': {
         'results': 'Results',
+        'errorAnalysis': 'Results/ErrorAnalysis',
+        'output': 'Results/Output',
         'projectPath': '',
-        'corpusFolder': 'ressources/sharedtask'
+        'corpusFolder': 'ressources/sharedtask',
+        'checkPointPath': 'best_model.h5'
+
     },
     'files': {
         'bestWeights': 'bestWeigths.hdf5',

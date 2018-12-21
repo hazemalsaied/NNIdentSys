@@ -3,9 +3,11 @@ from modelLinear import getFeatures
 from transitions import *
 
 
-def parse(sents, model, vectorizer=None, linearModels=None, linearVecs=None, mlpModels=None):
+def parse(sents, model, vectorizer=None, linearModels=None, linearVecs=None, mlpModels=None, initialize=True):
     for sent in sents:
-        sent.identifiedVMWEs, sent.initialTransition, sentEmbs, tokens = [], None, None, None
+        if initialize:
+            sent.identifiedVMWEs = []
+        sent.initialTransition, sentEmbs, tokens = None, None, None
         if configuration['xp']['kiperwasser']:
             tokenIdxs, posIdxs = model.getIdxs(sent)
             sentEmbs = model.getContextualizedEmbs(tokenIdxs, posIdxs)
@@ -18,7 +20,7 @@ def parse(sents, model, vectorizer=None, linearModels=None, linearVecs=None, mlp
         while not t.isTerminal():
             newT = nextTrans(t, sent, model, vectorizer, sentEmbs, tokens, linearModels=linearModels,
                              linearVecs=linearVecs, mlpModels=mlpModels)
-            newT.apply(t, sent, parse=True, isClassified=newT.isClassified)
+            newT.apply(t, sent, parse=True, isClassified=newT.isClassified, secondParse=not initialize)
             t = newT
             if configuration['xp']['kiperComp']:
                 sentEmbs, tokens = refreshSentEmb(t, tokens, model, sentEmbs)

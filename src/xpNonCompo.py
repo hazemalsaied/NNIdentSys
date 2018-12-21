@@ -126,7 +126,7 @@ def setOptimalRSGFeaturesByLogReg():
     configuration['features'].update(conf)
 
 
-def setOptimalRSGFeaturesBySVM():
+def setOptimalRSGFeaturesForSVM():
     conf = {
         'lemma': True,
         'token': True,
@@ -175,6 +175,7 @@ def setOptimalRSGFeaturesForDimsumSVM():
     }
     configuration['features'].update(conf)
 
+
 def setOptimalRSGFeaturesForFtbSVM():
     conf = {
         'lemma': True,
@@ -220,6 +221,7 @@ def setOptimalRSGForMlpFTB():
     configuration['mlp']['dense1UnitNumber'] = 167
     configuration['mlp']['dense1Dropout'] = 0.16
 
+
 def setOptimalRSGForMlpDiMSUM():
     samling = configuration['sampling']
     samling['importantSentences'] = True
@@ -240,25 +242,25 @@ def setOptimalRSGForMlpDiMSUM():
     configuration['mlp']['dense1UnitNumber'] = 172
     configuration['mlp']['dense1Dropout'] = 0.38
 
+
 def setOptimalRSGForMLP():
-    samling = configuration['sampling']
-    samling['importantSentences'] = True
-    samling['overSampling'] = True
-    samling['sampleWeight'] = True
-    samling['favorisationCoeff'] = 6
-    samling['focused'] = True
+    configuration['sampling'].update({
+        'importantSentences': True,
+        'overSampling': True,
+        'sampleWeight': True,
+        'favorisationCoeff': 6,
+        'focused': True})
 
-    configuration['mlp']['optimizer'] = 'adagrad'
-    configuration['mlp']['lr'] = 0.059
-
-    configuration['mlp']['lemma'] = True
-    configuration['mlp']['posEmb'] = 42
-    configuration['mlp']['tokenEmb'] = 480
-    configuration['mlp']['compactVocab'] = False
-
-    configuration['mlp']['dense1'] = True
-    configuration['mlp']['dense1UnitNumber'] = 58
-    configuration['mlp']['dense1Dropout'] = 0.429
+    configuration['mlp'].update({
+        'lemma': True,
+        'posEmb': 42,
+        'tokenEmb': 480,
+        'compactVocab': False,
+        'dense1': True,
+        'dense1UnitNumber': 58,
+        'dense1Dropout': 0.429,
+        'lr': 0.059,
+        'optimizer': 'adagrad'})
 
 
 def setOptimalRSGForRNN():
@@ -283,21 +285,45 @@ def setOptimalRSGForRNN():
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf8')
+    from rsg import createRSG, runRSG
 
-    # setOptimalRSGFeaturesBySVM()
-    # xp(['FR'], Dataset.ftb, XpMode.linear, Evaluation.corpus)
-    # xp(['EN'], Dataset.dimsum, XpMode.linear, Evaluation.corpus)
+    # oarsub -p "GPU<>'NO'" -q production -l nodes=1,walltime=90 "NNIdenSys/Scripts/nonCompo.sh" -n mlp1 -O Reports/mlp1 -E Reports/mlp1
+    createRSG('mlp.p', None, xpNum=5000)
+    runRSG(pilotLangs, Dataset.sharedtask2, None, Evaluation.fixedSize,
+              fileName='mlp.p', xpNum=2, xpNumByThread=500)
 
-    # setOptimalRSGFeaturesForFtbSVM()
-    # xp(['FR'], Dataset.ftb, XpMode.linear, Evaluation.corpus)
-    # setOptimalRSGFeaturesForDimsumSVM()
-    # xp(['EN'], Dataset.dimsum, XpMode.linear, Evaluation.corpus)
 
-    setOptimalRSGFeaturesBySVM()
-    setMinimalFeatures()
-    configuration['others']['traitDeformedLemma'] = False
-    configuration['others']['replaceNumbers'] = True
-    xp(['TR'], Dataset.sharedtask2, XpMode.linear, Evaluation.corpus)
-    #
+    # createRSG('coop.mlpInLin', XpMode.linear)
+    # runRSG(pilotLangs, Dataset.sharedtask2, None, Evaluation.fixedSize,
+    #        xpNumByThread=100,
+    #        fileName='coop.mlpInLin', xpNum=1, mlpInLinear=True)
+    # Ev.linInMLP
+    # configuration['mlp'].update({
+    #     'posEmb': 78,
+    #     'tokenEmb': 327,
+    #     'dense1UnitNumber': 113,
+    #     'dense1Dropout': 0.25,
+    # })
+    # xp(allSharedtask2Lang, Dataset.sharedtask2, None, Evaluation.corpus, linearInMlp=True)
+
+    # NoSampling5
     # setOptimalRSGForMLP()
-    # xp(allSharedtask2Lang, Dataset.sharedtask2, None, Evaluation.corpus)
+    # configuration['sampling'].update({
+    #     'importantSentences': False,
+    #     'overSampling': False,
+    #     'sampleWeight': False,
+    #     'favorisationCoeff': 6,
+    #     'focused': False})
+    # xp(allSharedtask2Lang, Dataset.sharedtask2, None, Evaluation.corpus, xpNum=10)
+
+    #  emb.tune.1
+    import rsg
+
+    # configuration['mlp']['initialize'] = True
+    # configuration['mlp']['tokenEmb'] = 300
+    #
+    # # rsg.createRSG('mlp.emb.p', None)
+    # # rsg.runRSG(pilotLangs, Dataset.sharedtask2, None, Evaluation.fixedSize,
+    # #            fileName='mlp.emb.p', xpNum=2, xpNumByThread=150)
+    #
+    # xp(['FR'], Dataset.sharedtask2, None, Evaluation.fixedSize)

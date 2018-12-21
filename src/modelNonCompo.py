@@ -5,10 +5,11 @@ import keras
 import numpy as np
 from keras import optimizers
 from keras.callbacks import ModelCheckpoint, EarlyStopping
-from keras.layers import Input, Dense, Flatten, Embedding, Dropout
+from keras.layers import Input, Dense, Flatten, Embedding, Dropout, Conv1D
 from keras.models import Model
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
+from keras.models import load_model
 
 import reports
 import sampling
@@ -20,30 +21,36 @@ from reports import *
 from transitions import TransitionType
 from wordEmbLoader import empty
 from wordEmbLoader import unk, number
-
+import facebookEmb
 enableCategorization = False
+
 
 
 class Network:
     def __init__(self, corpus, linearInMLP=False):
         self.vocabulary = Vocabulary(corpus)
         self.nnExtractor = Extractor(corpus) if configuration['mlp']['features'] else None
-        input, output = self.createTheModel(linearInMLP=linearInMLP)
+        input, output = self.createTheModel(corpus.langName, linearInMLP=linearInMLP)
         self.model = Model(inputs=input, outputs=output)
         if configuration['others']['verbose']:
             sys.stdout.write('# Parameters = {0}\n'.format(self.model.count_params()))
             print self.model.summary()
 
-    def createTheModel(self, linearInMLP=False):
+    def createTheModel(self, lang, linearInMLP=False):
         inputLayers, concLayers = [], []
         inputToken = Input((configuration['mlp']['inputItems'],))
         inputLayers.append(inputToken)
-        tokenEmb = Embedding(len(self.vocabulary.tokenIndices), configuration['mlp']['tokenEmb'])(inputToken)
+        if configuration['mlp']['initialize']:
+            self.vocabulary.tokenIndices, embeddingMatrix = facebookEmb.getEmbMatrix(lang, self.vocabulary.tokenIndices.keys())
+
+        tokenEmb = Embedding(len(self.vocabulary.tokenIndices), configuration['mlp']['tokenEmb'],
+                                 weights=[embeddingMatrix] if configuration['mlp']['initialize'] else None,
+                                 trainable=configuration['mlp']['trainable'])(inputToken)
         tokenFlatten = Flatten()(tokenEmb)
         concLayers.append(tokenFlatten)
         inputPos = Input((configuration['mlp']['inputItems'],))
         inputLayers.append(inputPos)
-        posEmb = Embedding(len(self.vocabulary.posIndices), configuration['mlp']['posEmb'])(inputPos)
+        posEmb = Embedding(len(self.vocabulary.posIndices), configuration['mlp']['posEmb'],trainable=configuration['mlp']['trainable'])(inputPos)
         posFlatten = Flatten()(posEmb)
         concLayers.append(posFlatten)
         if linearInMLP:
@@ -196,6 +203,7 @@ class Network:
                                  verbose=2 if configuration['others']['verbose'] else 0,
                                  callbacks=getCallBacks(),
                                  sample_weight=sampleWeights)
+        self.model = load_model(os.path.join(configuration['path']['projectPath'], 'Reports', configuration['path']['checkPointPath']))
         if configuration['mlp']['verbose']:
             sys.stdout.write('Epoch Losses= ' + str(history.history['loss']))
         self.trainValidationData(data, labels, history)
@@ -238,9 +246,12 @@ def getCallBacks():
     if trainConf['earlyStop']:
         es = EarlyStopping(monitor='val_loss',
                            min_delta=trainConf['minDelta'],
-                           patience=2,
+                           patience=configuration['mlp']['lrPatience'],
                            verbose=trainConf['verbose'])
         callbacks.append(es)
+    if trainConf['checkPoint']:
+        mc = ModelCheckpoint(os.path.join(configuration['path']['projectPath'], 'Reports' ,configuration['path']['checkPointPath']), monitor='val_acc', mode='max', verbose=1, save_best_only=True)
+        callbacks.append(mc)
     return callbacks
 
 

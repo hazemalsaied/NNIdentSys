@@ -22,7 +22,7 @@ class Transition(object):
         self.sent = sent
         self.isClassified = isClassified
         if isInitial:
-            self.configuration = Configuration([], sent.tokens, [], sent, self, isInitial=True)
+            self.configuration = Configuration([], sent.tokens, [], sent, self, isInitial=True, reduced=None)
             self.type = None
             sent.initialTransition = self
             self.isLegal = True
@@ -39,7 +39,7 @@ class Transition(object):
         else:
             self.id = self.previous.id + 1
 
-    def apply(self, parent, sent, parse=False):
+    def apply(self, parent, sent, parse=False, secondParse=False):
         pass
 
     def getLegalTransDic(self):
@@ -47,9 +47,8 @@ class Transition(object):
         if config and config.legalTrans:
             return config.legalTrans
         transitions = {}
-        if config.stack:
-            if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2 or \
-                    (len(config.stack) == 1 and str(config.stack[-1].__class__).endswith('corpus.Token')):
+        if configuration['others']['minimal']:
+            if len(config.stack) >= 1 :
                 transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,
                                                                 sent=self.sent)
                 transitions[TransitionType.MARK_AS_VPC] = MarkAs(type=TransitionType.MARK_AS_VPC,
@@ -64,6 +63,24 @@ class Transition(object):
                 whiteMerge = Merge(sent=self.sent)
                 transitions[TransitionType.MERGE] = whiteMerge
             transitions[TransitionType.REDUCE] = Reduce(sent=self.sent)
+        else:
+            if config.stack:
+                if isinstance(config.stack[-1], list) and len(config.stack[-1]) == 2 or \
+                        (len(config.stack) == 1 and str(config.stack[-1].__class__).endswith('corpus.Token')):
+                    transitions[TransitionType.MARK_AS_ID] = MarkAs(type=TransitionType.MARK_AS_ID,
+                                                                    sent=self.sent)
+                    transitions[TransitionType.MARK_AS_VPC] = MarkAs(type=TransitionType.MARK_AS_VPC,
+                                                                     sent=self.sent)
+                    transitions[TransitionType.MARK_AS_LVC] = MarkAs(type=TransitionType.MARK_AS_LVC,
+                                                                     sent=self.sent)
+                    transitions[TransitionType.MARK_AS_IREFLV] = MarkAs(type=TransitionType.MARK_AS_IREFLV,
+                                                                        sent=self.sent)
+                    transitions[TransitionType.MARK_AS_OTH] = MarkAs(type=TransitionType.MARK_AS_OTH,
+                                                                     sent=self.sent)
+                if len(config.stack) > 1:
+                    whiteMerge = Merge(sent=self.sent)
+                    transitions[TransitionType.MERGE] = whiteMerge
+                transitions[TransitionType.REDUCE] = Reduce(sent=self.sent)
 
         # if config.stack:
         #     transitions[TransitionType.REDUCE] = Reduce(sent=self.sent)
@@ -132,12 +149,13 @@ class Shift(Transition):
         super(Shift, self).__init__(type, config, previous, next, isInitial, sent)
         self.type = TransitionType.SHIFT
 
-    def apply(self, parent, sent, parse=False, isClassified=False):
+    def apply(self, parent, sent, parse=False, isClassified=False, secondParse=False):
         config = parent.configuration
         lastToken = config.buffer[0]
         newStack = list(config.stack)
         newStack.append(lastToken)
-        newConfig = Configuration(newStack, config.buffer[1:], list(config.tokens), sent, self)
+        reduced = parent.configuration.reduced if parent and parent.configuration else None
+        newConfig = Configuration(newStack, config.buffer[1:], list(config.tokens), sent, self, reduced=reduced)
         super(Shift, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
@@ -150,13 +168,14 @@ class Reduce(Transition):
     def __init__(self, type=TransitionType.REDUCE, config=None, previous=None, next=None, isInitial=False, sent=None):
         super(Reduce, self).__init__(type, config, previous, next, isInitial, sent)
 
-    def apply(self, parent, sent, parse=False, isClassified=False):
+    def apply(self, parent, sent, parse=False, isClassified=False, secondParse=False):
         config = parent.configuration
         newBuffer = list(config.buffer)
         newStack = list(config.stack)
         newStack = newStack[:-1]
         newTokens = list(config.tokens)
-        newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
+        reduced = config.stack[-1] if str(config.stack[-1].__class__).endswith('corpus.Token') else parent.configuration.reduced
+        newConfig = Configuration(newStack, newBuffer, newTokens, sent, self, reduced=reduced)
         super(Reduce, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
@@ -169,13 +188,14 @@ class Merge(Transition):
     def __init__(self, config=None, previous=None, next=None, isInitial=False, sent=None):
         super(Merge, self).__init__(TransitionType.MERGE, config, previous, next, isInitial, sent)
 
-    def apply(self, parent, sent, parse=False, isClassified=False):
+    def apply(self, parent, sent, parse=False, isClassified=False, secondParse=False):
         config = parent.configuration
         newBuffer = list(config.buffer)
         newStack = list(config.stack)[:-2]
         newStack.append([config.stack[-2], config.stack[-1]])
         newTokens = list(config.tokens)
-        newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
+        reduced = parent.configuration.reduced
+        newConfig = Configuration(newStack, newBuffer, newTokens, sent, self, reduced=reduced)
 
         super(Merge, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
@@ -189,25 +209,75 @@ class MarkAs(Transition):
     def __init__(self, type, config=None, previous=None, next=None, isInitial=False, sent=None):
         super(MarkAs, self).__init__(type, config, previous, next, isInitial, sent)
 
-    def apply(self, parent, sent, parse=False, isClassified=False):
+    def apply(self, parent, sent, parse=False, isClassified=False, secondParse=False):
+        if configuration['others']['minimal']:
+            self.applyMinimal(parent, sent, parse, isClassified, secondParse)
+        else:
+            config = parent.configuration
+            newBuffer = list(config.buffer)
+            newStack = list(config.stack)[:-1]
+            newStack.append([config.stack[-1]])
+            newTokens = list(config.tokens)
+            vMWETokens = getTokens(newStack[-1][0])
+            if parse:
+                vMWEIdx = len(sent.identifiedVMWEs) + 1
+                vMWE = VMWE(vMWEIdx, tokens=vMWETokens, type=getStrFromTransType(self.type))
+                if secondParse:
+                    poss = [v.getTokenPositionString() for v in sent.identifiedVMWEs]
+                    if vMWE.getTokenPositionString() not in poss:
+                        sent.identifiedVMWEs.append(vMWE)
+                        vMWE.predictingModel = 'linear' if configuration['xp']['linear'] else 'mlp'
+                    else:
+                        for v in sent.identifiedVMWEs:
+                            if v.getTokenPositionString() == vMWE.getTokenPositionString():
+                                v.predictingModel += 'linear' if configuration['xp']['linear'] else 'mlp'
+                                break
+                else:
+                    vMWE.predictingModel = 'linear' if configuration['xp']['linear'] else 'mlp'
+                    sent.identifiedVMWEs.append(vMWE)
+            # else:
+            #     vmwe = getVMWEByTokens(vMWETokens)
+            #     if vmwe:
+            #         vmwe.parsedByOracle = True
+            #     else:
+            #         raise
+            newTokens.append(vMWETokens)
+            reduced = parent.configuration.reduced
+            newConfig = Configuration(newStack, newBuffer, newTokens, sent, self, reduced=reduced)
+            super(MarkAs, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
+
+    def applyMinimal(self, parent, sent, parse=False, isClassified=False, secondParse=False):
         config = parent.configuration
         newBuffer = list(config.buffer)
-        newStack = list(config.stack)[:-1]
-        newStack.append([config.stack[-1]])
+        newStack = list(config.stack)[:-2] if len(config.stack)>1 else  list(config.stack)[:-1]
+        newStack.append([config.stack[-2], config.stack[-1]] if len(config.stack)>1 else [config.stack[-1]])
         newTokens = list(config.tokens)
-        vMWETokens = getTokens(newStack[-1][0])
+        vMWETokens = getTokens(newStack[-1])
         if parse:
             vMWEIdx = len(sent.identifiedVMWEs) + 1
             vMWE = VMWE(vMWEIdx, tokens=vMWETokens, type=getStrFromTransType(self.type))
-            sent.identifiedVMWEs.append(vMWE)
+            if secondParse:
+                poss = [v.getTokenPositionString() for v in sent.identifiedVMWEs]
+                if vMWE.getTokenPositionString() not in poss:
+                    sent.identifiedVMWEs.append(vMWE)
+                    vMWE.predictingModel = 'linear' if configuration['xp']['linear'] else 'mlp'
+                else:
+                    for v in sent.identifiedVMWEs:
+                        if v.getTokenPositionString() == vMWE.getTokenPositionString():
+                            v.predictingModel += 'linear' if configuration['xp']['linear'] else 'mlp'
+                            break
+            else:
+                vMWE.predictingModel = 'linear' if configuration['xp']['linear'] else 'mlp'
+                sent.identifiedVMWEs.append(vMWE)
         # else:
         #     vmwe = getVMWEByTokens(vMWETokens)
         #     if vmwe:
         #         vmwe.parsedByOracle = True
         #     else:
         #         raise
-        newTokens.append(vMWETokens)
-        newConfig = Configuration(newStack, newBuffer, newTokens, sent, self)
+        newTokens += vMWETokens
+        reduced = parent.configuration.reduced
+        newConfig = Configuration(newStack, newBuffer, newTokens, sent, self, reduced=reduced)
         super(MarkAs, self).__init__(config=newConfig, previous=parent, sent=sent, isClassified=isClassified)
 
     def isLegal(self):
@@ -217,7 +287,7 @@ class MarkAs(Transition):
 
 
 class Configuration:
-    def __init__(self, stack, buffer, tokens, sent, transition, isInitial=False, ):
+    def __init__(self, stack, buffer, tokens, sent, transition, reduced = None, isInitial=False, ):
 
         self.buffer = buffer
         self.stack = stack
@@ -227,6 +297,7 @@ class Configuration:
         self.sent = sent
         self.transition = transition
         self.legalTrans = {}
+        self.reduced = reduced
 
     def isTerminal(self):
         if not self.buffer and not self.stack:
@@ -241,7 +312,7 @@ class Configuration:
                 buffStr += elem.text + ','
             buffStr += ' ..' if len(self.buffer) > 2 else ''
         buffStr += ']'
-        return 'S=' + stackStr + ' B=' + buffStr
+        return 'S=' + stackStr + ' B=' + buffStr + ' Bx=' + self.reduced.getLemma() if self.reduced else ''
 
 
 def initialize(transType, sent):

@@ -107,9 +107,8 @@ def calculateScores(ig, g, i, title, loggingg=True):
             sys.stdout.write(reports.tabs + '{0} : {1}\n'.format(title, 0))
         return ['', 0, 0, 0]
 
-    p = float(ig / g)
-    r = float(ig / i)
-
+    r = float(ig / g)
+    p = float(ig / i)
     f = round(2 * (r * p) / (r + p), 3)
     r = round(r, 3)
     p = round(p, 3)

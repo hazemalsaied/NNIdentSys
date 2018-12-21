@@ -115,6 +115,9 @@ def getFeatures(transition, sent):
             generateLinguisticFeatures(elem, 'S' + str(elemIdx), featureDictionary)
             elemIdx -= 1
 
+    if configuration['features']['reduced'] and conf.reduced:
+        generateLinguisticFeatures(conf.reduced, 'Bx', featureDictionary)
+
     if len(conf.buffer) > 0:
         generateLinguisticFeatures(conf.buffer[0], 'B0', featureDictionary)
 
@@ -126,7 +129,15 @@ def getFeatures(transition, sent):
         if len(stackElements) > 1:
             # Generate a Bi-gram S1S0 S0B0 S1B0 S0B1
             generateBiGram(stackElements[-2], stackElements[-1], 'S1S0', featureDictionary)
+            if configuration['features']['reduced'] and conf.reduced:
+                generateBiGram(stackElements[-2], conf.reduced, 'S1Bx', featureDictionary)
+                generateTriGram(stackElements[-1],stackElements[-2], conf.reduced, 'S0S1Bx', featureDictionary)
+        if stackElements:
+            if configuration['features']['reduced'] and conf.reduced:
+                generateBiGram(stackElements[-1], conf.reduced, 'S0Bx', featureDictionary)
         if stackElements and conf.buffer:
+            if configuration['features']['reduced']and conf.reduced:
+                generateBiGram(conf.buffer[0], conf.reduced, 'B0Bx', featureDictionary)
             generateBiGram(stackElements[-1], conf.buffer[0], 'S0B0', featureDictionary)
             if len(stackElements) > 1:
                 generateBiGram(stackElements[-2], conf.buffer[0], 'S1B0', featureDictionary)
@@ -231,6 +242,8 @@ def generateLinguisticFeatures(stackElem, label, featureDictionary):
         featureDictionary[label + 'POS'] = stackElemToken.posTag
     if configuration['features']['lemma'] and stackElemToken.lemma and stackElemToken.lemma.strip() != '':
         featureDictionary[label + 'Lemma'] = stackElemToken.lemma
+    if configuration['features']['superSense']:
+        featureDictionary[label + 'superSense'] = stackElemToken.superSense
     if configuration['features']['suffix']:
         featureDictionary[label + '_LastThreeLetters'] = stackElemToken.text[-3:]
         featureDictionary[label + '_LastTwoLetters'] = stackElemToken.text[-2:]

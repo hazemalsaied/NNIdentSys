@@ -1,11 +1,12 @@
 import torch
 from enum import Enum
 from theano import function, config, shared, tensor
-
+import datetime
 import reports
+from analysis import analyzeCorpus
 from corpus import *
-from identification import identify, identifyWithMlpInLinear, identifyWithLinearInMlp, crossValidation
-#from analysis import exportEnalysis, errorAnalysis
+from identification import identify, identifyWithMlpInLinear, identifyWithLinearInMlp, crossValidation, identifyWithBoth
+
 allSharedtask1Lang = ['BG', 'CS', 'DE', 'EL', 'ES', 'FA', 'FR', 'HE', 'HU', 'IT',
                       'LT', 'MT', 'PL', 'PT', 'RO', 'SV', 'SL', 'TR']
 
@@ -15,7 +16,7 @@ allSharedtask2Lang = ['BG', 'DE', 'EL', 'EN', 'ES', 'EU', 'FA', 'FR', 'HE', 'HI'
 pilotLangs = ['BG', 'PT', 'TR']
 
 
-def xp(langs, dataset, xpMode, division, xpNum=1, title='', seed=0, mlpInLinear=False, linearInMlp=False):
+def xp(langs, dataset, xpMode, division, xpNum=1, title='', seed=0, mlpInLinear=False, linearInMlp=False, complentary=False):
     setXPMode(xpMode)
     setDataSet(dataset)
     setTrainAndTest(division)
@@ -36,10 +37,11 @@ def xp(langs, dataset, xpMode, division, xpNum=1, title='', seed=0, mlpInLinear=
                     identifyWithMlpInLinear(lang)
                 elif linearInMlp:
                     identifyWithLinearInMlp(lang)
+                elif complentary:
+                    identifyWithBoth(lang)
                 else:
                     corpus = identify(lang)
-                    #if configuration['evaluation']['corpus']:
-                        #exportEnalysis(errorAnalysis(corpus), lang, dataset, xpMode )
+                    # analyzeCorpus(corpus.langName, xpMode, dataset)
 
 
 def getParameters(xpMode, printTilte=True):
@@ -180,5 +182,3 @@ def verifyGPU():
         sys.stdout.write(tabs + 'Attention: CPU used' + doubleSep)
     else:
         sys.stdout.write(tabs + 'GPU Enabled' + doubleSep)
-
-

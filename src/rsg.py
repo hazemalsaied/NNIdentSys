@@ -4,7 +4,8 @@ from corpus import *
 from xpTools import xp, XpMode
 
 
-def runRSG(langs, dataset, xpMode, division, fileName, xpNumByThread=50, xpNum=1):
+def runRSG(langs, dataset, xpMode, division, fileName, xpNumByThread=50, xpNum=1, mlpInLinear=False, linearInMlp=False,
+           complentary=False):
     for i in range(xpNumByThread):
         exps = getGrid(fileName)
         while True:
@@ -15,7 +16,9 @@ def runRSG(langs, dataset, xpMode, division, fileName, xpNumByThread=50, xpNum=1
         exps[exp][0] = True
         pickle.dump(exps, open(os.path.join(configuration['path']['projectPath'], 'ressources/RSG', fileName), 'wb'))
         configuration.update(exps[exp][1])
-        xp(langs, dataset, xpMode, division, xpNum=xpNum)
+        xp(langs, dataset, xpMode, division, xpNum=xpNum,
+           mlpInLinear=mlpInLinear, linearInMlp=linearInMlp,
+           complentary=complentary)
 
 
 def createRSG(fileName, xpMode, xpNum=1000):
@@ -46,30 +49,27 @@ def generateConf(xpMode):
 
 def generateMLPConf():
     configuration['mlp'].update({
-        'posEmb': int(generateValue([15, 150], continousPlage=True, uniform=True)),
-        'tokenEmb': int(generateValue([150, 500], continousPlage=True, uniform=True)),
-        'compactVocab': generateValue([True, False], continousPlage=False, uniform=True),
-        'dense1UnitNumber': int(generateValue([15, 200], continousPlage=True, uniform=True)),
-        'dense1Dropout': round(generateValue([.1, .4], continousPlage=True, uniform=True), 2),
-        'lemma': True,
-        'optimizer': 'adagrad',
-        'loss': 'categorical_crossentropy',
-        'verbose': 0,
-        'batchSize': 64,
-        'epochs': 40,
-        'earlyStop': True,
-        'validationSplit': .1,
-        'lr': 0.059,
-        'dense1': True,
-        'dense1Activation': 'relu'
+        'posEmb': int(generateValue([15, 150], uniform=False, continousPlage=True)),
+        'tokenEmb': int(generateValue([100, 600], uniform=False, continousPlage=True)),
+        'compactVocab': generateValue([True, False], uniform=True),
+        'trainable': generateValue([True, False], continousPlage=False, uniform=False, favorisationTaux=0.8),
+        'dense1UnitNumber': int(generateValue([25, 600], uniform=False, continousPlage=True)),
+        'dense1Dropout': float(generateValue([.1, .2, .3, .4, .5, .6], continousPlage=False, uniform=True)),
+        'dense1Activation': generateValue(['relu', 'tanh'], continousPlage=False, uniform=False, favorisationTaux=0.8),
+        'lemma': generateValue([True, False], continousPlage=False, uniform=False),
+        'batchSize': generateValue([16, 32, 48, 64, 128], continousPlage=False, uniform=True),
+        'lr': round(generateValue([.01, .2], continousPlage=True, uniform=False), 3)
     })
     configuration['sampling'].update({
         'overSampling': True,
         'importantSentences': True,
         'importantTransitions': False,
-        'sampleWeight': True,
-        'favorisationCoeff': int(generateValue([1, 25], continousPlage=True, uniform=True)),
-        'focused': True
+        'sampleWeight': generateValue([True, False], continousPlage=False, uniform=True),
+        'favorisationCoeff': int(generateValue([1, 40], continousPlage=True, uniform=False)),
+        'focused': generateValue([True, False], continousPlage=False, uniform=True),
+    })
+    configuration['others'].update({
+        'mweRepeition': generateValue([5, 10, 15, 20, 30], continousPlage=False, uniform=True),
     })
 
 

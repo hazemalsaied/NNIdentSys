@@ -241,7 +241,7 @@ def createHeader(value):
 
 
 def getBestWeightFilePath():
-    if not configuration['mlp']['chickPoint']:
+    if not configuration['mlp']['checkPoint']:
         return None
     bestWeightPath = os.path.join(XP_CURRENT_DIR_PATH, configuration['files']['bestWeights'])
     if configuration['evaluation']['cv']:
@@ -513,19 +513,29 @@ def getAvgScores(scores, langNum=3, trialNum=3):
 def getNewScores(files, pilot=False, withTitles=True, withTitle2=False):
     for f in files:
         titles, scores, params, langs, titles2 = mineNewFile(str(f))
+        # scores, params = mineCoopFile(str(f))
         if pilot:
-            for i in range(len(titles)):
-                if withTitle2:
-                    # withTitle2 = False
-                    print 'BG, BG, PT, PT, TR, TR, ' + titles2[i][:-1]
-                print '{0},{1},{2},{3},{4},{5},{6}'.format(
-                    scores[i * 3] if i * 3 < len(scores) else '',
-                    scores[i * 3 + 1] if i * 3 + 1 < len(scores) else '',
-                    scores[i * 3 + 2] if i * 3 + 2 < len(scores) else '',
-                    scores[i * 3 + 3] if i * 3 + 3 < len(scores) else '',
-                    scores[i * 3 + 4] if i * 3 + 4 < len(scores) else '',
-                    scores[i * 3 + 5] if i * 3 + 5 < len(scores) else '',
-                    titles[i][:-1] if withTitles else '')
+            for i in range(len(scores)):
+                print scores[i]
+                # if withTitle2:
+                # withTitle2 = False
+                #    print 'BG, BG,BG, PT, PT,PT, TR,TR, TR, BG_AVG, PT_AVG, TR_AVG ' + titles2[i][:-1]
+                # print '{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}'.format(
+                #     scores[i * 3] if i * 3 < len(scores) else 0,
+                #     scores[i * 3 + 1] if i * 3 + 1 < len(scores) else 0,
+                #     scores[i * 3 + 2] if i * 3 + 2 < len(scores) else 0,
+                #     round((scores[i * 3] + scores[i * 3+1] + scores[i * 3 + 2])/ 3.,2) if i * 3 + 2 < len(scores) else 0,
+                #     scores[i * 3 + 3] if i * 3 + 3 < len(scores) else 0,
+                #     scores[i * 3 + 4] if i * 3 + 4 < len(scores) else 0,
+                #     scores[i * 3 + 5] if i * 3 + 5 < len(scores) else 0,
+                #     round((scores[i * 3 + 3] + scores[i * 3 + 4] + scores[i * 3 + 5]) / 3., 2) if i * 3 + 5 < len(
+                #         scores) else 0,
+                #     scores[i * 3 + 6] if i * 3 + 6 < len(scores) else 0,
+                #     scores[i * 3 + 7] if i * 3 + 7 < len(scores) else 0,
+                #     scores[i * 3 + 8] if i * 3 + 8 < len(scores) else 0,
+                #     round((scores[i * 3 + 6] + scores[i * 3 + 7] + scores[i * 3 + 8]) / 3., 2) if i * 3 + 5 < len(
+                #         scores) else 0,
+                #     params[i][:-1] if withTitles else '')
         else:
             # for i in range(len(titles)):
             #     print scores[i*2], ',',scores[i*2+1], titles[i][:-1] if withTitles else ''
@@ -562,6 +572,22 @@ def mineNewFile(newFile):
     return titles, scores, params, langs, titles2
 
 
+def mineCoopFile(newFile):
+    path = '../Reports/Reports/{0}'.format(newFile)
+    params, scores = [], []
+    previousLine = ''
+    with open(path, 'r') as log:
+        for line in log.readlines():
+            if line.startswith('# Configs:'):
+                params.append(line)
+            if line.startswith(scoreLine):
+                fScore = toNum(line[len(scoreLine):len(scoreLine) + 5].strip())
+                while len(fScore) < 4:
+                    fScore = fScore + '0'
+                scores.append(round(int(fScore) / 10000., 4) * 100)
+    return scores, params
+
+
 def orderResults(titles, values):
     results = dict()
     for i in range(len(titles)):
@@ -589,7 +615,60 @@ def readAndOrderResults():
     orderResults(titles, values)
 
 
+def mineSTScriptRes(newFile):
+    path = '../Reports/Reports/{0}'.format(newFile)
+    previousLine = ''
+    results, res = [], []
+    with open(path, 'r') as log:
+        for line in log.readlines():
+            if line.startswith('* MWE-based:'):
+                res.append(round(float(line.split('=')[2][:-2]) * 100., 1))
+                print (round(float(line.split('=')[2][:-2]) * 100., 1))
+            # if line.startswith('* MWE-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Tok-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Continuous: MWE-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Continuous: MWE-proportion:'):
+            #     res.append(line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+            # if line.startswith('* Discontinuous: MWE-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Discontinuous: MWE-proportion:'):
+            #     res.append(line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+            # if line.startswith('* Multi-token: MWE-based: '):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Multi-token: MWE-proportion:'):
+            #     res.append(line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+            # if line.startswith('* Single-token: MWE-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Single-token: MWE-proportion:'):
+            #     res.append(line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+            # if line.startswith('* Seen-in-train: MWE-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Seen-in-train: MWE-proportion:'):
+            #     res.append( line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1]) #line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+            # if line.startswith('* Unseen-in-train: MWE-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Unseen-in-train: MWE-proportion:'):
+            #     res.append(line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+            # if line.startswith('* Variant-of-train: MWE-based: '):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            # if line.startswith('* Variant-of-train: MWE-proportion:'):
+            #     res.append(line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+            # if line.startswith('* Identical-to-train: MWE-based:'):
+            #     res.append(round(float(line[-5:-1])/100.,1))
+            #     results.append(res)
+            #     res = []
+            # if line.startswith('* Identical-to-train: MWE-proportion:'):
+            #     res.append(line.split('%')[0].split('=')[-1] + ' / ' + line.split('%')[1].split('=')[-1])
+    print sum(res) / 19
+    print results
+    return results
+
+
 if __name__ == '__main__':
+    # mineSTScriptRes('mlp.fixedSize')
     getNewScores(
-        [f for f in os.listdir('../Reports/Reports') if f.startswith('st1.svm.eval.1')]
-                 , pilot=False, withTitles=False, withTitle2=False)
+        [f for f in os.listdir('../Reports/Reports') if f.startswith('Ev.linInMlp')]
+        , pilot=False, withTitles=False, withTitle2=False)

@@ -7,8 +7,8 @@ from corpus import getParents, isOrphanToken, getVMWEByTokens
 from transitions import *
 
 
-def parse(corpus, printReport=False):
-    printSentIdx, printSentNum = 0, 5
+def parse(corpus, printReport=True):
+    printSentIdx, printSentNum = 0, 0
     report = ''
     for sent in corpus:
         sent.initialTransition = Transition(isInitial=True, sent=sent)
@@ -29,10 +29,14 @@ def parse(corpus, printReport=False):
             os.makedirs(directory)
         with open(os.path.join(directory, fileName), 'w') as f:
             f.write(report)
+    validate(corpus)
 
 
 def Next(config):
-    newTransition = isMarkAs(config)
+    if configuration['others']['minimal']:
+        newTransition = isMarkAsMinimal(config)
+    else:
+        newTransition = isMarkAs(config)
     if newTransition:
         return newTransition
     newTransition = isMerge(config)
@@ -43,6 +47,22 @@ def Next(config):
         return newTransition
     shift = Shift(sent=config.sent)
     return shift
+
+
+def isMarkAsMinimal(config):
+    if config.stack and config.stack[-1] and str(config.stack[-1].__class__).endswith('corpus.Token'):
+        s0Tokens = getTokens([config.stack[-2], config.stack[-1]]) if len(config.stack) > 1 else getTokens(config.stack[-1])
+        selectedParents = getParents(s0Tokens)
+        if selectedParents:
+            if len(selectedParents) == 1:
+                selectedParents[0].parsedByOracle = True
+                newTrans = MarkAs(type=getMWTTypeFromStr(selectedParents[0].type), sent=config.sent)
+                return newTrans
+            else:
+                if selectedParents[0].tokens[-1] == s0Tokens[-1]:
+                    newTrans = MarkAs(type=getMWTTypeFromStr(selectedParents[0].type), sent=config.sent)
+                    return newTrans
+    return None
 
 
 def isMarkAs(config):
@@ -98,9 +118,14 @@ def isReduce(config):
             return reduce
         # Identified VMWE on Stack
         vmwe = getVMWEByTokens(getTokens(config.stack[-1]))
-        if vmwe and isIdentifiedVMWE(config.stack[-1]) and (
-                not vmwe.isEmbedded or vmwe.isEmbedded and vmwe.parent.parsedByOracle):
-            return reduce
+        if configuration['others']['minimal']:
+            if vmwe and (
+                    not vmwe.isEmbedded or vmwe.isEmbedded and vmwe.parent.parsedByOracle):
+                return reduce
+        else:
+            if vmwe and isIdentifiedVMWE(config.stack[-1]) and (
+                    not vmwe.isEmbedded or vmwe.isEmbedded and vmwe.parent.parsedByOracle):
+                return reduce
     # Empy Buffer With Full Stack
     if not config.buffer and config.stack:
         return reduce
@@ -128,8 +153,9 @@ def validate(corpus):
             report += str(sent) + '\n'
     if report:
         logging.error('ATTENTION: Oracle problems with {0} sentences!'.format(sentNum))
-        with open(os.path.join(oracleReportPath, corpus.langName + '.txt'), 'w') as oracleReport:
-            oracleReport.write(report)
+        if False:
+            with open(os.path.join(oracleReportPath, corpus.langName + '.txt'), 'w') as oracleReport:
+                oracleReport.write(report)
 
 
 def isIdentifiedVMWE(element):
